@@ -34,7 +34,7 @@ change all "cat" to "message"
 
 - owa: is change of order of elements avoidable? replace u with ... (in all my functions, too)
 
-- pointZoom: rename Argument colp, as col cannot be given currently.
+- pointZoom: rename Argument colp, as col cannot be given currently. Add expr argument
 
 - quantileMean: romeve sapply loop if probs has length 1 (if this is faster)
 
