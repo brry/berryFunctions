@@ -1,0 +1,116 @@
+\name{funnelPlot}
+\alias{funnelPlot}
+\title{Funnel plots for proportional data}
+\description{Funnel plots for proportional data with confdence interval based on sample size. Introduced by Stephen Few, 2013}
+\usage{funnelPlot(x, n, labels=NULL, method="classic", add=FALSE,
+xlim=range(n, finite=TRUE), ylim=range(x/n*100, finite=TRUE), las=1,
+xlab="Sample size n", ylab="Success rate [\%]", main="Funnel plot for Proportions",
+a3=NULL, a2=NULL, am=NULL, ap=NULL, at=NULL, al=NULL, ...)}
+\arguments{
+  \item{x}{Numeric vector with number of successes (cases).}
+  \item{n}{Numeric vector with number of trials (population).}
+  \item{labels}{Labels for points. DEFAULT: NULL}
+  \item{method}{Method to calculate Confidence interval, see "Notes_on_method" below. Can also be "wilson". DEFAULT: "classic"}
+  \item{add}{Add to exisiting plot instead of drawing new plot? DEFAULT: FALSE}
+  \item{xlim}{Graphical parameters, see \code{\link{par}} and \code{\link{plot}}. DEFAULT: range(n, finite=TRUE)}
+  \item{ylim}{DEFAULT: range(x/n*100, finite=TRUE)}
+  \item{las}{DEFAULT: 1}
+  \item{xlab}{DEFAULT: "Sample size n"}
+  \item{ylab}{DEFAULT: "Success rate [\%]"}
+  \item{main}{DEFAULT: "Funnel plot for Proportions"}
+  \item{a3}{List with arguments for CI lines at 3*sd (eg: col, lty, lwd, lend, etc.). Overwrites defaults that are defined within the function (if contentually possible). DEFAULT: NULL}
+  \item{a2}{Arguments for line of 2 sd. DEFAULT: NULL}
+  \item{am}{Arguments for mean line. DEFAULT: NULL}
+  \item{ap}{Arguments for the data points (cex, etc.). DEFAULT: NULL}
+  \item{at}{Arguments for text (labels of each point). DEFAULT: NULL}
+  \item{al}{Arguments for legend  (text.col, bty, border, y.intersp, etc.). DEFAULT: NULL}
+  \item{\dots}{further arguments passed to plot only!.}
+}
+\note{
+the default for lty is not taken from par("lty"). This would yield "solid".
+Overwriting lty for one of the three line categories then produces eg c("2", "solid", "solid"), which cannot be processed by legend.
+}
+\value{Nothing - the function just plots}
+\section{The basic idea}{
+Salesman A (new to the job) has had 3 customers and sold 1 car. So his success rate is 0.33.
+Salesman B sold 1372 customers 632 cars, thus having a success rate of 0.46
+Promoting B solely because of the higher rate fails to take experience and opportunity (n) into account!
+This dilemma is what the funnel plot with the confidence interval (ci) solves.
+See Stephen Few and Katherine Rowel's PDF for details on the interpretation.
+}
+\references{
+\url{http://www.perceptualedge.com/articles/visual_business_intelligence/variation_and_its_discontents.pdf}\cr
+\url{http://sfew.websitetoolbox.com/post/variation-and-its-discontents-6555336?}
+}
+\author{Berry Boessenkool, \email{berry-b@gmx.de}, Oct 2013}
+\section{Notes on method}{
+\bold{Wilson's Method:} algebraic approximation to the binomial distribution, very accurate, even for very small numbers.\cr
+\url{http://www.apho.org.uk/resource/item.aspx?RID=39445} see "contains".\cr
+\bold{classic = Stephen Few's Method = the way I knew it:} sqrt( mu*(1-mu) / n )\cr
+\url{http://www.jerrydallal.com/LHSP/psd.htm}\cr
+\url{http://commons.wikimedia.org/wiki/File:ComparisonConfidenceIntervals.png}\cr
+The apho Wilson method first yielded wrong upper limits in my translation (it needs 0:1 instead of \%). Thus I added the wikipedia formula:\cr
+\url{http://de.wikipedia.org/wiki/Konfidenzintervall_einer_unbekannten_Wahrscheinlichkeit#Wilson-Intervall}\cr
+\url{http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval}\cr
+Which other methods should I include? (That's not the hard part anymore)
+}
+\examples{
+# Taken directly from Stephen Few's PDF:
+funnel <- read.table(header=TRUE, text="
+Name SampleSize Incidents
+Tony 2 2
+Mike 400 224
+Jan 100 54
+Bob 1000 505
+Sheila 2 1
+Jeff 10 5
+Sandy 500 236
+Mitch 200 92
+Mary 10 3
+John 2 0")
+
+str(funnel)
+X <- funnel$Incidents
+N <- funnel$SampleSize
+
+barplot(X/N, names=funnel$Name, main="success rate")
+# not showing n!
+
+funnelPlot(X,N)
+# arguments for subfunctions as text may be given this way:
+funnelPlot(x=X, n=N, labels=funnel$Name, at=list(cex=0.7, col="red"))
+# Labeling many points is not very clear...
+
+# Even though Jan is more successfull than Mary in succes rate terms, both are
+# easily within random variation. Mary may just have had a bad start.
+# That Mike is doing better than average is not random, but (with 95% confidence)
+# actually due to him being a very good seller.
+
+# one more interesting option:
+funnelPlot(X,N, a3=list(lty=2))
+
+funnelPlot(X,N, a3=list(col=2, lwd=5))
+# changing round line ends in legend _and_ plot is easiest with
+par(lend=1)
+funnelPlot(X,N, a3=list(col=2, lwd=5))
+
+# The Wilson method yields slighty different (supposedly better) limits for small n:
+funnelPlot(X,N, method="classic", al=list(title="Standard Method"))
+funnelPlot(X,N, add=TRUE, method="wilson", a3=list(lty=2, col="red"),
+           a2=list(lty=2, col="blue"), al=list(x="bottomright", title="Wilson Method"))
+
+# Both Wilson method implementations yield the same result:
+funnelPlot(X,N, method="wilson")
+funnelPlot(X,N, add=TRUE, method="wilsonapho",
+           a3=list(lty=2, col="red"), a2=list(lty=2, col="blue"))
+
+
+# Note on nl used in the function, the n values for the ci lines:
+plot(     seq(      10 ,       300 , len=50), rep(  1, 50) )
+points(10^seq(log10(10), log10(300), len=50), rep(0.8, 50) )
+abline(v=10)
+# CI values change rapidly at small n, then later slowly.
+# more x-resolution is needed in the first region, so it gets more of the points
+}
+\keyword{hplot}
+\keyword{aplot}
