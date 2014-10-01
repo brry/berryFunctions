@@ -60,6 +60,7 @@ Version 1.6 (2014-09-)
 removed extremeStatLmom from this package, updated package title and description
 created a file with deprecated functions
 version table removed from berryFunctions package documentation (redundant and outdated information)
+Development version is now on Github
 - mReg and exp4p documentation updated (minor changes)
 - logAxis expanded by log argument to draw the lines on log10(data) but without plot(log="x")
 - logAxis argument order improved (side at first place to mimic axis)
