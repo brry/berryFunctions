@@ -1,0 +1,5 @@
+Das ist nur eine kleine Testdatei.
+Mit einer Leerzeile folgend:
+
+Damit reichts dann auch.
+Und der Versuch, keinen letzten Zeilenumbruch zu haben geht schief bei readLines.
