@@ -21,3 +21,9 @@ It is now in the package 'extremeStat' as 'distLextreme'")
 extremeStatLmom <- function(...)
 warning("'extremeStatLmom' is deprecated (removed from the package 'berryFunctions').
 It is now in the package 'extremeStat' as 'distLextreme'")
+
+compFiles <- function(...)
+  warning("'compFiles' has been renamed to 'compareFiles'")
+
+combineTextfiles <- function(...)
+  warning("'combineTextfiles' has been renamed to 'combineFiles'")
