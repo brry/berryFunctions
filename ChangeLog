@@ -4,15 +4,15 @@ This Log of changes in my package berryFunctions contains two sections:
 2. development over time - a log of the changes I already made
 
 
-----------------------------------------------------------------------
-----------------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
 1. berryFunctions - future development
-----------------------------------------------------------------------
-----------------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
 
 change all "cat" to "message"
 
-- addAlpha: remove warning and vectorize output if length of one of the arguments is 1
+
 
 - createDoc: 
 # no . DEFAULT for ones ending with . or ? or ! or containing DEFAULT
@@ -20,7 +20,7 @@ change all "cat" to "message"
 # upper/lowercase checking!!
 
 - exp4p:
-# try to improve with  nls(y~expfun(p,x=x), start=as.list(param) )  
+# try to improve with nls(y~expfun(p,x=x), start=as.list(param) )  
 # allow specification of initial values for optim
 
 - lsc:
@@ -32,11 +32,13 @@ change all "cat" to "message"
 # add hyperbolic functions
 # quantify / test influence of replacing zeros with near-zero values
 
+- normPlot, betaPlot: make mar an argument
+
 - owa: is change of order of elements avoidable? replace u with ... (in all my functions, too)
 
 - pointZoom: rename Argument colp, as col cannot be given currently. Add expr argument
 
-- quantileMean: romeve sapply loop if probs has length 1 (if this is faster)
+- quantileMean: remove sapply loop if probs has length 1 (if this is faster)
 
 - rainbow2: set as default in colPoints et al, look for other uses of rainbow
 
@@ -49,14 +51,14 @@ change all "cat" to "message"
 # support srt
 
 
-----------------------------------------------------------------------
-----------------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
 2. berryFunctions - development over time
-----------------------------------------------------------------------
-----------------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
 
 
-Version 1.6 (2014-09-)
+Version 1.6 (2014-10-)
 removed extremeStatLmom from this package, updated package title and description
 created a file with deprecated functions
 version table removed from berryFunctions package documentation (redundant and outdated information)
@@ -68,12 +70,11 @@ Development version is now on Github
 - linReg now also writes rmse. The default line width and pch were changed
 - addAlpha now also takes a vector for alpha and yields elementwise alpha-ing
 
-New functions: rainbow2, quantileMean
+New functions: rainbow2, quantileMean, quantileBands
 removed functions: extremeStatLmom, changeAttribute, showAttribute shapeZoom
 
-----------------------------------------------------------------------
-----------------------------------------------------------------------
-
+-----------------------------------------------------------------
+-----------------------------------------------------------------
 
 Version 1.5.2 (2014-09-15)
 Functions to be moved to new packages warn about it (extremeStatLmom, changeAttribute, showAttribute and shapeZoom)
@@ -84,8 +85,8 @@ Functions to be moved to new packages warn about it (extremeStatLmom, changeAttr
 New function: logAxis
 
 
-----------------------------------------------------------------------
-----------------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
 
 
 Version 1.5 (2014-09-03)
@@ -107,8 +108,8 @@ New functions: normPlot, betaPlot, exp4p, compFiles, funTinn, pretty2, colPoints
 functions removed: compareDoc (Rcmd check does this better, once a package is set up), extremeStat (replaced with extremeStatLmom)
 
 
-----------------------------------------------------------------------
-----------------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
 
 
 Version 1.4 (2014-07-01)
@@ -120,8 +121,8 @@ Added To-Do list with my personal wishes (and some comments from other people) a
 New function: linLogTrans
 
 
-----------------------------------------------------------------------
-----------------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
 
 
 Version 1.3 (2014-06-08)
@@ -130,8 +131,8 @@ Shapefile (6 MB) removed from data
 examples in changeAttribute, showAttribute, shapeZoom changed accordingly
 
 
-----------------------------------------------------------------------
-----------------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
 
 
 Version 1.2 (2014-06-06)
@@ -150,8 +151,8 @@ combineTextfiles: example added.
 require2: example is set to dontrun
 
 
-----------------------------------------------------------------------
-----------------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
 
 
 Version 1.1 (2014-06-05)
@@ -201,8 +202,8 @@ unitHydrograph
 yearSample
 
 
-----------------------------------------------------------------------
-----------------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
 
 
 Version 1.0 (2012-10-04)
