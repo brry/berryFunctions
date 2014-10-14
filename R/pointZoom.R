@@ -10,21 +10,21 @@ function (x,
           colp=FALSE, 
           xlab=substitute(x),
           ylab=substitute(y),
-          notify=TRUE,
+          quiet=FALSE,
           ...)
 {
 if(interactive()){ # does this silence the build check warnings?
-if(notify){
+if(!quiet){
   legend("top", "Instructions appear in console", bty="n", text.col="orange")
-  cat("Please select the area to zoom to in the graphics window.\n")
-  cat("first klick topleft, then bottomright.\n"); flush.console()   
+  message("Please select the area to zoom to in the graphics window.\n")
+  message("first klick topleft, then bottomright.\n"); flush.console()   
   } # if notify end
 w <- locator(2)
 u <- par()$usr
 if(w$x[1] > w$x[2] | w$y[1] < w$y[2])
   {
-  cat("wrong selection!\n")
-  cat("first klick topleft, then bottomright of the area to zoom to.\n")
+  message("wrong selection!\n")
+  message("first klick topleft, then bottomright of the area to zoom to.\n")
   flush.console(); w <- locator(2)
   }
 # if x is matrix:
@@ -48,6 +48,6 @@ for ( i in 1:steps)
    ylab=ylab, xlab=xlab ,  yaxs="i", xaxs="i", ...)
    } # loop end
 }
-if(notify) cat("Tell me if this was helpful: berry-b@gmx.de.\n") 
+if(!quiet) message("Tell me if this was helpful: berry-b@gmx.de.\n") 
 } # end if interactive
 } # function end

@@ -3,7 +3,7 @@
 \title{zoom in originally static x11 graphics}
 \description{zoom in x11 graphics - uses locator to define region to zoom into}
 \usage{pointZoom(x, y=NA, z=NA, Time=1, steps=30, las=1, colp=FALSE,
-xlab=substitute(x), ylab=substitute(y), notify=TRUE, ...)}
+xlab=substitute(x), ylab=substitute(y), quiet=FALSE, ...)}
 \arguments{
   \item{x}{same x coordinates as in current plot. x can be a matrix, then the y (and z) coordinates are taken from the second (and third) column.}
   \item{y}{ditto}
@@ -14,7 +14,7 @@ xlab=substitute(x), ylab=substitute(y), notify=TRUE, ...)}
   \item{colp}{logical: use \code{\link{colPoints}} when zooming? DEFAULT: FALSE}
   \item{xlab}{xlabel See \code{\link{plot}}. DEFAULT: substitute(x)}
   \item{ylab}{dito}
-  \item{notify}{logical. Should notifications (instructions) be written to the console? DEFAULT: TRUE}
+  \item{quiet}{logical. Should notifications (instructions) be written to the console? DEFAULT: FALSE}
   \item{\dots}{further arguments passed to plot or colpoints.}
 }
 \value{none, works in existing graphics}
