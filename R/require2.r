@@ -14,6 +14,6 @@ if(class(versuch)=="try-error")
    }
 }
 for(i in 1:length(name))
-  cat(paste0('-------------------------\nhelp(package="', name[i],
+  message(paste0('-------------------------\nhelp(package="', name[i],
             '")\n-------------------------\n'))
 }

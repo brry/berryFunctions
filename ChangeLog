@@ -10,7 +10,7 @@ This Log of changes in my package berryFunctions contains two sections:
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 
-change all "cat" to "message"
+
 
 
 
@@ -63,15 +63,17 @@ removed extremeStatLmom from this package, updated package title and description
 created a file with deprecated functions
 version table removed from berryFunctions package documentation (redundant and outdated information)
 Development version is now on Github
+"cat" changed to "message" where applicable
 - mReg and exp4p documentation updated (minor changes)
 - logAxis expanded by log argument to draw the lines on log10(data) but without plot(log="x")
 - logAxis argument order improved (side at first place to mimic axis)
 - logAxis argument base has new default (1,2,5)
 - linReg now also writes rmse. The default line width and pch were changed
 - addAlpha now also takes a vector for alpha and yields elementwise alpha-ing
+- compareFiles and combineFiles have been renamed for consistency
 
-New functions: rainbow2, quantileMean, quantileBands
-removed functions: extremeStatLmom, changeAttribute, showAttribute shapeZoom
+New functions: rainbow2, quantileMean, quantileBands, (compareFiles and combineFiles)
+removed functions: extremeStatLmom, changeAttribute, showAttribute shapeZoom, (compFiles and combineTextfiles)
 
 -----------------------------------------------------------------
 -----------------------------------------------------------------
