@@ -10,10 +10,6 @@ This Log of changes in my package berryFunctions contains two sections:
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 
-
-
-
-
 - createDoc: 
 # no . DEFAULT for ones ending with . or ? or ! or containing DEFAULT
 # better handling of rows with 2 arguments
@@ -32,15 +28,11 @@ This Log of changes in my package berryFunctions contains two sections:
 # add hyperbolic functions
 # quantify / test influence of replacing zeros with near-zero values
 
-- normPlot, betaPlot: make mar an argument
-
 - owa: is change of order of elements avoidable? replace u with ... (in all my functions, too)
 
 - pointZoom: rename Argument colp, as col cannot be given currently. Add expr argument
 
 - quantileMean: remove sapply loop if probs has length 1 (if this is faster)
-
-- rainbow2: set as default in colPoints et al, look for other uses of rainbow
 
 - seqR: add extendrange argument
 

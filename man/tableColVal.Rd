@@ -3,7 +3,7 @@
 \title{Table with values with value-dependent colored backgrounds in pdf}
 \description{Table with numbers and corresponding color in the background of each cell. (heatmap)}
 \usage{tableColVal(mat, pdffile="table_col_val.pdf", pdf=FALSE, nameswidth=0.3,
-namesheight=0.1, palette=rainbow(nrow(mat)*ncol(mat), start=0, end=0.7),
+namesheight=0.1, palette=rainbow2(nrow(mat)*ncol(mat)),
 Range=range(mat,finite=TRUE), 
 argrow=NULL, argcol=NULL, argcell=NULL, argmain=NULL, ...)}
 \arguments{
@@ -12,7 +12,7 @@ argrow=NULL, argcol=NULL, argcell=NULL, argmain=NULL, ...)}
   \item{pdf}{Should table be written to pdffile? (Else it will plot in x11). DEFAULT: FALSE}
   \item{nameswidth}{Relative width of row names at the left, as a percentage of plot. DEFAULT: 0.3}
   \item{namesheight}{Relative height of column names at the top. DEFAULT: 0.1}
-  \item{palette}{Color palette for the heatmap. DEFAULT: rainbow(nrow(mat)*ncol(mat), start=0, end=0.7)}
+  \item{palette}{Color palette for the heatmap. DEFAULT: rainbow2(nrow(mat)*ncol(mat))}
   \item{Range}{Range of values mapped linearly to color palette. DEFAULT: range(mat,finite}
   \item{argrow, argcol, argcell, argmain}{List of arguments passed to \code{\link{text}} in row and column names, cell content and topleft cell, respectively. Could be cex, col, srt, etc. DEFAULTS: NULL} 
   \item{\dots}{Further arguments passed to \code{\link{pdf}}.}

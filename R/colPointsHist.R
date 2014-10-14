@@ -3,7 +3,7 @@
 colPointsHist <- function(
 z, # Values of third dimension used in \code{\link{colPoints}}
 nbins=40, # Number of classes (thus, colors)
-colors=rev(rainbow(nbins, start=0, end=.7, alpha=1)), # Colors that are used for the background
+colors=rainbow2(nbins), # Colors that are used for the background
 bb=seqR(z, length.out=nbins+1), # Borders of bins for the background
 at=pretty2(z), # Positions of x-axis labels
 labels=at, # X-axis labels themselves

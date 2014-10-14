@@ -2,10 +2,10 @@
 \alias{colPoints}
 \title{add points to plot with color relative to third dimension data}
 \description{
-Draw colored points for 3D-data in a 2D-plane. Color is relative to third dimension, currently only on a linear scale.
+Draw colored points for 3D-data in a 2D-plane. Color is relative to third dimension, by different classification methods.
 Can take 3 vectors or, as in \code{\link{image}}, 2 vectors and a matrix for z.}
 \usage{colPoints(x, y, z, Range=range(z, finite=TRUE), method="equalinterval", breaks,
-sdlab=1, col=rev(rainbow(cl$nbins, start=0, end=0.7, alpha=1)), col2=par("fg"),
+sdlab=1, col=rainbow2(cl$nbins), col2=par("fg"),
 legargs=NULL, histargs=FALSE, add=TRUE, xlab=substitute(x), ylab=substitute(y),
 las=1, pch=16, ...)}
 \arguments{

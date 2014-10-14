@@ -6,7 +6,7 @@ colPoints <- function(
   method="equalinterval", # type of binning or classification method (ways to get color class breakpoints)
   breaks, # specification for method
   sdlab=1, #
-  col=rev(rainbow(cl$nbins, start=0, end=.7, alpha=1)), # color palette. default: 100 nuances from blue to red
+  col=rainbow2(cl$nbins), # color palette. default: 100 nuances from blue to red
   col2=par("fg"), # color for points not in the color range (method s or u)
   legargs=NULL, # Arguments for colPointsLegend. FALSE to suppress drawing, TRUE for defaults
   histargs=FALSE, # Arguments for colPointsHist. FALSE to suppress drawing

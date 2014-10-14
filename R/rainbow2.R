@@ -9,5 +9,5 @@ start=0, # start color
 end=0.7, # end color
 alpha=1) # transparency
 {
-rev(rainbow(n=n, s=s, v=v, start=start, end=end))
+rev(rainbow(n=n, s=s, v=v, start=start, end=end, alpha=alpha))
 }

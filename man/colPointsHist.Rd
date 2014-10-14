@@ -2,7 +2,7 @@
 \alias{colPointsHist}
 \title{Histogram for colPoints}
 \description{Adds Histogram to plots created or enhanced with \code{\link{colPoints}}}
-\usage{colPointsHist(z, nbins=40, colors=rev(rainbow(nbins, start=0, end=.7, alpha=1)),
+\usage{colPointsHist(z, nbins=40, colors=rainbow2(nbins),
 bb=seqR(z, length.out=nbins+1), at=pretty2(z), labels=at, bg="white",
 x1=0, y1=30, x2=40, y2=0, mar=c(6, 7, 3, 2), mgp=c(1.8, 0.6, 0),
 sborder=NA, resetfocus=TRUE, breaks=20, freq=TRUE, col=par("fg"),
@@ -10,7 +10,7 @@ border=NA, main="", ylab="", xlab="", las=1, axes=TRUE, ...)}
 \arguments{
   \item{z}{Values of third dimension used in \code{\link{colPoints}}}
   \item{nbins}{Number of classes (thus, colors). DEFAULT: 40}
-  \item{colors}{Colors that are used for the background. DEFAULT: rev(rainbow(nbins, start=0, end=.7, alpha=1))}
+  \item{colors}{Colors that are used for the background. DEFAULT: rainbow2(nbins)}
   \item{bb}{Borders of bins for the background. DEFAULT: seqR(z, length.out=nbins+1)}
   \item{at}{Positions of x-axis labels. DEFAULT: pretty2(z)}
   \item{labels}{X-axis labels themselves. DEFAULT: at}

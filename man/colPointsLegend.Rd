@@ -3,11 +3,10 @@
 \title{Legend for colPoints}
 \description{Adds legends to plots created or enhanced with \code{\link{colPoints}}}
 \usage{colPointsLegend(z, Range=range(z, finite=TRUE), nbins=40,
-colors=rev(rainbow(nbins, start=0, end=.7, alpha=1)),
-bb=seqR(Range, length.out=nbins+1), at=pretty2(Range), labels=at, bg="white",
-x1=60, y1=99, x2=x1+38, y2=y1-11, mar, mgp=c(1.8, 0.6, 0), sborder=NA,
-resetfocus=TRUE, density=NULL, lines=TRUE, atminmax=FALSE, horizontal=TRUE,
-labelpos=1, titlepos=3, title="Legend", las=1, ...)}
+colors=rainbow2(nbins), bb=seqR(Range, length.out=nbins+1), at=pretty2(Range),
+labels=at, bg="white", x1=60, y1=99, x2=x1+38, y2=y1-11, mar, mgp=c(1.8, 0.6, 0),
+sborder=NA, resetfocus=TRUE, density=NULL, lines=TRUE, atminmax=FALSE, 
+horizontal=TRUE, labelpos=1, titlepos=3, title="Legend", las=1, ...)}
 \arguments{
   \item{z}{Values of third dimension used in \code{\link{colPoints}}, can be matrix, vector, etc, but must be numeric}
   \item{Range}{Ends of color bar. DEFAULT: range(z, finite=TRUE)}

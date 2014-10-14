@@ -9,7 +9,7 @@ colPointsLegend <- function(
 z, # Values of third dimension used in \code{\link{colPoints}}, can be matrix, vector, etc, but must be numeric
 Range=range(z, finite=TRUE), # Ends of color bar for method=equalinterval
 nbins=40, # Number of classes (thus, colors)
-colors=rev(rainbow(nbins, start=0, end=.7, alpha=1)), # Color vector
+colors=rainbow2(nbins), # Color vector
 bb=seqR(Range, length.out=nbins+1), # Borders of bins for the legend (key)
 at=pretty2(Range), # Positions of legend labels
 labels=at, # Labels that are written at the positions of \code{at}
