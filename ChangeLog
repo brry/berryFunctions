@@ -48,7 +48,7 @@ This Log of changes in my package berryFunctions contains two sections:
 -----------------------------------------------------------------
 
 
-Version 1.6 (2014-10-)
+Version 1.6 (2014-10-14)
 removed extremeStatLmom from this package, updated package title and description
 created a file with deprecated functions
 version table removed from berryFunctions package documentation (redundant and outdated information)
