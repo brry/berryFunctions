@@ -28,7 +28,7 @@ if(w$x[1] > w$x[2] | w$y[1] < w$y[2])
   flush.console(); w <- locator(2)
   }
 # if x is matrix:
-if(class(x) %in% c("matrix", "data.frame", "array") )
+if(class(x)[1] %in% c("matrix", "data.frame", "array") )
    {y <- x[,2]; if(ncol(x)>2) z <- x[,3]; x <- x[,1]}
 #
 if (colp) 
