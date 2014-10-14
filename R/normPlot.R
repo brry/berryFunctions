@@ -15,10 +15,11 @@ normPlot <- function(
   type="l", # arguments passed to \code{\link{plot}} and \code{\link{lines}} 
   lty=1,
   col=par("fg"),
+  mar=c(2,3,3,3), # margins
   ... # further arguments passed to \code{\link{plot}} like lwd, xaxs, cex.axis, etc.
   )
 {
-par(mar=c(2,3,3,3))
+par(mar=mar)
 # create x and y coordinates
 x <- seq(mean-width*sd, mean+width*sd, length=200)
 y <- dnorm(x, mean, sd)
