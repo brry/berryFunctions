@@ -34,8 +34,6 @@ This Log of changes in my package berryFunctions contains two sections:
 
 - quantileMean: remove sapply loop if probs has length 1 (if this is faster)
 
-- seqR: add extendrange argument
-
 - textField: 
 # Bounding boxes are too high
 # # Adjust adj parameter based on pos and offset: if(!is.null(pos))# i want the field to still be drawn with adj, but have it based on pos
@@ -63,6 +61,7 @@ Development version is now on Github
 - linReg now also writes rmse. The default line width and pch were changed
 - addAlpha now also takes a vector for alpha and yields elementwise alpha-ing
 - compareFiles and combineFiles have been renamed for consistency
+- seqR: added extendrange argument, rewrote part of the function
 
 New functions: rainbow2, quantileMean, quantileBands, (compareFiles and combineFiles)
 removed functions: extremeStatLmom, changeAttribute, showAttribute shapeZoom, (compFiles and combineTextfiles)
