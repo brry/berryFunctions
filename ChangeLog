@@ -19,6 +19,8 @@ This Log of changes in my package berryFunctions contains two sections:
 # try to improve with nls(y~expfun(p,x=x), start=as.list(param) )  
 # allow specification of initial values for optim
 
+- linreg: enable col_a~col_b, data=df  formula specification
+
 - lsc:
 # find out what to do with optim
 # find better example dataset
@@ -44,6 +46,14 @@ This Log of changes in my package berryFunctions contains two sections:
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 2. berryFunctions - development over time
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+
+
+Version 1.7 (2014-)
+- rmse and rsquare NA-removal warnings can now be silenced with quiet=TRUE
+
+
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 
