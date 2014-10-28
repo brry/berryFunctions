@@ -25,7 +25,7 @@ ix <- cut(x, breaks=bb, labels=FALSE, include.lowest=TRUE) # index of class for 
 if(missing(breaks)) breaks <- 0:4/4
 if(!missing(breaks) & length(breaks)==1) breaks <- seq(0,1, length.out=breaks)
 nb <- length(breaks) - 1
-bb <- quantile(x, probs=breaks)
+bb <- unique(quantile(x, probs=breaks))
 at <- bb
 la <- signif(bb, 2) # rounding
 ix <- cut(x, breaks=bb, labels=FALSE, include.lowest=TRUE)

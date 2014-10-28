@@ -5,7 +5,7 @@
 linearly spaced equal intervals,
 intervals based on quantiles (equally filled bins)
 or distance from the mean in normal distributions,
-or user specified class borders, e.g. for legal or critical limits.}
+or user specified class borders, e.g. for legal or critical limits, or for logarithmically spaced (\code{\link{logSpaced}}) borders.}
 \usage{classify(x, method="equalinterval", breaks, Range=range(x, finite=TRUE), sdlab=1)}
 \arguments{
   \item{x}{Vector with numeric values}
@@ -26,7 +26,10 @@ Binning methods are explained very nicely in the link in the section References.
 \bold{standarddeviation} \tab |  normal distributions                \tab |  the number of sd in one direction from the mean      \tab |  3        \cr
 \bold{usergiven}         \tab |  custom breakpoints                  \tab |  personal breakpoint values (including ends of Range) \tab |  none     \cr
 }
-The default is set to equalinterval which makes sense for my original intent of plotting lake depth (bathymetry measured at irregularly distributed points) on a linear color scale.}
+The default is set to equalinterval which makes sense for my original intent
+of plotting lake depth (bathymetry measured at irregularly distributed points) on a linear color scale.\cr
+You can use \code{\link{logSpaced}} in this package for method=usergiven
+}
 \value{list with class numbers (index) and other elements for \code{\link{colPoints}}}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, 2014}
 \references{See this page on the effect of classification (binning) methods: \cr
