@@ -19,8 +19,6 @@ This Log of changes in my package berryFunctions contains two sections:
 # try to improve with nls(y~expfun(p,x=x), start=as.list(param) )  
 # allow specification of initial values for optim
 
-- linreg: enable col_a~col_b, data=df  formula specification
-
 - lsc:
 # find out what to do with optim
 # find better example dataset
@@ -37,9 +35,8 @@ This Log of changes in my package berryFunctions contains two sections:
 - quantileMean: remove sapply loop if probs has length 1 (if this is faster)
 
 - textField: 
-# Bounding boxes are too high
+# Bounding boxes are too high: vectorize expressionising?
 # # Adjust adj parameter based on pos and offset: if(!is.null(pos))# i want the field to still be drawn with adj, but have it based on pos
-# check out "Rounded not yet possible with log axes"
 # support srt
 
 
@@ -52,6 +49,7 @@ This Log of changes in my package berryFunctions contains two sections:
 
 Version 1.7 (2014-)
 - rmse and rsquare NA-removal warnings can now be silenced with quiet=TRUE
+- linReg: formula specification is now enabled: linReg(obj1~obj2) or linReg(col_a~col_b, data=df)
 
 
 -----------------------------------------------------------------
