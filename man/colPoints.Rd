@@ -1,6 +1,6 @@
 \name{colPoints}
 \alias{colPoints}
-\title{add points to plot with color relative to third dimension data}
+\title{Points colored relative to third dimension}
 \description{
 Draw colored points for 3D-data in a 2D-plane. Color is relative to third dimension, by different classification methods.
 Can take 3 vectors or, as in \code{\link{image}}, 2 vectors and a matrix for z.}
