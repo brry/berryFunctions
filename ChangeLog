@@ -35,8 +35,7 @@ This Log of changes in my package berryFunctions contains two sections:
 - quantileMean: remove sapply loop if probs has length 1 (if this is faster)
 
 - textField: 
-# Bounding boxes are too high: vectorize expressionising?
-# # Adjust adj parameter based on pos and offset: if(!is.null(pos))# i want the field to still be drawn with adj, but have it based on pos
+# Adjust adj parameter based on pos and offset: if(!is.null(pos))# i want the field to still be drawn with adj, but have it based on pos
 # support srt
 
 
@@ -47,9 +46,14 @@ This Log of changes in my package berryFunctions contains two sections:
 -----------------------------------------------------------------
 
 
-Version 1.7 (2014-)
+Version 1.7 (2014-).
+various small changes and bug fixes. See the commits on github
 - rmse and rsquare NA-removal warnings can now be silenced with quiet=TRUE
 - linReg: formula specification is now enabled: linReg(obj1~obj2) or linReg(col_a~col_b, data=df)
+- colPoints can now draw lines (with interpolation)
+- textField: vertical extend of bounding boxes is now correct through use of expression
+
+New function: logSpaced
 
 
 -----------------------------------------------------------------

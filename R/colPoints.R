@@ -11,11 +11,13 @@ colPoints <- function(
   legargs=NULL, # Arguments for colPointsLegend. FALSE to suppress drawing, TRUE for defaults
   histargs=FALSE, # Arguments for colPointsHist. FALSE to suppress drawing
   add=TRUE, # as in points. add to existing plot? add=F to draw new plot
+  lines=FALSE, #  Logical. Should lines be drawn underneath the points?
+  nint=30, # Numeric of length 1. Number of interpolation points between each coordinate if lines=TRUE.
   xlab=substitute(x), # axis labels
   ylab=substitute(y),
   las=1, # LabelAxisStyle: all labels horizontally (only relevant when add=FALSE)
   pch=16, # PointCHaracter, see ?par
-  ...) # further arguments, eg cex, xlim (bei add=F), mgp, main, sub, asp (when add=F), etc. NOT col
+  ...) # further arguments passed to plot, points and lines, eg cex, xlim (bei add=F), mgp, main, sub, asp (when add=F), etc. NOT col
 {
 xlab <- xlab ;  ylab <- ylab # defaults need to be set before x and y are evaluated
 # error checking:
@@ -23,6 +25,7 @@ if(diff(Range)==0) stop("all z-values are equal.")
 # Partial matching of breaks:
 PossibleValues <- c("equalinterval", "quantile", "usergiven", "standarddeviation")
 method <- PossibleValues[pmatch(method,  PossibleValues)]
+#
 # vector vs matrix and dimension check: ----------------------------------------
 # a) Regular case: z ist a vector
 if(is.vector(z))
@@ -39,23 +42,35 @@ if(is.vector(z))
      stop("Dimension of z (ncol*nrow) is not length(x) * length(y)!")
    x <- rep(x, each=nrow(z));  y <- rep(y, ncol(z));  z <- as.vector(z)
    }
+#
 # CLASSIFICATION # -------------------------------------------------------------
 if(method=="equalinterval") if(!missing(col)) breaks <- length(col)
 #
 cl <- classify(x=z, method=method, breaks=breaks, sdlab=sdlab, Range=Range)
 # error check:
-if(length(col) != cl$nbins) stop("cp: Number of colors is not equal to number of classes.")
+if(length(col) != cl$nbins) stop("colPoints: Number of colors is not equal to number of classes.")
+#
 # ACTUAL PLOTTING --------------------------------------------------------------
-if(add){points(x, y, col=col2,          pch=pch, ...)
-        points(x, y, col=col[cl$index], pch=pch, ...)}
-else   {  plot(x, y, col=col2,          pch=pch, xlab=xlab, ylab=ylab, las=las, ...)
-        points(x, y, col=col[cl$index], pch=pch, ...)}
+if(!add) plot(x, y, col=NA, pch=pch, xlab=xlab, ylab=ylab, las=las, ...)
+if(lines)
+  {# linear interpolation between coordinates (smoother line colors):
+  x2 <- approx(x, n=length(x)*nint)$y
+  y2 <- approx(y, n=length(y)*nint)$y
+  z2 <- approx(z, n=length(z)*nint)$y
+  cl2 <- classify(x=z2, method=method, breaks=breaks, sdlab=sdlab, Range=Range)
+  segments(x0=x2[-length(x2)],  y0=y2[-length(y2)],  x1=x2[-1],  y1=y2[-1],
+           col=col[cl2$index], ...)
+   }
+points(x, y, col=col2,          pch=pch, ...)
+points(x, y, col=col[cl$index], pch=pch, ...)
+#
 # add legend:
 if(is.list(legargs) | is.null(legargs) | isTRUE(legargs) )
   {
   legdefs <- list(z=z, at=cl$at, labels=cl$labels, bb=cl$bb, nbins=cl$nbins, colors=col)
   do.call(colPointsLegend, args=owa(legdefs, legargs))
   }
+#
 # add histogramm:
 if(is.list(histargs) | is.null(histargs) | isTRUE(histargs) )
   {

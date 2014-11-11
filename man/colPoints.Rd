@@ -6,8 +6,8 @@ Draw colored points for 3D-data in a 2D-plane. Color is relative to third dimens
 Can take 3 vectors or, as in \code{\link{image}}, 2 vectors and a matrix for z.}
 \usage{colPoints(x, y, z, Range=range(z, finite=TRUE), method="equalinterval", breaks,
 sdlab=1, col=rainbow2(cl$nbins), col2=par("fg"),
-legargs=NULL, histargs=FALSE, add=TRUE, xlab=substitute(x), ylab=substitute(y),
-las=1, pch=16, ...)}
+legargs=NULL, histargs=FALSE, add=TRUE, lines=FALSE, nint=30,
+xlab=substitute(x), ylab=substitute(y), las=1, pch=16, ...)}
 \arguments{
   \item{x,y}{Vectors with coordinates of the points to be drawn}
   \item{z}{z values beloning to coordinates. Vector or matrix}
@@ -20,20 +20,22 @@ las=1, pch=16, ...)}
   \item{legargs}{List. Arguments passed to \code{\link{colPointsLegend}}. \code{legargs=FALSE} to suppress drawing the legend, NULL for defaults. DEFAULT: NULL, with some defaults specified internally}
   \item{histargs}{List. Arguments passed to \code{\link{colPointsHist}}. -"-. DEFAULT: FALSE}
   \item{add}{Logical. Should the points be added to current (existing!) plot? If FALSE, a new plot is started. DEFAULT: TRUE (It's called col\bold{Points}, after all)}
+  \item{lines}{Logical. Should lines be drawn underneath the points? (color of each \code{\link{segment}} is taken from starting point, last point is endpoint.) DEFAULT: FALSE}
+  \item{nint}{Numeric of length 1. Number of interpolation points between each coordinate if \code{lines=TRUE}. nint=1 means no interpolation. DEFAULT: 30}
   \item{xlab}{x-axis label. DEFAULT: substitute as in plot}
   \item{ylab}{y-axis label. DEFAULT: ditto}
   \item{las}{Label Axis Style. Only used when add=FALSE. See \code{\link{par}}. DEFAULT: 1 (all labels horizontal)}
   \item{pch}{Point CHaracter. See \code{\link{par}}. DEFAULT: 16}
-  \item{\dots}{Further graphical arguments, eg cex, xlim (when add=F), mgp, main, sub, asp (when add=F), etc. Note: col does not work, as it is already another argument}
+  \item{\dots}{Further graphical arguments passed to plot, points and lines, eg cex, xlim (when add=F), mgp, main, sub, asp (when add=F), etc. Note: col does not work, as it is already another argument}
 }
 \value{Invisible list of values that can be passed to colPointsLegend or colPointsHist.}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2014. I'd be interested in hearing what you used the function for.}
 \references{\url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html}}
 \seealso{\code{\link{classify}}, \code{\link{colPointsLegend}}, \code{\link{colPointsHist}} }
 \examples{
-i <- c( 22,  40,  80,  45,  60,  63,  30,  70,  55,  48,  32,  48,  70,  40)
-j <- c(  5,  33,  12,  56,  20,  40,  45,  45,  30,  36,  23,  15,  30,  10)
-k <- c(175, 174, 120, 105, 132, 130, 190, 110, 131, 160, 183, 163, 117, 168)
+i <- c( 22,  40,  48,  60,  80,  70,  70,  45,  63,  55,  48,  40,  30,  32)
+j <- c(  5,  10,  15,  20,  12,  30,  45,  56,  40,  30,  36,  33,  45,  23)
+k <- c(175, 168, 163, 132, 120, 117, 110, 105, 130, 131, 160, 174, 190, 183)
 
 # basic usage:
 colPoints(i,j,k, cex=1.5, pch="+", add=FALSE)
@@ -41,7 +43,7 @@ colPoints(i,j,k, cex=1.5, pch="+", add=FALSE)
 # with custom Range (only for method equalinterval):
 colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, Range=c(150, 250))
 # can be used to allow comparison between several plots
-# points outside the range are plottet with col2
+# points outside the range are plotted with col2
 
 # with custom colors:
 mycols <- colorRampPalette(c("blue","yellow"))(10)
@@ -51,10 +53,11 @@ colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, col=mycols)
 colPoints(i,j,k, cex=2, pch="+", add=FALSE,
          legargs=list(density=FALSE, title="Elevation [m above NN.]"))
 
+# with lines (nint to change number of linear interpolation points):
+colPoints(i,j,k, cex=1.5, add=FALSE, lines=TRUE, lwd=2)
 
 # different classification methods:
-set.seed(007)
-rx <- rnorm(30) ; ry <- rnorm(30) ; rz <- rnorm(30)*100
+set.seed(007) ;  rx <- rnorm(30) ; ry <- rnorm(30) ; rz <- rnorm(30)*100
 # sd: normal distribution
 mycols <- colorRampPalette(c("green","yellow", "red"))
 colPoints(rx,ry,rz, add=FALSE, col=mycols(5), method="s",
@@ -100,8 +103,8 @@ colPointsLegend(x1=23,y1=95, z=k, horizontal=FALSE, labelpos=5, cex=0.8,
 
 # colPoints with matrix:
 colPoints(z=volcano, add=FALSE)
-colPointsHist(z=volcano)
 # image and contour by default transpose the matrix! This is really in the data
+colPointsHist(z=volcano)
 
 # highlight local character of points on a regular grid normally drawn with image:
 # library(datasets), normally already loaded in newer R versions.
