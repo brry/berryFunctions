@@ -9,7 +9,7 @@ plot=TRUE, pch=3, las=1, ylab="base", ... )}
   \item{n}{Number of values to be calculated. DEFAULT: 30}
   \item{min,max}{Range where n values are to be distributed, single values each. DEFAULT: 1,n}
   \item{plot}{Should the points be plotted on a line? DEFAULT: TRUE}
-  \item{pch}{PointCharacter and Label Axis Style. DEFAULT: 3, las=1}
+  \item{pch, las}{PointCharacter and Label Axis Style. DEFAULT: 3,1}
   \item{ylab}{Y axis label. DEFAULT: "base"}
   \item{\dots}{Further arguments passed to \code{\link{plot}}}
 }
@@ -24,5 +24,4 @@ logSpaced(base=c(1.1, 1.5, 2), n=6, min=5, max=10)
 d <- logSpaced(seq(0.8, 1.2, 0.025), main="logarithmically spaced points")
 
 }
-\keyword{}
-\keyword{}
+\keyword{arith}

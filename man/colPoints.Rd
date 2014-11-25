@@ -20,7 +20,7 @@ xlab=substitute(x), ylab=substitute(y), las=1, pch=16, ...)}
   \item{legargs}{List. Arguments passed to \code{\link{colPointsLegend}}. \code{legargs=FALSE} to suppress drawing the legend, NULL for defaults. DEFAULT: NULL, with some defaults specified internally}
   \item{histargs}{List. Arguments passed to \code{\link{colPointsHist}}. -"-. DEFAULT: FALSE}
   \item{add}{Logical. Should the points be added to current (existing!) plot? If FALSE, a new plot is started. DEFAULT: TRUE (It's called col\bold{Points}, after all)}
-  \item{lines}{Logical. Should lines be drawn underneath the points? (color of each \code{\link{segment}} is taken from starting point, last point is endpoint.) DEFAULT: FALSE}
+  \item{lines}{Logical. Should lines be drawn underneath the points? (color of each \code{\link{segments}} is taken from starting point, last point is endpoint.) DEFAULT: FALSE}
   \item{nint}{Numeric of length 1. Number of interpolation points between each coordinate if \code{lines=TRUE}. nint=1 means no interpolation. DEFAULT: 30}
   \item{xlab}{x-axis label. DEFAULT: substitute as in plot}
   \item{ylab}{y-axis label. DEFAULT: ditto}
@@ -29,6 +29,7 @@ xlab=substitute(x), ylab=substitute(y), las=1, pch=16, ...)}
   \item{\dots}{Further graphical arguments passed to plot, points and lines, eg cex, xlim (when add=F), mgp, main, sub, asp (when add=F), etc. Note: col does not work, as it is already another argument}
 }
 \value{Invisible list of values that can be passed to colPointsLegend or colPointsHist.}
+\note{Rstudio scales graphics really badly, so don't expect the right legend width out of the box if you use Rstudio! Exporting via \code{png("myplot.png", 600,400); colPoints(x,y,z); dev.off()} usually works much better}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2014. I'd be interested in hearing what you used the function for.}
 \references{\url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html}}
 \seealso{\code{\link{classify}}, \code{\link{colPointsLegend}}, \code{\link{colPointsHist}} }
@@ -46,7 +47,7 @@ colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, Range=c(150, 250))
 # points outside the range are plotted with col2
 
 # with custom colors:
-mycols <- colorRampPalette(c("blue","yellow"))(10)
+mycols <- colorRampPalette(c("blue","yellow","red"))(50)
 colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, col=mycols)
 
 # With legend title:

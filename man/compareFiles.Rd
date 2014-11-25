@@ -12,7 +12,7 @@
 }
 \value{result from \code{\link{head}}}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, Aug 2014}
-\seealso{\code{\link{combineTextfiles}} }
+\seealso{\code{\link{combineTextfiles}}, \url{http://text-compare.com/} }
 \examples{
 filenames <- system.file(paste0("extdata/Versuch",1:2,".txt"), package="berryFunctions")
 compareFiles(filenames[1], filenames[2], warn=FALSE)

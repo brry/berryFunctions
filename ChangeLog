@@ -10,6 +10,10 @@ This Log of changes in my package berryFunctions contains two sections:
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 
+- classify: new method 'logscale'
+
+- colPoints: legend additional to legargs (same with hist), lines with NA should be skipped
+
 - createDoc: 
 # no . DEFAULT for ones ending with . or ? or ! or containing DEFAULT
 # better handling of rows with 2 arguments
@@ -24,6 +28,10 @@ This Log of changes in my package berryFunctions contains two sections:
 # find better example dataset
 # Why is the sim line not plotted completely?
 
+- logAxis: 
+# better range and base defaults, depending on par("usr")[]
+# allow custom base for ablines(h) (logVals$all)
+
 - mReg: 
 # add hyperbolic functions
 # quantify / test influence of replacing zeros with near-zero values
@@ -33,6 +41,10 @@ This Log of changes in my package berryFunctions contains two sections:
 - pointZoom: rename Argument colp, as col cannot be given currently. Add expr argument
 
 - quantileMean: remove sapply loop if probs has length 1 (if this is faster)
+
+- require2: change to requireNamespace http://r-pkgs.had.co.nz/namespace.html#namespace
+
+- tableColVal: enable log scaled color through use of classify, update example
 
 - textField: 
 # Adjust adj parameter based on pos and offset: if(!is.null(pos))# i want the field to still be drawn with adj, but have it based on pos
@@ -52,7 +64,7 @@ various small changes and bug fixes. See the commits on github
 - linReg: formula specification is now enabled: linReg(obj1~obj2) or linReg(col_a~col_b, data=df)
 - colPoints can now draw lines (with interpolation)
 - textField: vertical extend of bounding boxes is now correct through use of expression
-
+- tableColVal: text can be changed (eg logarithmized, see examples)
 New function: logSpaced
 
 

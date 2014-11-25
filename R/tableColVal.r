@@ -48,7 +48,7 @@ do.call(text, args=owa(d=list(x=nameswidth/2, y=ytitles,  labels="tableColVal"),
 do.call(text, args=owa(d=list(x=nameswidth/2, y=1:nr+0.5, labels=rownames(mat)), argrow,  u=c("x","y")))
 # add text to each cell
 do.call(text, args=owa(d=list(x=rep(middles, each=nr), y=rep(1:nr, nc)+0.5, 
-                              labels=as.vector(mat)), argcell,  u=c("x","y", "labels")))
+                              labels=as.vector(mat)), argcell,  u=c("x","y")))
 # Set old paramaters again:
 par(op)
 if(pdf) { dev.off() ; message("PDF-File is located here:", pdffile, "\n") }# close pdf device
