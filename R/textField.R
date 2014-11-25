@@ -4,6 +4,7 @@
 # R Text visible on top
 # R labeling with color underneath
 # R Creating text with a halo
+# R Text with shadow
 
 # Berry, April 2013 + March 2014, berry-b@gmx.de
 # with inspiration taken from vegan:::ordilabel() and thanks to Jari Oksanen for his comments
@@ -15,10 +16,11 @@ textField <- function(
          labels=seq_along(x), # labels to be placed at the coordinates, as in \code\linktext}}
          fill="white",   # fill is recycled if necessary. With a message when quiet = FALSE
          border=NA,      # ditto for border
+         expression=NA,  # If TRUE, labels are converted to expression for better field positioning through expression bounding boxes. If NA, it is set to TRUE for labels without line breaks (Newlines, "\n").
          margin=0.3,     # added field space around words (multiple of em/ex)
          field="rect",   # 'rectangle', 'ellipse', or 'rounded', partial matching is performed
          nv=1000,        # number of vertices for field = "ellipse" or "rounded". low: fast drawing. high: high resolution in vector graphics as pdf possible.
-         rounding=0.4,   # between 0 and 1: portion of height that is cut off rounded at edges when field = "rounded"
+         rounding=0.75,  # between 0 and 1: portion of height that is cut off rounded at edges when field = "rounded"
          lty=par("lty"), # line type
          lwd=par("lwd"), # line width
          cex=par("cex"), # character expansion
@@ -29,9 +31,10 @@ textField <- function(
          quiet=FALSE,    # Suppress warning when Arguments are recycled?
          ...) # further arguments passed to strwidth and text, like font, vfont, family
 {
-# Partial matching -------------------------------------------------------------
+# Partial matching field--------------------------------------------------------
 PossibleValues <- c("rectangle", "ellipse", "rounded")
 field <- PossibleValues[pmatch(field,  PossibleValues)]
+#
 # Recycling --------------------------------------------------------------------
 # Recycle x or y, if one is shorter than the other. Code taken from xy.coords
 nx <- length(x)  ;  ny <- length(y)
@@ -68,9 +71,30 @@ if(length(cex)    != nx )    cex <- rep(   cex, length.out=nx)
 if(length(rounding) != nx & field=="rounded") rounding <- rep(rounding, length.out=nx)
 #
 # Dimensioning -----------------------------------------------------------------
+# better field positioning through expression bounding boxes:
+ labels2 <- as.list(labels)
+# labels without newline:
+nl <- which(!sapply(labels2, grepl, pattern="\n"))
+if(is.na(expression) & length(nl)>0 )
+  for(i in nl) labels2[[i]] <- as.expression(labels2[[i]])
+if(isTRUE(expression)) labels2 <- lapply(labels2, as.expression)
+#
 # Dimension of the character string in plot units:
-w <-  strwidth(labels, cex=cex, ...)
-h <- strheight(labels, cex=cex, ...)
+w <- sapply(labels2, strwidth , cex=cex, ...)
+h <- sapply(labels2, strheight, cex=cex, ...)
+# Box height times number of line breaks
+if(isTRUE(expression))
+##   h <- h + h*sapply(gregexpr("\n", labels), function(x) sum(x>0)) # false
+##labels=c("Bug","oo-\nbahg", "Bug-\nbahg\ngrh")
+h <- sapply(as.list(labels), function(xx) 
+    {
+    xxsplit <- strsplit(xx, "\n")[[1]]
+    sum(sapply( lapply(as.list(xxsplit), as.expression), strheight, cex=cex, ...))
+    })
+#browser() # this sometimes is a list!
+
+
+
 #h <- strheight("lg", cex=cex, ...)
 # Extra-space (margins) around characters:
 if(field=="ellipse") margin <- margin + 1.5 # bigger margin for ellipses needed
