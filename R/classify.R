@@ -7,7 +7,13 @@ classify <- function(
   sdlab=1) # type for method=standarddeviation
 {
 x <- as.numeric(na.omit(x))
-if(diff(range(x, finite=TRUE))==0) stop("all values are equal.")
+# error checking:
+if(diff(Range)==0)
+   {
+   warning("The Range values were equal. Range is now extended.")
+   Range[1] <- Range[1] -1
+   Range[2] <- Range[2] +1
+   }
 # Partial matching of method:
 PossibleValues <- c("equalinterval", "quantile", "usergiven", "standarddeviation")
 method <- PossibleValues[pmatch(tolower(method),  PossibleValues)]

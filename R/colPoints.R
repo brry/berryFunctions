@@ -21,7 +21,7 @@ colPoints <- function(
 {
 xlab <- xlab ;  ylab <- ylab # defaults need to be set before x and y are evaluated
 # error checking:
-if(diff(Range)==0) stop("all z-values are equal.")
+if(diff(range(z, finite=TRUE)==0)) warning("All z-values are equal.")
 # Partial matching of breaks:
 PossibleValues <- c("equalinterval", "quantile", "usergiven", "standarddeviation")
 method <- PossibleValues[pmatch(method,  PossibleValues)]
