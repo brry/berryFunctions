@@ -4,24 +4,27 @@
 \description{
 Draw colored points for 3D-data in a 2D-plane. Color is relative to third dimension, by different classification methods.
 Can take 3 vectors or, as in \code{\link{image}}, 2 vectors and a matrix for z.}
-\usage{colPoints(x, y, z, Range=range(z, finite=TRUE), method="equalinterval", breaks,
-sdlab=1, col=rainbow2(cl$nbins), col2=par("fg"),
-legargs=NULL, histargs=FALSE, add=TRUE, lines=FALSE, nint=30,
+\usage{colPoints(x, y, z, data, Range=range(z, finite=TRUE), method="equalinterval", breaks,
+sdlab=1, col=rainbow2(cl$nbins), col2=NA,
+legend=TRUE, legargs=NULL, hist=FALSE, histargs=NULL, add=TRUE, lines=FALSE, nint=30,
 xlab=substitute(x), ylab=substitute(y), las=1, pch=16, ...)}
 \arguments{
   \item{x,y}{Vectors with coordinates of the points to be drawn}
   \item{z}{z values beloning to coordinates. Vector or matrix}
+  \item{data}{ Optional: data.frame with the column names as given by x,y and z.}
   \item{Range}{Ends of color bar for method=equalinterval. DEFAULT: range(z, finite=TRUE)}
   \item{method}{Classification method (partial matching is performed), see \code{\link{classify}}. DEFAULT: "equalinterval")}
   \item{breaks}{Specification for method, see \code{\link{classify}}. DEFAULT: different defaults for each method}
   \item{sdlab}{Type of label and breakpoints if \code{method=standarddeviation}, see \code{\link{classify}}. DEFAULT: 1}
   \item{col}{Vector of colors to be used. DEFAULT: \code{\link{rainbow}} from blue (lowest) to red (highest value in Range)}
-  \item{col2}{Color for points not in the color range. DEFAULT: par("fg")}
-  \item{legargs}{List. Arguments passed to \code{\link{colPointsLegend}}. \code{legargs=FALSE} to suppress drawing the legend, NULL for defaults. DEFAULT: NULL, with some defaults specified internally}
-  \item{histargs}{List. Arguments passed to \code{\link{colPointsHist}}. -"-. DEFAULT: FALSE}
+  \item{col2}{Color for points not in the color range. DEFAULT: NA}
+  \item{legend}{Logical. Should a \code{\link{colPointsLegend}} be drawn? DEFAULT: TRUE}
+  \item{legargs}{List. Arguments passed to \code{\link{colPointsLegend}}.  DEFAULT: NULL, with some defaults specified internally}
+  \item{hist}{Logical. Should a \code{\link{colPointsHist}} be drawn? DEFAULT: FALSE (TRUE if histargs are given)}
+  \item{histargs}{List. Arguments passed to \code{\link{colPointsHist}}. DEFAULT: NULL}
   \item{add}{Logical. Should the points be added to current (existing!) plot? If FALSE, a new plot is started. DEFAULT: TRUE (It's called col\bold{Points}, after all)}
   \item{lines}{Logical. Should lines be drawn underneath the points? (color of each \code{\link{segments}} is taken from starting point, last point is endpoint.) DEFAULT: FALSE}
-  \item{nint}{Numeric of length 1. Number of interpolation points between each coordinate if \code{lines=TRUE}. nint=1 means no interpolation. DEFAULT: 30}
+  \item{nint}{Numeric of length 1. Number of interpolation points between each coordinate if \code{lines=TRUE}. nint=1 means no interpolation. Values below 10 will smooth coordinates and miss the original points!. DEFAULT: 30}
   \item{xlab}{x-axis label. DEFAULT: substitute as in plot}
   \item{ylab}{y-axis label. DEFAULT: ditto}
   \item{las}{Label Axis Style. Only used when add=FALSE. See \code{\link{par}}. DEFAULT: 1 (all labels horizontal)}
@@ -34,9 +37,9 @@ xlab=substitute(x), ylab=substitute(y), las=1, pch=16, ...)}
 \references{\url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html}}
 \seealso{\code{\link{classify}}, \code{\link{colPointsLegend}}, \code{\link{colPointsHist}} }
 \examples{
-i <- c( 22,  40,  48,  60,  80,  70,  70,  45,  63,  55,  48,  40,  30,  32)
-j <- c(  5,  10,  15,  20,  12,  30,  45,  56,  40,  30,  36,  33,  45,  23)
-k <- c(175, 168, 163, 132, 120, 117, 110, 105, 130, 131, 160, 174, 190, 183)
+i <- c( 22,  40,  48,  60,  80,  70,  70,  63,  55,  48,  45,  40,  30,  32)
+j <- c(  5,  10,  15,  20,  12,  30,  45,  40,  30,  36,  56,  33,  45,  23)
+k <- c(175, 168, 163, 132, 120, 117, 110, 130, 131, 160, 105, 174, 190, 183)
 
 # basic usage:
 colPoints(i,j,k, cex=1.5, pch="+", add=FALSE)
@@ -55,7 +58,11 @@ colPoints(i,j,k, cex=2, pch="+", add=FALSE,
          legargs=list(density=FALSE, title="Elevation [m above NN.]"))
 
 # with lines (nint to change number of linear interpolation points):
-colPoints(i,j,k, cex=1.5, add=FALSE, lines=TRUE, lwd=2)
+colPoints(i,j,k, cex=1.5, add=FALSE, lines=TRUE, nint=10, lwd=2)
+# With NAs separating lines:
+tfile <- system.file("extdata/rivers.txt", package="berryFunctions")
+rivers <- read.table(tfile, header=TRUE, dec=",")
+colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE)
 
 # different classification methods:
 set.seed(007) ;  rx <- rnorm(30) ; ry <- rnorm(30) ; rz <- rnorm(30)*100
@@ -72,9 +79,9 @@ text(rx,ry,round(rz), col=8)
 
 
 # With histogram:
-colPoints(i,j,k, add=FALSE, hist=NULL)
+colPoints(i,j,k, add=FALSE, hist=TRUE)
 colPoints(i,j,k, cex=3.5, lwd=3, pch=1, histargs=list(bg=5, breaks=5), add=FALSE)
-colPoints(rx,ry,rz, cex=3.5, lwd=3, pch=1, add=FALSE, legargs=FALSE,
+colPoints(rx,ry,rz, cex=3.5, lwd=3, pch=1, add=FALSE, legend=FALSE,
    histargs=list(mar=c(0,0,0,0), x1=50,y1=99, x2=100,y2=80, yaxt="n"))
 
 # use classify separately:
