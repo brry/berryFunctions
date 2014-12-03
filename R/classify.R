@@ -6,8 +6,9 @@ classify <- function(
   Range=range(x, finite=TRUE), # Ends of color bar for method=equalinterval
   sdlab=1) # type for method=standarddeviation
 {
-x <- as.numeric(na.omit(x))
+x <- as.numeric(x)
 # error checking:
+if(length(Range) != 2) stop("Range must have two values.")
 if(diff(Range)==0)
    {
    warning("The Range values were equal. Range is now extended.")
@@ -15,12 +16,14 @@ if(diff(Range)==0)
    Range[2] <- Range[2] +1
    }
 # Partial matching of method:
-PossibleValues <- c("equalinterval", "quantile", "usergiven", "standarddeviation")
+PossibleValues <- c("equalinterval", "quantile", "logspaced", "standarddeviation", "usergiven")
 method <- PossibleValues[pmatch(tolower(method),  PossibleValues)]
+if(is.na(method)) stop("method can only be equalinterval, quantile, logspaced, standarddeviation, or usergiven (but the name can be abbreviated).")
 # actual work:
 if(method=="equalinterval") # --------------------------------------------------
 {
-if(missing(breaks)) breaks <- 100     # default for breaks
+if(missing(breaks)) breaks <- 100     # default for breaks           # input control
+if(length(breaks)>1) stop("breaks must be a single value if method='equalinterval'.")
 nb <- breaks                          # number of bins (classes)
 bb <- seqR(Range, length.out=nb+1)    # bin borders
 at <- pretty2(bb)                     # position of labels in colPointsLegend / -Hist
@@ -30,10 +33,20 @@ ix <- cut(x, breaks=bb, labels=FALSE, include.lowest=TRUE) # index of class for 
 {
 if(missing(breaks)) breaks <- 0:4/4
 if(!missing(breaks) & length(breaks)==1) breaks <- seq(0,1, length.out=breaks)
+if(any(breaks<0 | breaks>1)) stop("breaks must be between 0 and 1 if method='quantile'.")
 nb <- length(breaks) - 1
 bb <- unique(quantile(x, probs=breaks))
 at <- bb
 la <- signif(bb, 2) # rounding
+ix <- cut(x, breaks=bb, labels=FALSE, include.lowest=TRUE)
+} else if(method=="logspaced") # ------------------------------------------------
+{
+if(missing(breaks)) breaks <- c(100, 1.2)
+if(length(breaks)!=2) stop("breaks must have two values if method='logspaced'.")
+nb <- breaks[1]
+bb <- logSpaced(base=breaks[2], n=breaks[1], min=Range[1], max=Range[2], plot=FALSE)
+at <- pretty2(bb)
+la <- at
 ix <- cut(x, breaks=bb, labels=FALSE, include.lowest=TRUE)
 } else if(method=="standarddeviation") # ---------------------------------------
 {
@@ -41,7 +54,7 @@ if(missing(breaks)) breaks <- 3
 breaks <- as.integer(breaks)
 if(length(breaks)>1) {breaks <- breaks[1]; warning("breaks was vector. Only first element is used.")}
 if(is.na(breaks)) stop("breaks must be an integer")
-if(breaks <0) stop("breaks must be a positive integer >=1 if method=standarddeviation.")
+if(breaks <0) stop("breaks must be a positive integer >=1 if method='standarddeviation'.")
 if(sdlab==2|sdlab==4)
   {
   nb <- 2*breaks
@@ -60,15 +73,17 @@ ix <- cut(x, breaks=bb, labels=FALSE)
 } else if(method=="usergiven") # -----------------------------------------------
 {
 if(missing(breaks)) stop("breaks _must_ be specified if method is 'usergiven'.")
+if(length(breaks)==1) {breaks <- c(min(x,na.rm=TRUE), breaks, max(x,na.rm=TRUE))
+                       warning("breaks were expanded by range (x).")}
 nb <- length(breaks) - 1
 bb <- breaks
 at <- bb
 la <- signif(breaks, 2)
 ix <- cut(x, breaks=bb, labels=FALSE)
 } else  # ----------------------------------------------------------------------
-stop("method can only be equalinterval, quantile, standarddeviation, or usergiven (but the name can be abbreviated).")
+stop("method went wrong internally. Please tell me! (berry-b@gmx.de).")
 # Range Warning:
-if(min(bb,na.rm=TRUE) > min(x) | max(bb,na.rm=TRUE) < max(x) )
+if(min(bb,na.rm=TRUE) > min(x,na.rm=TRUE) | max(bb,na.rm=TRUE) < max(x,na.rm=TRUE) )
    warning("There are values outside of the range of the given classes. These are given the index NA.")
 # Results
 list(nbins=nb, bb=bb, at=at, labels=la, index=ix)
