@@ -10,7 +10,8 @@ randomPoints <- function(
          mindist,
          plot=TRUE,
          ...)
-{ # benotigte Abstandsfunktion definieren:
+{
+# benotigte Abstandsfunktion definieren:
 distance <- function(xpt,ypt, xref,yref) sqrt((xref-xpt)^2 + (yref-ypt)^2)
 # Zielvektoren fuer zufaellig verteilte Punkte erstellen
 x <- y <- rep(NA, number)

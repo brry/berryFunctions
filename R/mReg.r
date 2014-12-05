@@ -44,7 +44,8 @@ mReg <- function(
     legargs=NULL, # legend options
     legendform="nameform", # "full" formula, "form", "nameform" or only "name" in legend in plot
     ...) # more graphical parameters passed to plot
-{ # Function start
+{
+# Function start
 # input checking
 if( (xf %in% letters[1:6] | yf %in% letters[1:6])  &  legendform %in% c("nameform", "form")  )
    warning("Using single letters a to f for input variable names is not recommended, as formula forms will be difficult to read" )

@@ -1,6 +1,7 @@
 # Create Documentation file section arguments from .r-source
-# Berry Boessenkool, June 2014
+# Berry Boessenkool, June + Dec 2014
 # This assumes the following structure of source code:
+
 # MyFun <- function(
 # arg1, # Explanation of this item
 # arg2=TRUE, # Ditto, with default
@@ -15,19 +16,26 @@ createDoc <- function(
   )
 {
 fun <- deparse(substitute(fun))
-# work PC check:
+fun <- gsub("\"", "", fun, fixed=TRUE)
+if(length(fun) >1) stop("'fun' must be a single function name.")
+if(length(path)>1) stop("'path' must be a single character string.")
+# work PC path change:
 if(!file.exists(path)) substr(path, 1,1) <- "D"
-# linux check:
-if(!file.exists(path)) substr(path, 1,1) <- "~" ; substr(path, 2,2) <- ""
+# laptop linux path change:
+if(!file.exists(path)) { substr(path, 1,1) <- "~" ; substr(path, 2,2) <- "" }
 owd <- setwd(path)
 #
 rfilename <- paste0("R/",fun,".r")
 if(!file.exists(rfilename)) rfilename <- paste0("R/",fun,".R")
 if(!file.exists(rfilename)) stop("File ", path, "/", rfilename, " does not exist")
-rfile <- scan(file=rfilename, what="char", sep="\n", quiet=TRUE)
+# case control Windows:
+if(!any(dir("R")==paste0(fun,".r")|dir("R")==paste0(fun,".R"))) stop("'", fun,
+   "' does not match capitalization of files in ", path, "/R")
+# read file
+rfile <- readLines(rfilename)
+rfile <- rfile[removeSpace(rfile)!=""]
 anf <- grep("<- function", rfile)[1]
-end <- which(rfile=="{")[1]    #}
-#browser()
+end <- which(removeSpace(rfile)=="{")[1]
 if (end < anf) stop("Argument section was not correctly identified!")
 #
 rdfile <- paste0("man/",fun,".Rd")
@@ -64,8 +72,8 @@ for(i in (anf+1):(end-1) )
   # Remove leading and trailing white spaces:
   arg_expl <- sub("^[[:space:]]*(.*?)[[:space:]]*$", "\\1", arg_expl, perl=TRUE)
   # double the backslashes:
-  usage <- gsub("\\n", "\\\\n", usage, fixed=TRUE)
-  usage <- gsub("\\t", "\\\\t", usage, fixed=TRUE)
+  arg_expl <- gsub("\\n", "\\\\n", arg_expl, fixed=TRUE)
+  arg_expl <- gsub("\\t", "\\\\t", arg_expl, fixed=TRUE)
   #arg_expl <- gsub("\\", "\\\\", arg_expl, fixed=TRUE)
   # remove trailing comma in Argument:
   if(grepl("[,]$", arg_expl[1]))
@@ -82,8 +90,9 @@ for(i in (anf+1):(end-1) )
     # write arg name and explanation
     cat(paste0("  \\item{",arg_expl[1],"}{",arg_expl[2]), file=rdfile, append=TRUE)
     # write default value:
-    if(length(arg_expl)==3)
-      cat(paste0(". DEFAULT: ", arg_expl[3]), file=rdfile, append=TRUE)
+    if(length(arg_expl)==3 & !grepl("default:", arg_expl[2], ignore.case=TRUE) )
+      cat(paste0(if(!grepl("[.?!]$", arg_expl[2]))".", " DEFAULT: ", arg_expl[3]),
+          file=rdfile, append=TRUE)
     #
     cat("}\n", file=rdfile, append=TRUE)
     }
@@ -94,7 +103,7 @@ cat(paste0("}
 \\value{}
 \\section{Warning}{}
 \\note{}
-\\author{Berry Boessenkool, \\email{berry-b@gmx.de}, 2014}
+\\author{Berry Boessenkool, \\email{berry-b@gmx.de}, 2015}
 \\references{}
 \\seealso{\\code{\\link{help}} }
 \\examples{
@@ -103,5 +112,12 @@ cat(paste0("}
 \\keyword{}
 \\keyword{}
 "), file=rdfile, append=TRUE)
+# warning if there are less argument lines than arguments themselves:
+source(rfilename)
+n_missing <- length(formals(fun))  -  (end-anf-1)
+if(n_missing != 0) warning(n_missing, " items are missing in the arguments section.
+There probably are several arguments on one line in ", path, "/", rfilename,
+"\nMost likely, the 'DEFAULT: ' at the line end is corrupted as well.")
+# set wd back to old working directory:
 setwd(owd)
 } # End of Function

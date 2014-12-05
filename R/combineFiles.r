@@ -9,7 +9,8 @@ combineFiles <- function(
    outDir = inDir,
    sep = NULL,
    names=TRUE)
-{ # Function start
+{
+# Function start
 # Default sep:
 if(is.null(sep)) sep <- "\n-------------------------------------------------------
 -------------------------------------------------------\n"

@@ -1,7 +1,7 @@
 # Zoom into scatterplot
 # Berry Boessenkool
-pointZoom <-
-function (x,
+pointZoom <- function(
+          x,
           y=NA,
           z=NA,
           Time=1,
