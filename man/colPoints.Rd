@@ -95,7 +95,7 @@ layout(1)
 
 
 # Customizing the legend :
-colPoints(i,j,k, leg=FALSE, add=FALSE)
+colPoints(i,j,k, legend=FALSE, add=FALSE)
 colPointsLegend(x1=20,y1=50, x2=95,y2=40, z=k, labelpos=5, atminmax=TRUE, bg=7)
 colPointsLegend(x1=50,y1=28, x2=90,y2=18, z=k, Range=c(80, 200), nbins=12, font=3)
 colPointsLegend(x1=10,y1=15, x2=40,y2= 5, z=k, labelpos=5, lines=FALSE, title="")
@@ -127,7 +127,7 @@ image(x,y,t(z), col=rev(rainbow(100, start=0, end=.7)))
 mx <- c( 22,  40,  80,  45,  60,  63,  30,  70)
 my <- c(  5,  33,  12,  56,  20,  40,  45,  45)
 mz <- c(135, 155, 120, 105, 140, 130, 190, 110)
-colPoints(mx,my,mz, cex=5, pch="*", Range=c(94, 195), col2=NA, leg=FALSE)
+colPoints(mx,my,mz, cex=5, pch="*", Range=c(94, 195), col2=NA, legend=FALSE)
 points(mx,my, cex=4)
 text(mx,my,mz, adj=-0.5, font=2)
 }

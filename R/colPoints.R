@@ -7,11 +7,11 @@ colPoints <- function(
   method="equalinterval", # type of binning or classification method (ways to get color class breakpoints)
   breaks, # specification for method
   sdlab=1, #
-  col=rainbow2(cl$nbins), # color palette. default: 100 nuances from blue to red
+  col=rainbow2(cl$nbins), # color palette. DEFAULT: 100 nuances from blue to red
   col2=NA, # color for z==NA and points not in the color range (method s or u)
-  legend=TRUE, # Should a legend be drawn? DEFAULT: TRUE
-  legargs=NULL, # Arguments for colPointsLegend. DEFAULT:NULL
-  hist=FALSE, # Should a legend be drawn? DEFAULT: TRUE
+  legend=TRUE, # Should a legend be drawn?
+  legargs=NULL, # Arguments for colPointsLegend.
+  hist=FALSE, # Should a legend be drawn?
   histargs=NULL, # Arguments for colPointsHist. FALSE to suppress drawing
   add=TRUE, # as in points. add to existing plot? add=F to draw new plot
   lines=FALSE, #  Logical. Should lines be drawn underneath the points?
@@ -24,7 +24,6 @@ colPoints <- function(
 {
 xlab <- xlab ;  ylab <- ylab # defaults need to be set before x and y are evaluated
 # error checking:
-if(diff(range(z, finite=TRUE)==0)) warning("All z-values are equal.")
 if(length(nint)>1) warning("Only the first value of 'nint' is used.")
 nint <- nint[1]
 if(nint<1) stop("nint must be >= 1.")
@@ -41,6 +40,8 @@ if(!missing(data)) # get x, y and z from data.frame
    y <- data[ , deparse(substitute(y))]  
    z <- data[ , deparse(substitute(z))] 
    } # now continue with case b
+# error checking:
+if(diff(range(z, finite=TRUE)==0)) warning("All z-values are equal.")
 # b) Regular case: z ist a vector
 if(is.vector(z))
    {
