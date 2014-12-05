@@ -4,14 +4,15 @@ classify <- function(
   method="equalinterval", # type of binning or classification method (ways to get color class breakpoints)
   breaks, # specification for method
   Range=range(x, finite=TRUE), # Ends of color bar for method=equalinterval
-  sdlab=1) # type for method=standarddeviation
+  sdlab=1, # type for method=standarddeviation
+  quiet=FALSE) # Suppress warnings, eg for values outside Range? DEFAULT: FALSE
 {
 x <- as.numeric(x)
 # error checking:
 if(length(Range) != 2) stop("Range must have two values.")
 if(diff(Range)==0)
    {
-   warning("The Range values were equal. Range is now extended.")
+   if(!quiet) warning("The Range values were equal. Range is now extended.")
    Range[1] <- Range[1] -1
    Range[2] <- Range[2] +1
    }
@@ -52,7 +53,7 @@ ix <- cut(x, breaks=bb, labels=FALSE, include.lowest=TRUE)
 {
 if(missing(breaks)) breaks <- 3
 breaks <- as.integer(breaks)
-if(length(breaks)>1) {breaks <- breaks[1]; warning("breaks was vector. Only first element is used.")}
+if(length(breaks)>1) {breaks <- breaks[1]; if(!quiet) warning("breaks was vector. Only first element is used.")}
 if(is.na(breaks)) stop("breaks must be an integer")
 if(breaks <0) stop("breaks must be a positive integer >=1 if method='standarddeviation'.")
 if(sdlab==2|sdlab==4)
@@ -69,22 +70,29 @@ at <- bb
 if(sdlab==2)           {la <- paste(-breaks:breaks, "sd"); la[breaks+1] <- "m"} else
 if(sdlab==3 | sdlab==4) la <- signif(at, 2) else
                         la <- paste(-breaks:(breaks-1)+0.5, "sd")
-ix <- cut(x, breaks=bb, labels=FALSE)
+ix <- cut(x, breaks=bb, labels=FALSE, include.lowest=TRUE)
 } else if(method=="usergiven") # -----------------------------------------------
 {
 if(missing(breaks)) stop("breaks _must_ be specified if method is 'usergiven'.")
 if(length(breaks)==1) {breaks <- c(min(x,na.rm=TRUE), breaks, max(x,na.rm=TRUE))
-                       warning("breaks were expanded by range (x).")}
+                       if(!quiet) warning("breaks were expanded by range (x).")}
 nb <- length(breaks) - 1
 bb <- breaks
 at <- bb
 la <- signif(breaks, 2)
-ix <- cut(x, breaks=bb, labels=FALSE)
+ix <- cut(x, breaks=bb, labels=FALSE, include.lowest=TRUE)
 } else  # ----------------------------------------------------------------------
 stop("method went wrong internally. Please tell me! (berry-b@gmx.de).")
 # Range Warning:
+###
+if(any(is.na(ix)))
+  {
+  ix[ x < min(bb, na.rm=TRUE) ] <- nb+1
+  ix[ x > max(bb, na.rm=TRUE) ] <- nb+2
+  }
 if(min(bb,na.rm=TRUE) > min(x,na.rm=TRUE) | max(bb,na.rm=TRUE) < max(x,na.rm=TRUE) )
-   warning("There are values outside of the range of the given classes. These are given the index NA.")
+  if(!quiet) warning("There are values outside of the range of the given classes.\n",
+      "These are given the index ", nb+1, " (lower) and ", nb+2, " (higher).")
 # Results
 list(nbins=nb, bb=bb, at=at, labels=la, index=ix)
 } # Function end

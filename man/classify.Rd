@@ -6,14 +6,16 @@
 - intervals based on quantiles (equally filled bins),\cr
 - intervals based on  distance from the mean in normal distributions,\cr
 - user specified class borders (e.g. for legal or critical limits).}
-\usage{classify(x, method="equalinterval", breaks, Range=range(x, finite=TRUE), sdlab=1)}
+\usage{classify(x, method="equalinterval", breaks, Range=range(x, finite=TRUE),
+sdlab=1, quiet=FALSE)}
 \arguments{
   \item{x}{Vector with numeric values}
   \item{method}{Character string (partial matching is performed). Classification method or type of binning to compute the class breakpoints. See section Details. DEFAULT: "equalinterval")}
   \item{breaks}{Specification for method, see Details. DEFAULT: different defaults for each method}
   \item{Range}{Ends of color bar for method=equalinterval. DEFAULT: range(x, finite=TRUE)}
   \item{sdlab}{Type of label and breakpoints if \code{method=standarddeviation}. 1 means \code{-0.5 sd, 0.5 sd}, 2 means \code{-1 sd, mean, 1 sd}, 3 means actual numbers for type 1, 4 means numbers for type 2.}
-  }
+  \item{quiet}{Suppress warnings, eg for values outside Range? DEFAULT: FALSE}
+}
 \details{
 Binning methods are explained very nicely in the link in the section References.\cr
 \emph{nbins} indicates the number of classes (and thus, colors).\cr \cr
@@ -40,5 +42,9 @@ This is the workhorse for \code{\link{colPoints}}.\cr
 classify( c(1:10, 20), breaks=12)
 classify( c(1:10, 20), "q", breaks=0:10/10)
 classify( c(1:10, 20), "s", sdlab=2 )
+classify( c(1:10, 20), "s", sdlab=1, breaks=2 )
+classify( c(1:10, 20), "u", breaks=c(5,27) )
+classify( c(1:10, 20), "l")
+
 }
 \keyword{classif}
