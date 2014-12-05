@@ -2,8 +2,8 @@
 \alias{logVals}
 \title{Create log-axis values and labels}
 \description{create nice values and labels to write at logartihmic axes}
-\usage{logVals(from=-7, to=7, Range=range(from, to), base=1,
-big.mark="'", decimal.mark=".", scientific=FALSE)}
+\usage{logVals(from=-7, to=7, Range, base=1, big.mark="'", decimal.mark=".",
+scientific=FALSE, exponent=Inf, expobase1=FALSE, allbase=1:9)}
 \arguments{
   \item{from}{lower exponent \emph{OR} vector with data}
   \item{to}{high end}
@@ -12,6 +12,9 @@ big.mark="'", decimal.mark=".", scientific=FALSE)}
   \item{big.mark}{symbol separating thousands, eg. space, comma, dot, etc. see \code{\link{format}} and \code{\link{prettyNum}}}
   \item{decimal.mark}{character separating comma values, see \code{\link{format}} and \code{\link{prettyNum}}}
   \item{scientific}{see \code{\link{format}}}
+  \item{exponent}{Starting at which exponent should \code{labs} be an expression with exponents? Compare to \code{\link{options}("scipen")}. This is mainly for \code{\link{logAxis}} and only for base 1. DEFAULT: Inf}
+  \item{expobase1}{Should "n * " be appended before 10^exp if n=1? DEFAULT: FALSE}
+  \item{allbase}{base for \code{$all} (for horizontal lines). DEFAULT: 1:9}
 }
 \value{A list with
   \item{vals}{Values for lines and label positions}
@@ -19,7 +22,7 @@ big.mark="'", decimal.mark=".", scientific=FALSE)}
   \item{all}{Values for lines}
 }
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, Feb 2014}
-\seealso{ \code{\link{log10}}}
+\seealso{ \code{\link{log10}}, \code{\link{logAxis}}, \url{http://r.789695.n4.nabble.com/expression-exponent-labeling-td4661174.html}}
 \examples{
 # Easiest use: vector with data (logVals automatically finds range):
 y <- 10^runif(50, -1, 2)
@@ -41,6 +44,7 @@ lines(seq(0.5, 1.5, len=50), 10^runif(50, -3, 4), col=2)
 # Formatting labels:
 logVals(                )$labs
 logVals(scient=TRUE     )$labs
+logVals(exponent=5      )$labs # expression with exponent, see logAxis
 logVals(big.mark=" "    )$labs
 logVals(big=".", dec=",")$labs # German style (not recommended)
 }

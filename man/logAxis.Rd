@@ -2,23 +2,26 @@
 \alias{logAxis}
 \title{label logarithmic axes}
 \description{shortcut to calling \code{\link{logVals}}, \code{\link{axis}} and \code{\link{abline}}}
-\usage{logAxis(side=1, log=NULL, lcol="grey", lty=1, lwd=1, expr, las=1, from=-7,
-to=7, Range=range(from, to), base=c(1,2,5), big.mark="'", decimal.mark=".",
-scientific=FALSE, ...)}
+\usage{logAxis(side=1, log=NULL, lcol="grey", lty=1, lwd=1, expr, las=1,
+from, to, Range, base, big.mark="'", decimal.mark=".", scientific=FALSE,
+exponent=5, expobase1=FALSE, allbase=1:9, ...)}
 \arguments{
-  \item{side}{Which \code{\link{axis}} is to be labeled?. DEFAULT: 1}
-  \item{log}{Is the axis logarithmic by plot(log="x")? internal DEFAULT: par("xlog") or "ylog". DEFAULT: NULL}
+  \item{side}{Which \code{\link{axis}} are to be labeled? Can be a vector within \code{1:4}. DEFAULT: 1}
+  \item{log}{Is the axis logarithmic by plot(log="x")? internal DEFAULT: \code{\link{par}("xlog")} or "ylog". DEFAULT: NULL}
   \item{lcol}{Color of gridlines drawn in the graph with \code{\link{abline}}, NA to suppress. DEFAULT: "grey"}
   \item{lty, lwd}{Type of gridlines. DEFAULT: 1}
   \item{expr}{Expression drawing over the ablines, like (points(x,y). Can be code within {braces}.}
   \item{las}{LabelAxisStyle for the orientation of the labels. DEFAULT: 1}
-  \item{from}{Lower exponent OR vector with data, as in \code{\link{logVals}}. DEFAULT: -7}
-  \item{to}{High end exponent. DEFAULT: 7}
-  \item{Range}{Override from and to as range. DEFAULT: range(from, to)}
-  \item{base}{Bases to be used, eg. c(1,2,5) or 1. DEFAULT: c(1,2,5)}
+  \item{from}{Lower exponent OR vector with data, as in \code{\link{logVals}}. DEFAULT based on \code{\link{par}("usr")}}
+  \item{to}{High end exponent. DEFAULT: internally based on par("usr")}
+  \item{Range}{Override from and to as range.}
+  \item{base}{Bases to be used in \code{\link{logVals}}. DEFAULT: c(1,2,5) or 1, depending on from and to.}
   \item{big.mark}{Symbol separating thousands, eg. space, comma, dot, etc. see "format" and "prettyNum". DEFAULT: "'"}
   \item{decimal.mark}{Character separating comma values, see "format" and "prettyNum". DEFAULT: "."}
   \item{scientific}{See \code{\link{format}}. DEFAULT: FALSE}
+  \item{exponent}{Starting at which exponent should \code{\link{logVals}} return an expression with exponents? DEFAULT: 5}
+  \item{expobase1}{Should "n * " be appended before 10^exp if n=1? DEFAULT: FALSE}
+  \item{allbase}{base for \code{$all} (for horizontal lines). DEFAULT: 1:9}
   \item{\dots}{further arguments passed to axis, like \code{lwd, col.ticks, hadj, lty}, ...}
 }
 \value{An invisible list with
@@ -30,14 +33,27 @@ scientific=FALSE, ...)}
 \seealso{\code{\link{logVals}}, \code{\link{log10}}}
 \examples{
 x <- 10^runif(200, -1, 2)
-plot(x, 1:200, xaxt="n", log="x")
-logAxis(base=1)
+plot(x, yaxt="n", log="y", pch=16)
+logAxis(2)
 # overplot vertical lines:
-logAxis(expr=points(x, 1:200), base=c(1,2,5), col=2 )
+logAxis(2, expr=points(x, pch=16), base=1, col.axis=4, font=2)
 
 # plots where log="x" is not possible:
 hist(log10(x), breaks=20, col.axis="grey", main="")
-logAxis(side=3, expr=hist(log10(x),breaks=20,add=TRUE, col=3))
+logAxis(side=3, expr=hist(log10(x), breaks=20, add=TRUE, col=3))
+
+# automatic calculation of from, to and base:
+plot(1:3, axes=FALSE)
+logAxis(1:2) # side can be a vector - nice, huh?
+plot(-1:4, axes=FALSE)
+logAxis(1:2) # treshold for base 1 instead of c(1,2,5) at 4 exponents exceeded.
+
+par(mar=c(3,3,1,4))
+plot(8:15) ;  logAxis(4) # with exponents if they are above 5
+plot(10^(1:4), ylim=10^c(4,1), type="o", log="y") # reverse axis:
+plot(10^(1:5), log="y"); logAxis(4, exponent=3) # different treshold
+plot(10^(1:5), log="y"); logAxis(4, expon=3, base=c(1,2,5), expobase1=TRUE)
+plot(-8:5); logAxis(4, allbase=c(1,2,5)) # In case you want to mislead...
 }
 \keyword{aplot}
 \keyword{dplot}

@@ -10,31 +10,13 @@ This Log of changes in my package berryFunctions contains two sections:
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 
-- classify: tableColVal
-
 - colPoints: enable triangle at legend ends as in fig 2 in utsumi et al 2011 surface temperature extreme precipitation
 
-- createDoc: 
-# no . DEFAULT for ones ending with . or ? or ! or containing DEFAULT
-# better handling of rows with 2 arguments
-# upper/lowercase checking!!
+- exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) ) 
 
-- exp4p:
-# try to improve with nls(y~expfun(p,x=x), start=as.list(param) )  
-# allow specification of initial values for optim
+- lsc: better example dataset, optim problems, sim line not plotted completely
 
-- lsc:
-# find out what to do with optim
-# find better example dataset
-# Why is the sim line not plotted completely?
-
-- logAxis: 
-# better range and base defaults, depending on par("usr")[]
-# allow custom base for ablines(h) (logVals$all)
-
-- mReg: 
-# add hyperbolic functions
-# quantify / test influence of replacing zeros with near-zero values
+- mReg: r^2 after backtransformation, influence of replacing zeros with near-zero values, hyperbolic functions
 
 - owa: is change of order of elements avoidable? replace u with ... (in all my functions, too)
 
@@ -44,11 +26,10 @@ This Log of changes in my package berryFunctions contains two sections:
 
 - require2: change to requireNamespace http://r-pkgs.had.co.nz/namespace.html#namespace
 
-- tableColVal: enable log scaled color through use of classify, update example. Allo srt/las
+- tableColVal: enable log scaled color through use of classify, update example. Allow srt/las
 
-- textField: 
-# Adjust adj parameter based on pos and offset: if(!is.null(pos))# i want the field to still be drawn with adj, but have it based on pos
-# support srt
+- textField: support srt, Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
+ 
 
 
 -----------------------------------------------------------------
@@ -66,7 +47,9 @@ various small changes and bug fixes. See the commits on github
 - classify has new method logscaled
 - textField: vertical extend of bounding boxes is now correct through use of expression
 - tableColVal: text can be changed (eg logarithmized, see examples)
-New function: logSpaced, removeSpace
+- createDoc: case now checked. Fixed handling when several args per line or explanations contain 'DEFAULT:'
+- logAxis: good internal range and base defaults. exponents. side can be a vector. 
+New functions: logSpaced, removeSpace
 
 
 -----------------------------------------------------------------
