@@ -5,9 +5,9 @@
 Draw colored points for 3D-data in a 2D-plane. Color is relative to third dimension, by different classification methods.
 Can take 3 vectors or, as in \code{\link{image}}, 2 vectors and a matrix for z.}
 \usage{colPoints(x, y, z, data, Range=range(z, finite=TRUE), method="equalinterval", breaks,
-sdlab=1, col=rainbow2(cl$nbins), col2=NA,
+sdlab=1, col=rainbow2(cl$nbins), col2=c(NA, 1, 8),
 legend=TRUE, legargs=NULL, hist=FALSE, histargs=NULL, add=TRUE, lines=FALSE, nint=30,
-xlab=substitute(x), ylab=substitute(y), las=1, pch=16, ...)}
+xlab=substitute(x), ylab=substitute(y), las=1, pch=16, quiet=FALSE, ...)}
 \arguments{
   \item{x,y}{Vectors with coordinates of the points to be drawn}
   \item{z}{z values beloning to coordinates. Vector or matrix}
@@ -17,7 +17,7 @@ xlab=substitute(x), ylab=substitute(y), las=1, pch=16, ...)}
   \item{breaks}{Specification for method, see \code{\link{classify}}. DEFAULT: different defaults for each method}
   \item{sdlab}{Type of label and breakpoints if \code{method=standarddeviation}, see \code{\link{classify}}. DEFAULT: 1}
   \item{col}{Vector of colors to be used. DEFAULT: \code{\link{rainbow}} from blue (lowest) to red (highest value in Range)}
-  \item{col2}{Color for points not in the color range. DEFAULT: NA}
+  \item{col2}{Color for points where z is NA, lower or higher than Range. DEFAULT: c(NA, 1, 8)}
   \item{legend}{Logical. Should a \code{\link{colPointsLegend}} be drawn? DEFAULT: TRUE}
   \item{legargs}{List. Arguments passed to \code{\link{colPointsLegend}}.  DEFAULT: NULL, with some defaults specified internally}
   \item{hist}{Logical. Should a \code{\link{colPointsHist}} be drawn? DEFAULT: FALSE (TRUE if histargs are given)}
@@ -29,6 +29,7 @@ xlab=substitute(x), ylab=substitute(y), las=1, pch=16, ...)}
   \item{ylab}{y-axis label. DEFAULT: ditto}
   \item{las}{Label Axis Style. Only used when add=FALSE. See \code{\link{par}}. DEFAULT: 1 (all labels horizontal)}
   \item{pch}{Point CHaracter. See \code{\link{par}}. DEFAULT: 16}
+  \item{quiet}{Turn off warnings? DEFAULT: FALSE}
   \item{\dots}{Further graphical arguments passed to plot, points and lines, eg cex, xlim (when add=F), mgp, main, sub, asp (when add=F), etc. Note: col does not work, as it is already another argument}
 }
 \value{Invisible list of values that can be passed to colPointsLegend or colPointsHist.}
@@ -45,7 +46,7 @@ k <- c(175, 168, 163, 132, 120, 117, 110, 130, 131, 160, 105, 174, 190, 183)
 colPoints(i,j,k, cex=1.5, pch="+", add=FALSE)
 
 # with custom Range (only for method equalinterval):
-colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, Range=c(150, 250))
+colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, Range=c(150, 180))
 # can be used to allow comparison between several plots
 # points outside the range are plotted with col2
 
@@ -56,6 +57,7 @@ colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, col=mycols)
 # With legend title:
 colPoints(i,j,k, cex=2, pch="+", add=FALSE,
          legargs=list(density=FALSE, title="Elevation [m above NN.]"))
+?colPointsLegend # to see which arguments can be set via legargs
 
 # with lines (nint to change number of linear interpolation points):
 colPoints(i,j,k, cex=1.5, add=FALSE, lines=TRUE, nint=10, lwd=2)

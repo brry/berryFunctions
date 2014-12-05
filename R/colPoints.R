@@ -8,7 +8,7 @@ colPoints <- function(
   breaks, # specification for method
   sdlab=1, #
   col=rainbow2(cl$nbins), # color palette. DEFAULT: 100 nuances from blue to red
-  col2=NA, # color for z==NA and points not in the color range (method s or u)
+  col2=c(NA, 1, 8), # color for z==NA and points not in the color range
   legend=TRUE, # Should a legend be drawn?
   legargs=NULL, # Arguments for colPointsLegend.
   hist=FALSE, # Should a legend be drawn?
@@ -20,13 +20,15 @@ colPoints <- function(
   ylab=substitute(y),
   las=1, # LabelAxisStyle: all labels horizontally (only relevant when add=FALSE)
   pch=16, # PointCHaracter, see ?par
+  quiet=FALSE, # Turn off warnings?
   ...) # further arguments passed to plot, points and lines, eg cex, xlim (bei add=F), mgp, main, sub, asp (when add=F), etc. NOT col
 {
 xlab <- xlab ;  ylab <- ylab # defaults need to be set before x and y are evaluated
 # error checking:
-if(length(nint)>1) warning("Only the first value of 'nint' is used.")
+if(length(nint)>1) if(!quiet) warning("Only the first value of 'nint' is used.")
 nint <- nint[1]
 if(nint<1) stop("nint must be >= 1.")
+col2 <- rep(col2, length.out=3) # in case only one, two or >3 values are given.
 # Partial matching of method:
 PossibleValues <- c("equalinterval", "quantile", "logspaced", "standarddeviation", "usergiven")
 method <- PossibleValues[pmatch(tolower(method),  PossibleValues)]
@@ -41,7 +43,7 @@ if(!missing(data)) # get x, y and z from data.frame
    z <- data[ , deparse(substitute(z))] 
    } # now continue with case b
 # error checking:
-if(diff(range(z, finite=TRUE)==0)) warning("All z-values are equal.")
+if(diff(range(z, finite=TRUE)==0)) if(!quiet) warning("All z-values are equal.")
 # b) Regular case: z ist a vector
 if(is.vector(z))
    {
@@ -61,9 +63,9 @@ if(is.vector(z))
 # CLASSIFICATION # -------------------------------------------------------------
 if(method=="equalinterval") if(!missing(col)) breaks <- length(col)
 #
-cl <- classify(x=z, method=method, breaks=breaks, sdlab=sdlab, Range=Range)
+cl <- classify(x=z, method=method, breaks=breaks, sdlab=sdlab, Range=Range, quiet=quiet)
 # error check:
-if(length(col) != cl$nbins) stop("colPoints: Number of colors is not equal to number of classes.")
+if(length(col) != cl$nbins) stop("Number of colors is not equal to number of classes.")
 #
 # ACTUAL PLOTTING --------------------------------------------------------------
 if(!add) plot(x, y, col=NA, pch=pch, xlab=xlab, ylab=ylab, las=las, ...)
@@ -75,7 +77,7 @@ if(lines)
   y2 <- approx(replace(y, is.na(y), median(y, na.rm=TRUE)), n=np)$y
   z2 <- approx(replace(z, is.na(z), median(z, na.rm=TRUE)), n=np)$y
   # classify interpolated values:
-  cl2 <- classify(x=z2, method=method, breaks=breaks, sdlab=sdlab, Range=Range)
+  cl2 <- classify(x=z2, method=method, breaks=breaks, sdlab=sdlab, Range=Range, quiet=quiet)
   # Where are NAs in the vectors?
   wNA <- is.na(x) | is.na(y) | is.na(z)
   # change single values (surrounded by NA) to NA:
@@ -88,13 +90,14 @@ if(lines)
   segments(x0=x2[-length(x2)],  y0=y2[-length(y2)],  x1=x2[-1],  y1=y2[-1],
            col=col[cl2$index], ...)
   }
-points(x, y, col=col2,          pch=pch, ...)
-points(x, y, col=col[cl$index], pch=pch, ...)
+points(x[is.na(z)], y[is.na(z)], col=col2[1], pch=pch, ...)
+points(x, y, col=c(col, col2[2:3])[cl$index], pch=pch, ...)
 #
 # add legend:
 if(legend)
   {
-  legdefs <- list(z=z, at=cl$at, labels=cl$labels, bb=cl$bb, nbins=cl$nbins, colors=col)
+  legdefs <- list(z=z, at=cl$at, labels=cl$labels, bb=cl$bb, nbins=cl$nbins,
+      colors=col, plottriangle=any(na.omit(cl$index>cl$nbins)), tricol=col2[2:3])
   do.call(colPointsLegend, args=owa(legdefs, legargs))
   }
 #

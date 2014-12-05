@@ -5,7 +5,8 @@
 \usage{colPointsLegend(z, Range=range(z, finite=TRUE), nbins=40,
 colors=rainbow2(nbins), bb=seqR(Range, length.out=nbins+1), at=pretty2(Range),
 labels=at, bg="white", x1=60, y1=99, x2=x1+38, y2=y1-11, mar, mgp=c(1.8, 0.6, 0),
-sborder=NA, resetfocus=TRUE, density=NULL, lines=TRUE, atminmax=FALSE, 
+sborder=NA, resetfocus=TRUE, plottriangle=FALSE, triangle=0.14, tricol=c(1,8),
+density=NULL, lines=TRUE, atminmax=FALSE,
 horizontal=TRUE, labelpos=1, titlepos=3, title="Legend", las=1, ...)}
 \arguments{
   \item{z}{Values of third dimension used in \code{\link{colPoints}}, can be matrix, vector, etc, but must be numeric}
@@ -22,6 +23,9 @@ horizontal=TRUE, labelpos=1, titlepos=3, title="Legend", las=1, ...)}
   \item{mgp}{MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.6, 0)}
   \item{sborder}{Border around inset subplot. DEFAULT: NA}
   \item{resetfocus}{Reset focus to original plot? Specifies where further low level plot commands are directed to. DEFAULT: TRUE}
+  \item{plottriangle}{Should triangles be plotted at the end of the legend for values outside Range? TRUE if missing but triangle is given. DEFAULT: FALSE}
+  \item{triangle}{Percentage of bar length at lower and upper end for triangles (can be a vector with two different values). DEFAULT: 0.14}
+  \item{tricol}{Triangle colors for lower and upper end. DEFAULT: c(1,8)}
   \item{density}{Plot kernel density line? arguments passed to \code{\link{density}}. DEFAULT: NULL}
   \item{lines}{Plot black lines in the color bar at \code{at}? DEFAULT: TRUE}
   \item{atminmax}{Should the extrema of the legend be added to \code{at}? DEFAULT: FALSE}
@@ -42,6 +46,12 @@ plot(1:10)
 colPointsLegend(z=z)
 colPointsLegend(z=z, titlepos=2)
 colPointsLegend(z=z, horiz=FALSE) # note the different defaults
+# positioning relative to plot:
+colPointsLegend(z=z, x1=5, x2=30, y1=90, y2=70, title="Booh!", density=FALSE)
+# Denote values outside of Range wit a triangle:
+colPointsLegend(z=z, Range=c(-1,3), x1=20, y1=60, y2=40, triangle=c(0,0.5))
+colPointsLegend(z=z, horiz=FALSE, x1=70, y1=60, plottriangle=TRUE, density=FALSE)
+?colPoints # example section for actual usage
 }
 \keyword{aplot}
 \keyword{color}

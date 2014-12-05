@@ -10,8 +10,6 @@ This Log of changes in my package berryFunctions contains two sections:
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 
-- colPoints: enable triangle at legend ends as in fig 2 in utsumi et al 2011 surface temperature extreme precipitation
-
 - exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) ) 
 
 - lsc: better example dataset, optim problems, sim line not plotted completely
@@ -43,8 +41,8 @@ Version 1.7 (2014-).
 various small changes and bug fixes. See the commits on github
 - rmse and rsquare NA-removal warnings can now be silenced with quiet=TRUE
 - linReg: formula specification is now enabled: linReg(obj1~obj2) or linReg(col_a~col_b, data=df)
-- colPoints can now draw lines (with interpolation amd with NA management)
-- classify has new method logscaled
+- colPoints can now draw lines (with interpolation amd with NA management) and triangles at legend ends for values outside Range
+- classify has new method logscaled and an index for values outside Range
 - textField: vertical extend of bounding boxes is now correct through use of expression
 - tableColVal: text can be changed (eg logarithmized, see examples)
 - createDoc: case now checked. Fixed handling when several args per line or explanations contain 'DEFAULT:'

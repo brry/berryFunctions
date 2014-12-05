@@ -22,6 +22,9 @@ mgp=c(1.8, 0.6, 0), # MarGinPlacement: distance of xlab/ylab, numbers and line f
 sborder=NA, # Border around inset subplot
 resetfocus=TRUE, # Reset focus to original plot? Specifies where further low level plot commands are directed to.
 
+plottriangle=FALSE, # Should triangles be plotted at the end of the legend for values outside Range? TRUE if missing but triangle is given
+triangle=0.14, # Percentage of bar length at lower and upper end for triangles (can be a vector with two different values)
+tricol=c(1,8), # Triangle colors for lower and upper end
 density=NULL, # Plot kernel density line? arguments passed to \code{\link{density}}
 lines=TRUE, # Plot black lines in the color bar at \code{at}?
 atminmax=FALSE, # Should the extrema of the legend be added to \code{at}?
@@ -46,12 +49,27 @@ if(length(labels)!=length(at)) stop("labels and at do not have the same length")
 if(!horizontal){
 if(missing(x1)) x1 <- 88
 if(missing(y1)) y1 <- 70
-if(missing(x2)) x2 <- x1+11
-if(missing(y2)) y2 <- y1-40
+if(missing(x2)) x2 <- pmin(x1+11, 100)
+if(missing(y2)) y2 <- pmax(y1-40, 0)
 if(missing(labelpos)) labelpos <- 2
 if(missing(titlepos)) titlepos <- 3
 if(missing(title)) title <- "Key"
 }
+# triangle preparation:
+if(!missing(triangle) & missing(plottriangle)) plottriangle <- TRUE
+if(plottriangle)
+  {
+  if(!is.numeric(triangle)) stop("triangle must be numeric.")
+  if(any(triangle>2 | triangle<0)) stop("Values in triangle must be between 0 and 2")
+  triangle <- rep(triangle, length.out=2)
+  tricol   <- rep(tricol  , length.out=2)
+  # coordinates of triangle points
+  barlength <- (tail(bb,1) - bb[1])
+  trimin <- bb[1] - barlength*triangle[1]
+  trimax <- tail(bb,1) + barlength*triangle[2]
+  plotrange <- c(trimin, trimax)
+  }  else
+  plotrange <- c(bb[1], tail(bb,1))
 # margin preparation:
 if(missing(mar))
 {
@@ -68,10 +86,16 @@ smallPlot(x1=x1, y1=y1, x2=x2, y2=y2, mar=mar, mgp=mgp, bg=bg,
   border=sborder, las=las, resetfocus=resetfocus, expr={
 if(horizontal) # ---------------------------------------------------------------
   {
-  plot.window(xlim=c(bb[1], tail(bb,1)), ylim=c(0,1), xaxs="i", yaxs="i")
+  plot.window(xlim=plotrange, ylim=c(0,1), xaxs="i", yaxs="i")
   # actually plot legend color fields:
   for(i in 1:length(colors))
     rect(xleft=bb[i], xright=bb[i+1], ybottom=0, ytop=1, col=colors[i], border=NA)
+  # triangle:
+  if(plottriangle)
+     {
+     polygon(c(bb[1],bb[1],trimin),       c(0,1,0.5), col=tricol[1], border=NA)
+     polygon(c(rep(tail(bb,1),2),trimax), c(0,1,0.5), col=tricol[2], border=NA)
+     }
   # lines
   if(lines) segments(x0=at, y0=0, y1=1)
   # prepare label adjustment:
@@ -100,10 +124,16 @@ if(horizontal) # ---------------------------------------------------------------
   }
 else # if not horizontal, thus if vertical -------------------------------------
   {
-  plot.window(ylim=c(bb[1], tail(bb,1)), xlim=c(0,1), xaxs="i", yaxs="i")
+  plot.window(ylim=plotrange, xlim=c(0,1), xaxs="i", yaxs="i")
   # actually plot legend color fields:
   for(i in 1:length(colors))
     rect(ybottom=bb[i], ytop=bb[i+1], xleft=0, xright=1, col=colors[i], border=NA)
+  # triangle:
+  if(plottriangle)
+     {
+     polygon(c(0,1,0.5), c(bb[1],bb[1],trimin),       col=tricol[1], border=NA)
+     polygon(c(0,1,0.5), c(rep(tail(bb,1),2),trimax), col=tricol[2], border=NA)
+     }
   # lines
   if(lines) segments(y0=at, x0=0, x1=1)
   # prepare label adjustment:
