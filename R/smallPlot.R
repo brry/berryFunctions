@@ -22,6 +22,11 @@ if(y2>y1) {yy <- y2; y2 <- y1;  y1 <- yy; rm(yy);
     warning("Bottomright coordinate is higher (y) than topleft. y1 and y2 were swapped.")}
 if(x2<x1) {xx <- x2; x2 <- x1;  x1 <- xx; rm(xx);
     warning("Bottomright coordinate is lower (x) than topleft. x1 and x2 were swapped.")}
+# catch outside plot:
+if(x1<0) stop("x1 must be larger than 0.")
+if(y2<0) stop("y2 must be larger than 0.")
+if(x2>100) stop("x2 must be smaller than 100.")
+if(y1>100) stop("y1 must be smaller than 100.")
 # old parameters to be restored at exit:
 op <- par(no.readonly=TRUE)
 # inset plot: background, border
