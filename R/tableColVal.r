@@ -43,12 +43,12 @@ rect(xleft=rep(lefts[-1], each=nr), xright=rep(rights[-1], each=nr),
 abline(v=rights, h=1:nr)
 # add "titles"
 ytitles <- 1-(namesheight*nr/2)
-do.call(text, args=owa(d=list(x=middles,      y=ytitles,  labels=colnames(mat)), argcol,  u=c("x","y")))
-do.call(text, args=owa(d=list(x=nameswidth/2, y=ytitles,  labels="tableColVal"), argmain, u=c("x","y")))
-do.call(text, args=owa(d=list(x=nameswidth/2, y=1:nr+0.5, labels=rownames(mat)), argrow,  u=c("x","y")))
+do.call(text, args=owa(d=list(x=middles,      y=ytitles,  labels=colnames(mat)), argcol,  "x","y"))
+do.call(text, args=owa(d=list(x=nameswidth/2, y=ytitles,  labels="tableColVal"), argmain, "x","y"))
+do.call(text, args=owa(d=list(x=nameswidth/2, y=1:nr+0.5, labels=rownames(mat)), argrow,  "x","y"))
 # add text to each cell
 do.call(text, args=owa(d=list(x=rep(middles, each=nr), y=rep(1:nr, nc)+0.5, 
-                              labels=as.vector(mat)), argcell,  u=c("x","y")))
+                              labels=as.vector(mat)), argcell,  "x","y"))
 # Set old paramaters again:
 par(op)
 if(pdf) { dev.off() ; message("PDF-File is located here:", pdffile, "\n") }# close pdf device

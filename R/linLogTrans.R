@@ -36,7 +36,7 @@ if(is.null(values_t)) # if it's not given by user, use internal calculation:
 if(firstplot)
   {
   plot(x, y, las=1, type="n", ...)
-  do.call(points, args=owa(d=list(x=x, y=y), a=pointsarg, u=c("x", "y")))
+  do.call(points, args=owa(d=list(x=x, y=y), a=pointsarg, "x", "y"))
   }
 # in case people capitalize log:
 log <- tolower(log)
@@ -54,7 +54,7 @@ if(log=="x") # -----------------------------------------------------------------
      box()
      axis(1, (lv$vals)^(1/t), lv$labs)
      # user-specified arguments for points:
-     pargs <- owa(d=list(x=x^(1/t), y=y), a=pointsarg, u=c("x", "y"))
+     pargs <- owa(d=list(x=x^(1/t), y=y), a=pointsarg, "x", "y")
      # draw original points:
      do.call(points, args=pargs)
      # write transformation value:
@@ -65,7 +65,7 @@ if(log=="x") # -----------------------------------------------------------------
     {
     plot(x, y, las=1, xaxt="n", type="n", log="x", ...)
     abline(v=lv$all, col=8) ; box() ; axis(1, lv$vals, lv$labs)
-    do.call(points, args=owa(d=list(x=x, y=y), a=pointsarg, u=c("x", "y")))
+    do.call(points, args=owa(d=list(x=x, y=y), a=pointsarg, "x", "y"))
     }
   }
 else if(log=="y") # ------------------------------------------------------------
@@ -75,7 +75,7 @@ else if(log=="y") # ------------------------------------------------------------
      {
      plot(x, y^(1/t), las=1, yaxt="n", type="n", ...)
      abline(h=(lv$all)^(1/t), col=8) ; box() ; axis(2, (lv$vals)^(1/t), lv$labs)
-     pargs <- owa(d=list(x=x, y=y^(1/t)), a=pointsarg, u=c("x", "y"))
+     pargs <- owa(d=list(x=x, y=y^(1/t)), a=pointsarg, "x", "y")
      do.call(points, args=pargs)
      if(write_t) title(sub=paste("t =", sprintf("%6.2f", t)), adj=1)
      } # End for loop
@@ -83,7 +83,7 @@ else if(log=="y") # ------------------------------------------------------------
     {
     plot(x, y, las=1, yaxt="n", type="n", log="y", ...)
     abline(h=lv$all, col=8) ; box() ; axis(2, lv$vals, lv$labs)
-    do.call(points, args=owa(d=list(x=x, y=y), a=pointsarg, u=c("x", "y")))
+    do.call(points, args=owa(d=list(x=x, y=y), a=pointsarg, "x", "y"))
     }
   }
 else if(log=="xy" | log=="yx") # -----------------------------------------------
@@ -95,7 +95,7 @@ else if(log=="xy" | log=="yx") # -----------------------------------------------
      plot(x^(1/t), y^(1/t), las=1, xaxt="n", yaxt="n", type="n", ...)
      abline(h=(lvy$all)^(1/t), v=(lvx$all)^(1/t), col=8) ; box()
      axis(1, (lvx$vals)^(1/t), lvx$labs) ; axis(2, (lvy$vals)^(1/t), lvy$labs)
-     pargs <- owa(d=list(x=x^(1/t), y=y^(1/t)), a=pointsarg, u=c("x", "y"))
+     pargs <- owa(d=list(x=x^(1/t), y=y^(1/t)), a=pointsarg, "x", "y")
      do.call(points, args=pargs)
      if(write_t) title(sub=paste("t =", sprintf("%6.2f", t)), adj=1)
      } # End for loop
@@ -104,7 +104,7 @@ else if(log=="xy" | log=="yx") # -----------------------------------------------
     plot(x, y, las=1, xaxt="n", yaxt="n", type="n", log="xy", ...)
     abline(h=lvy$all, v=lvx$all, col=8) ; box()
     axis(1, lvx$vals, lvx$labs) ; axis(2, lvy$vals, lvy$labs)
-    do.call(points, args=owa(d=list(x=x, y=y), a=pointsarg, u=c("x", "y")))
+    do.call(points, args=owa(d=list(x=x, y=y), a=pointsarg, "x", "y"))
     }
   }
 else stop("log can only be 'x', 'y', or 'xy'.")

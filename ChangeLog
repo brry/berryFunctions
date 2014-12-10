@@ -14,9 +14,7 @@ This Log of changes in my package berryFunctions contains two sections:
 
 - lsc: better example dataset, optim problems, sim line not plotted completely
 
-- mReg: r^2 after backtransformation, influence of replacing zeros with near-zero values, hyperbolic functions
-
-- owa: is change of order of elements avoidable? replace u with ... (in all my functions, too)
+- mReg: influence of replacing zeros with near-zero values, hyperbolic functions
 
 - pointZoom: rename Argument colp, as col cannot be given currently. Add expr argument
 
@@ -47,6 +45,7 @@ various small changes and bug fixes. See the commits on github
 - tableColVal: text can be changed (eg logarithmized, see examples)
 - createDoc: case now checked. Fixed handling when several args per line or explanations contain 'DEFAULT:'
 - logAxis: good internal range and base defaults. exponents. side can be a vector. 
+- owa: replaced u with ellipsis. order of arguments is not changed anymore.
 New functions: logSpaced, removeSpace
 
 

@@ -4,13 +4,13 @@
 \description{Can be used in functions that give defaults for several argument lists that are each passed to different functions.
 Some of the defaults can be overwritten, some should be left unchanged, some are
 aditionally specified by users. owa combines everything accordingly.}
-\usage{owa(d, a, u=NA)}
+\usage{owa(d, a, ...)}
 \arguments{
   \item{d}{Default arguments}
   \item{a}{Arguments specified by user}
-  \item{u}{names of Unchangeable arguments (that can not be overwritten). DEFAULT: NA}
+  \item{\ldots}{names of unchangeable arguments (that will not be overwritten) as character strings.}
 }
-\details{None}
+\note{the argument u has been replaced by ellipsis (...) in version 1.7 (Dec. 2014)!}
 \value{Always a list, disregarding list/vector mode of input}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, Early 2014}
 \references{
@@ -19,31 +19,30 @@ aditionally specified by users. owa combines everything accordingly.}
    \url{http://stackoverflow.com/questions/4124900}\cr
    \url{http://stackoverflow.com/questions/16774946}\cr}
 \examples{
-d <- list(col="gray", lty=1, wachs=1:6, bb=42)
-a <- list(lty=3, lwd=2, wachs="A", bb=16)
+d <- list(bb=1:5, lwd=2, lty=1,   col="gray")
+a <- list(bb=3,   lwd=5, lty="1", wachs="A", bb=16)
 
-owa(d, a, u=c("bb", "wachs"))
-owa(d, NULL, u=c("bb", "wachs")) # NULL is a good default for argument lists
-owa(d, c(HH=2, BBB=3) ) # vectors and lists all converted to lists
+owa(d, a, "bb", "lwd") # basic usage: lty is overwritten
+owa(d, NULL, "bb", "wachs") # NULL is a good default for argument lists
+owa(d, c(HH=2, BBB=3) ) # vectors and lists are all converted to lists
+owa(d, list(lwd=5, bb=3, lty="1") ) # order of arguments doesn't matter
 
-
-# An example of how to code (as in funnelPlot or mReg):
+# An example of how to code (as in funnelPlot, colPoints or mReg):
 # Why we want to do this:
 testfun <- function(...) {plot(7:9, ...) ; legend("top", "Text hier", ...)}
 testfun()
-\dontrun{
-testfun(type="o") # legend doesn't have the argument 'type'!
-}
+# testfun(type="o") # Error: legend doesn't have the argument 'type'!
 
-# How we do this:
+
+# How we solve this:
 testfun <- function(data=7:9, legarg=NULL, plotarg=NULL)
    {
    # defaults for plot and legend:
    plot_def <- list(x=0.5*data, col="red", cex=2, lty=2, type="o")
    leg_def <- list(x="top", lty=2, legend="Default text here")
    # combine defaults and user specified into final argument list
-   plot_fin <- owa(d=plot_def, a=plotarg, u=c("col", "lty"))
-   leg_fin <- owa(d=leg_def, a=legarg, u="lty")
+   plot_fin <- owa(d=plot_def, a=plotarg, "col", "lty")
+   leg_fin <- owa(d=leg_def, a=legarg, "lty")
    # Execute single functions that each have their own arguments:
    do.call(  plot, args=plot_fin)
    do.call(legend, args=leg_fin)

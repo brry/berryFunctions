@@ -87,7 +87,7 @@ if(length(intm) >0 )
 arid <- which(rpy<=tpy)
 argarid_def <- list(x=px[c(arid, rev(arid))], y=c(rpy[arid],rev(tpy[arid])), 
                     col=rgb(1,0.84,0, alpha=0.3), border=NA) # col from col2rgb("gold")/255
-do.call(polygon, args=owa(d=argarid_def, a=argarid, u=c("x","y"))  )
+do.call(polygon, args=owa(d=argarid_def, a=argarid, "x","y")  )
 
 # polygon drawing - HUMID ------------------------------------------------------------
 # interception coordinates of temp with 0-axis (baseline of humid polygon):
@@ -102,7 +102,7 @@ hpy <- c(tpy, if(isneg)intc_t[2,] )[order(hpx, decreasing=TRUE)]
 hpx <- sort(hpx, decreasing=TRUE)
 rpy[rpy<tpy] <- tpy[rpy<tpy] # have the polygon go along templine, so density starting lines are overplotted later
 arghumi_def <- list(x=c(px, hpx), y=c(rpy, hpy), col=rgb(0,0,1, alpha=0.3), border=NA)
-do.call(polygon, args=owa(d=arghumi_def, a=arghumi, u=c("x","y"))  )
+do.call(polygon, args=owa(d=arghumi_def, a=arghumi, "x","y")  )
 
 # polygon drawing - compressed area -----------------------------------------------------
 if(compress & sum(diff(rain>100) !=0) >0 )
@@ -115,7 +115,7 @@ cpx <- c( px, intc_c[1,] ) # backwards polygon border
 cpy <- c(rpy, intc_c[2,] )[order(cpx, decreasing=FALSE)]
 cpx <- sort(cpx, decreasing=FALSE)
 argcomp_def <- list(x=c(cpx, rev(cpx)), y=c(cpy,pmin(rev(cpy),50)), col=rgb(1,0,1, alpha=0.3), border=NA)
-do.call(polygon, args=owa(d=argcomp_def, a=argcomp, u=c("x","y"))  )
+do.call(polygon, args=owa(d=argcomp_def, a=argcomp, "x","y")  )
 }
 
 # lines and labels ----------------------------------------------------------------

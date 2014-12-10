@@ -35,7 +35,7 @@ xlab=substitute(x), ylab=substitute(y), las=1, pch=16, quiet=FALSE, ...)}
 \value{Invisible list of values that can be passed to colPointsLegend or colPointsHist.}
 \note{Rstudio scales graphics really badly, so don't expect the right legend width out of the box if you use Rstudio! Exporting via \code{png("myplot.png", 600,400); colPoints(x,y,z); dev.off()} usually works much better}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2014. I'd be interested in hearing what you used the function for.}
-\references{\url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html}}
+\references{\url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html}, \url{http://www.theusrus.de/blog/the-good-the-bad-22012/}}
 \seealso{\code{\link{classify}}, \code{\link{colPointsLegend}}, \code{\link{colPointsHist}} }
 \examples{
 i <- c( 22,  40,  48,  60,  80,  70,  70,  63,  55,  48,  45,  40,  30,  32)
