@@ -1,7 +1,7 @@
 # yearSample:
 # Nerdy way to wish someone a happy new year, eg:
 # Have a great
-# set.seed(1244); sample(0:9, 4, replace=T)
+# set.seed(1244); sample(0:9,4,T)
 
 # Berry Boessenkool, berry-b@gmx.de, 15 April 2014
 
@@ -18,7 +18,7 @@ year_is_false <- function(i)
   }
 i <- 0
 while( year_is_false(i) ) i <- i+1
-output <- paste0("set.seed(", i, "); sample(0:9, 4, replace=T)\n")
-cat(output)
+output <- paste0("set.seed(", i, "); sample(0:9,4,T)\n")
+message(output)
 }
 
