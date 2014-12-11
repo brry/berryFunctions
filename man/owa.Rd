@@ -30,13 +30,12 @@ owa(d, NULL, "bb", "wachs") # NULL is a good default for argument lists
 owa(d, c(HH=2, BBB=3) ) # vectors and lists are all converted to lists
 owa(d, list(lwd=5, bb=3, lty="1") ) # order of arguments doesn't matter
 
-# Usage example (see application eg. in funnelPlot, colPoints or mReg)
+# Usage example (see applications eg. in funnelPlot, colPoints or mReg)
 
 # Why we want to do this:
 testfun <- function(...) {plot(7:9, ...) ; legend("top", "Text hier", ...)}
 testfun()
 # testfun(type="o") # Error: legend doesn't have the argument 'type'!
-
 
 # How to solve this:
 testfun <- function(data=7:9, legarg=NULL, plotarg=NULL)
