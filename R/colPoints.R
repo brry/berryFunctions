@@ -43,7 +43,7 @@ if(!missing(data)) # get x, y and z from data.frame
    z <- data[ , deparse(substitute(z))] 
    } # now continue with case b
 # error checking:
-if(diff(range(z, finite=TRUE)==0)) if(!quiet) warning("All z-values are equal.")
+if(diff(range(z, finite=TRUE))==0) if(!quiet) warning("All z-values are equal.")
 # b) Regular case: z ist a vector
 if(is.vector(z))
    {
