@@ -23,7 +23,7 @@ ylab=deparse(substitute(y)), main="linear regression", ...)}
 }
 \value{None, used for plotting and drawing.}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2012}
-\seealso{ \code{\link{lm}}, \code{\link{legend}}, \code{\link{par}}, \code{\link{abline}}. }
+\seealso{ \code{\link{lm}}, \code{\link{mReg}}, \code{\link{expReg}}, \code{\link{legend}}, \code{\link{par}}, \code{\link{abline}}. }
 \examples{
 
 a <- 1:30

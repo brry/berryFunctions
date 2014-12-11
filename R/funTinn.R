@@ -8,7 +8,7 @@ name#, # name of function or object to be opened with the editor Tinn-R
 #path="C:/Program Files/Tinn-R/bin/Tinn-R.exe" # path to editor.
 )
 {
-File <- paste0(deparse(substitute(name)), ".r")
+File <- paste0(tempdir(), "/", deparse(substitute(name)), ".r")
 sink(File)
 print(name)
 sink()
