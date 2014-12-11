@@ -1,9 +1,12 @@
 \name{owa}
 \alias{owa}
-\title{overwrite argument lists passed to functions}
-\description{Can be used in functions that give defaults for several argument lists that are each passed to different functions.
-Some of the defaults can be overwritten, some should be left unchanged, some are
-aditionally specified by users. owa combines everything accordingly.}
+\title{overwrite argument default lists}
+\description{Expansion of ellipsis (three dots).
+Used in functions that pass argument lists separately to several functions.
+Internal defaults can be set per function (eg. one list for plot and one for legend).
+Some of the defaults can be overwritten, some should be left unchanged, some can be
+additionally specified by users. owa combines everything accordingly.
+See the example section on how to implement this.}
 \usage{owa(d, a, ...)}
 \arguments{
   \item{d}{Default arguments}
@@ -27,14 +30,15 @@ owa(d, NULL, "bb", "wachs") # NULL is a good default for argument lists
 owa(d, c(HH=2, BBB=3) ) # vectors and lists are all converted to lists
 owa(d, list(lwd=5, bb=3, lty="1") ) # order of arguments doesn't matter
 
-# An example of how to code (as in funnelPlot, colPoints or mReg):
+# Usage example (see application eg. in funnelPlot, colPoints or mReg)
+
 # Why we want to do this:
 testfun <- function(...) {plot(7:9, ...) ; legend("top", "Text hier", ...)}
 testfun()
 # testfun(type="o") # Error: legend doesn't have the argument 'type'!
 
 
-# How we solve this:
+# How to solve this:
 testfun <- function(data=7:9, legarg=NULL, plotarg=NULL)
    {
    # defaults for plot and legend:
