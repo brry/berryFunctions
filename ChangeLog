@@ -14,7 +14,9 @@ This Log of changes in my package berryFunctions contains two sections:
 
 - lsc: better example dataset, optim problems, sim line not plotted completely
 
-- mReg: influence of replacing zeros with near-zero values, hyperbolic functions
+- linReg: grouped density or boxplot(y~group, add=T, at=unique(bpoints), yaxt="n", xlab="", range=0)
+
+- mReg: remove zeros instead of replacing zeros with near-zero values, hyperbolic functions
 
 - pointZoom: rename Argument colp, as col cannot be given currently. Add expr argument
 
@@ -46,7 +48,8 @@ various small changes and bug fixes. See the commits on github
 - createDoc: case now checked. Fixed handling when several args per line or explanations contain 'DEFAULT:'
 - logAxis: good internal range and base defaults. exponents. side can be a vector. 
 - owa: replaced u with ellipsis. order of arguments is not changed anymore.
-New functions: logSpaced, removeSpace
+- nameSample has been enhanced a lot.
+New functions: logSpaced, removeSpace, expReg
 
 
 -----------------------------------------------------------------
