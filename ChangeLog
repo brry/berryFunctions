@@ -24,8 +24,6 @@ This Log of changes in my package berryFunctions contains two sections:
 
 - require2: change to requireNamespace http://r-pkgs.had.co.nz/namespace.html#namespace
 
-- tableColVal: enable log scaled color through use of classify, update example. Allow srt/las
-
 - textField: support srt, Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
  
 
@@ -49,6 +47,7 @@ various small changes and bug fixes. See the commits on github
 - logAxis: good internal range and base defaults. exponents. side can be a vector. 
 - owa: replaced u with ellipsis. order of arguments is not changed anymore.
 - nameSample has been enhanced a lot.
+- tableColVal now uses classify
 New functions: logSpaced, removeSpace, expReg
 
 

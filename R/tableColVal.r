@@ -10,11 +10,12 @@
 tableColVal <- function(
    mat,
    pdffile="table_col_val.pdf",
-   pdf=FALSE,
+   pdf=!missing(pdffile),
    nameswidth=0.3,   # percentage of plot
    namesheight=0.1,
    palette=rainbow2(nrow(mat)*ncol(mat)),
    Range=range(mat,finite=TRUE),
+   argclass=NULL,
    argrow=NULL,
    argcol=NULL,
    argcell=NULL,
@@ -35,20 +36,21 @@ rights <- seq(nameswidth, 1, len=nc+1)
 lefts <- c(0, rights[1:nc] )
 middles <- nameswidth + (1:nc*2-1) * (1-nameswidth)/nc/2
 # define color for each value of mat
-mod <- lm(c(1, length(palette)) ~ Range)[[1]]
-lincol <- round(as.vector(mat) * mod[2] + mod[1])
+cl <- do.call(classify, args=owa(list(x=mat, breaks=length(palette), Range=Range), argclass))
+##mod <- lm(c(1, length(palette)) ~ Range)[[1]]
+##lincol <- round(as.vector(mat) * mod[2] + mod[1])
 # plot rectancles with colors corresponding to values of mat
 rect(xleft=rep(lefts[-1], each=nr), xright=rep(rights[-1], each=nr),
-     ybottom=rep(2:(nr+1), nc), ytop=rep(1:nr, nc), col=palette[lincol] , border=NA)
+     ybottom=rep(2:(nr+1), nc), ytop=rep(1:nr, nc), col=palette[cl$index] , border=NA)
 abline(v=rights, h=1:nr)
 # add "titles"
 ytitles <- 1-(namesheight*nr/2)
-do.call(text, args=owa(d=list(x=middles,      y=ytitles,  labels=colnames(mat)), argcol,  "x","y"))
-do.call(text, args=owa(d=list(x=nameswidth/2, y=ytitles,  labels="tableColVal"), argmain, "x","y"))
-do.call(text, args=owa(d=list(x=nameswidth/2, y=1:nr+0.5, labels=rownames(mat)), argrow,  "x","y"))
+do.call(text, args=owa(d=list(x=middles,      y=ytitles,  labels=colnames(mat)), argcol))
+do.call(text, args=owa(d=list(x=nameswidth/2, y=ytitles,  labels="tableColVal"), argmain))
+do.call(text, args=owa(d=list(x=nameswidth/2, y=1:nr+0.5, labels=rownames(mat)), argrow))
 # add text to each cell
 do.call(text, args=owa(d=list(x=rep(middles, each=nr), y=rep(1:nr, nc)+0.5, 
-                              labels=as.vector(mat)), argcell,  "x","y"))
+                              labels=as.vector(mat)), argcell))
 # Set old paramaters again:
 par(op)
 if(pdf) { dev.off() ; message("PDF-File is located here:", pdffile, "\n") }# close pdf device

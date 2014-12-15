@@ -2,9 +2,9 @@
 \alias{tableColVal}
 \title{Table with values with value-dependent colored backgrounds in pdf}
 \description{Table with numbers and corresponding color in the background of each cell. (heatmap)}
-\usage{tableColVal(mat, pdffile="table_col_val.pdf", pdf=FALSE, nameswidth=0.3,
+\usage{tableColVal(mat, pdffile="table_col_val.pdf", pdf=!missing(pdffile), nameswidth=0.3,
 namesheight=0.1, palette=rainbow2(nrow(mat)*ncol(mat)),
-Range=range(mat,finite=TRUE), 
+Range=range(mat,finite=TRUE), argclass=NULL,
 argrow=NULL, argcol=NULL, argcell=NULL, argmain=NULL, ...)}
 \arguments{
   \item{mat}{Matrix with values}
@@ -14,6 +14,7 @@ argrow=NULL, argcol=NULL, argcell=NULL, argmain=NULL, ...)}
   \item{namesheight}{Relative height of column names at the top. DEFAULT: 0.1}
   \item{palette}{Color palette for the heatmap. DEFAULT: rainbow2(nrow(mat)*ncol(mat))}
   \item{Range}{Range of values mapped linearly to color palette. DEFAULT: range(mat,finite}
+  \item{argclass}{List of arguments specifying how to call \code{\link{classify}}, eg. method. DEFAULT: NULL}
   \item{argrow, argcol, argcell, argmain}{List of arguments passed to \code{\link{text}} in row and column names, cell content and topleft cell, respectively. Could be cex, col, srt, etc. DEFAULTS: NULL} 
   \item{\dots}{Further arguments passed to \code{\link{pdf}}.}
 }
@@ -32,6 +33,7 @@ tableColVal(Bsp, namesheight=0.5, argcol=list(srt=90))
 
 tableColVal(Bsp, argrow=list(col="red", cex=2) )
 tableColVal(Bsp, Range=c(10,40))
+tableColVal(Bsp, Range=c(20,40))
 tableColVal(Bsp, palette=heat.colors(12))
 tableColVal(Bsp, palette=c(2,4,7), argmain=list(labels="last\ncomparison"))
 
