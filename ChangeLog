@@ -35,7 +35,7 @@ This Log of changes in my package berryFunctions contains two sections:
 -----------------------------------------------------------------
 
 
-Version 1.7 (2014-).
+Version 1.7 (2014-)
 various small changes and bug fixes. See the commits on github
 - rmse and rsquare NA-removal warnings can now be silenced with quiet=TRUE
 - linReg: formula specification is now enabled: linReg(obj1~obj2) or linReg(col_a~col_b, data=df)
@@ -48,7 +48,7 @@ various small changes and bug fixes. See the commits on github
 - owa: replaced u with ellipsis. order of arguments is not changed anymore.
 - nameSample has been enhanced a lot.
 - tableColVal now uses classify
-New functions: logSpaced, removeSpace, expReg
+New functions: logSpaced, removeSpace, expReg, dupes
 
 
 -----------------------------------------------------------------
