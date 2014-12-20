@@ -1,0 +1,16 @@
+double lines
+to test dupes
+
+this is a file
+with spaces in this line
+ with spaces in this line
+   with spaces in this line     
+with spaces in this line too, but only exact matches are analysed
+to test dupes
+which is
+
+a function in my misc package berryFunctions
+to find duplicate lines in a text file
+and color them accordingly
+in excel or libreOffice   
+using conditional formatting
