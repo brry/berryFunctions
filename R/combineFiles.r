@@ -1,6 +1,6 @@
 
 # Combine Textfiles regardless of their content.
-# Berry Boessenkool, berry-b@gmx.de, Nov 2012
+# Berry Boessenkool, berry-b@gmx.de, Nov 2012, Dec 2014
 
 combineFiles <- function(
    inFiles = dir(),
@@ -8,7 +8,9 @@ combineFiles <- function(
    outFile = "combined_Textfiles.txt",
    outDir = inDir,
    sep = NULL,
-   names=TRUE)
+   names=TRUE,
+   selection=NULL,
+   quiet=FALSE)
 {
 # Function start
 # Default sep:
@@ -17,14 +19,29 @@ if(is.null(sep)) sep <- "\n-----------------------------------------------------
 # File to write to:
 File <- paste(outDir, outFile, sep="/")
 write("", file=File)
+# Meta information if wanted
+if(names)
+ {
+ write(paste(length(inFiles), "Files in", inDir), file=File, append=TRUE)
+ write("Combined together with berryFunctions::combineFiles", file=File, append=TRUE)
+ write(as.character(Sys.time()), file=File, append=TRUE)
+ write(sep, file=File, append=TRUE)
+ }
 # The actual action
 for(i in 1:length(inFiles))
    {
+   # Read file:
    inFile_i <- scan(file=paste(inDir, inFiles[i], sep="/"), what="char", 
                     blank.lines.skip=FALSE, sep="\n", quiet=TRUE)
+   # Write filename if wanted:
    if(names) write(paste(inFiles[i], "\n"), file=File, append=TRUE)
-   write(inFile_i, file=File, append=TRUE)
+   # selection of lines to write to output
+   selection2 <- eval(substitute(selection), envir=environment())
+   if(is.null(selection2)) selection2 <- 1:length(inFile_i)
+   # write selection to output
+   write(inFile_i[selection2], file=File, append=TRUE)
+   # Write separation:
    write(sep, file=File, append=TRUE)
    } # End of for-Loop
-message(i, "files combined to", File, "\n")
+if(!quiet) message(i, " files combined to ", File)
 } # End of function
