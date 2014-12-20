@@ -22,7 +22,7 @@ Binning methods are explained very nicely in the link in the section References.
 
 \tabular{llll}{
 \bold{\code{method}}     \tab |  explanation                         \tab |  meaning of \code{breaks}                             \tab |  default   \cr
-----------              \tab |  -----------                         \tab |  -----------                                          \tab |  -------   \cr
+----------               \tab |  -----------                         \tab |  -----------                                          \tab |  -------   \cr
 \bold{equalinterval}     \tab |  \emph{nbins} equally spaced classes \tab |  nbins                                                \tab |  100       \cr
 \bold{quantile}          \tab |  classes have equal number of values \tab |  the quantiles (or number of them)                    \tab |  0:4/4     \cr
 \bold{standarddeviation} \tab |  normal distributions                \tab |  the number of sd in one direction from the mean      \tab |  3         \cr

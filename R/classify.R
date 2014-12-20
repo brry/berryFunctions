@@ -47,6 +47,7 @@ if(length(breaks)!=2) stop("breaks must have two values if method='logspaced'.")
 nb <- breaks[1]
 bb <- logSpaced(base=breaks[2], n=breaks[1], min=Range[1], max=Range[2], plot=FALSE)
 bb <- signif(bb, 5) # else min is in reality min + 1e-13
+bb <- unique(bb) # as logspaced produces a lot of breaks in one region
 at <- pretty2(bb)
 la <- at
 ix <- cut(x, breaks=bb, labels=FALSE, include.lowest=TRUE)
