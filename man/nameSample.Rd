@@ -14,6 +14,7 @@ Can especially impress newbies a lot.}
 That's why it warns about strings longer than 5 characters}
 \seealso{ \code{\link{yearSample}} to wish a happy new year, \code{\link{set.seed}}, \code{\link{sample}}, \code{\link{letters}}    }
 \examples{
+# Not run in RCMD check as they're very time consuming
 \dontrun{
 nameSample("berry")  # After that, you can send the result to colleagues:
 # Kind regards from
@@ -31,11 +32,13 @@ ctfile  <- system.file("extdata/calctime_nameSample.txt",  package="berryFunctio
 ctfile2 <- system.file("extdata/calctime_nameSample2.txt", package="berryFunctions")
 calctime <- read.table(ctfile)
 # regression result in hours:
-expReg(nchar(rownames(calctime))-8, calctime[,1], xlim=c(1,7), ylim=c(-3,4), predict=7)/3600
+expReg(nchar(rownames(calctime))-8, calctime[,1], xlim=c(1,7), ylim=c(-3,4),
+       predict=7)/3600
 
 # For my 3 times faster computer:
 calctime <- read.table(ctfile2)
-expReg(nchar(rownames(calctime))-8, calctime[,1], xlim=c(1,7), ylim=c(-3,4), predict=c(4,7))/c(1,3600)
+expReg(nchar(rownames(calctime))-8, calctime[,1], xlim=c(1,7), ylim=c(-3,4),
+       predict=c(4,7))/c(1,3600)
 # 4 sec for 4 letters are expected to be 10 hours for 7 letters...
 
 }
