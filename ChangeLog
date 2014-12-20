@@ -16,7 +16,7 @@ This Log of changes in my package berryFunctions contains two sections:
 
 - linReg: grouped density or boxplot(y~group, add=T, at=unique(bpoints), yaxt="n", xlab="", range=0)
 
-- mReg: remove zeros instead of replacing zeros with near-zero values, hyperbolic functions
+- mReg: remove zeros instead of replacing zeros with near-zero values. add hyperbolic functions
 
 - pointZoom: rename Argument colp, as col cannot be given currently. Add expr argument
 
@@ -35,7 +35,7 @@ This Log of changes in my package berryFunctions contains two sections:
 -----------------------------------------------------------------
 
 
-Version 1.7 (2014-)
+Version 1.7 (2014-12-20)
 various small changes and bug fixes. See the commits on github
 - rmse and rsquare NA-removal warnings can now be silenced with quiet=TRUE
 - linReg: formula specification is now enabled: linReg(obj1~obj2) or linReg(col_a~col_b, data=df)
