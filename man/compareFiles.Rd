@@ -12,9 +12,9 @@
 }
 \value{result from \code{\link{head}}}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, Aug 2014}
-\seealso{\code{\link{combineTextfiles}}, \url{http://text-compare.com/} }
+\seealso{\url{http://text-compare.com/} which I sadly only discovered after writing this function, \code{\link{dupes}} for finding duplicate lines, \code{\link{combineFiles}}}
 \examples{
-filenames <- system.file(paste0("extdata/Versuch",1:2,".txt"), package="berryFunctions")
+filenames <- system.file(paste0("extdata/versuch",1:2,".txt"), package="berryFunctions")
 compareFiles(filenames[1], filenames[2], warn=FALSE)
 }
 \keyword{IO}

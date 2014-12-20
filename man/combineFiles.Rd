@@ -14,7 +14,7 @@ outFile="combined_Textfiles.txt", outDir=inDir, sep=NULL, names=TRUE)}
 }
 \value{None, but prints number of files combined and output file name.}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, Nov 2012}
-\seealso{\code{\link{paste}}, \code{\link{scan}}, \code{\link{write}}, \code{\link{cat}}.}
+\seealso{\code{\link{compareFiles}}, and the functions used internally here, namely: \code{\link{paste}}, \code{\link{scan}}, \code{\link{write}}.}
 \examples{
 # These are skipped by rcmd check (writing to external places is not allowed)
 \dontrun{
