@@ -26,9 +26,10 @@ text(c(12, 20, 50), c(0.1, 0.04, 0.025), c("n=2, k=3","n=2, k=8","n=5.5, k=8"),
 
 # try several parameters (e.g. in Monte Carlo Simulation to estimate
   # sensitivity of model towards slight differences/uncertainty in parameters):
-n <- rnorm(5e4, mean=2, sd=0.8); n <- n[n>0]
-k <- rnorm(5e4, mean=8, sd=1.1); k <- k[k>0]
-UH <- sapply(1:5e4, function(i) unitHydrograph(n=n[i], k=k[i], t=Time))
+nreps <- 1e3 # 5e4 eg on faster computers
+n <- rnorm(nreps, mean=2, sd=0.8); n <- n[n>0]
+k <- rnorm(nreps, mean=8, sd=1.1); k <- k[k>0]
+UH <- sapply(1:nreps, function(i) unitHydrograph(n=n[i], k=k[i], t=Time))
 UHquant <- apply(UH, 1, quantile, probs=0:10/10, na.rm=TRUE)
 if(interactive()) View(UHquant)
 
