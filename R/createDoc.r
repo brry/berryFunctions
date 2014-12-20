@@ -113,6 +113,7 @@ cat(paste0("}
 \\keyword{}
 "), file=rdfile, append=TRUE)
 # warning if there are less argument lines than arguments themselves:
+if(removeSpace(rfile[end-1]) ==")") end <- end-1
 source(rfilename)
 n_missing <- length(formals(fun))  -  (end-anf-1)
 if(n_missing != 0) warning(n_missing, " items are missing in the arguments section.
