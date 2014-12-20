@@ -8,7 +8,7 @@ normPlot <- function(
   fill=rgb(0,0.3,0.8, 0.4), # color passed to \code{\link{polygon}}
   cumulative=TRUE, # should cumulative density distribution be added?
   las=1, # arguments passed to \code{\link{plot}}
-  main=paste("Normal density with\nmean =", mean, "and sd =", sd), # main as in \code{\link{plot}}.
+  main=paste("Normal density with\nmean =", signif(mean,2), "and sd =", signif(sd,2)), # main as in \code{\link{plot}}.
   ylim=lim0(y), # limit for the y axis
   ylab="", # labels for the axes
   xlab="",
@@ -19,7 +19,7 @@ normPlot <- function(
   ... # further arguments passed to \code{\link{plot}} like lwd, xaxs, cex.axis, etc.
   )
 {
-par(mar=mar)
+op <- par(mar=mar)
 # create x and y coordinates
 x <- seq(mean-width*sd, mean+width*sd, length=200)
 y <- dnorm(x, mean, sd)
@@ -40,5 +40,6 @@ if(cumulative)
   axis(4, at=0:4/4*par("usr")[4], labels=0:4/4, col.axis=2, las=1, col=2)
   }
 box()
+par(op)
 }
 

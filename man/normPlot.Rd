@@ -4,7 +4,7 @@
 \description{nice plot of normal density distribution}
 \usage{normPlot(mean=0, sd=1, width=3, lines=TRUE, fill=rgb(0,0.3,0.8, 0.4),
 cumulative=TRUE, las=1, 
-main=paste("Normal density with\\nmean =", mean, "and sd =", sd),
+main=paste("Normal density with\\nmean =", signif(mean,2), "and sd =", signif(sd,2)),
 ylim=lim0(y), ylab="", xlab="", type="l", lty=1, col=par("fg"), mar=c(2,3,3,3), ... )}
 \arguments{
   \item{mean}{average value as in \code{\link{dnorm}}. DEFAULT: 0}

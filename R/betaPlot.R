@@ -8,7 +8,7 @@ betaPlot <- function(
   cumulative=TRUE, # should cumulative density distribution be added?
   mar=c(2,3,3,3), # margins for plot passed to \code{\link{par}}
   las=1, # arguments passed to \code{\link{plot}}
-  main=paste("Beta density with\nalpha =", shape1, "and beta =", shape2), # main as in \code{\link{plot}}.
+  main=paste("Beta density with\nalpha =", signif(shape1,2), "and beta =", signif(shape2,2)), # main as in \code{\link{plot}}.
   ylim=lim0(y), # limit for the y axis
   xlim=0:1,
   ylab="", # labels for the axes
@@ -19,7 +19,7 @@ betaPlot <- function(
   ... # further arguments passed to \code{\link{plot}} like lwd, cex.axis, etc.
   )
 {
-par(mar=mar)
+op <- par(mar=mar)
 # create x and y coordinates
 x <- seq(1e-3,1-1e-3, length=200)
 y <- dbeta(x, shape1, shape2)
@@ -38,4 +38,5 @@ if(cumulative)
   axis(4, at=0:4/4*par("usr")[4], labels=0:4/4, col.axis=2, las=1, col=2)
   }
 box()
+par(op)
 }
