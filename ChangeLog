@@ -24,6 +24,8 @@ This Log of changes in my package berryFunctions contains two sections:
 
 - require2: change to requireNamespace http://r-pkgs.had.co.nz/namespace.html#namespace
 
+- tableColVal: add digits argument
+
 - textField: support srt, Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
  
 
@@ -35,7 +37,16 @@ This Log of changes in my package berryFunctions contains two sections:
 -----------------------------------------------------------------
 
 
-Version 1.7 (2014-12-20)
+Version 1.8 (2015-0-)
+
+New Functions: panelDim, groupHist
+
+
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+
+
+Version 1.7.1 (2014-12-20)
 various small changes and bug fixes. See the commits on github
 - rmse and rsquare NA-removal warnings can now be silenced with quiet=TRUE
 - linReg: formula specification is now enabled: linReg(obj1~obj2) or linReg(col_a~col_b, data=df)
@@ -48,6 +59,7 @@ various small changes and bug fixes. See the commits on github
 - owa: replaced u with ellipsis. order of arguments is not changed anymore.
 - nameSample has been enhanced a lot.
 - tableColVal now uses classify
+- combineFiles now allows selection of lines
 New functions: logSpaced, removeSpace, expReg, dupes
 
 
