@@ -1,0 +1,59 @@
+\name{panelDim}
+\alias{panelDim}
+\title{arrange panels in a multipanel plot (par mfrow)}
+\description{Returns the optimum where deviation from ncol=nrow and number of panels left empty have a minimum sum.}
+\usage{panelDim(n, weight=c(1,1), maxempty=round(n/4), landscape=FALSE, 
+all=FALSE, plot=FALSE, mfcol=FALSE )}
+\arguments{
+  \item{n}{Number of panels to be arranged}
+  \item{weight}{weights to avoid \emph{empty panels} and \emph{discrepancy between ncol and nrow}, respectively. DEFAULT: c(1,1)}
+  \item{maxempty}{Maximum number of panels that are allowed to be left empty. If \code{maxempty=0}, no panel is left blank, so 11 plots would be beneath each other instead of in a 4x3 grid with one panel left blank. DEFAULT: round(n/4)}
+  \item{landscape}{Use landscape orientation instead of portrait? DEFAULT: FALSE}
+  \item{all}{Show all reasonable possibilities in a data.frame? DEFAULT: FALSE}
+  \item{plot}{Show the panel layout result? (the 4 best options are compared if \code{all=TRUE}). DEFAULT: FALSE}
+  \item{mfcol}{use mfcol instead of mfrow. DEFAULT: FALSE}
+}
+\details{There probably are other ways to find the optimal way to arrange panels, so if you find anything, please give me a hint.}
+\value{vector with 2 values, can be passed to par(mfrow), or a data.frame if \code{all=TRUE}.}
+\author{Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2014, Jan 2015}
+\seealso{\code{\link{groupHist}}, which is using this function}
+\examples{
+# basic usage
+op <- par(mfrow=panelDim(6))
+for(i in 1:6) plot(i:10, main=i)
+par(op)
+
+# Adcanced options
+panelDim(7)
+g <- panelDim(7, all=TRUE)
+panelDim(7, plot=TRUE)
+panelDim(7, plot=TRUE, all=TRUE) # compares 4 best options
+
+panelDim(26, all=TRUE)
+panelDim(26, plot=TRUE, all=TRUE) # compares 4 best options
+panelDim(26, plot=TRUE, all=TRUE, weight=c(3,0) ) # fewer empty panels
+
+# effect of maxempty:
+panelDim(13, plot=TRUE)             #  4 x 4
+panelDim(13, maxempty=2, plot=TRUE) #  5 x 3
+panelDim(13, maxempty=1, plot=TRUE) #  7 x 2
+panelDim(13, maxempty=0, plot=TRUE) # 13 x 1
+
+panelDim(45, plot=TRUE) # no empty panels
+# focus on aspect ratio of each panel (make it as square as possible):
+panelDim(45, weight=c(1,3), plot=TRUE) # better aspect for each panel
+
+# Orientation of plot:
+panelDim(45, plot=TRUE) # good for portrait orientation of plot
+panelDim(45, landscape=TRUE, plot=TRUE) # better if plot width > height
+
+\dontrun{
+plot of several n with defaults
+dev.new(record=TRUE)
+for(i in 1:50)  panelDim(i, plot=TRUE)
+}
+
+}
+\keyword{dplot}
+\keyword{array}
+\keyword{optimize}
