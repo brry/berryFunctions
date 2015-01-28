@@ -7,7 +7,7 @@ owa <- function(  # owa: overwrite arguments
        a,    #a: arguments specified by user
        ...) # arguments that can not be overwritten (are left unchanged)
 {
-if(is.null(a)) return( as.list(d) )
+if(is.null(a) | length(a)==0) return( as.list(d) )
 if(is.null(names(a))) stop("Arguments must be named!")
 if("" %in% names(a) ) stop("All arguments must be named!")
 #
