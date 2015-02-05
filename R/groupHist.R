@@ -13,8 +13,8 @@ unit=NA,
 )
 {
 # Input can be quoted, must not:
-x <- gsub("\"", "", deparse(substitute(x)), fix=TRUE)
-g <- gsub("\"", "", deparse(substitute(g)), fix=TRUE)
+x <- gsub("\"", "", deparse(substitute(x)), fixed=TRUE)
+g <- gsub("\"", "", deparse(substitute(g)), fixed=TRUE)
 # get break values from full dataset,
 # ignore messages like: argument ‘col’ is not made use of
 suppressWarnings( h <- hist(d[,x], plot=FALSE, ...)    )
