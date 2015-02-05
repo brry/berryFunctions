@@ -73,7 +73,7 @@ if(!is.null(meanargs))
    }
 # text
 if(missing(txi)) txi <- round(ncol(qc)/2)
-if(!is.na(txi))
+if(any(!is.na(txi)))
   {
   txi <- rep(txi, length=nrow(qc))
   utxi <- unique(txi)
