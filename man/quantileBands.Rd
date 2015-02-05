@@ -26,20 +26,20 @@ type=7, smooth=NA, medargs=NULL, meanargs=NULL, txi, textargs=NULL, ...)}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, Sept 2014}
 \seealso{\code{\link{quantile}}, \code{\link{quantileMean}}, \code{\link{polygon}}}
 \examples{
-neff <- t(sapply(1:30, function(i) sapply(1:100*10, function(n) max(rnorm(n)))))
-qB <- quantileBands(neff, x=1:100*10)
-qB[,1:10]
-quantileBands(neff, x=1:100*10, smooth=19, meanargs=list(col=2), txi=NA)
+neff <- t(replicate(n=30, sapply(1:400, function(nn) max(rnorm(nn)))   ))
+qB <- quantileBands(neff, x=1:400)
+qB[,1:9]
+quantileBands(neff, smooth=19, meanargs=list(col=2), txi=NA)
 
 library(RColorBrewer)
 
-quantileBands(neff, x=1:100*10, smooth=9, ylab="max of rnorm(n)",
+quantileBands(neff, smooth=35, ylab="max of rnorm(n)",
   xlab="sample size (n)", probs=0:10/10, col=brewer.pal(5,"BuGn"),
   medargs=list(lwd=2), meanargs=list(col=2, lty=1), txi=c(40,50,60),
   main="Maximum is an unsaturated statistic:\n it rises with sample size")
 
-neff2 <- t(sapply(1:30, function(i) sapply(1:100*10, function(n) mean(rnorm(n)))))
-quantileBands(neff2, x=1:100*10, smooth=9, ylab="mean of rnorm(n)",
+neff2 <- t(replicate(n=50, sapply(1:400, function(nn) mean(rnorm(nn)))   ))
+quantileBands(neff2, x=1:400, smooth=35, ylab="mean of rnorm(n)",
   xlab="sample size (n)", probs=0:10/10, col=brewer.pal(5,"BuGn"),
   txi=c(40,50,60), textargs=list(col="yellow"), medargs=list(lwd=2),
   meanargs=list(col=2, lty=1), main="Mean converges to true population mean")
