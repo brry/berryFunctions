@@ -76,8 +76,8 @@ if(missing(txi)) txi <- round(ncol(qc)/2)
 if(any(!is.na(txi)))
   {
   txi <- rep(txi, length=nrow(qc))
-  utxi <- unique(txi)
-  if(any(utxi < 1)) stop("txi (",utxi,") must be a vactor of positive integers.")
+  utxi <- na.omit(unique(txi))
+  if(any(utxi < 1)) stop("txi (",utxi,") must be a vector of positive integers.")
   if(any(utxi > ncol(qc))) stop("txi (",utxi,") must be smaller than ncol(mat)-smooth (",ncol(qc),").")
   do.call(text, args=owa(list(x=x[txi], y=diag(qc[,txi]), labels=rownames(qc)), textargs))
   }
