@@ -2,12 +2,12 @@
 \alias{smallPlot}
 \title{inset small plot within figure}
 \description{inset plot with margins, background and border}
-\usage{smallPlot(expr, x1=5, y1=100, x2=70, y2=50, mar=c(12, 14, 3, 3),
+\usage{smallPlot(expr, x=c(5,70), y=c(50,100), x1,y1,x2,y2, mar=c(12, 14, 3, 3),
 mgp=c(1.8, 0.8, 0), bg=par("bg"), border=par("fg"), las=1, resetfocus=TRUE, ...)}
 \arguments{
   \item{expr}{expression creating a plot. Can be code within {braces}.}
-  \item{x1, y1}{Position of topleft corner of small plot, relative to current figure region (0:100). Only used if add=TRUE. DEFAULT: 5,100}
-  \item{x2, y2}{Bottom right corner. Ditto. DEFAULT: 70,50}
+  \item{x, y}{Position of small plot, relative to current figure region (0:100). max and min from vector arre taken. DEFAULT: 5-70, 50-100}
+  \item{x1,y1,x2,y2}{Positions of topleft and bottomright corner. Replaced with x,y, kept here for backcompatibility.}
   \item{mar}{Margin vector in relative units (0:100), thus behaves differently than \code{\link{par}(mar)}. DEFAULT: c(12, 14, 3, 3)}
   \item{mgp}{MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, as in \code{\link{par}}, but with different default. DEFAULT: c(1.8, 0.8, 0)}
   \item{bg}{Background. DEFAULT: par("bg")}
@@ -24,7 +24,7 @@ mgp=c(1.8, 0.8, 0), bg=par("bg"), border=par("fg"), las=1, resetfocus=TRUE, ...)
 # Basic usage:
 plot(1:10)
 smallPlot(plot(5:1) )
-smallPlot(plot(5:1), x1=30,y1=60, x2=80,y2=30, bg="yellow", yaxt="n")
+smallPlot(plot(5:1), x=c(30,80), y=30:60, bg="yellow", yaxt="n")
 # if R warns "figure margins too large", try dragging the plot viewer bigger
 
 # select focus for further add-on's:
@@ -43,6 +43,18 @@ smallPlot(plot(10:50))
 plot(1:10)
 smallPlot( {plot(5:1, ylab="Blubber"); lines(c(2,4,3));
             legend("topright", "BerryRocks!", lwd=3)    }, bg="white" )
+
+# in par multiple figure, things now work as well if resetfocus=TRUE:
+op <- par("plt")
+par(mfrow=c(2,3))
+for(i in 1:2) plot(cumsum(rnorm(50)))
+smallPlot( plot(50:1), bg=6)
+plot(3:9) # opens new window
+smallPlot( plot(50:1), bg=6, resetfocus=FALSE)
+points(3, 2, pch="+", cex=2)
+plot(3:9) # plot in next window, but it is still small
+par(plt=op)
+plot(3:9)  # margins, las and mgp are still changed
 
 }
 \keyword{hplot}
