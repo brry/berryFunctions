@@ -9,8 +9,8 @@ at=pretty2(z), # Positions of x-axis labels
 labels=at, # X-axis labels themselves
 
 bg="white", # Background behind background and axis labels
-x1=0, y1=30, # Topleft relative coordinates (0:100) of inset plot, see \code{\link{smallPlot}}
-x2=40, y2=0, # Bottomright -"-
+x=0:40, y=0:30, # relative coordinates (0:100) of inset plot, see \code{\link{smallPlot}}
+x1,y1,x2,y2, # Positions of topleft and bottomright corner. Replaced with x,y, kept here for backcompatibility.
 mar=c(6, 7, 3, 2), # Margins for \code{\link{smallPlot}} in relative values (0:100)
 mgp=c(1.8, 0.6, 0), # MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, as in \code{\link{par}}, but with different defaults
 sborder=NA, # Border around inset subplot
@@ -26,9 +26,9 @@ axes=TRUE, # Draw axes?
 ...) # Further arguments passed to \code{\link{hist}}. NOT POSSIBLE: \code{x, add}
 {
 z <- as.numeric(z)
-if(length(colors) != nbins) stop("cph: Number of colors is not equal to number of classes.")
+if(length(colors) != nbins) stop("Number of colors is not equal to number of classes.")
 # plot setup:
-smallPlot(x1=x1, y1=y1, x2=x2, y2=y2, mar=mar, mgp=mgp, bg=bg,
+smallPlot(x=x, y=y, x1=x1,y1=y1, x2=x2,y2=y2, mar=mar, mgp=mgp, bg=bg,
   border=sborder, las=las, resetfocus=resetfocus, expr={
   hist(z, breaks=breaks, main=main, xaxt="n", ylab=ylab, xlab=xlab,
              freq=freq, las=las, col=col, border=border, ...)
