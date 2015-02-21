@@ -25,7 +25,7 @@ as.Date(   paste(rep(startyear:stopyear, each=12*npm),
         )
 } else
 {
-# check for wrong npm-argument
+# check for wrong npy-argument
 if(!npy %in% c(1:4,6)) stop("wrong 'npy'-value: possible are 1,2,3,4 or 6.")
 # define possible combinations
 npyval <- list(npy1=1, npy2=c(1,7), npy3=c(1,5,9), npy4=c(1,4,7,10), npy5=NA, npy6=c(1,3,5,7,9,11))
