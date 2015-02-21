@@ -17,14 +17,14 @@ offset=0.5, quiet=FALSE, ...) }
          If FALSE, no conversion happens. DEFAULT: NA}
   \item{margin}{added field space around words (multiple of em/ex). DEFAULT: 0.3}
   \item{field}{'rectangle', 'ellipse', or 'rounded', partial matching is performed. DEFAULT: "rect"}
-  \item{nv}{number of vertices for field = "ellipse" or "rounded". low: fast drawing. high: high resolution in vector graphics as pdf possible.. DEFAULT: 1000}
+  \item{nv}{number of vertices for field = "ellipse" or "rounded". low: fast drawing. high: high resolution in vector graphics as pdf possible. DEFAULT: 1000}
   \item{rounding}{between 0 and 1: portion of height that is cut off rounded at edges when field = "rounded". DEFAULT: 0.75}
   \item{lty}{line type. DEFAULT: par("lty")}
   \item{lwd}{line width. DEFAULT: par("lwd")}
   \item{cex}{character expansion. DEFAULT: par("cex")}
   \item{xpd}{expand text outside of plot region ("figure")?. DEFAULT: par("xpd")}
   \item{adj}{vector of length one or two. DEFAULT: par("adj")}
-  \item{pos}{in 'text', pos overrides adj values.. DEFAULT: NULL}
+  \item{pos}{in 'text', pos overrides adj values. DEFAULT: NULL}
   \item{offset}{I want the field to still be drawn with adj, but have it based on pos. DEFAULT: 0.5}
   \item{quiet}{Suppress warning when Arguments are recycled?. DEFAULT: FALSE}
   \item{\dots}{further arguments passed to strwidth and text, like font, vfont, family}

@@ -7,7 +7,7 @@
   \item{x}{Numeric vector whose sample quantiles are wanted}
   \item{probs }{Numeric vector of probabilities with values in [0,1]. DEFAULT:  seq(0, 1, 0.25)}
   \item{weights}{Numeric vetor of length 9 with weight for each \code{\link{quantile} method}. Recycled if shorter. DEFAULT: unweighted mean. DEFAULT: rep(1,9)}
-  \item{names}{If TRUE, the result has a names attribute. Set to FALSE for speedup with many probs.. DEFAULT: TRUE}
+  \item{names}{If TRUE, the result has a names attribute. Set to FALSE for speedup with many probs. DEFAULT: TRUE}
   \item{\dots}{further arguments passed to \code{\link{quantile}}, except for type}
 }
 \details{weights are internally normalized to sum 1}
