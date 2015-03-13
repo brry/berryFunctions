@@ -23,9 +23,9 @@ See the example section on how to implement this.}
    \url{http://stackoverflow.com/questions/16774946}\cr}
 \examples{
 d <- list(bb=1:5, lwd=2, lty=1,   col="gray")
-a <- list(bb=3,   lwd=5, lty="1", wachs="A", bb=16)
+a <- list(bb=3,   lwd=5, lty="1", wachs="A")
 
-owa(d, a, "bb", "lwd") # basic usage: lty is overwritten
+owa(d, a, "bb", "lwd") # basic usage: lty is overwritten, bb and lwd are ignored
 owa(d, NULL, "bb", "wachs") # NULL is a good default for argument lists
 owa(d, c(HH=2, BBB=3) ) # vectors and lists are all converted to lists
 owa(d, list(lwd=5, bb=3, lty="1") ) # order of arguments doesn't matter
