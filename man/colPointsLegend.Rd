@@ -4,9 +4,9 @@
 \description{Adds legends to plots created or enhanced with \code{\link{colPoints}}}
 \usage{colPointsLegend(z, Range=range(z, finite=TRUE), nbins=40,
 colors=rainbow2(nbins), bb=seqR(Range, length.out=nbins+1), at=pretty2(Range),
-labels=at, bg="white", x1=60, y1=99, x2=x1+38, y2=y1-11, mar, mgp=c(1.8, 0.6, 0),
-sborder=NA, resetfocus=TRUE, plottriangle=FALSE, triangle=0.14, tricol=c(1,8),
-density=NULL, lines=TRUE, atminmax=FALSE,
+labels=at, adj=0.5, bg="white", x1=60, y1=99, x2=x1+38, y2=y1-11, mar,
+mgp=c(1.8, 0.6, 0), sborder=NA, resetfocus=TRUE, plottriangle=FALSE,
+triangle=0.14, tricol=c(1,8), density=NULL, lines=TRUE, atminmax=FALSE,
 horizontal=TRUE, labelpos=1, titlepos=3, title="Legend", las=1, ...)}
 \arguments{
   \item{z}{Values of third dimension used in \code{\link{colPoints}}, can be matrix, vector, etc, but must be numeric}
@@ -16,6 +16,7 @@ horizontal=TRUE, labelpos=1, titlepos=3, title="Legend", las=1, ...)}
   \item{bb}{Borders of bins for the legend (key). DEFAULT: seqR(Range, length.out=nbins+1)}
   \item{at}{Positions of legend labels. DEFAULT: pretty2(Range)}
   \item{labels}{Labels that are written at the positions of \code{at}. DEFAULT: at}
+  \item{adj}{label adjustment parallel to legend bar (only one number!). DEFAULT: 0.5}
   \item{bg}{Background behind key, labels and title. DEFAULT: "white"}
   \item{x1,y1}{Topleft relative coordinates (0:100) of inset plot, see \code{\link{smallPlot}}. DEFAULT: 60,99}
   \item{x2,y2}{Bottomright -"-. DEFAULT: 98,88}

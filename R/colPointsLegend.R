@@ -13,6 +13,7 @@ colors=rainbow2(nbins), # Color vector
 bb=seqR(Range, length.out=nbins+1), # Borders of bins for the legend (key)
 at=pretty2(Range), # Positions of legend labels
 labels=at, # Labels that are written at the positions of \code{at}
+adj=0.5, # label adjustment parallel to legend bar (only one number!)
 
 bg="white", # Background behind key, labels and title
 x1=60, y1=99, # Topleft relative coordinates (0:100) of inset plot, see \code{\link{smallPlot}}
@@ -104,7 +105,7 @@ if(horizontal) # ---------------------------------------------------------------
   if(labelpos==5) { y <-  0.5 ; vadj <- 0.5 } else
   stop("Wrong labelpos. Possible in horizontal legend: 1 (below legend bar), 3 (above), and 5 (on top).")
   # actually write labels:
-  text(x=at, y=y, labels=labels, adj=c(0.5, vadj), xpd=TRUE, ...)
+  text(x=at, y=y, labels=labels, adj=c(adj, vadj), xpd=TRUE, ...)
   # prepare title adjustment:
   pu <- par("usr")[1:2]
   if(titlepos==1) {x <- mean(pu); y <- -0.2; hadj <- 0.5; vadj <- 1   } else
@@ -142,7 +143,7 @@ else # if not horizontal, thus if vertical -------------------------------------
   if(labelpos==5) { x <-  0.5 ; hadj <- 0.5 } else
   stop("Wrong labelpos. Possible in vertical legend: 2 (left of legend bar), 4 (right), and 5 (on top).")
   # actually write labels:
-  text(x=x, y=at, labels=labels, adj=c(hadj, 0.5), xpd=TRUE, ...)
+  text(x=x, y=at, labels=labels, adj=c(hadj, adj), xpd=TRUE, ...)
   # prepare title adjustment:
   pu <- par("usr")[3:4]
   if(titlepos==1) {y <-    pu[1]; x <-  0.5; hadj <- 0.5; vadj <- 1  } else
