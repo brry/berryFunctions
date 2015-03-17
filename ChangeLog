@@ -16,11 +16,11 @@ This Log of changes in my package berryFunctions contains two sections:
 
 - linReg: grouped density or boxplot(y~group, add=T, at=unique(bpoints), yaxt="n", xlab="", range=0)
 
-- mReg: remove zeros instead of replacing zeros with near-zero values. add hyperbolic functions
+- mReg: remove zeros instead of replacing zeros with near-zero values. add hyperbolic functions. copy formula option from linReg.
 
 - pointZoom: rename Argument colp, as col cannot be given currently. Add expr argument
 
-- quantileMean: remove sapply loop if probs has length 1 (if this is faster)
+- quantileMean: remove sapply loop if probs has length 1 (if this is faster). Add truncate option.
 
 - require2: change to requireNamespace http://r-pkgs.had.co.nz/namespace.html#namespace
 
