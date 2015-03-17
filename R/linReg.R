@@ -38,9 +38,7 @@ if (!add) plot(x, y, las=1, pch=pch, xlab=xlab, ylab=ylab, main=main, ...)
 mod <- lm( y ~ x )
 abline(mod, col=col, lwd=lwd, ...)
 # expand digits vector, if necessary
-if(is.na(digits[2])) digits[2] <- digits[1]
-if(is.na(digits[3])) digits[3] <- digits[1]
-if(is.na(digits[4])) digits[4] <- digits[1]
+digits <- rep(digits, length.out=4)
 # Prepare formula writing
 a <- round( coef(mod)[2] , digits[1])
 b <- round( coef(mod)[1] , digits[2])
