@@ -41,6 +41,7 @@ las=1, # LabelAxisStyle
 z <- as.numeric(z)
 # input checks:
 if(any(diff(bb)<0)) stop("Breaks 'bb' (bin borders) have to be in ascending order.")
+if(missing(nbins) & !missing(colors)) nbins <- length(colors)
 if(length(colors) != nbins) stop("Number of colors is not equal to number of classes.")
 # extend labels and at:
 if(atminmax) labels <- c( signif(head(bb,1),2), labels, signif(tail(bb,1),2) ) ### & length(labels)!=length(at)
