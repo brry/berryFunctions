@@ -40,7 +40,7 @@ betaPlot(0.5, 2)
 # both bigger: narrower HDI
 a <- b <- c(0.5, 1:4)
 par(mfrow=c(length(b), length(a)), yaxt="n", xaxt="n", 
-    oma=c(2,2,4.5,2), mgp=c(3,0.7,0))
+    oma=c(2,2,4.5,2), mar=rep(0,4), mgp=c(3,0.7,0))
 for(y in b)
   for(x in a)
   {
