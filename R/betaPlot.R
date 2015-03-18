@@ -7,6 +7,7 @@ betaPlot <- function(
   fill=rgb(0,0.3,0.8, 0.4), # color passed to \code{\link{polygon}}
   cumulative=TRUE, # should cumulative density distribution be added?
   mar=c(2,3,3,3), # margins for plot passed to \code{\link{par}}
+  keeppar=FALSE, # should margin parameters be kept instead of being restored to previous value?
   las=1, # arguments passed to \code{\link{plot}}
   main=paste("Beta density with\nalpha =", signif(shape1,2), "and beta =", signif(shape2,2)), # main as in \code{\link{plot}}.
   ylim=lim0(y), # limit for the y axis
@@ -38,5 +39,5 @@ if(cumulative)
   axis(4, at=0:4/4*par("usr")[4], labels=0:4/4, col.axis=2, las=1, col=2)
   }
 box()
-par(op)
+if(!keeppar) par(op)
 }

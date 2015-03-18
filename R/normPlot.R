@@ -16,6 +16,7 @@ normPlot <- function(
   lty=1,
   col=par("fg"),
   mar=c(2,3,3,3), # margins
+  keeppar=FALSE, # should margin parameters be kept instead of being restored to previous value?
   ... # further arguments passed to \code{\link{plot}} like lwd, xaxs, cex.axis, etc.
   )
 {
@@ -40,6 +41,6 @@ if(cumulative)
   axis(4, at=0:4/4*par("usr")[4], labels=0:4/4, col.axis=2, las=1, col=2)
   }
 box()
-par(op)
+if(!keeppar) par(op)
 }
 
