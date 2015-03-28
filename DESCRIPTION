@@ -1,8 +1,8 @@
 Package: berryFunctions
 Type: Package
 Title: Function Collection related to Plotting and Hydrology
-Version: 1.7.8
-Date: 2015-03-18
+Version: 1.7.9
+Date: 2015-03-28
 Author: Berry Boessenkool
 Maintainer: Berry Boessenkool <berry-b@gmx.de>
 Description: miscellaneous functions to: draw horizontal histograms, color scatterpoints by 3rd dimension, enhance log-axis plots, zoom in X11 graphics, use the unit hydrograph in a linear storage cascade, convert lists to data.frames, fit multiple functions by regression (power, reciprocal, exponential, logarithmic, polynomial, rational). Development version: https://github.com/BerryBoessenkool
