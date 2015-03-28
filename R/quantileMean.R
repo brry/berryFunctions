@@ -30,5 +30,6 @@ if(length(probs2)==1) qx <- t(qx)
 # weighted mean:
 output <- apply(qx, 1, function(y) sum(y*weights))
 if(names) names(output) <- paste0(probs*100,"%")
+output[probs<truncate] <- NA
 output
 }
