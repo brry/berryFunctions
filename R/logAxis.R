@@ -6,6 +6,8 @@ logAxis <- function(
   log=NULL,    # Is the axis logarithmic by plot(log="x")? internal DEFAULT: par("xlog") or "ylog"
   lcol="grey", # Color of gridlines drawn in the graph with \code{\link{abline}}, NA to suppress.
   lty=1, lwd=1,# Type of gridlines
+  allticks=FALSE, # Place all intermediate ticklines at the axis (without labelling)
+  allargs=NULL,# List of arguments passed to axis for allticks=TRUE
   expr,        # Expression drawing over the ablines, like (points(x,y). Can be code within {braces}.
   las=1,       # LabelAxisStyle for the orientation of the labels
   from,             # Lower exponent OR vector with data, as in \code{\link{logVals}}
@@ -57,6 +59,12 @@ else # horizontal lines, labels at y-axis:
 # axis labels:
 if(log) axis(side=side_i, at=lv$vals,        labels=lv$labs, las=las, ...)
 else    axis(side=side_i, at=log10(lv$vals), labels=lv$labs, las=las, ...)
+if(allticks)
+  {
+  lv$add <- lv$all[!lv$all %in% lv$vals]
+  if(!log) lv$add <- log10(lv$add)
+  do.call(axis, args=owa(list(side=side_i, at=lv$add, labels=FALSE, col="grey", ...), allargs))
+  }
 } # End of loop
 # Box to cover up the lines plotted over the existing box:
 box("plot")
