@@ -20,7 +20,7 @@ This Log of changes in my package berryFunctions contains two sections:
 
 - pointZoom: rename Argument colp, as col cannot be given currently. Add expr argument
 
-- quantileMean: remove sapply loop if probs has length 1 (if this is faster). Add truncate option.
+- quantileMean: remove sapply loop if probs has length 1 (if this is faster).
 
 - require2: change to requireNamespace http://r-pkgs.had.co.nz/namespace.html#namespace
 

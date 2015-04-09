@@ -20,7 +20,14 @@ These code blocks were excluded from checking while building, mainly because the
 \cr Normally, you should be able to run them in an interactive session.
 If you do find unexecutable code, please tell me!\cr
 Feel free to suggest packages in which these functions would fit well.
-I strongly depend on - and therefore welcome - any feedback!
+I strongly depend on - and therefore welcome - any feedback!\cr
+The following functions have been deprecated:\cr
+changeAttribute, showAttribute, shapeZoom: moved to
+\url{https://github.com/BerryBoessenkool/shapeInteractive}\cr
+extremeStat, extremeStatLmom: moved to distLextreme in
+\url{https://github.com/BerryBoessenkool/extremeStat}\cr
+compFiles has been renamed to \code{\link{compareFiles}}.
+combineTextfiles has been renamed to \code{\link{combineFiles}}.
 }
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2014}
 \section{suggests}{evd, lmom, maptools, spatstat}
