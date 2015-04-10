@@ -40,7 +40,7 @@ This Log of changes in my package berryFunctions contains two sections:
 Version 1.8 (2015-0-)
 various small changes, see the commits on github.
 - smallPlot: improved for mfrow situations, coordinates now two vectors instead of 4 numerics
-New Functions: panelDim, groupHist, monthAxis
+New Functions: panelDim, groupHist, monthAxis, pastec
 
 
 -----------------------------------------------------------------
