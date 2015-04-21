@@ -7,7 +7,7 @@ Code to install:
 
 ```R
 if(!require(devtools)) install.packages("devtools")
-devtools::install_github("BerryBoessenkool/berryFunctions")
+devtools::install_github("brry/berryFunctions")
 library(berryFunctions)
 ?berryFunctions
 ```
