@@ -2,7 +2,8 @@
 \alias{logAxis}
 \title{label logarithmic axes}
 \description{shortcut to calling \code{\link{logVals}}, \code{\link{axis}} and \code{\link{abline}}}
-\usage{logAxis(side=1, log=NULL, lcol="grey", lty=1, lwd=1, allticks=FALSE, allargs=NULL, expr, las=1,
+\usage{logAxis(side=1, log=NULL, lcol="grey", lty=1, lwd=1,
+allticks=FALSE, allargs=NULL, expr, las=1,
 from, to, Range, base, big.mark="'", decimal.mark=".", scientific=FALSE,
 exponent=5, expobase1=FALSE, allbase=1:9, ...)}
 \arguments{
