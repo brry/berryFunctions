@@ -16,7 +16,7 @@ This Log of changes in my package berryFunctions contains two sections:
 
 - linReg: grouped density or boxplot(y~group, add=T, at=unique(bpoints), yaxt="n", xlab="", range=0)
 
-- mReg: remove zeros instead of replacing zeros with near-zero values. add hyperbolic functions. copy formula option from linReg.
+- mReg: remove zeros instead of replacing zeros with near-zero values. add hyperbolic functions. copy formula option from linReg. catch NAs before rmse catches them several times. repeat col. selection partial matching. Numbers in output. output limited to selection.
 
 - pointZoom: rename Argument colp, as col cannot be given currently. Add expr argument
 
@@ -26,7 +26,7 @@ This Log of changes in my package berryFunctions contains two sections:
 
 - tableColVal: add digits argument
 
-- textField: support srt, Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
+- textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
  
 
 
