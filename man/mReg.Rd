@@ -173,11 +173,16 @@ mReg(x, y, posx="right")
 
 # Solitaire Results. According to en.wikipedia.org/wiki/Klondike_(solitaire):
 # Points=700000/Time + Score
-# I recorded my results on a windows XP system in 2010 as an excuse to play this game a lot.
-# Games longer than 100 seconds are intentionally bad to find what happens then...
+# I recorded my results as an excuse to play this game a lot.
 sfile <- system.file("extdata/solitaire.txt", package="berryFunctions")
 solitaire <- read.table(sfile, header=TRUE)
 mReg(solitaire$Time, solitaire$Points) # and yes, reciprocal ranks highest! Play Fast!
+mReg(solitaire$Time, solitaire$Bonus, xlim=c(60,200), extend=0)
+sol <- unique(na.omit(solitaire[c("Time","Bonus")]))
+sol
+sol$official <- round(700000/sol$Time/5)*5
+mReg(sol$Time, sol$Bonus, extend=0, selection=9, col=rep(4,10), legendform="full")
+plot(sol$Time, sol$official-sol$Bonus, type="l")
 
 # multivariate regression should be added, too:
 sfile <- system.file("extdata/gelman_equation_search.txt", package="berryFunctions")
