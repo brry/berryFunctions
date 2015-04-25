@@ -7,6 +7,7 @@ linLogTrans <- function(
    log="x", # which axis is logarithmic, "x" or "y"
    steps=100, # number of steps in transition
    base=1, # base passed to \code{\link{logVals}}
+   las=1, # \code{\link{par}} LabelAxisStyle (numbers upright)
    firstplot=TRUE, # plot on linear scale first?
    lastplot=TRUE, # plot on logarithmic scale at the end?
    write_t=TRUE, # write transformation value in lower right corner?
@@ -35,7 +36,7 @@ if(is.null(values_t)) # if it's not given by user, use internal calculation:
 # Plot on linear scale first:
 if(firstplot)
   {
-  plot(x, y, las=1, type="n", ...)
+  plot(x, y, las=las, type="n", ...)
   do.call(points, args=owa(d=list(x=x, y=y), a=pointsarg, "x", "y"))
   }
 # in case people capitalize log:
@@ -48,24 +49,26 @@ if(log=="x") # -----------------------------------------------------------------
   for(t in allt)
      {
      # Plot single frame:
-     plot(x^(1/t), y, las=1, xaxt="n", type="n", ...)
+     plot(x^(1/t), y, las=las, xaxt="n", type="n", ...)
      # draw grey lines at 10^n values and label appropriate ones:
      abline(v=(lv$all)^(1/t), col=8)
-     box()
-     axis(1, (lv$vals)^(1/t), lv$labs)
+     axis(1, (lv$vals)^(1/t), lv$labs, las=las)
      # user-specified arguments for points:
      pargs <- owa(d=list(x=x^(1/t), y=y), a=pointsarg, "x", "y")
      # draw original points:
      do.call(points, args=pargs)
+     box()
      # write transformation value:
      if(write_t) title(sub=paste("t =", sprintf("%6.2f", t)), adj=1)
      } # End for loop
   # Final image
   if(lastplot)
     {
-    plot(x, y, las=1, xaxt="n", type="n", log="x", ...)
-    abline(v=lv$all, col=8) ; box() ; axis(1, lv$vals, lv$labs)
+    plot(x, y, las=las, xaxt="n", type="n", log="x", ...)
+    abline(v=lv$all, col=8)
+    axis(1, lv$vals, lv$labs, las=las)
     do.call(points, args=owa(d=list(x=x, y=y), a=pointsarg, "x", "y"))
+    box()
     }
   }
 else if(log=="y") # ------------------------------------------------------------
@@ -73,17 +76,21 @@ else if(log=="y") # ------------------------------------------------------------
   lv <- logVals(y, base=base)
   for(t in allt)
      {
-     plot(x, y^(1/t), las=1, yaxt="n", type="n", ...)
-     abline(h=(lv$all)^(1/t), col=8) ; box() ; axis(2, (lv$vals)^(1/t), lv$labs)
+     plot(x, y^(1/t), las=las, yaxt="n", type="n", ...)
+     abline(h=(lv$all)^(1/t), col=8)
+     axis(2, (lv$vals)^(1/t), lv$labs, las=las)
      pargs <- owa(d=list(x=x, y=y^(1/t)), a=pointsarg, "x", "y")
      do.call(points, args=pargs)
+     box()
      if(write_t) title(sub=paste("t =", sprintf("%6.2f", t)), adj=1)
      } # End for loop
   if(lastplot)
     {
-    plot(x, y, las=1, yaxt="n", type="n", log="y", ...)
-    abline(h=lv$all, col=8) ; box() ; axis(2, lv$vals, lv$labs)
+    plot(x, y, las=las, yaxt="n", type="n", log="y", ...)
+    abline(h=lv$all, col=8)
+    axis(2, lv$vals, lv$labs, las=las)
     do.call(points, args=owa(d=list(x=x, y=y), a=pointsarg, "x", "y"))
+    box()
     }
   }
 else if(log=="xy" | log=="yx") # -----------------------------------------------
@@ -92,19 +99,23 @@ else if(log=="xy" | log=="yx") # -----------------------------------------------
   lvy <- logVals(y, base=base)
   for(t in allt)
      {
-     plot(x^(1/t), y^(1/t), las=1, xaxt="n", yaxt="n", type="n", ...)
-     abline(h=(lvy$all)^(1/t), v=(lvx$all)^(1/t), col=8) ; box()
-     axis(1, (lvx$vals)^(1/t), lvx$labs) ; axis(2, (lvy$vals)^(1/t), lvy$labs)
+     plot(x^(1/t), y^(1/t), las=las, xaxt="n", yaxt="n", type="n", ...)
+     abline(h=(lvy$all)^(1/t), v=(lvx$all)^(1/t), col=8)
+     axis(1, (lvx$vals)^(1/t), lvx$labs, las=las)
+     axis(2, (lvy$vals)^(1/t), lvy$labs, las=las)
      pargs <- owa(d=list(x=x^(1/t), y=y^(1/t)), a=pointsarg, "x", "y")
      do.call(points, args=pargs)
+     box()
      if(write_t) title(sub=paste("t =", sprintf("%6.2f", t)), adj=1)
      } # End for loop
   if(lastplot)
     {
-    plot(x, y, las=1, xaxt="n", yaxt="n", type="n", log="xy", ...)
-    abline(h=lvy$all, v=lvx$all, col=8) ; box()
-    axis(1, lvx$vals, lvx$labs) ; axis(2, lvy$vals, lvy$labs)
+    plot(x, y, las=las, xaxt="n", yaxt="n", type="n", log="xy", ...)
+    abline(h=lvy$all, v=lvx$all, col=8)
+    axis(1, lvx$vals, lvx$labs, las=las)
+    axis(2, lvy$vals, lvy$labs, las=las)
     do.call(points, args=owa(d=list(x=x, y=y), a=pointsarg, "x", "y"))
+    box()
     }
   }
 else stop("log can only be 'x', 'y', or 'xy'.")
