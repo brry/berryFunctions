@@ -2,16 +2,17 @@
 # berry-b@gmx.de, Feb 2014, idea 2013
 
 logVals <- function(
-  from=-7,               # lower exponent OR vector with data
-  to=7,                  # high end
-  Range,                 # or give from and to as range
-  base=1,                # bases to be used, eg. c(1,2,5)
-  big.mark="'",          # symbol separating thousands, eg. space, comma, dot, etc. see "format" and "prettyNum"
-  decimal.mark=".",      # character separating comma values, see "format" and "prettyNum"
-  scientific=FALSE,      # see "format"
+  from=-7,               # Lower exponent OR vector with data
+  to=7,                  # High end
+  Range,                 # Or give from and to as range
+  base=1,                # Bases to be used, eg. c(1,2,5)
+  big.mark="'",          # Symbol separating thousands, eg. space, comma, dot, etc. see "format" and "prettyNum"
+  decimal.mark=".",      # Character separating comma values, see "format" and "prettyNum"
+  scientific=FALSE,      # See "format"
   exponent=Inf,          # like scipen, but for expression (to be used in logAxis)
   expobase1=FALSE,       # Should "n * " be appended before 10^exp if n=1?
-  allbase=1:9            # base for \code{$all} (for horizontal lines)
+  allbase=1:9,           # Base for \code{$all} (for horizontal lines)
+  ...                    # Ignored arguments
   )
 {
 # Calculate the exponents from vector, if given as first argument:

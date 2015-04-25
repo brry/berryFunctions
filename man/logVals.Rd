@@ -3,18 +3,19 @@
 \title{Create log-axis values and labels}
 \description{create nice values and labels to write at logartihmic axes}
 \usage{logVals(from=-7, to=7, Range, base=1, big.mark="'", decimal.mark=".",
-scientific=FALSE, exponent=Inf, expobase1=FALSE, allbase=1:9)}
+scientific=FALSE, exponent=Inf, expobase1=FALSE, allbase=1:9, ...)}
 \arguments{
-  \item{from}{lower exponent \emph{OR} vector with data}
-  \item{to}{high end}
-  \item{Range}{or give from and to as range}
-  \item{base}{bases to be used, eg. c(1,2,5)}
-  \item{big.mark}{symbol separating thousands, eg. space, comma, dot, etc. see \code{\link{format}} and \code{\link{prettyNum}}}
-  \item{decimal.mark}{character separating comma values, see \code{\link{format}} and \code{\link{prettyNum}}}
-  \item{scientific}{see \code{\link{format}}}
+  \item{from}{Lower exponent \emph{OR} vector with data}
+  \item{to}{High end}
+  \item{Range}{Or give from and to as range}
+  \item{base}{Bases to be used, eg. c(1,2,5)}
+  \item{big.mark}{Symbol separating thousands, eg. space, comma, dot, etc. see \code{\link{format}} and \code{\link{prettyNum}}}
+  \item{decimal.mark}{Character separating comma values, see \code{\link{format}} and \code{\link{prettyNum}}}
+  \item{scientific}{See \code{\link{format}}}
   \item{exponent}{Starting at which exponent should \code{labs} be an expression with exponents? Compare to \code{\link{options}("scipen")}. This is mainly for \code{\link{logAxis}} and only for base 1. DEFAULT: Inf}
   \item{expobase1}{Should "n * " be appended before 10^exp if n=1? DEFAULT: FALSE}
-  \item{allbase}{base for \code{$all} (for horizontal lines). DEFAULT: 1:9}
+  \item{allbase}{Base for \code{$all} (for horizontal lines). DEFAULT: 1:9}
+  \item{\dots}{Ignored arguments}
 }
 \value{A list with
   \item{vals}{Values for lines and label positions}
