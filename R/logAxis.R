@@ -19,8 +19,9 @@ logAxis <- function(
   scientific=FALSE, # See \code{\link{format}}
   exponent=5,       # Starting at which exponent should \code{\link{logVals}} return an expression with exponents? DEFAULT: 5
   expobase1=FALSE,  # Should "n * " be appended before 10^exp if n=1?
-  allbase=1:9,      # base for \code{$all} (for horizontal lines)
-    ...)            # further arguments passed to axis, like \code{lwd, col.ticks, hadj, lty}, ...
+  allbase=1:9,      # Base for \code{$all} (for horizontal lines)
+  box=TRUE,         # Draw box at the end to overplot \code{\link{abline}s} crossing the box?
+    ...)            # Further arguments passed to axis, like \code{lwd, col.ticks, hadj, lty}, ...
 {
 for(side_i in side)
 { # loop around each side
@@ -67,7 +68,7 @@ if(allticks)
   }
 } # End of loop
 # Box to cover up the lines plotted over the existing box:
-box("plot")
+if(box) graphics::box("plot")
 # overplot ablines with expr:
 if(!missing(expr)) expr
 # output:

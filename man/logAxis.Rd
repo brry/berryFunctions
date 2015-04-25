@@ -5,7 +5,7 @@
 \usage{logAxis(side=1, log=NULL, lcol="grey", lty=1, lwd=1,
 allticks=FALSE, allargs=NULL, expr, las=1,
 from, to, Range, base, big.mark="'", decimal.mark=".", scientific=FALSE,
-exponent=5, expobase1=FALSE, allbase=1:9, ...)}
+exponent=5, expobase1=FALSE, allbase=1:9, box=TRUE, ...)}
 \arguments{
   \item{side}{Which \code{\link{axis}} are to be labeled? Can be a vector within \code{1:4}. DEFAULT: 1}
   \item{log}{Is the axis logarithmic by plot(log="x")? internal DEFAULT: \code{\link{par}("xlog")} or "ylog". DEFAULT: NULL}
@@ -25,6 +25,7 @@ exponent=5, expobase1=FALSE, allbase=1:9, ...)}
   \item{exponent}{Starting at which exponent should \code{\link{logVals}} return an expression with exponents? DEFAULT: 5}
   \item{expobase1}{Should "n * " be appended before 10^exp if n=1? DEFAULT: FALSE}
   \item{allbase}{base for \code{$all} (for horizontal lines). DEFAULT: 1:9}
+  \item{box}{Draw box at the end to overplot \code{\link{abline}s} crossing the box? DEFAULT: TRUE}
   \item{\dots}{further arguments passed to axis, like \code{lwd, col.ticks, hadj, lty}, ...}
 }
 \value{An invisible list with
