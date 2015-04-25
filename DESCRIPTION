@@ -1,7 +1,7 @@
 Package: berryFunctions
 Type: Package
 Title: Function Collection related to Plotting and Hydrology
-Version: 1.7.14
+Version: 1.7.15
 Date: 2015-04-24
 Author: Berry Boessenkool
 Maintainer: Berry Boessenkool <berry-b@gmx.de>

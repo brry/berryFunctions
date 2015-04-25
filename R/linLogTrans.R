@@ -8,6 +8,7 @@ linLogTrans <- function(
    steps=100, # number of steps in transition
    base=1, # base passed to \code{\link{logVals}}
    las=1, # \code{\link{par}} LabelAxisStyle (numbers upright)
+   plot=TRUE, # Plot animations at all? False to just get the t-vector (used in \code{\link{linLogHist}})
    firstplot=TRUE, # plot on linear scale first?
    lastplot=TRUE, # plot on logarithmic scale at the end?
    write_t=TRUE, # write transformation value in lower right corner?
@@ -33,6 +34,7 @@ if(is.null(values_t)) # if it's not given by user, use internal calculation:
   }
   else allt <- values_t
 # Plot the images --------------------------------------------------------------
+if(!plot) return(allt)
 # Plot on linear scale first:
 if(firstplot)
   {
