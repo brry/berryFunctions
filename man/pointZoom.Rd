@@ -21,7 +21,7 @@ xlab=substitute(x), ylab=substitute(y), quiet=FALSE, ...)}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, ca 2012}
 \note{Extensive testing is yet to be done!}
 
-\seealso{\code{\link{shapeZoom}}, \code{\link{colPoints}}, \code{\link{locator}} }
+\seealso{shapeZoom in \url{https://github.com/brry/shapeInteractive}, \code{\link{colPoints}}, \code{\link{locator}} }
 \examples{
 ## Examples rely on locator, so can't be checked in non-interactive R use.
 \dontrun{
