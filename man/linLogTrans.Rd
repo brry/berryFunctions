@@ -3,15 +3,18 @@
 \title{Animation for transition from linear to logarithmic axis}
 \description{draw images that gradually transform from a linear to a logarithmic axis}
 \usage{linLogTrans(x, y, log="x", steps=100, base=1, las=1, plot=TRUE,
+xlim=range(x, finite=TRUE), ylim=range(y, finite=TRUE),
 firstplot=TRUE, lastplot=TRUE, write_t=TRUE, values_t=NULL, pointsarg=NULL, ...) }
 \arguments{
   \item{x}{x values to be plotted in animation}
   \item{y}{Vector with corresponding y values}
   \item{log}{Which axis is logarithmic, "x" or "y". DEFAULT: "x"}
-  \item{steps}{Approximate number of steps (images) in transition (About 30\% are taken out). DEFAULT: 100}
+  \item{steps}{Number of steps (images) in transition (About 30\% are taken out). DEFAULT: 100}
   \item{base}{Base passed to \code{\link{logVals}}. DEFAULT: 1}
   \item{las}{\code{\link{par}} LabelAxisStyle (numbers upright). DEFAULT: 1}
   \item{plot}{Plot animations at all? False to just get the t-vector (used in \code{\link{linLogHist}}). DEFAULT: TRUE}
+  \item{xlim}{xlim range in non-log units. DEFAULT: range(x, finite=TRUE)}
+  \item{ylim}{ylim range in non-log units. DEFAULT: range(y, finite=TRUE)}
   \item{firstplot}{Plot data on linear axis as first image? DEFAULT: TRUE}
   \item{lastplot}{Plot data on logarithmic axis as last image? DEFAULT: TRUE}
   \item{write_t}{Write transformation value in lower right corner? DEFAULT: TRUE}
@@ -20,10 +23,11 @@ firstplot=TRUE, lastplot=TRUE, write_t=TRUE, values_t=NULL, pointsarg=NULL, ...)
   \item{\dots}{Further arguments passed only to plot, like main, xlim, ylab. Excluded: x, y, las, xaxt, type}
 }
 \value{Returned invisibly: transformation values used. Plotted: \code{steps} number of images.}
-\note{It's best to save the plots into a pdf (see the example) or wrap it within\cr \code{png("Transition\%03d"); linLogTrans(x,y); dev.off()}}
+\note{if(steps>1000) steps <- 1000. In the unlikely case you need more steps, please let me know and I'll change the code.\cr
+It's best to save the plots into a pdf (see the example) or wrap it within\cr \code{png("Transition\%03d"); linLogTrans(x,y); dev.off()}}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, June 2014}
 \references{x^(1/t) is based on the first comment on \url{http://stackoverflow.com/questions/15994442/}\cr
-besides the nice graphic properties, check this page for the implications on rates of change: \cr
+besides the nice graphic properties of logtransformations, check this page for the implications on rates of change: \cr
 \url{http://sfew.websitetoolbox.com/post/show_single_post?pid=1282690259&postcount=4}\cr
 \url{http://sfew.websitetoolbox.com/post/show_single_post?pid=1282691799&postcount=5}}
 \seealso{\code{\link{logVals}} }
@@ -31,7 +35,7 @@ besides the nice graphic properties, check this page for the implications on rat
 
 set.seed(42);  x <- 10^rnorm(100, 3);  y <- runif(100)
 linLogTrans(x,y, steps=15)
-
+linLogTrans(x,y, steps=15, log="y", ylim=c(0.1, 0.8), base=c(1,2,5))
 
 \dontrun{
 ## Rcmd check --as-cran doesn't like to open external devices such as pdf,
@@ -39,6 +43,62 @@ linLogTrans(x,y, steps=15)
 pdf("LinLogTransitionAnimation.pdf")
 linLogTrans(x,y, main="Example Transition")
 dev.off()
+
+# if you have FFmpeg installed, you can use the animation package like this:
+library2(animation)
+saveVideo(linLogTrans(x,y, steps=300), video.name="linlog_anim.mp4", interval=0.01,
+    ffmpeg="C:/ffmpeg-20150424-git-cd69c0e-win64-static/bin/ffmpeg.exe")
+
+
+# old t values were dependent on the value of steps
+findt <- function(steps) {
+  # t-values for x^(1/t):
+  allt <- 10^(seq(0,2.5,len=1e4) )
+  # selection at upper half of these values;
+  # Otherwise, the animation slows down too much at the end
+  f <- 1.4 # multiplication factor due to length loss by unique
+  sel <- round(seq(1, 10, len=f*steps)^4)   #0.5*seq(1, 100, len=1.3*steps)^2 + 0.5*
+  sel2 <- unique(round(log10(seq(1, 10, len=f*steps))*f*steps))
+  sel2[1] <- 1
+  sel <- sel[sel2]
+  # final t-values for transition:
+  allt <- unique(round(allt[sel], 2))
+  data.frame(x=seq(1,1000,len=length(allt)), t=allt)
+  }
+
+plot(findt(1000), type="l", log="y", las=1)
+for(i in 5:999) lines(findt(i), col=rainbow2(1000)[i])
+d <- findt(300)
+lines(d) # good average
+
+plot(d$x[-1], diff(d$t), type="l", ylim=c(3e-3,10), yaxt="n", log="y", main="t value growth rate")
+logAxis(2) ; lines(d$x[-1], diff(d$t))
+d2 <- findt(1000)
+lines(d2$x[-1], diff(d2$t), col=2)
+lines(2:1000, diff(linLogTrans(1,1, steps=1000, plot=F)), col=4)
+
+
+d <- findt(300)
+pdf("degreepoly.pdf")
+for(i in 5:30)
+  {
+  plot(d, log="y", type="l", lwd=3, main=i, xlim=c(0,300), ylim=c(1,2))
+  modell <- lm(t ~  poly(x,i, raw=T), data=d)
+  lines(x2, predict(modell, data.frame(x=1:1300)), col=2)
+  }
+dev.off()   # 17 is good
+
+cf <- coef(lm(t ~  poly(x,17, raw=T), data=d)) # these are currently used in the function
+x <- 1:1000
+y <- rowSums(sapply(1:18, function(i) cf[i]*x^(i-1)), na.rm=TRUE)
+lines(x, y, lwd=3)
+y[1] <- 1
+plot(x, round(y, 3), ylim=c(1,3), xlim=c(0,500), type="l", log="")
+dput(round(y, 3))
+
+findn <- function(steps) nrow(findt(steps))
+plot(1:1000, sapply(1:1000, findn), type="l")
+abline(b=1, a=0)
 
 }
 }
