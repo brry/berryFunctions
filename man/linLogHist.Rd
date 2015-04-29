@@ -3,17 +3,22 @@
 \title{lin-log transition histogram}
 \description{draw histograms that gradually transform from a linear to a logarithmic axis}
 \usage{linLogHist(x, steps=100, breaks=20, col="blue", las=1,
-xlab=deparse(substitute(x)), box=TRUE, axisargs=NULL, firstplot=TRUE, lastplot=TRUE,
+xlab=deparse(substitute(x)), xlim=range(x, finite=TRUE), box=TRUE, parexpr, endexpr,
+axisargs=NULL, axisargs2=NULL, firstplot=TRUE, lastplot=TRUE,
 write_t=TRUE, values_t=NULL, ...)}
 \arguments{
   \item{x}{x values to be plotted in animation}
-  \item{steps}{number of steps in transition. DEFAULT: 100}
+  \item{steps}{Number of steps in transition. DEFAULT: 100}
   \item{breaks}{\code{\link{hist}} breaks. DEFAULT: 20}
   \item{col}{\code{\link{hist}} color. DEFAULT: "blue"}
   \item{las}{\code{\link{par}} LabelAxisStyle (numbers upright). DEFAULT: 1}
   \item{xlab}{Label for the x axis. DEFAULT: deparse(substitute(x))}
+  \item{xlim}{xlim range in non-log units. DEFAULT: range(x, finite=TRUE)}
   \item{box}{Draw box at the end to overplot \code{\link{abline}s} crossing the box? DEFAULT: TRUE}
-  \item{axisargs}{List of arguments passed to \code{\link{logVals}} and \code{\link{logAxis}}, like base. DEFAULT: NULL}
+  \item{parexpr}{Characterized Expression to set \code{\link{par}}, eg. \code{parexpr='par(mar=c(2,0.5,1.5,0.5), mpg=c(1.8,1,0))'}}
+  \item{endexpr}{Characterized Expression executed at the end of the plot, eg. \code{endexpr='mtext("Probability Density", line=-1, adj=0.03, outer=T)'}}
+  \item{axisargs}{List of arguments passed to \code{\link{logVals}}, like base. DEFAULT: NULL}
+  \item{axisargs2}{List of arguments passed to \code{\link{logAxis}}in the final plot. DEFAULT: NULL}
   \item{firstplot}{plot on linear scale first? DEFAULT: TRUE}
   \item{lastplot}{plot on logarithmic scale at the end? DEFAULT: TRUE}
   \item{write_t}{write transformation value in lower right corner? DEFAULT: TRUE}
@@ -28,6 +33,10 @@ write_t=TRUE, values_t=NULL, ...)}
 x <- rlnorm(700, m=3)
 hist(x, col=4)
 hist(log10(x), xaxt="n"); logAxis(1); hist(log10(x), col=4, add=TRUE)
+
+linLogHist(x, xlab="ddd", breaks=30, steps=3, write_t=FALSE, yaxt="n", freq=FALSE,
+   main="", parexpr='par(mar=c(2,0.5,1.5,0.5), mgp=c(1.8,1,0))',
+   endexpr='mtext("Probability Density", line=-1.2, adj=0.03, outer=T)')
 
 \dontrun{
 ## Rcmd check --as-cran doesn't like to open external devices such as pdf,
