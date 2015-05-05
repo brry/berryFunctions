@@ -4,6 +4,7 @@
 \description{draw images that gradually transform from a linear to a logarithmic axis}
 \usage{linLogTrans(x, y, log="x", steps=100, base=1, las=1, plot=TRUE,
 xlim=range(x, finite=TRUE), ylim=range(y, finite=TRUE),
+box=TRUE, parexpr, endexpr,
 firstplot=TRUE, lastplot=TRUE, write_t=TRUE, values_t=NULL, pointsarg=NULL, ...) }
 \arguments{
   \item{x}{x values to be plotted in animation}
@@ -15,6 +16,9 @@ firstplot=TRUE, lastplot=TRUE, write_t=TRUE, values_t=NULL, pointsarg=NULL, ...)
   \item{plot}{Plot animations at all? False to just get the t-vector (used in \code{\link{linLogHist}}). DEFAULT: TRUE}
   \item{xlim}{xlim range in non-log units. DEFAULT: range(x, finite=TRUE)}
   \item{ylim}{ylim range in non-log units. DEFAULT: range(y, finite=TRUE)}
+  \item{box}{Draw box at the end to overplot \code{\link{abline}s} crossing the box? DEFAULT: TRUE}
+  \item{parexpr}{Characterized Expression to set \code{\link{par}}, eg. \code{parexpr='par(mar=c(2,3.5,1.5,0.5), mpg=c(1.8,1,0))'}}
+  \item{endexpr}{Characterized Expression executed at the end of the plot, eg. \code{endexpr='mtext("I am an upright ylab!", line=-1, adj=0.03, outer=T)'}}
   \item{firstplot}{Plot data on linear axis as first image? DEFAULT: TRUE}
   \item{lastplot}{Plot data on logarithmic axis as last image? DEFAULT: TRUE}
   \item{write_t}{Write transformation value in lower right corner? DEFAULT: TRUE}

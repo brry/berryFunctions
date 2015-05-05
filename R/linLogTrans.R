@@ -11,6 +11,9 @@ linLogTrans <- function(
    plot=TRUE, # Plot animations at all? False to just get the t-vector (used in \code{\link{linLogHist}})
    xlim=range(x, finite=TRUE), # xlim range in non-log units.
    ylim=range(y, finite=TRUE), # ylim range in non-log units.
+   box=TRUE, # Draw box at the end to overplot \code{\link{abline}s} crossing the box?
+   parexpr, # Characterized Expression to set \code{\link{par}}, eg. \code{parexpr='par(mar=c(2,0.5,1.5,0.5), mpg=c(1.8,1,0))'}
+   endexpr, # Characterized Expression executed at the end of the plot, eg. \code{endexpr='mtext("Probability Density", line=-1, adj=0.03, outer=T)'}
    firstplot=TRUE, # plot on linear scale first?
    lastplot=TRUE, # plot on logarithmic scale at the end?
    write_t=TRUE, # write transformation value in lower right corner?
@@ -43,8 +46,11 @@ if(!plot) return(allt)
 # Plot on linear scale first:
 if(firstplot)
   {
+  if(!missing(parexpr)) eval(parse(text=parexpr))
   plot(x, y, las=las, type="n", xlim=xlim, ylim=ylim, ...)
   do.call(points, args=owa(d=list(x=x, y=y), a=pointsarg, "x", "y"))
+  if(box) graphics::box("plot")
+  if(!missing(endexpr)) eval(parse(text=endexpr))
   }
 # in case people capitalize log:
 log <- tolower(log)
@@ -55,6 +61,7 @@ if(log=="x") # -----------------------------------------------------------------
   # Images:
   for(t in allt)
      {
+     if(!missing(parexpr)) eval(parse(text=parexpr))
      # Plot single frame:
      plot(x^(1/t), y, las=las, xaxt="n", type="n", xlim=xlim^(1/t), ylim=ylim, ...)
      # draw grey lines at 10^n values and label appropriate ones:
@@ -64,18 +71,21 @@ if(log=="x") # -----------------------------------------------------------------
      pargs <- owa(d=list(x=x^(1/t), y=y), a=pointsarg, "x", "y")
      # draw original points:
      do.call(points, args=pargs)
-     box()
+     if(box) graphics::box("plot")
+     if(!missing(endexpr)) eval(parse(text=endexpr))
      # write transformation value:
      if(write_t) title(sub=paste("t =", sprintf("%6.2f", t)), adj=1)
      } # End for loop
   # Final image
   if(lastplot)
     {
+    if(!missing(parexpr)) eval(parse(text=parexpr))
     plot(x, y, las=las, xaxt="n", type="n", log="x", xlim=xlim, ylim=ylim, ...)
     abline(v=lv$all, col=8)
     axis(1, lv$vals, lv$labs, las=las)
     do.call(points, args=owa(d=list(x=x, y=y), a=pointsarg, "x", "y"))
-    box()
+    if(box) graphics::box("plot")
+    if(!missing(endexpr)) eval(parse(text=endexpr))
     }
   }
 else if(log=="y") # ------------------------------------------------------------
@@ -83,21 +93,25 @@ else if(log=="y") # ------------------------------------------------------------
   lv <- logVals(y, base=base)
   for(t in allt)
      {
+     if(!missing(parexpr)) eval(parse(text=parexpr))
      plot(x, y^(1/t), las=las, yaxt="n", type="n", xlim=xlim, ylim=ylim^(1/t), ...)
      abline(h=(lv$all)^(1/t), col=8)
      axis(2, (lv$vals)^(1/t), lv$labs, las=las)
      pargs <- owa(d=list(x=x, y=y^(1/t)), a=pointsarg, "x", "y")
      do.call(points, args=pargs)
-     box()
+     if(box) graphics::box("plot")
+     if(!missing(endexpr)) eval(parse(text=endexpr))
      if(write_t) title(sub=paste("t =", sprintf("%6.2f", t)), adj=1)
      } # End for loop
   if(lastplot)
     {
+    if(!missing(parexpr)) eval(parse(text=parexpr))
     plot(x, y, las=las, yaxt="n", type="n", log="y", xlim=xlim, ylim=ylim, ...)
     abline(h=lv$all, col=8)
     axis(2, lv$vals, lv$labs, las=las)
     do.call(points, args=owa(d=list(x=x, y=y), a=pointsarg, "x", "y"))
-    box()
+    if(box) graphics::box("plot")
+    if(!missing(endexpr)) eval(parse(text=endexpr))
     }
   }
 else if(log=="xy" | log=="yx") # -----------------------------------------------
@@ -106,23 +120,27 @@ else if(log=="xy" | log=="yx") # -----------------------------------------------
   lvy <- logVals(y, base=base)
   for(t in allt)
      {
+     if(!missing(parexpr)) eval(parse(text=parexpr))
      plot(x^(1/t), y^(1/t), las=las, xaxt="n", yaxt="n", type="n", xlim=xlim^(1/t), ylim=ylim^(1/t), ...)
      abline(h=(lvy$all)^(1/t), v=(lvx$all)^(1/t), col=8)
      axis(1, (lvx$vals)^(1/t), lvx$labs, las=las)
      axis(2, (lvy$vals)^(1/t), lvy$labs, las=las)
      pargs <- owa(d=list(x=x^(1/t), y=y^(1/t)), a=pointsarg, "x", "y")
      do.call(points, args=pargs)
-     box()
+     if(box) graphics::box("plot")
+     if(!missing(endexpr)) eval(parse(text=endexpr))
      if(write_t) title(sub=paste("t =", sprintf("%6.2f", t)), adj=1)
      } # End for loop
   if(lastplot)
     {
+    if(!missing(parexpr)) eval(parse(text=parexpr))
     plot(x, y, las=las, xaxt="n", yaxt="n", type="n", log="xy", xlim=xlim, ylim=ylim, ...)
     abline(h=lvy$all, v=lvx$all, col=8)
     axis(1, lvx$vals, lvx$labs, las=las)
     axis(2, lvy$vals, lvy$labs, las=las)
     do.call(points, args=owa(d=list(x=x, y=y), a=pointsarg, "x", "y"))
-    box()
+    if(box) graphics::box("plot")
+    if(!missing(endexpr)) eval(parse(text=endexpr))
     }
   }
 else stop("log can only be 'x', 'y', or 'xy'.")
