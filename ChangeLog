@@ -10,7 +10,7 @@ This Log of changes in my package berryFunctions contains two sections:
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 
-- createDoc: message successful creation location
+- createDoc: message successful creation location. add field opportunities for description, note, etc (see Roxygen)
 
 
 - exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) ) 
@@ -20,6 +20,10 @@ This Log of changes in my package berryFunctions contains two sections:
 - linReg: grouped density or boxplot(y~group, add=T, at=unique(bpoints), yaxt="n", xlab="", range=0)
 
 - mReg: remove zeros instead of replacing zeros with near-zero values. add hyperbolic functions. copy formula option from linReg. catch NAs before rmse catches them several times. repeat col. selection partial matching. Numbers in output. output limited to selection.
+
+- movAv cannot handle tapply result, is.vector check is too strict. Add function adding semitransparent lines automatically.
+
+- pastec: enable newline insertion every n elements
 
 - pointZoom: rename Argument colp, as col cannot be given currently. Add expr argument
 
