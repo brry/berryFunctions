@@ -6,7 +6,7 @@ movAv <- function(
                   width=7,
                   weights=rep(1,width) )
 {
-# input-checking (added May 2014 with extension weights) :
+# input-checking (added May 2014 along with new option weights) :
 if(!is.vector(dat))
    stop("Dat has to be a vector.")
 if(missing(width))
@@ -58,7 +58,7 @@ v <- c(rep(NA, s), v, rep(NA, s) )
 
 # Error checking:
 if(length(v) != length(dat)) stop("Window size was computed wrongly.
-Tell Berry that his function sucks: berry-b@gmx.de")
+Please report conditions: berry-b@gmx.de")
 # Output
 return(v)
 }
