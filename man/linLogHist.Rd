@@ -34,9 +34,11 @@ x <- rlnorm(700, m=3)
 hist(x, col=4)
 hist(log10(x), xaxt="n"); logAxis(1); hist(log10(x), col=4, add=TRUE)
 
+op <- par()
 linLogHist(x, xlab="ddd", breaks=30, steps=3, write_t=FALSE, yaxt="n", freq=FALSE,
    main="", parexpr='par(mar=c(2,0.5,1.5,0.5), mgp=c(1.8,1,0))',
    endexpr='mtext("Probability Density", line=-1.2, adj=0.03, outer=T)')
+par(op)
 
 \dontrun{
 ## Rcmd check --as-cran doesn't like to open external devices such as pdf,
