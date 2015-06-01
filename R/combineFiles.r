@@ -17,6 +17,8 @@ combineFiles <- function(
 if(is.null(sep)) sep <- "\n-------------------------------------------------------
 -------------------------------------------------------\n"
 # File to write to:
+while( substring(outDir, nchar(outDir)) %in% c("/", "\\") ) #"
+    outDir <- substring(outDir, 1, nchar(outDir)-1)
 File <- paste(outDir, outFile, sep="/")
 write("", file=File)
 # Meta information if wanted
