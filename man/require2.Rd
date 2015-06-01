@@ -14,6 +14,7 @@
 \seealso{\code{\link{install.packages}}, \code{\link{require}}}
 \examples{
 \dontrun{
+## Excluded fom CRAN checks. Package installation on server is unnecessary.
 require2(ada)
 }
 }

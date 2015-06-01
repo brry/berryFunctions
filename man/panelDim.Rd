@@ -48,6 +48,8 @@ panelDim(45, plot=TRUE) # good for portrait orientation of plot
 panelDim(45, landscape=TRUE, plot=TRUE) # better if plot width > height
 
 \dontrun{
+## Rcmd check --as-cran doesn't like to open external devices,
+## so this example is excluded from running in the checks.
 plot of several n with defaults
 dev.new(record=TRUE)
 for(i in 1:50)  panelDim(i, plot=TRUE)

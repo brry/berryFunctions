@@ -39,6 +39,7 @@ lines(density(n1000), col=3) # underestimated. for Q0.999, n must be > 1000
 
 
 \dontrun{
+# #Excluded from CRAN Checks because of the long computing time
 # median of 500 simulations:
 qmm <- function(size, truncate=0) median(replicate(n=500,
        expr=quantileMean(rbeta(size, 2,9), probs=0.999, names=FALSE, truncate=truncate)))

@@ -14,7 +14,7 @@ Can especially impress newbies a lot.}
 That's why it warns about strings longer than 5 characters}
 \seealso{ \code{\link{yearSample}} to wish a happy new year, \code{\link{set.seed}}, \code{\link{sample}}, \code{\link{letters}}    }
 \examples{
-# Not run in RCMD check as they're very time consuming
+## Not run in RCMD check as they're very time consuming
 \dontrun{
 nameSample("berry")  # After that, you can send the result to colleagues:
 # Kind regards from

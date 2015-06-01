@@ -38,6 +38,8 @@ tableColVal(Bsp, palette=heat.colors(12))
 tableColVal(Bsp, palette=c(2,4,7), argmain=list(labels="last\ncomparison"))
 
 \dontrun{
+## Rcmd check --as-cran doesn't like to open external devices such as pdf,
+## so this example is excluded from running in the checks.
 tableColVal(Bsp, pdf=TRUE, width=12)  # further arguments to pdf possible.
 
 Bsp2 <- matrix(sample(1:100, 30), ncol=6, byrow=TRUE)

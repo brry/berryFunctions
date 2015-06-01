@@ -71,6 +71,8 @@ climateGraph(temp, rain, compress=TRUE, ylim=c(-10, 90))
 climateGraph(temp, rain, compress=TRUE, argcomp=list(density=30, col=6))
 
 \dontrun{
+## Rcmd check --as-cran doesn't like to open external devices such as pdf,
+## so this example is excluded from running in the checks.
 setwd("C:/Users/berry/Desktop")
 pdf("ClimateGraph.pdf")
 climateGraph(temp, rain, main="Another Station\nlocated somewhere\n369 ft a sl")

@@ -15,6 +15,7 @@
 \seealso{\code{\link{object.size}}, \code{\link{ls}}}
 \examples{
 \dontrun{
+## excluded from CRAN check  - I forgot why, but there's probably a good reason
 lsMem()
 }
 }

@@ -19,7 +19,7 @@ sep=NULL, names=TRUE, selection=NULL, quiet=FALSE)}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, Nov 2012}
 \seealso{\code{\link{compareFiles}}, and the functions used internally here, namely: \code{\link{paste}}, \code{\link{scan}}, \code{\link{write}}.}
 \examples{
-# These are skipped by rcmd check (writing to external places is not allowed)
+## These are skipped by rcmd check (writing to external places is not allowed)
 \dontrun{
 cat("This is Sparta.\\nKicking your face.", file="BujakashaBerry1.txt")
 cat("Chuck Norris will roundhousekick you.", file="BujakashaBerry2.txt")

@@ -10,6 +10,8 @@
 \seealso{\code{\link{edit}} }
 \examples{
 \dontrun{
+## Rcmd check --as-cran doesn't allow opening external devices,
+## so this example is excluded from running in the checks.
 funTinn(boxplot.default)
 }
 }

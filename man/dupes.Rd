@@ -27,7 +27,7 @@ file <- system.file("extdata/doublelines.txt", package="berryFunctions")
 dupes(file, tofile=FALSE)
 dupes(file, tofile=FALSE, ignore.empty=TRUE)  
 
-# These are skipped by rcmd check (opening external places is not allowed):
+## These are skipped by rcmd check (opening external places is not allowed):
 \dontrun{dupes(file)}
 
 # a template file (dupes.ods) for libreOffice Calc is available here:

@@ -23,7 +23,9 @@ rect(xleft=200, ybottom=300, xright=700, ytop=680, col=NA, border=1)
 
 format( round(P,4), trim=FALSE)
 
-\dontrun{windows(record=TRUE)}
+\dontrun{dev.new(record=TRUE)}
+## Rcmd check --as-cran doesn't like to open external devices,
+## so this example is excluded from running in the checks.
 for(i in 1:10)
 {
 rp <- randomPoints(xmin=0,xmax=20, ymin=0,ymax=20, number=20, mindist=3, plot=FALSE)

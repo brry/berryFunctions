@@ -99,6 +99,8 @@ mReg(x,y, nbest=4) # only 4 distributions plotted
 mReg(x,y, legargs=list(x=7, y=8, bty="o")) # Legend position as coordinates
 
 \dontrun{
+## Rcmd check --as-cran doesn't like to open external devices,
+## so this View example is excluded from running in the checks.
 View(mReg(x,y, Poly45=TRUE, exp_4=TRUE, plot=FALSE)) # exp_4: fit more distributions
 }
 # optim methods often yield different results, so be careful using this.
@@ -177,7 +179,7 @@ mReg(x, y, posx="right")
 sfile <- system.file("extdata/solitaire.txt", package="berryFunctions")
 solitaire <- read.table(sfile, header=TRUE)
 mReg(solitaire$Time, solitaire$Points) # and yes, reciprocal ranks highest! Play Fast!
-mReg(solitaire$Time, solitaire$Bonus, xlim=c(60,200), extend=0)
+mReg(solitaire$Time, solitaire$Bonus, xlim=c(50,200), extend=0, nbest=3)
 sol <- unique(na.omit(solitaire[c("Time","Bonus")]))
 sol
 sol$official <- round(700000/sol$Time/5)*5
