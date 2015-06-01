@@ -19,4 +19,4 @@ getwd("that/path")
 dd <- dir("berryFunctions-master/R", full=T)
 dummy <- sapply(dd, source)
 ```
-That creates all R functions as objects in you globalenv workspace (and overwrites existing objects of the same name!)
+This creates all R functions as objects in your globalenv workspace (and overwrites existing objects of the same name!).
