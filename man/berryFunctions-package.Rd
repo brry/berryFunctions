@@ -38,6 +38,9 @@ combineTextfiles has been renamed to \code{\link{combineFiles}}.
 ### GRAPHICS
 ### MISCELLANEOUS
 
+# The functions are documented pretty thoroughly, so press F1 repeatedly ;-)
+# Also, I'd love to get feedback!   berry-b@gmx.de    github.com/brry
+
 \dontrun{
 
 ### HYDROLOGY #################################################################
@@ -46,12 +49,8 @@ combineTextfiles has been renamed to \code{\link{combineFiles}}.
 climateGraph(temp=c(-9.3,-8.2,-2.8,6.3,13.4,16.8,18.4,17,11.7,5.6,-1,-5.9),
              rain=c(46,46,36,30,31,21,26,57,76,85,59,46))
 
-# Extreme value Statistics (for flood risk estimation): extremeStat
-# Replaced (with linear moments to fit 13 distributions) by: extremeStatLmom
-JM <- c(61.5, 77.0, 37.0, 69.3, 75.6, 74.9, 43.7, 50.8, 55.6, 84.1, 43.6, 81.9,
-60.1, 72.4, 61.6, 94.8, 82.6, 57.2,  63.1, 73.8, 51.3, 93.6, 56.9, 52.1, 40.4,
-48.9, 113.6, 35.4, 40.1, 89.6, 47.8, 57.6, 38.9, 69.7, 110.8)
-extremeStatLmom(JM)
+# Extreme value Statistics (for flood risk estimation):
+# moved to github.com/brry/extremeStat
 
 # superposition of precipitation to simulate Q from P: superPos
 N <- c(9,5,2,14,1,3) # [mm/hour]
@@ -78,23 +77,23 @@ rsquare(QOBS, QSIM)
 
 
 ### SPATIAL ####################################################################
-# Here are some functions that were originally in this package:
-browseURL("https://github.com/BerryBoessenkool/shapeInteractive/
-           blob/master/README.md")
 
 # arrange points randomly with minimal distance to each other: randomPoints
 randomPoints(xmin=5,xmax=15, ymin=20,ymax=30, number=25, mindist=1)
 
 # distance between two points on a plane: distance
 A <- c(3,  9,-1)  ;  B <- c(7, -2, 4)
-distance(A,B, 3,5)
 plot(A,B); points(3,5, col=2, pch=16); segments(3,5, A,B)
+distance(A,B, 3,5)
 
 # calculate Area of a planar triangle: triangleArea
 a <- c(1,5.387965,9); b <- c(1,1,5)
 plot(a[c(1:3,1)], b[c(1:3,1)], type="l", asp=1)
 abline(v=1:9, h=1:5, col=8,lty=2)
 triangleArea(a,b)
+
+# more stuff, like Zooming in Shapefiles in my package:
+browseURL("https://github.com/brry/shapeInteractive")
 
 
 ### GRAPHICS ##################################################################
@@ -116,7 +115,7 @@ smoothLines(x,y)
 
 # write text with colored shape underneath: textField
 plot(rnorm(1e4))
-textField(5000, 0, "Here's some great readable text", field="round", cex=1.5)
+textField(5000, 0, "good readable text", field="round", fill="orange", cex=1.5)
 
 # draw circle with given radius: circle
 plot(1:10, asp=1)
@@ -139,29 +138,31 @@ i <- c(22, 40, 80, 45, 60, 63, 30, 70) ;  j <- c(5, 33, 12, 56, 20, 40, 45, 45)
 k <- c(135, 155, 120, 105, 140, 130, 190, 110)
 colPoints(i,j,k, cex=2, pch="+", add=FALSE)
 colPointsHist(z=k)
+# this uses severall helper functions like smallPlot, classify, pretty2
 
 # Histogramm with bars drawn horizontally: horizHist
 ExampleData <- rnorm(50,8,5)+5
-hpos <- horizHist(ExampleData)
+hpos <- horizHist(ExampleData, col=4)
 abline(h=hpos(11), col=2, lwd=2)
 
 # Set ylim so that it does not extend below zero: lim0
 val <- c(3.2, 1.8, 4.5, 2.8, 0.1, 2.9) # just some numbers
-plot(val, ylim=lim0(val) ) # you don't even have to set yaxs="i" ;-)
+plot(val) # axes are extenden by 4% automatically, if xaxs="r"
+plot(val, ylim=lim0(val), las=1) # you don't even have to set yaxs="i" ;-)
 
-# Get nice values and labels to write at logarithmic axes: logVals
+# Get nice values and labels to write at logarithmic axes: logVals, logAxis
 exdat <- 10^runif(50, -1, 2)
 plot(exdat, log="y", yaxt="n")
-lv <- logVals(exdat, base=c(1,2,5) )
-abline(h=lv$all, col=8 )
-axis(2, lv$vals, lv$labs, las=1)
+dummy <- logAxis(side=2)
+points(exdat, pch=16)
+dummy
 
-# Label time axis in date-regular intervals: monthLabs
+# Label time axis in date-regular intervals: monthLabs, monthAxis
 monthLabs(2014,2014, 3)
 plot(as.Date("2013-09-25")+sort(sample(0:150, 30)), 
      cumsum(rnorm(30)), type="o", xaxt="n", ann=F)
-axis(1, monthLabs(npm=1), format(monthLabs(npm=1), "\%d.\%m.\n \%Y"),
-     mgp=c(3,2,0), cex.axis=0.7 )
+dummy <- monthAxis(side=1) # tries to find suitable labeling intervall
+str(dummy)
 
 # Linear regression: plot data, model and r^2: linReg
 a <- 1:30   ; b <- a/2.345+rnorm(30,0,3)
@@ -172,13 +173,40 @@ x <- c(1.3, 1.6, 2.1, 2.9, 4.4, 5.7, 6.6, 8.3, 8.6, 9.5)
 y <- c(8.6, 7.9, 6.6, 5.6, 4.3, 3.7, 3.2, 2.5, 2.5, 2.2)
 mReg(x,y)
 
-# Moving average with overlapping windows: movAv
-a <- cumsum(rnorm(100))
+# Moving average with overlapping windows: movAv, movAvLines
+set.seed(42); a <- cumsum(rnorm(100))
 plot(a, type="l", pch=16, las=1)
 lines(movAv(a), col=2, lwd=3)
+movAvLines(1:100, a, lwd=3, plot=TRUE)
+
+# Transformation from linear to logarithmic axis: linLogHist, linLogTrans
+x <- rlnorm(700, m=3)
+linLogHist(x, xlab="ddd", breaks=30, steps=3, write_t=FALSE, yaxt="n", freq=FALSE)
+
+# Histograms for dataset split into categories: groupHist
+groupHist(chickwts, "weight", "feed", col=2, unit="grams at age 6 weeks")
+# drop the horsebean, feed those chicks with sunflower seeds
+# (unless you like small chicken)
+
+# Plot simulation results as result ranges: quantileBands
+neff <- t(replicate(n=30, sapply(1:400, function(nn) max(rnorm(nn)))   ))
+qB <- quantileBands(neff, x=1:400)
+
+# Quickly plot distributions by just specifying parameters: normPlot, betaPlot
+normPlot(mean=81.7, sd=11.45)
+betaPlot(shape1=1.5, shape2=6) # see examples for overview of parameter effects
+
 
 
 ### MISCELLANEOUS #############################################################
+
+# paste character strings with collapse: pastec
+listoferrors <- c("filetype", "header", "nonemptyline")
+message("The following entities were corrupted:\n", pastec(listoferrors))
+
+# remove leading and trailing white space: removeSpace
+s <- c("space at end     ", "  white at begin", "  both ", " special ^  ")
+removeSpace(s)
 
 # calculate confidence interval (and other EDA values): ci, cie
 ci(  c(5:8,3,14) )
@@ -213,16 +241,15 @@ Link <- paste0("http://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1",
         "&usg=AFQjCNGejDwPlor4togQZmQEQv72cK9z8A&bvm=bv.45580626,d.Yms")
 googleLink2pdf(Link)
 
-# concatenate textfiles contents unchanged into one file: combineTextfiles
+# concatenate textfiles contents unchanged into one file: combineFiles
 cat("This is Sparta.\nKicking your face.", file="BujakashaBerry1.txt")
 cat("Chuck Norris will roundhousekick you.", file="BujakashaBerry2.txt")
-combineTextfiles(inFiles=paste0("BujakashaBerry", 1:2, ".txt"), 
+combineFiles(inFiles=paste0("BujakashaBerry", 1:2, ".txt"),
                  outFile="BujakashaBerry3.txt")
 readLines("BujakashaBerry3.txt")
 unlink(paste0("BujakashaBerry", 1:3, ".txt"))
 
 # create .Rd documentation from source code in Berry's format: createDoc
-# compare arguments in Rd with source code, saves time Rcmd check: compareDoc
 
 # generate name from "random" sample: nameSample
 nameSample("berry")
