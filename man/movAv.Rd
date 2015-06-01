@@ -8,9 +8,9 @@
   \item{width}{Odd integer specifying window width. DEFAULT: 7}
   \item{weights}{Vector with weights. Sum is normalized to 1. DEFAULT: rep(1,width)}
 }
-\details{Width has to be odd, so there is a defined middle point of each window. Even inputs will be changed with a warning.\cr
-Weights doesn't have to be symmetrical, but is always mapped to the middle of each point!\cr
-An even length of weights will yield an error, not just a warning.\cr
+\details{Width has to be odd, so there is a defined middle point of each window.
+Even inputs will be changed with a warning.\cr
+Weights doesn't have to be symmetrical, but is always mapped to the middle of each window!\cr
 If there are NAs in the window, the corresponding weight is distributed evenly to the other weights.
 }
 \note{You can specify just one of weights or width.}
@@ -38,10 +38,15 @@ plot(c(Nile), type="l")
 lines(movAv(c(Nile),20), col=4, lwd=4)
 lines(movAv(c(Nile),21), col=3) # even widths are changed to a higher value
 
+
 # smoothing intenstiy:
+plot(1871:1970, c(Nile), type="l", col=8)
+movAvLines(1871:1970, c(Nile), lwd=3)
+
 \dontrun{
-graphics.off(); windows(record=TRUE)
-}
+## Rcmd check --as-cran doesn't like to open external devices,
+## so this piece of the example is excluded from running in the checks.
+graphics.off(); windows(record=TRUE)}
 for(i in 1:30*2-1) {
  plot(a, type="o", pch=16, las=1, main=paste("moving average, width =", i))
  lines(movAv(a, i), col=2, lwd=4)
