@@ -8,7 +8,7 @@ names=TRUE, truncate=0, ... )}
   \item{x}{Numeric vector whose sample quantiles are wanted}
   \item{probs }{Numeric vector of probabilities with values in [0,1]. DEFAULT:  seq(0, 1, 0.25)}
   \item{weights}{Numeric vetor of length 9 with weight for each \code{\link{quantile} method}. Recycled if shorter. DEFAULT: unweighted mean. DEFAULT: rep(1,9)}
-  \item{names}{If TRUE, the result has a names attribute. DEFAULT: TRUE}
+  \item{names}{If TRUE, the resulting vector has a names attribute. DEFAULT: TRUE}
   \item{truncate}{Number between 0 and 1. Censored quantile: fit to highest values only (truncate lower proportion of x). Probabilities are adjusted accordingly. DEFAULT: 0}
   \item{\dots}{further arguments passed to \code{\link{quantile}}, except for type}
 }
@@ -55,7 +55,7 @@ lines(n, medians_trunc, col=2) # censored quantiles don't help!
 
 # Parametrical quantiles can avoid sample size dependency!
 if(!require(devtools)) install.packages("devtools")
-devtools::install_github("BerryBoessenkool/extremeStat")
+devtools::install_github("brry/extremeStat")
 library("extremeStat")
 library2("pbapply")
 

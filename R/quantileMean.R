@@ -5,7 +5,7 @@ quantileMean <- function(
   x, # Numeric vector whose sample quantiles are wanted
   probs = seq(0, 1, 0.25), # Numeric vector of probabilities with values in [0,1]
   weights=rep(1,9), # Numeric vetor of length 9 with weight for each \code{\link{quantile} method}. Recycled if shorter. DEFAULT: unweighted mean
-  names=TRUE, # If TRUE, the resultin vector has a names attribute.
+  names=TRUE, # If TRUE, the resulting vector has a names attribute.
   truncate=0, # Number between 0 and 1. Censored quantile: fit to highest values only (truncate lower proportion of x). Probabilities are adjusted accordingly.
   ...  # further arguments passed to \code{\link{quantile}}, except for type
   )

@@ -17,12 +17,14 @@
 \note{
 Get the most recent code updates at \url{https://github.com/brry}\cr
 At some places you'll find \code{## not run} in the examples.
-These code blocks were excluded from checking while building, mainly because they are interactive and need mouseclicks, or because they open another device/file.
-\cr Normally, you should be able to run them in an interactive session.
+These code blocks were excluded from checking while building,
+mainly because they are interactive and need mouseclicks,
+or because they open another device/file.
+Normally, you should be able to run them in an interactive session.
 If you do find unexecutable code, please tell me!\cr
 Feel free to suggest packages in which these functions would fit well.
 I strongly depend on - and therefore welcome - any feedback!\cr
-The following functions have been deprecated:\cr
+The following functions have been deprecated over the lifetime of the package:\cr
 changeAttribute, showAttribute, shapeZoom: moved to
 \url{https://github.com/brry/shapeInteractive}\cr
 extremeStat, extremeStatLmom: moved to distLextreme in
