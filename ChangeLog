@@ -47,10 +47,24 @@ This Log of changes in my package berryFunctions contains two sections:
 -----------------------------------------------------------------
 
 
-Version 1.8 (2015-0-)
-various small changes, see the commits on github.
-- smallPlot: improved for mfrow situations, coordinates now two vectors instead of 4 numerics
-New Functions: panelDim, groupHist, monthAxis, pastec, linLogHist
+Version 1.8 (2015-06-0)
+For all changes see the commits on github with these links:
+https://github.com/brry/berryFunctions/compare/master@{2014-12-22}...master
+https://github.com/brry/berryFunctions/compare/master@{2014-12-22}...master@{2015-06-02}
+
+The most important stuff:
+- documentation improved and examples expanded in many places
+- where graphical parameters are changed, options are added to reset them (betaPlot, linLogTrans, normPLot, smallPlot, and in some example sections)
+- improvements in package-internal references to other functions (smoothLines eg now calls addAlpha, new functions repeatedly rely on existing functions)
+
+- linLogTrans: lots of new options, better transformation t values
+- logAxis: intermediate tick marks enabled
+- pretty2 can now be forced to return an exact nubmer of values
+- quantileMean: inputs checked, truncate option (analog to extremeStat::distLquantile), example with sample size dependency simulation
+- smallPlot: improved for mfrow situations, coordinates input and swapping improved, auomatic correction of input errors
+
+New Functions: panelDim, groupHist, monthAxis, pastec, linLogHist, movAvLines
+removed: deprecatedFunctions
 
 
 -----------------------------------------------------------------
@@ -61,7 +75,7 @@ Version 1.7.1 (2014-12-20)
 various small changes and bug fixes. See the commits on github
 - rmse and rsquare NA-removal warnings can now be silenced with quiet=TRUE
 - linReg: formula specification is now enabled: linReg(obj1~obj2) or linReg(col_a~col_b, data=df)
-- colPoints can now draw lines (with interpolation amd with NA management) and triangles at legend ends for values outside Range
+- colPoints can now draw lines (with interpolation and with NA management) and triangles at legend ends for values outside Range
 - classify has new method logscaled and an index for values outside Range
 - textField: vertical extend of bounding boxes is now correct through use of expression
 - tableColVal: text can be changed (eg logarithmized, see examples)
