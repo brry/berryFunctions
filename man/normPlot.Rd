@@ -26,7 +26,7 @@ mar=c(2,3,3,3), keeppar=FALSE, ... )}
 \details{This function finds some nice defaults for very quickly plotting a normal distribution by just specifying mean and sd.}
 \value{None. Used for plotting.}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, July 2014}
-\seealso{\code{\link{betaPlot}}, \code{\link{dnorm}}, \url{http://cran.r-project.org/web/packages/denstrip}, \url{http://cran.r-project.org/web/views/Distributions.html} }
+\seealso{\code{\link{betaPlot}}, \code{\link{dnorm}}, \url{http://cran.r-project.org/package=denstrip}, \url{http://cran.r-project.org/web/views/Distributions.html} }
 \examples{
 normPlot()
 normPlot(81.7, 11.45)

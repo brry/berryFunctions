@@ -16,7 +16,7 @@ unit=NA,
 x <- gsub("\"", "", deparse(substitute(x)), fixed=TRUE)
 g <- gsub("\"", "", deparse(substitute(g)), fixed=TRUE)
 # get break values from full dataset,
-# ignore messages like: argument ‘col’ is not made use of
+# ignore messages like: argument 'col' is not made use of
 suppressWarnings( h <- hist(d[,x], plot=FALSE, ...)    )
 # prepare dimensions:
 names <- unique(d[,g])

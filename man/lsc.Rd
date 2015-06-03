@@ -26,7 +26,7 @@ type=c("o","l"), legx="center", legy=NULL, ...)}
 \references{\url{http://ponce.sdsu.edu/onlineuhcascade.php}\cr
    Skript "Abflusskonzentration" zur Vorlesungsreihe Abwasserentsorgung I von Prof. Krebs an der TU Dresden\cr
    \url{http://tu-dresden.de/die_tu_dresden/fakultaeten/fakultaet_forst_geo_und_hydrowissenschaften/fachrichtung_wasserwesen/isiw/sww/lehre/dateien/abwasserbehandlung/uebung_ws09_10/uebung_awe_1_abflusskonzentration.pdf}\cr
-   \url{http://www.uni-potsdam.de/fs-g3/data/archiv/klausuren/Master_of_Science/HydroII_Lernzettel.pdf}}
+   \url{http://www.uni-potsdam.de/fs-g3/file.php?fileserver=klausuren&file=\%2FMaster_of_Science\%2FHydroII_Lernzettel.pdf}}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, July 2013}
 \seealso{\code{\link{unitHydrograph}}, \code{\link{superPos}}, \code{\link{nse}}, \code{\link{rmse}}. \code{deconvolution.uh} in the package hydromad, \url{http://hydromad.catchment.org}}
 \examples{

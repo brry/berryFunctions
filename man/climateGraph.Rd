@@ -37,8 +37,6 @@
 \references{Heinrich Walter, Helmut Lieth: Klimadiagramm-Weltatlas. Gustav Fischer Verlag, Jena 1967\cr
 Examples:\cr
 \url{http://www.hoelzel.at/_verlag/geojournal/archiv/klima/2006_01/lieth.gif}\cr
-\url{http://www.wabo.boku.ac.at/uploads/RTEmagicC_klidiagr.gif.gif}\cr
-\url{http://www.geolinde.musin.de/afrika/pic/klimamuenchen.gif}\cr
 \url{http://www.hoelzel.at/_verlag/geojournal/archiv/klima/istanbul/istanbul200.gif}\cr
 \url{http://www.ipb.uni-tuebingen.de/kurs/comp/1_excel2007/1_pic/2007diagramm_verbund02.jpg}\cr
 \url{http://www.zivatar.hu/felhotar/albums/userpics/wldp.png}}
