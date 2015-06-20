@@ -47,11 +47,11 @@ This Log of changes in my package berryFunctions contains two sections:
 -----------------------------------------------------------------
 
 
-Version 1.9.0 (2014-12-20)
+Version 1.9.0 (2015-)
 https://github.com/brry/berryFunctions/compare/master@{2015-06-02}...master
 - 
 
-New Functions: sortDF
+New Functions: sortDF, timer
 
 
 -----------------------------------------------------------------
