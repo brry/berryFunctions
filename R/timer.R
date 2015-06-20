@@ -6,7 +6,7 @@
 timer <- function(
 interval=20, # \code{\link{alarm}} interval in seconds
 n=15, # number of alarm signals to be given
-write=TRUE # Should the actual estimated time be written for overhead computing time control purposes?
+write=FALSE # Should the actual estimated time be written for overhead computing time control purposes?
 )
 {
 begin <- Sys.time()
@@ -18,8 +18,13 @@ for(i in 1:n)
   alarm()
   }
 close(pb)
-time_used <- round(Sys.time()-begin, 2)
+time_used <- round(difftime(Sys.time(), begin, units="secs"), 2)
 if(write) message("Actual time passed by: ", time_used,
-                  ". Deviance from target: ", round(time_used-interval*n, 2),
+                  " secs. Deviance from target: ", round(time_used-interval*n, 2),
                   " (", round((time_used-interval*n)/(interval*n)*100, 2), "%).")
 }
+
+# Examples:
+# timer(interval=1, n=3)
+# timer(interval=0.2, n=15, write=TRUE)
+# timer() # to practice lightning talks at useR! conferences
