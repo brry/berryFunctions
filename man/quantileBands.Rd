@@ -24,7 +24,7 @@ type=7, smooth=NA, medargs=NULL, meanargs=NULL, txi, textargs=NULL, ...)}
 \value{Quantiles of each column, invisible. Smoothed if \code{smooth} is given!}
 \note{This is the first version and is not tested very well yet.}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, Sept 2014}
-\seealso{\code{\link{quantile}}, \code{\link{quantileMean}}, \code{\link{polygon}}}
+\seealso{\code{\link{quantile}}, \code{\link{quantileMean}}, \code{\link{polygon}}, \url{cran.r-project.org/package=fanplot}}
 \examples{
 neff <- t(replicate(n=30, sapply(1:400, function(nn) max(rnorm(nn)))   ))
 qB <- quantileBands(neff, x=1:400)
