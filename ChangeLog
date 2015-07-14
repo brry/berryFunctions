@@ -10,6 +10,8 @@ This Log of changes in my package berryFunctions contains two sections:
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 
+- colPoints: use approx2 if applicable in line 76
+
 - combineFiles: add optional progbar, use dirname and basename where appropriate
 
 - createDoc: message successful creation location. add field opportunities for description, note, etc (see Roxygen), use dirname and basename where appropriate
@@ -51,7 +53,7 @@ Version 1.9.0 (2015-)
 https://github.com/brry/berryFunctions/compare/master@{2015-06-02}...master
 - imports 'base' packages: graphics (22 functions), stats (18), utils (6), grDevices (5)
 
-New Functions: sortDF, timer
+New Functions: sortDF, timer, approx2, ciBand
 
 
 -----------------------------------------------------------------
