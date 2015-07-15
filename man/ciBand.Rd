@@ -46,8 +46,8 @@ ssdep_mean<- function(n) quantile(  replicate(n=200,expr=mean(rnorm(n)) )  )
 x <- 1:100
 res_max <- sapply(x, ssdep_max)
 res_mean <- sapply(x, ssdep_mean)
-ciBand(yl=res_max [2,], yu=res_max [4,], ym=res_max [3,], x=x, ylim=c(-0.5, 3))
-ciBand(yl=res_mean[2,], yu=res_mean[4,], ym=res_mean[3,], x=x, add=T, colm="purple")
+ciBand(yl=res_max[2,], yu=res_max[4,], ym=res_max[3,], x=x, ylim=c(-0.5, 3))
+ciBand(res_mean[2,], res_mean[4,], res_mean[3,], x=x, add=TRUE, colm="purple")
 }
 \keyword{aplot}
 \keyword{hplot}
