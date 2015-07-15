@@ -4,7 +4,7 @@
 \description{Combine several textfiles into one, regardless of their content.}
 \usage{combineFiles(inFiles=dir(), inDir=getwd(),
 outFile="combined_Textfiles.txt", outDir=inDir,
-sep=NULL, names=TRUE, selection=NULL, quiet=FALSE)}
+sep=NULL, names=TRUE, selection=NULL, progbar=!quiet, quiet=FALSE)}
 \arguments{
   \item{inFiles}{vector with names of input files, as can be read with \code{\link{scan}}. Is pasted with inDir, so don't use full paths. DEFAULT: dir()}
   \item{inDir}{Character string: path to the files. E.g. "D:/MyFolder/Subfolder". Don't have / at the end. DEFAULT: \code{\link{getwd}}().}
@@ -13,6 +13,7 @@ sep=NULL, names=TRUE, selection=NULL, quiet=FALSE)}
   \item{sep}{Character string: Separation between content of each file and the following. DEFAULT: NULL, with which it uses an empty line, two lines with dashes, and another line break.}
   \item{names}{Should File names be included after sep? DEFAULT: TRUE}
   \item{selection}{Index of rows that should be written. Can refer to each file separately, e.g. \code{substr(inFile_i,1,1)=="#"}, DEFAULT: all lines}
+  \item{progbar}{Should a progress bar be drwan? Useful if you combine many large files. DEFAULT: !quiet, i.e. TRUE}
   \item{quiet}{Suppress message about number of files combined? DEFAULT: FALSE}
 }
 \value{None, but prints number of files combined and output file name.}

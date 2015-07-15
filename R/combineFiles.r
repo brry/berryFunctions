@@ -1,6 +1,6 @@
 
 # Combine Textfiles regardless of their content.
-# Berry Boessenkool, berry-b@gmx.de, Nov 2012, Dec 2014
+# Berry Boessenkool, berry-b@gmx.de, Nov 2012, Dec 2014, Jul 2015
 
 combineFiles <- function(
    inFiles = dir(),
@@ -10,6 +10,7 @@ combineFiles <- function(
    sep = NULL,
    names=TRUE,
    selection=NULL,
+   progbar=!quiet,
    quiet=FALSE)
 {
 # Function start
@@ -29,6 +30,8 @@ if(names)
  write(as.character(Sys.time()), file=File, append=TRUE)
  write(sep, file=File, append=TRUE)
  }
+# Progressbar, if wanted:
+if(progbar) pb <- txtProgressBar(max=length(inFiles), style=3)
 # The actual action
 for(i in 1:length(inFiles))
    {
@@ -44,6 +47,9 @@ for(i in 1:length(inFiles))
    write(inFile_i[selection2], file=File, append=TRUE)
    # Write separation:
    write(sep, file=File, append=TRUE)
+   # Update progres bar:
+   if(progbar) setTxtProgressBar(pb, i)
    } # End of for-Loop
 if(!quiet) message(i, " files combined to ", File)
+if(progbar) close(pb)
 } # End of function
