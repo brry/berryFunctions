@@ -3,10 +3,9 @@
 \alias{berryFunctions}
 \docType{package}
 \title{Berry's functions}
-\description{Collection of functions, mainly connected with graphics.\cr
-- zoom in X11 graphics and ESRI shapefile plots\cr
+\description{Collection of functions, mainly connected with graphics and hydrology.\cr
+- zoom in X11 graphics\cr
 - plot rainfall-runoff data and optimize parameters for the unit hydrograph in the linear storage cascade\cr
-- fit and plot 13 extreme-value-distributions to estimate discharge at given return periods\cr
 - write text to plots on top of colored fields in label size (halo-effect)\cr
 - draw scatterplots colored by 3rd dimension (as in image, which only deals with grids)\cr
 - draw histograms horizontally\cr
@@ -22,9 +21,9 @@ mainly because they are interactive and need mouseclicks,
 or because they open another device/file.
 Normally, you should be able to run them in an interactive session.
 If you do find unexecutable code, please tell me!\cr
-Feel free to suggest packages in which these functions would fit well.
-I strongly depend on - and therefore welcome - any feedback!\cr
-The following functions have been deprecated over the lifetime of the package:\cr
+Feel free to suggest packages in which these functions would fit well.\cr
+I strongly depend on - and therefore welcome - any feedback!\cr\cr
+The following functions have been deprecated:\cr
 changeAttribute, showAttribute, shapeZoom: moved to
 \url{https://github.com/brry/shapeInteractive}\cr
 extremeStat, extremeStatLmom: moved to distLextreme in
@@ -102,7 +101,7 @@ browseURL("https://github.com/brry/shapeInteractive")
 
 # Zoom into graphics: pointZooom
 a <- rnorm(90); b <- rexp(90)
-windows(record=TRUE) # turn recording on
+dev.new(record=TRUE) # turn recording on
 plot(a,b, las=1)
 pointZoom(a,b) # scroll through the plots (Pg Up and Pg Dn) to unzoom again.
 
@@ -149,15 +148,14 @@ abline(h=hpos(11), col=2, lwd=2)
 
 # Set ylim so that it does not extend below zero: lim0
 val <- c(3.2, 1.8, 4.5, 2.8, 0.1, 2.9) # just some numbers
-plot(val) # axes are extenden by 4% automatically, if xaxs="r"
+plot(val) # axes are extended by 4% automatically, if xaxs="r"
 plot(val, ylim=lim0(val), las=1) # you don't even have to set yaxs="i" ;-)
 
 # Get nice values and labels to write at logarithmic axes: logVals, logAxis
 exdat <- 10^runif(50, -1, 2)
 plot(exdat, log="y", yaxt="n")
-dummy <- logAxis(side=2)
+logAxis(side=2) # invisibly returns values and labels
 points(exdat, pch=16)
-dummy
 
 # Label time axis in date-regular intervals: monthLabs, monthAxis
 monthLabs(2014,2014, 3)
@@ -179,11 +177,12 @@ mReg(x,y)
 set.seed(42); a <- cumsum(rnorm(100))
 plot(a, type="l", pch=16, las=1)
 lines(movAv(a), col=2, lwd=3)
-movAvLines(1:100, a, lwd=3, plot=TRUE)
+movAvLines(a, lwd=3, plot=TRUE)
 
 # Transformation from linear to logarithmic axis: linLogHist, linLogTrans
 x <- rlnorm(700, m=3)
-linLogHist(x, xlab="ddd", breaks=30, steps=3, write_t=FALSE, yaxt="n", freq=FALSE)
+dev.new(record=TRUE) # scroll through the plots (Pg Up and Pg Dn)...
+linLogHist(x, xlab="ddd", breaks=30, yaxt="n", freq=FALSE)
 
 # Histograms for dataset split into categories: groupHist
 groupHist(chickwts, "weight", "feed", col=2, unit="grams at age 6 weeks")
@@ -216,7 +215,7 @@ cie( c(5:8,3,14) )
 
 # sequence given by range or vector of values: seqR
 seqR(range=c(12,6), by=-2)
-seqR(range=rnorm(20), by=1)
+seqR(rnorm(20), by=1)
 
 # Convert list with vectors of unequal length to one single data.frame: l2df
 eglist <- list(BB=c(6,9,2,6), KA=1:8, JE=c(-3,2) )
@@ -230,10 +229,10 @@ addRows(MYDF, 3)
 # Show memory size of the biggest objects in MB: lsMem
 lsMem()
 
-# Lists with arguments for functions, some defaults: owa
+# Separate lists with arguments for functions: owa
 ?owa # the example section has a good - wait for it - example!
 
-# install.package and require in on function: require2
+# install.package and require in one single function: require2
 require2(ada)
 
 # extract pdf link from google search result url: googleLink2pdf
@@ -261,7 +260,7 @@ set.seed(1248272); paste(sample(letters,5,rep=T),collapse='')
 # wish neRds a happy new year: yearSample
 yearSample(2015)
 # Have a nerdy
-set.seed(1244); sample(0:9, 4, replace=TRUE)
+set.seed(1244); sample(0:9,4,T)
 
 }
 }
