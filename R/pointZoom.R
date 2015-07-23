@@ -13,18 +13,18 @@ pointZoom <- function(
           quiet=FALSE,
           ...)
 {
-if(interactive()){ # does this silence the build check warnings?
+if(interactive()){ # to silence the R CMD check warnings
 if(!quiet){
   legend("top", "Instructions appear in console", bty="n", text.col="orange")
-  message("Please select the area to zoom to in the graphics window.\n")
-  message("first klick topleft, then bottomright.\n"); flush.console()   
+  message("Please select the area to zoom to in the graphics window.")
+  message("first klick topleft, then bottomright."); flush.console()   
   } # if notify end
 w <- locator(2)
 u <- par()$usr
 if(w$x[1] > w$x[2] | w$y[1] < w$y[2])
   {
-  message("wrong selection!\n")
-  message("first klick topleft, then bottomright of the area to zoom to.\n")
+  message("wrong selection!")
+  message("first klick topleft, then bottomright of the area to zoom to.")
   flush.console(); w <- locator(2)
   }
 # if x is matrix:
@@ -42,12 +42,13 @@ Y1 <- c(u[3]+(w$y[2]-u[3])*1:steps/steps)
 Y2 <- c(u[4]-(u[4]-w$y[1])*1:steps/steps)
 for ( i in 1:steps) 
    {
-   polygon(c(w$x, rev(w$x)), rep(w$y, each = 2))
+   rect(xleft=w$x[1], ybottom=w$y[1], xright=w$x[2], ytop=w$y[2])
    Sys.sleep(Time/steps)
    plot(x, y, xlim=c(X1[i], X2[i]), ylim=c(Y1[i], Y2[i]), las=las,
    ylab=ylab, xlab=xlab ,  yaxs="i", xaxs="i", ...)
+   rect(xleft=w$x[1], ybottom=w$y[1], xright=w$x[2], ytop=w$y[2])
    } # loop end
 }
-if(!quiet) message("Tell me if this was helpful: berry-b@gmx.de.\n") 
+# if(!quiet) message("Tell me if this was helpful: berry-b@gmx.de") 
 } # end if interactive
 } # function end
