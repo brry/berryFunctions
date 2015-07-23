@@ -16,7 +16,7 @@ The default (NULL) means to use the first (or last) observation available.
 }
 \value{Vector with NAs replaced with interpolation (not a list, as in \code{\link{approx}}!)}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, July 2015}
-\seealso{\code{\link{approx}}, zoo::na.locf }
+\seealso{\code{\link{approx}}, zoo::na.locf, \code{\link{ciBand}} for  usage example}
 \examples{
 # approx2(c(NA,NA)) # yields an error
 approx2(c(NA,NA, 6, 4, 8, 9, 3, 2, 1))
