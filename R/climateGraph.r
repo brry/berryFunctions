@@ -41,6 +41,7 @@ if(textprop > 0)
   if(box) box()
   par(op)
   }
+rainsum <- sum(rain) # must be calculated before compression
 if(compress)
   {
   # compress all rain above 100 mm
@@ -124,8 +125,8 @@ lines(temp, col=coltemp, type="l", lwd=lwd)
 # plot rain line:
 lines(rain/2, col=colrain, type="l", lwd=lwd)
 # labelling:
-mtext(paste("\U00D8", round(mean(temp),1), units[1]),           side=3, col=coltemp, line=-2.0, adj=0.02, outer=T)
-mtext(bquote(sum()* " "*.(round(sum(rain),1))*" "*.(units[2])), side=3, col=colrain, line=-2.2, adj=1.08, outer=T, at=par("fig")[2])
+mtext(paste("\U00D8", round(mean(temp),1), units[1]),         side=3, col=coltemp, line=-2.0, adj=0.02, outer=T)
+mtext(bquote(sum()* " "*.(round(rainsum,1))*" "*.(units[2])), side=3, col=colrain, line=-2.2, adj=1.08, outer=T, at=par("fig")[2])
 if(compress) ticks <- ticks[ticks<=50]
 axis(side=2, at=ticks, col.axis=coltemp, las=1)
 axis(side=4, at=ticks[ticks>=0], ticks[ticks>=0]*2, col.axis=colrain, las=1)
