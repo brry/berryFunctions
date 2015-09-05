@@ -1,7 +1,7 @@
 # Produce logarithmic interval borders
 # Berry Boessenkool, berry-b@gmx.de, Oct 2014
 logSpaced <- function(
-base=1.2, # Base for calculations, can be a vector to compare several bases
+base=1.1708, # Base for calculations, can be a vector to compare several bases
 n=20, # Number of values to be calculated
 min=1, max=n, # Range where n values are to be distributed, single values each.
 plot=TRUE, # Should the points be plotted on a line?

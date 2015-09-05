@@ -2,10 +2,10 @@
 \alias{logSpaced}
 \title{Logarithmically spaced points}
 \description{Calculates values that are in logarithmic distance from each other.}
-\usage{logSpaced(base=1.2, n=20, min=1, max=n,
+\usage{logSpaced(base=1.1708, n=20, min=1, max=n,
 plot=TRUE, pch=3, las=1, ylab="base", ... )}
 \arguments{
-  \item{base}{Base for calculations, can be a vector to compare several bases. DEFAULT: 1.1}
+  \item{base}{Base for calculations, can be a vector to compare several bases. DEFAULT: 1.1708}
   \item{n}{Number of values to be calculated. DEFAULT: 30}
   \item{min,max}{Range where n values are to be distributed, single values each. DEFAULT: 1,n}
   \item{plot}{Should the points be plotted on a line? DEFAULT: TRUE}

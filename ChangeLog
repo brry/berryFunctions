@@ -13,6 +13,8 @@ This Log of changes in my package berryFunctions contains two sections:
 
 - createDoc: message successful creation location. add field opportunities for description, note, etc (see Roxygen), use dirname and basename where appropriate
 
+- combineFiles with default options creates file first and includes this in output
+
 - exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) ) 
 
 - lsc: better example dataset, optim problems, sim line not plotted completely
