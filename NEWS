@@ -23,10 +23,6 @@ This Log of changes in my package berryFunctions contains two sections:
 
 - mReg: remove zeros instead of replacing zeros with near-zero values. add hyperbolic functions. copy formula option from linReg. catch NAs before rmse catches them several times. repeat col. selection partial matching. Numbers in output. output limited to selection.
 
-- movAv cannot handle tapply result, is.vector check is too strict
-
-- pastec: enable newline insertion every n elements
-
 - pointZoom: rename Argument colp, as col cannot be given currently. Add expr argument
 
 - require2: change to requireNamespace http://r-pkgs.had.co.nz/namespace.html#namespace
