@@ -4,7 +4,7 @@ berryFunctions
 My misc functions package. Notable: colPoints, horizHist, logAxis, pointZoom, smallPlot, lsc.
 
 Code to install from CRAN:
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/berryFunctions)](http://cran.r-project.org/package=berryFunctions) [![downloads](http://cranlogs.r-pkg.org/badges/berryFunctions)](http://cranlogs.r-pkg.org/)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/berryFunctions)](http://cran.r-project.org/package=berryFunctions) [![downloads](http://cranlogs.r-pkg.org/badges/berryFunctions)](http://www.r-pkg.org/services)
 
 ```R
 install.packages("berryFunctions")
@@ -22,7 +22,7 @@ library(berryFunctions)
 ```
 
 If this doesnt work, your R version is probably too old. In that case, an update is really recommendable: [r-project.org](http://www.r-project.org/). If you can't update R, here's a workaround:
-click on **Download ZIP** (to the right), unzip the file to some place, then
+click on **Download ZIP** (to the right, [link](https://github.com/brry/berryFunctions/archive/master.zip)), unzip the file to some place, then
 ```R
 setwd("that/path")
 dd <- dir("berryFunctions-master/R", full=T)
