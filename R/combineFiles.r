@@ -14,6 +14,7 @@ combineFiles <- function(
    quiet=FALSE)
 {
 # Function start
+inFiles <- inFiles # execute before outFile is added
 # Default sep:
 if(is.null(sep)) sep <- "\n-------------------------------------------------------
 -------------------------------------------------------\n"

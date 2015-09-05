@@ -11,27 +11,23 @@ This Log of changes in my package berryFunctions contains two sections:
 -----------------------------------------------------------------
 
 
-- createDoc: message successful creation location. add field opportunities for description, note, etc (see Roxygen), use dirname and basename where appropriate
-
-- combineFiles with default options creates file first and includes this in output
+- createDoc: message successful creation location. add field opportunities for description, note, etc (see Roxygen)
 
 - exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) ) 
 
 - lsc: better example dataset, optim problems, sim line not plotted completely
 
-- linReg: grouped density or boxplot(y~group, add=T, at=unique(bpoints), yaxt="n", xlab="", range=0)
+- linReg: grouped density or boxplot(y~group, add=T, at=unique(bpoints), yaxt="n", xlab="", range=0). Add uncertainty intervals.
 
 - linLogHist, linLogTrans: add sleep argument for Sys.sleep
 
 - mReg: remove zeros instead of replacing zeros with near-zero values. add hyperbolic functions. copy formula option from linReg. catch NAs before rmse catches them several times. repeat col. selection partial matching. Numbers in output. output limited to selection.
 
-- movAv cannot handle tapply result, is.vector check is too strict. Add function adding semitransparent lines automatically.
+- movAv cannot handle tapply result, is.vector check is too strict
 
 - pastec: enable newline insertion every n elements
 
 - pointZoom: rename Argument colp, as col cannot be given currently. Add expr argument
-
-- quantileMean: remove sapply loop if probs has length 1 (if this is faster).
 
 - require2: change to requireNamespace http://r-pkgs.had.co.nz/namespace.html#namespace
 
@@ -39,7 +35,6 @@ This Log of changes in my package berryFunctions contains two sections:
 
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
  
-
 
 -----------------------------------------------------------------
 -----------------------------------------------------------------
