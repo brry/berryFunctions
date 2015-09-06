@@ -21,6 +21,13 @@ if(width %% 2 == 0)
    width <- width+1
    weights <- rep(1,width)
    }
+# remove NAs at start and end
+notNA <- which(!is.na(dat))
+nNAbegin <- head(notNA, 1)-1
+nNAend <- length(dat)-tail(notNA, 1)
+if(nNAend!=0)   dat <- dat[1:(length(dat)-nNAend)]
+if(nNAbegin!=0) dat <- dat[-(1:nNAbegin)]
+#
 if(length(weights) >= length(dat))
    stop("weight vector too long for this dataset.")
 
@@ -57,6 +64,9 @@ v <- c(rep(NA, s), v, rep(NA, s) )
 # Error checking:
 if(length(v) != length(dat)) stop("Window size was computed wrongly.
 Please report conditions: berry-b@gmx.de")
+# Re-append NAs at beginning and end of vector:
+if(nNAbegin!=0) v <- c(rep(NA, nNAbegin), v)
+if(nNAend!=0)   v <- c(v, rep(NA, nNAend))
 # Output
 return(v)
 }
