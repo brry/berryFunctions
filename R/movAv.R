@@ -45,7 +45,8 @@ v <- sapply( (s+1):(n-s),  function(i)
   if(any(is.na(subset)))
      {weights[is.na(subset)] <- 0
      weights <- weights/(sum(weights))
-     }
+  }
+  if(all(is.na(subset))) NA else
   sum(weights*subset, na.rm=TRUE)
   })
 

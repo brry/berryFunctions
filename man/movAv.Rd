@@ -19,9 +19,14 @@ If there are NAs in the window, the corresponding weight is distributed evenly t
 \seealso{ \code{\link{decompose}}, \code{\link{smooth}}, \code{\link{loess}}, \code{\link[zoo]{rollapply}} (no overlapping!)}
 \examples{
 
-set.seed(29); a <- runif(60, 5,50)
-data.frame(a[1:20], movAv(a[1:20]))
+set.seed(29); a <- runif(40, 5,50)
+data.frame(a, movAv(a))
 
+# final and commencing NAs are kept, middle ones are filled:
+a[c(1:10, 18:26, 32:40)] <- NA
+data.frame(a, movAv(a))
+
+set.seed(29); a <- runif(60, 5,50)
 plot(a, type="o", pch=16, las=1)
 lines(movAv(a), col=2, lwd=3) # shows trends, signal in the noise
 lines(movAv(a,3), col=4, lwd=3)
@@ -100,3 +105,4 @@ lines(nileNA_ma, col=2)
 \keyword{ts}
 \keyword{manip}
 \keyword{smooth}
+
