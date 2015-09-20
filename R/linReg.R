@@ -29,8 +29,8 @@ if(class(x)=="formula")
     } else
     {                   # get x and y from formula directly
     name <- as.character(x)[-1]
-    x <- get(name[2]) ;  if(missing(xlab)) xlab <- name[2]
-    y <- get(name[1]) ;  if(missing(ylab)) ylab <- name[1]
+    x <- get(name[2], pos=1) ;  if(missing(xlab)) xlab <- name[2]
+    y <- get(name[1], pos=1) ;  if(missing(ylab)) ylab <- name[1]
     }
   }
 # make new plot if add is FALSE (the default):
