@@ -77,11 +77,11 @@ If you're adjusting the appearance (lwd, lty, col) of single lines, set paramete
 #  9 reciprocal             a/x + b \cr
 # 10 rational               1 / (a*x + b) \cr
 # 11 exponential 4 Param    a*e^(b*(x+c)) + d  \cr
-Replaces zeros with 0.00000000000001 for logarithms. Which may put too much weight on these data points - further testing needed!\cr
+
 Negative values are not used for regressions containing logarithms; with warning.\cr
 exp_4par was originally developed for exponential temperature decline in a cup of hot water.
 }
-\author{Berry Boessenkool, \email{berry-b@gmx.de}, December 2012}
+\author{Berry Boessenkool, \email{berry-b@gmx.de}, December 2012, updated sept 2015}
 \references{Listed here: \url{http://rclickhandbuch.wordpress.com/berryfunctions/#mReg}}
 \seealso{\code{\link{glm}}, \code{\link{lm}}, \code{\link{optim}}}
 
@@ -102,9 +102,10 @@ mReg(x,y)
 # Passing arguments to legend:
 mReg(x,y, pch=1, legargs=list(x="bottomright", cex=0.7), legendform="form")
 
+mReg(x,y, col=rainbow2(11))
 mReg(x,y, extend=0.2) # less empty space around data points
 mReg(x,y, nbest=4) # only 4 distributions plotted
-mReg(x,y, legargs=list(x=7, y=8, bty="o")) # Legend position as coordinates
+mReg(x,y, legargs=list(x=7, y=8, bty="o", cex=0.6)) # Legend position as coordinates
 
 \dontrun{
 ## Rcmd check --as-cran doesn't like to open external devices,
