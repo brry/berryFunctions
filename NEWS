@@ -1,54 +1,38 @@
 
-This Log of changes in my package berryFunctions contains two sections:
-1. future development - a list of things I want to change
-2. development over time - a log of the changes I already made
-
-
------------------------------------------------------------------
------------------------------------------------------------------
-1. berryFunctions - future development
------------------------------------------------------------------
------------------------------------------------------------------
-
-
+Before the actual NEWS, here is some future development planned in berryFunctions.
+Feedback, ideas, code suggestions welcome at berry-b@gmx.de or via github.com/brry/berryFunctions
+-----------------------------
 - createDoc: message successful creation location. add field opportunities for description, note, etc (see Roxygen)
-
 - exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) ) 
-
 - lsc: better example dataset, optim problems, sim line not plotted completely
-
-- linReg: grouped density or boxplot(y~group, add=T, at=unique(bpoints), yaxt="n", xlab="", range=0). Add uncertainty intervals.
-
 - linLogHist, linLogTrans: add sleep argument for Sys.sleep
-
-- mReg: remove zeros instead of replacing zeros with near-zero values. add hyperbolic functions. copy formula option from linReg. catch NAs before rmse catches them several times. repeat col. selection partial matching. Numbers in output. output limited to selection.
-
 - pointZoom: rename Argument colp, as col cannot be given currently. Add expr argument
-
 - require2: change to requireNamespace http://r-pkgs.had.co.nz/namespace.html#namespace
-
 - tableColVal: add digits argument
-
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
  
 
------------------------------------------------------------------
------------------------------------------------------------------
-2. berryFunctions - development over time
------------------------------------------------------------------
------------------------------------------------------------------
+-----------------------------
+-----------------------------
 
 
 Version 1.9.0 (2015-)
+To see all changes in detail, go to:
 https://github.com/brry/berryFunctions/compare/master@{2015-06-02}...master
-- imports 'base' packages: graphics (22 functions), stats (18), utils (6), grDevices (5)
-- combineFiles: progbar option added
+The general overview:
+Package imports 'base' packages: graphics (22 functions used), stats (18), utils (6), grDevices (5)
+Documentation updated in several places, notably in package info
+ChangeLog renamed to NEWS, so that it shows up in package help index
+- combineFiles: progbar option added, with default options does no longer include outFile in outFile
+- climateGraph: rainfall sum corrected if compress=TRUE
+- movAv: NA handling greatly improved (some bugs went unnoticed for a long time)
+- linReg and mReg: handle NAs and formula input
 
-New Functions: sortDF, timer, approx2, ciBand
+New functions: sortDF, timer, approx2, ciBand
 
 
------------------------------------------------------------------
------------------------------------------------------------------
+-----------------------------
+-----------------------------
 
 
 Version 1.8.1 (2015-06-02)
@@ -67,12 +51,12 @@ The most important stuff:
 - quantileMean: inputs checked, truncate option (analog to extremeStat::distLquantile), example with sample size dependency simulation
 - smallPlot: improved for mfrow situations, coordinates input and swapping improved, auomatic correction of input errors
 
-New Functions: panelDim, groupHist, monthAxis, pastec, linLogHist, movAvLines
+New functions: panelDim, groupHist, monthAxis, pastec, linLogHist, movAvLines
 removed: deprecatedFunctions
 
 
------------------------------------------------------------------
------------------------------------------------------------------
+-----------------------------
+-----------------------------
 
 
 Version 1.7.1 (2014-12-20)
@@ -92,8 +76,8 @@ various small changes and bug fixes. See the commits on github
 New functions: logSpaced, removeSpace, expReg, dupes
 
 
------------------------------------------------------------------
------------------------------------------------------------------
+-----------------------------
+-----------------------------
 
 
 Version 1.6 (2014-10-14)
@@ -114,8 +98,8 @@ Development version is now on Github
 New functions: rainbow2, quantileMean, quantileBands, (compareFiles and combineFiles)
 removed functions: extremeStatLmom, changeAttribute, showAttribute shapeZoom, (compFiles and combineTextfiles)
 
------------------------------------------------------------------
------------------------------------------------------------------
+-----------------------------
+-----------------------------
 
 Version 1.5.2 (2014-09-15)
 Functions to be moved to new packages warn about it (extremeStatLmom, changeAttribute, showAttribute and shapeZoom)
@@ -126,8 +110,8 @@ Functions to be moved to new packages warn about it (extremeStatLmom, changeAttr
 New function: logAxis
 
 
------------------------------------------------------------------
------------------------------------------------------------------
+-----------------------------
+-----------------------------
 
 
 Version 1.5 (2014-09-03)
@@ -149,8 +133,8 @@ New functions: normPlot, betaPlot, exp4p, compFiles, funTinn, pretty2, colPoints
 functions removed: compareDoc (Rcmd check does this better, once a package is set up), extremeStat (replaced with extremeStatLmom)
 
 
------------------------------------------------------------------
------------------------------------------------------------------
+-----------------------------
+-----------------------------
 
 
 Version 1.4 (2014-07-01)
@@ -162,8 +146,8 @@ Added To-Do list with my personal wishes (and some comments from other people) a
 New function: linLogTrans
 
 
------------------------------------------------------------------
------------------------------------------------------------------
+-----------------------------
+-----------------------------
 
 
 Version 1.3 (2014-06-08)
@@ -172,8 +156,8 @@ Shapefile (6 MB) removed from data
 examples in changeAttribute, showAttribute, shapeZoom changed accordingly
 
 
------------------------------------------------------------------
------------------------------------------------------------------
+-----------------------------
+-----------------------------
 
 
 Version 1.2 (2014-06-06)
@@ -192,8 +176,8 @@ combineTextfiles: example added.
 require2: example is set to dontrun
 
 
------------------------------------------------------------------
------------------------------------------------------------------
+-----------------------------
+-----------------------------
 
 
 Version 1.1 (2014-06-05)
@@ -243,8 +227,8 @@ unitHydrograph
 yearSample
 
 
------------------------------------------------------------------
------------------------------------------------------------------
+-----------------------------
+-----------------------------
 
 
 Version 1.0 (2012-10-04)
