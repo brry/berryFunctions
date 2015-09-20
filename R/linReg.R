@@ -19,19 +19,13 @@ linReg <- function(
 {
 if(class(x)=="formula")
   {
-  if(!missing(data))
-    {                   # get x and y from data.frame
-    name <- as.character(x)[-1]
-    x <- data[ , name[2] ]  ;  if(missing(xlab)) xlab <- name[2]
-    y <- data[ , name[1] ]  ;  if(missing(ylab)) ylab <- name[1]
-    if(missing(main)) main <- paste("linear regression of",
-                                    deparse(substitute(data)))
-    } else
-    {                   # get x and y from formula directly
-    name <- as.character(x)[-1]
-    x <- get(name[2], pos=1) ;  if(missing(xlab)) xlab <- name[2]
-    y <- get(name[1], pos=1) ;  if(missing(ylab)) ylab <- name[1]
-    }
+  mf <- model.frame(x, data=data)
+  x <- mf[,2]
+  y <- mf[,1]
+  if(missing(xlab)) xlab <- colnames(mf)[2]
+  if(missing(ylab)) ylab <- colnames(mf)[1]
+  if(!missing(data) & missing(main)) main <- paste("linear regression of",
+                                                    deparse(substitute(data)))
   }
 # make new plot if add is FALSE (the default):
 if (!add) plot(x, y, las=1, pch=pch, xlab=xlab, ylab=ylab, main=main, ...)
