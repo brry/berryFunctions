@@ -3,8 +3,8 @@
 \title{linear regression with plotting}
 \description{uses \code{\link{lm}}; plots data if add=FALSE, draws the regression line with \code{\link{abline}} and writes the formula with \code{\link{legend}}}
 \usage{linReg(x, y=NULL, data=NULL, digits=2, inset=0, xpd=par("xpd"), pos1="top",
-pos2=NULL, add=FALSE, pch=16, col=2, lwd=1, xlab=deparse(substitute(x)),
-ylab=deparse(substitute(y)), main="linear regression", ...)}
+pos2=NULL, add=FALSE, pch=16, col=2, colband=addAlpha(col), lwd=1, 
+xlab=deparse(substitute(x)), ylab=deparse(substitute(y)), main="linear regression", ...)}
 \arguments{
   \item{x}{Numeric or formula (see examples). Vector with values of explanatory variable}
   \item{y}{Numeric. Vector with values of dependent variable. DEFAULT: NULL}
@@ -16,7 +16,8 @@ ylab=deparse(substitute(y)), main="linear regression", ...)}
   \item{pos2}{For numerical coordinates, this is the y-position. DEFAULT: NULL, as in \code{\link{legend}}}
   \item{add}{Logical. If TRUE, line and text are added to the existing graphic. DEFAULT: FALSE (plots datapoints first and then the line.)}
   \item{pch}{Point Character, see \code{\link{par}}. DEFAULT: 16}
-  \item{col}{Color, see \code{\link{par}}. DEFAULT: 2}
+  \item{col}{Color of the regression line, see \code{\link{par}}. DEFAULT: 2}
+  \item{colband}{Color of the confidence region band. DEFAULT: addAlpha(col)}
   \item{lwd}{Numeric. Linewidth, see \code{\link{par}}. DEFAULT: 1}
   \item{xlab, ylab, main}{Character / Expression. axis label and graph title if add=FAlSE. DEFAULT: deparse(substitute(x)) or y, "linear regression"}
   \item{\dots}{Further arguments passed to plot and abline.}
