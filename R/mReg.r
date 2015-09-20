@@ -17,8 +17,9 @@
 #             13 powerplus a^x + b
 
 mReg <- function(
-    x,
-    y, # x and y Data
+    x, # Vector with x coordinates or formula (like y~x), the latter is passed to \code{\link{model.frame}}
+    y=NULL, # Vector with y values
+    data=NULL, # data.frame in which formula is applied
     Poly45=FALSE, # Also fit polynomials of 4th and 5th degree?
     exp_4=FALSE, # return exp_4 fits in table? (only best fit is plotted) DEFAULT: FALSE
     xf=deparse(substitute(x)), yf=deparse(substitute(y)), # x and y names for Formula
@@ -54,8 +55,37 @@ if( xf=="e" | yf=="e" )
 if(any(4:5 %in% selection)) Poly45 <- TRUE
 if(11 %in% selection) exp_4 <- TRUE
 if( ! round(nbest,1) %in% 0:12) stop("nbest has to be an integer between 0 and 12")
-if(length(lwd)==1) lwd <- rep(lwd, 12)
-if(length(lty)==1) lty <- rep(lty, 12)
+lwd <- rep(lwd, length=12)
+lty <- rep(lty, length=12)
+if(class(x)=="formula")
+{
+  mf <- model.frame(x, data=data)
+  x <- mf[,2]
+  y <- mf[,1]
+  if(missing(xlab)) xf <- colnames(mf)[2]
+  if(missing(ylab)) yf <- colnames(mf)[1]
+  #if(!missing(data) & missing(main)) main <- paste("multiple regression of",deparse(substitute(data)))
+}
+# NA removal
+if(any(is.na(x)|is.na(y)))
+  {
+  Na <- which(is.na(x)|is.na(y))
+  warning(length(Na), " NAs were omitted from ", length(x), " data points (",
+          round(length(Na)/length(x)*100,1),"%).")
+  x <- x[-Na] ; y <- y[-Na]
+  } # end if NA
+# vector length check:
+if(length(x)!=length(y)) stop("x (",length(x), " elements) and y (",length(y),") must be of the same length.")
+# log regression vectors without zeros and negative values:
+neg <- which(x<=0|y<=0)
+if(length(neg)!=0) 
+  {
+  warning("For log/exp/power regressions, ",length(neg),
+    " nonpositive values were removed from x and y (",round(length(neg)/length(x)*100,1),"%).")
+  xg0 <- x[-neg] # xg0: x greater zero
+  yg0 <- y[-neg]
+  } else
+  {xg0 <- x; yg0 <- y}
 #
 # Functions needed for function descriptions
 # abbreviate parameters of fitted functions:
@@ -93,26 +123,27 @@ if(Poly45){
   output$R2[5] <- rsquare(y, output$a[5]*x^5 + output$b[5]*x^4 + output$c[5]*x^3 + output$d[5]*x^2 + output$e[5]*x + output$f[5])
   } # if Poly45 end
 #  6 logarithmic ---------- a*log(x) + b ---------------------------------------
-mod6 <- lm( y ~ log10(replace(x, x==0, 1e-10)) ) # influence needs yet to be checked! ###
+mod6 <- lm( yg0 ~ log10(xg0) )
 output$a [6] <- coef(mod6)[2]
 output$b [6] <- coef(mod6)[1]
-output$R2[6] <- rsquare(y, output$a[6]*log10(replace(x, x==0, 1e-10)) + output$b[6])
+output$R2[6] <- rsquare(yg0, output$a[6]*log10(xg0) + output$b[6])
 #  7 exponential ---------- a*e^(b*x) ------------------------------------------
-log_y <- log(replace(y, y==0, 1e-10))
-mod7 <- lm( log_y ~ x )                    # y = a*e^(b*x)
+mod7 <- lm( log(yg0) ~ xg0 )               # y = a*e^(b*x)
 output$a [7] <- exp(coef(mod7)[1])         # ln(y) = ln(a) + ln( e^(b*x) )
 output$b [7] <- coef(mod7)[2]              # ln(y) = ln(a) + b*x
-output$R2[7] <- rsquare(y, output$a[7]*exp(output$b[7]*x))
+output$R2[7] <- rsquare(yg0, output$a[7]*exp(output$b[7]*xg0))
 #  8 power/root ----------- a*x^b ----------------------------------------------
-mod8 <- lm( log_y ~ log(replace(x, x==0, 1e-10)) ) # y = a*x^b
+mod8 <- lm( log(yg0) ~ log(xg0) )                  # y = a*x^b
 output$a [8] <- exp(coef(mod8)[1])                 # ln(y) = ln(a) + ln(x^b)
 output$b [8] <- coef(mod8)[2]                      # ln(y) = ln(a) + b*ln(x)
-output$R2[8] <- rsquare(y, output$a[8]*replace(x, x==0, 1e-10)^output$b[8])
+output$R2[8] <- rsquare(yg0, output$a[8]*xg0^output$b[8])
 #  9 reciprocal ----------- a/x + b --------------------------------------------
-mod9 <- lm( y ~ I(1/replace(x, x==0, 1e-10)) )
+xn0 <- x[x!=0 & y!=0] # xn0: x not zero
+yn0 <- y[x!=0 & y!=0]
+mod9 <- lm( yn0 ~ I(1/xn0) )
 output$a [9] <- coef(mod9)[2]
 output$b [9] <- coef(mod9)[1]
-output$R2[9] <- rsquare(y, output$a[9]/replace(x, x==0, 1e-10) + output$b[9])
+output$R2[9] <- rsquare(yn0, output$a[9]/xn0 + output$b[9])
 # 10 rational ------------- 1 / (a*x + b) --------------------------------------
 mod10 <- lm( I(1/y) ~ x)
 output$a [10] <- coef(mod10)[2]

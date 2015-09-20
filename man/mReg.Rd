@@ -6,7 +6,7 @@ Multiple regression fitting various function types including e.g. linear, cubic,
 Quick way to find out what function type fits the data best.
 Plots data and fitted functions and adds a legend with the functions (or their types=structure) sorted by R squared.
 Returns the fitted functions with their parameters and R^2 values in a data.frame.}
-\usage{mReg(x, y, Poly45=FALSE, exp_4=FALSE,
+\usage{mReg(x, y=NULL, data=NULL, Poly45=FALSE, exp_4=FALSE,
 xf=deparse(substitute(x)),  yf=deparse(substitute(y)), ncolumns=9, plot=TRUE,
 add=FALSE,  nbest=12, R2min, selection=NULL, digits=2, extend=0.4,
 xlim=range(x, finite=TRUE) + c(-1,1)* extend * diff(range(x,  finite=TRUE)),
@@ -14,8 +14,9 @@ ylim=range(y, finite=TRUE) + c(-1,1)* extend * diff(range(y, finite=TRUE)),
 xlab=xf,  ylab=yf, las=1, lwd=rep(1, 12), lty=rep(1, 12), col=NULL,
 pcol=par("col"), pch=16, legend=TRUE, legargs=NULL, legendform="nameform", ...)}
 \arguments{
-  \item{x}{Numerical vector. x coordinates of points for regression}
-  \item{y}{Y-values}
+  \item{x}{Vector with x coordinates or formula (like y~x), the latter is passed to \code{\link{model.frame}}}
+  \item{y}{Vector with y values. DEFAULT: NULL (to enable x to be a formula)}
+  \item{data}{data.frame in which formula is applied. DEFAULT: NULL}
   \item{Poly45}{Logical. Should 4th and 5th degree polynomials also be fitted? DEFAULT: FALSE, as the formulas are very long.}
   \item{exp_4}{Logical. Return 4-parametric exponential distibution fits? (only best fit is plotted). exp_4par_ini has the initial values of exponential fitting with the data relocated to first quadrant. The others are optimized with the methods of \code{\link{optim}}. DEFAULT: FALSE}
   \item{xf}{Character. x name for Formula. DEFAULT: substitute(x) before replacing zeros in x and y}
@@ -89,7 +90,14 @@ set.seed(12)
 x <- c(runif(100,0,3), runif(200, 3, 25)) # random from uniform distribution
 y <- 12.367*log10(x)+7.603+rnorm(300)     # random from normal distribution
 plot(x,y, xlim=c(0,40))
-mReg(x,y) # Warnings come from negative y-values
+mReg(x,y) # Warning comes from negative y-values
+
+# Formula specification:
+mReg(Volume~Height, data=trees)
+
+# NA management
+x[3:20] <- NA
+mReg(x,y)
 
 # Passing arguments to legend:
 mReg(x,y, pch=1, legargs=list(x="bottomright", cex=0.7), legendform="form")
