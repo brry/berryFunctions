@@ -34,7 +34,7 @@ xlim=range(x), ylim=range(y), ...)}
 \seealso{ \code{\link{lm}}, \code{\link{mReg}}, \code{\link{linReg}}.}
 \examples{
 x <- runif(100, 1, 10)
-y <- 10^(x+rnorm(100, sd=0.2))
+y <- 10^(0.3*x+rnorm(100, sd=0.3)+4)
 plot(x,y)
 expReg(x,y)
 expReg(x,y, logy=FALSE)
