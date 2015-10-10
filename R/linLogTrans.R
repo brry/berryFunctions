@@ -14,6 +14,7 @@ linLogTrans <- function(
    box=TRUE, # Draw box at the end to overplot \code{\link{abline}s} crossing the box?
    parexpr, # Characterized Expression to set \code{\link{par}}, eg. \code{parexpr='par(mar=c(2,0.5,1.5,0.5), mpg=c(1.8,1,0))'}
    endexpr, # Characterized Expression executed at the end of the plot, eg. \code{endexpr='mtext("Probability Density", line=-1, adj=0.03, outer=T)'}
+   sleep=0, # Pause time between frames, in seconds, passed to \code{\link{Sys.sleep}} 
    firstplot=TRUE, # plot on linear scale first?
    lastplot=TRUE, # plot on logarithmic scale at the end?
    write_t=TRUE, # write transformation value in lower right corner?
@@ -75,6 +76,8 @@ if(log=="x") # -----------------------------------------------------------------
      if(!missing(endexpr)) eval(parse(text=endexpr))
      # write transformation value:
      if(write_t) title(sub=paste("t =", sprintf("%6.2f", t)), adj=1)
+     # slow down frame passing:
+     if(sleep!=0) Sys.sleep(sleep)
      } # End for loop
   # Final image
   if(lastplot)
@@ -102,6 +105,7 @@ else if(log=="y") # ------------------------------------------------------------
      if(box) graphics::box("plot")
      if(!missing(endexpr)) eval(parse(text=endexpr))
      if(write_t) title(sub=paste("t =", sprintf("%6.2f", t)), adj=1)
+     if(sleep!=0) Sys.sleep(sleep)
      } # End for loop
   if(lastplot)
     {
@@ -130,6 +134,7 @@ else if(log=="xy" | log=="yx") # -----------------------------------------------
      if(box) graphics::box("plot")
      if(!missing(endexpr)) eval(parse(text=endexpr))
      if(write_t) title(sub=paste("t =", sprintf("%6.2f", t)), adj=1)
+     if(sleep!=0) Sys.sleep(sleep)
      } # End for loop
   if(lastplot)
     {

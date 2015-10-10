@@ -12,6 +12,7 @@ xlim=range(x, finite=TRUE), # xlim range in non-log units.
 box=TRUE, # Draw box at the end to overplot \code{\link{abline}s} crossing the box?
 parexpr, # Characterized Expression to set \code{\link{par}}, eg. \code{parexpr='par(mar=c(2,0.5,1.5,0.5), mpg=c(1.8,1,0))'}
 endexpr, # Characterized Expression executed at the end of the plot, eg. \code{endexpr='mtext("Probability Density", line=-1, adj=0.03, outer=T)'}
+sleep=0, # Pause time between frames, in seconds, passed to \code{\link{Sys.sleep}} 
 axisargs=NULL, # List of arguments passed to \code{\link{logVals}}, like base
 axisargs2=NULL, # List of arguments passed to \code{\link{logAxis}} in the final plot
 firstplot=TRUE, # plot on linear scale first?
@@ -50,6 +51,8 @@ for(t in allt)
   # write transformation value:
   if(write_t) title(sub=paste("t =", sprintf("%6.2f", t)), adj=1)
   if(!missing(endexpr)) eval(parse(text=endexpr))
+  # slow down frame passing:
+  if(sleep!=0) Sys.sleep(sleep)
   } # End for loop
 # Final image
 if(lastplot)

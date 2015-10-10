@@ -4,7 +4,7 @@
 \description{draw images that gradually transform from a linear to a logarithmic axis}
 \usage{linLogTrans(x, y, log="x", steps=100, base=1, las=1, plot=TRUE,
 xlim=range(x, finite=TRUE), ylim=range(y, finite=TRUE),
-box=TRUE, parexpr, endexpr,
+box=TRUE, parexpr, endexpr, sleep=0,
 firstplot=TRUE, lastplot=TRUE, write_t=TRUE, values_t=NULL, pointsarg=NULL, ...) }
 \arguments{
   \item{x}{x values to be plotted in animation}
@@ -19,6 +19,7 @@ firstplot=TRUE, lastplot=TRUE, write_t=TRUE, values_t=NULL, pointsarg=NULL, ...)
   \item{box}{Draw box at the end to overplot \code{\link{abline}s} crossing the box? DEFAULT: TRUE}
   \item{parexpr}{Characterized Expression to set \code{\link{par}}, eg. \code{parexpr='par(mar=c(2,3.5,1.5,0.5), mpg=c(1.8,1,0))'}}
   \item{endexpr}{Characterized Expression executed at the end of the plot, eg. \code{endexpr='mtext("I am an upright ylab!", line=-1, adj=0.03, outer=T)'}}
+  \item{sleep}{Pause time between frames, in seconds, passed to \code{\link{Sys.sleep}}. DEFAULT: 0}
   \item{firstplot}{Plot data on linear axis as first image? DEFAULT: TRUE}
   \item{lastplot}{Plot data on logarithmic axis as last image? DEFAULT: TRUE}
   \item{write_t}{Write transformation value in lower right corner? DEFAULT: TRUE}
@@ -38,7 +39,7 @@ besides the nice graphic properties of logtransformations, check this page for t
 \examples{
 
 set.seed(42);  x <- 10^rnorm(100, 3);  y <- runif(100)
-linLogTrans(x,y, steps=15)
+linLogTrans(x,y, steps=15, sleep=0.01) # 0.05 might be smoother...
 linLogTrans(x,y, steps=15, log="y", ylim=c(0.1, 0.8), base=c(1,2,5))
 
 \dontrun{
