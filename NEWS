@@ -2,11 +2,9 @@
 Before the actual NEWS, here is some future development planned in berryFunctions.
 Feedback, ideas, code suggestions welcome at berry-b@gmx.de or via github.com/brry/berryFunctions
 -----------------------------
-- createDoc: message successful creation location. add field opportunities for description, note, etc (see Roxygen)
+- createDoc: add field opportunities for description, note, etc (see Roxygen)
 - exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) ) 
 - lsc: better example dataset, optim problems, sim line not plotted completely
-- linLogHist, linLogTrans: add sleep argument for Sys.sleep
-- pointZoom: rename Argument colp, as col cannot be given currently. Add expr argument
 - require2: change to requireNamespace http://r-pkgs.had.co.nz/namespace.html#namespace
 - tableColVal: add digits argument
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
@@ -16,7 +14,7 @@ Feedback, ideas, code suggestions welcome at berry-b@gmx.de or via github.com/br
 -----------------------------
 
 
-Version 1.9.0 (2015-)
+Version 1.9.0 (2015-10-10)
 To see all changes in detail, go to:
 https://github.com/brry/berryFunctions/compare/master@{2015-06-02}...master
 The general overview:
@@ -27,6 +25,8 @@ ChangeLog renamed to NEWS, so that it shows up in package help index
 - climateGraph: rainfall sum corrected if compress=TRUE
 - movAv: NA handling greatly improved (some bugs went unnoticed for a long time)
 - linReg and mReg: handle NAs and formula input
+- linLogHist, linLogTrans: added sleep argument to slow down animation
+- pointZoom: expr argument added, colp renamed (col could not be given)
 
 New functions: sortDF, timer, approx2, ciBand
 
