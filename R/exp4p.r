@@ -12,8 +12,8 @@ exp4p <- function(
     ...) # further graphical parameters passed to \code{\link{plot}}
 {
 # Prepare Output Table
-output <- as.data.frame(matrix(NA, ncol=7, nrow=6 ))
-colnames(output) <- c("R2","Formulas","R2full", letters[1:4] )
+output <- as.data.frame(matrix(NA, ncol=8, nrow=6 ))
+colnames(output) <- c("nr","R2","Formulas","R2full", letters[1:4] )
 rownames(output) <- c("ini", "N-M", "BFGS", "CG", "SANN", "L--B")
 #
 # initial parameters via lm of values relocated to first quadrant
@@ -33,19 +33,19 @@ expfun <- function(p, x) p[1]*exp(p[2]*(x+p[3]))+p[4]
 minfun <- function(p) rmse(y, expfun(p, x=x)) # Root Mean Square Error
 #
 # Fitting of parameters with different methods
-output[1, 4:7] <- param
-output[2, 4:7] <- optim(par=param, fn=minfun, method="Nelder-Mead")$par
-output[3, 4:7] <- optim(par=param, fn=minfun, method="BFGS")$par
-output[4, 4:7] <- optim(par=param, fn=minfun, method="CG")$par
-output[5, 4:7] <- optim(par=param, fn=minfun, method="SANN")$par
+output[1, 5:8] <- param
+output[2, 5:8] <- optim(par=param, fn=minfun, method="Nelder-Mead")$par
+output[3, 5:8] <- optim(par=param, fn=minfun, method="BFGS")$par
+output[4, 5:8] <- optim(par=param, fn=minfun, method="CG")$par
+output[5, 5:8] <- optim(par=param, fn=minfun, method="SANN")$par
 opt_L      <- try(optim(par=param, fn=minfun, method="L-BFGS-B")$par, silent=TRUE)
 for(i in 2:5) if(class(opt_L)=="try-error")
-  opt_L<- try(optim(output[i,4:7], fn=minfun, method="L-BFGS-B")$par, silent=TRUE)
+  opt_L<- try(optim(output[i,5:8], fn=minfun, method="L-BFGS-B")$par, silent=TRUE)
 if(class(opt_L)=="try-error") opt_L <- list(par=c(a=NA,b=NA,c=NA,d=NA))
-output[6, 4:7] <- opt_L
+output[6, 5:8] <- opt_L
 #
 # R squared values
-output$R2full <- sapply(1:6, function(i) rsquare(y, expfun(as.numeric(output[i, 4:7]), x=x)))
+output$R2full <- sapply(1:6, function(i) rsquare(y, expfun(as.numeric(output[i, 5:8]), x=x)))
 output$R2 <- round(output$R2full, digits)
 # descending order of goodness of fit, for legend
 output <- output[ order(output$R2full, decreasing=TRUE) , ]
