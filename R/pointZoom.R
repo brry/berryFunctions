@@ -7,10 +7,11 @@ pointZoom <- function(
           Time=1,
           steps=30,
           las=1,
-          colp=FALSE, 
+          usecolp=FALSE,
           xlab=substitute(x),
           ylab=substitute(y),
           quiet=FALSE,
+          expr,
           ...)
 {
 if(interactive()){ # to silence the R CMD check warnings
@@ -31,7 +32,7 @@ if(w$x[1] > w$x[2] | w$y[1] < w$y[2])
 if(class(x)[1] %in% c("matrix", "data.frame", "array") )
    {y <- x[,2]; if(ncol(x)>2) z <- x[,3]; x <- x[,1]}
 #
-if (colp) 
+if (usecolp)
   {polygon(c(w$x, rev(w$x)), rep(w$y, each = 2))
   Sys.sleep(1)
   colPoints(x, y, z, add=FALSE, xlim=w$x, ylim=rev(w$y), las=las, ylab=ylab, xlab=xlab, ...)
@@ -47,6 +48,7 @@ for ( i in 1:steps)
    plot(x, y, xlim=c(X1[i], X2[i]), ylim=c(Y1[i], Y2[i]), las=las,
    ylab=ylab, xlab=xlab ,  yaxs="i", xaxs="i", ...)
    rect(xleft=w$x[1], ybottom=w$y[1], xright=w$x[2], ytop=w$y[2])
+   if(!missing(expr)) eval(parse(text=expr))
    } # loop end
 }
 # if(!quiet) message("Tell me if this was helpful: berry-b@gmx.de") 
