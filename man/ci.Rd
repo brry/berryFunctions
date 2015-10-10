@@ -17,7 +17,7 @@ For statisticians: any of your favorite statistics books should cover confidence
 Wolfe R, Hanley J (Jan 2002). "If we're so different, why do we keep overlapping? When 1 plus 1 doesn't make 2"\cr
 \url{http://www.ecmaj.ca/content/166/1/65.full.pdf}\cr
 Goldstein, H.; Healey, M.J.R. (1995). "The graphical presentation of a collection of means". Journal of the Royal Statistical Society\cr
-\url{http://www.jstor.org/stable/view/2983411}
+\url{http://www.jstor.org/stable/2983411}
 }
 \seealso{\code{\link{t.test}} , \code{\link{cie}}}
 \examples{
