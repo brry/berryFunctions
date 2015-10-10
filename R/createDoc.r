@@ -8,7 +8,7 @@
 # arg3)
 # {
 
-# PS: I know of Roxygen, but it doesn't really get this structure, as far as I know.
+# PS: Roxygen doesn't really get this structure, as far as I know.
 
 createDoc <- function(
   fun, # Character string. Function (== filename) with correct structure in source code.
@@ -23,6 +23,8 @@ if(length(path)>1) stop("'path' must be a single character string.")
 if(!file.exists(path)) substr(path, 1,1) <- "D"
 # laptop linux path change:
 if(!file.exists(path)) { substr(path, 1,1) <- "~" ; substr(path, 2,2) <- "" }
+# path control
+if(!file.exists(path)) stop("path does not exist.", path)
 owd <- setwd(path)
 #
 rfilename <- paste0("R/",fun,".r")
@@ -119,6 +121,8 @@ n_missing <- length(formals(fun))  -  (end-anf-1)
 if(n_missing != 0) warning(n_missing, " items are missing in the arguments section.
 There probably are several arguments on one line in ", path, "/", rfilename,
 "\nMost likely, the 'DEFAULT: ' at the line end is corrupted as well.")
+# file location:
+if(!Newfilecreated) message("Created the file ", path, "/", rdfile)
 # set wd back to old working directory:
 setwd(owd)
 } # End of Function
