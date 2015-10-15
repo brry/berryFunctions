@@ -14,9 +14,18 @@ Feedback, ideas, code suggestions welcome at berry-b@gmx.de or via github.com/br
 -----------------------------
 
 
+Version 1.10.0 (2015--)
+https://github.com/brry/berryFunctions/compare/master@{2015-10-10}...master@{2015--}
+- normPlot: colors drawn in quantiles
+
+
+-----------------------------
+-----------------------------
+
+
 Version 1.9.0 (2015-10-10)
 To see all changes in detail, go to:
-https://github.com/brry/berryFunctions/compare/master@{2015-06-02}...master
+https://github.com/brry/berryFunctions/compare/master@{2015-06-02}...master@{2015-10-10}
 The general overview:
 Package imports 'base' packages: graphics (22 functions used), stats (18), utils (6), grDevices (5)
 Documentation updated in several places, notably in package info
