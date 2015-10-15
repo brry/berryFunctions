@@ -6,6 +6,7 @@ lim0 <- function(
      # see methods(plot), graphics:::plot.default,
      #     graphics:::curve and extendrange in grDevices
      {
+     if(length(x)==1) x <- c(0,x)
      r <- range(x, finite=TRUE)
      r2 <- r + c(-f,f) * diff(r) # classical procedure of extendrange
      r2[which.min(abs(r2))] <- 0 # set one end to zero
