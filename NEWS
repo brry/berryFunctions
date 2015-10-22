@@ -4,6 +4,7 @@ Feedback, ideas, code suggestions welcome at berry-b@gmx.de or via github.com/br
 -----------------------------
 - createDoc: add field opportunities for description, note, etc (see Roxygen)
 - exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) ) 
+- linreg: add legargs argument
 - lsc: better example dataset, optim problems, sim line not plotted completely
 - require2: change to requireNamespace http://r-pkgs.had.co.nz/namespace.html#namespace
 - tableColVal: add digits argument
@@ -17,6 +18,8 @@ Feedback, ideas, code suggestions welcome at berry-b@gmx.de or via github.com/br
 Version 1.10.0 (2015--)
 https://github.com/brry/berryFunctions/compare/master@{2015-10-10}...master@{2015--}
 - normPlot: colors drawn in quantiles
+
+New functions: insertRows
 
 
 -----------------------------

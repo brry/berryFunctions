@@ -10,10 +10,10 @@
 }
 \value{A data.frame}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, 2014}
-\seealso{ \code{\link{data.frame}}, \code{\link{matrix}}, \code{\link{rbind}}}
+\seealso{\code{\link{insertRows}}, \code{\link{data.frame}}, \code{\link{matrix}}, \code{\link{rbind}}}
 \examples{
 MYDF <- data.frame(A=5:3, B=2:4)
 addRows(MYDF, 3)
 }
-\keyword{ misc }
+\keyword{misc}
 
