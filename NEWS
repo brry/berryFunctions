@@ -19,7 +19,7 @@ Version 1.10.0 (2015--)
 https://github.com/brry/berryFunctions/compare/master@{2015-10-10}...master@{2015--}
 - normPlot: colors drawn in quantiles
 
-New functions: insertRows
+New functions: insertRows, dataStr
 
 
 -----------------------------

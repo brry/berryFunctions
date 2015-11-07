@@ -1,7 +1,7 @@
 \name{dataStr}
 \alias{dataStr}
 \title{str of datasets}
-\description{Print the \code{\link{str}} of each dataset returned by \code{\link{data}, by default in the package \code{\link{datasets}}}
+\description{Print the \code{\link{str}} of each dataset returned by \code{\link{data}}, by default in the package \code{\link{datasets}}}
 \usage{dataStr(package="datasets", ... )}
 \arguments{
   \item{package}{package. DEFAULT: "datasets"}
