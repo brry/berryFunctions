@@ -21,7 +21,7 @@ library(berryFunctions)
 ?berryFunctions
 ```
 
-If direct installation from CRAN doesn't work, your R version might be too old. In that case, an update is really recommendable: [r-project.org](http://www.r-project.org/). If you can't update R, try installing from source (github) via devtools as mentioned above. If that's not possible eather, here's a workaround:
+If direct installation from CRAN doesn't work, your R version might be too old. In that case, an update is really recommendable: [r-project.org](http://www.r-project.org/). If you can't update R, try installing from source (github) via devtools as mentioned above. If that's not possible either, here's a manual workaround:
 click on **Download ZIP** (to the right, [link](https://github.com/brry/berryFunctions/archive/master.zip)), unzip the file to some place, then
 ```R
 setwd("that/path")
