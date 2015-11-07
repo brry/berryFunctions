@@ -51,6 +51,6 @@ for(i in 1:length(inFiles))
    # Update progres bar:
    if(progbar) setTxtProgressBar(pb, i)
    } # End of for-Loop
-if(!quiet) message(i, " files combined to ", File)
 if(progbar) close(pb)
+if(!quiet) message(i, " files combined to ", File)
 } # End of function
