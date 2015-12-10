@@ -25,7 +25,7 @@ ylim=range(yu,yl, finite=TRUE), ... )}
 }
 \value{None, currently. Used for drawing.}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, July 2015}
-\seealso{\code{\link{polygon}}, \code{\link{approx2}} }
+\seealso{\code{\link{quantileBands}}, \code{\link{polygon}}, \code{\link{approx2}} }
 \examples{
 y1 <- c(1,3,4,2,1,4,6,8,7)
 y2 <- c(5,6,5,6,9,8,8,9,10)
