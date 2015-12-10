@@ -15,13 +15,19 @@ library(berryFunctions)
 Code to install the most recent development version from github:
 
 ```R
+# Avoid installing devtools with all its dependencies:
+source("https://raw.githubusercontent.com/brry/misc/master/instgit.R")
+instgithub("brry/berryFunctions")
+
+# or use it:
 if(!require(devtools)) install.packages("devtools")
 devtools::install_github("brry/berryFunctions")
+
 library(berryFunctions)
 ?berryFunctions
 ```
 
-If direct installation from CRAN doesn't work, your R version might be too old. In that case, an update is really recommendable: [r-project.org](http://www.r-project.org/). If you can't update R, try installing from source (github) via devtools as mentioned above. If that's not possible either, here's a manual workaround:
+If direct installation from CRAN doesn't work, your R version might be too old. In that case, an update is really recommendable: [r-project.org](http://www.r-project.org/). If you can't update R, try installing from source (github) via instgithub or devtools as mentioned above. If that's not possible either, here's a manual workaround:
 click on **Download ZIP** (to the right, [link](https://github.com/brry/berryFunctions/archive/master.zip)), unzip the file to some place, then
 ```R
 setwd("that/path")
