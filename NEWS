@@ -18,6 +18,7 @@ Feedback, ideas, code suggestions welcome at berry-b@gmx.de or via github.com/br
 Version 1.10.0 (2015--)
 https://github.com/brry/berryFunctions/compare/master@{2015-10-10}...master@{2015--}
 - normPlot: colors drawn in quantiles
+- monthLab: gained labels and midyear argument
 
 New functions: insertRows, dataStr
 

@@ -1,7 +1,7 @@
 \name{movAv}
 \alias{movAv}
 \title{moving average}
-\description{weighted moving average with overlapping windows}
+\description{weighted moving average (running mean) with overlapping windows}
 \usage{movAv(dat, width=7, weights=rep(1,width) )}
 \arguments{
   \item{dat}{Vector with regularly spaced data}
