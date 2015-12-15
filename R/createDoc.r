@@ -22,9 +22,11 @@ if(length(path)>1) stop("'path' must be a single character string.")
 # work PC path change:
 if(!file.exists(path)) substr(path, 1,1) <- "D"
 # laptop linux path change:
-if(!file.exists(path)) { substr(path, 1,1) <- "~" ; substr(path, 2,2) <- "" }
+if(!file.exists(path)) path <- gsub("D:", "~", path)
+# new work PC path change:
+if(!file.exists(path)) path <- gsub("~", "C:/Users/boessenkool", path)
 # path control
-if(!file.exists(path)) stop("path does not exist.", path)
+if(!file.exists(path)) stop("path does not exist. ", path)
 owd <- setwd(path)
 #
 rfilename <- paste0("R/",fun,".r")
@@ -119,8 +121,9 @@ if(removeSpace(rfile[end-1]) ==")") end <- end-1
 source(rfilename)
 n_missing <- length(formals(fun))  -  (end-anf-1)
 if(n_missing != 0) warning(n_missing, " items are missing in the arguments section.
-There probably are several arguments on one line in ", path, "/", rfilename,
-"\nMost likely, the 'DEFAULT: ' at the line end is corrupted as well.")
+There possibly are several arguments on one line in ", path, "/", rfilename,
+"\nlikely, the 'DEFAULT: ' at the line end is corrupted as well.
+beginline=",anf,", endline=",end,", nlines=",end-anf-1,", length formals=",length(formals(fun)))
 # file location:
 if(!Newfilecreated) message("Created the file ", path, "/", rdfile)
 # set wd back to old working directory:
