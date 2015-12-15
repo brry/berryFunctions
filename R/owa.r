@@ -12,7 +12,7 @@ if(is.null(names(a))) stop("Arguments must be named!")
 if("" %in% names(a) ) stop("All arguments must be named!")
 #
 u <- list(...) # unchanged arguments
-if("u" %in% names(u)) stop("The argument 'u' has been replaced by ellipsis and does not work anymore.")
+if("u" %in% names(u)) warning("The argument 'u' has been replaced by ellipsis and does not work anymore.")
 if( isTRUE(a) ) a <- NULL # catch where useres try to give eg legargs=TRUE
 #
 a <- a[ ! names(a) %in% u ] # discard arguments that should be left unchanged
