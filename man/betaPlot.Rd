@@ -7,7 +7,8 @@ cumulative=TRUE, mar=c(2,3,3,3), keeppar=FALSE, las=1,
 main=paste("Beta density with\\nalpha =", signif(shape1,2),
            "and beta =", signif(shape2,2)),
 ylim=lim0(y), xlim=0:1, ylab="", xlab="",
-type="l", lty=1, col=par("fg"), ... )}
+type="l", lty=1, col=par("fg"), ... )
+}
 \arguments{
   \item{shape1}{alpha value as in \code{\link{dbeta}}. DEFAULT: 1.5}
   \item{shape2}{beta value. DEFAULT: 5}
@@ -27,34 +28,19 @@ type="l", lty=1, col=par("fg"), ... )}
 \details{This function very quickly plots a beta distribution by just specifying alpha and beta.}
 \value{None. Used for plotting.}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, July 2014}
-\seealso{\code{\link{normPlot}}, \code{\link{dbeta}}, \url{http://cran.r-project.org/package=denstrip}, \url{http://cran.r-project.org/web/views/Distributions.html} }
+\seealso{\code{\link{betaPlotComp}}, \code{\link{normPlot}}, \code{\link{dbeta}}, \url{http://cran.r-project.org/package=denstrip}, \url{http://cran.r-project.org/web/views/Distributions.html} }
 \examples{
-
-
 betaPlot()
 betaPlot(2,1) 
 betaPlot(0.5, 2)
 
-# overview of parameters beta distribution:
-# a bigger: HDI (Highest Density Interval) more to the left
-# b bigger: HDI left, lower values
-# both bigger: narrower HDI
-a <- b <- c(0.5, 1:4)
-par(mfrow=c(length(b), length(a)), yaxt="n", xaxt="n", 
-    oma=c(2,2,4.5,2), mar=rep(0,4), mgp=c(3,0.7,0))
-for(y in b)
-  for(x in a)
-  {
-  betaPlot(x,y, main="", ylim=c(0.12,3), mar=rep(0,4), xaxs="r")
-  mtext(text=paste("a=",x,", b=",y, sep=""), side=3, line=-1.5, cex=0.7)
-  if(y==min(b)) mtext(paste("a =",x), side=3, line=0.5)
-  if(x==min(a)) mtext(paste("b =",y), side=2, line=0.5)
-  if(y==max(b) & x==median(a)) axis(1, at=c(0,0.5,1), xaxt="s", las=1)
-  if(x==max(a) & y==median(b)) axis(4, at=0:3, yaxt="s", las=1)
-  }
-mtext("beta density distribution", line=2.5, outer=TRUE, cex=1.2, font=2)
-box("outer")
-
+# beta distribution is often used for proportions or probabilities
+# overview of parameters
+# alpha = number of successes + 1.  beta = number of failures + 1
+betaPlotComp()
+# a bigger: HDI (Highest Density Interval) further to the right (1)
+# b bigger: HDI more to the left (0)
+# both bigger: narrower HDI, stronger peak
 }
 \keyword{hplot}
 \keyword{distribution}
