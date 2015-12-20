@@ -28,6 +28,8 @@ if(!file.exists(path)) path <- gsub("~", "C:/Users/boessenkool", path)
 # path control
 if(!file.exists(path)) stop("path does not exist. ", path)
 owd <- setwd(path)
+# set wd back to old working directory:
+on.exit(setwd(owd))
 #
 rfilename <- paste0("R/",fun,".r")
 if(!file.exists(rfilename)) rfilename <- paste0("R/",fun,".R")
@@ -126,6 +128,4 @@ There possibly are several arguments on one line in ", path, "/", rfilename,
 beginline=",anf,", endline=",end,", nlines=",end-anf-1,", length formals=",length(formals(fun)))
 # file location:
 if(!Newfilecreated) message("Created the file ", path, "/", rdfile)
-# set wd back to old working directory:
-setwd(owd)
 } # End of Function
