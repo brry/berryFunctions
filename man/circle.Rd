@@ -12,7 +12,7 @@
 }
 \value{none. Used for drawing.}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, 2012}
-\seealso{ \code{\link{polygon}} }
+\seealso{\code{\link{symbols}}, \code{\link{polygon}} }
 \examples{
 plot(1:20, type="n", asp=1)
 circle(5,5, r=3)   # 1:1 aspect shows they're really circles and not ellipses.
