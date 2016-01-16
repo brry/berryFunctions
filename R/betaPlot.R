@@ -9,7 +9,7 @@ betaPlot <- function(
   mar=c(2,3,3,3), # margins for plot passed to \code{\link{par}}
   keeppar=FALSE, # should margin parameters be kept instead of being restored to previous value?
   las=1, # arguments passed to \code{\link{plot}}
-  main=paste("Beta density with\nalpha =", signif(shape1,2), "and beta =", signif(shape2,2)), # main as in \code{\link{plot}}.
+  main=paste("Beta density with\nalpha =", signif(shape1,3), "and beta =", signif(shape2,3)), # main as in \code{\link{plot}}.
   ylim=lim0(y), # limit for the y axis
   xlim=0:1,
   ylab="", # labels for the axes

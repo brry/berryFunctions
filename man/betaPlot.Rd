@@ -4,8 +4,8 @@
 \description{nice plot of beta density distribution}
 \usage{betaPlot(shape1=1.5, shape2=5, lines=NA, fill=rgb(0,0.3,0.8, 0.4),
 cumulative=TRUE, mar=c(2,3,3,3), keeppar=FALSE, las=1,
-main=paste("Beta density with\\nalpha =", signif(shape1,2),
-           "and beta =", signif(shape2,2)),
+main=paste("Beta density with\\nalpha =", signif(shape1,3),
+           "and beta =", signif(shape2,3)),
 ylim=lim0(y), xlim=0:1, ylab="", xlab="",
 type="l", lty=1, col=par("fg"), ... )
 }
