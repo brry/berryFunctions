@@ -46,6 +46,7 @@ monthAxis(format="", mgp=c(3,2,0)) # International Date format YYYY-mm-dd
 
 plot(Date2, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
 monthAxis(midyear=TRUE)
+abline(v=monthLabs(npm=1), col=8)
 
 Date3 <- sort(as.Date("2011-07-13")+sample(0:1200, 50))
 plot(Date3, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
