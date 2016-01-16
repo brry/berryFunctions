@@ -31,8 +31,8 @@ owd <- setwd(path)
 # set wd back to old working directory:
 on.exit(setwd(owd))
 #
-rfilename <- paste0("R/",fun,".r")
-if(!file.exists(rfilename)) rfilename <- paste0("R/",fun,".R")
+                            rfilename <- paste0("R/",fun,".r")
+if(!file.exists(rfilename)) rfilename <- paste0("R/",fun,".R") # capital R
 if(!file.exists(rfilename)) stop("File ", path, "/", rfilename, " does not exist")
 # case control Windows:
 if(!any(dir("R")==paste0(fun,".r")|dir("R")==paste0(fun,".R"))) stop("'", fun,
@@ -40,17 +40,17 @@ if(!any(dir("R")==paste0(fun,".r")|dir("R")==paste0(fun,".R"))) stop("'", fun,
 # read file
 rfile <- readLines(rfilename)
 rfile <- rfile[removeSpace(rfile)!=""]
-anf <- grep("<- function", rfile)[1]
-end <- which(removeSpace(rfile)=="{")[1]
-if (end < anf) stop("Argument section was not correctly identified!")
+anf <- grep("<- function", rfile)[1]      # begin line of argument section
+end <- which(removeSpace(rfile)=="{")[1]  # end line
+if (end < anf) stop("Argument section (begin=",anf,", end=",end,") was not correctly identified!")
 #
 rdfile <- paste0("man/",fun,".Rd")
-# File name check (fnc):
-Newfilecreated <- FALSE
-for(fnc in 1:99) 
-  if(file.exists(rdfile))
+# File name check:
+Newfilecreated <- FALSE   ; file_nr <- 1
+while(file.exists(rdfile))
     {
-    rdfile <- paste0("man/",fun,"_", fnc,".Rd")
+    rdfile <- paste0("man/",fun,"_", file_nr,".Rd")
+    file_nr <- file_nr + 1
     Newfilecreated <- TRUE
     }
 if(Newfilecreated) warning("File already existed. Created the file ", path, "/", rdfile)
@@ -61,7 +61,7 @@ cat(paste0("\\title{}\n\\description{}\n\\usage{", fun , "("), file=rdfile, appe
 # ignore comments:
 usage <- sapply(strsplit(rfile[(anf+1):(end-1) ], "#"), "[", 1)
 # Remove leading and trailing white spaces:
-usage <- sub("^[[:space:]]*(.*?)[[:space:]]*$", "\\1", usage, perl=TRUE)
+usage <- removeSpace(usage)
 # ignore empty lines:
 usage <- usage[usage!=""]
 # double the backslashes:
@@ -76,7 +76,7 @@ for(i in (anf+1):(end-1) )
   # Split argument and explanation:
   arg_expl <- strsplit(rfile[i], "#")[[1]]
   # Remove leading and trailing white spaces:
-  arg_expl <- sub("^[[:space:]]*(.*?)[[:space:]]*$", "\\1", arg_expl, perl=TRUE)
+  arg_expl <- removeSpace(arg_expl)
   # double the backslashes:
   arg_expl <- gsub("\\n", "\\\\n", arg_expl, fixed=TRUE)
   arg_expl <- gsub("\\t", "\\\\t", arg_expl, fixed=TRUE)
@@ -109,7 +109,7 @@ cat(paste0("}
 \\value{}
 \\section{Warning}{}
 \\note{}
-\\author{Berry Boessenkool, \\email{berry-b@gmx.de}, 2015}
+\\author{Berry Boessenkool, \\email{berry-b@gmx.de}, ",format(Sys.Date(), "%b %Y"),"}
 \\references{}
 \\seealso{\\code{\\link{help}} }
 \\examples{
