@@ -8,6 +8,8 @@ addAlpha <- function(
   alpha=0.3 # Level of semi-transparency. between 0 (transparent) and 1 (intransparent).
   )
 {
+if(any(alpha<0 | alpha>1)) stop("alpha must be between 0 and 1, not ",
+                                 pastec(alpha[alpha<0|alpha>1]))
 rgb2 <-  function(x) rgb(x[1], x[2], x[3], alpha=alpha)
 output <- apply(X=sapply(col,col2rgb)/255, MARGIN=2, FUN=rgb2)
 if( length(alpha)==1 | length(col)==1)  return(as.vector(output)) else
