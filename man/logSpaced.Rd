@@ -14,8 +14,8 @@ plot=TRUE, pch=3, las=1, ylab="base", ... )}
   \item{\dots}{Further arguments passed to \code{\link{plot}}}
 }
 \value{Vector or matrix, depending on base input}
-\note{base >1 concentrate points at low values, base<1 at high values.
-The default values may change yet, so do specify them in your code.}
+\note{base >1 concentrates points at low values, base<1 at high values.\\
+\code{base} does not relate to \code{base} in \code{\link{log}}!}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, Oct 2014}
 \seealso{\code{\link{classify}}, \code{\link{log}} }
 \examples{
@@ -23,5 +23,9 @@ logSpaced()
 logSpaced(base=c(1.1, 1.5, 2), n=6, min=5, max=10)
 d <- logSpaced(seq(0.8, 1.2, 0.025), main="logarithmically spaced points")
 
+# the default base for the default n (20) will give an approximately equal
+# bin width across the range on a logarithmic scale:
+d <- logSpaced()
+plot(d, rep(1,20), log="x")
 }
 \keyword{arith}

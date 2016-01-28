@@ -69,16 +69,22 @@ colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE)
 # different classification methods:
 set.seed(007) ;  rx <- rnorm(30) ; ry <- rnorm(30) ; rz <- rnorm(30)*100
 # sd: normal distribution
-mycols <- colorRampPalette(c("green","yellow", "red"))
+mycols <- colorRampPalette(c("blue","yellow", "red"))
 colPoints(rx,ry,rz, add=FALSE, col=mycols(5), method="s",
-          legargs=list(horiz=FALSE, x1=80, x2=95))
+          legargs=list(horiz=FALSE, x1=70, x2=95))
 colPoints(rx,ry,rz, add=FALSE, col=mycols(6), method="s", sdlab=2,
           legargs=list(horiz=FALSE, labelpos=5, lines=FALSE, title=""))
 # quantiles: each color is equally often used
 colPoints(rx,ry,rz, add=FALSE, method="q",
-          legargs=list(horiz=FALSE, mar=c(0,5,3,0), bg="transparent") )
+          legargs=list(mar=c(0,5,3,0), bg="transparent") )
 text(rx,ry,round(rz), col=8)
-
+# logSpaced for rightly skewed data:
+set.seed(41); rz2 <- rbeta(30, 1,7)*100
+colPoints(rx,ry,rz2, add=FALSE, method="l", breaks=c(20,1.1708), col=mycols(20),
+          legargs=list(mar=c(0,5,3,0), bg="transparent") )
+colPoints(rx,ry,rz2, add=FALSE, method="q", breaks=0:20/20, col=mycols(20),
+          legargs=list(mar=c(0,5,3,0), at=pretty2(rz2), labels=pretty2(rz2),
+                       bg="transparent") )
 
 # With histogram:
 colPoints(i,j,k, add=FALSE, hist=TRUE)
