@@ -57,7 +57,7 @@ if(11 %in% selection) exp_4 <- TRUE
 if( ! round(nbest,1) %in% 0:12) stop("nbest has to be an integer between 0 and 12")
 lwd <- rep(lwd, length=12)
 lty <- rep(lty, length=12)
-if(class(x)=="formula")
+if(inherits(x,"formula"))
 {
   mf <- model.frame(x, data=data)
   x <- mf[,2]

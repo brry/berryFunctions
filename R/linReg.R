@@ -18,7 +18,7 @@ inset=0,                      # Numeric vector of length \eqn{\le 2}. inset dist
 legargs=NULL,                 # list of arguments passed to legend, like list(cex=0.8, xpd=TRUE, bg="white"), ...   xpd specifies whether formula can be written only inside the plot region (when FALSE) or inside the figure region including mar (when TRUE) or in the entire device region including oma (when NA)
 ...)                          # Further arguments passed to \code{\link{plot}} and \code{\link{abline}}.
 {
-if(class(x)=="formula")
+if(inherits(x,"formula"))
   {
   mf <- model.frame(x, data=data)
   x <- mf[,2]

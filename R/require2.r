@@ -7,7 +7,7 @@ name <- as.character(substitute(name))
 for(i in 1:length(name))
 {
 versuch <- try(library(name[i], character.only=TRUE, quietly=TRUE), silent=TRUE)
-if(class(versuch)=="try-error")
+if(inherits(versuch,"try-error"))
    {
    install.packages(name, ...)
    require(name[i], character.only=TRUE)

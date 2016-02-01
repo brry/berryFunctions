@@ -29,7 +29,7 @@ ylim=range(y),
 # deparse labs before x and y are evaluated:
 xlab <- xlab ;  ylab <- ylab
 # Formula:
-if(class(x)=="formula")
+if(inherits(x,"formula"))
   {
   if(!missing(data))
     {                   # get x and y from data.frame

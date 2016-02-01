@@ -39,9 +39,9 @@ output[3, 5:8] <- optim(par=param, fn=minfun, method="BFGS")$par
 output[4, 5:8] <- optim(par=param, fn=minfun, method="CG")$par
 output[5, 5:8] <- optim(par=param, fn=minfun, method="SANN")$par
 opt_L      <- try(optim(par=param, fn=minfun, method="L-BFGS-B")$par, silent=TRUE)
-for(i in 2:5) if(class(opt_L)=="try-error")
+for(i in 2:5) if(inherits(opt_L, "try-error"))
   opt_L<- try(optim(output[i,5:8], fn=minfun, method="L-BFGS-B")$par, silent=TRUE)
-if(class(opt_L)=="try-error") opt_L <- list(par=c(a=NA,b=NA,c=NA,d=NA))
+if(inherits(opt_L, "try-error")) opt_L <- list(par=c(a=NA,b=NA,c=NA,d=NA))
 output[6, 5:8] <- opt_L
 #
 # R squared values
