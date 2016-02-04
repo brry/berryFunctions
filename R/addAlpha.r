@@ -4,8 +4,8 @@
 # Based on suggestion by Mathias Seibert, Dec. 2013
 
 addAlpha <- function(
-  col, # vector of color names (\code{\link{colors}) that can be interpreted by \code{\link{col2rgb}}
-  alpha=0.3 # Level of semi-transparency. between 0 (transparent) and 1 (intransparent).
+  col, # vector of color names (\code{\link{colors}), hexadecimal or integer that can be interpreted by \code{\link{col2rgb}}
+  alpha=0.3 # Level of semi-transparency. between 0 (transparent) and 1 (intransparent). Can also be a vector.
   )
 {
 if(any(alpha<0 | alpha>1)) stop("alpha must be between 0 and 1, not ",
