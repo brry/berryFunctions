@@ -10,7 +10,7 @@
   \item{quiet}{show warnings about file lengths? DEFAULT: FALSE}
   \item{\dots}{further arguments passed to \code{\link{readLines}}}
 }
-\value{result from \code{\link{head}}}
+\value{Vector of line numbers that differ, result from \code{\link{head}(..., nr)}}
 \author{Berry Boessenkool, \email{berry-b@gmx.de}, Aug 2014}
 \seealso{\url{http://text-compare.com/} which I sadly only discovered after writing this function, \code{\link{dupes}} for finding duplicate lines, \code{\link{combineFiles}}}
 \examples{
