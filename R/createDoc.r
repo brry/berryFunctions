@@ -120,7 +120,7 @@ cat(paste0("}
 "), file=rdfile, append=TRUE)
 # warning if there are less argument lines than arguments themselves:
 if(removeSpace(rfile[end-1]) ==")") end <- end-1
-source(rfilename)
+source(rfilename, local=TRUE)
 n_missing <- length(formals(fun))  -  (end-anf-1)
 if(n_missing != 0) warning(n_missing, " items are missing in the arguments section.
 There possibly are several arguments on one line in ", path, "/", rfilename,
