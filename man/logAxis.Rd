@@ -45,6 +45,8 @@ logAxis(2, expr=points(x, pch=16), base=1, col.axis=4, font=2)
 # plots where log="x" is not possible:
 hist(log10(x), breaks=20, col.axis="grey", main="")
 logAxis(side=3, expr=hist(log10(x), breaks=20, add=TRUE, col=3))
+# or just use the new logHist function (Feb 2016):
+logHist(x, breaks=20, col=3)
 
 # automatic calculation of from, to and base:
 plot(1:3, axes=FALSE)
