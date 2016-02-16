@@ -1,8 +1,8 @@
 
-Before the actual NEWS, here is some future development planned in berryFunctions.
+Before the actual NEWS, here are some things planned for future development.
 Feedback, ideas, code suggestions welcome at berry-b@gmx.de or via github.com/brry/berryFunctions
 -----------------------------
-- createDoc: add field opportunities for description, note, etc (see Roxygen)
+- replace all occurences of rainbow2 with seqPal
 - exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) ) 
 - lsc: better example dataset, optim problems, sim line not plotted completely
 - require2: change to requireNamespace http://r-pkgs.had.co.nz/namespace.html#namespace
@@ -14,13 +14,14 @@ Feedback, ideas, code suggestions welcome at berry-b@gmx.de or via github.com/br
 -----------------------------
 
 
-Version 1.10.0 (2015--)
-https://github.com/brry/berryFunctions/compare/master@{2015-10-10}...master@{2015--}
+Version 1.10.0 (2016--)
+- several small code and documentation improvements, see
+https://github.com/brry/berryFunctions/compare/master@{2015-10-10}...master@{2016--}
 - normPlot: colors drawn in quantiles
-- monthLab: gained labels and midyear argument
+- monthAxis: gained labels and midyear argument
 - linReg: legargs can now be specified, as well as confint.
 
-New functions: insertRows, dataStr
+New functions: insertRows, dataStr, betaCompPlot, rescale, divPal, seqPal, na9, addFade, logHist
 
 
 -----------------------------
