@@ -13,7 +13,7 @@ tableColVal <- function(
    pdf=!missing(pdffile),
    nameswidth=0.3,   # percentage of plot
    namesheight=0.1,
-   palette=rainbow2(nrow(mat)*ncol(mat)),
+   palette=seqPal(nrow(mat)*ncol(mat)),
    Range=range(mat,finite=TRUE),
    argclass=NULL,
    argrow=NULL,

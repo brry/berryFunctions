@@ -7,7 +7,7 @@ colPoints <- function(
   method="equalinterval", # type of binning or classification method (ways to get color class breakpoints)
   breaks, # specification for method
   sdlab=1, #
-  col=rainbow2(cl$nbins), # color palette. DEFAULT: 100 nuances from blue to red
+  col=seqPal(cl$nbins), # color palette. DEFAULT: 100 nuances from blue to red
   col2=c(NA, 1, 8), # color for z==NA and points not in the color range
   legend=TRUE, # Should a legend be drawn?
   legargs=NULL, # Arguments for colPointsLegend.
