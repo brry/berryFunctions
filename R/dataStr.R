@@ -1,6 +1,20 @@
-# give the structure of each dataset returned by \code{\link{data}}
-# Berry Boessenkool, 2015-11-07 in search of good datasets for teaching
-
+#' str of datasets
+#' 
+#' Print the \code{\link{str}} of each dataset returned by \code{\link{data}},
+#' by default in the package \code{\link{datasets}}
+#' 
+#' @return NULL. prints via \code{\link{message}} in a for loop.
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, November 2015, in search of good datasets for teaching
+#' @seealso \code{\link{str}}
+#' @keywords print documentation
+#' @export
+#' @examples
+#' 
+#' # dataStr()
+#' 
+#' @param package package. DEFAULT: "datasets"
+#' @param \dots other arguments passed to \code{\link{data}}
+#' 
 dataStr <- function(
 package="datasets", # package
 ... # other arguments passed to \code{\link{data}}

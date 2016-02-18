@@ -1,11 +1,45 @@
-# Number of duplicates per line of (text) file
-# Per default saved to file which can be loaded into excel / libreoffice
-# with conditional formatting of the first column, colors show for each line
-# how often it occurs in the file.
-# Note: OpenOffice does not provide color scales based on cell values.
-
-# Berry boessenkool, 2014-12-19, berry-b@gmx.de
-
+#' Duplicate lines in file
+#' 
+#' Number of duplicates per line of (text) file. Per default saved to file
+#' which can be loaded into excel / libreoffice. With conditional formatting of
+#' the first column, colors show for each line how often it occurs in the file.
+#' A LibreOffice file is included. Note: OpenOffice does not provide color
+#' scales based on cell values.
+#' 
+#' @return Either: a data.frame with line numbers of duplicate rows and the number of duplicates\cr 
+#'         Or: a file is written with the number of duplicates and the original \code{file} content.
+#' @note This has not been tested al that much - feedback is heavily welcome!
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Dec 2014
+#' @seealso \code{\link{compareFiles}}
+#' @keywords IO file character
+#' @export
+#' @examples
+#' 
+#' file <- system.file("extdata/doublelines.txt", package="berryFunctions")
+#' dupes(file, tofile=FALSE)
+#' dupes(file, tofile=FALSE, ignore.empty=TRUE)  
+#' 
+#' ## These are skipped by rcmd check (opening external places is not allowed):
+#' \dontrun{dupes(file)}
+#' 
+#' # a template file (dupes.ods) for libreOffice Calc is available here:
+#' system.file("extdata", package="berryFunctions")
+#' 
+#' \dontrun{system2("nautilus", system.file("extdata/dupes.ods", package="berryFunctions"))}
+#' 
+#' # To open folders with system2:
+#' # "nautilus" on linux ubuntu
+#' # "open" or "dolphin" on mac
+#' # "explorer" or "start" on windows
+#' 
+#' @param file File name (character string)
+#' @param ignore.empty Should empty lines be ignored? DEFAULT: TRUE
+#' @param ignore.space Should leading/trailing whitespace be ignored? DEFAULT: TRUE
+#' @param tofile Logical: should output be directed to a file? 
+#'        Otherwise, a dataframe with line numbers and number of duplicates of that line 
+#'        will be printed in the console. DEFAULT: missing(n)
+#' @param n Show only the first n values if \code{tofile=FALSE}. DEFAULT: length(d)
+#' 
 dupes <- function(
 file,               # File name (character string)
 ignore.empty=TRUE,  # Should empty lines be ignored?

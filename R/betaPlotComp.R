@@ -1,19 +1,47 @@
-# Compare beta distributions
-# Berry Boessenkool, Dec 2015
+#' Compare beta distributions
+#' 
+#' Visually understand the effect of the beta distribution parameters
+#' 
+#' @return None. Used for plotting.
+#' @note Tries to find suitable subplot for axis labels. This works only for increasing parameter values.
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Dec 2015
+#' @seealso \code{\link{betaPlot}}
+#' @keywords hplot distribution
+#' @export
+#' @examples
+#' 
+#' betaPlotComp()
+#' betaPlotComp(oma=c(2,2,2,2), ylim=lim0(5.5), textargs=list(y=NA))
+#' betaPlotComp(shape1=c(3,10,34), shape2=c(7,9,24))
+#' 
+#' @param shape1 Vector of alpha values as in \code{\link{dbeta}}. DEFAULT: c(0.5, 1:4, 10,20)
+#' @param shape2 Beta values to be compared. DEFAULT: shape1
+#' @param cumulative Should the cumulative density distribution line be added? DEFAULT: FALSE
+#' @param cex Character EXpansion size. DEFAULT: 0.8
+#' @param las Label Axis Style passed to \code{\link{axis}}. DEFAULT: 1
+#' @param main Main as in \code{\link{plot}}. DEFAULT: ""
+#' @param ylim LIMit for the Y axis. DEFAULT: lim0(4)
+#' @param mar MARgins for plot passed to \code{\link{par}}. DEFAULT: rep(0,4)
+#' @param oma Outer MArgins for plot passed to \code{\link{par}}. DEFAULT: c(2,2,4.5,2)
+#' @param mgp MarGin Placement. DEFAULT: c(3,0.7,0)
+#' @param keeppar Should margin parameters be kept instead of being restored to previous value? DEFAULT: FALSE
+#' @param textargs List of arguments passed to \code{\link{textField}}. DEFAULT: NULL
+#' @param \dots Further arguments passed to \code{\link{betaPlot}} like lines, fill, etc.
+#' 
 betaPlotComp <- function(
-  shape1=c(0.5, 1:4, 10,20), # Vector of alpha values as in \code{\link{dbeta}}
-  shape2=shape1, # Beta values to be compared
-  cumulative=FALSE, # Should the cumulative density distribution line be added?
-  cex=0.8, # Character EXpansion size
-  las=1, # Label Axis Style passed to \code{\link{axis}}
-  main="", # Main as in \code{\link{plot}}.
-  ylim=lim0(4), # LIMit for the Y axis
-  mar=rep(0,4), # MARgins for plot passed to \code{\link{par}}
-  oma=c(2,2,4.5,2), # Outer MArgins for plot passed to \code{\link{par}} 
-  mgp=c(3,0.7,0), # MarGin Placement
-  keeppar=FALSE, # Should margin parameters be kept instead of being restored to previous value?
-  textargs=NULL, # List of arguments passed to \code{\link{textField}} 
-  ... # Further arguments passed to \code{\link{betaPlot}} like lines, fill, etc.
+  shape1=c(0.5, 1:4, 10,20),
+  shape2=shape1, 
+  cumulative=FALSE,
+  cex=0.8, 
+  las=1, 
+  main="", 
+  ylim=lim0(4), 
+  mar=rep(0,4), 
+  oma=c(2,2,4.5,2),  
+  mgp=c(3,0.7,0), 
+  keeppar=FALSE,
+  textargs=NULL,  
+  ... 
   )
 {
 a <- shape1

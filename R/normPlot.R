@@ -1,5 +1,38 @@
-# Plot density of normal distribution based on just mean and sd
-# Berry Boessenkool, July 23, 2014
+#' Normal density plot
+#' 
+#' Nice plot of normal density distribution
+#' 
+#' @details This function finds some nice defaults for very quickly plotting a normal distribution by just specifying mean and sd.
+#' 
+#' @return None. Used for plotting.
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, July 2014
+#' @seealso \code{\link{betaPlot}}, \code{\link{dnorm}},
+#'       \url{http://cran.r-project.org/package=denstrip},
+#'       \url{http://cran.r-project.org/web/views/Distributions.html}
+#' @keywords hplot distribution
+#' @export
+#' @examples
+#' 
+#' normPlot()
+#' normPlot(81.7, 11.45)
+#' normPlot(180, 11, quant=FALSE, width=2)
+#' 
+#' @param mean average value as in \code{\link{dnorm}}. DEFAULT: 0
+#' @param sd standard deviation. DEFAULT: 1
+#' @param width distance (in sd) from plot ends to mean. DEFAULT: 3
+#' @param lines Should vertical lines be plotted at mean +- n*sd? DEFAULT: TRUE
+#' @param quant should quantile regions be drawn with \code{fill} colors? DEFAULT: TRUE
+#' @param fill color(s) passed to \code{\link{polygon}}. DEFAULT: addAlpha("blue",c(2:6,7:2)/10)
+#' @param cumulative Should cumulative density distribution be added? DEFAULT: TRUE
+#' @param las arguments passed to \code{\link{plot}}. DEFAULT: 1
+#' @param main main as in \code{\link{plot}}. DEFAULT: paste("Normal density with\\nmean =", mean, "and sd =", sd)
+#' @param ylim limit for the y axis. DEFAULT: lim0(y)
+#' @param ylab,xlab labels for the axes. DEFAULT: ""
+#' @param type,lty,col arguments passed to \code{\link{lines}}. type="l" to add pdf line
+#' @param mar margins for plot passed to \code{\link{par}}. DEFAULT: c(2,3,3,3)
+#' @param keeppar should margin parameters be kept instead of being restored to previous value? DEFAULT: FALSE
+#' @param \dots further arguments passed to \code{\link{plot}} like lwd, xaxs, cex.axis, etc.
+#' 
 normPlot <- function(
   mean=0, # average value as in \code{\link{dnorm}}
   sd=1, # standard deviation

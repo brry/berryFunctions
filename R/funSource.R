@@ -1,11 +1,20 @@
-# open github.com/cran source code of a function in a package
-# Berry Boessenkool", "Jan 2016", "berry-b@gmx.de
-
-# ToDo: add message: "function also found in: " 
-
+#' Source code of a function
+#' 
+#' open github.com/cran source code of a function in a package
+#' 
+#' @return link that is also opened
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2016
+#' @note This is not finished yet...
+#' @export
+#' @examples
+#' # ToDo: add message: "function also found in: " 
+#' 
+#' @param x function name, with or without quotation marks
+#' @param character.only If TRUE, look for SomeFun instead of MyFun if  MyFun <- "SomeFun". DEFAULT: FALSE
+#' 
 funSource <- function(
-x, # function name, with or without quotation marks
-character.only=FALSE # If TRUE, look for SomeFun instead of MyFun if  MyFun <- "SomeFun"
+x, 
+character.only=FALSE 
 )
 {
 # change input to character:

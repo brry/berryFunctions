@@ -1,15 +1,34 @@
-# Create Documentation file section arguments from .r-source
-# Berry Boessenkool, June + Dec 2014
-# This assumes the following structure of source code:
-
-# MyFun <- function(
-# arg1, # Explanation of this item
-# arg2=TRUE, # Ditto, with default
-# arg3)
-# {
-
-# PS: Roxygen doesn't really get this structure, as far as I know.
-
+#' Create Documentation file from r-source
+#' 
+#' Create Documentation file (especially section arguments) from r-source
+#' 
+#' @details This assumes the following structure of source code:\cr 
+#'    \code{MyFun <- function(}\cr 
+#'    \code{arg1, # Explanation of this item}\cr 
+#'    \code{arg2=TRUE, # Ditto, with default}\cr 
+#'    \code{arg3)}\cr 
+#'    \code{'{'}\cr
+#'    \code{computations'}'}\cr
+#'    The opening bracket line may ONLY contain the curly brace
+#' 
+#' @note This might be deprecated in favor of Roxygen
+#' @return None. Cats documentation for \code{fun} in \code{path}/man. Only usage, arguments and author section are filled, the rest is empty (but the frame is there).
+#' @section Warning: This is highly specific to my way of working, don't rely blindly on it.\cr 
+#'     If a file already exists, it is not overwritten, instead a new file \code{fun_2.Rd} or \code{fun_3.Rd} (up to 99), is created.\cr 
+#'     Empty (or space-only) lines are silently ignored.\cr A line with two arguments will throw a warning, 
+#'     as they can't be listed in the argument section. They should be written normally into the usage section.
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, June + Dec 2014
+#' @seealso \code{\link{package.skeleton}}, \code{\link{prompt}}, \code{\link{scan}}, 
+#'          \code{\link{cat}}, Roxygen and Roxygen2 \url{http://cran.r-project.org/web/packages/roxygen2/vignettes/rd.html}
+#' @keywords documentation
+#' @export
+#' @examples
+#' 
+#' #createDoc("textField")
+#' 
+#' @param fun Character string or unquoted name. Function (== filename) with structure described in 'Details' in source code.
+#' @param path Path to package in development containing folders 'R' and 'man'. DEFAULT: "S:/Dropbox/Public/berryFunctions"
+#' 
 createDoc <- function(
   fun, # Character string. Function (== filename) with correct structure in source code.
   path="S:/Dropbox/Public/berryFunctions" # Path to package in development containing folders "R" and 'man'.

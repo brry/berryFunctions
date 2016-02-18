@@ -1,3 +1,29 @@
+#' RMSE
+#' 
+#' Root Mean Squared Error
+#' 
+#' @details Formula used: \code{sqrt( sum((a-b)^2)/length(b) )}
+#'
+#' @return Numeric.
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2014
+#' @seealso \code{\link{rsquare}}
+#' @references \url{http://en.wikipedia.org/wiki/Mean_squared_error}
+#' @keywords univar
+#' @export
+#' @examples
+#' 
+#' x <- rnorm(20)
+#' y <- 2*x + rnorm(20)
+#' plot(x,y)
+#' yp <- predict(lm(y~x))
+#' plot(y, yp)
+#' abline(a=0,b=1)
+#' rmse(y,yp)
+#' 
+#' @param a Vector with values.
+#' @param b Another vector of the same length.
+#' @param quiet Should NA-removal warnings be suppressed? Helpful within functions. DEFAULT: FALSE
+#' 
 rmse <- function(
                 a,
                 b,

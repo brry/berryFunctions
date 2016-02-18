@@ -1,8 +1,25 @@
-# Timer alarm
-# Berry Boessenkool, berry-b@gmx.de, 2015-06-20
-
-# with defaults for useR lightning talks: 15 slides, each shown 20 secs, change automatically
-
+#' Timer alarm
+#' 
+#' Beeps in a given interval and gives a progress bar in the console
+#' 
+#' @details defaults to practice useR lightning talks: 15 slides, each shown 20 secs, change automatically
+#' 
+#' @return none
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, June 2015
+#' @seealso \code{\link{alarm}}, \code{\link{Sys.sleep}}, \code{\link{txtProgressBar}}
+#' @references \url{http://user2015.math.aau.dk/lightning_talks}
+#' @keywords utilities chron
+#' @export
+#' @examples
+#' 
+#' timer(interval=0.5, n=3)
+#' timer(interval=0.2, n=8, write=TRUE) # a slight deviation occurs for a large n
+#' # timer() # to practice lightning talks at useR! conferences
+#'
+#' @param interval \code{\link{alarm}} interval in seconds. DEFAULT: 20
+#' @param n number of alarm signals to be given. DEFAULT: 15
+#' @param write Should the actual estimated time be written for overhead computing time control purposes? DEFAULT: FALSE
+#' 
 timer <- function(
 interval=20, # \code{\link{alarm}} interval in seconds
 n=15, # number of alarm signals to be given

@@ -1,15 +1,105 @@
-
-# write text in graphics with colored field underneath it for better readability
-# Search Engine Keywords:
-# R Text visible on top
-# R labeling with color underneath
-# R Creating text with a halo
-# R Text with shadow
-
-# Berry, April 2013 + March 2014, berry-b@gmx.de
-# with inspiration taken from vegan:::ordilabel() and thanks to Jari Oksanen for his comments
-# see also ade4:::s.label, which is simpler and doesn't work with logarithmic axes
-
+#' Write text to plot with halo underneath
+#' 
+#' Write text to plot. A field the size of each label is drawn beneath it, so
+#' the text can be read easily even if there are many points in the plot.
+#' Fields can be rectangular, elliptic or rectangular with roundeed edges.
+#' 
+#' @details Specifying pos and offset will currently change the position of the text, but not of the field.\cr 
+#' srt is not supported yet.\cr 
+#' lend, ljoin and lmitre can not be specified for rect, to keep argument number low.\cr 
+#' density (crosshatch etc.) is not supported, as this would distract from the text.
+#' # Search Engine Keywords:
+#' R Text visible on top
+#' R labeling with color underneath
+#' R Creating text with a halo
+#' R Text with shadow
+#' 
+#' @return None
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, April 2013 + March 2014
+#' @seealso \code{\link{text}}; \code{shadowtext} in package \code{TeachingDemos}, see \url{http://stackoverflow.com/questions/25631216};
+#'          \code{s.label} in package \code{ade4}, which is not so versatile and doesn't work with logarithmic axes
+#' @references with inspiration taken from \code{ordilabel} in package \code{vegan} and thanks to Jari Oksanen for his comments
+#' @keywords aplot
+#' @export
+#' @examples
+#' 
+#' # TextFields with mixed field shapes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' set.seed(13);  plot(cumsum(rnorm(100)), type="l", main="berryFunctions::textField")
+#' for(i in 2:7) lines(cumsum(rnorm(100)), col=i)
+#' textField(40, 4, "default")
+#' textField(40, 0, "some options", col=2, fill=4, margin=c(-0.4, 0.9), font=2)
+#' # Ellipsis (looks better in vector graphics like pdf):
+#' textField(80, 2, "field='ellipse'", field="ell", mar=c(0.5, 2.3), border=5)
+#' # Rectangular field with edges rounded:
+#' textField(60,-3, "field='Rounded'", field="rounded", fill="orange", cex=1.7)
+#' 
+#' # Field type can be abbreviated (partial matching), margin may need adjustment:
+#' textField(90, 5, "short", field="ell", fill=7, border=4, mar=-0.4)
+#' 
+#' # Rounded can also vectorized:
+#' textField(30, c(2,0,-2,-4,-6), paste("rounding =",seq(0,1,len=5)), field="round",
+#'     fill=(2:6), mar=1, rounding=seq(0,1,len=5), border=1)
+#' # turn off warning about recycling:
+#' textField(80, c(-5,-6.5), c("Ja", "Nein"), field="round", fill=6:8, quiet=TRUE)
+#' 
+#' 
+#' set.seed(007); plot(rnorm(1e4)) ; abline(v=0:5*2e3, col=8)
+#' # Default settings:
+#' textField(5000, 0, "Here's some good text")
+#' # right-adjusted text (the field box still extends 'margin' stringwidths em):
+#' textField(2000, -1, "Some more (smores!)", cex=1.5, adj=0, col=2)
+#' # Field color, no extra margin beyond baseline (excluding descenders):
+#' textField(2000, -2, "more yet", col=2, fill="blue", margin=0)
+#' # margin can be one number for both x and y direction ... :
+#' textField(1000, 2, "Up we go", fill=7, margin=1.4)
+#' # ... or two (x and y different), even negative:
+#' textField(5000, 2, "to the right", col=2, fill=4, margin=c(-0.4, 0.9))
+#' # Fonts can be set as well:
+#' textField(5000, 1, "And boldly down in bold font", font=2, border=3)
+#' # Text can expand outsinde of the plot region (figure) into the margins:
+#' textField(11000, -2, "Hi, I'm a long block of text", adj=1, fill="red")
+#' textField(11000, -3, "You're not outside the plot!", adj=1, xpd=TRUE, fill="red")
+#' # And most parameters can be vectorized, while x/y are recycled:
+#' textField(3000, c(-3, -3.7), c("0", "good"), border=c("red",3), lty=1:2)
+#' 
+#' 
+#' # textField even works on logarithmic axes:
+#' mylabel <- c("This","is (g)","the","ever-\n great","Sparta")
+#' plot(10^runif(5000, -1,2), log="y", col=8)
+#' textField(1000, c(100,20,4,2,0.5), mylabel, fill=2, mar=0, expression=FALSE)
+#' textField(2500, c(100,20,4,2,0.5), mylabel, fill=4, mar=0, expression=TRUE)
+#' textField(4000, c(100,20,4,2,0.5), mylabel, fill=3, mar=0)
+#' textField(c(1,2.5,4)*1000, 0.2, paste("expression=\n", c("FALSE","TRUE","NA")))
+#' 
+#' # In most devices, vertical adjustment is slightly off when the character string
+#' # contains no descenders. The default is for centered text:  adj = c(0.5, NA).
+#' # For drawing the field, adj[2] is in this case set to 0.5.
+#' # Text positioning is different for NA than for 0.5, see details of ?text
+#' # I'm working on it through expression, which does not work with newlines yet
+#' 
+#' @param x X coordinates, if necessary, they are recycled
+#' @param y Y coordinates
+#' @param labels labels to be placed at the coordinates, as in \code{\link{text}}. DEFAULT: seq_along(x)
+#' @param fill fill is recycled if necessary. With a message when quiet = FALSE. DEFAULT: "white"
+#' @param border ditto for border. DEFAULT: NA
+#' @param expression If TRUE, labels are converted to expression for better field positioning through expression bounding boxes.  
+#'        If NA, it is set to TRUE for labels without line breaks (Newlines, "\\n").
+#'        If FALSE, no conversion happens. DEFAULT: NA
+#' @param margin added field space around words (multiple of em/ex). DEFAULT: 0.3
+#' @param field 'rectangle', 'ellipse', or 'rounded', partial matching is performed. DEFAULT: "rect"
+#' @param nv number of vertices for field = "ellipse" or "rounded". low: fast drawing.
+#'        high: high resolution in vector graphics as pdf possible. DEFAULT: 1000
+#' @param rounding between 0 and 1: portion of height that is cut off rounded at edges when field = "rounded". DEFAULT: 0.75
+#' @param lty line type. DEFAULT: par("lty")
+#' @param lwd line width. DEFAULT: par("lwd")
+#' @param cex character expansion. DEFAULT: par("cex")
+#' @param xpd expand text outside of plot region ("figure")?. DEFAULT: par("xpd")
+#' @param adj vector of length one or two. DEFAULT: par("adj")
+#' @param pos in 'text', pos overrides adj values. DEFAULT: NULL
+#' @param offset I want the field to still be drawn with adj, but have it based on pos. DEFAULT: 0.5
+#' @param quiet Suppress warning when Arguments are recycled?. DEFAULT: FALSE
+#' @param \dots further arguments passed to strwidth and text, like font, vfont, family
+#' 
 textField <- function(
          x, # X coordinates, if necessary, they are recycled
          y, # Y coordinates

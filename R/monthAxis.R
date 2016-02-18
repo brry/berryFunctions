@@ -1,9 +1,61 @@
-# Function to label date axes
-# berry-b@gmx.de, Feb 2015, update labels and midyear Dec 2015
-# returns Date object
-
-#midargs=NULL,  # List of arguments passed to \code{\link{axis}} for the year-start lines without labels.
-
+#' Label date axis
+#' 
+#' Labels date axes at sensible intervals in the time domain of weeks to decades.
+#' 
+#' @return The dates that were labelled
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Feb 2015, update labels and midyear Dec 2015
+#' @seealso \code{\link{monthLabs}} for the numbercrunching itself, \code{\link{axis.Date}} with defaults that are less nice.
+#' @keywords chron aplot dplot
+#' @export
+#' @examples
+#' 
+#' set.seed(007) # for reproducibility
+#' Date1 <- sort(as.Date("2013-09-25")+sample(0:150, 30))
+#' plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
+#' monthAxis(side=1)
+#' monthAxis(1, npm=2, cex.axis=0.5) # fix number of labels per month
+#' 
+#' plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
+#' monthAxis(labels=FALSE)
+#' monthAxis(1, format=" ", col.ticks=2)  # equivalent to axis(labels=FALSE)
+#' monthAxis(1)
+#' d <- monthAxis(1, labels=letters[1:24], mgp=c(3,2.5,0))
+#' d # d covers the full year, thus is longer than n=5
+#' 
+#' Date2 <- sort(as.Date("2011-07-13")+sample(0:1400, 50))
+#' plot(Date2, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
+#' monthAxis(npy=12, format=" ")  # fix number of labels per year
+#' monthAxis(tcl=-0.8, lwd.ticks=2, format="%Y/%m", mgp=c(3,1,0))
+#' monthAxis(format="", mgp=c(3,2,0)) # International Date format YYYY-mm-dd
+#' 
+#' plot(Date2, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
+#' monthAxis(midyear=TRUE)
+#' abline(v=monthLabs(npm=1), col=8)
+#' 
+#' Date3 <- sort(as.Date("2011-07-13")+sample(0:1200, 50))
+#' plot(Date3, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
+#' monthAxis(1, n=4, font=2)
+#' monthAxis(1, col.axis=3) # too many labels with default n=5
+#' 
+#' # toDo: midargs=NULL,
+#' # List of arguments passed to \code{\link{axis}}
+#' # for the year-start lines without labels.
+#' 
+#' @param side Which \code{\link{axis}} are to be labeled? (can be several). DEFAULT: 1
+#' @param startyear Integer. starting year. DEFAULT: NULL = internally computed from \code{\link{par}("usr")}
+#' @param stopyear Ditto for ending year. DEFAULT: NULL
+#' @param n Approximate number of labels that should be printed (as in code\link{pretty}). DEFAULT: 5
+#' @param npm Number of labels per month, overrides n. DEFAULT: NULL = internally computed.
+#' @param npy Number of labels per year, overrides npm and n. DEFAULT: NA
+#' @param format Format of date, see details in \code{\link{strptime}}. DEFAULT: "\%d.\%m.\\n\%Y"
+#' @param labels labels. DEFAULT: format.Date(d, format)
+#' @param midyear Place labels in the middle of the year? if TRUE, format default is "\%Y". DEFAULT: FALSE
+#' @param mgp MarGinPlacement, see \code{\link{par}}. The second value is for label distance to axis. DEFAULT: c(3,1.5,0)
+#' @param cex.axis CharacterEXpansion (letter size). DEFAULT: 1
+#' @param tick Draw tick lines? DEFAULT: TRUE
+#' @param las LabelAxisStyle for orientation of labels. DEFAULT: 1 (upright)
+#' @param \dots Further arguments passed to \code{\link{axis}}, like \code{lwd, col.ticks, hadj, lty}, ...
+#'  
 monthAxis <- function(
 side=1,        # Which \code{\link{axis}} are to be labeled? (can be several)
 startyear=NULL,# Integer. starting year. DEFAULT: NULL = internally computed from \code{\link{par}("usr")}

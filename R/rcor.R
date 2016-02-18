@@ -1,9 +1,22 @@
-# spatially correlated random values
-# Berry Boesenkool, Jan 2016, berry-b@gmx.de
-# For regular grid fields, see:
-# http://santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r/
+#' Spatially correlated random values
+#' 
+#' Generate random values, but with spatial correlation
+#' 
+#' @author Berry Boesenkool, \email{berry-b@@gmx.de}, Jan 2016
+#' @references For regular grid fields, see: \url{http://santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r/}
+#' @note This function is not yet running
+#' @export
 
-
+#' @param n Number of randomly scattered points to be created
+#' @param xmin  Smallest x-coordinate
+#' @param xmax Largest x-coordinate
+#' @param ymin Smallest y-coordinate
+#' @param ymax Largest y-coordinate
+#' @param allplots Save all plots in dummy.pdf? DEFAULT: TRUE
+#' @param zstart Vector of starting values for seeding some points, must be shorter than n
+#' @param zfun A function for random noise creation, taking n as first argument. DEFAULT: rnorm
+#' @param \dots Further arguments passed to zfun, like sd=3
+#'
 rcor <- function(
 n,      # Number of randomly scattered points to be created
 xmin,   # Smallest x-coordinate
@@ -43,6 +56,5 @@ if(FALSE){
 coor <- rcor(n=100, xmin=45, xmax=80, ymin=230, ymax=270, zstart=c(20,30,40), sd=3)
 colPoints(x,y,z, data=coor, add=FALSE, asp=1, col=divPal(100))
 points(coor$x[1:3], coor$y[1:3], cex=1.4)
-
 }
 

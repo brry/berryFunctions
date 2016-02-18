@@ -1,6 +1,49 @@
-# Exponential Regression
-# Berry Boessenkool, Dec 2014
-
+#' Exponential regression with plotting
+#' 
+#' uses \code{\link{lm}}; plots data if add=FALSE, draws the regression line
+#' with \code{\link{abline}} and confidence interval with \code{\link{polygon}}
+#' and writes the formula with \code{\link{legend}}
+#' 
+#' @return \code{\link{predict.lm}} result.
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Dec. 2014
+#' @seealso \code{\link{lm}}, \code{\link{mReg}}, \code{\link{linReg}}.
+#' @keywords hplot aplot regression
+#' @export
+#' @examples
+#' 
+#' x <- runif(100, 1, 10)
+#' y <- 10^(0.3*x+rnorm(100, sd=0.3)+4)
+#' plot(x,y)
+#' expReg(x,y)
+#' expReg(x,y, logy=FALSE)
+#' expReg(x,y, predictnew=6, plot=FALSE)
+#' expReg(x,y, predictnew=3:6, interval="none", plot=FALSE)
+#' 
+#' @param x Numeric or formula (see examples). Vector with values of explanatory variable
+#' @param y Numeric. Vector with values of dependent variable. DEFAULT: NULL
+#' @param data Dataframe. If x is a formula, the according columns from data are used as x and y. DEFAULT: NULL
+#' @param logy Plot with a logarithmic y axis?  Calls \code{\link{logAxis}}. DEFAULT: TRUE
+#' @param predictnew Vector with values to predict outcome for. Passed as \code{newdata} to \code{\link{predict.lm}}. DEFAULT: NULL
+#' @param interval Inter val for prediction. DEFAULT: "confidence"
+#' @param plot Plot things at all? If FALSE, predictnew will still be returned. DEFAULT: TRUE
+#' @param digits Numeric vector of length \eqn{\ge 1}. Specifies number of digits a,b,r,e are rounded to 
+#'        in the formula "y=a*log(x)+b, R^2, RMSE=e", respectively. 
+#'        If values are not specified, they are set equal to the first. DEFAULT: 2
+#' @param inset Numeric vector of length \eqn{\le 2}. inset distance(s) from the margins 
+#'        as a fraction of the plot region when formula is placed by keyword. DEFAULT: 0
+#' @param xpd Logical, specifying wheter formula can be written only inside the plot region (when FALSE) 
+#'        or inside the figure region including mar (when TRUE) or in the entire device region including oma (when NA). DEFAULT: par("xpd")
+#' @param pos1 \code{\link{xy.coords}}-acceptable position of the formula. DEFAULT: "top"
+#' @param pos2 For numerical coordinates, this is the y-position. DEFAULT: NULL, as in \code{\link{legend}}
+#' @param add Logical. If TRUE, line and text are added to the existing graphic. DEFAULT: FALSE (plots datapoints first and then the line.)
+#' @param pch Point Character, see \code{\link{par}}. DEFAULT: 16
+#' @param col Color of points, see \code{\link{par}}. DEFAULT: rgb(0,0,0, 0.5)
+#' @param modcol color of model line. DEFAULT: 2
+#' @param lwd Numeric. Linewidth, see \code{\link{par}}. DEFAULT: 1
+#' @param xlab,ylab,main Character / Expression. axis label and graph title if add=FAlSE. DEFAULT: internal from names
+#' @param xlim,ylim graphic range. DEFAULT: range(x)
+#' @param \dots Further arguments passed to \code{\link{plot}} and \code{\link{abline}}.
+#' 
 expReg <- function(
 x, # Numeric or formula (see examples). Vector with values of explanatory variable
 y=NULL, # Numeric. Vector with values of dependent variable

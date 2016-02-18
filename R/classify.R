@@ -1,11 +1,61 @@
-# Berry Boessenkool, Aug/Sept 2014
+#' Classification into groups
+#' 
+#' classify continuous values into categories with different methods:\cr
+#' - linearly or logarithmically spaced equal intervals,\cr
+#' - intervals based on quantiles (equally filled bins),\cr
+#' - intervals based on  distance from the mean in normal distributions,\cr
+#' - user specified class borders (e.g. for legal or critical limits).
+#' 
+#' @details 
+#' Binning methods are explained very nicely in the link in the section References.\cr
+#' \emph{nbins} indicates the number of classes (and thus, colors).\cr \cr
+#'
+#' \tabular{llll}{
+#'  \bold{\code{method}}     \tab |  explanation                         \tab |  meaning of \code{breaks}                             \tab |  default   \cr
+#'  ----------               \tab |  -----------                         \tab |  -----------                                          \tab |  -------   \cr
+#'  \bold{equalinterval}     \tab |  \emph{nbins} equally spaced classes \tab |  nbins                                                \tab |  100       \cr
+#'  \bold{quantile}          \tab |  classes have equal number of values \tab |  the quantiles (or number of them)                    \tab |  0:4/4     \cr
+#'  \bold{standarddeviation} \tab |  normal distributions                \tab |  the number of sd in one direction from the mean      \tab |  3         \cr
+#'  \bold{logspaced}         \tab |  \emph{nbins} logarithmically spaced \tab |  c(nbins, base),  see \code{\link{logSpaced}}         \tab |  c(100,1.2)\cr
+#'  \bold{usergiven}         \tab |  custom breakpoints                  \tab |  personal breakpoint values (including ends of Range) \tab |  none      \cr
+#' }
+#' The default is set to equalinterval which makes sense for my original intent
+#' of plotting lake depth (bathymetry measured at irregularly distributed points) on a linear color scale.\cr
+#' This is the workhorse for \code{\link{colPoints}}.\cr
+#' 
+#' @return list with class numbers (index) and other elements for \code{\link{colPoints}}
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2014
+#' @seealso \code{\link{colPoints}}
+#' @references See this page on the effect of classification (binning) methods: \cr 
+#' \url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html}
+#' @keywords classif
+#' @export
+#' @examples
+#' 
+#' classify( c(1:10, 20), breaks=12)
+#' classify( c(1:10, 20), "q", breaks=0:10/10)
+#' classify( c(1:10, 20), "s", sdlab=2 )
+#' classify( c(1:10, 20), "s", sdlab=1, breaks=2 )
+#' classify( c(1:10, 20), "u", breaks=c(5,27) )
+#' classify( c(1:10, 20), "l")
+#' 
+#' @param x Vector with numeric values
+#' @param method Character string (partial matching is performed). Classification method or 
+#'        type of binning to compute the class breakpoints. See section Details. DEFAULT: "equalinterval")
+#' @param breaks Specification for method, see Details. DEFAULT: different defaults for each method
+#' @param Range Ends of color bar for method=equalinterval. DEFAULT: range(x, finite=TRUE)
+#' @param sdlab Type of label and breakpoints if \code{method=standarddeviation}. 
+#'        1 means \code{-0.5 sd, 0.5 sd}, 2 means \code{-1 sd, mean, 1 sd}, 
+#'        3 means actual numbers for type 1, 4 means numbers for type 2.
+#' @param quiet Suppress warnings, eg for values outside Range? DEFAULT: FALSE
+#' 
 classify <- function(
-  x, # Vector with numeric values
-  method="equalinterval", # type of binning or classification method (ways to get color class breakpoints)
-  breaks, # specification for method
-  Range=range(x, finite=TRUE), # Ends of color bar for method=equalinterval
-  sdlab=1, # type for method=standarddeviation
-  quiet=FALSE) # Suppress warnings, eg for values outside Range? DEFAULT: FALSE
+  x, 
+  method="equalinterval", 
+  breaks, 
+  Range=range(x, finite=TRUE), 
+  sdlab=1, 
+  quiet=FALSE)
 {
 x <- as.numeric(x)
 # error checking:
