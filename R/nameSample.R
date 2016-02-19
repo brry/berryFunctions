@@ -67,7 +67,7 @@ if(estimatetime)
     {
     randomwords <- function(n) paste(sample(letters,n), collapse="")
     let <- sapply(rep(4:2, c(3,15,50)), randomwords)
-    if(require(pbapply, quietly=TRUE)) sapply <- pbapply::pbsapply
+    if(requireNamespace("pbapply", quietly=TRUE)) sapply <- pbapply::pbsapply
     suppressMessages(calctime <- sapply(let, function(x) system.time(nameSample(x))[3]))
     nchar_name <- nchar(names(calctime))-8
     estcalctime <- expReg(nchar_name, calctime, xlim=c(1, nc),

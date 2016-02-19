@@ -1,12 +1,13 @@
 #' axis limits with one end at zero
 #' 
-#' Calculates the range needed for ylim or xlim in plot, so that axis starts at zero and is extended by 4\% at the other end
+#' Calculates the range needed for ylim or xlim in plot, so that axis
+#' starts at zero and is extended by 4\% at the other end
 #' 
-#' @return Vector with two values
-#' @note Needs more testing, please get back to me if it doesn't do what it's supposed to do!
+#' @return Vector with two values: 0 and by 4% contra-extended max (as for xaxs="r")
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 6.6.2013
 #' @seealso The \code{\link{extendrange}()} utility in package \pkg{grDevices}
-#' @references \code{methods(plot)}, \code{\link[graphics]{plot.default}}. actually, I found extendrange via \code{plot.function} in \code{curve}
+#' @references \code{methods(plot)}, \code{\link[graphics]{plot.default}}.
+#'             Actually, I found extendrange via \code{plot.function} in \code{curve}
 #' @keywords dplot
 #' @export
 #' @examples
@@ -37,19 +38,16 @@
 #'         plotting doesn't need the default \code{\link{par}} xaxs or yaxs changed. DEFAULT: TRUE
 #' 
 lim0 <- function(
-                 x,
-                 f=1/27,
-                 curtail=TRUE)
-     # returns vector with 2 values: 0 and by 4% contra-extended max (as for xaxs="r")
-     # see methods(plot), graphics:::plot.default,
-     #     graphics:::curve and extendrange in grDevices
-     {
-     if(length(x)==1) x <- c(0,x)
-     r <- range(as.matrix(x), finite=TRUE)
-     r2 <- r + c(-f,f) * diff(r) # classical procedure of extendrange
-     r2[which.min(abs(r2))] <- 0 # set one end to zero
-     if(curtail) # if par xaxs is "r" as it is by default, first trim the range, so that
-     r2 + c(f,-f) * diff(r2) # in the plot command, we don't have to change yaxs or xaxs
-     else
-     r2
-     }
+x,
+f=1/27,
+curtail=TRUE)
+{
+if(length(x)==1) x <- c(0,x)
+r <- range(as.matrix(x), finite=TRUE)
+r2 <- r + c(-f,f) * diff(r) # classical procedure of extendrange
+r2[which.min(abs(r2))] <- 0 # set one end to zero
+if(curtail) # if par xaxs is "r" as it is by default, first trim the range, so that
+r2 + c(f,-f) * diff(r2) # in the plot command, we don't have to change yaxs or xaxs
+else
+r2
+}

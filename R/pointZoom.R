@@ -40,18 +40,18 @@
 #' @param \dots further arguments passed to \code{\link{plot}} or \code{\link{colPoints}}.
 #' 
 pointZoom <- function(
-          x,
-          y=NA,
-          z=NA,
-          Time=1,
-          steps=30,
-          las=1,
-          usecolp=FALSE,
-          xlab=substitute(x),
-          ylab=substitute(y),
-          quiet=FALSE,
-          expr,
-          ...)
+x,
+y=NA,
+z=NA,
+Time=1,
+steps=30,
+las=1,
+usecolp=FALSE,
+xlab=substitute(x),
+ylab=substitute(y),
+quiet=FALSE,
+expr,
+...)
 {
 if(interactive()){ # to silence the R CMD check warnings
 if(!quiet){

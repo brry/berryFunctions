@@ -101,25 +101,25 @@
 #' @param \dots further arguments passed to strwidth and text, like font, vfont, family
 #' 
 textField <- function(
-         x, # X coordinates, if necessary, they are recycled
-         y, # Y coordinates
-         labels=seq_along(x), # labels to be placed at the coordinates, as in \code\linktext}}
-         fill="white",   # fill is recycled if necessary. With a message when quiet = FALSE
-         border=NA,      # ditto for border
-         expression=NA,  # If TRUE, labels are converted to expression for better field positioning through expression bounding boxes. If NA, it is set to TRUE for labels without line breaks (Newlines, "\n").
-         margin=0.3,     # added field space around words (multiple of em/ex)
-         field="rect",   # 'rectangle', 'ellipse', or 'rounded', partial matching is performed
-         nv=1000,        # number of vertices for field = "ellipse" or "rounded". low: fast drawing. high: high resolution in vector graphics as pdf possible.
-         rounding=0.75,  # between 0 and 1: portion of height that is cut off rounded at edges when field = "rounded"
-         lty=par("lty"), # line type
-         lwd=par("lwd"), # line width
-         cex=par("cex"), # character expansion
-         xpd=par("xpd"), # expand text outside of plot region ("figure")?
-         adj=par("adj"), # vector of length one or two
-         pos=NULL,       # in 'text', pos overrides adj values.
-         offset=0.5,     # I want the field to still be drawn with adj, but have it based on pos
-         quiet=FALSE,    # Suppress warning when Arguments are recycled?
-         ...) # further arguments passed to strwidth and text, like font, vfont, family
+x,
+y,
+labels=seq_along(x),
+fill="white",
+border=NA,
+expression=NA,
+margin=0.3,
+field="rect",
+nv=1000,
+rounding=0.75,
+lty=par("lty"),
+lwd=par("lwd"),
+cex=par("cex"),
+xpd=par("xpd"),
+adj=par("adj"),
+pos=NULL,
+offset=0.5,
+quiet=FALSE,
+...)
 {
 # Partial matching field--------------------------------------------------------
 PossibleValues <- c("rectangle", "ellipse", "rounded")

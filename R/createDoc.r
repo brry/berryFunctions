@@ -30,8 +30,8 @@
 #' @param path Path to package in development containing folders 'R' and 'man'. DEFAULT: "S:/Dropbox/Public/berryFunctions"
 #' 
 createDoc <- function(
-  fun, # Character string. Function (== filename) with correct structure in source code.
-  path="S:/Dropbox/Public/berryFunctions" # Path to package in development containing folders "R" and 'man'.
+  fun,
+  path="S:/Dropbox/Public/berryFunctions"
   )
 {
 fun <- deparse(substitute(fun))

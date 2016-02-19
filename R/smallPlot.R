@@ -46,11 +46,11 @@
 #' plot(3:9)  # margins, las and mgp are still changed
 #' 
 #' 
-#' @param expr expression creating a plot. Can be code within braces.
-#' @param x,y Position of small plot, relative to current figure region (0:100). max and min from vector arre taken. DEFAULT: 5-70, 50-100
+#' @param expr expression creating a plot. Can be code within {braces}.
+#' @param x,y Position of small plot, relative to current figure region (0:100). max and min from vector are taken. DEFAULT: 5-70, 50-100
 #' @param x1,y1,x2,y2 Positions of topleft and bottomright corner. Replaced with x,y, kept here for backcompatibility.
 #' @param mar Margin vector in relative units (0:100), thus behaves differently than \code{\link{par}(mar)}. DEFAULT: c(12, 14, 3, 3)
-#' @param mgp MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, as in \code{\link{par}}, but with different default. DEFAULT: c(1.8, 0.8, 0)
+#' @param mgp MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.8, 0)
 #' @param bg Background. DEFAULT: par("bg")
 #' @param border Border around inset plot. DEFAULT: par("fg")
 #' @param las LabelAxisStyle. DEFAULT: 1
@@ -58,17 +58,17 @@
 #' @param \dots further arguments passed to \code{\link{par}. new=F} removes old plot. May mess things up - please tell me for which arguments!
 #'  
 smallPlot <- function(
-expr, # expression creating a plot. Can be code within {braces}.
-x=c(5,70), # Position of small plot, relative to current figure region (0:100)
+expr,
+x=c(5,70),
 y=c(50,100),
-x1,y1,x2,y2, # Positions of topleft and bottomright corner. Replaced with x,y, kept here for backcompatibility.
-mar=c(12, 14, 3, 3), # Margin vector in relative units (0:100), thus behaves differently than \code{\link{par}(mar)}
-mgp=c(1.8, 0.8, 0), # MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, as in \code{\link{par}}, but with different defaults
-bg=par("bg"), # Background
-border=par("fg"), # Border around inset plot
-las=1, # LabelAxisStyle
-resetfocus=TRUE, # reset focus to original plot? Specifies where further low level plot commands are directed to.
-...) # further arguments passed to \code{\link{par}. new=F} removes old plot. May mess things up - please tell me for which arguments!
+x1,y1,x2,y2,
+mar=c(12, 14, 3, 3),
+mgp=c(1.8, 0.8, 0),
+bg=par("bg"),
+border=par("fg"),
+las=1,
+resetfocus=TRUE,
+...)
 {                                            #     ------------
 # Input check:                               #  y1 | P1       |
 if(missing(x1)) x1 <- min(x, na.rm=TRUE)     #     |          |

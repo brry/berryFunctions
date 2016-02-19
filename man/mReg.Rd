@@ -7,12 +7,10 @@
 mReg(x, y = NULL, data = NULL, Poly45 = FALSE, exp_4 = FALSE,
   xf = deparse(substitute(x)), yf = deparse(substitute(y)), ncolumns = 9,
   plot = TRUE, add = FALSE, nbest = 12, R2min, selection = NULL,
-  digits = 2, extend = 0.4, xlim = range(x, finite = TRUE) + c(-1, 1) *
-  extend * diff(range(x, finite = TRUE)), ylim = range(y, finite = TRUE) +
-  c(-1, 1) * extend * diff(range(y, finite = TRUE)), xlab = xf, ylab = yf,
-  las = 1, lwd = rep(1, 12), lty = rep(1, 12), col = NULL,
-  pcol = par("col"), pch = 16, legend = TRUE, legargs = NULL,
-  legendform = "nameform", ...)
+  digits = 2, extend = 0.4, xlim = extendrange(x, f = extend),
+  ylim = extendrange(y, f = extend), xlab = xf, ylab = yf, las = 1,
+  lwd = rep(1, 12), lty = rep(1, 12), col = NULL, pcol = par("col"),
+  pch = 16, legend = TRUE, legargs = NULL, legendform = "nameform", ...)
 }
 \arguments{
 \item{x}{Vector with x coordinates or formula (like y~x), the latter is passed to \code{\link{model.frame}}}
@@ -23,7 +21,7 @@ mReg(x, y = NULL, data = NULL, Poly45 = FALSE, exp_4 = FALSE,
 
 \item{Poly45}{Logical. Should 4th and 5th degree polynomials also be fitted? DEFAULT: FALSE, as the formulas are very long.}
 
-\item{exp_4}{Logical. Return 4-parametric exponential distibution fits? (only best fit is plotted). 
+\item{exp_4}{Logical. Return 4-parametric exponential distibution fits (via \code{\link{exp4p}}) in the output table? (only best fit is plotted).
 exp_4par_ini has the initial values of exponential fitting with the data relocated to first quadrant. 
 The others are optimized with the methods of \code{\link{optim}}. DEFAULT: FALSE}
 
@@ -64,13 +62,13 @@ Suggestion: 0.6 (2/3 of variation of y is explained by function of x). DEFAULT: 
 
 \item{col}{Numerical of length 12. line colors. DEFAULT: NULL, means they are specified internally}
 
-\item{pcol}{Numerical. Color used for the data-points themselves. DEFAULT: par('col')}
+\item{pcol}{Color used for the data-points themselves. DEFAULT: par('col')}
 
 \item{pch}{Integer or single character. Point CHaracter for the data points. See \code{\link{par}}. DEFAULT: 16}
 
-\item{legend}{Logical. add legend to plot? DEFAULT: TRUE}
+\item{legend}{Logical. Add legend to plot? DEFAULT: TRUE}
 
-\item{legargs}{List. Arguments passed to \code{\link{legend}}. Will overwrite defaults. DEFAULT: NULL}
+\item{legargs}{List. List of arguments passed to \code{\link{legend}}. Will overwrite internal defaults. DEFAULT: NULL}
 
 \item{legendform}{One of 'full', 'form', 'nameform' or 'name'. Complexity (and length) of legend in plot. See Details. DEFAULT: 'nameform'}
 

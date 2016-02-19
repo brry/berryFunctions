@@ -175,7 +175,7 @@
 #' @param y Vector with y values. DEFAULT: NULL (to enable x to be a formula)
 #' @param data data.frame in which formula is applied. DEFAULT: NULL
 #' @param Poly45 Logical. Should 4th and 5th degree polynomials also be fitted? DEFAULT: FALSE, as the formulas are very long.
-#' @param exp_4 Logical. Return 4-parametric exponential distibution fits? (only best fit is plotted). 
+#' @param exp_4 Logical. Return 4-parametric exponential distibution fits (via \code{\link{exp4p}}) in the output table? (only best fit is plotted).
 #'        exp_4par_ini has the initial values of exponential fitting with the data relocated to first quadrant. 
 #'        The others are optimized with the methods of \code{\link{optim}}. DEFAULT: FALSE
 #' @param xf Character. x name for Formula. DEFAULT: substitute(x) before replacing zeros in x and y
@@ -197,42 +197,43 @@
 #' @param lwd Numerical of length 12. line width for lines. DEFAULT: rep(1,12)
 #' @param lty Numerical of length 12. line type. DEFAULT: rep(1,12)
 #' @param col Numerical of length 12. line colors. DEFAULT: NULL, means they are specified internally
-#' @param pcol Numerical. Color used for the data-points themselves. DEFAULT: par('col')
+#' @param pcol Color used for the data-points themselves. DEFAULT: par('col')
 #' @param pch Integer or single character. Point CHaracter for the data points. See \code{\link{par}}. DEFAULT: 16
-#' @param legend Logical. add legend to plot? DEFAULT: TRUE
-#' @param legargs List. Arguments passed to \code{\link{legend}}. Will overwrite defaults. DEFAULT: NULL
+#' @param legend Logical. Add legend to plot? DEFAULT: TRUE
+#' @param legargs List. List of arguments passed to \code{\link{legend}}. Will overwrite internal defaults. DEFAULT: NULL
 #' @param legendform One of 'full', 'form', 'nameform' or 'name'. Complexity (and length) of legend in plot. See Details. DEFAULT: 'nameform'
 #' @param \dots Further graphical parameters passed to plot
 #' 
 mReg <- function(
-    x, # Vector with x coordinates or formula (like y~x), the latter is passed to \code{\link{model.frame}}
-    y=NULL, # Vector with y values
-    data=NULL, # data.frame in which formula is applied
-    Poly45=FALSE, # Also fit polynomials of 4th and 5th degree?
-    exp_4=FALSE, # return exp_4 fits in table? (only best fit is plotted) DEFAULT: FALSE
-    xf=deparse(substitute(x)), yf=deparse(substitute(y)), # x and y names for Formula
-    ncolumns=9, # number of columns in output. Set lower to avoid overcrowding the console
-    plot=TRUE,   # plot data and fitted functions?
-    add=FALSE,    #  add lines to existing plot?
-    nbest=12, # number of best fitting functions to be plotted (console output table always has all)
-    R2min, # minimum Rsquared value for function type to be plotted. Suggestion: 0.6 (2/3 of variation of y is explained by function of x)
-    selection=NULL, # Integers of functions to be plotted, assigned as in list above.
-    digits=2, # significant digits for rounding formula output and R^2 in legend
-    extend=0.4, # extention of axis ranges (proportion of range)
-    xlim=range(x, finite=TRUE) + c(-1,1)*extend*diff(range(x, finite=TRUE)), # default xlim
-    ylim=range(y, finite=TRUE) + c(-1,1)*extend*diff(range(y, finite=TRUE)), # default ylim
-    xlab=xf, #  default labels via substitute before replacing zeros in x and y
-    ylab=yf, #
-    las=1, # label axis style, see ?par
-    lwd=rep(1,12), # some graphical parameters, all of length 12
-    lty=rep(1,12),
-    col=NULL, # 12 colors for lines and legend texts. DEFAULT: NULL, means they are specified internally
-    pcol=par("col"), # color for the data points
-    pch=16, #  point character for the data points
-    legend=TRUE, #posx="top", posy=NULL, inset=0, # legend options
-    legargs=NULL, # legend options
-    legendform="nameform", # "full" formula, "form", "nameform" or only "name" in legend in plot
-    ...) # more graphical parameters passed to plot
+x,
+y=NULL,
+data=NULL,
+Poly45=FALSE,
+exp_4=FALSE,
+xf=deparse(substitute(x)),
+yf=deparse(substitute(y)),
+ncolumns=9,
+plot=TRUE,
+add=FALSE,
+nbest=12,
+R2min,
+selection=NULL,
+digits=2,
+extend=0.4,
+xlim=extendrange(x, f=extend), # range(x, finite=TRUE) + c(-1,1)*extend*diff(range(x, finite=TRUE))
+ylim=extendrange(y, f=extend),
+xlab=xf,
+ylab=yf,
+las=1,
+lwd=rep(1,12),
+lty=rep(1,12),
+col=NULL,
+pcol=par("col"),
+pch=16,
+legend=TRUE,
+legargs=NULL,
+legendform="nameform",
+...)
 {
 # Function start
 # input checking

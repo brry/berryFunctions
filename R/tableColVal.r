@@ -54,19 +54,19 @@
 #' @param \dots Further arguments passed to \code{\link{pdf}}.
 #' 
 tableColVal <- function(
-   mat,
-   pdffile="table_col_val.pdf",
-   pdf=!missing(pdffile),
-   nameswidth=0.3,   # percentage of plot
-   namesheight=0.1,
-   palette=seqPal(nrow(mat)*ncol(mat)),
-   Range=range(mat,finite=TRUE),
-   argclass=NULL,
-   argrow=NULL,
-   argcol=NULL,
-   argcell=NULL,
-   argmain=NULL,
-   ...)
+mat,
+pdffile="table_col_val.pdf",
+pdf=!missing(pdffile),
+nameswidth=0.3,
+namesheight=0.1,
+palette=seqPal(nrow(mat)*ncol(mat)),
+Range=range(mat,finite=TRUE),
+argclass=NULL,
+argrow=NULL,
+argcol=NULL,
+argcell=NULL,
+argmain=NULL,
+...)
 {
 # expand pdf-path to working directory if only file name (without path) is given:
 if(pdf){   if(!grepl("/", pdffile) | grepl("\\", pdffile, fixed=TRUE) )

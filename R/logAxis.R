@@ -46,7 +46,7 @@
 #' @param lty,lwd Type of gridlines. DEFAULT: 1
 #' @param allticks Place all intermediate ticklines at the axis (without labelling). DEFAULT: FALSE
 #' @param allargs List of arguments passed to axis for allticks=TRUE. DEFAULT: NULL
-#' @param expr Expression drawing over the ablines, like (points(x,y). Can be code within braces.
+#' @param expr Expression drawing over the ablines, like (points(x,y). Can be code within {braces}.
 #' @param las LabelAxisStyle for the orientation of the labels. DEFAULT: 1
 #' @param from Lower exponent OR vector with data, as in \code{\link{logVals}}. DEFAULT based on \code{\link{par}("usr")}
 #' @param to High end exponent. DEFAULT: internally based on par("usr")
@@ -59,29 +59,29 @@
 #' @param expobase1 Should "n * " be appended before 10^exp if n=1? DEFAULT: FALSE
 #' @param allbase base for \code{$all} (for horizontal lines). DEFAULT: 1:9
 #' @param box Draw box at the end to overplot \code{\link{abline}s} crossing the box? DEFAULT: TRUE
-#' @param \dots further arguments passed to axis, like \code{lwd, col.ticks, hadj, lty}, ...
+#' @param \dots Further arguments passed to axis, like \code{lwd, col.ticks, hadj, lty}, ...
 #' 
 logAxis <- function(
-  side=1,      # Which \code{\link{axis}} are to be labeled?
-  log=NULL,    # Is the axis logarithmic by plot(log="x")? internal DEFAULT: par("xlog") or "ylog"
-  lcol="grey", # Color of gridlines drawn in the graph with \code{\link{abline}}, NA to suppress.
-  lty=1, lwd=1,# Type of gridlines
-  allticks=FALSE, # Place all intermediate ticklines at the axis (without labelling)
-  allargs=NULL,# List of arguments passed to axis for allticks=TRUE
-  expr,        # Expression drawing over the ablines, like (points(x,y). Can be code within {braces}.
-  las=1,       # LabelAxisStyle for the orientation of the labels
-  from,             # Lower exponent OR vector with data, as in \code{\link{logVals}}
-  to,               # High end exponent
-  Range,            # Override from and to as range
-  base,             # Bases to be used, eg. c(1,2,5) or 1
-  big.mark="'",     # Symbol separating thousands, eg. space, comma, dot, etc. see "format" and "prettyNum"
-  decimal.mark=".", # Character separating comma values, see "format" and "prettyNum"
-  scientific=FALSE, # See \code{\link{format}}
-  exponent=5,       # Starting at which exponent should \code{\link{logVals}} return an expression with exponents? DEFAULT: 5
-  expobase1=FALSE,  # Should "n * " be appended before 10^exp if n=1?
-  allbase=1:9,      # Base for \code{$all} (for horizontal lines)
-  box=TRUE,         # Draw box at the end to overplot \code{\link{abline}s} crossing the box?
-    ...)            # Further arguments passed to axis, like \code{lwd, col.ticks, hadj, lty}, ...
+side=1,
+log=NULL,
+lcol="grey",
+lty=1, lwd=1,
+allticks=FALSE,
+allargs=NULL,
+expr,
+las=1,
+from,
+to,
+Range,
+base,
+big.mark="'",
+decimal.mark=".",
+scientific=FALSE,
+exponent=5,
+expobase1=FALSE,
+allbase=1:9,
+box=TRUE,
+...)
 {
 for(side_i in side)
 { # loop around each side

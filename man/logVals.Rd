@@ -23,7 +23,8 @@ logVals(from = -7, to = 7, Range, base = 1, big.mark = "'",
 
 \item{scientific}{See \code{\link{format}}}
 
-\item{exponent}{Starting at which exponent should \code{labs} be an expression with exponents? Compare to \code{\link{options}("scipen")}. This is mainly for \code{\link{logAxis}} and only for base 1. DEFAULT: Inf}
+\item{exponent}{Starting at which exponent should \code{labs} be an expression with exponents?
+Compare to \code{\link{options}("scipen")}. This is mainly for \code{\link{logAxis}} and only for base 1. DEFAULT: Inf}
 
 \item{expobase1}{Should "n * " be appended before 10^exp if n=1? DEFAULT: FALSE}
 

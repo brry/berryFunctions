@@ -91,9 +91,9 @@
 #' @param n Numeric vector with number of trials (population).
 #' @param labels Labels for points. DEFAULT: NULL
 #' @param method Method to calculate Confidence interval, see "note" below. Can also be "wilson". DEFAULT: "classic"
-#' @param add Add to exisiting plot instead of drawing new plot? DEFAULT: FALSE
+#' @param add Add to existing plot instead of drawing new plot? DEFAULT: FALSE
 #' @param xlim Graphical parameters, see \code{\link{par}} and \code{\link{plot}}. DEFAULT: range(n, finite=TRUE)
-#' @param ylim DEFAULT: range(x/n*100, finite=TRUE)
+#' @param ylim y limit in [0:1] DEFAULT: range(x/n*100, finite=TRUE)
 #' @param las DEFAULT: 1
 #' @param xlab DEFAULT: "Sample size n"
 #' @param ylab DEFAULT: "Success rate [\%]"
@@ -104,29 +104,28 @@
 #' @param am Arguments for mean line. DEFAULT: NULL
 #' @param ap Arguments for the data points (cex, etc.). DEFAULT: NULL
 #' @param at Arguments for text (labels of each point). DEFAULT: NULL
-#' @param al Arguments for legend (text.col, bty, border, y.intersp, etc.). DEFAULT: NULL
+#' @param al Arguments for \code{\link{legend}} (text.col, bty, border, y.intersp, etc.). DEFAULT: NULL
 #' @param \dots further arguments passed to plot only!
 #' 
 funnelPlot <- function(
-                       x,  # number of successes (cases)
-                       n,  # number of trials (population)
-                       labels=NULL, # Labels for points
-                       method="classic", # see notes. can also be "wilson"
-                       add=FALSE, # add to exisiting plot instead of drawing new plot?
-                       xlim=range(n, finite=TRUE), # graphical parameters
-                       ylim=range(x/n*100, finite=TRUE), # always in %!
-                       las=1,
-                       xlab="Sample size n",
-                       ylab="Success rate [%]",
-                       main="Funnel plot for Proportions",
-                       a3=NULL, # list with arguments for CI lines at 3*sd (eg: col, lty, lwd, lend, etc.)
-                       # overwrites defaults that are defined within the function (if contentually possible)
-                       a2=NULL, # for line of 2 sd
-                       am=NULL, # arguments for mean line
-                       ap=NULL, # for the data points (cex, etc.)
-                       at=NULL, # for text (labels of each point)
-                       al=NULL, # for legend  (text.col, bty, border, y.intersp, etc.)
-                       ...) # further arguments passed to plot only!
+x,
+n,
+labels=NULL,
+method="classic",
+add=FALSE,
+xlim=range(n, finite=TRUE),
+ylim=range(x/n*100, finite=TRUE),
+las=1,
+xlab="Sample size n",
+ylab="Success rate [%]",
+main="Funnel plot for Proportions",
+a3=NULL,
+a2=NULL,
+am=NULL,
+ap=NULL,
+at=NULL,
+al=NULL,
+...)
 {
 # Data (proportions) -----------------------------------------------------------
 p <- x/n*100 # p: proportion of success

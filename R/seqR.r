@@ -24,11 +24,11 @@
 #' @param \dots further arguments passed to \code{\link{seq}}.
 #' 
 seqR <- function(
-                 range,
-                 from=1,
-                 to=1,
-                 extend=0, # f-factor passed to extendrange
-                 ...)
+range,
+from=1,
+to=1,
+extend=0,
+...)
 {
 # only set from and to if range is given as input:
 if(!missing(range)) 

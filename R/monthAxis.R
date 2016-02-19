@@ -44,7 +44,7 @@
 #' @param side Which \code{\link{axis}} are to be labeled? (can be several). DEFAULT: 1
 #' @param startyear Integer. starting year. DEFAULT: NULL = internally computed from \code{\link{par}("usr")}
 #' @param stopyear Ditto for ending year. DEFAULT: NULL
-#' @param n Approximate number of labels that should be printed (as in code\link{pretty}). DEFAULT: 5
+#' @param n Approximate number of labels that should be printed (as in \code{\link{pretty}}). DEFAULT: 5
 #' @param npm Number of labels per month, overrides n. DEFAULT: NULL = internally computed.
 #' @param npy Number of labels per year, overrides npm and n. DEFAULT: NA
 #' @param format Format of date, see details in \code{\link{strptime}}. DEFAULT: "\%d.\%m.\\n\%Y"
@@ -57,20 +57,20 @@
 #' @param \dots Further arguments passed to \code{\link{axis}}, like \code{lwd, col.ticks, hadj, lty}, ...
 #'  
 monthAxis <- function(
-side=1,        # Which \code{\link{axis}} are to be labeled? (can be several)
-startyear=NULL,# Integer. starting year. DEFAULT: NULL = internally computed from \code{\link{par}("usr")}
-stopyear=NULL, # Ditto for ending year.
-n=5,           # Approximate number of labels that should be printed (as in code{\link{pretty}})
-npm=NULL,      # Number of labels per month, overrides n. DEFAULT: NULL = internally computed.
-npy=NA,        # Number of labels per year, overrides npm and n.
-format="%d.%m.\n%Y", # Format of date, see details in \code{\link{strptime}}
-labels=format.Date(d, format), # labels
-midyear=FALSE, # Place labels in the middle of the year? if TRUE, format default is "%Y"
-mgp=c(3,1.5,0),# MarGinPlacement, see \code{\link{par}}. The second value is for label distance to axis.
-cex.axis=1,    # CharacterEXpansion (letter size)
-tick=TRUE,     # Draw tick lines?
-las=1,         # LabelAxisStyle for orientation of labels. DEFAULT: 1 (upright)
-...)           # Further arguments passed to \code{\link{axis}}, like \code{lwd, col.ticks, hadj, lty}, ...
+side=1,
+startyear=NULL,
+stopyear=NULL,
+n=5,
+npm=NULL,
+npy=NA,
+format="%d.%m.\n%Y",
+labels=format.Date(d, format),
+midyear=FALSE,
+mgp=c(3,1.5,0),
+cex.axis=1,
+tick=TRUE,
+las=1,
+...)
 {
 # internally needed functions to get Date range from graphic:
 getDate <- function(s) as.Date(par("usr")[if(s%%2) 1:2 else 3:4], origin="1970-01-01")

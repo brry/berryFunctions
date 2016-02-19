@@ -18,11 +18,11 @@
 #' @param alpha transparency. DEFAULT: 1)
 #' 
 rainbow2 <- function(
-n=10, # number of colors
-s=1, v=1, # saturation and value as in \code{\link{rainbow}}
-start=0, # start color
-end=0.7, # end color
-alpha=1) # transparency
+n=10,
+s=1, v=1,
+start=0,
+end=0.7,
+alpha=1)
 {
 rev(rainbow(n=n, s=s, v=v, start=start, end=end, alpha=alpha))
 }

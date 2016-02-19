@@ -39,13 +39,13 @@
 #' @param \dots further graphical parameters passed to \code{\link{plot}}
 #' 
 exp4p <- function(
-    x, y, # x and y Data
-    digits=2, # significant digits for rounding formula output and R^2 in legend
-    plot=FALSE,  # plot data and fitted functions?
-    las=1, # label axis style, see \code{\link{par}}
-    col=1:6, # 6 colors for lines and legend texts
-    legarg=NULL, # Arguments passed to \code{\link{legend}}
-    ...) # further graphical parameters passed to \code{\link{plot}}
+    x, y,
+    digits=2,
+    plot=FALSE,
+    las=1,
+    col=1:6,
+    legarg=NULL,
+    ...)
 {
 # Prepare Output Table
 output <- as.data.frame(matrix(NA, ncol=8, nrow=6 ))

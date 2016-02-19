@@ -34,14 +34,14 @@
 #' @param \dots Further arguments passed to \code{\link{colorRamp}}
 #' 
 seqPal <- function(
-n=12, # Number of colors
-reverse=FALSE, # Reverse colors?
-alpha=1, # Transparency (0=transparent, 1=fully colored)
-extr=FALSE, # Should colors span possible range more extremely? If TRUE, it has very light yellow and very dark blue values included, using the result from \code{RColorBrewer::brewer.pal(9, "YlGnBu")}
-yb=FALSE, # Should colors be in yellow-blue instead of the internal (nice) default?
-yr=FALSE, # Should colors be in yellow-red instead of the default?
-colors=NULL, # If not NULL, a color vector used in \code{\link{colorRampPalette}}
-... # Further arguments passed to \code{\link{colorRamp}}
+n=12,
+reverse=FALSE,
+alpha=1,
+extr=FALSE,
+yb=FALSE,
+yr=FALSE,
+colors=NULL,
+...
 )
 {
 cols <- c("#FFFFC6","#CAE9AE","#85CDBA","#4DB6C6","#327EBD","#22329A")

@@ -21,9 +21,9 @@
 #' @param write Should the actual estimated time be written for overhead computing time control purposes? DEFAULT: FALSE
 #' 
 timer <- function(
-interval=20, # \code{\link{alarm}} interval in seconds
-n=15, # number of alarm signals to be given
-write=FALSE # Should the actual estimated time be written for overhead computing time control purposes?
+interval=20,
+n=15,
+write=FALSE
 )
 {
 begin <- Sys.time()

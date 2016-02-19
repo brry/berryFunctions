@@ -115,20 +115,20 @@
 #' @param \dots arguments passed to optim
 #' 
 lsc <- function(P,
-                Q,
-                area=50,
-                Qbase=Q[1],
-                n=2,
-                k=3,
-                x=1:length(P),
-                fit=1:length(Q),
-                plot=TRUE,
-                plotsim=TRUE,
-                returnsim=FALSE,
-                type=c("o", "l"),
-                legx="center",
-                legy=NULL,
-                ...)
+Q,
+area=50,
+Qbase=Q[1],
+n=2,
+k=3,
+x=1:length(P),
+fit=1:length(Q),
+plot=TRUE,
+plotsim=TRUE,
+returnsim=FALSE,
+type=c("o", "l"),
+legx="center",
+legy=NULL,
+...)
 {
 # checking for wrong input:
 if(length(P) != length(Q)) stop("Vectors P and Q are not of equal length.")

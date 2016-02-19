@@ -36,14 +36,14 @@
 #' @param \dots Further arguments passed to plot
 #' 
 randomPoints <- function(
-         xmin,
-         xmax,
-         ymin,
-         ymax,
-         number,
-         mindist,
-         plot=TRUE,
-         ...)
+xmin,
+xmax,
+ymin,
+ymax,
+number,
+mindist,
+plot=TRUE,
+...)
 {
 # benotigte Abstandsfunktion definieren:
 distance <- function(xpt,ypt, xref,yref) sqrt((xref-xpt)^2 + (yref-ypt)^2)

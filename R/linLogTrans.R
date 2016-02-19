@@ -95,36 +95,37 @@
 #' @param xlim xlim range in non-log units. DEFAULT: range(x, finite=TRUE)
 #' @param ylim ylim range in non-log units. DEFAULT: range(y, finite=TRUE)
 #' @param box Draw box at the end to overplot \code{\link{abline}s} crossing the box? DEFAULT: TRUE
-#' @param parexpr Characterized Expression to set \code{\link{par}}, eg. \code{parexpr='par(mar=c(2,3.5,1.5,0.5), mpg=c(1.8,1,0))'}
-#' @param endexpr Characterized Expression executed at the end of the plot, eg. \code{endexpr='mtext("I am an upright ylab!", line=-1, adj=0.03, outer=T)'}
+#' @param parexpr Characterized Expression to set \code{\link{par}}, eg. \code{parexpr='par(mar=c(2,0.5,1.5,0.5), mpg=c(1.8,1,0))'}
+#' @param endexpr Characterized Expression executed at the end of the plot, eg.
+#'        \code{endexpr='mtext("Probability density", line=-1, adj=0.03, outer=T)'}
 #' @param sleep Pause time between frames, in seconds, passed to \code{\link{Sys.sleep}}. DEFAULT: 0
-#' @param firstplot Plot data on linear axis as first image? DEFAULT: TRUE
-#' @param lastplot Plot data on logarithmic axis as last image? DEFAULT: TRUE
+#' @param firstplot Plot data on linear axis as additional first image? DEFAULT: TRUE
+#' @param lastplot Plot data on logarithmic axis as additional last image? DEFAULT: TRUE
 #' @param write_t Write transformation value in lower right corner? DEFAULT: TRUE
 #' @param values_t Supply vector with values for transformation (1/t). Overides steps. If you have a better algorithm than I do, please let me know! DEFAULT: NULL for internal calculation based on size of steps.
 #' @param pointsarg List of further arguments passed to points, like pch, cex, col. DEFAULT: NULL
 #' @param \dots Further arguments passed only to plot, like main, xlim, ylab. Excluded: x, y, las, xaxt, type
 #' 
 linLogTrans <- function(
-   x, # x values to be plotted in animation
-   y, # vector with corresponding y values
-   log="x", # which axis is logarithmic, "x" or "y"
-   steps=100, # number of steps in transition
-   base=1, # base passed to \code{\link{logVals}}
-   las=1, # \code{\link{par}} LabelAxisStyle (numbers upright)
-   plot=TRUE, # Plot animations at all? False to just get the t-vector (used in \code{\link{linLogHist}})
-   xlim=range(x, finite=TRUE), # xlim range in non-log units.
-   ylim=range(y, finite=TRUE), # ylim range in non-log units.
-   box=TRUE, # Draw box at the end to overplot \code{\link{abline}s} crossing the box?
-   parexpr, # Characterized Expression to set \code{\link{par}}, eg. \code{parexpr='par(mar=c(2,0.5,1.5,0.5), mpg=c(1.8,1,0))'}
-   endexpr, # Characterized Expression executed at the end of the plot, eg. \code{endexpr='mtext("Probability Density", line=-1, adj=0.03, outer=T)'}
-   sleep=0, # Pause time between frames, in seconds, passed to \code{\link{Sys.sleep}} 
-   firstplot=TRUE, # plot on linear scale first?
-   lastplot=TRUE, # plot on logarithmic scale at the end?
-   write_t=TRUE, # write transformation value in lower right corner?
-   values_t=NULL, # Supply vector with values for transformation (1/t). Overides steps. If you have a better algorithm than I do, please let me know!
-   pointsarg=NULL, # List of further arguments passed to points, like pch, cex, col
-   ...) # further arguments passed only to plot, like main, xlim, ylab. Excluded: x, y, las, xaxt, type
+x,
+y,
+log="x",
+steps=100,
+base=1,
+las=1,
+plot=TRUE,
+xlim=range(x, finite=TRUE),
+ylim=range(y, finite=TRUE),
+box=TRUE,
+parexpr,
+endexpr,
+sleep=0,
+firstplot=TRUE,
+lastplot=TRUE,
+write_t=TRUE,
+values_t=NULL,
+pointsarg=NULL,
+...)
 {
 # Tansformation values ---------------------------------------------------------
 if(is.null(values_t)) # if it's not given by user, use internal calculation:

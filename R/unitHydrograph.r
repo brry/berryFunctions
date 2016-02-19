@@ -52,9 +52,9 @@
 #' @param t Numeric, possibly a vector. Time [s].
 #' 
 unitHydrograph <- function(
-    n,
-    k,
-    t)
+n,
+k,
+t)
 {
 if(length(n)>1 | length(k)>1) stop("n and k can only have one single value!
 For vectorization, use sapply (see documentation examples).")

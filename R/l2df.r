@@ -45,8 +45,8 @@
 #' @param byrow Transposed output? DEFAULT: TRUE
 #' 
 l2df <- function(
-                 list,
-                 byrow=TRUE)
+list,
+byrow=TRUE)
 {
 maxlen <- max(sapply(list,length))
 df <- sapply(list, "[", 1:maxlen) # apply the indexing function to each element

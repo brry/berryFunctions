@@ -26,14 +26,14 @@
 #' @param \dots further arguments passed to \code{\link{hist}}
 #' 
 groupHist <- function(
-d, # data.frame object name
-x, # column name of variable of interest
-g, # column name of groups (\code{INDEX in \link{tapply}, f in \link{split}})
-xlab="", ylab="", # axis labels
-las=1, # LabelAxisStyle, see \code{\link{par}}. DEFAULT: 1, means numbers on y-axis upright
-main=NULL, # Main title, internal default based on \code{d, x, unit} and \code{g}
+d,
+x,
+g,
+xlab="", ylab="",
+las=1,
+main=NULL,
 unit=NA,
-... # further arguments passed to \code{\link{hist}}
+...
 )
 {
 # Input can be quoted, must not:

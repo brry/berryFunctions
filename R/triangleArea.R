@@ -20,9 +20,9 @@
 #' @param digits Number of digits the result is rounded to. DEFAULT: 3)
 #' 
 triangleArea <- function(
-   x, # Vector with 3 values (x coordinates of triangle corners)
-   y, # Ditto for y.
-   digits=3) # Number of digits the result is rounded to
+x,
+y,
+digits=3)
 {
 if( !is.vector(x) | !is.vector(y) ) stop("Input must be a vector!")
 if(length(x) != 3 | length(y) !=3 ) stop("Vectors must have 3 elements.")

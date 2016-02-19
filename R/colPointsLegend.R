@@ -23,7 +23,7 @@
 #' ?colPoints # example section for actual usage
 #' 
 #' @param z Values of third dimension used in \code{\link{colPoints}}, can be matrix, vector, etc, but must be numeric
-#' @param Range Ends of color bar. DEFAULT: range(z, finite=TRUE)
+#' @param Range Ends of color bar for method=equalinterval. DEFAULT: range(z, finite=TRUE)
 #' @param nbins Number of classes (thus, colors). DEFAULT: 40
 #' @param colors Color vector. DEFAULT: \code{\link{rainbow}} from blue (lowest) to red (highest value in Range)
 #' @param bb Borders of bins for the legend (key). DEFAULT: seqR(Range, length.out=nbins+1)
@@ -51,36 +51,37 @@
 #' @param \dots Further arguments passed to \code{\link{text}} and \code{\link{strwidth}}, e.g. cex, srt, font, col. But NOT adj!
 #' 
 colPointsLegend <- function(
-z, # Values of third dimension used in \code{\link{colPoints}}, can be matrix, vector, etc, but must be numeric
-Range=range(z, finite=TRUE), # Ends of color bar for method=equalinterval
-nbins=40, # Number of classes (thus, colors)
-colors=seqPal(nbins), # Color vector
-bb=seqR(Range, length.out=nbins+1), # Borders of bins for the legend (key)
-at=pretty2(Range), # Positions of legend labels
-labels=at, # Labels that are written at the positions of \code{at}
-adj=0.5, # label adjustment parallel to legend bar (only one number!)
+z,
+Range=range(z, finite=TRUE),
+nbins=40,
+colors=seqPal(nbins),
+bb=seqR(Range, length.out=nbins+1),
+at=pretty2(Range),
+labels=at,
+adj=0.5,
 
-bg="white", # Background behind key, labels and title
-x1=60, y1=99, # Topleft relative coordinates (0:100) of inset plot, see \code{\link{smallPlot}}
-x2=x1+38, y2=y1-11, # Bottomright -"-
-mar, # Margins for \code{\link{smallPlot}} in relative values (0:100). DEFAULT: internal calculations based on title, labelpos and titlepos.
-mgp=c(1.8, 0.6, 0), # MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, as in \code{\link{par}}, but with different defaults
-sborder=NA, # Border around inset subplot
-resetfocus=TRUE, # Reset focus to original plot? Specifies where further low level plot commands are directed to.
+bg="white",
+x1=60,
+y1=99,
+x2=x1+38,
+y2=y1-11,
+mar,
+mgp=c(1.8, 0.6, 0),
+sborder=NA,
+resetfocus=TRUE,
 
-plottriangle=FALSE, # Should triangles be plotted at the end of the legend for values outside Range? TRUE if missing but triangle is given
-triangle=0.14, # Percentage of bar length at lower and upper end for triangles (can be a vector with two different values)
-tricol=c(1,8), # Triangle colors for lower and upper end
-density=NULL, # Plot kernel density line? arguments passed to \code{\link{density}}
-lines=TRUE, # Plot black lines in the color bar at \code{at}?
-atminmax=FALSE, # Should the extrema of the legend be added to \code{at}?
-horizontal=TRUE, # Horizontal bar? if FALSE, a vertical bar is drawn, ###with length and width exchanged
-labelpos=1, # Position of labels relative to the bar. Possible: 1 (below), 2 (left), 3 (above), 4 (right), 5(on top of bar)
-titlepos=3, # Position of title -"-
-title="Legend", # Legend title
-las=1, # LabelAxisStyle
-...) # Further arguments passed to \code{\link{text}} and \code{\link{strwidth}}, e.g. cex, srt, font, col. But NOT adj!
-
+plottriangle=FALSE,
+triangle=0.14,
+tricol=c(1,8),
+density=NULL,
+lines=TRUE,
+atminmax=FALSE,
+horizontal=TRUE,
+labelpos=1,
+titlepos=3,
+title="Legend",
+las=1,
+...)
 {
 # ------------------------------------------------------------------------------
 z <- as.numeric(z)

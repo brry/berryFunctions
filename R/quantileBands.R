@@ -44,20 +44,20 @@
 #' @param \dots Further arguments passed to \code{\link{polygon}}, like border, lty, ... 
 #' 
 quantileBands <- function(
-mat, # Matrix or data.frame with columns of data
-x=1:ncol(mat), # X-axis positions for each column
-col=rgb(0,0,1, alpha=c(0.5, 0.7)), # Vector of colors for each quantile group, recycled reversively if necessary
-add=FALSE, # Add to existing plot? Allows to add to highly customized plot
-main="Quantile Bands", ylab="", xlab="", # plot labels
-probs=0:4/4, # Probabilities passed to \code{\link{quantile}}
-na.rm=FALSE, # Remove NAs before computing \code{\link{quantile}s}, \code{\link{median}} and \code{\link{mean}}?
-type=7, # Which of the 9 \code{\link{quantile}} algorithms should be used
-smooth=NA, # If(!is.na), \code{width} passed to \code{\link{movAv}} smoothing quantiles
-medargs=NULL, # List of arguments passed to lines drawing \code{\link{median}}. Not drawn if NULL
-meanargs=NULL, # List of arguments passed to lines drawing \code{\link{mean}}. Not drawn if NULL
-txi, # text x position index (along columns of mat), recyled if necessary.
-textargs=NULL, # List of arguments passed to \code{\link{text}}, like col, adj, ...
-...) # Further arguments passed to \code{\link{polygon}}, like border, lty, ...
+mat,
+x=1:ncol(mat),
+col=rgb(0,0,1, alpha=c(0.5, 0.7)),
+add=FALSE,
+main="Quantile Bands", ylab="", xlab="",
+probs=0:4/4,
+na.rm=FALSE,
+type=7,
+smooth=NA,
+medargs=NULL,
+meanargs=NULL,
+txi,
+textargs=NULL,
+...)
 {
 # input check:------------------------------------------------------------------
 if(length(x) != ncol(mat)) stop("length(x) (",length(x),") must equal ncol(mat) (",ncol(mat),").")

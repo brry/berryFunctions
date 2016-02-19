@@ -17,7 +17,7 @@
 #' @param name Name of function or object to be opened with the program associated with .r-files. In my case, the editor Tinn-R
 #' 
 funTinn <- function(
-name#, # name of function or object to be opened with the editor Tinn-R
+name
 #path="C:/Program Files/Tinn-R/bin/Tinn-R.exe" # path to editor.
 )
 {

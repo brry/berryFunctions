@@ -23,8 +23,8 @@ This assumes the following structure of source code:\cr
    \code{arg1, # Explanation of this item}\cr 
    \code{arg2=TRUE, # Ditto, with default}\cr 
    \code{arg3)}\cr 
-   \code{{}\cr
-   \code{computations}}\cr
+   \code{'{'}\cr
+   \code{computations'}'}\cr
    The opening bracket line may ONLY contain the curly brace
 }
 \note{

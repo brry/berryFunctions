@@ -33,9 +33,9 @@
 #'        If it has more rows than length(r), the excess rows are ignored. DEFAULT: NA
 #' 
 insertRows <- function(
-df,    # data.frame
-r,     # Row number (not name!), at which the \code{new} row is to be inserted. Can be a vector
-new=NA # Vector with data to be inserted, is recycled. Alternatively, a data.frame, whose rows are put into the r locations. If it has more rows than length(r), the excess rows are ignored
+df,
+r,
+new=NA
 )
 {
 # Input checks:

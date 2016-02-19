@@ -98,9 +98,9 @@
 #' @param weights Vector with weights. Sum is normalized to 1. DEFAULT: rep(1,width) 
 #' 
 movAv <- function(
-                  dat,
-                  width=7,
-                  weights=rep(1,width) )
+dat,
+width=7,
+weights=rep(1,width) )
 {
 # input-checking (added May 2014 along with new option weights) :
 dat <- as.vector(dat)

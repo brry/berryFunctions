@@ -31,15 +31,16 @@ linLogTrans(x, y, log = "x", steps = 100, base = 1, las = 1,
 
 \item{box}{Draw box at the end to overplot \code{\link{abline}s} crossing the box? DEFAULT: TRUE}
 
-\item{parexpr}{Characterized Expression to set \code{\link{par}}, eg. \code{parexpr='par(mar=c(2,3.5,1.5,0.5), mpg=c(1.8,1,0))'}}
+\item{parexpr}{Characterized Expression to set \code{\link{par}}, eg. \code{parexpr='par(mar=c(2,0.5,1.5,0.5), mpg=c(1.8,1,0))'}}
 
-\item{endexpr}{Characterized Expression executed at the end of the plot, eg. \code{endexpr='mtext("I am an upright ylab!", line=-1, adj=0.03, outer=T)'}}
+\item{endexpr}{Characterized Expression executed at the end of the plot, eg.
+\code{endexpr='mtext("Probability density", line=-1, adj=0.03, outer=T)'}}
 
 \item{sleep}{Pause time between frames, in seconds, passed to \code{\link{Sys.sleep}}. DEFAULT: 0}
 
-\item{firstplot}{Plot data on linear axis as first image? DEFAULT: TRUE}
+\item{firstplot}{Plot data on linear axis as additional first image? DEFAULT: TRUE}
 
-\item{lastplot}{Plot data on logarithmic axis as last image? DEFAULT: TRUE}
+\item{lastplot}{Plot data on logarithmic axis as additional last image? DEFAULT: TRUE}
 
 \item{write_t}{Write transformation value in lower right corner? DEFAULT: TRUE}
 

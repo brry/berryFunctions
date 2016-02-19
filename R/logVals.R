@@ -43,23 +43,24 @@
 #' @param big.mark Symbol separating thousands, eg. space, comma, dot, etc. see \code{\link{format}} and \code{\link{prettyNum}}
 #' @param decimal.mark Character separating comma values, see \code{\link{format}} and \code{\link{prettyNum}}
 #' @param scientific See \code{\link{format}}
-#' @param exponent Starting at which exponent should \code{labs} be an expression with exponents? Compare to \code{\link{options}("scipen")}. This is mainly for \code{\link{logAxis}} and only for base 1. DEFAULT: Inf
+#' @param exponent Starting at which exponent should \code{labs} be an expression with exponents?
+#'        Compare to \code{\link{options}("scipen")}. This is mainly for \code{\link{logAxis}} and only for base 1. DEFAULT: Inf
 #' @param expobase1 Should "n * " be appended before 10^exp if n=1? DEFAULT: FALSE
 #' @param allbase Base for \code{$all} (for horizontal lines). DEFAULT: 1:9
 #' @param \dots Ignored arguments
 #' 
 logVals <- function(
-  from=-7,               # Lower exponent OR vector with data
-  to=7,                  # High end
-  Range,                 # Or give from and to as range
-  base=1,                # Bases to be used, eg. c(1,2,5)
-  big.mark="'",          # Symbol separating thousands, eg. space, comma, dot, etc. see "format" and "prettyNum"
-  decimal.mark=".",      # Character separating comma values, see "format" and "prettyNum"
-  scientific=FALSE,      # See "format"
-  exponent=Inf,          # like scipen, but for expression (to be used in logAxis)
-  expobase1=FALSE,       # Should "n * " be appended before 10^exp if n=1?
-  allbase=1:9,           # Base for \code{$all} (for horizontal lines)
-  ...                    # Ignored arguments
+  from=-7,
+  to=7,
+  Range,
+  base=1,
+  big.mark="'",
+  decimal.mark=".",
+  scientific=FALSE,
+  exponent=Inf,
+  expobase1=FALSE,
+  allbase=1:9,
+  ...
   )
 {
 # Calculate the exponents from vector, if given as first argument:

@@ -28,7 +28,11 @@
 #' @param force Must output lenght equal n exactly?  DEFAULT: FALSE
 #' @param \dots all other arguments in \code{\link{pretty}}.
 #' 
-pretty2 <- function(x, n=5, force=FALSE, ...)
+pretty2 <- function(
+x,
+n=5,
+force=FALSE,
+...)
 {
 p <- pretty(x, n=n, ...)
 r <- range(x, finite=TRUE)

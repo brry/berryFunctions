@@ -22,7 +22,7 @@ expReg(x, y = NULL, data = NULL, logy = TRUE, predictnew = NULL,
 
 \item{predictnew}{Vector with values to predict outcome for. Passed as \code{newdata} to \code{\link{predict.lm}}. DEFAULT: NULL}
 
-\item{interval}{Inter val for prediction. DEFAULT: "confidence"}
+\item{interval}{Interval for prediction. DEFAULT: "confidence"}
 
 \item{plot}{Plot things at all? If FALSE, predictnew will still be returned. DEFAULT: TRUE}
 
@@ -34,7 +34,8 @@ If values are not specified, they are set equal to the first. DEFAULT: 2}
 as a fraction of the plot region when formula is placed by keyword. DEFAULT: 0}
 
 \item{xpd}{Logical, specifying wheter formula can be written only inside the plot region (when FALSE) 
-or inside the figure region including mar (when TRUE) or in the entire device region including oma (when NA). DEFAULT: par("xpd")}
+or inside the figure region including mar (when TRUE)
+or in the entire device region including oma (when NA). DEFAULT: par("xpd")}
 
 \item{pos1}{\code{\link{xy.coords}}-acceptable position of the formula. DEFAULT: "top"}
 

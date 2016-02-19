@@ -10,7 +10,7 @@ panelDim(n, weight = c(1, 1), maxempty = round(n/4), landscape = FALSE,
 \arguments{
 \item{n}{Number of panels to be arranged}
 
-\item{weight}{weights to avoid \emph{empty panels} and \emph{discrepancy between ncol and nrow}, respectively. DEFAULT: c(1,1)}
+\item{weight}{Weights to avoid \emph{empty panels} and \emph{discrepancy between ncol and nrow}, respectively. DEFAULT: c(1,1)}
 
 \item{maxempty}{Maximum number of panels that are allowed to be left empty.
 If \code{maxempty=0}, no panel is left blank, so 11 plots would be beneath each other 

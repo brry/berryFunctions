@@ -20,9 +20,9 @@
 #' @param \dots Further arguments passed to \code{\link{ls}}
 #'  
 lsMem <- function(
-                   n=6,
-                   pos=1,
-                   ...)
+n=6,
+pos=1,
+...)
 {
 LS <- ls(pos=pos, ...)
 if(n > length(LS))  n <- length(LS)

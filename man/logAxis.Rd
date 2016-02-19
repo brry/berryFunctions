@@ -22,7 +22,7 @@ logAxis(side = 1, log = NULL, lcol = "grey", lty = 1, lwd = 1,
 
 \item{allargs}{List of arguments passed to axis for allticks=TRUE. DEFAULT: NULL}
 
-\item{expr}{Expression drawing over the ablines, like (points(x,y). Can be code within braces.}
+\item{expr}{Expression drawing over the ablines, like (points(x,y). Can be code within {braces}.}
 
 \item{las}{LabelAxisStyle for the orientation of the labels. DEFAULT: 1}
 
@@ -48,7 +48,7 @@ logAxis(side = 1, log = NULL, lcol = "grey", lty = 1, lwd = 1,
 
 \item{box}{Draw box at the end to overplot \code{\link{abline}s} crossing the box? DEFAULT: TRUE}
 
-\item{\dots}{further arguments passed to axis, like \code{lwd, col.ticks, hadj, lty}, ...}
+\item{\dots}{Further arguments passed to axis, like \code{lwd, col.ticks, hadj, lty}, ...}
 }
 \value{
 An invisible list with 

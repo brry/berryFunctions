@@ -30,13 +30,13 @@
 #' @param \dots Further arguments passed to \code{\link{plot}}
 #' 
 logSpaced <- function(
-base=1.1708, # Base for calculations, can be a vector to compare several bases
-n=20, # Number of values to be calculated
-min=1, max=n, # Range where n values are to be distributed, single values each.
-plot=TRUE, # Should the points be plotted on a line?
-pch=3, las=1, # PointCharacter and Label Axis Style
-ylab="base", # Y axis label
-... # Further arguments passed to \code{\link{plot}}
+base=1.1708,
+n=20,
+min=1, max=n,
+plot=TRUE,
+pch=3, las=1,
+ylab="base",
+...
 )
 {
 # input control:

@@ -16,7 +16,7 @@ monthAxis(side = 1, startyear = NULL, stopyear = NULL, n = 5,
 
 \item{stopyear}{Ditto for ending year. DEFAULT: NULL}
 
-\item{n}{Approximate number of labels that should be printed (as in code\link{pretty}). DEFAULT: 5}
+\item{n}{Approximate number of labels that should be printed (as in \code{\link{pretty}}). DEFAULT: 5}
 
 \item{npm}{Number of labels per month, overrides n. DEFAULT: NULL = internally computed.}
 

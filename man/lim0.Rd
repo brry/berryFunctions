@@ -15,13 +15,11 @@ lim0(x, f = 1/27, curtail = TRUE)
 plotting doesn't need the default \code{\link{par}} xaxs or yaxs changed. DEFAULT: TRUE}
 }
 \value{
-Vector with two values
+Vector with two values: 0 and by 4% contra-extended max (as for xaxs="r")
 }
 \description{
-Calculates the range needed for ylim or xlim in plot, so that axis starts at zero and is extended by 4\% at the other end
-}
-\note{
-Needs more testing, please get back to me if it doesn't do what it's supposed to do!
+Calculates the range needed for ylim or xlim in plot, so that axis
+starts at zero and is extended by 4\% at the other end
 }
 \examples{
 
@@ -50,7 +48,8 @@ plot(b, ylim=lim0(b) ) # works with only negative values as well
 Berry Boessenkool, \email{berry-b@gmx.de}, 6.6.2013
 }
 \references{
-\code{methods(plot)}, \code{\link[graphics]{plot.default}}. actually, I found extendrange via \code{plot.function} in \code{curve}
+\code{methods(plot)}, \code{\link[graphics]{plot.default}}.
+            Actually, I found extendrange via \code{plot.function} in \code{curve}
 }
 \seealso{
 The \code{\link{extendrange}()} utility in package \pkg{grDevices}

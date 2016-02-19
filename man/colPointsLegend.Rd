@@ -16,7 +16,7 @@ colPointsLegend(z, Range = range(z, finite = TRUE), nbins = 40,
 \arguments{
 \item{z}{Values of third dimension used in \code{\link{colPoints}}, can be matrix, vector, etc, but must be numeric}
 
-\item{Range}{Ends of color bar. DEFAULT: range(z, finite=TRUE)}
+\item{Range}{Ends of color bar for method=equalinterval. DEFAULT: range(z, finite=TRUE)}
 
 \item{nbins}{Number of classes (thus, colors). DEFAULT: 40}
 

@@ -4,7 +4,6 @@
 #' 
 #' @return Characterstring with only the basic link
 #' @note The function is not vectorized! If you have many links, use a loop around this function... 
-#'       Not tested for all that many links yet, please report erronous behaviour!
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2012
 #' @seealso \code{\link{strsplit}}, \code{\link{gsub}}
 #' @keywords character
@@ -17,11 +16,11 @@
 #'         "&usg=AFQjCNGejDwPlor4togQZmQEQv72cK9z8A&bvm=bv.45580626,d.Yms")
 #' googleLink2pdf(Link)
 #' 
-#' @param googlelink Character: A search result address
+#' @param googlelink Character string: A search result address
 #' 
 googleLink2pdf <- function(
-                           googlelink
-                           )
+googlelink
+)
 {
 pdflink <- strsplit(googlelink, "&url=")[[1]][2]
 pdflink <- strsplit(pdflink, "&ei=")[[1]][1]
@@ -31,4 +30,3 @@ pdflink <- gsub("%3A", ":", pdflink)
 pdflink <- gsub("%25", "%", pdflink)
 pdflink
 }
-

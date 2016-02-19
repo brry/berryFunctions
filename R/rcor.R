@@ -18,15 +18,15 @@
 #' @param \dots Further arguments passed to zfun, like sd=3
 #'
 rcor <- function(
-n,      # Number of randomly scattered points to be created
-xmin,   # Smallest x-coordinate
-xmax,   # Largest x-coordinate
-ymin,   # Smallest y-coordinate
-ymax,   # Largest y-coordinate
-allplots=TRUE, # save all plots in dummy.pdf
-zstart, # Vector of starting values for seeding some points, must be shorter than n
-zfun=rnorm, # A function for random noise creation, taking n as first argument
-...)  # Further arguments passed to zfun, like sd=3
+n,
+xmin,
+xmax,
+ymin,
+ymax,
+allplots=TRUE,
+zstart,
+zfun=rnorm,
+...)
 {
 if(allplots) { pdf("dummy.pdf") ; on.exit(dev.off())}
 # coordinate vectors

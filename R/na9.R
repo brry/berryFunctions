@@ -18,10 +18,10 @@
 #' @param \dots Arguments passed to nothing currently
 #' 
 na9 <- function(
-nspace=5, # number of spaces prepended
-base=c("-9999","-999", "-99", "-9.99", "-9.9", "-9,99", "-9,9"), # basic na.string structures. Might be expanded in the future. Thankful for suggestions.
-more="", # allows more structures added to base
-...) # Arguments passed to nothing currently
+nspace=5,
+base=c("-9999","-999", "-99", "-9.99", "-9.9", "-9,99", "-9,9"),
+more="",
+...)
 {
 base <- c(base, more)
 spaces <- sapply(0:nspace, function(i) paste(rep(" ",i), collapse=""))

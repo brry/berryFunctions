@@ -17,9 +17,9 @@
 #' @param \dots Further arguments passed to \code{\link{order}}, like eg \code{decreasing=TRUE}
 #' 
 sortDF <- function(
-df, # Data.frame to be sorted
-col, # Column (index or name) to be sorted by
-... # Further arguments passed to \code{\link{order}}, like eg \code{decreasing=TRUE}
+df,
+col,
+...
 )
 {
 df[order(df[,col], ...),]

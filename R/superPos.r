@@ -78,8 +78,8 @@
 #' @param UH Vector with discrete values of the Unit Hydrograph. This can be any UH summing to one, not just the storage cascade model.
 #' 
 superPos <- function(
-  P, # Precipitation
-  UH) # discrete UnitHydrograph
+P,
+UH)
 {
 added <- length(UH)-1
 qsim <- rep(0, length(P)+added )

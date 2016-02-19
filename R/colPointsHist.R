@@ -36,29 +36,29 @@
 #' @param \dots Further arguments passed to \code{\link{hist}}. NOT POSSIBLE: \code{x, add}
 #' 
 colPointsHist <- function(
-z, # Values of third dimension used in \code{\link{colPoints}}
-nbins=40, # Number of classes (thus, colors)
-colors=seqPal(nbins), # Colors that are used for the background
-bb=seqR(z, length.out=nbins+1), # Borders of bins for the background
-at=pretty2(z), # Positions of x-axis labels
-labels=at, # X-axis labels themselves
+z,
+nbins=40,
+colors=seqPal(nbins),
+bb=seqR(z, length.out=nbins+1),
+at=pretty2(z),
+labels=at,
 
-bg="white", # Background behind background and axis labels
-x=0:40, y=0:30, # relative coordinates (0:100) of inset plot, see \code{\link{smallPlot}}
-x1,y1,x2,y2, # Positions of topleft and bottomright corner. Replaced with x,y, kept here for backcompatibility.
-mar=c(6, 7, 3, 2), # Margins for \code{\link{smallPlot}} in relative values (0:100)
-mgp=c(1.8, 0.6, 0), # MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, as in \code{\link{par}}, but with different defaults
-sborder=NA, # Border around inset subplot
-resetfocus=TRUE, # Reset focus to original plot? Specifies where further low level plot commands are directed to.
+bg="white",
+x=0:40, y=0:30,
+x1,y1,x2,y2,
+mar=c(6, 7, 3, 2),
+mgp=c(1.8, 0.6, 0),
+sborder=NA,
+resetfocus=TRUE,
 
-breaks=20, # Breaks as in \code{\link{hist}}, but with a different default
-freq=TRUE, # Plot count data in hist? (if FALSE, plot density instead)
-col=par("fg"), # Color of histogram bars
-border=NA, # Border around each bar
-main="", ylab="", xlab="", # Labels
-las=1, # LabelAxisStyle
-axes=TRUE, # Draw axes?
-...) # Further arguments passed to \code{\link{hist}}. NOT POSSIBLE: \code{x, add}
+breaks=20,
+freq=TRUE,
+col=par("fg"),
+border=NA,
+main="", ylab="", xlab="",
+las=1,
+axes=TRUE,
+...)
 {
 z <- as.numeric(z)
 if(length(colors) != nbins) stop("Number of colors is not equal to number of classes.")

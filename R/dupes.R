@@ -41,11 +41,11 @@
 #' @param n Show only the first n values if \code{tofile=FALSE}. DEFAULT: length(d)
 #' 
 dupes <- function(
-file,               # File name (character string)
-ignore.empty=TRUE,  # Should empty lines be ignored?
-ignore.space=TRUE,  # Should leading/trailing whitespace be ignored? 
-tofile=missing(n),  # Logical: should output be directed to a file? Otherwise, a dataframe with line numbers and number of duplicates of that line will be printed in the console
-n=length(d)         # Show only the first n values if \code{tofile=FALSE}
+file,
+ignore.empty=TRUE,
+ignore.space=TRUE,
+tofile=missing(n),
+n=length(d)
 )
 {
 # empty lines or lines with only (up to 9) spaces:

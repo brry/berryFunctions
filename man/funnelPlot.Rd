@@ -19,11 +19,11 @@ funnelPlot(x, n, labels = NULL, method = "classic", add = FALSE,
 
 \item{method}{Method to calculate Confidence interval, see "note" below. Can also be "wilson". DEFAULT: "classic"}
 
-\item{add}{Add to exisiting plot instead of drawing new plot? DEFAULT: FALSE}
+\item{add}{Add to existing plot instead of drawing new plot? DEFAULT: FALSE}
 
 \item{xlim}{Graphical parameters, see \code{\link{par}} and \code{\link{plot}}. DEFAULT: range(n, finite=TRUE)}
 
-\item{ylim}{DEFAULT: range(x/n*100, finite=TRUE)}
+\item{ylim}{y limit in [0:1] DEFAULT: range(x/n*100, finite=TRUE)}
 
 \item{las}{DEFAULT: 1}
 
@@ -44,7 +44,7 @@ Overwrites defaults that are defined within the function (if contentually possib
 
 \item{at}{Arguments for text (labels of each point). DEFAULT: NULL}
 
-\item{al}{Arguments for legend (text.col, bty, border, y.intersp, etc.). DEFAULT: NULL}
+\item{al}{Arguments for \code{\link{legend}} (text.col, bty, border, y.intersp, etc.). DEFAULT: NULL}
 
 \item{\dots}{further arguments passed to plot only!}
 }

@@ -22,8 +22,8 @@
 #' @param sim simulated data.
 #' 
 nse <- function(
-                obs,
-                sim)
+obs,
+sim)
 {
 if(!(is.vector(obs) & is.vector(sim))) stop("Input is not a vector.")
 if(length(obs) != length(sim)) stop("Vectors are not of equal length.")

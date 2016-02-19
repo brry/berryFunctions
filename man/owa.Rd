@@ -11,7 +11,7 @@ owa(d, a, ...)
 
 \item{a}{Arguments specified by user}
 
-\item{\dots}{names of unchangeable arguments (that will not be overwritten) as character strings.}
+\item{\dots}{Names of unchangeable arguments (that will not be overwritten) as character strings (can also be a vector with characters strings).}
 }
 \value{
 Always a list, disregarding list/vector mode of input
@@ -28,13 +28,16 @@ the argument u has been replaced by ellipsis (...) in version 1.7 (Dec. 2014)!
 }
 \examples{
 
-d <- list(bb=1:5, lwd=2, lty=1,   col="gray")
-a <- list(bb=3,   lwd=5, lty="1", wachs="A")
-
-owa(d, a, "bb", "lwd") # basic usage: lty is overwritten, bb and lwd are ignored
+# basic usage of owa itself:
+d <- list(bb=1:5, lwd="was d", lty=1,   col="gray")
+a <- list(bb=3,   lwd=5, lty="from a", wachs="A")
+owa(d,a) # all changed, wachs added
+owa(d, a, "bb", "lwd") # lty is overwritten, bb and lwd are ignored
 owa(d, NULL, "bb", "wachs") # NULL is a good default for argument lists
 owa(d, c(HH=2, BBB=3) ) # vectors and lists are all converted to lists
 owa(d, list(lwd=5, bb=3, lty="1") ) # order of arguments doesn't matter
+owa(d, a, c("bb","lwd") ) # unchangable can also be a named vector
+owa(d, a, c("bb","lwd"), c("lty","dummy") ) # or several vectors
 
 # Usage example (see applications eg. in funnelPlot, colPoints or mReg)
 

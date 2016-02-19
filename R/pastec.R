@@ -17,9 +17,9 @@
 #' @param collapse Character string between combined strings. DEFAULT: ", "
 #' 
 pastec <- function(
-...,          # Object(s) to be \code{\link{paste}d} to a character vector
-sep=" ",      # Character string to separate single strings
-collapse=", " # Character string between combined strings
+...,
+sep=" ",
+collapse=", "
 )
 {
 paste(..., sep=sep, collapse=collapse)

@@ -28,10 +28,10 @@
 #'        If specified, npm is not considered at all. DEFAULT: NA
 #' 
 monthLabs <- function(             # returns Date object
-   startyear=2002,
-   stopyear=2018,
-   npm=2,  # number of labels per month
-   npy=NA)
+startyear=2002,
+stopyear=2018,
+npm=2,
+npy=NA)
 { # start of function
 # check for correct input, especially integers:
 if(length(startyear)>1) stop("'startyear' has to be one single number.")

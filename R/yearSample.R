@@ -20,8 +20,8 @@
 #' @param year 4 digit numerical year.
 #' 
 yearSample <- function(
-    year
-    )
+year
+)
 {
 year2 <- as.numeric(substring(year, first=1:4, last=1:4))
 year_is_false <- function(i)

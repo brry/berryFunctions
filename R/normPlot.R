@@ -34,25 +34,25 @@
 #' @param \dots further arguments passed to \code{\link{plot}} like lwd, xaxs, cex.axis, etc.
 #' 
 normPlot <- function(
-  mean=0, # average value as in \code{\link{dnorm}}
-  sd=1, # standard deviation
-  width=3, # distance (in sd) from plot ends to mean
-  lines=TRUE, # Should vertical lines be plotted at mean +- n*sd?
-  quant=TRUE, # should quantile regions be drawn with \code{fill} colors?
-  fill=addAlpha("blue",c(2:6,7:2)/10), # color(s) passed to \code{\link{polygon}}
-  cumulative=TRUE, # should cumulative density distribution be added?
-  las=1, # arguments passed to \code{\link{plot}}
-  main=paste("Normal density with\nmean =", signif(mean,2), "and sd =", signif(sd,2)), # main as in \code{\link{plot}}.
-  ylim=lim0(dnorm(mean,mean,sd)), # limit for the y axis
-  ylab="", # labels for the axes
-  xlab="",
-  type="n", # arguments passed to \code{\link{lines}}, type="l" for added line
-  lty=1,
-  col=par("fg"),
-  mar=c(2,3,3,3), # margins
-  keeppar=FALSE, # should margin parameters be kept instead of being restored to previous value?
-  ... # further arguments passed to \code{\link{plot}} like lwd, xaxs, cex.axis, etc.
-  )
+mean=0,
+sd=1,
+width=3,
+lines=TRUE,
+quant=TRUE,
+fill=addAlpha("blue",c(2:6,7:2)/10),
+cumulative=TRUE,
+las=1,
+main=paste("Normal density with\nmean =", signif(mean,2), "and sd =", signif(sd,2)),
+ylim=lim0(dnorm(mean,mean,sd)),
+ylab="",
+xlab="",
+type="n",
+lty=1,
+col=par("fg"),
+mar=c(2,3,3,3),
+keeppar=FALSE,
+...
+)
 {
 op <- par(mar=mar)
 # set up plot

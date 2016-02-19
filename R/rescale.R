@@ -22,9 +22,9 @@
 #' @param to output maximum. DEFAULT: 1
 #' 
 rescale <- function(
-x,      # Numerical vector of values to be mapped to a given range
-from=0, # output minimum
-to=1    # output maximum
+x,
+from=0,
+to=1
 )
 {
 if(length(from)!=1) warning("from has length ", length(from))

@@ -30,12 +30,12 @@
 #' @param \dots Further arguments passed to \code{\link{colorRamp}}
 #' 
 divPal <- function(
-n=12, # Number of colors
-reverse=FALSE, # Reverse colors?
-alpha=1, # Transparency (0=transparent, 1=fully colored)
-rwb=FALSE, # Should colors be in red-white-blue instead of brown-blue?
-colors=NULL, # If not NULL, a color vector used in \code{\link{colorRampPalette}}
-... # Further arguments passed to \code{\link{colorRamp}}
+n=12,
+reverse=FALSE,
+alpha=1,
+rwb=FALSE,
+colors=NULL,
+...
 )
 {
 cols <- c("#9B5523", "#B16A32", "#CA8448", "#F4C882", "#F1DB99", "#FBF5B4",

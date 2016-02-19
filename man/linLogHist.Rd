@@ -35,7 +35,7 @@ linLogHist(x, steps = 100, breaks = 20, col = "blue", las = 1,
 
 \item{axisargs}{List of arguments passed to \code{\link{logVals}}, like base. DEFAULT: NULL}
 
-\item{axisargs2}{List of arguments passed to \code{\link{logAxis}}in the final plot. DEFAULT: NULL}
+\item{axisargs2}{List of arguments passed to \code{\link{logAxis}} in the final plot. DEFAULT: NULL}
 
 \item{firstplot}{plot on linear scale first? DEFAULT: TRUE}
 

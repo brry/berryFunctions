@@ -28,9 +28,9 @@
 #' @param quiet Should NA-removal warnings be suppressed? Helpful within functions. DEFAULT: FALSE
 #' 
 rsquare <- function(
-                    a,
-                    b,
-                    quiet=FALSE)
+a,
+b,
+quiet=FALSE)
 {
 if(!(is.vector(a) & is.vector(b))) stop("input is not vectors")
 if(length(a) != length(b)) stop("vectors not of equal length")

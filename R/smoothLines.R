@@ -35,13 +35,13 @@
 #' @param \dots further arguments as in \code{\link{lines}}
 #' 
 smoothLines <- function(
-    x,
-    y,
-    lwd=1,
-    col=1,
-    n=5,
-    alpha=0.1,
-    ...)
+x,
+y,
+lwd=1,
+col=1,
+n=5,
+alpha=0.1,
+...)
 {
 # Handling for Vector and Matrix with columns x and y
 if(is.vector(x)) {x <- x; y <- y} else {y <- x[,2]; x <- x[,1]}

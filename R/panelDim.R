@@ -49,7 +49,7 @@
 #' }
 #' 
 #' @param n Number of panels to be arranged
-#' @param weight weights to avoid \emph{empty panels} and \emph{discrepancy between ncol and nrow}, respectively. DEFAULT: c(1,1)
+#' @param weight Weights to avoid \emph{empty panels} and \emph{discrepancy between ncol and nrow}, respectively. DEFAULT: c(1,1)
 #' @param maxempty Maximum number of panels that are allowed to be left empty.
 #'        If \code{maxempty=0}, no panel is left blank, so 11 plots would be beneath each other 
 #'        instead of in a 4x3 grid with one panel left blank. DEFAULT: round(n/4)
@@ -59,13 +59,13 @@
 #' @param mfcol use mfcol instead of mfrow. DEFAULT: FALSE
 #' 
 panelDim <- function(
-n, # Number of panels to be arranged
-weight=c(1,1), # weights to avoid \emph{empty panels} and \emph{discrepancy between ncol and nrow}, respectively.
-maxempty=round(n/4), # Maximum number of panels that are allowed to be left empty. If \code{maxempty=0}, no panel is left blank, so 11 plots would be beneath each other instead of in a 4x3 grid with one panel left blank.
-landscape=FALSE, # Use landscape orientation instead of portrait?
-all=FALSE, # Show all reasonable possibilities in a data.frame?
-plot=FALSE, # Show the panel layout result? (the 4 best options are compared if \code{all=TRUE})
-mfcol=FALSE # use mfcol instead of mfrow
+n,
+weight=c(1,1),
+maxempty=round(n/4),
+landscape=FALSE,
+all=FALSE,
+plot=FALSE,
+mfcol=FALSE
 )
 {
 # Input control:

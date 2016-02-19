@@ -16,11 +16,13 @@
 #' @param \dots other arguments passed to \code{\link{data}}
 #' 
 dataStr <- function(
-package="datasets", # package
-... # other arguments passed to \code{\link{data}}
+package="datasets",
+...
 )
 {
-d <- data(package=package, ...)$results[,"Item"]
+d <- data(package=package, envir=new.env(), ...)$results[,"Item"]
 d <- sapply(strsplit(d, split=" ", fixed=TRUE), "[", 1)
 for(x in d){ message(x, ":  ", class(get(x))); message(str(get(x)))}
 }
+
+

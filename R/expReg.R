@@ -24,7 +24,7 @@
 #' @param data Dataframe. If x is a formula, the according columns from data are used as x and y. DEFAULT: NULL
 #' @param logy Plot with a logarithmic y axis?  Calls \code{\link{logAxis}}. DEFAULT: TRUE
 #' @param predictnew Vector with values to predict outcome for. Passed as \code{newdata} to \code{\link{predict.lm}}. DEFAULT: NULL
-#' @param interval Inter val for prediction. DEFAULT: "confidence"
+#' @param interval Interval for prediction. DEFAULT: "confidence"
 #' @param plot Plot things at all? If FALSE, predictnew will still be returned. DEFAULT: TRUE
 #' @param digits Numeric vector of length \eqn{\ge 1}. Specifies number of digits a,b,r,e are rounded to 
 #'        in the formula "y=a*log(x)+b, R^2, RMSE=e", respectively. 
@@ -32,7 +32,8 @@
 #' @param inset Numeric vector of length \eqn{\le 2}. inset distance(s) from the margins 
 #'        as a fraction of the plot region when formula is placed by keyword. DEFAULT: 0
 #' @param xpd Logical, specifying wheter formula can be written only inside the plot region (when FALSE) 
-#'        or inside the figure region including mar (when TRUE) or in the entire device region including oma (when NA). DEFAULT: par("xpd")
+#'        or inside the figure region including mar (when TRUE)
+#'        or in the entire device region including oma (when NA). DEFAULT: par("xpd")
 #' @param pos1 \code{\link{xy.coords}}-acceptable position of the formula. DEFAULT: "top"
 #' @param pos2 For numerical coordinates, this is the y-position. DEFAULT: NULL, as in \code{\link{legend}}
 #' @param add Logical. If TRUE, line and text are added to the existing graphic. DEFAULT: FALSE (plots datapoints first and then the line.)
@@ -45,29 +46,29 @@
 #' @param \dots Further arguments passed to \code{\link{plot}} and \code{\link{abline}}.
 #' 
 expReg <- function(
-x, # Numeric or formula (see examples). Vector with values of explanatory variable
-y=NULL, # Numeric. Vector with values of dependent variable
-data=NULL, # Dataframe. If x is a formula, the according columns from data are used as x and y.
-logy=TRUE, # Plot with a logarithmic y axis?  Calls \code{\link{logAxis}}
-predictnew=NULL, # Vector with values to predict outcome for. Passed as \code{newdata} to \code{\link{predict.lm}}.
-interval="confidence", # Inter val for prediction
-plot=TRUE, # Plot things at all? If FALSE, predictnew will still be returned
-digits=2, # Numeric vector of length \eqn{\ge 1}. Specifies number of digits a,b,r,e are rounded to in the formula "y=a*log(x)+b \\n R^2=r \\n RMSE=e", respectively. If values are not specified, they are set equal to the first
-inset=0, # Numeric vector of length \eqn{\le 2}. inset distance(s) from the margins as a fraction of the plot region when formula is placed by keyword
-xpd=par("xpd"), # Logical, specifying wheter formula can be written only inside the plot region (when FALSE) or inside the figure region including mar (when TRUE) or in the entire device region including oma (when NA)
-pos1="top", # \code{\link{xy.coords}}-acceptable position of the formula
-pos2=NULL, # For numerical coordinates, this is the y-position. DEFAULT: NULL, as in \code{\link{legend}}
-add=FALSE, # Logical. If TRUE, line and text are added to the existing graphic. DEFAULT: FALSE (plots datapoints first and then the line.)
-pch=16, # Point Character, see \code{\link{par}}
-col=rgb(0,0,0, 0.5), # Color of points, see \code{\link{par}}
-modcol=2, # color of model line
-lwd=1, # Numeric. Linewidth, see \code{\link{par}}
-xlab=deparse(substitute(x)), # Character / Expression. axis label and graph title if add=FAlSE}
+x,
+y=NULL,
+data=NULL,
+logy=TRUE,
+predictnew=NULL,
+interval="confidence",
+plot=TRUE,
+digits=2,
+inset=0,
+xpd=par("xpd"),
+pos1="top",
+pos2=NULL,
+add=FALSE,
+pch=16,
+col=rgb(0,0,0, 0.5),
+modcol=2,
+lwd=1,
+xlab=deparse(substitute(x)),
 ylab=deparse(substitute(y)),
 main="exponential regression",
-xlim=range(x), # graphic range
+xlim=range(x),
 ylim=range(y),
-...)# Further arguments passed to \code{\link{plot}} and \code{\link{abline}}.}
+...)
 {
 # deparse labs before x and y are evaluated:
 xlab <- xlab ;  ylab <- ylab
