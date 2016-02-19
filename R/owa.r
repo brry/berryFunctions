@@ -16,14 +16,17 @@
 #' @keywords programming
 #' @export
 #' @examples
-#' 
-#' d <- list(bb=1:5, lwd=2, lty=1,   col="gray")
-#' a <- list(bb=3,   lwd=5, lty="1", wachs="A")
-#' 
-#' owa(d, a, "bb", "lwd") # basic usage: lty is overwritten, bb and lwd are ignored
+#'
+#' # basic usage of owa itself:
+#' d <- list(bb=1:5, lwd="was d", lty=1,   col="gray")
+#' a <- list(bb=3,   lwd=5, lty="from a", wachs="A")
+#' owa(d,a) # all changed, wachs added
+#' owa(d, a, "bb", "lwd") # lty is overwritten, bb and lwd are ignored
 #' owa(d, NULL, "bb", "wachs") # NULL is a good default for argument lists
 #' owa(d, c(HH=2, BBB=3) ) # vectors and lists are all converted to lists
 #' owa(d, list(lwd=5, bb=3, lty="1") ) # order of arguments doesn't matter
+#' owa(d, a, c("bb","lwd") ) # unchangable can also be a named vector
+#' owa(d, a, c("bb","lwd"), c("lty","dummy") ) # or several vectors
 #' 
 #' # Usage example (see applications eg. in funnelPlot, colPoints or mReg)
 #' 
@@ -53,25 +56,24 @@
 #' 
 #' @param d Default arguments
 #' @param a Arguments specified by user
-#' @param \dots names of unchangeable arguments (that will not be overwritten) as character strings.
+#' @param \dots Names of unchangeable arguments (that will not be overwritten) as character strings (can also be a vector with characters strings).
 #' 
-owa <- function(  # owa: overwrite arguments
-       d,    #d: default
-       a,    #a: arguments specified by user
-       ...) # arguments that can not be overwritten (are left unchanged)
+owa <- function(
+d,
+a,
+...)
 {
 if(is.null(a) | length(a)==0) return( as.list(d) )
 if(is.null(names(a))) stop("Arguments must be named!")
 if("" %in% names(a) ) stop("All arguments must be named!")
 #
-u <- list(...) # unchanged arguments
+u <- list(...) # arguments that should be left unchanged
+u <- as.list(unlist(u)) # so vectors band be handled
 if("u" %in% names(u)) warning("The argument 'u' has been replaced by ellipsis and does not work anymore.")
 if( isTRUE(a) ) a <- NULL # catch where useres try to give eg legargs=TRUE
 #
 a <- a[ ! names(a) %in% u ] # discard arguments that should be left unchanged
 #
-###d <- d[order(names(d))] # sort lists, so that order of args given in a is irrelevant
-###a <- a[order(names(a))]
 a_replace <- a[names(a) %in% names(d)]
 d[names(a_replace)] <- a_replace # replace (overwrite)
 a_add <- a[ !names(a) %in% names(d) ]
