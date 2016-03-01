@@ -31,6 +31,10 @@ Generate random values, but with spatial correlation
 \note{
 This function is not yet running
 }
+\examples{
+# ToDO: expand function + write examples
+
+}
 \author{
 Berry Boesenkool, \email{berry-b@gmx.de}, Jan 2016
 }
