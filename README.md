@@ -19,8 +19,8 @@ Code to install the most recent development version from github:
 source("https://raw.githubusercontent.com/brry/misc/master/instgit.R")
 instgithub("brry/berryFunctions")
 
-# or use it:
-if(!require(devtools)) install.packages("devtools")
+# or using devtools:
+if(!requireNamespace("devtools", quitly=TRUE)) install.packages("devtools")
 devtools::install_github("brry/berryFunctions")
 
 library(berryFunctions)
