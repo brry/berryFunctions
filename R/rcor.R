@@ -6,7 +6,9 @@
 #' @references For regular grid fields, see: \url{http://santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r/}
 #' @note This function is not yet running
 #' @export
-
+#' @examples
+#' # ToDO: expand function + write examples
+#'
 #' @param n Number of randomly scattered points to be created
 #' @param xmin  Smallest x-coordinate
 #' @param xmax Largest x-coordinate
