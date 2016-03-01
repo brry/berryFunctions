@@ -23,6 +23,7 @@ Helper function \code{\link{paste}} with collapse = ", "
 
 listoferrors <- c("filetype", "header", "nonemptyline")
 message("The following entities were corrupted:\\n", pastec(listoferrors))
+pastec("Part1", c("Part2", "Part3"), letters[1:3])
 
 }
 \author{

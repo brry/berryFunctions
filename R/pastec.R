@@ -11,6 +11,7 @@
 #' 
 #' listoferrors <- c("filetype", "header", "nonemptyline")
 #' message("The following entities were corrupted:\n", pastec(listoferrors))
+#' pastec("Part1", c("Part2", "Part3"), letters[1:3])
 #' 
 #' @param \dots Object(s) to be \code{\link{paste}d} to a character vector
 #' @param sep Character string to separate single strings. DEFAULT: " "
@@ -22,7 +23,7 @@ sep=" ",
 collapse=", "
 )
 {
-paste(..., sep=sep, collapse=collapse)
+paste(c(...), sep=sep, collapse=collapse)
 }
 
 ## Old idea to enable newline insertion every n elements, apparently not necessary.
