@@ -57,7 +57,7 @@ Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2014
   \url{http://stackoverflow.com/questions/4227223/r-list-to-data-frame}
 }
 \seealso{
-\code{\link{sapply}}
+\code{\link{sapply}}. If you have a LARGE list each with the same number of values, use the (much!) faster: \code{plyr::quickdf}.
 }
 \keyword{list}
 \keyword{manip}

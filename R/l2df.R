@@ -4,7 +4,7 @@
 #'
 #' @return data.frame
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2014
-#' @seealso \code{\link{sapply}}
+#' @seealso \code{\link{sapply}}. If you have a LARGE list each with the same number of values, use the (much!) faster: \code{plyr::quickdf}.
 #' @references
 #'   \url{http://stackoverflow.com/questions/5531471/combining-unequal-columns-in-r}\cr
 #'   \url{http://stackoverflow.com/questions/15753091/convert-mixed-length-named-list-to-data-frame}\cr
