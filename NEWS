@@ -22,7 +22,7 @@ https://github.com/brry/berryFunctions/compare/master@{2015-10-10}...master@{201
 - monthAxis: gained labels and midyear argument
 - linReg: legargs can now be specified, as well as confint.
 
-New functions: insertRows, dataStr, betaCompPlot, rescale, divPal, seqPal, na9, addFade, logHist, locLine, createFun
+New functions: insertRows, dataStr, betaCompPlot, rescale, divPal, seqPal, na9, addFade, logHist, locLine, createFun, headtail
 
 
 -----------------------------
