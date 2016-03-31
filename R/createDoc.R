@@ -34,6 +34,7 @@ createDoc <- function(
   path="S:/Dropbox/Public/berryFunctions"
   )
 {
+warning("createDoc will be deprecated in late 2016. Use createFun() instead.")
 fun <- deparse(substitute(fun))
 fun <- gsub("\"", "", fun, fixed=TRUE)
 if(length(fun) >1) stop("'fun' must be a single function name.")

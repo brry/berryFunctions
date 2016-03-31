@@ -17,7 +17,7 @@ createFun(fun, package = "berryFunctions", path = "S:/Dropbox/Public")
 file name as character string
 }
 \description{
-create a file with a complete framework for a new function in this package
+create a file with a complete (Roxygen) framework for a new function in this package
 }
 \details{
 Tries to open the file in the standard editor for .R files using \code{\link{system2}}
