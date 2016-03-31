@@ -16,8 +16,8 @@
 #' monthAxis(1, npm=2, cex.axis=0.5) # fix number of labels per month
 #' 
 #' plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
-#' monthAxis(labels=FALSE)
-#' monthAxis(1, format=" ", col.ticks=2)  # equivalent to axis(labels=FALSE)
+#' monthAxis(labels=FALSE, col.ticks=2)
+#' monthAxis(1, format=" ")  # equivalent to axis(labels=FALSE)
 #' monthAxis(1)
 #' d <- monthAxis(1, labels=letters[1:24], mgp=c(3,2.5,0))
 #' d # d covers the full year, thus is longer than n=5
@@ -37,11 +37,15 @@
 #' monthAxis(1, n=4, font=2)
 #' monthAxis(1, col.axis=3) # too many labels with default n=5
 #' 
-#' mid-year labels:
+#' # mid-year labels:
 #' plot(Date3, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
 #' monthAxis(midyear=TRUE, midargs=list(tcl=-1.2))
+#' 
+#' # mid-month labels:
+#' plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
+#' monthAxis(midmonth=TRUE)
 #'
-#' Time axis instead of date axis:
+#' # Time axis instead of date axis:
 #' plot(as.POSIXct(Sys.time()+c(0,10)*24*3600), 1:2, xaxt="n")
 #' monthAxis(n=3)
 #' monthAxis()
@@ -57,6 +61,7 @@
 #' @param format Format of date, see details in \code{\link{strptime}}. DEFAULT: "\%d.\%m.\\n\%Y"
 #' @param labels labels. DEFAULT: format.Date(d, format)
 #' @param midyear Place labels in the middle of the year? if TRUE, format default is "\%Y". DEFAULT: FALSE
+#' @param midmonth Place labels in the middle of the month? if TRUE, format default is "\%m\\n\%Y". DEFAULT: FALSE
 #' @param midargs List of arguments passed to \code{\link{axis}} for the year-start lines without labels. DEFAULT: NULL
 #' @param mgp MarGinPlacement, see \code{\link{par}}. The second value is for label distance to axis. DEFAULT: c(3,1.5,0)
 #' @param cex.axis CharacterEXpansion (letter size). DEFAULT: 1
@@ -76,6 +81,7 @@ npy=NA,
 format="%d.%m.\n%Y",
 labels=format.Date(d, format),
 midyear=FALSE,
+midmonth=FALSE,
 midargs=NULL,
 mgp=c(3,1.5,0),
 cex.axis=1,
@@ -117,7 +123,7 @@ for(side_i in side)
   if(is.na(timeAxis)) timeAxis <- par("usr")[if(side_i%%2) 1 else 3]>1e5
   if(timeAxis) d <- as.POSIXct(d)
   # Label axis
-  if(!midyear) axis(side=side_i, at=d, labels=labels, las=las, mgp=mgp, cex.axis=cex.axis, tick=tick, ...)
+  if(!midyear & ! midmonth) axis(side=side_i, at=d, labels=labels, las=las, mgp=mgp, cex.axis=cex.axis, tick=tick, ...)
   # midyear option:
   if(midyear)
     {
@@ -128,6 +134,19 @@ for(side_i in side)
                            cex.axis=cex.axis, tick=tick), midargs))
     if(missing(format)) format <- "%Y"
     if(missing(mgp)) mgp <- c(3,0.5,0)
+    labels <- labels[seq(2,length(d), by=2)]
+    axis(side=side_i, at=dmid, labels=labels, las=las, mgp=mgp, cex.axis=cex.axis, tick=FALSE, ...)
+    }
+  # midmonth option:
+  if(midmonth)
+    {
+    d <- monthLabs(startyear_i, stopyear_i, npm=2)
+    dbor <- d[seq(1,length(d), by=2)] # border dates (=year starting points)
+    dmid <- d[seq(2,length(d), by=2)] # mid-year points
+    do.call(axis, owa(list(side=side_i, at=dbor, labels=FALSE,las=las, mgp=mgp, 
+                           cex.axis=cex.axis, tick=tick), midargs))
+    if(missing(format)) format <- "%m\n%Y"
+    if(missing(mgp)) mgp <- c(3,1.5,0)
     labels <- labels[seq(2,length(d), by=2)]
     axis(side=side_i, at=dmid, labels=labels, las=las, mgp=mgp, cex.axis=cex.axis, tick=FALSE, ...)
     }

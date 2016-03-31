@@ -7,8 +7,8 @@
 monthAxis(side = 1, timeAxis = NA, origin = "1970-01-01",
   startyear = NULL, stopyear = NULL, n = 5, npm = NULL, npy = NA,
   format = "\%d.\%m.\\n\%Y", labels = format.Date(d, format),
-  midyear = FALSE, midargs = NULL, mgp = c(3, 1.5, 0), cex.axis = 1,
-  tick = TRUE, las = 1, ...)
+  midyear = FALSE, midmonth = FALSE, midargs = NULL, mgp = c(3, 1.5, 0),
+  cex.axis = 1, tick = TRUE, las = 1, ...)
 }
 \arguments{
 \item{side}{Which \code{\link{axis}} are to be labeled? (can be several). DEFAULT: 1}
@@ -32,6 +32,8 @@ monthAxis(side = 1, timeAxis = NA, origin = "1970-01-01",
 \item{labels}{labels. DEFAULT: format.Date(d, format)}
 
 \item{midyear}{Place labels in the middle of the year? if TRUE, format default is "\%Y". DEFAULT: FALSE}
+
+\item{midmonth}{Place labels in the middle of the month? if TRUE, format default is "\%m\\n\%Y". DEFAULT: FALSE}
 
 \item{midargs}{List of arguments passed to \code{\link{axis}} for the year-start lines without labels. DEFAULT: NULL}
 
@@ -60,8 +62,8 @@ monthAxis(side=1)
 monthAxis(1, npm=2, cex.axis=0.5) # fix number of labels per month
 
 plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
-monthAxis(labels=FALSE)
-monthAxis(1, format=" ", col.ticks=2)  # equivalent to axis(labels=FALSE)
+monthAxis(labels=FALSE, col.ticks=2)
+monthAxis(1, format=" ")  # equivalent to axis(labels=FALSE)
 monthAxis(1)
 d <- monthAxis(1, labels=letters[1:24], mgp=c(3,2.5,0))
 d # d covers the full year, thus is longer than n=5
@@ -81,11 +83,15 @@ plot(Date3, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
 monthAxis(1, n=4, font=2)
 monthAxis(1, col.axis=3) # too many labels with default n=5
 
-mid-year labels:
+# mid-year labels:
 plot(Date3, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
 monthAxis(midyear=TRUE, midargs=list(tcl=-1.2))
 
-Time axis instead of date axis:
+# mid-month labels:
+plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
+monthAxis(midmonth=TRUE)
+
+# Time axis instead of date axis:
 plot(as.POSIXct(Sys.time()+c(0,10)*24*3600), 1:2, xaxt="n")
 monthAxis(n=3)
 monthAxis()
