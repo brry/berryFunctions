@@ -36,15 +36,16 @@
 #' plot(Date3, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
 #' monthAxis(1, n=4, font=2)
 #' monthAxis(1, col.axis=3) # too many labels with default n=5
+#' 
+#' mid-year labels:
+#' plot(Date3, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
+#' monthAxis(midyear=TRUE, midargs=list(tcl=-1.2))
 #'
+#' Time axis instead of date axis:
 #' plot(as.POSIXct(Sys.time()+c(0,10)*24*3600), 1:2, xaxt="n")
 #' monthAxis(n=3)
 #' monthAxis()
 #'
-#' # toDo: midargs=NULL,
-#' # List of arguments passed to \code{\link{axis}}
-#' # for the year-start lines without labels.
-#' 
 #' @param side Which \code{\link{axis}} are to be labeled? (can be several). DEFAULT: 1
 #' @param timeAxis Logical indicating whether the axis is \code{\link{POSIXct}}, not date. DEFAULT: NA, meaning axis value >1e5
 #' @param origin Origin for\code{\link{as.Date}} and \code{\link{as.POSIXct}}. DEFAULT: "1970-01-01"
@@ -56,6 +57,7 @@
 #' @param format Format of date, see details in \code{\link{strptime}}. DEFAULT: "\%d.\%m.\\n\%Y"
 #' @param labels labels. DEFAULT: format.Date(d, format)
 #' @param midyear Place labels in the middle of the year? if TRUE, format default is "\%Y". DEFAULT: FALSE
+#' @param midargs List of arguments passed to \code{\link{axis}} for the year-start lines without labels. DEFAULT: NULL
 #' @param mgp MarGinPlacement, see \code{\link{par}}. The second value is for label distance to axis. DEFAULT: c(3,1.5,0)
 #' @param cex.axis CharacterEXpansion (letter size). DEFAULT: 1
 #' @param tick Draw tick lines? DEFAULT: TRUE
@@ -74,6 +76,7 @@ npy=NA,
 format="%d.%m.\n%Y",
 labels=format.Date(d, format),
 midyear=FALSE,
+midargs=NULL,
 mgp=c(3,1.5,0),
 cex.axis=1,
 tick=TRUE,
@@ -121,12 +124,12 @@ for(side_i in side)
     d <- monthLabs(startyear_i, stopyear_i, npy=2)
     dbor <- d[seq(1,length(d), by=2)] # border dates (=year starting points)
     dmid <- d[seq(2,length(d), by=2)] # mid-year points
-    axis(side=side_i, at=dbor, labels=FALSE,  las=las, mgp=mgp, cex.axis=cex.axis, tick=tick,  ...)
+    do.call(axis, owa(list(side=side_i, at=dbor, labels=FALSE,las=las, mgp=mgp, 
+                           cex.axis=cex.axis, tick=tick), midargs))
     if(missing(format)) format <- "%Y"
     if(missing(mgp)) mgp <- c(3,0.5,0)
     labels <- labels[seq(2,length(d), by=2)]
     axis(side=side_i, at=dmid, labels=labels, las=las, mgp=mgp, cex.axis=cex.axis, tick=FALSE, ...)
-    # stop("midyear has not been implemented yet")
     }
   } # End of loop
 # output:
