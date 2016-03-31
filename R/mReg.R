@@ -151,7 +151,7 @@
 #' 
 #' x <- seq(1, 1000, 1)
 #' y <- (x+22)/(x+123) # can't find an analytical solution so far. Want to check out nls
-#' mReg(x, y, posx="right")
+#' mReg(x, y, legargs=list(x="right"))
 #' 
 #' 
 #' # Solitaire Results. According to en.wikipedia.org/wiki/Klondike_(solitaire):
