@@ -4,13 +4,18 @@
 \alias{monthAxis}
 \title{Label date axis}
 \usage{
-monthAxis(side = 1, startyear = NULL, stopyear = NULL, n = 5,
-  npm = NULL, npy = NA, format = "\%d.\%m.\\n\%Y",
-  labels = format.Date(d, format), midyear = FALSE, mgp = c(3, 1.5, 0),
-  cex.axis = 1, tick = TRUE, las = 1, ...)
+monthAxis(side = 1, timeAxis = NA, origin = "1970-01-01",
+  startyear = NULL, stopyear = NULL, n = 5, npm = NULL, npy = NA,
+  format = "\%d.\%m.\\n\%Y", labels = format.Date(d, format),
+  midyear = FALSE, mgp = c(3, 1.5, 0), cex.axis = 1, tick = TRUE,
+  las = 1, ...)
 }
 \arguments{
 \item{side}{Which \code{\link{axis}} are to be labeled? (can be several). DEFAULT: 1}
+
+\item{timeAxis}{Logical indicating whether the axis is \code{\link{POSIXct}}, not date. DEFAULT: NA, meaning axis value >1e5}
+
+\item{origin}{Origin for\code{\link{as.Date}} and \code{\link{as.POSIXct}}. DEFAULT: "1970-01-01"}
 
 \item{startyear}{Integer. starting year. DEFAULT: NULL = internally computed from \code{\link{par}("usr")}}
 
@@ -73,6 +78,10 @@ Date3 <- sort(as.Date("2011-07-13")+sample(0:1200, 50))
 plot(Date3, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
 monthAxis(1, n=4, font=2)
 monthAxis(1, col.axis=3) # too many labels with default n=5
+
+plot(as.POSIXct(Sys.time()+c(0,10)*24*3600), 1:2, xaxt="n")
+monthAxis(n=3)
+monthAxis()
 
 # toDo: midargs=NULL,
 # List of arguments passed to \\code{\\link{axis}}

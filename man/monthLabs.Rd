@@ -11,12 +11,13 @@ monthLabs(startyear = 2002, stopyear = 2018, npm = 2, npy = NA)
 
 \item{stopyear}{Integer. ending year. DEFAULT: 2018}
 
-\item{npm}{Integer, one of 1,2,3 or 6. Number of labels per month. DEFAULT: 2\cr 
-npm : days of the month\cr 
-1 : first day of each month within the given years\cr 
-2 : 1st and 15th day\cr 
-3 : 1, 10, 20\cr 
-6 : 1, 5, 10, 15, 20, 25.}
+\item{npm}{Integer, one of 1,2,3,6 or 31. Number of labels per month. DEFAULT: 2\cr
+ npm : days of the month\cr 
+ 1 : first day of each month within the given years\cr 
+ 2 : 1st and 15th day\cr 
+ 3 : 1, 10, 20\cr 
+ 6 : 1, 5, 10, 15, 20, 25.
+31 : each day}
 
 \item{npy}{Integer, one of 1,2,3,4 or 6. Number of labels per year at equally spaced month-beginnings. 
 If specified, npm is not considered at all. DEFAULT: NA}

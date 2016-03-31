@@ -36,12 +36,18 @@
 #' plot(Date3, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
 #' monthAxis(1, n=4, font=2)
 #' monthAxis(1, col.axis=3) # too many labels with default n=5
-#' 
+#'
+#' plot(as.POSIXct(Sys.time()+c(0,10)*24*3600), 1:2, xaxt="n")
+#' monthAxis(n=3)
+#' monthAxis()
+#'
 #' # toDo: midargs=NULL,
 #' # List of arguments passed to \code{\link{axis}}
 #' # for the year-start lines without labels.
 #' 
 #' @param side Which \code{\link{axis}} are to be labeled? (can be several). DEFAULT: 1
+#' @param timeAxis Logical indicating whether the axis is \code{\link{POSIXct}}, not date. DEFAULT: NA, meaning axis value >1e5
+#' @param origin Origin for\code{\link{as.Date}} and \code{\link{as.POSIXct}}. DEFAULT: "1970-01-01"
 #' @param startyear Integer. starting year. DEFAULT: NULL = internally computed from \code{\link{par}("usr")}
 #' @param stopyear Ditto for ending year. DEFAULT: NULL
 #' @param n Approximate number of labels that should be printed (as in \code{\link{pretty}}). DEFAULT: 5
@@ -58,6 +64,8 @@
 #'  
 monthAxis <- function(
 side=1,
+timeAxis=NA,
+origin="1970-01-01",
 startyear=NULL,
 stopyear=NULL,
 n=5,
@@ -73,12 +81,18 @@ las=1,
 ...)
 {
 # internally needed functions to get Date range from graphic:
-getDate <- function(s) as.Date(par("usr")[if(s%%2) 1:2 else 3:4], origin="1970-01-01")
+getDate <- function(s)
+  {
+  usr <- par("usr")[if(s%%2) 1:2 else 3:4]
+  if(is.na(timeAxis)) timeAxis <- usr[1]>1e5
+  if(timeAxis) usr <- as.POSIXct(usr, origin=origin)
+  as.Date(usr, origin=origin)
+  }
 getYear <- function(x) as.numeric(format(x, "%Y"))
 # possible combinations of npm, npy:
-pos_npm <- c(6, 3, 2, 1, NA,NA,NA,NA,NA)
-pos_npy <- c(NA,NA,NA,12, 6, 4, 3, 2, 1)
-pos_dif <- c(5,10,15,30,61,91,122,183,365) # number of days between labels
+pos_npm <- c(31,  6,  3,  2,  1, NA, NA,  NA,  NA,  NA)
+pos_npy <- c(NA, NA, NA, NA, 12,  6,  4,   3,   2,   1)
+pos_dif <- c( 1,  5, 10, 15, 30, 61, 91, 122, 183, 365) # number of days between labels
 #
 # loop around each side:
 for(side_i in side)
@@ -96,6 +110,9 @@ for(side_i in side)
   npy_i <- if(is.null(npm) & is.na(npy)) pos_npy[sel] else npy
   # calculate dates
   d <- monthLabs(startyear_i, stopyear_i, npm=npm_i, npy=npy_i)
+  # TimeAxis default:
+  if(is.na(timeAxis)) timeAxis <- par("usr")[if(side_i%%2) 1 else 3]>1e5
+  if(timeAxis) d <- as.POSIXct(d)
   # Label axis
   if(!midyear) axis(side=side_i, at=d, labels=labels, las=las, mgp=mgp, cex.axis=cex.axis, tick=tick, ...)
   # midyear option:
