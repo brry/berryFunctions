@@ -4,9 +4,9 @@
 #' 
 #' @details This is a nice way to check operator precedence, see \code{\link{Syntax}}
 #'
-#' @return Matrix with TRUE, FALSE and NA combinations
+#' @return Truth table as data.frame with TRUE and FALSE (and NA) combinations
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de},  Mrz 2016 
-#' @seealso \code{\link{help}}, \code{\link{help}}
+#' @seealso \code{\link{logical}}
 #' @keywords logic
 #' @export
 #' @examples

@@ -13,7 +13,7 @@ TFtest(..., na = TRUE)
 with single letters for variables. Each expression is to be separated with a comma}
 }
 \value{
-Matrix with TRUE, FALSE and NA combinations
+Truth table as data.frame with TRUE and FALSE (and NA) combinations
 }
 \description{
 Check if logical expressions return what you expect with a truth table
@@ -34,7 +34,7 @@ TFtest(a&b|c, (a&b)|c, a&(b|c), na=FALSE) # AND has precedence over OR
 Berry Boessenkool, \email{berry-b@gmx.de},  Mrz 2016
 }
 \seealso{
-\code{\link{help}}, \code{\link{help}}
+\code{\link{logical}}
 }
 \keyword{logic}
 
