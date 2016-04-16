@@ -334,7 +334,17 @@ output$a [9] <- coef(mod9)[2]
 output$b [9] <- coef(mod9)[1]
 output$R2[9] <- rsquare(yn0, output$a[9]/xn0 + output$b[9])
 # 10 rational ------------- 1 / (a*x + b) --------------------------------------
-mod10 <- lm( I(1/y) ~ x)
+y_rational <- 1/y
+infin <- which(!is.finite(y_rational))
+if(length(infin)!=0)
+  {
+  warning("For rational regressions, ",length(infin),
+    " zero values were removed from x and y (",round(length(infin)/length(x)*100,1),"%).")
+  x_rat <- x[-infin] # x_rat: rational regression values
+  y_rat <- y[-infin]
+  } else
+  {x_rat <- x; y_rat <- y}
+mod10 <- lm( y_rat ~ x_rat)
 output$a [10] <- coef(mod10)[2]
 output$b [10] <- coef(mod10)[1]
 output$R2[10] <- rsquare(y, 1 / (output$a[10]*x + output$b[10]))
