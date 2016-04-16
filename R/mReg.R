@@ -171,6 +171,14 @@
 #' sfile <- system.file("extdata/gelman_equation_search.txt", package="berryFunctions")
 #' mv <- read.table(sfile, header=TRUE)
 #' 
+#' sfile <- system.file("extdata/mRegProblem.txt", package="berryFunctions")
+#' x <- read.table(sfile, header=TRUE)$x
+#' y <- read.table(sfile, header=TRUE)$y
+#' mReg(x,y,  digits=6) # all very equal
+#' x2 <- x2-min(x2)
+#' mReg(x2,y, digits=6)          #  Formulas are wrong if digits is too low!! 
+#' mReg(x2,y, legendform="full")
+#' 
 #' @param x Vector with x coordinates or formula (like y~x), the latter is passed to \code{\link{model.frame}}
 #' @param y Vector with y values. DEFAULT: NULL (to enable x to be a formula)
 #' @param data data.frame in which formula is applied. DEFAULT: NULL
@@ -350,8 +358,12 @@ output$b [10] <- coef(mod10)[1]
 output$R2[10] <- rsquare(y, 1 / (output$a[10]*x + output$b[10]))
 # 11 exp_4 ---------------- a*e^(b*(x+c))+d ------------------------------------
 # 4-parametric exponential distibutions
-if(exp_4) output_exp4p <- exp4p(x,y, digits=digits)
-if(exp_4) output[11,] <- output_exp4p[1,] # only include best fit for plotting
+if(exp_4)
+  {
+  output_exp4p <- exp4p(x,y, digits=digits)
+  if(Poly45) output_exp4p <- cbind(output_exp4p, e=NA,f=NA)
+  output[11,] <- output_exp4p[1,] # only include best fit for plotting
+  }
 #
 # 12 hyperbolic ----------- sinh(a*x+b)+c, cosh(), tanh() ----------------------
 # yet to add

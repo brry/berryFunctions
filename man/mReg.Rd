@@ -233,6 +233,14 @@ plot(sol$Time, sol$official-sol$Bonus, type="l")
 sfile <- system.file("extdata/gelman_equation_search.txt", package="berryFunctions")
 mv <- read.table(sfile, header=TRUE)
 
+sfile <- system.file("extdata/mRegProblem.txt", package="berryFunctions")
+x <- read.table(sfile, header=TRUE)$x
+y <- read.table(sfile, header=TRUE)$y
+mReg(x,y,  digits=6) # all very equal
+x2 <- x2-min(x2)
+mReg(x2,y, digits=6)          #  Formulas are wrong if digits is too low!! 
+mReg(x2,y, legendform="full")
+
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2012, updated April and Aug 2013, sept 2015
