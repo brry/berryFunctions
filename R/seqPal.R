@@ -4,7 +4,8 @@
 #' 
 #' @return Character string vector with color names
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2016
-#' @seealso \code{\link{divPal}}, \code{\link{addAlpha}}, \code{\link{colorRampPalette}}, package RColorBrewer
+#' @seealso \code{\link{divPal}}, \code{\link{addAlpha}}, \code{\link{colorRampPalette}},
+#' package RColorBrewer, Why not use rainbow? see e.g. \url{https://eagereyes.org/basics/rainbow-color-map}
 #' @keywords color dplot
 #' @export
 #' @examples

@@ -52,7 +52,8 @@ par(op)
 Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2016
 }
 \seealso{
-\code{\link{divPal}}, \code{\link{addAlpha}}, \code{\link{colorRampPalette}}, package RColorBrewer
+\code{\link{divPal}}, \code{\link{addAlpha}}, \code{\link{colorRampPalette}},
+package RColorBrewer, Why not use rainbow? see e.g. \url{https://eagereyes.org/basics/rainbow-color-map}
 }
 \keyword{color}
 \keyword{dplot}
