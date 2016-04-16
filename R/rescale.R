@@ -29,6 +29,6 @@ to=1
 {
 if(length(from)!=1) warning("from has length ", length(from))
 if(length(to)!=1)   warning(  "to has length ", length(to))
-  (x-min(x)) / (max(x)-min(x)) * (to - from) + from
+  (x-min(x, na.rm=TRUE)) / (max(x, na.rm=TRUE)-min(x, na.rm=TRUE)) * (to - from) + from
 }
 
