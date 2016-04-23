@@ -14,11 +14,12 @@
 #' @export
 #' @examples
 #' 
-#' op <- par(mfrow=c(9,1), mar=c(0,0,0,0))
+#' op <- par(mfrow=c(10,1), mar=c(0,0,0,0))
 #' for(n in c(3,7,11,12,300)) plot(rep(1,n), pch=16, cex=5, col=divPal(n), xaxt="n")
 #' plot(rep(1,12), pch=16, cex=5, col=divPal(alpha=0.4), xaxt="n")
 #' plot(rep(1,12), pch=16, cex=5, col=divPal(rev=TRUE), xaxt="n")
-#' plot(rep(1,12), pch=16, cex=5, col=divPal(rwb=TRUE), xaxt="n")
+#' plot(rep(1,50), pch=16, cex=5, col=divPal(50, rwb=TRUE), xaxt="n")
+#' plot(rep(1,50), pch=16, cex=5, col=divPal(50, ryb=TRUE), xaxt="n")
 #' plot(rep(1,12), pch=16, cex=5, col=divPal(col=c("yellow","red")), xaxt="n")
 #' par(op)
 #' 
@@ -26,6 +27,7 @@
 #' @param reverse Reverse colors? DEFAULT: FALSE
 #' @param alpha Transparency (0=transparent, 1=fully colored). DEFAULT: 1
 #' @param rwb Should colors be in red-white-blue instead of brown-blue? DEFAULT: FALSE
+#' @param ryb Use red-yellow-blue instead of the default, with "khaki" in the center. DEFAULT: FALSE
 #' @param colors If not NULL, a color vector used in \code{\link{colorRampPalette}}. DEFAULT: NULL
 #' @param \dots Further arguments passed to \code{\link{colorRamp}}
 #' 
@@ -34,6 +36,7 @@ n=12,
 reverse=FALSE,
 alpha=1,
 rwb=FALSE,
+ryb=FALSE,
 colors=NULL,
 ...
 )
@@ -41,6 +44,7 @@ colors=NULL,
 cols <- c("#9B5523", "#B16A32", "#CA8448", "#F4C882", "#F1DB99", "#FBF5B4",
           "#C3E2C0", "#96D1A7", "#46BEA0", "#4984A0", "#4984A0", "#0B3A5B")
 if(rwb) cols <- c("red","white","blue")
+if(ryb) cols <- c("red","khaki1","blue")
 if(!is.null(colors)) cols <- colors
 if(reverse) cols <- rev(cols)
 outcols <- colorRampPalette(cols)(n)
