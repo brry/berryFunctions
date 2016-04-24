@@ -29,20 +29,10 @@ Character string vector with color names
 Diverging color palette: brown to blue, light colors in the middle, darker
 at the extremes, good for displaying values in two directions
 }
-\details{
-Diverging palette, good for displaying values in two directions
-Brown to blue in originally 12 shades from IPCC Assesment Report 5 Figure 12.22
-}
 \examples{
 
-op <- par(mfrow=c(10,1), mar=c(0,0,0,0))
-for(n in c(3,7,11,12,300)) plot(rep(1,n), pch=16, cex=5, col=divPal(n), xaxt="n")
-plot(rep(1,12), pch=16, cex=5, col=divPal(alpha=0.4), xaxt="n")
-plot(rep(1,12), pch=16, cex=5, col=divPal(rev=TRUE), xaxt="n")
-plot(rep(1,50), pch=16, cex=5, col=divPal(50, rwb=TRUE), xaxt="n")
-plot(rep(1,50), pch=16, cex=5, col=divPal(50, ryb=TRUE), xaxt="n")
-plot(rep(1,12), pch=16, cex=5, col=divPal(col=c("yellow","red")), xaxt="n")
-par(op)
+plot(rep(1,12), pch=16, cex=5, col=divPal(12), xaxt="n")
+showPal()
 
 }
 \author{
@@ -52,7 +42,8 @@ Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2016
 Originally in 12 shades in the IPCC Assesment Report 5 Chapter 12 Fig 12.22, \url{http://www.ipcc.ch/report/ar5/wg1/}
 }
 \seealso{
-\code{\link{seqPal}}, \code{\link{addAlpha}}, \code{\link{colorRampPalette}}, package RColorBrewer
+\code{\link{showPal}}, \code{\link{seqPal}}, \code{\link{addAlpha}}, 
+         \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 }
 \keyword{color}
 \keyword{dplot}

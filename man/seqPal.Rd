@@ -34,26 +34,16 @@ Sequential color palette from yelow to red or yellow to blue or custom colors.
 }
 \examples{
 
-op <- par(mfrow=c(11,1), mar=c(0,0,0,0))
-for(n in c(3,7,11,12,300)) plot(rep(1,n), pch=16, cex=5, col=seqPal(n), xaxt="n")
-text(150, 1, "berryFunctions::seqPal default palette")
-plot(rep(1,300), pch=16, cex=5, col=seqPal(300, extr=TRUE), xaxt="n")
-text(150, 1, "extr=TRUE")
-plot(rep(1,12),  pch=16, cex=5, col=seqPal(alpha=0.4), xaxt="n")
-text(6, 1, "semi-transparency with alpha=0.4")
-plot(rep(1,12),  pch=16, cex=5, col=seqPal(rev=TRUE), xaxt="n")
-plot(rep(1,300), pch=16, cex=5, col=seqPal(300,yb=TRUE), xaxt="n")
-plot(rep(1,300), pch=16, cex=5, col=seqPal(300,yr=TRUE), xaxt="n")
-plot(rep(1,300), pch=16, cex=5, col=seqPal(300,col=c("darkblue","green","orange")), xaxt="n")
-par(op)
-
+plot(rep(1,12),  pch=16, cex=5, col=seqPal(12), xaxt="n")
+showPal()
+ 
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2016
 }
 \seealso{
-\code{\link{divPal}}, \code{\link{addAlpha}}, \code{\link{colorRampPalette}},
-package RColorBrewer, Why not use rainbow? see e.g. \url{https://eagereyes.org/basics/rainbow-color-map}
+\code{\link{showPal}}, \code{\link{divPal}}, \code{\link{addAlpha}}, 
+         \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 }
 \keyword{color}
 \keyword{dplot}

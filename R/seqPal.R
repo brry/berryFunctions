@@ -4,25 +4,15 @@
 #' 
 #' @return Character string vector with color names
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2016
-#' @seealso \code{\link{divPal}}, \code{\link{addAlpha}}, \code{\link{colorRampPalette}},
-#' package RColorBrewer, Why not use rainbow? see e.g. \url{https://eagereyes.org/basics/rainbow-color-map}
+#' @seealso \code{\link{showPal}}, \code{\link{divPal}}, \code{\link{addAlpha}}, 
+#'          \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 #' @keywords color dplot
 #' @export
 #' @examples
 #' 
-#' op <- par(mfrow=c(11,1), mar=c(0,0,0,0))
-#' for(n in c(3,7,11,12,300)) plot(rep(1,n), pch=16, cex=5, col=seqPal(n), xaxt="n")
-#' text(150, 1, "berryFunctions::seqPal default palette")
-#' plot(rep(1,300), pch=16, cex=5, col=seqPal(300, extr=TRUE), xaxt="n")
-#' text(150, 1, "extr=TRUE")
-#' plot(rep(1,12),  pch=16, cex=5, col=seqPal(alpha=0.4), xaxt="n")
-#' text(6, 1, "semi-transparency with alpha=0.4")
-#' plot(rep(1,12),  pch=16, cex=5, col=seqPal(rev=TRUE), xaxt="n")
-#' plot(rep(1,300), pch=16, cex=5, col=seqPal(300,yb=TRUE), xaxt="n")
-#' plot(rep(1,300), pch=16, cex=5, col=seqPal(300,yr=TRUE), xaxt="n")
-#' plot(rep(1,300), pch=16, cex=5, col=seqPal(300,col=c("darkblue","green","orange")), xaxt="n")
-#' par(op)
-#' 
+#' plot(rep(1,12),  pch=16, cex=5, col=seqPal(12), xaxt="n")
+#' showPal()
+#'  
 #' @param n Number of colors. DEFAULT: 12
 #' @param reverse Reverse colors? DEFAULT: FALSE
 #' @param alpha Transparency (0=transparent, 1=fully colored). DEFAULT: 1
