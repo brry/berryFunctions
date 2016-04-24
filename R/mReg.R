@@ -175,9 +175,9 @@
 #' x <- read.table(sfile, header=TRUE)$x
 #' y <- read.table(sfile, header=TRUE)$y
 #' mReg(x,y,  digits=6) # all very equal
-#' x2 <- x2-min(x2)
+#' x2 <- x-min(x)
 #' mReg(x2,y, digits=6)          #  Formulas are wrong if digits is too low!! 
-#' mReg(x2,y, legendform="full")
+#' #mReg(x2,y, legendform="full")
 #' 
 #' @param x Vector with x coordinates or formula (like y~x), the latter is passed to \code{\link{model.frame}}
 #' @param y Vector with y values. DEFAULT: NULL (to enable x to be a formula)

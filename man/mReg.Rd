@@ -237,9 +237,9 @@ sfile <- system.file("extdata/mRegProblem.txt", package="berryFunctions")
 x <- read.table(sfile, header=TRUE)$x
 y <- read.table(sfile, header=TRUE)$y
 mReg(x,y,  digits=6) # all very equal
-x2 <- x2-min(x2)
+x2 <- x-min(x)
 mReg(x2,y, digits=6)          #  Formulas are wrong if digits is too low!! 
-mReg(x2,y, legendform="full")
+#mReg(x2,y, legendform="full")
 
 }
 \author{
