@@ -16,8 +16,8 @@ Code to install the most recent development version from github:
 
 ```R
 # Avoid installing devtools with all its dependencies:
-source("https://raw.githubusercontent.com/brry/misc/master/instgit.R")
-instgithub("brry/berryFunctions")
+source("https://raw.githubusercontent.com/brry/berryFunctions/master/R/instGit.R")
+instGit("brry/berryFunctions")
 
 # or using devtools:
 if(!requireNamespace("devtools", quitly=TRUE)) install.packages("devtools")
