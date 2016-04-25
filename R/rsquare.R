@@ -40,6 +40,11 @@ if(any(is.na(a)|is.na(b)))
      if(!quiet) warning(length(Na), " NAs were omitted from ", length(a), " data points.")
      a <- a[-Na] ; b <- b[-Na]
      } # end if NA
+if(all(a==0) | all(b==0))
+  {
+  if(!quiet) warning("all a (or all b) values are zero, returning NA.")
+  return(NA)
+  } # end if zero
 cor(a,b)^2
 }
 

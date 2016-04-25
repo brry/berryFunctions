@@ -43,7 +43,7 @@
 #' # 10 rational 1 / (a*x + b) \cr 
 #' # 11 exponential 4 Param a*e^(b*(x+c)) + d \cr
 #' 
-#' Negative values are not used for regressions containing logarithms; with warning.\cr 
+#' Negative values are not used for regressions containing logarithms; with warning.\cr
 #' exp_4par was originally developed for exponential temperature decline in a cup of hot water.
 #' @section warning: A well fitting function does NOT imply correct causation!\cr 
 #'         A good fit does NOT mean that you describe the bahaviour of a system adequatly!\cr 
@@ -62,7 +62,7 @@
 #' x <- c(runif(100,0,3), runif(200, 3, 25)) # random from uniform distribution
 #' y <- 12.367*log10(x)+7.603+rnorm(300)     # random from normal distribution
 #' plot(x,y, xlim=c(0,40))
-#' mReg(x,y) # Warning comes from negative y-values
+#' mReg(x,y) # warning comes from negative y-values (suppress with quiet=TRUE)
 #' 
 #' # Formula specification:
 #' mReg(Volume~Height, data=trees)
@@ -178,6 +178,23 @@
 #' x2 <- x-min(x)
 #' mReg(x2,y, digits=6)          #  Formulas are wrong if digits is too low!! 
 #' #mReg(x2,y, legendform="full")
+#'
+#' # Zero and NA testing (to be moved to unit testing someday...) 
+#' mReg(1:10, rep(0,10))
+#' mReg(1:10, c(rep(0,9),NA))
+#' mReg(1:10, rep(NA,10))
+#' mReg(rep(1,10), 1:10)
+#' mReg(rep(0,10), 1:10)
+#' mReg(c(rep(0,9),NA), 1:10)
+#' mReg(rep(NA,10), 1:10)
+#'
+#'mReg(1:10, rep(0,10), quiet=TRUE)
+#'mReg(1:10, c(rep(0,9),NA), quiet=TRUE)
+#'mReg(1:10, rep(NA,10), quiet=TRUE)
+#'mReg(rep(1,10), 1:10, quiet=TRUE)
+#'mReg(rep(0,10), 1:10, quiet=TRUE)
+#'mReg(c(rep(0,9),NA), 1:10, quiet=TRUE)
+#'mReg(rep(NA,10), 1:10, quiet=TRUE)
 #' 
 #' @param x Vector with x coordinates or formula (like y~x), the latter is passed to \code{\link{model.frame}}
 #' @param y Vector with y values. DEFAULT: NULL (to enable x to be a formula)
@@ -210,6 +227,7 @@
 #' @param legend Logical. Add legend to plot? DEFAULT: TRUE
 #' @param legargs List. List of arguments passed to \code{\link{legend}}. Will overwrite internal defaults. DEFAULT: NULL
 #' @param legendform One of 'full', 'form', 'nameform' or 'name'. Complexity (and length) of legend in plot. See Details. DEFAULT: 'nameform'
+#' @param quiet Suppress warnings about value removal (NAs, smaller 0, etc)? DEFAULT: FALSE
 #' @param \dots Further graphical parameters passed to plot
 #' 
 mReg <- function(
@@ -241,14 +259,15 @@ pch=16,
 legend=TRUE,
 legargs=NULL,
 legendform="nameform",
+quiet=FALSE,
 ...)
 {
 # Function start
 # input checking
 if( (xf %in% letters[1:6] | yf %in% letters[1:6])  &  legendform %in% c("nameform", "form")  )
-   warning("Using single letters a to f for input variable names is not recommended, as formula forms will be difficult to read" )
+   if(!quiet) warning("Using single letters a to f for input variable names is not recommended, as formula forms will be difficult to read" )
 if( xf=="e" | yf=="e" )
-   warning("Using 'e' for input variable name is not recommended, as exponential formula forms will be difficult to read" )
+   if(!quiet) warning("Using 'e' for input variable name is not recommended, as exponential formula forms will be difficult to read" )
 if(any(4:5 %in% selection)) Poly45 <- TRUE
 if(11 %in% selection) exp_4 <- TRUE
 if( ! round(nbest,1) %in% 0:12) stop("nbest has to be an integer between 0 and 12")
@@ -267,7 +286,7 @@ if(inherits(x,"formula"))
 if(any(is.na(x)|is.na(y)))
   {
   Na <- which(is.na(x)|is.na(y))
-  warning(length(Na), " NAs were omitted from ", length(x), " data points (",
+  if(!quiet) warning(length(Na), " NAs were omitted from ", length(x), " data points (",
           round(length(Na)/length(x)*100,1),"%).")
   x <- x[-Na] ; y <- y[-Na]
   } # end if NA
@@ -277,7 +296,7 @@ if(length(x)!=length(y)) stop("x (",length(x), " elements) and y (",length(y),")
 neg <- which(x<=0|y<=0)
 if(length(neg)!=0) 
   {
-  warning("For log/exp/power regressions, ",length(neg),
+  if(!quiet) warning("For log/exp/power regressions, ",length(neg),
     " nonpositive values were removed from x and y (",round(length(neg)/length(x)*100,1),"%).")
   xg0 <- x[-neg] # xg0: x greater zero
   yg0 <- y[-neg]
@@ -295,6 +314,8 @@ output <- as.data.frame(matrix(NA, ncol=if(Poly45) 10 else 8, nrow=11 ))
 colnames(output) <- c("nr","R2","Formulas","R2full", letters[1:(ncol(output)-4)] )
 #
 #  1 linear --------------- a*x + b --------------------------------------------
+if(length(x)>0 & length(y)>0)
+  {
 mod1 <- lm( y ~ x )
 output$R2[1] <- summary(mod1)$r.squared
 output$a [1] <- coef(mod1)[2]
@@ -304,58 +325,71 @@ mod2 <- lm(y ~ I(x^2) + x)
 output$a [2] <- coef(mod2)[2]
 output$b [2] <- coef(mod2)[3]
 output$c [2] <- coef(mod2)[1]
-output$R2[2] <- rsquare(y, output$a[2]*x^2 + output$b[2]*x + output$c[2])
+output$R2[2] <- rsquare(y, output$a[2]*x^2 + output$b[2]*x + output$c[2], quiet=quiet)
 #  3 cubic ---------------- a*x^3 + b*x^2 + c*x + d ----------------------------
 mod3 <- lm(y ~  poly(x,3, raw=TRUE))
 output[3,5:8] <- rev(coef(mod3))
-output$R2[3] <- rsquare(y, output$a[3]*x^3 + output$b[3]*x^2 + output$c[3]*x + output$d[3])
+output$R2[3] <- rsquare(y, output$a[3]*x^3 + output$b[3]*x^2 + output$c[3]*x + output$d[3], quiet=quiet)
 if(Poly45){
   #  4 Polynom4 ----------- a*x^4 + b*x^3 + c*x^2 + d*x + e --------------------
   mod4 <- lm(y ~  poly(x,4, raw=TRUE))
   output[4, 5:9] <- rev(coef(mod4))
-  output$R2[4] <- rsquare(y, output$a[4]*x^4 + output$b[4]*x^3 + output$c[4]*x^2 + output$d[4]*x + output$e[4])
+  output$R2[4] <- rsquare(y, output$a[4]*x^4 + output$b[4]*x^3 + output$c[4]*x^2 + output$d[4]*x + output$e[4], quiet=quiet)
   #  5 Polynom5 ----------- a*x^5 + b*x^4 + c*x^3 + d*x^2 + e*x + f ------------
   mod5 <- lm(y ~  poly(x,5, raw=TRUE))
   output[5,5:10] <- rev(coef(mod5))
-  output$R2[5] <- rsquare(y, output$a[5]*x^5 + output$b[5]*x^4 + output$c[5]*x^3 + output$d[5]*x^2 + output$e[5]*x + output$f[5])
+  output$R2[5] <- rsquare(y, output$a[5]*x^5 + output$b[5]*x^4 + output$c[5]*x^3 + output$d[5]*x^2 + output$e[5]*x + output$f[5], quiet=quiet)
   } # if Poly45 end
+  } else # length(y) end
+  if(!quiet) warning("linear/square/cubic not fitted (no non-NA values in dataset).")
 #  6 logarithmic ---------- a*log(x) + b ---------------------------------------
-mod6 <- lm( yg0 ~ log10(xg0) )
-output$a [6] <- coef(mod6)[2]
-output$b [6] <- coef(mod6)[1]
-output$R2[6] <- rsquare(yg0, output$a[6]*log10(xg0) + output$b[6])
+if(length(xg0)>0 & length(yg0)>0)
+  {
+  mod6 <- lm( yg0 ~ log10(xg0) )
+  output$a [6] <- coef(mod6)[2]
+  output$b [6] <- coef(mod6)[1]
+  output$R2[6] <- rsquare(yg0, output$a[6]*log10(xg0) + output$b[6], quiet=quiet)
 #  7 exponential ---------- a*e^(b*x) ------------------------------------------
-mod7 <- lm( log(yg0) ~ xg0 )               # y = a*e^(b*x)
-output$a [7] <- exp(coef(mod7)[1])         # ln(y) = ln(a) + ln( e^(b*x) )
-output$b [7] <- coef(mod7)[2]              # ln(y) = ln(a) + b*x
-output$R2[7] <- rsquare(yg0, output$a[7]*exp(output$b[7]*xg0))
+  mod7 <- lm( log(yg0) ~ xg0 )               # y = a*e^(b*x)
+  output$a [7] <- exp(coef(mod7)[1])         # ln(y) = ln(a) + ln( e^(b*x) )
+  output$b [7] <- coef(mod7)[2]              # ln(y) = ln(a) + b*x
+  output$R2[7] <- rsquare(yg0, output$a[7]*exp(output$b[7]*xg0), quiet=quiet)
 #  8 power/root ----------- a*x^b ----------------------------------------------
-mod8 <- lm( log(yg0) ~ log(xg0) )                  # y = a*x^b
-output$a [8] <- exp(coef(mod8)[1])                 # ln(y) = ln(a) + ln(x^b)
-output$b [8] <- coef(mod8)[2]                      # ln(y) = ln(a) + b*ln(x)
-output$R2[8] <- rsquare(yg0, output$a[8]*xg0^output$b[8])
+  mod8 <- lm( log(yg0) ~ log(xg0) )                  # y = a*x^b
+  output$a [8] <- exp(coef(mod8)[1])                 # ln(y) = ln(a) + ln(x^b)
+  output$b [8] <- coef(mod8)[2]                      # ln(y) = ln(a) + b*ln(x)
+  output$R2[8] <- rsquare(yg0, output$a[8]*xg0^output$b[8], quiet=quiet)
+  } else
+  if(!quiet) warning("log/exp/power not fitted (no non-zero positive values in dataset).")
 #  9 reciprocal ----------- a/x + b --------------------------------------------
 xn0 <- x[x!=0 & y!=0] # xn0: x not zero
 yn0 <- y[x!=0 & y!=0]
-mod9 <- lm( yn0 ~ I(1/xn0) )
-output$a [9] <- coef(mod9)[2]
-output$b [9] <- coef(mod9)[1]
-output$R2[9] <- rsquare(yn0, output$a[9]/xn0 + output$b[9])
+if(length(xn0)>0 & length(yn0)>0)
+  {
+  mod9 <- lm( yn0 ~ I(1/xn0) )
+  output$a [9] <- coef(mod9)[2]
+  output$b [9] <- coef(mod9)[1]
+  output$R2[9] <- rsquare(yn0, output$a[9]/xn0 + output$b[9], quiet=quiet)
+  } else
+  if(!quiet) warning("reciprocal not fitted (no non-zero values in dataset).")
 # 10 rational ------------- 1 / (a*x + b) --------------------------------------
 y_rational <- 1/y
 infin <- which(!is.finite(y_rational))
 if(length(infin)!=0)
   {
-  warning("For rational regressions, ",length(infin),
-    " zero values were removed from x and y (",round(length(infin)/length(x)*100,1),"%).")
+  if(!quiet) warning("For rational regressions, ",length(infin),
+    " zeros were removed from x and y (",round(length(infin)/length(x)*100,1),"%).")
   x_rat <- x[-infin] # x_rat: rational regression values
   y_rat <- y[-infin]
   } else
   {x_rat <- x; y_rat <- y}
-mod10 <- lm( y_rat ~ x_rat)
-output$a [10] <- coef(mod10)[2]
-output$b [10] <- coef(mod10)[1]
-output$R2[10] <- rsquare(y, 1 / (output$a[10]*x + output$b[10]))
+if(length(x_rat)>0 & length(y_rat)>0)
+  {
+  mod10 <- lm( y_rat ~ x_rat)
+  output$a [10] <- coef(mod10)[2]
+  output$b [10] <- coef(mod10)[1]
+  output$R2[10] <- rsquare(y, 1 / (output$a[10]*x + output$b[10]), quiet=quiet)
+  }
 # 11 exp_4 ---------------- a*e^(b*(x+c))+d ------------------------------------
 # 4-parametric exponential distibutions
 if(exp_4)
@@ -395,6 +429,7 @@ output$R2 <- round(output$R2, digits)
 ord <- order(output$R2full, decreasing=TRUE) # descending order of goodness of fit, for legend
 #
 # plot data and functions ------------------------------------------------------
+if(all(is.na(y)) | all(is.na(x))) plot <- FALSE
 if(plot & nbest!=0) {
   if(!add)  plot(x, y, las=las, pch=pch, ylab=ylab, xlab=xlab, xlim=xlim, ylim=ylim, col=pcol, ...)
   # select function types that should be drawn:
@@ -415,7 +450,7 @@ if(plot & nbest!=0) {
   if(todraw[4]) lines(xdraw, predict( mod4 , xdrawtab ),          col=col[4], lwd=lwd[4], lty=lty[4]) # 4 polynomial 4th degree
   if(todraw[5]) lines(xdraw, predict( mod5 , xdrawtab ),          col=col[5], lwd=lwd[5], lty=lty[5]) # 5 polynomial 5th degree
   } # end if Poly45
-  if(all(xdraw<=0)) warning("no logarithmic regression could be done, as there are no positive x values")
+  if(all(xdraw<=0)) if(!quiet) warning("no logarithmic regression could be done, as there are no positive x values")
   xd2 <- xdraw[xdraw>0]
   if(todraw[6]) lines(xd2,   output$a[6]*log10(xd2)+output$b[6],  col=col[6], lwd=lwd[6], lty=lty[6]) # 6 logarithmic
   if(todraw[7]) lines(xdraw, output$a[7]*exp(output$b[7]*xdraw),  col=col[7], lwd=lwd[7], lty=lty[7]) # 7 exponential

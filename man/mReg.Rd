@@ -10,7 +10,8 @@ mReg(x, y = NULL, data = NULL, Poly45 = FALSE, exp_4 = FALSE,
   digits = 2, extend = 0.4, xlim = extendrange(x, f = extend),
   ylim = extendrange(y, f = extend), xlab = xf, ylab = yf, las = 1,
   lwd = rep(1, 12), lty = rep(1, 12), col = NULL, pcol = par("col"),
-  pch = 16, legend = TRUE, legargs = NULL, legendform = "nameform", ...)
+  pch = 16, legend = TRUE, legargs = NULL, legendform = "nameform",
+  quiet = FALSE, ...)
 }
 \arguments{
 \item{x}{Vector with x coordinates or formula (like y~x), the latter is passed to \code{\link{model.frame}}}
@@ -72,6 +73,8 @@ Suggestion: 0.6 (2/3 of variation of y is explained by function of x). DEFAULT: 
 
 \item{legendform}{One of 'full', 'form', 'nameform' or 'name'. Complexity (and length) of legend in plot. See Details. DEFAULT: 'nameform'}
 
+\item{quiet}{Suppress warnings about value removal (NAs, smaller 0, etc)? DEFAULT: FALSE}
+
 \item{\dots}{Further graphical parameters passed to plot}
 }
 \value{
@@ -107,7 +110,7 @@ set parameters in the following order:\cr
 # 10 rational 1 / (a*x + b) \cr 
 # 11 exponential 4 Param a*e^(b*(x+c)) + d \cr
 
-Negative values are not used for regressions containing logarithms; with warning.\cr 
+Negative values are not used for regressions containing logarithms; with warning.\cr
 exp_4par was originally developed for exponential temperature decline in a cup of hot water.
 }
 \section{warning}{
@@ -124,7 +127,7 @@ set.seed(12)
 x <- c(runif(100,0,3), runif(200, 3, 25)) # random from uniform distribution
 y <- 12.367*log10(x)+7.603+rnorm(300)     # random from normal distribution
 plot(x,y, xlim=c(0,40))
-mReg(x,y) # Warning comes from negative y-values
+mReg(x,y) # warning comes from negative y-values (suppress with quiet=TRUE)
 
 # Formula specification:
 mReg(Volume~Height, data=trees)
@@ -240,6 +243,23 @@ mReg(x,y,  digits=6) # all very equal
 x2 <- x-min(x)
 mReg(x2,y, digits=6)          #  Formulas are wrong if digits is too low!! 
 #mReg(x2,y, legendform="full")
+
+# Zero and NA testing (to be moved to unit testing someday...) 
+mReg(1:10, rep(0,10))
+mReg(1:10, c(rep(0,9),NA))
+mReg(1:10, rep(NA,10))
+mReg(rep(1,10), 1:10)
+mReg(rep(0,10), 1:10)
+mReg(c(rep(0,9),NA), 1:10)
+mReg(rep(NA,10), 1:10)
+
+mReg(1:10, rep(0,10), quiet=TRUE)
+mReg(1:10, c(rep(0,9),NA), quiet=TRUE)
+mReg(1:10, rep(NA,10), quiet=TRUE)
+mReg(rep(1,10), 1:10, quiet=TRUE)
+mReg(rep(0,10), 1:10, quiet=TRUE)
+mReg(c(rep(0,9),NA), 1:10, quiet=TRUE)
+mReg(rep(NA,10), 1:10, quiet=TRUE)
 
 }
 \author{
