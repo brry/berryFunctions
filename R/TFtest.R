@@ -46,7 +46,7 @@ for(i in 1:nn) assign(letters[i], out[,i])
 # evaluate the expression(s):
 result <- lapply(depsub, function(x) eval(parse(text=x)))
 result <- as.data.frame(result)
-colnames(result) <- paste("--", depsub)
+colnames(result) <- paste("__", depsub)
 
 # return output:
 cbind(out, result)
