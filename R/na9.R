@@ -11,16 +11,17 @@
 #' @examples
 #' 
 #' na9()
+#' na9(more=c(NA,"-"))
 #' 
 #' @param nspace number of spaces prepended. DEFAULT: 5
 #' @param base basic na.string structures. Might be expanded in the future. Thankful for suggestions. DEFAULT: c("-9999","-999", "-99", "-9.99", "-9.9", "-9,99", "-9,9")
-#' @param more allows more structures added to base. DEFAULT: ""
+#' @param more More structures added to base, like "NA", "--". DEFAULT: NULL
 #' @param \dots Arguments passed to nothing currently
 #' 
 na9 <- function(
 nspace=5,
-base=c("-9999","-999", "-99", "-9.99", "-9.9", "-9,99", "-9,9"),
-more="",
+base=c("-9999","-999", "-99", "-9.99", "-9.9", "-9,99", "-9,999"),
+more=NULL,
 ...)
 {
 base <- c(base, more)

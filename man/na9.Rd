@@ -5,14 +5,14 @@
 \title{Prepend spaces before na.strings}
 \usage{
 na9(nspace = 5, base = c("-9999", "-999", "-99", "-9.99", "-9.9", "-9,99",
-  "-9,9"), more = "", ...)
+  "-9,999"), more = NULL, ...)
 }
 \arguments{
 \item{nspace}{number of spaces prepended. DEFAULT: 5}
 
 \item{base}{basic na.string structures. Might be expanded in the future. Thankful for suggestions. DEFAULT: c("-9999","-999", "-99", "-9.99", "-9.9", "-9,99", "-9,9")}
 
-\item{more}{allows more structures added to base. DEFAULT: ""}
+\item{more}{More structures added to base, like "NA", "--". DEFAULT: NULL}
 
 \item{\dots}{Arguments passed to nothing currently}
 }
@@ -26,6 +26,7 @@ It can be used as \code{na.strings=na9()} in \code{\link{read.table}}.
 \examples{
 
 na9()
+na9(more=c(NA,"-"))
 
 }
 \author{
