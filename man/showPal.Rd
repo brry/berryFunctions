@@ -7,7 +7,7 @@
 showPal(...)
 }
 \arguments{
-\item{\dots}{ignored}
+\item{\dots}{Arguments passed to \code{\link{par}}}
 }
 \description{
 Plot examples of the seqential and diverging color palettes in this package.
