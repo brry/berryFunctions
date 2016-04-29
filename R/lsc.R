@@ -107,6 +107,7 @@
 #' @param x Vector for the x-axis of the plot. DEFAULT: sequence along P
 #' @param fit Integer vector. Indices for a subset of Q that Qsim is fitted to. DEFAULT: all of Q
 #' @param plot Logical. plot input data? DEFAULT: TRUE
+#' @param main Character string. DEFAULT: "Precipitation and discharge"
 #' @param plotsim Logical. add best fit to plot? DEFAULT: TRUE
 #' @param returnsim Logical. Return simulated Q instead of parameters of UH? DEFAULT: FALSE
 #' @param type Vector with two characters: type as in \code{\link{plot}}, repeated if only one is given. 1st for obs, 2nd for sim. DEFAULT: c("o","l")
@@ -123,6 +124,7 @@ k=3,
 x=1:length(P),
 fit=1:length(Q),
 plot=TRUE,
+main="Precipitation and discharge",
 plotsim=TRUE,
 returnsim=FALSE,
 type=c("o", "l"),
@@ -163,7 +165,7 @@ if(plot)
   if(length(type)==1) type <- rep(type,2)
   op <- par(mar=rep(3,4))
   plot(x, P, type="h", col=4, yaxt="n", ylim=c(max(P)*2, 0), lwd=2, ann=FALSE)
-  title(main="Precipitation and discharge" )
+  title(main=main)
   axis(2, pretty(P), col=4, las=1, col.axis=4)
   #
   par(new=TRUE); plot(x, Q, type=type[1], col=2, las=1, ylim=range(Q)*c(1,2), ann=FALSE, axes=FALSE)

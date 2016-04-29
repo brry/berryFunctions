@@ -5,8 +5,9 @@
 \title{Linear storage cascade, unit hydrograph}
 \usage{
 lsc(P, Q, area = 50, Qbase = Q[1], n = 2, k = 3, x = 1:length(P),
-  fit = 1:length(Q), plot = TRUE, plotsim = TRUE, returnsim = FALSE,
-  type = c("o", "l"), legx = "center", legy = NULL, ...)
+  fit = 1:length(Q), plot = TRUE, main = "Precipitation and discharge",
+  plotsim = TRUE, returnsim = FALSE, type = c("o", "l"),
+  legx = "center", legy = NULL, ...)
 }
 \arguments{
 \item{P}{Vector with precipitation values \bold{in mm in hourly spacing}}
@@ -26,6 +27,8 @@ lsc(P, Q, area = 50, Qbase = Q[1], n = 2, k = 3, x = 1:length(P),
 \item{fit}{Integer vector. Indices for a subset of Q that Qsim is fitted to. DEFAULT: all of Q}
 
 \item{plot}{Logical. plot input data? DEFAULT: TRUE}
+
+\item{main}{Character string. DEFAULT: "Precipitation and discharge"}
 
 \item{plotsim}{Logical. add best fit to plot? DEFAULT: TRUE}
 
