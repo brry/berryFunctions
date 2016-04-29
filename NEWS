@@ -14,14 +14,16 @@ Before the actual NEWS, here are some things planned for future development:
 -----------------------------
 
 
-Version 1.10.0 (2016--)
-- several small code and documentation improvements, see
-https://github.com/brry/berryFunctions/compare/master@{2015-10-10}...master@{2016--}
-- the package is now Roxygenized, source code structure much more standardized
+Version 1.10.0 (2016-04-29)
+- numerous small code and documentation improvements, see
+https://github.com/brry/berryFunctions/compare/master@{2015-10-10}...master@{2016-04-29}
+- the package is now Roxygenized, the source code structure is much more standardized
 - There now is a vignette
 - normPlot: colors drawn in quantiles
 - monthAxis: gained labels and midyear argument
 - linReg: legargs can now be specified, as well as confint.
+- mReg: input checks + NA and 0 now handled well (thanks to Mathias Hollaender)
+- Color palette default unified throughout the package
 
 New functions: insertRows, dataStr, betaCompPlot, rescale, divPal, seqPal, na9, addFade, logHist, locLine, createFun, headtail, TFtest, showPal, instGit
 
