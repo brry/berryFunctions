@@ -44,6 +44,7 @@
 #' @param log Is the axis logarithmic by plot(log="x")? internal DEFAULT: \code{\link{par}("xlog")} or "ylog". DEFAULT: NULL
 #' @param lcol Color of gridlines drawn in the graph with \code{\link{abline}}, NA to suppress. DEFAULT: "grey"
 #' @param lty,lwd Type of gridlines. DEFAULT: 1
+#' @param labels Labels passed to \code{\link{axis}}. "FALSE" to suppress labelling. DEFAULT: NULL (internally, \code{\link{logVals}$labs}
 #' @param allticks Place all intermediate ticklines at the axis (without labelling). DEFAULT: FALSE
 #' @param allargs List of arguments passed to axis for allticks=TRUE. DEFAULT: NULL
 #' @param expr Expression drawing over the ablines, like (points(x,y). Can be code within {braces}.
@@ -66,6 +67,7 @@ side=1,
 log=NULL,
 lcol="grey",
 lty=1, lwd=1,
+labels=NULL,
 allticks=FALSE,
 allargs=NULL,
 expr,
@@ -118,8 +120,9 @@ else # horizontal lines, labels at y-axis:
   else abline(h=log10(lv$all), col=lcol, lty=lty, lwd=lwd)
   }
 # axis labels:
-if(log) axis(side=side_i, at=lv$vals,        labels=lv$labs, las=las, ...)
-else    axis(side=side_i, at=log10(lv$vals), labels=lv$labs, las=las, ...)
+if(is.null(labels)) labels <- lv$labs
+if(log) axis(side=side_i, at=lv$vals,        labels=labels, las=las, ...)
+else    axis(side=side_i, at=log10(lv$vals), labels=labels, las=las, ...)
 if(allticks)
   {
   lv$add <- lv$all[!lv$all %in% lv$vals]
