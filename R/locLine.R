@@ -11,7 +11,7 @@
 #' @examples
 #'
 #' plot(cumsum(rnorm(60)), type="l")
-#' if(interactive()) locLine()
+#' ## locLine() # only do this manually in interactive() mode
 
 #' @param h Draw horizontal line at clicked location? DEFAULT: TRUE
 #' @param v Draw vertical line at clicked location? DEFAULT: TRUE

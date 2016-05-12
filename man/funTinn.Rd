@@ -17,7 +17,7 @@ Opens function or object in external editor with an R command
 \dontrun{
 ## Rcmd check --as-cran doesn't allow opening external devices,
 ## so this example is excluded from running in the checks.
-funTinn(boxplot.default)
+## funTinn(boxplot.default)
 }
 
 }

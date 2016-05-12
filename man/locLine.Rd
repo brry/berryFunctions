@@ -27,7 +27,7 @@ Not tested across platforms yet...
 \examples{
 
 plot(cumsum(rnorm(60)), type="l")
-if(interactive()) locLine()
+## locLine() # only do this manually in interactive() mode
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Mar 2016

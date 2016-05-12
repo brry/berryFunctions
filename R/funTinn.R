@@ -11,7 +11,7 @@
 #' \dontrun{
 #' ## Rcmd check --as-cran doesn't allow opening external devices,
 #' ## so this example is excluded from running in the checks.
-#' funTinn(boxplot.default)
+#' ## funTinn(boxplot.default)
 #' }
 #' 
 #' @param name Name of function or object to be opened with the program associated with .r-files. In my case, the editor Tinn-R
