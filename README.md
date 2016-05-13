@@ -3,23 +3,24 @@ berryFunctions
 
 My misc functions package. Notable: colPoints, horizHist, logAxis, pointZoom, smallPlot, lsc.
 
-**See the [Vignette](http://htmlpreview.github.io/?https://github.com/brry/berryFunctions/blob/master/inst/doc/berryFunctions.html) for an overview of the package.**
+**See the [Vignette](https://cran.r-project.org/web/packages/berryFunctions/vignettes/berryFunctions.html) for an overview of the package.**
 
 
 Code to install from CRAN:
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/berryFunctions)](http://cran.r-project.org/package=berryFunctions) [![downloads](http://cranlogs.r-pkg.org/badges/berryFunctions)](http://www.r-pkg.org/services)
 
+
 ```R
 install.packages("berryFunctions")
 library(berryFunctions)
-?berryFunctions # run the examples to get an idea of what's possible.
+vignette("berryFunctions")
 ```
 
 Code to install the most recent development version from github:
 
 ```R
 # Avoid installing devtools with all its dependencies:
-source("https://raw.githubusercontent.com/brry/berryFunctions/master/R/instGit.R")
+source("http://raw.githubusercontent.com/brry/berryFunctions/master/R/instGit.R")
 instGit("brry/berryFunctions")
 
 # or using devtools:
