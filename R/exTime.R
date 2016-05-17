@@ -49,8 +49,8 @@ if(!is.character(topic)) {warning("topic must be a character string"); return()}
 # silence progress bars if applicable
 if(requireNamespace("pbapply", quietly=TRUE)) if(quiet)
   {
-  opo <- pboptions(type="none")
-  on.exit(pboptions(opo), add=TRUE)
+  opo <- pbapply::pboptions(type="none")
+  on.exit(pbapply::pboptions(opo), add=TRUE)
   }
 # write expression only once, then conditionally suppress warnings:
 expr <- substitute(
