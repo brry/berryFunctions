@@ -66,6 +66,7 @@ part1 <- paste(part1, collapse="\n")
 part2 <- paste0(format(Sys.Date(), "%b %Y"), "\n")
 part3 <- "' @seealso \\code{\\link{help}}, \\code{\\link{help}}
 ' @keywords aplot
+' @importFrom package fun1 fun2
 ' @export
 ' @examples
 '
