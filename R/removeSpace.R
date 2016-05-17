@@ -14,6 +14,12 @@
 #' s <- c("space at end     ", "  white at begin", "  both ", " special ^  ")
 #' removeSpace(s)
 #' 
+#' # To add space, use:
+#' x <- c("ab","abcde")
+#' format(x)
+#' format(x, justify="centre")
+#' format(x, width=9)
+#' 
 #' @param x Character string, can be a vector
 #' @param begin Logical. Remove leading spaces at the beginning of the character string? DEFAULT: TRUE
 #' @param end Logical. Remove trailing spaces at the end? DEFAULT: TRUE

@@ -32,6 +32,12 @@ extensively tested yet, please mail me any problems...
 s <- c("space at end     ", "  white at begin", "  both ", " special ^  ")
 removeSpace(s)
 
+# To add space, use:
+x <- c("ab","abcde")
+format(x)
+format(x, justify="centre")
+format(x, width=9)
+
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2014
