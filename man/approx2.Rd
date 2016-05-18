@@ -4,12 +4,16 @@
 \alias{approx2}
 \title{Smart linear NA interpolation}
 \usage{
-approx2(x, fill = NULL)
+approx2(x, fill = NULL, n = length(x), ...)
 }
 \arguments{
 \item{x}{Vector with (numeric) values}
 
 \item{fill}{Function to fill NAs at the start or end of the vector. See Details. DEFAULT: NULL}
+
+\item{n}{Number of points to interpolate to}
+
+\item{\dots}{Further arguments passed to \code{\link{approx}}}
 }
 \value{
 Vector with NAs replaced with interpolation (not a list, as in \code{\link{approx}}!)
@@ -26,10 +30,10 @@ The default (NULL) means to use the first (or last) observation available.
 }
 \examples{
 
-# approx2(c(NA,NA)) # yields an error
+is.error(  approx2(c(NA,NA))  ) # yields an error
 approx2(c(NA,NA, 6, 4, 8, 9, 3, 2, 1))
-approx2(c( 3,NA, 6, 4, 8, 9, 3, 2, 1))
-approx2(c( 3, 4, 6, 4, 8, 9,NA, 2,NA))
+approx2(c( 2,NA, 6, 4, 8, 9, 3, 2, 1))
+approx2(c( 2, 4, 6, 4, 8, 9,NA, 2,NA))
 
 approx2(c(NA,NA, 6, 4, 8, 9, 3, 2, 1))
 approx2(c(NA,NA, 6, 4, 8, 9, 3, 2, 1), fill=median)
@@ -38,6 +42,10 @@ approx2(c(NA,NA, 6, 4, 8, 9, 3, 2, 1), fill=mean)
 approx2(c( 3, 4, 6, 4, 8, 9,NA, 2,NA))
 approx2(c( 3, 4, 6, 4, 8, 9,NA, 2,NA), fill=median)
 approx2(c( 3, 4, 6, 4, 8, 9,NA, 2,NA), fill=mean)
+
+approx2(c(NA,NA, 6, 4, 8, 9, 3, 2, 1), n=17)
+approx2(c( 2,NA, 6, 4, 8, 9, 3, 2, 1), n=17)
+approx2(c( 2, 4, 6, 4, 8, 9,NA, 2,NA), n=17)
 
 }
 \author{
