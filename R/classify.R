@@ -59,7 +59,11 @@ classify <- function(
 {
 x <- as.numeric(x)
 # error checking:
-if(length(Range) != 2) stop("Range must have two values.")
+if(length(Range) != 2) 
+  {
+  if(!quiet) warning("Range did not have two values.")
+  Range <- range(Range, finite=TRUE)
+  }
 if(diff(Range)==0)
    {
    if(!quiet) warning("The Range values were equal. Range is now extended.")
