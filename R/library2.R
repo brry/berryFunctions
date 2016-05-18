@@ -18,23 +18,22 @@
 #' }
 #' 
 #' @param name Name of the package(s). Can be qouted, must not.
+#' @param libargs List of arguments passed to \code{\link{library}} like \code{lib.loc}, \code{quietly} etc. DEFAULT: NULL
 #' @param \dots Arguments passed to \code{\link{install.packages}} like \code{lib}, \code{repos} etc.
 #' 
 library2 <- function(
 name,
+libargs=NULL,
 ...)
 {
 name <- as.character(substitute(name))
-for(i in 1:length(name))
+for(n in name)
 {
-if(!requireNamespace(name[i], quietly=TRUE))
-   {
-   install.packages(name, ...)
-   library(name[i], character.only=TRUE)
-   }
+if(!requireNamespace(n, quietly=TRUE))  install.packages(n, ...)
+do.call(library, owa(list(package=n, character.only=TRUE), libargs, "package", "character.only"))
 }
-for(i in 1:length(name))
-  message(paste0('-------------------------\nhelp(package="', name[i],
+for(n in name)
+  message(paste0('-------------------------\nhelp(package="', n,
             '")\n-------------------------\n'))
 }
 

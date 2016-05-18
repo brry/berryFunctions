@@ -5,10 +5,12 @@
 \alias{require2}
 \title{install.package and require}
 \usage{
-library2(name, ...)
+library2(name, libargs = NULL, ...)
 }
 \arguments{
 \item{name}{Name of the package(s). Can be qouted, must not.}
+
+\item{libargs}{List of arguments passed to \code{\link{library}} like \code{lib.loc}, \code{quietly} etc. DEFAULT: NULL}
 
 \item{\dots}{Arguments passed to \code{\link{install.packages}} like \code{lib}, \code{repos} etc.}
 }
