@@ -74,7 +74,7 @@ part3 <- "' @seealso \\code{\\link{help}}, \\code{\\link{help}}
 ' @param
 ' @param
 ' @param
-' @param \\dots
+' @param \\dots Further arguments passed to \\code{\\link{plot}}
 '
 "
 part3 <- paste0("#", strsplit(part3, "\n", fixed=TRUE)[[1]])
