@@ -4,16 +4,20 @@
 \alias{distance}
 \title{Distance between points}
 \usage{
-distance(xpt, ypt, xref, yref)
+distance(x, y, xref, yref, along = FALSE)
 }
 \arguments{
-\item{xpt}{vector with x-coordinate(s) of point(s)}
+\item{x}{vector with x-coordinate(s) of point(s)}
 
-\item{ypt}{ditto for y}
+\item{y}{ditto for y}
 
 \item{xref}{single x coordinate of reference point}
 
 \item{yref}{ditto for y}
+
+\item{along}{Logical: Should distances be computed along vector \code{(x,y)}? 
+If TRUE, \code{(xref,yref)} are ignored. 
+If both \code{(xref,yref)} are not given, along is set to TRUE.}
 }
 \value{
 vector with the distances

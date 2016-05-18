@@ -20,16 +20,28 @@
 #' distance(A,B, 3,5)
 #' text(c(3.2,6,1), c(6,1,4), round(distance(A,B, 3,5),2) )
 #' 
-#' @param xpt vector with x-coordinate(s) of point(s)
-#' @param ypt ditto for y
+#' @param x vector with x-coordinate(s) of point(s)
+#' @param y ditto for y
 #' @param xref single x coordinate of reference point
 #' @param yref ditto for y
+#' @param along Logical: Should distances be computed along vector \code{(x,y)}? 
+#'              If TRUE, \code{(xref,yref)} are ignored. 
+#'              If both \code{(xref,yref)} are not given, along is set to TRUE.
 #' 
 distance <- function(
-   xpt,
-   ypt,
-   xref,
-   yref)
+x,
+y,
+xref,
+yref,
+along=FALSE   
+)
 {
-sqrt((xref-xpt)^2 + (yref-ypt)^2)
+# input check:
+if(missing(xref) & missing(yref)) along <- TRUE
+# main function, internally:
+dist_int <- function(x,y, xref,yref) sqrt((xref-x)^2 + (yref-y)^2)
+if(along)
+  c(0,sapply(2:length(x), function(i) dist_int(x[i-1],y[i-1], x[i],y[i])))
+else
+  dist_int(x,y, xref,yref) # normal case
 }
