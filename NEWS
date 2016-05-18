@@ -7,6 +7,7 @@ Before the actual NEWS, here are some things planned for future development:
 - lsc: better example dataset, optim problems, sim line not plotted completely
 - tableColVal: add digits argument
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
+- implement fileCheck and is.error wherever applicable
 
 
 -----------------------------
@@ -15,7 +16,7 @@ Before the actual NEWS, here are some things planned for future development:
 
 Version 1.11.0 (2016--)
 https://github.com/brry/berryFunctions/compare/master@{2016-04-29}...master@{2016--}
-New functions: exTime, equidistPoints, is.error
+New functions: exTime, equidistPoints, is.error, fileCheck
 
 
 -----------------------------
