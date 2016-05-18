@@ -11,7 +11,7 @@ colPointsLegend(z, Range = range(z, finite = TRUE), nbins = 40,
   sborder = NA, resetfocus = TRUE, plottriangle = FALSE,
   triangle = 0.14, tricol = c(1, 8), density = NULL, lines = TRUE,
   atminmax = FALSE, horizontal = TRUE, labelpos = 1, titlepos = 3,
-  title = "Legend", las = 1, ...)
+  title = "Legend", las = 1, x, y, index, ...)
 }
 \arguments{
 \item{z}{Values of third dimension used in \code{\link{colPoints}}, can be matrix, vector, etc, but must be numeric}
@@ -36,17 +36,23 @@ colPointsLegend(z, Range = range(z, finite = TRUE), nbins = 40,
 
 \item{x2, y2}{Bottomright -"-. DEFAULT: 98,88}
 
-\item{mar}{Margins for \code{\link{smallPlot}} in relative values (0:100). DEFAULT: internal calculations based on title, labelpos and titlepos.}
+\item{mar}{Margins for \code{\link{smallPlot}} in relative values (0:100). 
+DEFAULT: internal calculations based on title, labelpos and titlepos.}
 
-\item{mgp}{MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.6, 0)}
+\item{mgp}{MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, 
+as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.6, 0)}
 
 \item{sborder}{Border around inset subplot. DEFAULT: NA}
 
-\item{resetfocus}{Reset focus to original plot? Specifies where further low level plot commands are directed to. DEFAULT: TRUE}
+\item{resetfocus}{Reset focus to original plot? 
+Specifies where further low level plot commands are directed to. DEFAULT: TRUE}
 
-\item{plottriangle}{Should triangles be plotted at the end of the legend for values outside Range? TRUE if missing but triangle is given. DEFAULT: FALSE}
+\item{plottriangle}{Should triangles be plotted at the end of the legend for values outside Range? 
+Vector of length two (for lower and upper, internally recycled). 
+If this argument is missing but triangle is given, this is set to TRUE. DEFAULT: FALSE}
 
-\item{triangle}{Percentage of bar length at lower and upper end for triangles (can be a vector with two different values). DEFAULT: 0.14}
+\item{triangle}{Percentage of bar length at lower and upper end for triangles 
+(can be a vector with two different values). DEFAULT: 0.14}
 
 \item{tricol}{Triangle colors for lower and upper end. DEFAULT: c(1,8)}
 
@@ -58,13 +64,16 @@ colPointsLegend(z, Range = range(z, finite = TRUE), nbins = 40,
 
 \item{horizontal}{Horizontal bar? if FALSE, a vertical bar is drawn. DEFAULT: TRUE}
 
-\item{labelpos}{Position of labels relative to the bar. Possible: 1 (below), 2 (left), 3 (above), 4 (right), 5(on top of bar). DEFAULT: 1}
+\item{labelpos}{Position of labels relative to the bar. 
+Possible: 1 (below), 2 (left), 3 (above), 4 (right), 5(on top of bar). DEFAULT: 1}
 
 \item{titlepos}{Position of title -"-. DEFAULT: 3}
 
 \item{title}{Legend title. DEFAULT: "Legend"}
 
 \item{las}{LabelAxisStyle. DEFAULT: 1}
+
+\item{x, y, index}{Ignored arguments, so that you can pass the result from colPoints via do.call(cpl, cp_result)}
 
 \item{\dots}{Further arguments passed to \code{\link{text}} and \code{\link{strwidth}}, e.g. cex, srt, font, col. But NOT adj!}
 }

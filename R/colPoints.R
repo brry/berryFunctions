@@ -22,8 +22,8 @@
 #' # basic usage:
 #' colPoints(i,j,k, cex=1.5, pch="+", add=FALSE)
 #' 
-#' # with custom Range (only for method equalinterval):
-#' colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, Range=c(150, 180))
+#' # with custom Range:
+#' colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, Range=c(150, 190))
 #' # can be used to allow comparison between several plots
 #' # points outside the range are plotted with col2
 #' 
@@ -32,8 +32,8 @@
 #' colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, col=mycols)
 #' 
 #' # With legend title:
-#' colPoints(i,j,k, cex=2, pch="+", add=FALSE,
-#'          legargs=list(density=FALSE, title="Elevation [m above NN.]"))
+#' colPoints(i,j,k, cex=2, pch="+", add=FALSE, zlab="Elevation [m above NN.]",
+#'          legargs=list(density=FALSE))
 #' ?colPointsLegend # to see which arguments can be set via legargs
 #' 
 #' # with lines (nint to change number of linear interpolation points):
@@ -80,11 +80,10 @@
 #' 
 #' 
 #' # Customizing the legend :
-#' colPoints(i,j,k, legend=FALSE, add=FALSE)
+#' cp <- colPoints(i,j,k, legend=FALSE, add=FALSE)
 #' colPointsLegend(x1=20,y1=50, x2=95,y2=40, z=k, labelpos=5, atminmax=TRUE, bg=7)
 #' colPointsLegend(x1=50,y1=28, x2=90,y2=18, z=k, Range=c(80, 200), nbins=12, font=3)
 #' colPointsLegend(x1=10,y1=15, x2=40,y2= 5, z=k, labelpos=5, lines=FALSE, title="")
-#' 
 #' colPointsLegend(z=k, horizontal=FALSE)
 #' colPointsLegend(x1=1, y1=90, z=k, horizontal=FALSE, labelpos=4, cex=1.2)
 #' colPointsLegend(x1=23,y1=95, z=k, horizontal=FALSE, labelpos=5, cex=0.8,
@@ -92,7 +91,8 @@
 #' # For method other than colPoints' default, it is easiest to include these
 #' # options as a list in legargs, but you can also use the invisible output
 #' # from colPoints for later calls to colPointsLegend
-#' 
+#' do.call(colPointsLegend, cp)
+#' do.call(colPointsLegend, owa(cp, list(colors=rainbow2(100), cex=1.2)))
 #' 
 #' # colPoints with matrix:
 #' colPoints(z=volcano, add=FALSE)
@@ -132,8 +132,9 @@
 #' @param add Logical. Should the points be added to current (existing!) plot? If FALSE, a new plot is started. DEFAULT: TRUE (It's called col\bold{Points}, after all)
 #' @param lines Logical. Should lines be drawn underneath the points? (color of each \code{\link{segments}} is taken from starting point, last point is endpoint.) DEFAULT: FALSE
 #' @param nint Numeric of length 1. Number of interpolation points between each coordinate if \code{lines=TRUE}. nint=1 means no interpolation. Values below 10 will smooth coordinates and miss the original points!. DEFAULT: 30
-#' @param xlab x-axis label. DEFAULT: substitute as in plot
+#' @param xlab x-axis label. DEFAULT: \code{\link{substitute}(x)}
 #' @param ylab y-axis label. DEFAULT: ditto
+#' @param zlab \code{\link{colPointsLegend} title}. DEFAULT: ditto
 #' @param las Label Axis Style. Only used when add=FALSE. See \code{\link{par}}. DEFAULT: 1 (all labels horizontal)
 #' @param pch Point CHaracter. See \code{\link{par}}. DEFAULT: 16
 #' @param quiet Turn off warnings? DEFAULT: FALSE
@@ -148,7 +149,7 @@ colPoints <- function(
   breaks, # specification for method
   sdlab=1, #
   col=seqPal(cl$nbins), # color palette. DEFAULT: 100 nuances from blue to red
-  col2=c(NA, 1, 8), # color for z==NA and points not in the color range
+  col2=c(NA, "grey", "black"), # color for z==NA and points not in the color range
   legend=TRUE, # Should a legend be drawn?
   legargs=NULL, # Arguments for colPointsLegend.
   hist=FALSE, # Should a legend be drawn?
@@ -158,12 +159,16 @@ colPoints <- function(
   nint=30, # Numeric of length 1. Number of interpolation points between each coordinate if lines=TRUE.
   xlab=substitute(x), # axis labels
   ylab=substitute(y),
+  zlab=substitute(z),
   las=1, # LabelAxisStyle: all labels horizontally (only relevant when add=FALSE)
   pch=16, # PointCHaracter, see ?par
   quiet=FALSE, # Turn off warnings?
   ...) # further arguments passed to plot, points and lines, eg cex, xlim (bei add=F), mgp, main, sub, asp (when add=F), etc. NOT col
 {
-xlab <- xlab ;  ylab <- ylab # defaults need to be set before x and y are evaluated
+ # default labels need to be obtained before x and y are evaluated
+xlab <- if(missing(xlab)) deparse(xlab) else xlab
+ylab <- if(missing(ylab)) deparse(ylab) else ylab
+zlab <- if(missing(zlab)) deparse(zlab) else zlab
 # error checking:
 if(length(nint)>1) if(!quiet) warning("Only the first value of 'nint' is used.")
 nint <- nint[1]
@@ -193,8 +198,8 @@ if(is.vector(z))
    } else
 # c) z is a matrix: class(z) = matrix, data.frame, array (2D) - as in image, persp
    {
-   if(missing(x)) {x <- 1:ncol(z) ; xlab <- "x" }
-   if(missing(y)) {y <- nrow(z):1 ; ylab <- "y" }
+   if(missing(x)) {x <- 1:ncol(z) ; if(missing(xlab)) xlab <- "x" }
+   if(missing(y)) {y <- nrow(z):1 ; if(missing(ylab)) ylab <- "y" }
    if(!(length(x)==ncol(z) & length(y)==nrow(z)))
      stop("Dimension of z (ncol*nrow) is not length(x) * length(y)!")
    x <- rep(x, each=nrow(z));  y <- rep(y, ncol(z));  z <- as.vector(z)
@@ -204,6 +209,10 @@ if(is.vector(z))
 if(method=="equalinterval") if(!missing(col)) breaks <- length(col)
 #
 cl <- classify(x=z, method=method, breaks=breaks, sdlab=sdlab, Range=Range, quiet=quiet)
+output <- cl
+output$x <- x
+output$y <- y
+output$z <- z
 # error check:
 if(length(col) != cl$nbins) stop("Number of colors is not equal to number of classes.")
 #
@@ -218,6 +227,10 @@ if(lines)
   z2 <- approx(replace(z, is.na(z), median(z, na.rm=TRUE)), n=np)$y
   # classify interpolated values:
   cl2 <- classify(x=z2, method=method, breaks=breaks, sdlab=sdlab, Range=Range, quiet=quiet)
+  output <- cl
+  output$x <- x2
+  output$y <- y2
+  output$z <- z2
   # Where are NAs in the vectors?
   wNA <- is.na(x) | is.na(y) | is.na(z)
   # change single values (surrounded by NA) to NA:
@@ -234,12 +247,11 @@ points(x[is.na(z)], y[is.na(z)], col=col2[1], pch=pch, ...)
 points(x, y, col=c(col, col2[2:3])[cl$index], pch=pch, ...)
 #
 # add legend:
-if(legend)
-  {
-  legdefs <- list(z=z, at=cl$at, labels=cl$labels, bb=cl$bb, nbins=cl$nbins,
-      colors=col, plottriangle=any(na.omit(cl$index>cl$nbins)), tricol=col2[2:3])
-  do.call(colPointsLegend, args=owa(legdefs, legargs))
-  }
+legdefs <- list(z=z, at=cl$at, labels=cl$labels, bb=cl$bb, nbins=cl$nbins,
+                plottriangle=c(any(na.omit(cl$index==cl$nbins+1)),any(na.omit(cl$index==cl$nbins+2))), 
+                title=zlab, tricol=col2[2:3], colors=col)
+output <- c(output, legdefs[!names(legdefs) %in% c("nbins","bb","at","labels","index","z")])
+if(legend) do.call(colPointsLegend, args=owa(legdefs, legargs))
 #
 # add histogramm:
 if(hist | !missing(histargs))
@@ -247,5 +259,5 @@ if(hist | !missing(histargs))
   histdefs <- list(z=z, at=cl$at, labels=cl$labels, bb=cl$bb, nbins=cl$nbins, colors=col)
   do.call(colPointsHist, args=owa(histdefs, histargs))
   }
-return(invisible(cl))
+return(invisible(output))
 } # Function end

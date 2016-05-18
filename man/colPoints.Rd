@@ -6,10 +6,10 @@
 \usage{
 colPoints(x, y, z, data, Range = range(z, finite = TRUE),
   method = "equalinterval", breaks, sdlab = 1, col = seqPal(cl$nbins),
-  col2 = c(NA, 1, 8), legend = TRUE, legargs = NULL, hist = FALSE,
-  histargs = NULL, add = TRUE, lines = FALSE, nint = 30,
-  xlab = substitute(x), ylab = substitute(y), las = 1, pch = 16,
-  quiet = FALSE, ...)
+  col2 = c(NA, "grey", "black"), legend = TRUE, legargs = NULL,
+  hist = FALSE, histargs = NULL, add = TRUE, lines = FALSE, nint = 30,
+  xlab = substitute(x), ylab = substitute(y), zlab = substitute(z),
+  las = 1, pch = 16, quiet = FALSE, ...)
 }
 \arguments{
 \item{x, y}{Vectors with coordinates of the points to be drawn}
@@ -44,9 +44,11 @@ colPoints(x, y, z, data, Range = range(z, finite = TRUE),
 
 \item{nint}{Numeric of length 1. Number of interpolation points between each coordinate if \code{lines=TRUE}. nint=1 means no interpolation. Values below 10 will smooth coordinates and miss the original points!. DEFAULT: 30}
 
-\item{xlab}{x-axis label. DEFAULT: substitute as in plot}
+\item{xlab}{x-axis label. DEFAULT: \code{\link{substitute}(x)}}
 
 \item{ylab}{y-axis label. DEFAULT: ditto}
+
+\item{zlab}{\code{\link{colPointsLegend} title}. DEFAULT: ditto}
 
 \item{las}{Label Axis Style. Only used when add=FALSE. See \code{\link{par}}. DEFAULT: 1 (all labels horizontal)}
 
@@ -77,8 +79,8 @@ k <- c(175, 168, 163, 132, 120, 117, 110, 130, 131, 160, 105, 174, 190, 183)
 # basic usage:
 colPoints(i,j,k, cex=1.5, pch="+", add=FALSE)
 
-# with custom Range (only for method equalinterval):
-colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, Range=c(150, 180))
+# with custom Range:
+colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, Range=c(150, 190))
 # can be used to allow comparison between several plots
 # points outside the range are plotted with col2
 
@@ -87,8 +89,8 @@ mycols <- colorRampPalette(c("blue","yellow","red"))(50)
 colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, col=mycols)
 
 # With legend title:
-colPoints(i,j,k, cex=2, pch="+", add=FALSE,
-         legargs=list(density=FALSE, title="Elevation [m above NN.]"))
+colPoints(i,j,k, cex=2, pch="+", add=FALSE, zlab="Elevation [m above NN.]",
+         legargs=list(density=FALSE))
 ?colPointsLegend # to see which arguments can be set via legargs
 
 # with lines (nint to change number of linear interpolation points):
@@ -135,11 +137,10 @@ layout(1)
 
 
 # Customizing the legend :
-colPoints(i,j,k, legend=FALSE, add=FALSE)
+cp <- colPoints(i,j,k, legend=FALSE, add=FALSE)
 colPointsLegend(x1=20,y1=50, x2=95,y2=40, z=k, labelpos=5, atminmax=TRUE, bg=7)
 colPointsLegend(x1=50,y1=28, x2=90,y2=18, z=k, Range=c(80, 200), nbins=12, font=3)
 colPointsLegend(x1=10,y1=15, x2=40,y2= 5, z=k, labelpos=5, lines=FALSE, title="")
-
 colPointsLegend(z=k, horizontal=FALSE)
 colPointsLegend(x1=1, y1=90, z=k, horizontal=FALSE, labelpos=4, cex=1.2)
 colPointsLegend(x1=23,y1=95, z=k, horizontal=FALSE, labelpos=5, cex=0.8,
@@ -147,7 +148,8 @@ colPointsLegend(x1=23,y1=95, z=k, horizontal=FALSE, labelpos=5, cex=0.8,
 # For method other than colPoints' default, it is easiest to include these
 # options as a list in legargs, but you can also use the invisible output
 # from colPoints for later calls to colPointsLegend
-
+do.call(colPointsLegend, cp)
+do.call(colPointsLegend, owa(cp, list(colors=rainbow2(100), cex=1.2)))
 
 # colPoints with matrix:
 colPoints(z=volcano, add=FALSE)

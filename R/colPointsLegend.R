@@ -33,21 +33,29 @@
 #' @param bg Background behind key, labels and title. DEFAULT: "white"
 #' @param x1,y1 Topleft relative coordinates (0:100) of inset plot, see \code{\link{smallPlot}}. DEFAULT: 60,99
 #' @param x2,y2 Bottomright -"-. DEFAULT: 98,88
-#' @param mar Margins for \code{\link{smallPlot}} in relative values (0:100). DEFAULT: internal calculations based on title, labelpos and titlepos.
-#' @param mgp MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.6, 0)
+#' @param mar Margins for \code{\link{smallPlot}} in relative values (0:100). 
+#'        DEFAULT: internal calculations based on title, labelpos and titlepos.
+#' @param mgp MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, 
+#'        as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.6, 0)
 #' @param sborder Border around inset subplot. DEFAULT: NA
-#' @param resetfocus Reset focus to original plot? Specifies where further low level plot commands are directed to. DEFAULT: TRUE
-#' @param plottriangle Should triangles be plotted at the end of the legend for values outside Range? TRUE if missing but triangle is given. DEFAULT: FALSE
-#' @param triangle Percentage of bar length at lower and upper end for triangles (can be a vector with two different values). DEFAULT: 0.14
+#' @param resetfocus Reset focus to original plot? 
+#'        Specifies where further low level plot commands are directed to. DEFAULT: TRUE
+#' @param plottriangle Should triangles be plotted at the end of the legend for values outside Range? 
+#'        Vector of length two (for lower and upper, internally recycled). 
+#'        If this argument is missing but triangle is given, this is set to TRUE. DEFAULT: FALSE
+#' @param triangle Percentage of bar length at lower and upper end for triangles 
+#'        (can be a vector with two different values). DEFAULT: 0.14
 #' @param tricol Triangle colors for lower and upper end. DEFAULT: c(1,8)
 #' @param density Plot kernel density line? arguments passed to \code{\link{density}}. DEFAULT: NULL
 #' @param lines Plot black lines in the color bar at \code{at}? DEFAULT: TRUE
 #' @param atminmax Should the extrema of the legend be added to \code{at}? DEFAULT: FALSE
 #' @param horizontal Horizontal bar? if FALSE, a vertical bar is drawn. DEFAULT: TRUE
-#' @param labelpos Position of labels relative to the bar. Possible: 1 (below), 2 (left), 3 (above), 4 (right), 5(on top of bar). DEFAULT: 1
+#' @param labelpos Position of labels relative to the bar. 
+#'        Possible: 1 (below), 2 (left), 3 (above), 4 (right), 5(on top of bar). DEFAULT: 1
 #' @param titlepos Position of title -"-. DEFAULT: 3
 #' @param title Legend title. DEFAULT: "Legend"
 #' @param las LabelAxisStyle. DEFAULT: 1
+#' @param x,y,index Ignored arguments, so that you can pass the result from colPoints via do.call(cpl, cp_result)
 #' @param \dots Further arguments passed to \code{\link{text}} and \code{\link{strwidth}}, e.g. cex, srt, font, col. But NOT adj!
 #' 
 colPointsLegend <- function(
@@ -81,6 +89,7 @@ labelpos=1,
 titlepos=3,
 title="Legend",
 las=1,
+x,y,index,
 ...)
 {
 # ------------------------------------------------------------------------------
@@ -105,19 +114,20 @@ if(missing(title)) title <- "Key"
 }
 # triangle preparation:
 if(!missing(triangle) & missing(plottriangle)) plottriangle <- TRUE
-if(plottriangle)
+plottriangle <- rep(plottriangle, length.out=2)
+if(any(plottriangle))
   {
   if(!is.numeric(triangle)) stop("triangle must be numeric.")
   if(any(triangle>2 | triangle<0)) stop("Values in triangle must be between 0 and 2")
   triangle <- rep(triangle, length.out=2)
   tricol   <- rep(tricol  , length.out=2)
   # coordinates of triangle points
-  barlength <- (tail(bb,1) - bb[1])
-  trimin <- bb[1] - barlength*triangle[1]
-  trimax <- tail(bb,1) + barlength*triangle[2]
-  plotrange <- c(trimin, trimax)
-  }  else
-  plotrange <- c(bb[1], tail(bb,1))
+  barlength <- tail(bb,1) - bb[1]
+  trimin <-  bb[1]      - barlength*triangle[1] 
+  trimax <-  tail(bb,1) + barlength*triangle[2]
+  } 
+plotrange <- c(if(plottriangle[1]) trimin else bb[1], 
+               if(plottriangle[2]) trimax else tail(bb,1))
 # margin preparation:
 if(missing(mar))
 {
@@ -139,11 +149,8 @@ if(horizontal) # ---------------------------------------------------------------
   for(i in 1:length(colors))
     rect(xleft=bb[i], xright=bb[i+1], ybottom=0, ytop=1, col=colors[i], border=NA)
   # triangle:
-  if(plottriangle)
-     {
-     polygon(c(bb[1],bb[1],trimin),       c(0,1,0.5), col=tricol[1], border=NA)
-     polygon(c(rep(tail(bb,1),2),trimax), c(0,1,0.5), col=tricol[2], border=NA)
-     }
+  if(plottriangle[1]) polygon(c(bb[1],bb[1],trimin),       c(0,1,0.5), col=tricol[1], border=NA)
+  if(plottriangle[2]) polygon(c(rep(tail(bb,1),2),trimax), c(0,1,0.5), col=tricol[2], border=NA)
   # lines
   if(lines) segments(x0=at, y0=0, y1=1)
   # prepare label adjustment:
@@ -177,11 +184,8 @@ else # if not horizontal, thus if vertical -------------------------------------
   for(i in 1:length(colors))
     rect(ybottom=bb[i], ytop=bb[i+1], xleft=0, xright=1, col=colors[i], border=NA)
   # triangle:
-  if(plottriangle)
-     {
-     polygon(c(0,1,0.5), c(bb[1],bb[1],trimin),       col=tricol[1], border=NA)
-     polygon(c(0,1,0.5), c(rep(tail(bb,1),2),trimax), col=tricol[2], border=NA)
-     }
+  if(plottriangle[1]) polygon(c(0,1,0.5), c(bb[1],bb[1],trimin),       col=tricol[1], border=NA)
+  if(plottriangle[2]) polygon(c(0,1,0.5), c(rep(tail(bb,1),2),trimax), col=tricol[2], border=NA)
   # lines
   if(lines) segments(y0=at, x0=0, x1=1)
   # prepare label adjustment:
