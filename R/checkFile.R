@@ -8,24 +8,24 @@
 #' @keywords file
 #' @export
 #' @examples
-#' is.error( fileCheck("FileThatDoesntExist.txt") )
-#' fileCheck("FileThatDoesntExist.txt", fun=warning)
-#' fileCheck("FileThatDoesntExist.txt", fun=message)
-#' is.error( fileCheck("FileThatDoesntExist.txt", fun=MyWarn) ) # nonexisting function
+#' is.error( checkFile("FileThatDoesntExist.txt") )
+#' checkFile("FileThatDoesntExist.txt", fun=warning)
+#' checkFile("FileThatDoesntExist.txt", fun=message)
+#' is.error( checkFile("FileThatDoesntExist.txt", fun=MyWarn) ) # nonexisting function
 #' 
 #' \dontrun{## Excluded from CRAN checks because of file creation
 #' # Vectorized:
 #' file.create("DummyFile2.txt")
-#' fileCheck(paste0("DummyFile",1:3,".txt"), fun=message)
-#' fileCheck(paste0("DummyFile",1:3,".txt") ) 
+#' checkFile(paste0("DummyFile",1:3,".txt"), fun=message)
+#' checkFile(paste0("DummyFile",1:3,".txt") ) 
 #' file.remove("DummyFile2.txt")
 #' }
 #' 
 #' \dontrun{## Excluded from CRAN checks because of intentional errors
 #' compareFiles("dummy.nonexist", "dummy2.nonexist")
-#' fileCheck("dummy.nonexist")
+#' checkFile("dummy.nonexist")
 #'
-#' dingo <- function(k="brute.nonexist") fileCheck(k)
+#' dingo <- function(k="brute.nonexist") checkFile(k)
 #' dingo()
 #' dingo("dummy.nonexist")
 #'
@@ -38,7 +38,7 @@
 #' @param trace Logical: Add function call stack to the message? DEFAULT: TRUE
 #' @param \dots Further arguments passed to \code{fun}
 #'
-fileCheck <- function(
+checkFile <- function(
 file,
 fun=stop,
 trace=TRUE,

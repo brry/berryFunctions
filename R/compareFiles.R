@@ -28,7 +28,7 @@ quiet=FALSE,
 ...
 )
 {
-fileCheck(c(file1,file2), call.=FALSE)
+checkFile(c(file1,file2), call.=FALSE)
 f1 <- readLines(file1, ...)
 f2 <- readLines(file2, ...)
 # truncate:

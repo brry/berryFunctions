@@ -16,7 +16,7 @@ Before the actual NEWS, here are some things planned for future development:
 
 Version 1.11.0 (2016--)
 https://github.com/brry/berryFunctions/compare/master@{2016-04-29}...master@{2016--}
-New functions: exTime, equidistPoints, is.error, fileCheck
+New functions: exTime, equidistPoints, is.error, checkFile
 
 
 -----------------------------
