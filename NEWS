@@ -7,7 +7,7 @@ Before the actual NEWS, here are some things planned for future development:
 - lsc: better example dataset, optim problems, sim line not plotted completely
 - tableColVal: add digits argument
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
-- implement fileCheck and is.error wherever applicable
+- implement is.error wherever applicable
 
 
 -----------------------------
