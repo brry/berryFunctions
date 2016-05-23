@@ -4,12 +4,16 @@
 \alias{fileCheck}
 \title{check file existance}
 \usage{
-fileCheck(file, fun = stop)
+fileCheck(file, fun = stop, trace = TRUE, ...)
 }
 \arguments{
-\item{file}{Filename as character string to be checked for existence.}
+\item{file}{Filename(s) as character string to be checked for existence.}
 
 \item{fun}{One of the functions \code{\link{stop}}, \code{\link{warning}}, or \code{\link{message}}. DEFAULT: stop}
+
+\item{trace}{Logical: Add function call stack to the message? DEFAULT: TRUE}
+
+\item{\dots}{Further arguments passed to \code{fun}}
 }
 \value{
 TRUE/FALSE, invisibly
@@ -22,6 +26,26 @@ is.error( fileCheck("FileThatDoesntExist.txt") )
 fileCheck("FileThatDoesntExist.txt", fun=warning)
 fileCheck("FileThatDoesntExist.txt", fun=message)
 is.error( fileCheck("FileThatDoesntExist.txt", fun=MyWarn) ) # nonexisting function
+
+\dontrun{## Excluded from CRAN checks because of file creation
+# Vectorized:
+file.create("DummyFile2.txt")
+fileCheck(paste0("DummyFile",1:3,".txt"), fun=message)
+fileCheck(paste0("DummyFile",1:3,".txt") ) 
+file.remove("DummyFile2.txt")
+}
+
+\dontrun{## Excluded from CRAN checks because of intentional errors
+compareFiles("dummy.nonexist", "dummy2.nonexist")
+fileCheck("dummy.nonexist")
+
+dingo <- function(k="brute.nonexist") fileCheck(k)
+dingo()
+dingo("dummy.nonexist")
+
+upper <- function(h) dingo(c(h, "dumbo.nonexist"))
+upper("dumbo2.nonexist")
+}
 
 }
 \author{
