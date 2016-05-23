@@ -16,7 +16,7 @@ headtail(x, n = 1, nh = n, nt = n, na = TRUE, ...)
 \item{na}{Add NA values in between to emphasize visibly that there is
 something inbetween the values? DEFAULT: TRUE}
 
-\item{\dots}{nothing}
+\item{\dots}{Further arguments passed to \code{\link{head}} and \code{\link{tail}}}
 }
 \value{
 \code{\link{head}} result

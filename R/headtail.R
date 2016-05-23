@@ -42,7 +42,7 @@
 #' @param nh,nt Number for \code{\link{head}} and \code{\link{tail}}, respectively. DEFAULT: n
 #' @param na Add NA values in between to emphasize visibly that there is
 #'           something inbetween the values? DEFAULT: TRUE
-#' @param \dots nothing
+#' @param \dots Further arguments passed to \code{\link{head}} and \code{\link{tail}}
 #'
 headtail <- function(
   x,
