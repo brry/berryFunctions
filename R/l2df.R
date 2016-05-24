@@ -19,9 +19,7 @@
 #' eglist
 #' l2df(eglist)  # names are even kept
 #' l2df(eglist, byrow=FALSE)
-#' class(  l2df(eglist, byrow=FALSE)  ) # matrix
-#' # So technically, the list is converted to a matrix, not a data.frame
-#' # But I guess people search more often for convert R list to df (or table)
+#' class(  l2df(eglist, byrow=FALSE)  ) # data.frame (since 2016-05-24)
 #' 
 #' eglist <- list(BB=c(6,9,2,6), KA="no", JE=c(-3,2) )
 #' eglist
@@ -34,7 +32,7 @@
 #' 
 #' eg2 <- list(BB=c(6,9,2,6), KA=data.frame(SW=1:8, SB=4:-3), JE=c(-3,2) )
 #' eg2
-#' # l2df(eg2) # it is not possible to do this with a data.frame
+#' is.error( l2df(eg2) )# it is not possible to do this with a data.frame
 #' # If you have a list with only data.frames, you could use the following:
 #' eg3 <- list(KA=data.frame(SW=1:8, SB=4:-3), LS=data.frame(BB=23:24, JE=c(-3,2)))
 #' eg3
@@ -50,5 +48,6 @@ byrow=TRUE)
 {
 maxlen <- max(sapply(list,length))
 df <- sapply(list, "[", 1:maxlen) # apply the indexing function to each element
-if(byrow) t(df) else df
+if(byrow) df <- t(df)
+as.data.frame(df, stringsAsFactors=FALSE)
 }
