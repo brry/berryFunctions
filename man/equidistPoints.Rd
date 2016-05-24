@@ -5,7 +5,7 @@
 \alias{equidistPoints}
 \title{Evenly spaced points along path}
 \usage{
-equidistPoints(x, y, z, data, n, nint = 30, ...)
+equidistPoints(x, y, z, data, n, nint = 30, mid = FALSE, ...)
 }
 \arguments{
 \item{x, y, z}{Vectors with coordinates. z is optional and can be left empty}
@@ -18,10 +18,12 @@ equidistPoints(x, y, z, data, n, nint = 30, ...)
 Larger numbers give more precisely equidistant points, but increase computing time.
 \code{int=1} to not do any interpolation. DEFAULT: 30}
 
+\item{mid}{Logical: Should centers of segments be returned instead of their ends?}
+
 \item{\dots}{Further arguments passed to \code{\link{approx}}}
 }
 \value{
-Dataframe with the coordinates of the final points
+Dataframe with the coordinates of the final points. ATTENTION: The columns are named x,y,z, not with the original names from the function call.
 }
 \description{
 Compute waypoints with equal distance to each other along a (curved) path or track given by coordinates

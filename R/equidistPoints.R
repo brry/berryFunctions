@@ -5,7 +5,7 @@
 #' @details detailsMayBeRemoved
 #' @aliases aliasMayBeRemoved
 #'
-#' @return Dataframe with the coordinates of the final points
+#' @return Dataframe with the coordinates of the final points. ATTENTION: The columns are named x,y,z, not with the original names from the function call.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, May 2016
 #' @seealso \code{\link{distance}}, \code{\link{approx}}
 #' @keywords spatial
@@ -53,6 +53,7 @@
 #' @param nint Number of points to interpolate between original coordinates (with \code{\link{approx2}}).
 #'            Larger numbers give more precisely equidistant points, but increase computing time.
 #'            \code{int=1} to not do any interpolation. DEFAULT: 30
+#' @param mid Logical: Should centers of segments be returned instead of their ends?
 #' @param \dots Further arguments passed to \code{\link{approx}}
 #'
 equidistPoints <- function(
@@ -62,6 +63,7 @@ z,
 data,
 n,
 nint=30,
+mid=FALSE,
 ...
 )
 {
@@ -103,7 +105,9 @@ if(nint>1)
 dist <- distance(x,y)
 # points closest to target distances
 target_diff <- sum(dist)/n
-index <- sapply(0:n, function(i) which.min(abs(cumsum(dist)-target_diff*i)) )
+target_dist <- target_diff*0:n
+if(mid) target_dist <- target_diff*(1:n-0.5)
+index <- sapply(target_dist, function(td) which.min(abs(cumsum(dist)-td)) )
 # output:
 out <- data.frame(x=x[index], y=y[index])
 if(doz) out$z <- z[index]
