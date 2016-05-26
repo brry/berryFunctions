@@ -49,7 +49,8 @@ par(mfrow=c(1,2), mar=c(3,3,1,1), mgp=c(2,0.6,0), las=1)
 colPoints(time,vals,vals, col=divPal(100), add=FALSE, legend=FALSE,
           lines=TRUE, pch=NA, nint=1, lwd=2)
 spiralDate(time,vals, col=divPal(100))
-spiralDate(time,vals, lines=T, nint=1, pch=NA)
+par(mfrow=c(1,1))
+spiralDate(time,vals, lines=T, nint=1)
 
 }
 \author{

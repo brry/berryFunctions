@@ -32,7 +32,7 @@
 #' colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, col=mycols)
 #' 
 #' # With legend title:
-#' colPoints(i,j,k, cex=2, pch="+", add=FALSE, zlab="Elevation [m above NN.]",
+#' colPoints(i,j,k, cex=2, add=FALSE, zlab="Elevation [m above NN.]",
 #'          legargs=list(density=FALSE))
 #' ?colPointsLegend # to see which arguments can be set via legargs
 #' 
@@ -42,6 +42,8 @@
 #' tfile <- system.file("extdata/rivers.txt", package="berryFunctions")
 #' rivers <- read.table(tfile, header=TRUE, dec=",")
 #' colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE)
+#' colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE, pch=3)
+#' colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE, pch=3, nint=2)
 #' 
 #' # different classification methods:
 #' set.seed(007) ;  rx <- rnorm(30) ; ry <- rnorm(30) ; rz <- rnorm(30)*100
@@ -130,7 +132,7 @@
 #' @param hist Logical. Should a \code{\link{colPointsHist}} be drawn? DEFAULT: FALSE (TRUE if histargs are given)
 #' @param histargs List. Arguments passed to \code{\link{colPointsHist}}. DEFAULT: NULL
 #' @param add Logical. Should the points be added to current (existing!) plot? If FALSE, a new plot is started. DEFAULT: TRUE (It's called col\bold{Points}, after all)
-#' @param lines Logical. Should lines be drawn underneath the points? (color of each \code{\link{segments}} is taken from starting point, last point is endpoint.) DEFAULT: FALSE
+#' @param lines Logical. Should lines be drawn underneath the points? (color of each \code{\link{segments}} is taken from starting point, last point is endpoint.) If TRUE and pch not given, pch ist set to NA. DEFAULT: FALSE
 #' @param nint Numeric of length 1. Number of interpolation points between each coordinate if \code{lines=TRUE}. nint=1 means no interpolation. Values below 10 will smooth coordinates and miss the original points!. DEFAULT: 30
 #' @param xlab x-axis label. DEFAULT: \code{\link{substitute}(x)}
 #' @param ylab y-axis label. DEFAULT: ditto
@@ -220,11 +222,13 @@ if(length(col) != cl$nbins) stop("Number of colors is not equal to number of cla
 if(!add) plot(x, y, col=NA, pch=pch, xlab=xlab, ylab=ylab, las=las, ...)
 # Plot lines if wanted:
 if(lines)
-  {# linear interpolation between coordinates (smoother line colors):
+  {
+  if(missing(pch)) pch <- NA
+  # linear interpolation between coordinates (smoother line colors):
   np <- length(x)*nint-nint+1 # replacing NA necessary if NAs are at start or end
-  x2 <- approx(replace(x, is.na(x), median(x, na.rm=TRUE)), n=np)$y
-  y2 <- approx(replace(y, is.na(y), median(y, na.rm=TRUE)), n=np)$y
-  z2 <- approx(replace(z, is.na(z), median(z, na.rm=TRUE)), n=np)$y
+  x2 <- approx2(x,n=np) #approx(replace(x, is.na(x), median(x, na.rm=TRUE)), n=np)$y
+  y2 <- approx2(y,n=np) #approx(replace(y, is.na(y), median(y, na.rm=TRUE)), n=np)$y
+  z2 <- approx2(z,n=np) #approx(replace(z, is.na(z), median(z, na.rm=TRUE)), n=np)$y
   # classify interpolated values:
   cl2 <- classify(x=z2, method=method, breaks=breaks, sdlab=sdlab, Range=Range, quiet=quiet)
   output <- cl

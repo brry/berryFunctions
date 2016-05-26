@@ -23,7 +23,8 @@
 #' colPoints(time,vals,vals, col=divPal(100), add=FALSE, legend=FALSE,
 #'           lines=TRUE, pch=NA, nint=1, lwd=2)
 #' spiralDate(time,vals, col=divPal(100))
-#' spiralDate(time,vals, lines=T, nint=1, pch=NA)
+#' par(mfrow=c(1,1))
+#' spiralDate(time,vals, lines=T, nint=1)
 #' 
 #' @param dates Dates in ascending order. 
 #'              Can be charater strings or \code{\link{strptime}} results, 

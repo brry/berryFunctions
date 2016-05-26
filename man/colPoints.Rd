@@ -40,7 +40,7 @@ colPoints(x, y, z, data, Range = range(z, finite = TRUE),
 
 \item{add}{Logical. Should the points be added to current (existing!) plot? If FALSE, a new plot is started. DEFAULT: TRUE (It's called col\bold{Points}, after all)}
 
-\item{lines}{Logical. Should lines be drawn underneath the points? (color of each \code{\link{segments}} is taken from starting point, last point is endpoint.) DEFAULT: FALSE}
+\item{lines}{Logical. Should lines be drawn underneath the points? (color of each \code{\link{segments}} is taken from starting point, last point is endpoint.) If TRUE and pch not given, pch ist set to NA. DEFAULT: FALSE}
 
 \item{nint}{Numeric of length 1. Number of interpolation points between each coordinate if \code{lines=TRUE}. nint=1 means no interpolation. Values below 10 will smooth coordinates and miss the original points!. DEFAULT: 30}
 
@@ -89,7 +89,7 @@ mycols <- colorRampPalette(c("blue","yellow","red"))(50)
 colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, col=mycols)
 
 # With legend title:
-colPoints(i,j,k, cex=2, pch="+", add=FALSE, zlab="Elevation [m above NN.]",
+colPoints(i,j,k, cex=2, add=FALSE, zlab="Elevation [m above NN.]",
          legargs=list(density=FALSE))
 ?colPointsLegend # to see which arguments can be set via legargs
 
@@ -99,6 +99,8 @@ colPoints(i,j,k, cex=1.5, add=FALSE, lines=TRUE, nint=10, lwd=2)
 tfile <- system.file("extdata/rivers.txt", package="berryFunctions")
 rivers <- read.table(tfile, header=TRUE, dec=",")
 colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE)
+colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE, pch=3)
+colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE, pch=3, nint=2)
 
 # different classification methods:
 set.seed(007) ;  rx <- rnorm(30) ; ry <- rnorm(30) ; rz <- rnorm(30)*100
