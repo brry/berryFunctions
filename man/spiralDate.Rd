@@ -56,16 +56,16 @@ fakeData$vals <- fakeData$vals + sin(0:5000/366*2*pi)*max(abs(fakeData$vals))/2
 par(mfrow=c(1,3), mar=c(3,3,6,1), mgp=c(2,0.6,0), las=1)
 colPoints(time,vals,vals, data=fakeData, col=divPal(100), add=FALSE, legend=FALSE,
           lines=TRUE, pch=NA, nint=1, lwd=2)
-title(main="classical time series\\n works badly for long time series\\n shows trends well")
+title(main="classical time series\\nworks badly for long time series\\nshows trends well")
 
 fakeData$Year <- as.numeric(format(fakeData$time,"\%Y"))
 fakeData$DOY  <- as.numeric(format(fakeData$time,"\%j")) # Day of Year
 colPoints(Year, DOY, vals, data=fakeData, add=FALSE, zlab="Daily mean discharge",
            ylim=c(366,0), col=divPal(100), legend=FALSE)
-title(main="yearly time series\\n doy of year over time\\n fails for cyclicity over the winter")
+title(main="yearly time series\\nday of year over time\\nfails for cyclicity over the winter")
 
-spiralDate(time,vals, data=fakeData, col=divPal(100), legargs=list(y1=65,y2=90))
-title(main="spiral graph\\n Shows cyclic values nicely\\n trends are harder to detect\\n recent values get more space = visual weight")
+spiralDate(time,vals, data=fakeData, col=divPal(100), legargs=list(y1=70,y2=80))
+title(main="spiral graph\\nshows cyclic values nicely\\ntrends are harder to detect\\nrecent values = more visual weight")
 
           
 par(mfrow=c(1,1))
@@ -75,7 +75,7 @@ spiralDate(time,vals, data=fakeData, drange=as.Date(c("1980-01-01", "2004-11-15"
 
 # Data with missing values:
 fakeData[1300:1500, 2] <- NA
-spiralDate(time,vals, data=fakeData, lines=TRUE)
+spiralDate(time,vals, data=fakeData, lines=TRUE) # no problem
 # Missing data:
 fakeData <- na.omit(fakeData)
 spiralDate(time,vals, data=fakeData, lines=TRUE) # problematic for lines
