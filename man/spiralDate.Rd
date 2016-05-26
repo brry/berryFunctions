@@ -4,9 +4,9 @@
 \alias{spiralDate}
 \title{Spiral graph of time series}
 \usage{
-spiralDate(dates, values, drange = NULL, months = c("J", "F", "M", "A", "M",
-  "J", "J", "A", "S", "O", "N", "D"), add = FALSE,
-  zlab = substitute(values), ...)
+spiralDate(dates, values, data, drange = NULL, vrange = NULL,
+  months = c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"),
+  add = FALSE, zlab = substitute(values), format = "\%Y", nint = 1, ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order. 
@@ -15,7 +15,11 @@ as accepted (and coerced) by \code{\link{as.Date}}}
 
 \item{values}{Values to be mapped in color with \code{\link{colPoints}} along seasonal spiral}
 
-\item{drange}{Optional data ragne (analogous to xlim), can be a vector like \code{dates}. DEFAULT: NULL}
+\item{data}{Optional: data.frame with the column names as given by dates and values}
+
+\item{drange}{Optional date range (analogous to xlim), can be a vector like \code{dates}. DEFAULT: NULL}
+
+\item{vrange}{Optional value range (analogous to ylim), can be a vector like \code{values}. DEFAULT: NULL}
 
 \item{months}{Labels for the months}
 
@@ -23,13 +27,18 @@ as accepted (and coerced) by \code{\link{as.Date}}}
 
 \item{zlab}{Title of \code{\link{colPointsLegend}}}
 
-\item{\dots}{Further arguments passed to \code{\link{colPoints}}}
+\item{format}{Format of date labels see details in \code{\link{strptime}}. DEFAULT: "\%Y"}
+
+\item{nint}{Number of interpolation segments between points, only used if lines=TRUE. 
+DEFAULT: 1 (with long time series, the colPoints default of 30 is too high!)}
+
+\item{\dots}{Further arguments passed to \code{\link{colPoints}}, but not Range (use \code{vrange})}
 }
 \value{
 invisible data.frame with date, vals, and the plotting coordinates
 }
 \description{
-Plot seasonality of (daily) time serires along spiral
+Plot seasonality of (daily) time series along spiral
 }
 \details{
 detailsMayBeRemoved
@@ -38,19 +47,39 @@ detailsMayBeRemoved
  warningMayBeRemoved
 }
 \examples{
-
 # fake Data
 set.seed(42)
-time <- as.Date("1985-01-01")+0:5000
-vals <- cumsum(rnorm(5001))
-vals <- vals + sin(0:5000/366*2*pi)*max(abs(vals))/2
+fakeData <- data.frame(time = as.Date("1985-01-01")+0:5000,
+                       vals = cumsum(rnorm(5001))+50          )
+fakeData$vals <- fakeData$vals + sin(0:5000/366*2*pi)*max(abs(fakeData$vals))/2
 
-par(mfrow=c(1,2), mar=c(3,3,1,1), mgp=c(2,0.6,0), las=1)
-colPoints(time,vals,vals, col=divPal(100), add=FALSE, legend=FALSE,
+par(mfrow=c(1,3), mar=c(3,3,6,1), mgp=c(2,0.6,0), las=1)
+colPoints(time,vals,vals, data=fakeData, col=divPal(100), add=FALSE, legend=FALSE,
           lines=TRUE, pch=NA, nint=1, lwd=2)
-spiralDate(time,vals, col=divPal(100))
+title(main="classical time series\\n works badly for long time series\\n shows trends well")
+
+fakeData$Year <- as.numeric(format(fakeData$time,"\%Y"))
+fakeData$DOY  <- as.numeric(format(fakeData$time,"\%j")) # Day of Year
+colPoints(Year, DOY, vals, data=fakeData, add=FALSE, zlab="Daily mean discharge",
+           ylim=c(366,0), col=divPal(100), legend=FALSE)
+title(main="yearly time series\\n doy of year over time\\n fails for cyclicity over the winter")
+
+spiralDate(time,vals, data=fakeData, col=divPal(100), legargs=list(y1=65,y2=90))
+title(main="spiral graph\\n Shows cyclic values nicely\\n trends are harder to detect\\n recent values get more space = visual weight")
+
+          
 par(mfrow=c(1,1))
-spiralDate(time,vals, lines=T, nint=1)
+sp <- spiralDate(time,vals, data=fakeData, lines=TRUE, lwd=2)
+head(sp)
+spiralDate(time,vals, data=fakeData, drange=as.Date(c("1980-01-01", "2004-11-15")), lines=TRUE)
+
+# Data with missing values:
+fakeData[1300:1500, 2] <- NA
+spiralDate(time,vals, data=fakeData, lines=TRUE)
+# Missing data:
+fakeData <- na.omit(fakeData)
+spiralDate(time,vals, data=fakeData, lines=TRUE) # problematic for lines
+spiralDate(time,vals, data=fakeData, pch=3)      # but not for points
 
 }
 \author{
@@ -59,5 +88,8 @@ Berry Boessenkool, \email{berry-b@gmx.de}, May 2016
 \seealso{
 \code{\link{colPoints}}, \code{\link{as.Date}}
 }
+\keyword{aplot}
 \keyword{chron}
+\keyword{color}
+\keyword{hplot}
 
