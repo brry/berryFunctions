@@ -4,45 +4,56 @@
 \alias{colPoints}
 \title{Points colored relative to third dimension}
 \usage{
-colPoints(x, y, z, data, Range = range(z, finite = TRUE),
-  method = "equalinterval", breaks, sdlab = 1, col = seqPal(cl$nbins),
-  col2 = c(NA, "grey", "black"), legend = TRUE, legargs = NULL,
-  hist = FALSE, histargs = NULL, add = TRUE, lines = FALSE, nint = 30,
-  xlab = substitute(x), ylab = substitute(y), zlab = substitute(z),
-  las = 1, pch = 16, quiet = FALSE, ...)
+colPoints(x, y, z, data, add = TRUE, col = seqPal(cl$nbins), col2 = c(NA,
+  "grey", "black"), Range = range(z, finite = TRUE),
+  method = "equalinterval", breaks, sdlab = 1, legend = TRUE,
+  legargs = NULL, hist = FALSE, histargs = NULL, lines = FALSE,
+  nint = 30, xlab = substitute(x), ylab = substitute(y),
+  zlab = substitute(z), las = 1, pch = 16, quiet = FALSE, ...)
 }
 \arguments{
 \item{x, y}{Vectors with coordinates of the points to be drawn}
 
-\item{z}{z values beloning to coordinates. Vector or matrix}
+\item{z}{z values belonging to coordinates. Vector or matrix with the color-defining height values}
 
 \item{data}{Optional: data.frame with the column names as given by x,y and z.}
 
-\item{Range}{Ends of color bar for method=equalinterval. DEFAULT: range(z, finite=TRUE)}
+\item{add}{Logical. Should the points be added to current (existing!) plot? 
+If FALSE, a new plot is started. DEFAULT: TRUE (It's called col\bold{Points}, after all)}
 
-\item{method}{Classification method (partial matching is performed), see \code{\link{classify}}. DEFAULT: "equalinterval")}
+\item{col}{Vector of colors to be used. DEFAULT: 100 colors from sequential 
+palette \code{\link{seqPal}} (color-blind safe, black/white-print safe)}
 
-\item{breaks}{Specification for method, see \code{\link{classify}}. DEFAULT: different defaults for each method}
+\item{col2}{Color for points where z is NA, or lower / higher than \code{Range}. DEFAULT: c(NA, 1, 8)}
 
-\item{sdlab}{Type of label and breakpoints if \code{method=standarddeviation}, see \code{\link{classify}}. DEFAULT: 1}
+\item{Range}{Ends of color bar. DEFAULT: range(z, finite=TRUE)}
 
-\item{col}{Vector of colors to be used. DEFAULT: \code{\link{rainbow}} from blue (lowest) to red (highest value in Range)}
+\item{method}{Classification method (partial matching is performed), 
+see \code{\link{classify}} (ways to get color breakpoints). DEFAULT: "equalinterval")}
 
-\item{col2}{Color for points where z is NA, lower or higher than Range. DEFAULT: c(NA, 1, 8)}
+\item{breaks}{Specification for method, see \code{\link{classify}}. 
+DEFAULT: different defaults for each method}
+
+\item{sdlab}{Type of label and breakpoints if \code{method=standarddeviation}, 
+see \code{\link{classify}}. DEFAULT: 1}
 
 \item{legend}{Logical. Should a \code{\link{colPointsLegend}} be drawn? DEFAULT: TRUE}
 
-\item{legargs}{List. Arguments passed to \code{\link{colPointsLegend}}. DEFAULT: NULL, with some defaults specified internally}
+\item{legargs}{List. Arguments passed to \code{\link{colPointsLegend}}. 
+DEFAULT: NULL, with some defaults specified internally}
 
-\item{hist}{Logical. Should a \code{\link{colPointsHist}} be drawn? DEFAULT: FALSE (TRUE if histargs are given)}
+\item{hist}{Logical. Should a \code{\link{colPointsHist}} be drawn? 
+DEFAULT: FALSE (TRUE if histargs are given)}
 
 \item{histargs}{List. Arguments passed to \code{\link{colPointsHist}}. DEFAULT: NULL}
 
-\item{add}{Logical. Should the points be added to current (existing!) plot? If FALSE, a new plot is started. DEFAULT: TRUE (It's called col\bold{Points}, after all)}
+\item{lines}{Logical. Should lines be drawn instead of / underneath the points? 
+(color of each \code{\link{segments}} is taken from starting point, last point is endpoint.) 
+If lines=TRUE and pch is not given, pch ist set to NA. DEFAULT: FALSE}
 
-\item{lines}{Logical. Should lines be drawn underneath the points? (color of each \code{\link{segments}} is taken from starting point, last point is endpoint.) If TRUE and pch not given, pch ist set to NA. DEFAULT: FALSE}
-
-\item{nint}{Numeric of length 1. Number of interpolation points between each coordinate if \code{lines=TRUE}. nint=1 means no interpolation. Values below 10 will smooth coordinates and miss the original points!. DEFAULT: 30}
+\item{nint}{Numeric of length 1. Number of interpolation points between each 
+coordinate if \code{lines=TRUE}. nint=1 means no interpolation. 
+Values below 10 will smooth coordinates and might miss the original points. DEFAULT: 30}
 
 \item{xlab}{x-axis label. DEFAULT: \code{\link{substitute}(x)}}
 
@@ -50,13 +61,17 @@ colPoints(x, y, z, data, Range = range(z, finite = TRUE),
 
 \item{zlab}{\code{\link{colPointsLegend} title}. DEFAULT: ditto}
 
-\item{las}{Label Axis Style. Only used when add=FALSE. See \code{\link{par}}. DEFAULT: 1 (all labels horizontal)}
+\item{las}{Label Axis Style. Only used when add=FALSE. See \code{\link{par}}. 
+DEFAULT: 1 (all labels horizontal)}
 
 \item{pch}{Point CHaracter. See \code{\link{par}}. DEFAULT: 16}
 
 \item{quiet}{Turn off warnings? DEFAULT: FALSE}
 
-\item{\dots}{Further graphical arguments passed to plot, points and lines, eg cex, xlim (when add=F), mgp, main, sub, asp (when add=F), etc. Note: col does not work, as it is already another argument}
+\item{\dots}{Further graphical arguments passed to \code{\link{plot}}, 
+\code{\link{points}} and \code{\link{lines}}, 
+eg cex, xlim (when add=F), mgp, main, sub, asp (when add=F), etc. 
+Note: col does not work, as it is already another argument}
 }
 \value{
 Invisible list of values that can be passed to colPointsLegend or colPointsHist.

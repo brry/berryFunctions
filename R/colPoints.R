@@ -119,53 +119,68 @@
 #' text(mx,my,mz, adj=-0.5, font=2)
 #' 
 #' @param x,y Vectors with coordinates of the points to be drawn
-#' @param z z values beloning to coordinates. Vector or matrix
+#' @param z z values belonging to coordinates. Vector or matrix with the color-defining height values
 #' @param data Optional: data.frame with the column names as given by x,y and z.
-#' @param Range Ends of color bar for method=equalinterval. DEFAULT: range(z, finite=TRUE)
-#' @param method Classification method (partial matching is performed), see \code{\link{classify}}. DEFAULT: "equalinterval")
-#' @param breaks Specification for method, see \code{\link{classify}}. DEFAULT: different defaults for each method
-#' @param sdlab Type of label and breakpoints if \code{method=standarddeviation}, see \code{\link{classify}}. DEFAULT: 1
-#' @param col Vector of colors to be used. DEFAULT: \code{\link{rainbow}} from blue (lowest) to red (highest value in Range)
-#' @param col2 Color for points where z is NA, lower or higher than Range. DEFAULT: c(NA, 1, 8)
+#' @param add Logical. Should the points be added to current (existing!) plot? 
+#'            If FALSE, a new plot is started. DEFAULT: TRUE (It's called col\bold{Points}, after all)
+#' @param col Vector of colors to be used. DEFAULT: 100 colors from sequential 
+#'            palette \code{\link{seqPal}} (color-blind safe, black/white-print safe)
+#' @param col2 Color for points where z is NA, or lower / higher than \code{Range}. DEFAULT: c(NA, 1, 8)
+#' @param Range Ends of color bar. DEFAULT: range(z, finite=TRUE)
+#' @param method Classification method (partial matching is performed), 
+#'              see \code{\link{classify}} (ways to get color breakpoints). DEFAULT: "equalinterval")
+#' @param breaks Specification for method, see \code{\link{classify}}. 
+#'               DEFAULT: different defaults for each method
+#' @param sdlab Type of label and breakpoints if \code{method=standarddeviation}, 
+#'              see \code{\link{classify}}. DEFAULT: 1
 #' @param legend Logical. Should a \code{\link{colPointsLegend}} be drawn? DEFAULT: TRUE
-#' @param legargs List. Arguments passed to \code{\link{colPointsLegend}}. DEFAULT: NULL, with some defaults specified internally
-#' @param hist Logical. Should a \code{\link{colPointsHist}} be drawn? DEFAULT: FALSE (TRUE if histargs are given)
+#' @param legargs List. Arguments passed to \code{\link{colPointsLegend}}. 
+#'                DEFAULT: NULL, with some defaults specified internally
+#' @param hist Logical. Should a \code{\link{colPointsHist}} be drawn? 
+#'             DEFAULT: FALSE (TRUE if histargs are given)
 #' @param histargs List. Arguments passed to \code{\link{colPointsHist}}. DEFAULT: NULL
-#' @param add Logical. Should the points be added to current (existing!) plot? If FALSE, a new plot is started. DEFAULT: TRUE (It's called col\bold{Points}, after all)
-#' @param lines Logical. Should lines be drawn underneath the points? (color of each \code{\link{segments}} is taken from starting point, last point is endpoint.) If TRUE and pch not given, pch ist set to NA. DEFAULT: FALSE
-#' @param nint Numeric of length 1. Number of interpolation points between each coordinate if \code{lines=TRUE}. nint=1 means no interpolation. Values below 10 will smooth coordinates and miss the original points!. DEFAULT: 30
+#' @param lines Logical. Should lines be drawn instead of / underneath the points? 
+#'             (color of each \code{\link{segments}} is taken from starting point, last point is endpoint.) 
+#'             If lines=TRUE and pch is not given, pch ist set to NA. DEFAULT: FALSE
+#' @param nint Numeric of length 1. Number of interpolation points between each 
+#'             coordinate if \code{lines=TRUE}. nint=1 means no interpolation. 
+#'             Values below 10 will smooth coordinates and might miss the original points. DEFAULT: 30
 #' @param xlab x-axis label. DEFAULT: \code{\link{substitute}(x)}
 #' @param ylab y-axis label. DEFAULT: ditto
 #' @param zlab \code{\link{colPointsLegend} title}. DEFAULT: ditto
-#' @param las Label Axis Style. Only used when add=FALSE. See \code{\link{par}}. DEFAULT: 1 (all labels horizontal)
+#' @param las Label Axis Style. Only used when add=FALSE. See \code{\link{par}}. 
+#'            DEFAULT: 1 (all labels horizontal)
 #' @param pch Point CHaracter. See \code{\link{par}}. DEFAULT: 16
 #' @param quiet Turn off warnings? DEFAULT: FALSE
-#' @param \dots Further graphical arguments passed to plot, points and lines, eg cex, xlim (when add=F), mgp, main, sub, asp (when add=F), etc. Note: col does not work, as it is already another argument
+#' @param \dots Further graphical arguments passed to \code{\link{plot}}, 
+#'              \code{\link{points}} and \code{\link{lines}}, 
+#'              eg cex, xlim (when add=F), mgp, main, sub, asp (when add=F), etc. 
+#'              Note: col does not work, as it is already another argument
 #' 
 colPoints <- function(
-  x, y, # x,y: Vectors with coordinates of the points to be drawn
-  z, # Vector or matrix with accompanying color defining height values
-  data, # Optional: data.frame with the column names as given by x,y and z.
-  Range=range(z, finite=TRUE), # Ends of color bar for method=equalinterval
-  method="equalinterval", # type of binning or classification method (ways to get color class breakpoints)
-  breaks, # specification for method
-  sdlab=1, #
-  col=seqPal(cl$nbins), # color palette. DEFAULT: 100 nuances from blue to red
-  col2=c(NA, "grey", "black"), # color for z==NA and points not in the color range
-  legend=TRUE, # Should a legend be drawn?
-  legargs=NULL, # Arguments for colPointsLegend.
-  hist=FALSE, # Should a legend be drawn?
-  histargs=NULL, # Arguments for colPointsHist. FALSE to suppress drawing
-  add=TRUE, # as in points. add to existing plot? add=F to draw new plot
-  lines=FALSE, #  Logical. Should lines be drawn underneath the points?
-  nint=30, # Numeric of length 1. Number of interpolation points between each coordinate if lines=TRUE.
-  xlab=substitute(x), # axis labels
+  x, y, 
+  z, 
+  data,
+  add=TRUE, 
+  col=seqPal(cl$nbins),
+  col2=c(NA, "grey", "black"),
+  Range=range(z, finite=TRUE), 
+  method="equalinterval",
+  breaks, 
+  sdlab=1, 
+  legend=TRUE, 
+  legargs=NULL, 
+  hist=FALSE, 
+  histargs=NULL, 
+  lines=FALSE, 
+  nint=30,
+  xlab=substitute(x),
   ylab=substitute(y),
   zlab=substitute(z),
-  las=1, # LabelAxisStyle: all labels horizontally (only relevant when add=FALSE)
-  pch=16, # PointCHaracter, see ?par
-  quiet=FALSE, # Turn off warnings?
-  ...) # further arguments passed to plot, points and lines, eg cex, xlim (bei add=F), mgp, main, sub, asp (when add=F), etc. NOT col
+  las=1, 
+  pch=16, 
+  quiet=FALSE, 
+  ...)
 {
  # default labels need to be obtained before x and y are evaluated
 xlab <- if(missing(xlab)) deparse(xlab) else xlab
