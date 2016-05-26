@@ -4,15 +4,19 @@
 \alias{na9}
 \title{Prepend spaces before na.strings}
 \usage{
-na9(nspace = 5, base = c("-9999", "-999", "-99", "-9.99", "-9.9", "-9,99",
-  "-9,999"), more = NULL, ...)
+na9(nspace = 5, base = c(-9999, -999, -9.99, -9.999), sep = c(",", "."),
+  digits = 0:4, more = NULL, ...)
 }
 \arguments{
 \item{nspace}{number of spaces prepended. DEFAULT: 5}
 
-\item{base}{basic na.string structures. Might be expanded in the future. Thankful for suggestions. DEFAULT: c("-9999","-999", "-99", "-9.99", "-9.9", "-9,99", "-9,9")}
+\item{base}{Numeric: basic na.string numbers}
 
-\item{more}{More structures added to base, like "NA", "--". DEFAULT: NULL}
+\item{sep}{Separator string (comma or decimal point or both). DEFAULT: c(",",".")}
+
+\item{digits}{Number(s) of zeros to be appended. DEFAULT: 0:4}
+
+\item{more}{More structures added to base, like "NA", "--". digits and sep is not added to this! DEFAULT: NULL}
 
 \item{\dots}{Arguments passed to nothing currently}
 }
@@ -26,7 +30,8 @@ It can be used as \code{na.strings=na9()} in \code{\link{read.table}}.
 \examples{
 
 na9()
-na9(more=c(NA,"-"))
+na9(nspace=0, sep=".")
+na9(nspace=0, sep=".", more=c(NA,"-"))
 
 }
 \author{

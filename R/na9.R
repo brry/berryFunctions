@@ -11,20 +11,33 @@
 #' @examples
 #' 
 #' na9()
-#' na9(more=c(NA,"-"))
-#' 
+#' na9(nspace=0, sep=".")
+#' na9(nspace=0, sep=".", more=c(NA,"-"))
+#'
 #' @param nspace number of spaces prepended. DEFAULT: 5
-#' @param base basic na.string structures. Might be expanded in the future. Thankful for suggestions. DEFAULT: c("-9999","-999", "-99", "-9.99", "-9.9", "-9,99", "-9,9")
-#' @param more More structures added to base, like "NA", "--". DEFAULT: NULL
+#' @param base Numeric: basic na.string numbers
+#' @param sep Separator string (comma or decimal point or both). DEFAULT: c(",",".")
+#' @param digits Number(s) of zeros to be appended. DEFAULT: 0:4
+#' @param more More structures added to base, like "NA", "--". digits and sep is not added to this! DEFAULT: NULL
 #' @param \dots Arguments passed to nothing currently
 #' 
 na9 <- function(
 nspace=5,
-base=c("-9999","-999", "-99", "-9.99", "-9.9", "-9,99", "-9,999"),
+base=c(-9999,-999, -9.99, -9.999),
+sep=c(",","."),
+digits=0:4,
 more=NULL,
 ...)
 {
-base <- c(base, more)
+# zeros:
+base <- c(sapply(digits, function(d) sapply(base, format, nsmall=d)   ))
+# separator signs:
+base <- c(sapply(sep, function(s) gsub(".", s, base, fixed=TRUE) ))
+# spaces:
 spaces <- sapply(0:nspace, function(i) paste(rep(" ",i), collapse=""))
-paste0(rep(spaces, each=length(base)), base)
+base <- paste0(rep(spaces, each=length(base)), base)
+# add more:
+base <- c(base, more)
+# output:
+unique(base)
 }
