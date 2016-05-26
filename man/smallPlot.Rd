@@ -36,26 +36,28 @@ parameters of small plot, invisible.
 Inset plot with margins, background and border
 }
 \section{Warning}{
- setting mai etc does not work!
+ setting mai etc does not work! Canot keep mfcol, only mfrow.
 }
 \examples{
 
 # Basic usage:
+op <- par(no.readonly=TRUE) # original parameters
 plot(1:10)
 smallPlot(plot(5:1) )
 smallPlot(plot(5:1), x=c(30,80), y=30:60, bg="yellow", yaxt="n")
 # if R warns "figure margins too large", try dragging the plot viewer bigger
 
 # select focus for further add-on's:
-points(3, 2, pch="+", cex=2)
-smallPlot( plot(5:1), bg="blue", resetfocus=FALSE )
-points(3, 2, pch="+", cex=2)
+points(2, 2, pch="+", cex=2, col=2) # main window
+smallPlot( plot(5:1), bg="lightblue", resetfocus=FALSE )
+points(2, 2, pch="+", cex=2, col=2) # smallPlot window
+par(op)
 
 # More par settings:
-smallPlot( plot(50:1), bg=6, mai=c(0.2, 0.3, 0.1, 0.1))
-# If you find any more that screw things up, please let me know!
+plot(1:10)
+smallPlot( plot(50:1), bg=6, mai=c(0.2, 0.3, 0.1, 0.1)) # screws up
 smallPlot( plot(5:1), bg=8, ann=FALSE)
-smallPlot(plot(10:50)) # with default bg ("transparent"), old plot is kept
+smallPlot(plot(10:50), bg="transparent") # old plot is kept
 smallPlot(plot(10:50))
 
 # complex graphics in code chunks:
@@ -63,17 +65,27 @@ plot(1:10)
 smallPlot( {plot(5:1, ylab="Blubber"); lines(c(2,4,3));
             legend("topright", "BerryRocks!", lwd=3)    }, bg="white" )
 
-# in par multiple figure, things now work as well if resetfocus=TRUE:
-op <- par("plt")
-par(mfrow=c(2,3))
-for(i in 1:2) plot(cumsum(rnorm(50)))
-smallPlot( plot(50:1), bg=6)
-plot(3:9) # opens new window
-smallPlot( plot(50:1), bg=6, resetfocus=FALSE)
-points(3, 2, pch="+", cex=2)
-plot(3:9) # plot in next window, but it is still small
-par(plt=op)
-plot(3:9)  # margins, las and mgp are still changed
+
+# multiple figure situations
+old_plt <- par("plt")
+par(mfcol=c(3,4))
+new_plt <- par("plt")
+plot(1:10)
+plot(1:10)
+smallPlot(plot(5:1), bg="lightblue")
+points(3, 2, pch="+", cex=2, col=2)
+plot(1:10) # canot keep mfcol, only mfrow.
+smallPlot(plot(5:1), bg="bisque", resetfocus=FALSE )
+points(3, 2, pch="+", cex=2, col=2)
+plot(1:10) # in smallPlot space
+par(plt=old_plt)
+plot(1:10) # too large
+smallPlot(plot(5:1), bg="palegreen")
+points(3, 2, pch="+", cex=2, col=2, xpd=NA) # not drawn with default xpd
+par(plt=new_plt)
+plot(1:10)
+smallPlot(plot(5:1), bg="palegreen") 
+points(3, 2, pch="+", cex=2, col=2)   # everything back to normal
 
 
 }
