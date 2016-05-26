@@ -13,7 +13,7 @@ smallPlot(expr, x = c(5, 70), y = c(50, 100), x1, y1, x2, y2, mar = c(12,
 
 \item{x, y}{Position of small plot, relative to current figure region (0:100). max and min from vector are taken. DEFAULT: 5-70, 50-100}
 
-\item{x1, y1, x2, y2}{Positions of topleft and bottomright corner. Replaced with x,y, kept here for backcompatibility.}
+\item{x1, y1, x2, y2}{Positions of topleft and bottomright corner. If any is missing, it is taken from x or y}
 
 \item{mar}{Margin vector in relative units (0:100), thus behaves differently than \code{\link{par}(mar)}. DEFAULT: c(12, 14, 3, 3)}
 

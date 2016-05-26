@@ -60,7 +60,7 @@
 #' 
 #' @param expr expression creating a plot. Can be code within {braces}.
 #' @param x,y Position of small plot, relative to current figure region (0:100). max and min from vector are taken. DEFAULT: 5-70, 50-100
-#' @param x1,y1,x2,y2 Positions of topleft and bottomright corner. Replaced with x,y, kept here for backcompatibility.
+#' @param x1,y1,x2,y2 Positions of topleft and bottomright corner. If any is missing, it is taken from x or y
 #' @param mar Margin vector in relative units (0:100), thus behaves differently than \code{\link{par}(mar)}. DEFAULT: c(12, 14, 3, 3)
 #' @param mgp MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.8, 0)
 #' @param bg Background. DEFAULT: par("bg")
@@ -92,6 +92,9 @@ if(x1<0)  {x1 <- 0;   warning("x (",x1,") set to 0.")}
 if(y2<0)  {y2 <- 0;   warning("y (",y2,") set to 0.")}
 if(x2>100){x2 <- 100; warning("x (",x2,") set to 100.")}
 if(y1>100){y1 <- 100; warning("y (",y1,") set to 100.")}
+# correct order of values (only relevant if x1,x2,y1,y2 is given):
+if(x2<x1) {temp <- x2;  x2 <- x1;  x1 <- temp;  rm(temp)}
+if(y2>y1) {temp <- y2;  y2 <- y1;  y1 <- temp;  rm(temp)}
 # control for 0:1 input:
 if(diff(range(x, na.rm=TRUE)) < 1  |  diff(range(y, na.rm=TRUE)) < 1  )
    stop("x or y was probably given as coodinates between 0 and 1. They must be between 0 and 100.")
