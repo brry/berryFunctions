@@ -30,7 +30,8 @@
 #' title(main="yearly time series\nday of year over time\nfails for cyclicity over the winter")
 #'
 #' spiralDate(time,vals, data=fakeData, col=divPal(100), legargs=list(y1=70,y2=80))
-#' title(main="spiral graph\nshows cyclic values nicely\ntrends are harder to detect\nrecent values = more visual weight")
+#' title(main="spiral graph\nshows cyclic values nicely 
+#'             trends are harder to detect\nrecent values = more visual weight")
 #'
 #'           
 #' par(mfrow=c(1,1))
