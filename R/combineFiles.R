@@ -26,7 +26,7 @@
 #' @param sep Character string: Separation between content of each file and the following. DEFAULT: NULL, with which it uses an empty line, two lines with dashes, and another line break.
 #' @param names Should File names be included after sep? DEFAULT: TRUE
 #' @param selection Index of rows that should be written. Can refer to each file separately, e.g. \code{substr(inFile_i,1,1)=="#"}, DEFAULT: all lines
-#' @param progbar Should a progress bar be drwan? Useful if you combine many large files. DEFAULT: !quiet, i.e. TRUE
+#' @param progbar Should a progress bar be drawn? Useful if you combine many large files. DEFAULT: !quiet, i.e. TRUE
 #' @param quiet Suppress message about number of files combined? DEFAULT: FALSE
 #' 
 combineFiles <- function(

@@ -23,7 +23,7 @@ combineFiles(inFiles = dir(), inDir = getwd(),
 
 \item{selection}{Index of rows that should be written. Can refer to each file separately, e.g. \code{substr(inFile_i,1,1)=="#"}, DEFAULT: all lines}
 
-\item{progbar}{Should a progress bar be drwan? Useful if you combine many large files. DEFAULT: !quiet, i.e. TRUE}
+\item{progbar}{Should a progress bar be drawn? Useful if you combine many large files. DEFAULT: !quiet, i.e. TRUE}
 
 \item{quiet}{Suppress message about number of files combined? DEFAULT: FALSE}
 }
