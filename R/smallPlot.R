@@ -3,7 +3,7 @@
 #' Inset plot with margins, background and border
 #' 
 #' @return parameters of small plot, invisible.
-#' @section Warning: setting mai etc does not work! Canot keep mfcol, only mfrow.
+#' @section Warning: setting mai etc does not work!
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2014
 #' @seealso \code{\link{colPointsHist}} for an example of usage, \code{\link[TeachingDemos]{subplot}} and \code{\link[ade4]{add.scatter}} for alternative solutions to this problem that do not set margins.
 #' @keywords hplot
@@ -42,9 +42,9 @@
 #' new_plt <- par("plt")
 #' plot(1:10)
 #' plot(1:10)
-#' smallPlot(plot(5:1), bg="lightblue")
+#' smallPlot(plot(5:1), bg="lightblue", colwise=TRUE)
 #' points(3, 2, pch="+", cex=2, col=2)
-#' plot(1:10) # canot keep mfcol, only mfrow.
+#' plot(1:10) # canot keep mfcol, only mfrow, if colwise is left FALSE.
 #' smallPlot(plot(5:1), bg="bisque", resetfocus=FALSE )
 #' points(3, 2, pch="+", cex=2, col=2)
 #' plot(1:10) # in smallPlot space
@@ -53,21 +53,39 @@
 #' smallPlot(plot(5:1), bg="palegreen")
 #' points(3, 2, pch="+", cex=2, col=2, xpd=NA) # not drawn with default xpd
 #' par(plt=new_plt)
-#' plot(1:10)
-#' smallPlot(plot(5:1), bg="palegreen") 
+#' plot(1:10) # canot keep mfcol, only mfrow, if colwise is left FALSE.
+#' smallPlot(plot(5:1), bg="yellow") 
 #' points(3, 2, pch="+", cex=2, col=2)   # everything back to normal
 #' 
+#' par(op)
+#' par(mfrow=c(3,4))
+#' plot(1:10)
+#' plot(1:10)
+#' smallPlot(plot(5:1), bg="lightblue", colwise=TRUE)
+#' plot(1:10) 
+#' smallPlot(plot(5:1), bg="bisque")
+#' plot(1:10)
 #' 
 #' @param expr expression creating a plot. Can be code within {braces}.
-#' @param x,y Position of small plot, relative to current figure region (0:100). max and min from vector are taken. DEFAULT: 5-70, 50-100
-#' @param x1,y1,x2,y2 Positions of topleft and bottomright corner. If any is missing, it is taken from x or y
-#' @param mar Margin vector in relative units (0:100), thus behaves differently than \code{\link{par}(mar)}. DEFAULT: c(12, 14, 3, 3)
-#' @param mgp MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.8, 0)
+#' @param x,y Position of small plot, relative to current figure region (0:100). 
+#'        max and min from vector are taken. DEFAULT: 5-70, 50-100
+#' @param x1,y1,x2,y2 Positions of topleft and bottomright corner. 
+#'        If any is missing, it is taken from x or y
+#' @param mar Margin vector in relative units (0:100), thus behaves differently than 
+#'        \code{\link{par}(mar)}. DEFAULT: c(12, 14, 3, 3)
+#' @param mgp MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, 
+#'        as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.8, 0)
 #' @param bg Background. DEFAULT: par("bg")
 #' @param border Border around inset plot. DEFAULT: par("fg")
 #' @param las LabelAxisStyle. DEFAULT: 1
-#' @param resetfocus reset focus to original plot? Specifies where further low level plot commands are directed to. DEFAULT: TRUE
-#' @param \dots further arguments passed to \code{\link{par}. new=F} removes old plot. May mess things up - please tell me for which arguments!
+#' @param resetfocus Reset focus to original plot? Specifies where further 
+#'        low level plot commands are directed to. DEFAULT: TRUE
+#' @param colwise Logical: Continue next plot below current plot? 
+#'        If you had \code{par(mfcol=...)}, you must use \code{colwise=TRUE}, 
+#'        otherwise the next plot will be to the right of the current plot 
+#'        (as with \code{par(mfrow=...)}). DEFAULT: FALSE
+#' @param \dots further arguments passed to \code{\link{par}. new=F} removes old plot. 
+#'        May mess things up - please tell me for which arguments!
 #'  
 smallPlot <- function(
 expr,
@@ -80,6 +98,7 @@ bg=par("bg"),
 border=par("fg"),
 las=1,
 resetfocus=TRUE,
+colwise=FALSE,
 ...)
 {                                            #     ------------
 # Input check:                               #  y1 | P1       |
@@ -115,6 +134,7 @@ sp <- par(no.readonly=TRUE)
 if(resetfocus)
   {
   par(op)
+  if(colwise) par(mfcol=op$mfcol)
   par(mfg=op$mfg) # needed for multiple figure plots
   par(new=op$new)
   }

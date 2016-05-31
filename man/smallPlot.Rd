@@ -6,18 +6,22 @@
 \usage{
 smallPlot(expr, x = c(5, 70), y = c(50, 100), x1, y1, x2, y2, mar = c(12,
   14, 3, 3), mgp = c(1.8, 0.8, 0), bg = par("bg"), border = par("fg"),
-  las = 1, resetfocus = TRUE, ...)
+  las = 1, resetfocus = TRUE, colwise = FALSE, ...)
 }
 \arguments{
 \item{expr}{expression creating a plot. Can be code within {braces}.}
 
-\item{x, y}{Position of small plot, relative to current figure region (0:100). max and min from vector are taken. DEFAULT: 5-70, 50-100}
+\item{x, y}{Position of small plot, relative to current figure region (0:100). 
+max and min from vector are taken. DEFAULT: 5-70, 50-100}
 
-\item{x1, y1, x2, y2}{Positions of topleft and bottomright corner. If any is missing, it is taken from x or y}
+\item{x1, y1, x2, y2}{Positions of topleft and bottomright corner. 
+If any is missing, it is taken from x or y}
 
-\item{mar}{Margin vector in relative units (0:100), thus behaves differently than \code{\link{par}(mar)}. DEFAULT: c(12, 14, 3, 3)}
+\item{mar}{Margin vector in relative units (0:100), thus behaves differently than 
+\code{\link{par}(mar)}. DEFAULT: c(12, 14, 3, 3)}
 
-\item{mgp}{MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.8, 0)}
+\item{mgp}{MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, 
+as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.8, 0)}
 
 \item{bg}{Background. DEFAULT: par("bg")}
 
@@ -25,9 +29,16 @@ smallPlot(expr, x = c(5, 70), y = c(50, 100), x1, y1, x2, y2, mar = c(12,
 
 \item{las}{LabelAxisStyle. DEFAULT: 1}
 
-\item{resetfocus}{reset focus to original plot? Specifies where further low level plot commands are directed to. DEFAULT: TRUE}
+\item{resetfocus}{Reset focus to original plot? Specifies where further 
+low level plot commands are directed to. DEFAULT: TRUE}
 
-\item{\dots}{further arguments passed to \code{\link{par}. new=F} removes old plot. May mess things up - please tell me for which arguments!}
+\item{colwise}{Logical: Continue next plot below current plot? 
+If you had \code{par(mfcol=...)}, you must use \code{colwise=TRUE}, 
+otherwise the next plot will be to the right of the current plot 
+(as with \code{par(mfrow=...)}). DEFAULT: FALSE}
+
+\item{\dots}{further arguments passed to \code{\link{par}. new=F} removes old plot. 
+May mess things up - please tell me for which arguments!}
 }
 \value{
 parameters of small plot, invisible.
@@ -36,7 +47,7 @@ parameters of small plot, invisible.
 Inset plot with margins, background and border
 }
 \section{Warning}{
- setting mai etc does not work! Canot keep mfcol, only mfrow.
+ setting mai etc does not work!
 }
 \examples{
 
@@ -72,9 +83,9 @@ par(mfcol=c(3,4))
 new_plt <- par("plt")
 plot(1:10)
 plot(1:10)
-smallPlot(plot(5:1), bg="lightblue")
+smallPlot(plot(5:1), bg="lightblue", colwise=TRUE)
 points(3, 2, pch="+", cex=2, col=2)
-plot(1:10) # canot keep mfcol, only mfrow.
+plot(1:10) # canot keep mfcol, only mfrow, if colwise is left FALSE.
 smallPlot(plot(5:1), bg="bisque", resetfocus=FALSE )
 points(3, 2, pch="+", cex=2, col=2)
 plot(1:10) # in smallPlot space
@@ -83,10 +94,18 @@ plot(1:10) # too large
 smallPlot(plot(5:1), bg="palegreen")
 points(3, 2, pch="+", cex=2, col=2, xpd=NA) # not drawn with default xpd
 par(plt=new_plt)
-plot(1:10)
-smallPlot(plot(5:1), bg="palegreen") 
+plot(1:10) # canot keep mfcol, only mfrow, if colwise is left FALSE.
+smallPlot(plot(5:1), bg="yellow") 
 points(3, 2, pch="+", cex=2, col=2)   # everything back to normal
 
+par(op)
+par(mfrow=c(3,4))
+plot(1:10)
+plot(1:10)
+smallPlot(plot(5:1), bg="lightblue", colwise=TRUE)
+plot(1:10) 
+smallPlot(plot(5:1), bg="bisque")
+plot(1:10)
 
 }
 \author{
