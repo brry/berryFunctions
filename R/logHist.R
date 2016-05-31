@@ -11,25 +11,37 @@
 #' 
 #' dat <- rbeta(1e4, 2, 18)*100
 #' hist(dat, col="tan", breaks=50)
-#' logHist(dat, col="tan", breaks=50)
+#' logHist(dat, breaks=50)
+#' logHist(dat,xlim=c(0,2)) # xlim in powers of ten
+#' logHist(c(-1,0,1,2,2,3,3,4,8,10,50)) # warning for negative values
 #' 
 #' @param x Vector of numerical values
 #' @param logargs A list of arguments passed to \code{\link{logAxis}}. DEFAULT: NULL
-#' @param main Title of graph, internally from x. DEFAULT: xmain
-#' @param xlab X axis label. DEFAULT: xname
-#' @param \dots further arguments passed to \code{\link{hist}} like breaks, col, ..., but not xaxt or add.
+#' @param main Title of graph, internally from x. DEFAULT: internal name representation
+#' @param xlab X axis label. DEFAULT: internal: name of x
+#' @param col Color of histogram bars
+#' @param \dots further arguments passed to \code{\link{hist}} like breaks, freq, xlim=c(-1,3), ..., but not xaxt or add.
 #' 
 logHist <- function(
 x,
 logargs=NULL,
 main=xmain,
 xlab=xname,
+col="tan",
 ...)
 {
 xname <- deparse(substitute(x))
+x <- as.numeric(x)
+neg <- sum(x<=0)
+if(neg>0)
+  {
+  warning(neg," values <= 0 are discarded (",
+          round(neg/length(x)*100,1),"% of ",length(x)," values).")
+  x <- x[x>0]
+  }
 xmain <- paste0("Histogram of log10(",xname,")")
 hist(x=log10(x), ..., main=main, xlab=xlab, xaxt="n")
 do.call(logAxis, owa(list(), logargs))
-hist(x=log10(x), ..., add=TRUE)
+hist(x=log10(x), col=col, ..., add=TRUE)
 }
 

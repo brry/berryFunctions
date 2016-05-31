@@ -4,18 +4,20 @@
 \alias{logHist}
 \title{Histogram of logarithmic values}
 \usage{
-logHist(x, logargs = NULL, main = xmain, xlab = xname, ...)
+logHist(x, logargs = NULL, main = xmain, xlab = xname, col = "tan", ...)
 }
 \arguments{
 \item{x}{Vector of numerical values}
 
 \item{logargs}{A list of arguments passed to \code{\link{logAxis}}. DEFAULT: NULL}
 
-\item{main}{Title of graph, internally from x. DEFAULT: xmain}
+\item{main}{Title of graph, internally from x. DEFAULT: internal name representation}
 
-\item{xlab}{X axis label. DEFAULT: xname}
+\item{xlab}{X axis label. DEFAULT: internal: name of x}
 
-\item{\dots}{further arguments passed to \code{\link{hist}} like breaks, col, ..., but not xaxt or add.}
+\item{col}{Color of histogram bars}
+
+\item{\dots}{further arguments passed to \code{\link{hist}} like breaks, freq, xlim=c(-1,3), ..., but not xaxt or add.}
 }
 \value{
 none
@@ -27,7 +29,9 @@ Draw histogram of values on a logarithmic scale with nice axis labels
 
 dat <- rbeta(1e4, 2, 18)*100
 hist(dat, col="tan", breaks=50)
-logHist(dat, col="tan", breaks=50)
+logHist(dat, breaks=50)
+logHist(dat,xlim=c(0,2)) # xlim in powers of ten
+logHist(c(-1,0,1,2,2,3,3,4,8,10,50)) # warning for negative values
 
 }
 \author{
