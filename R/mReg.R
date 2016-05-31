@@ -283,7 +283,7 @@ if(inherits(x,"formula"))
   #if(!missing(data) & missing(main)) main <- paste("multiple regression of",deparse(substitute(data)))
 }
 # NA removal
-if(any(is.na(x)|is.na(y)))
+if( anyNA(x) | anyNA(y) )
   {
   Na <- which(is.na(x)|is.na(y))
   if(!quiet) warning(length(Na), " NAs were omitted from ", length(x), " data points (",

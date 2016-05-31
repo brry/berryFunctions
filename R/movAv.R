@@ -151,7 +151,7 @@ n <- length(dat)
 v <- sapply( (s+1):(n-s),  function(i)
   {
   subset <- dat[(i-s):(i+s)]
-  if(any(is.na(subset)))
+  if(anyNA(subset))
      {weights[is.na(subset)] <- 0
      weights <- weights/(sum(weights))
   }

@@ -27,7 +27,7 @@ sim)
 {
 if(!(is.vector(obs) & is.vector(sim))) stop("Input is not a vector.")
 if(length(obs) != length(sim)) stop("Vectors are not of equal length.")
-if(any(is.na(obs)|is.na(sim)))
+if( anyNA(obs) | anyNA(sim) )
      {
      Na <- which(is.na(obs)|is.na(sim))
      warning(length(Na), " NAs were omitted from ", length(obs), " data points.")
