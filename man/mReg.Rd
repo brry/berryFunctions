@@ -22,7 +22,7 @@ mReg(x, y = NULL, data = NULL, Poly45 = FALSE, exp_4 = FALSE,
 
 \item{Poly45}{Logical. Should 4th and 5th degree polynomials also be fitted? DEFAULT: FALSE, as the formulas are very long.}
 
-\item{exp_4}{Logical. Return 4-parametric exponential distibution fits (via \code{\link{exp4p}}) in the output table? (only best fit is plotted).
+\item{exp_4}{Logical. Return 4-parametric exponential distribution fits (via \code{\link{exp4p}}) in the output table? (only best fit is plotted).
 exp_4par_ini has the initial values of exponential fitting with the data relocated to first quadrant. 
 The others are optimized with the methods of \code{\link{optim}}. DEFAULT: FALSE}
 

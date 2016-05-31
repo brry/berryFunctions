@@ -200,7 +200,7 @@
 #' @param y Vector with y values. DEFAULT: NULL (to enable x to be a formula)
 #' @param data data.frame in which formula is applied. DEFAULT: NULL
 #' @param Poly45 Logical. Should 4th and 5th degree polynomials also be fitted? DEFAULT: FALSE, as the formulas are very long.
-#' @param exp_4 Logical. Return 4-parametric exponential distibution fits (via \code{\link{exp4p}}) in the output table? (only best fit is plotted).
+#' @param exp_4 Logical. Return 4-parametric exponential distribution fits (via \code{\link{exp4p}}) in the output table? (only best fit is plotted).
 #'        exp_4par_ini has the initial values of exponential fitting with the data relocated to first quadrant. 
 #'        The others are optimized with the methods of \code{\link{optim}}. DEFAULT: FALSE
 #' @param xf Character. x name for Formula. DEFAULT: substitute(x) before replacing zeros in x and y
