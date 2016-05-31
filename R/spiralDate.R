@@ -2,21 +2,22 @@
 #'
 #' Plot seasonality of (daily) time series along spiral
 #'
-#' @details detailsMayBeRemoved
-#'
 #' @return invisible data.frame with date, vals, and the plotting coordinates
-#' @section Warning: warningMayBeRemoved
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, May 2016
 #' @seealso \code{\link{colPoints}}, \code{\link{as.Date}}
 #' @keywords chron hplot aplot color
 # @importFrom package fun1 fun2
 #' @export
 #' @examples
-#' # fake Data
+#' # synthetic seasonal Data
 #' set.seed(42)
 #' fakeData <- data.frame(time = as.Date("1985-01-01")+0:5000,
 #'                        vals = cumsum(rnorm(5001))+50          )
-#' fakeData$vals <- fakeData$vals + sin(0:5000/366*2*pi)*max(abs(fakeData$vals))/2
+#' fakeData$vals <- fakeData$vals + sin(0:5000/366*2*pi)*max(abs(fakeData$vals))
+#' 
+#' sp <- spiralDate(time,vals, data=fakeData)
+#' tail(sp)
+#' spiralDate(time,vals, data=fakeData, drange=as.Date(c("1980-01-01", "2004-11-15")), lines=TRUE)
 #' 
 #' par(mfrow=c(1,3), mar=c(3,3,6,1), mgp=c(2,0.6,0), las=1)
 #' colPoints(time,vals,vals, data=fakeData, col=divPal(100), add=FALSE, legend=FALSE,
@@ -33,11 +34,7 @@
 #' title(main="spiral graph\nshows cyclic values nicely 
 #'             trends are harder to detect\nrecent values = more visual weight")
 #'
-#'           
 #' par(mfrow=c(1,1))
-#' sp <- spiralDate(time,vals, data=fakeData, lines=TRUE, lwd=2)
-#' head(sp)
-#' spiralDate(time,vals, data=fakeData, drange=as.Date(c("1980-01-01", "2004-11-15")), lines=TRUE)
 #' 
 #' # Data with missing values:
 #' fakeData[1300:1500, 2] <- NA
@@ -46,6 +43,11 @@
 #' fakeData <- na.omit(fakeData)
 #' spiralDate(time,vals, data=fakeData, lines=TRUE) # problematic for lines
 #' spiralDate(time,vals, data=fakeData, pch=3)      # but not for points
+#' 
+#' ## Real data:    
+#' #library2("waterData")
+#' #data(exampleWaterData)
+#' #spiralDate(dates, val, data=q05054000LT, lines=TRUE, lwd=3)
 #' 
 #' @param dates Dates in ascending order. 
 #'              Can be charater strings or \code{\link{strptime}} results, 
@@ -56,6 +58,7 @@
 #' @param vrange Optional value range (analogous to ylim), can be a vector like \code{values}. DEFAULT: NULL
 #' @param months Labels for the months
 #' @param add Add to existing plot? DEFAULT: FALSE
+#' @param prop Proportion of the data to be actually plotted, used in \code{\link{spiralDateAnim}}. DEFAULT: NULL
 #' @param zlab Title of \code{\link{colPointsLegend}}
 #' @param format Format of date labels see details in \code{\link{strptime}}. DEFAULT: "\%Y"
 #' @param nint Number of interpolation segments between points, only used if lines=TRUE. 
@@ -70,6 +73,7 @@ drange=NULL,
 vrange=NULL,
 months=c("J","F","M","A","M","J","J","A","S","O","N","D"),
 add=FALSE, 
+prop=NULL,
 zlab=substitute(values),
 format="%Y",
 nint=1,
@@ -107,6 +111,18 @@ r <- rescale(as.numeric(dates)) # ascending time-dependent radius
 doy <- as.numeric(format(dates, "%j")) # day of year
 x <- r*sin(doy/365.25*2*pi)
 y <- r*cos(doy/365.25*2*pi)
+# output:
+out <- data.frame(dates,values,x,y)
+# plot selected data only:
+
+if(!is.null(prop))
+  {
+  sel <- 1:(prop*length(dates))
+  x <- x[sel]
+  y <- y[sel]
+  dates <- dates[sel]
+  values <- values[sel]
+  }
 # plot:
 lim <- c(-1.1,1.1)
 if(!add) plot(1, xlim=lim, ylim=lim, type="n", ann=FALSE, axes=FALSE, asp=1)
@@ -118,8 +134,7 @@ ly <- f*cos(0:11/12*2*pi)
 lsrt <- 12:1/12*360
 for(i in 1:12) text(lx[i], ly[i], months[i], srt=lsrt[i])
 # labeling years:
-text(0,0, format(min(dates,na.rm=TRUE), format))
-text(tail(x,1),tail(y,1), format(max(dates,na.rm=TRUE), format))
+text(headtail(x), headtail(y), format(headtail(dates), format))
 # output:
-return(invisible(data.frame(dates,values,x,y)))
+return(invisible(out))
 }

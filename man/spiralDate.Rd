@@ -6,7 +6,8 @@
 \usage{
 spiralDate(dates, values, data, drange = NULL, vrange = NULL,
   months = c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"),
-  add = FALSE, zlab = substitute(values), format = "\%Y", nint = 1, ...)
+  add = FALSE, prop = NULL, zlab = substitute(values), format = "\%Y",
+  nint = 1, ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order. 
@@ -25,6 +26,8 @@ as accepted (and coerced) by \code{\link{as.Date}}}
 
 \item{add}{Add to existing plot? DEFAULT: FALSE}
 
+\item{prop}{Proportion of the data to be actually plotted, used in \code{\link{spiralDateAnim}}. DEFAULT: NULL}
+
 \item{zlab}{Title of \code{\link{colPointsLegend}}}
 
 \item{format}{Format of date labels see details in \code{\link{strptime}}. DEFAULT: "\%Y"}
@@ -40,18 +43,16 @@ invisible data.frame with date, vals, and the plotting coordinates
 \description{
 Plot seasonality of (daily) time series along spiral
 }
-\details{
-detailsMayBeRemoved
-}
-\section{Warning}{
- warningMayBeRemoved
-}
 \examples{
-# fake Data
+# synthetic seasonal Data
 set.seed(42)
 fakeData <- data.frame(time = as.Date("1985-01-01")+0:5000,
                        vals = cumsum(rnorm(5001))+50          )
-fakeData$vals <- fakeData$vals + sin(0:5000/366*2*pi)*max(abs(fakeData$vals))/2
+fakeData$vals <- fakeData$vals + sin(0:5000/366*2*pi)*max(abs(fakeData$vals))
+
+sp <- spiralDate(time,vals, data=fakeData)
+tail(sp)
+spiralDate(time,vals, data=fakeData, drange=as.Date(c("1980-01-01", "2004-11-15")), lines=TRUE)
 
 par(mfrow=c(1,3), mar=c(3,3,6,1), mgp=c(2,0.6,0), las=1)
 colPoints(time,vals,vals, data=fakeData, col=divPal(100), add=FALSE, legend=FALSE,
@@ -68,11 +69,7 @@ spiralDate(time,vals, data=fakeData, col=divPal(100), legargs=list(y1=70,y2=80))
 title(main="spiral graph\\nshows cyclic values nicely 
             trends are harder to detect\\nrecent values = more visual weight")
 
-          
 par(mfrow=c(1,1))
-sp <- spiralDate(time,vals, data=fakeData, lines=TRUE, lwd=2)
-head(sp)
-spiralDate(time,vals, data=fakeData, drange=as.Date(c("1980-01-01", "2004-11-15")), lines=TRUE)
 
 # Data with missing values:
 fakeData[1300:1500, 2] <- NA
@@ -81,6 +78,11 @@ spiralDate(time,vals, data=fakeData, lines=TRUE) # no problem
 fakeData <- na.omit(fakeData)
 spiralDate(time,vals, data=fakeData, lines=TRUE) # problematic for lines
 spiralDate(time,vals, data=fakeData, pch=3)      # but not for points
+
+## Real data:    
+#library2("waterData")
+#data(exampleWaterData)
+#spiralDate(dates, val, data=q05054000LT, lines=TRUE, lwd=3)
 
 }
 \author{
