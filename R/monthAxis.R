@@ -130,6 +130,7 @@ for(side_i in side)
     d <- monthLabs(startyear_i, stopyear_i, npy=2)
     dbor <- d[seq(1,length(d), by=2)] # border dates (=year starting points)
     dmid <- d[seq(2,length(d), by=2)] # mid-year points
+    if(timeAxis) {dbor <- as.POSIXct(dbor) ; dmid <- as.POSIXct(dmid) }
     do.call(axis, owa(list(side=side_i, at=dbor, labels=FALSE,las=las, mgp=mgp, 
                            cex.axis=cex.axis, tick=tick), midargs))
     if(missing(format)) format <- "%Y"
@@ -143,7 +144,8 @@ for(side_i in side)
     d <- monthLabs(startyear_i, stopyear_i, npm=2)
     dbor <- d[seq(1,length(d), by=2)] # border dates (=year starting points)
     dmid <- d[seq(2,length(d), by=2)] # mid-year points
-    do.call(axis, owa(list(side=side_i, at=dbor, labels=FALSE,las=las, mgp=mgp, 
+    if(timeAxis) {dbor <- as.POSIXct(dbor) ; dmid <- as.POSIXct(dmid) }
+    do.call(axis, owa(list(side=side_i, at=dbor, labels=FALSE,las=las, mgp=mgp,
                            cex.axis=cex.axis, tick=tick), midargs))
     if(missing(format)) format <- "%m\n%Y"
     if(missing(mgp)) mgp <- c(3,1.5,0)
