@@ -6,14 +6,16 @@
 \usage{
 monthAxis(side = 1, timeAxis = NA, origin = "1970-01-01",
   startyear = NULL, stopyear = NULL, n = 5, npm = NULL, npy = NA,
-  format = "\%d.\%m.\\n\%Y", labels = format.Date(d, format),
-  midyear = FALSE, midmonth = FALSE, midargs = NULL, mgp = c(3, 1.5, 0),
-  cex.axis = 1, tick = TRUE, las = 1, ...)
+  format = "\%d.\%m.\\n\%Y", labels = format.Date(d, format), ym = FALSE,
+  mcex = 0.6, mmgp = c(3, 0, 0), midyear = FALSE, midmonth = FALSE,
+  midargs = NULL, mgp = c(3, 1.5, 0), cex.axis = 1, tick = TRUE,
+  tcl = par("tcl"), las = 1, ...)
 }
 \arguments{
 \item{side}{Which \code{\link{axis}} are to be labeled? (can be several). DEFAULT: 1}
 
-\item{timeAxis}{Logical indicating whether the axis is \code{\link{POSIXct}}, not date. DEFAULT: NA, meaning axis value >1e5}
+\item{timeAxis}{Logical indicating whether the axis is \code{\link{POSIXct}}, not date.
+DEFAULT: NA, meaning axis value >1e5}
 
 \item{origin}{Origin for\code{\link{as.Date}} and \code{\link{as.POSIXct}}. DEFAULT: "1970-01-01"}
 
@@ -31,6 +33,14 @@ monthAxis(side = 1, timeAxis = NA, origin = "1970-01-01",
 
 \item{labels}{labels. DEFAULT: format.Date(d, format)}
 
+\item{ym}{Label months with first letter at the center of the month and year at center below.
+Sets midyear and midmonth to TRUE. Uses \code{labels} and \code{format}
+for the years, but ignores them for the months. DEFAULT: FALSE}
+
+\item{mcex}{\code{cex.axis} for month labels if ym=TRUE. DEFAULT: 0.8}
+
+\item{mmgp}{\code{mgp} for month labels if ym=TRUE. DEFAULT: 3,0,0}
+
 \item{midyear}{Place labels in the middle of the year? if TRUE, format default is "\%Y". DEFAULT: FALSE}
 
 \item{midmonth}{Place labels in the middle of the month? if TRUE, format default is "\%m\\n\%Y". DEFAULT: FALSE}
@@ -42,6 +52,9 @@ monthAxis(side = 1, timeAxis = NA, origin = "1970-01-01",
 \item{cex.axis}{CharacterEXpansion (letter size). DEFAULT: 1}
 
 \item{tick}{Draw tick lines? DEFAULT: TRUE}
+
+\item{tcl}{Tick length (negative to go below axis) in text line height units like mgp[2]
+Changed to -2.5 for year borders if ym=TRUE. DEFAULT: par("tcl")}
 
 \item{las}{LabelAxisStyle for orientation of labels. DEFAULT: 1 (upright)}
 
@@ -56,11 +69,18 @@ Labels date axes at sensible intervals in the time domain of weeks to decades.
 \examples{
 
 set.seed(007) # for reproducibility
-Date1 <- sort(as.Date("2013-09-25")+sample(0:150, 30))
+Date1 <- as.Date("2013-09-25")+sort(sample(0:150, 30))
 plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
 monthAxis(side=1)
-monthAxis(1, npm=2, cex.axis=0.5) # fix number of labels per month
+monthAxis(1, npm=2, cex.axis=0.5, col.axis="red") # fix number of labels per month
 
+DateYM <- as.Date("2013-04-25")+0:500
+plot(DateYM, cumsum(rnorm(501)), type="l", xaxt="n", ann=FALSE)
+monthAxis(ym=TRUE)
+monthAxis(ym=TRUE, mgp=c(3,1,0))
+monthAxis(ym=TRUE, cex.axis=1.4)
+monthAxis(ym=TRUE, mcex=0.9, col.axis="red")
+ 
 plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
 monthAxis(labels=FALSE, col.ticks=2)
 monthAxis(1, format=" ")  # equivalent to axis(labels=FALSE)
@@ -68,7 +88,7 @@ monthAxis(1)
 d <- monthAxis(1, labels=letters[1:24], mgp=c(3,2.5,0))
 d # d covers the full year, thus is longer than n=5
 
-Date2 <- sort(as.Date("2011-07-13")+sample(0:1400, 50))
+Date2 <- as.Date("2011-07-13")+sort(sample(0:1400, 50))
 plot(Date2, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
 monthAxis(npy=12, format=" ")  # fix number of labels per year
 monthAxis(tcl=-0.8, lwd.ticks=2, format="\%Y/\%m", mgp=c(3,1,0))
@@ -78,7 +98,7 @@ plot(Date2, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
 monthAxis(midyear=TRUE)
 abline(v=monthLabs(npm=1), col=8)
 
-Date3 <- sort(as.Date("2011-07-13")+sample(0:1200, 50))
+Date3 <- as.Date("2011-07-13")+sort(sample(0:1200, 50))
 plot(Date3, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
 monthAxis(1, n=4, font=2)
 monthAxis(1, col.axis=3) # too many labels with default n=5

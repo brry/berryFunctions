@@ -10,11 +10,18 @@
 #' @examples
 #' 
 #' set.seed(007) # for reproducibility
-#' Date1 <- sort(as.Date("2013-09-25")+sample(0:150, 30))
+#' Date1 <- as.Date("2013-09-25")+sort(sample(0:150, 30))
 #' plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
 #' monthAxis(side=1)
-#' monthAxis(1, npm=2, cex.axis=0.5) # fix number of labels per month
+#' monthAxis(1, npm=2, cex.axis=0.5, col.axis="red") # fix number of labels per month
 #' 
+#' DateYM <- as.Date("2013-04-25")+0:500
+#' plot(DateYM, cumsum(rnorm(501)), type="l", xaxt="n", ann=FALSE)
+#' monthAxis(ym=TRUE)
+#' monthAxis(ym=TRUE, mgp=c(3,1,0))
+#' monthAxis(ym=TRUE, cex.axis=1.4)
+#' monthAxis(ym=TRUE, mcex=0.9, col.axis="red")
+#'  
 #' plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
 #' monthAxis(labels=FALSE, col.ticks=2)
 #' monthAxis(1, format=" ")  # equivalent to axis(labels=FALSE)
@@ -22,7 +29,7 @@
 #' d <- monthAxis(1, labels=letters[1:24], mgp=c(3,2.5,0))
 #' d # d covers the full year, thus is longer than n=5
 #' 
-#' Date2 <- sort(as.Date("2011-07-13")+sample(0:1400, 50))
+#' Date2 <- as.Date("2011-07-13")+sort(sample(0:1400, 50))
 #' plot(Date2, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
 #' monthAxis(npy=12, format=" ")  # fix number of labels per year
 #' monthAxis(tcl=-0.8, lwd.ticks=2, format="%Y/%m", mgp=c(3,1,0))
@@ -32,7 +39,7 @@
 #' monthAxis(midyear=TRUE)
 #' abline(v=monthLabs(npm=1), col=8)
 #' 
-#' Date3 <- sort(as.Date("2011-07-13")+sample(0:1200, 50))
+#' Date3 <- as.Date("2011-07-13")+sort(sample(0:1200, 50))
 #' plot(Date3, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
 #' monthAxis(1, n=4, font=2)
 #' monthAxis(1, col.axis=3) # too many labels with default n=5
@@ -51,7 +58,8 @@
 #' monthAxis()
 #'
 #' @param side Which \code{\link{axis}} are to be labeled? (can be several). DEFAULT: 1
-#' @param timeAxis Logical indicating whether the axis is \code{\link{POSIXct}}, not date. DEFAULT: NA, meaning axis value >1e5
+#' @param timeAxis Logical indicating whether the axis is \code{\link{POSIXct}}, not date.
+#'                 DEFAULT: NA, meaning axis value >1e5
 #' @param origin Origin for\code{\link{as.Date}} and \code{\link{as.POSIXct}}. DEFAULT: "1970-01-01"
 #' @param startyear Integer. starting year. DEFAULT: NULL = internally computed from \code{\link{par}("usr")}
 #' @param stopyear Ditto for ending year. DEFAULT: NULL
@@ -60,12 +68,19 @@
 #' @param npy Number of labels per year, overrides npm and n. DEFAULT: NA
 #' @param format Format of date, see details in \code{\link{strptime}}. DEFAULT: "\%d.\%m.\\n\%Y"
 #' @param labels labels. DEFAULT: format.Date(d, format)
+#' @param ym Label months with first letter at the center of the month and year at center below.
+#'           Sets midyear and midmonth to TRUE. Uses \code{labels} and \code{format}
+#'           for the years, but ignores them for the months. DEFAULT: FALSE
+#' @param mcex \code{cex.axis} for month labels if ym=TRUE. DEFAULT: 0.8
+#' @param mmgp \code{mgp} for month labels if ym=TRUE. DEFAULT: 3,0,0
 #' @param midyear Place labels in the middle of the year? if TRUE, format default is "\%Y". DEFAULT: FALSE
 #' @param midmonth Place labels in the middle of the month? if TRUE, format default is "\%m\\n\%Y". DEFAULT: FALSE
 #' @param midargs List of arguments passed to \code{\link{axis}} for the year-start lines without labels. DEFAULT: NULL
 #' @param mgp MarGinPlacement, see \code{\link{par}}. The second value is for label distance to axis. DEFAULT: c(3,1.5,0)
 #' @param cex.axis CharacterEXpansion (letter size). DEFAULT: 1
 #' @param tick Draw tick lines? DEFAULT: TRUE
+#' @param tcl Tick length (negative to go below axis) in text line height units like mgp[2]
+#'            Changed to -2.5 for year borders if ym=TRUE. DEFAULT: par("tcl")
 #' @param las LabelAxisStyle for orientation of labels. DEFAULT: 1 (upright)
 #' @param \dots Further arguments passed to \code{\link{axis}}, like \code{lwd, col.ticks, hadj, lty}, ...
 #'  
@@ -80,15 +95,24 @@ npm=NULL,
 npy=NA,
 format="%d.%m.\n%Y",
 labels=format.Date(d, format),
+ym=FALSE,
+mcex=0.6,
+mmgp=c(3,0,0),
 midyear=FALSE,
 midmonth=FALSE,
 midargs=NULL,
 mgp=c(3,1.5,0),
 cex.axis=1,
 tick=TRUE,
+tcl=par("tcl"),
 las=1,
 ...)
 {
+if(ym)
+  {
+  midyear <- TRUE
+  midmonth <- TRUE
+  }
 # internally needed functions to get Date range from graphic:
 getDate <- function(s)
   {
@@ -110,6 +134,7 @@ for(side_i in side)
   dateRange <- getDate(side_i)
   startyear_i <- if(missing(startyear)) getYear(dateRange[1]) else startyear
   stopyear_i  <- if(missing(stopyear )) getYear(dateRange[2]) else stopyear
+#
   # determine npm and npy - desired number of days between labels:
   wish_dif <- as.numeric(diff(dateRange)) / n
   # closest value:
@@ -119,11 +144,30 @@ for(side_i in side)
   npy_i <- if(is.null(npm) & is.na(npy)) pos_npy[sel] else npy
   # calculate dates
   d <- monthLabs(startyear_i, stopyear_i, npm=npm_i, npy=npy_i)
-  # TimeAxis default:
-  if(is.na(timeAxis)) timeAxis <- par("usr")[if(side_i%%2) 1 else 3]>1e5
+  # TimeAxis default (TRUE if values at axis are very large):
+  if(is.na(timeAxis)) timeAxis <- par("usr")[if(side_i%%2) 1 else 3]   >  1e5
   if(timeAxis) d <- as.POSIXct(d)
   # Label axis
-  if(!midyear & ! midmonth) axis(side=side_i, at=d, labels=labels, las=las, mgp=mgp, cex.axis=cex.axis, tick=tick, ...)
+  if(!midyear & ! midmonth) axis(side=side_i, at=d, labels=labels, las=las, mgp=mgp,
+                                 cex.axis=cex.axis, tcl=tcl, tick=tick, ...)
+#
+  # midmonth option:
+  if(midmonth)
+    {
+    d <- monthLabs(startyear_i, stopyear_i, npm=2)
+    dbor <- d[seq(1,length(d), by=2)] # border dates (=month starting points)
+    dmid <- d[seq(2,length(d), by=2)] # mid-month points
+    if(timeAxis) {dbor <- as.POSIXct(dbor) ; dmid <- as.POSIXct(dmid) }
+    cex2 <- if(ym) mcex else cex.axis
+    mgp2 <- if(ym) mmgp else mgp
+    do.call(axis, owa(list(side=side_i, at=dbor, labels=FALSE, las=las, mgp=mgp2,
+                           cex.axis=cex2, tcl=tcl, tick=tick), midargs))
+    if(missing(format)) format <- "%m\n%Y"
+    labels <- labels[seq(2,length(d), by=2)]
+    if(ym) labels <- substr(format(dmid, "%B"),1,1)
+    axis(side=side_i, at=dmid, labels=labels, las=las, mgp=mgp2,
+         cex.axis=cex2, tick=FALSE, ...)
+    }
   # midyear option:
   if(midyear)
     {
@@ -131,28 +175,17 @@ for(side_i in side)
     dbor <- d[seq(1,length(d), by=2)] # border dates (=year starting points)
     dmid <- d[seq(2,length(d), by=2)] # mid-year points
     if(timeAxis) {dbor <- as.POSIXct(dbor) ; dmid <- as.POSIXct(dmid) }
-    do.call(axis, owa(list(side=side_i, at=dbor, labels=FALSE,las=las, mgp=mgp, 
-                           cex.axis=cex.axis, tick=tick), midargs))
+    if(ym) tcl <- -2.5
+    if(!ym & missing(mgp)) mgp <- c(3,0.5,0)   #  if(ym) mgp[2] <- mgp[2] + 1.5
+    do.call(axis, owa(list(side=side_i, at=dbor, labels=FALSE, las=las, mgp=mgp,
+                           cex.axis=cex.axis, tcl=tcl, tick=tick), midargs))
     if(missing(format)) format <- "%Y"
-    if(missing(mgp)) mgp <- c(3,0.5,0)
     labels <- labels[seq(2,length(d), by=2)]
-    axis(side=side_i, at=dmid, labels=labels, las=las, mgp=mgp, cex.axis=cex.axis, tick=FALSE, ...)
+    if(ym) labels <- format(dmid, "%Y")
+    axis(side=side_i, at=dmid, labels=labels, las=las, mgp=mgp,
+         cex.axis=cex.axis, tick=FALSE, ...)
     }
-  # midmonth option:
-  if(midmonth)
-    {
-    d <- monthLabs(startyear_i, stopyear_i, npm=2)
-    dbor <- d[seq(1,length(d), by=2)] # border dates (=year starting points)
-    dmid <- d[seq(2,length(d), by=2)] # mid-year points
-    if(timeAxis) {dbor <- as.POSIXct(dbor) ; dmid <- as.POSIXct(dmid) }
-    do.call(axis, owa(list(side=side_i, at=dbor, labels=FALSE,las=las, mgp=mgp,
-                           cex.axis=cex.axis, tick=tick), midargs))
-    if(missing(format)) format <- "%m\n%Y"
-    if(missing(mgp)) mgp <- c(3,1.5,0)
-    labels <- labels[seq(2,length(d), by=2)]
-    axis(side=side_i, at=dmid, labels=labels, las=las, mgp=mgp, cex.axis=cex.axis, tick=FALSE, ...)
-    }
-  } # End of loop
+  } # End of loop along graph sides
 # output:
 return(invisible(d))
 } # End of function
