@@ -86,7 +86,7 @@
 #'        If NA, it is set to TRUE for labels without line breaks (Newlines, "\\n").
 #'        If FALSE, no conversion happens. DEFAULT: NA
 #' @param margin added field space around words (multiple of em/ex). DEFAULT: 0.3
-#' @param field 'rectangle', 'ellipse', or 'rounded', partial matching is performed. DEFAULT: "rect"
+#' @param field 'rectangle', 'ellipse', or 'rounded', partial matching is performed. DEFAULT: "rounded"
 #' @param nv number of vertices for field = "ellipse" or "rounded". low: fast drawing.
 #'        high: high resolution in vector graphics as pdf possible. DEFAULT: 1000
 #' @param rounding between 0 and 1: portion of height that is cut off rounded at edges when field = "rounded". DEFAULT: 0.75
@@ -108,7 +108,7 @@ fill="white",
 border=NA,
 expression=NA,
 margin=0.3,
-field="rect",
+field="rounded",
 nv=1000,
 rounding=0.75,
 lty=par("lty"),
