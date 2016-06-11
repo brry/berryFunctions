@@ -9,6 +9,8 @@ Before the actual NEWS, here are some things planned for future development:
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
 - implement is.error wherever applicable
 - move importsFrom in package documentation to sourcecode of the functions atually using it
+- check if all occurences of pastec can be replaced with toString and delete pastec from package
+- warn about deletion of createDoc (and pastec, potentially)
 
 
 -----------------------------
@@ -17,7 +19,7 @@ Before the actual NEWS, here are some things planned for future development:
 
 Version 1.11.0 (2016--)
 https://github.com/brry/berryFunctions/compare/master@{2016-04-29}...master@{2016--}
-New functions: exTime, equidistPoints, is.error, checkFile, spiralDate, spiralDateAnim
+New functions: exTime, equidistPoints, is.error, checkFile, spiralDate, spiralDateAnim, locArrow, runAxis
 
 
 -----------------------------
