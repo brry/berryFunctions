@@ -56,8 +56,8 @@ if(trace)
 exi <- file.exists(file)
 # prepare message:
 Text <- if(length(exi)>1)
-paste0("  The files '", pastec(file[!exi]), "'\n  do not exist at ", getwd()) else
-paste0("  The file '",         file,      "'\n  does not exist at ", getwd())
+paste0("  The files '", toString(file[!exi]), "'\n  do not exist at ", getwd()) else
+paste0("  The file '",           file,      "'\n  does not exist at ", getwd())
 #
 if(trace) Text <- paste(calltrace, Text, sep="\n")
 # return message, if file nonexistent:

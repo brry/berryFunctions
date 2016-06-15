@@ -30,7 +30,7 @@ addFade <- function(
   )
 {
 if(any(fade<0 | fade>1)) stop("fade must be between 0 and 1, not ",
-                                 pastec(fade[fade<0|fade>1]))
+                              toString(fade[fade<0|fade>1]))
 cR <-  function(fade, col, target)
   {
   x <- colorRamp(c(col, target))(1-fade)   # , ...

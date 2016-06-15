@@ -29,9 +29,15 @@
 #' @param topic Character string: the online \code{\link{help}} topic the examples of which should be run
 #' @param echo Show the R input when sourcing? DEFAULT: FALSE
 #' @param elapsed Return *only* the third element (total elapsed time)? DEFAULT: FALSE
-#' @param imagefile Reroute graphics to \code{\link{pdf}} device? Will \code{\link{message}} the \code{\link{tempfile}} location if quiet=FALSE. DEFAULT: TRUE
-#' @param quiet Suppress warnings with both \code{\link{suppressWarnings}} and \code{\link{suppressMessages}}, also \code{\link{capture.output}} for str and cat results as well as setting \code{pboptions(type="none")} if \code{pbapply} is available.
-#' @param \dots Further arguments to \code{\link{example}}, especially \code{run.dontrun}, \code{run.donttest} and \code{package}, but NOT \code{character.only} and \code{ask}
+#' @param imagefile Reroute graphics to \code{\link{pdf}} device? 
+#'        Will \code{\link{message}} the \code{\link{tempfile}} location if quiet=FALSE. 
+#'        DEFAULT: TRUE
+#' @param quiet Suppress warnings with both \code{\link{suppressWarnings}} and 
+#'        \code{\link{suppressMessages}}, also \code{\link{capture.output}} for str and cat results 
+#'        as well as setting \code{pboptions(type="none")} if \code{pbapply} is available.
+#' @param \dots Further arguments to \code{\link{example}}, especially 
+#'        \code{run.dontrun}, \code{run.donttest} and \code{package}, 
+#'        but NOT \code{character.only} and \code{ask}
 #'
 exTime <- function(
 topic,
@@ -77,7 +83,7 @@ if(imagefile)
   {
   plot(1, type="n", ann=FALSE, axes=FALSE) # outro graph
   moreargs <- unlist(list(...))
-  catformat <- function(x) pastec(paste(names(x), x, sep="="))
+  catformat <- function(x) toString(paste(names(x), x, sep="="))
   text(1,1, paste0(topic, " finished. Elapsed time  [sec]:\n\n", catformat(result),
                    "\n\n", catformat(moreargs)))
   }

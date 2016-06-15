@@ -14,11 +14,17 @@ exTime(topic, echo = FALSE, elapsed = FALSE, imagefile = TRUE,
 
 \item{elapsed}{Return *only* the third element (total elapsed time)? DEFAULT: FALSE}
 
-\item{imagefile}{Reroute graphics to \code{\link{pdf}} device? Will \code{\link{message}} the \code{\link{tempfile}} location if quiet=FALSE. DEFAULT: TRUE}
+\item{imagefile}{Reroute graphics to \code{\link{pdf}} device? 
+Will \code{\link{message}} the \code{\link{tempfile}} location if quiet=FALSE. 
+DEFAULT: TRUE}
 
-\item{quiet}{Suppress warnings with both \code{\link{suppressWarnings}} and \code{\link{suppressMessages}}, also \code{\link{capture.output}} for str and cat results as well as setting \code{pboptions(type="none")} if \code{pbapply} is available.}
+\item{quiet}{Suppress warnings with both \code{\link{suppressWarnings}} and 
+\code{\link{suppressMessages}}, also \code{\link{capture.output}} for str and cat results 
+as well as setting \code{pboptions(type="none")} if \code{pbapply} is available.}
 
-\item{\dots}{Further arguments to \code{\link{example}}, especially \code{run.dontrun}, \code{run.donttest} and \code{package}, but NOT \code{character.only} and \code{ask}}
+\item{\dots}{Further arguments to \code{\link{example}}, especially 
+\code{run.dontrun}, \code{run.donttest} and \code{package}, 
+but NOT \code{character.only} and \code{ask}}
 }
 \value{
 Time used as per \code{\link{system.time}}

@@ -10,8 +10,8 @@
 #' @examples
 #' 
 #' listoferrors <- c("filetype", "header", "nonemptyline")
-#' message("The following entities were corrupted:\n", pastec(listoferrors))
-#' pastec("Part1", c("Part2", "Part3"), letters[1:3])
+#' message("The following entities were corrupted:\n", toString(listoferrors))
+#' toString(c("Part1", c("Part2", "Part3"), letters[1:3]))
 #' 
 #' @param \dots Object(s) to be \code{\link{paste}d} to a character vector
 #' @param sep Character string to separate single strings. DEFAULT: " "
@@ -23,6 +23,7 @@ sep=" ",
 collapse=", "
 )
 {
+warning("pastec will be deprecated in late 2016. Use toString() instead.")
 paste(c(...), sep=sep, collapse=collapse)
 }
 

@@ -268,10 +268,6 @@ Zooming in Shapefiles in my package https://github.com/brry/shapeInteractive
 
 ## Miscellaneous
 ```{r misc}
-# paste character strings with collapse: pastec
-listoferrors <- c("filetype", "header", "nonemptyline")
-message("The following entities were corrupted:\n", pastec(listoferrors))
-
 # remove leading and trailing white space: removeSpace
 s <- c("space at end     ", "  white at begin", "  both ", " special ^  ")
 removeSpace(s)

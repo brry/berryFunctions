@@ -174,10 +174,6 @@ abline(v=1:9, h=1:5, col=8,lty=2)
 triangleArea(a,b)
 
 ## ----misc----------------------------------------------------------------
-# paste character strings with collapse: pastec
-listoferrors <- c("filetype", "header", "nonemptyline")
-message("The following entities were corrupted:\n", pastec(listoferrors))
-
 # remove leading and trailing white space: removeSpace
 s <- c("space at end     ", "  white at begin", "  both ", " special ^  ")
 removeSpace(s)
