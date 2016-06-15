@@ -6,6 +6,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Feb 2016
 #' @seealso \code{\link{logAxis}}, \code{\link{hist}}
 #' @keywords aplot dplot
+#' @importFrom graphics hist
 #' @export
 #' @examples
 #' 

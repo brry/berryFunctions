@@ -8,6 +8,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2015
 #' @seealso \code{\link{hist}}, \code{\link{tapply}}
 #' @keywords dplot hplot distribution
+#' @importFrom graphics box hist par title
 #' @export
 #' @examples
 #' 

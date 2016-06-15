@@ -6,6 +6,8 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Feb 2015, update labels and midyear Dec 2015
 #' @seealso \code{\link{monthLabs}} for the numbercrunching itself, \code{\link{axis.Date}} with defaults that are less nice.
 #' @keywords chron aplot dplot
+#' @importFrom graphics axis par
+#' @importFrom utils str
 #' @export
 #' @examples
 #' 

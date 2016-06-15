@@ -10,6 +10,7 @@
 #' @seealso \code{\link{addFade}}, \code{\link{rgb}}, \code{\link{colors}}, \code{\link{col2rgb}}
 #' @keywords dplot color
 #' @export
+#' @importFrom grDevices col2rgb rgb
 #' @examples
 #' 
 #' addAlpha("red", c(0.1, 0.3, 0.6, 1))

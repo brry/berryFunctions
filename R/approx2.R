@@ -12,6 +12,8 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, July 2015
 #' @seealso \code{\link{approx}}, zoo::na.locf, \code{\link{ciBand}} for usage example
 #' @keywords arith dplot
+#' @importFrom stats approx
+#' @importFrom utils head tail
 #' @export
 #' @examples
 #' 

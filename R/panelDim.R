@@ -8,6 +8,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Dec 2014, Jan 2015
 #' @seealso \code{\link{groupHist}}, which is using this function
 #' @keywords dplot array optimize
+#' @importFrom graphics box par plot rect text
 #' @export
 #' @examples
 #' 

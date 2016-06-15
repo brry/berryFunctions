@@ -6,6 +6,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Nov 2012, Dec 2014, Jul 2015
 #' @seealso \code{\link{compareFiles}}, and the functions used internally here, namely: \code{\link{paste}}, \code{\link{scan}}, \code{\link{write}}.
 #' @keywords IO file character
+#' @importFrom utils setTxtProgressBar txtProgressBar
 #' @export
 #' @examples
 #' 

@@ -10,6 +10,9 @@
 #'       \url{http://cran.r-project.org/package=denstrip},
 #'       \url{http://cran.r-project.org/web/views/Distributions.html}
 #' @keywords hplot distribution
+#' @importFrom graphics abline axis box lines par plot polygon segments text
+#' @importFrom stats dnorm pnorm qnorm
+#' @importFrom utils tail
 #' @export
 #' @examples
 #' 

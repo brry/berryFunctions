@@ -28,10 +28,6 @@
 #' compFiles has been renamed to \code{\link{compareFiles}}. combineTextfiles has been renamed to \code{\link{combineFiles}}.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2011-2016
 #' @keywords package documentation
-#' @importFrom grDevices col2rgb colorRamp colorRampPalette dev.off extendrange pdf rainbow rgb
-#' @importFrom graphics abline axis barplot box hist layout legend lines locator mtext par plot plot.new plot.window points polygon rect segments strheight strwidth text title
-#' @importFrom stats approx coef cor dbeta dnorm lm median model.frame na.omit optim pbeta pnorm predict qbeta qnorm quantile rnorm runif sd t.test
-#' @importFrom utils alarm browseURL data download.file find flush.console head install.packages installed.packages object.size setTxtProgressBar str tail txtProgressBar unzip write.table
 #' @examples
 #' 
 #' # see   vignette("berryFunctions")

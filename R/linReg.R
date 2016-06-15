@@ -7,6 +7,8 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2011-2012, 2015
 #' @seealso \code{\link{lm}}, \code{\link{mReg}}, \code{\link{expReg}}, \code{\link{legend}}, \code{\link{par}}, \code{\link{abline}}.
 #' @keywords hplot aplot regression
+#' @importFrom graphics abline par plot
+#' @importFrom stats coef lm model.frame predict
 #' @export
 #' @examples
 #' 

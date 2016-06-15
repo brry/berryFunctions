@@ -8,6 +8,9 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Dec. 2014
 #' @seealso \code{\link{lm}}, \code{\link{mReg}}, \code{\link{linReg}}.
 #' @keywords hplot aplot regression
+#' @importFrom grDevices rgb
+#' @importFrom graphics axis legend lines par plot points polygon
+#' @importFrom stats coef lm predict
 #' @export
 #' @examples
 #' 

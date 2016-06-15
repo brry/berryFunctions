@@ -5,6 +5,7 @@
 #' @return link that is also opened
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2016
 #' @note This is not finished yet...
+#' @importFrom utils browseURL find
 #' @export
 #' @examples
 #' # ToDo: add message: "function also found in: " 

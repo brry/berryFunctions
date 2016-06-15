@@ -10,6 +10,7 @@
 #' @seealso \code{\link{rmse}}, \code{\link{cor}}, \code{\link{lm}}
 #' @references \url{http://en.wikipedia.org/wiki/R-squared}
 #' @keywords univar
+#' @importFrom stats cor rnorm
 #' @export
 #' @examples
 #' 

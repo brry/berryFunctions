@@ -11,6 +11,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, ca 2012
 #' @seealso \code{\link{decompose}}, \code{\link{smooth}}, \code{\link{loess}}, \code{\link[zoo]{rollapply}} (no overlapping!)
 #' @keywords ts manip smooth
+#' @importFrom utils head tail
 #' @export
 #' @examples
 #' 

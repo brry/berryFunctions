@@ -6,6 +6,8 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2011/2012
 #' @seealso \code{\link{distance}}, the package RandomFields ( \url{https://cran.r-project.org/package=RandomFields})
 #' @keywords datagen spatial
+#' @importFrom graphics plot
+#' @importFrom stats runif
 #' @export
 #' @examples
 #' 

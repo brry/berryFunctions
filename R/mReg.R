@@ -55,6 +55,9 @@
 #' @seealso \code{\link{glm}}, \code{\link{lm}}, \code{\link{optim}}
 #' @references Listed here: \url{http://rclickhandbuch.wordpress.com/berryfunctions/#mReg}
 #' @keywords aplot hplot regression nonlinear multivariate
+#' @importFrom grDevices extendrange
+#' @importFrom graphics lines par plot
+#' @importFrom stats coef lm model.frame predict
 #' @export
 #' @examples
 #' 

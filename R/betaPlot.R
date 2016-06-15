@@ -9,6 +9,9 @@
 #' @seealso \code{\link{betaPlotComp}}, \code{\link{normPlot}}, \code{\link{dbeta}}, 
 #'    \url{http://cran.r-project.org/package=denstrip}, \url{http://cran.r-project.org/web/views/Distributions.html}
 #' @keywords hplot distribution
+#' @importFrom grDevices rgb
+#' @importFrom graphics abline axis box lines par plot polygon
+#' @importFrom stats dbeta pbeta qbeta
 #' @export
 #' @examples
 #' 

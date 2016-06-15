@@ -6,6 +6,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sept 2014
 #' @seealso \code{\link{seqPal}} for a better palette, \code{\link{rainbow}}
 #' @keywords color dplot
+#' @importFrom grDevices rainbow 
 #' @export
 #' @examples
 #' 

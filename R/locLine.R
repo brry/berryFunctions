@@ -7,6 +7,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Mar 2016
 #' @seealso \code{\link{locator}}, \code{\link{abline}}
 #' @keywords aplot iplot
+#' @importFrom graphics abline locator
 #' @export
 #' @examples
 #'

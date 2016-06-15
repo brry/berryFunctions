@@ -7,6 +7,8 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, ca 2012
 #' @seealso shapeZoom in \url{https://github.com/brry/shapeInteractive}, \code{\link{colPoints}}, \code{\link{locator}}
 #' @keywords aplot iplot dynamic
+#' @importFrom graphics legend locator par plot polygon rect
+#' @importFrom utils flush.console
 #' @export
 #' @examples
 #' 

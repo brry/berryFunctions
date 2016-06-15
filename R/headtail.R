@@ -8,6 +8,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Mrz 2016
 #' @seealso \code{\link{head}}
 #' @keywords manip
+#' @importFrom utils head tail
 #' @export
 #' @examples
 #' 

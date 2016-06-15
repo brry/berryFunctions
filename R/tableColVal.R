@@ -13,6 +13,8 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Nov. 2012
 #' @seealso \code{\link{pdf}}, \code{\link{heatmap}}
 #' @keywords hplot
+#' @importFrom grDevices dev.off pdf
+#' @importFrom graphics abline par plot rect
 #' @export
 #' @examples
 #' 

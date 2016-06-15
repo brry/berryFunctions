@@ -7,6 +7,7 @@
 #' @seealso \url{http://text-compare.com/} which I sadly only discovered after writing this function, 
 #'          \code{\link{dupes}} for finding duplicate lines, \code{\link{combineFiles}}
 #' @keywords IO file character
+#' @importFrom utils head
 #' @export
 #' @examples
 #' 

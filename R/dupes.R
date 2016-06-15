@@ -12,6 +12,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Dec 2014
 #' @seealso \code{\link{compareFiles}}
 #' @keywords IO file character
+#' @importFrom utils head write.table
 #' @export
 #' @examples
 #' 

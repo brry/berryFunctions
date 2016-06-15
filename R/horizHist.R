@@ -11,6 +11,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2011-2012
 #' @seealso \code{\link{hist}}, \code{\link{barplot}}, \code{\link{axis}}
 #' @keywords hplot
+#' @importFrom graphics axis barplot hist par plot
 #' @export
 #' @examples
 #' 

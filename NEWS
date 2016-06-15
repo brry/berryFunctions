@@ -2,13 +2,12 @@ package berryFunctions: my collection of miscellaneous helper functions
 Feedback, ideas, code suggestions welcome at berry-b@gmx.de or via github.com/brry/berryFunctions
 Before the actual NEWS, here are some things planned for future development:
 -----------------------------
-- finish funSource and rcor
+- finish funSource and rcor (RandomFields?)
 - exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) ) 
 - lsc: better example dataset, optim problems, sim line not plotted completely
 - tableColVal: add digits argument
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
 - implement is.error wherever applicable
-- move importsFrom in package documentation to sourcecode of the functions atually using it
 - late 2016: delete pastec and createDoc from package
 
 

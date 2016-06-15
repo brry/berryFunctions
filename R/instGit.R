@@ -19,6 +19,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Dec 2015 + Mar/Apr 2016
 #' @seealso \code{\link{funSource}}, \code{install_github} in each of the packages \code{devtools, ghit, remotes}
 #' @keywords package
+#' @importFrom utils download.file flush.console install.packages installed.packages unzip
 #' @export
 #' @examples
 #'

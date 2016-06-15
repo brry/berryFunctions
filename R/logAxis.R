@@ -9,6 +9,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sept 2014
 #' @seealso \code{\link{logVals}}, \code{\link{log10}}
 #' @keywords aplot dplot
+#' @importFrom graphics abline axis box par
 #' @export
 #' @examples
 #' 

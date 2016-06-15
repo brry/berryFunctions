@@ -7,6 +7,8 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2012
 #' @seealso \code{\link{symbols}}, \code{\link{polygon}}
 #' @keywords aplot
+#' @importFrom grDevices rgb
+#' @importFrom graphics polygon
 #' @export
 #' @examples
 #' 

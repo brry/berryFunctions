@@ -7,6 +7,7 @@
 #' @seealso \code{\link{object.size}}, \code{\link{ls}}
 #' @references \url{http://stackoverflow.com/questions/1358003/tricks-to-manage-the-available-memory-in-an-r-session}
 #' @keywords programming file
+#' @importFrom utils object.size
 #' @export
 #' @examples
 #' 

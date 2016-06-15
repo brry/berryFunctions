@@ -29,6 +29,7 @@
 #' @references See this page on the effect of classification (binning) methods: \cr 
 #' \url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html}
 #' @keywords classif
+#' @importFrom stats quantile sd
 #' @export
 #' @examples
 #' 

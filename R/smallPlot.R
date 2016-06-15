@@ -7,6 +7,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2014
 #' @seealso \code{\link{colPointsHist}} for an example of usage, \code{\link[TeachingDemos]{subplot}} and \code{\link[ade4]{add.scatter}} for alternative solutions to this problem that do not set margins.
 #' @keywords hplot
+#' @importFrom graphics par plot.new rect
 #' @export
 #' @examples
 #' 

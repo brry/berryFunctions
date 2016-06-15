@@ -7,6 +7,8 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Dec 2015
 #' @seealso \code{\link{betaPlot}}
 #' @keywords hplot distribution
+#' @importFrom graphics axis mtext par text
+#' @importFrom stats quantile
 #' @export
 #' @examples
 #' 

@@ -7,6 +7,10 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sept 2014
 #' @seealso \code{\link{quantile}}, \code{\link{quantileMean}}, \code{\link{ciBand}}, \code{\link{polygon}}, \url{cran.r-project.org/package=fanplot}
 #' @keywords dplot aplot univar
+#' @importFrom grDevices rgb
+#' @importFrom graphics plot polygon
+#' @importFrom stats na.omit
+#' @importFrom utils tail
 #' @export
 #' @examples
 #' 

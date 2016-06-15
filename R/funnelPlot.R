@@ -27,6 +27,8 @@
 #'    \url{http://sfew.websitetoolbox.com/post/variation-and-its-discontents-6555336?}\cr
 #'    Excellent explanation of bayesian take on proportions: \url{http://varianceexplained.org/r/empirical_bayes_baseball/}
 #' @keywords hplot aplot
+#' @importFrom graphics par plot
+#' @importFrom stats qnorm
 #' @export
 #' @examples
 #' 

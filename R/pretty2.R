@@ -11,6 +11,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Aug 2014
 #' @seealso \code{\link{pretty}} , \code{\link{logVals}}
 #' @keywords dplot
+#' @importFrom grDevices extendrange
 #' @export
 #' @examples
 #' 

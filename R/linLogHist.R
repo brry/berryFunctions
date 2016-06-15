@@ -8,6 +8,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, April 2015
 #' @seealso \code{\link{linLogTrans}}
 #' @keywords dplot hplot dynamic
+#' @importFrom graphics abline axis box hist title
 #' @export
 #' @examples
 #' 

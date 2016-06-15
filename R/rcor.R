@@ -5,6 +5,9 @@
 #' @author Berry Boesenkool, \email{berry-b@@gmx.de}, Jan 2016
 #' @references For regular grid fields, see: \url{http://santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r/}
 #' @note This function is not yet running
+#' @importFrom grDevices dev.off pdf
+#' @importFrom graphics points
+#' @importFrom stats cor runif
 #' @export
 #' @examples
 #' # ToDO: expand function + write examples

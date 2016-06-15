@@ -8,6 +8,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sept 2014
 #' @seealso \code{\link{quantile}}
 #' @keywords univar
+#' @importFrom stats quantile
 #' @export
 #' @examples
 #' 

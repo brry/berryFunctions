@@ -6,6 +6,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Aug 2014
 #' @seealso \code{\link{colPoints}} (section examples) for real life example
 #' @keywords aplot color
+#' @importFrom graphics axis hist par rect
 #' @export
 #' @examples
 #' 

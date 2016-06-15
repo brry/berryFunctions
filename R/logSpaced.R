@@ -9,6 +9,8 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Oct 2014
 #' @seealso \code{\link{classify}}, \code{\link{log}}
 #' @keywords arith
+#' @importFrom graphics plot points
+#' @importFrom stats coef lm
 #' @export
 #' @examples
 #' 

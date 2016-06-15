@@ -6,6 +6,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2011/2012
 #' @seealso \code{\link{lines}}, \code{\link{col2rgb}}, \code{\link{rgb}}
 #' @keywords aplot
+#' @importFrom graphics lines
 #' @export
 #' @examples
 #' 

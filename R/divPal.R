@@ -9,6 +9,7 @@
 #'          \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 #' @references Originally in 12 shades in the IPCC Assesment Report 5 Chapter 12 Fig 12.22, \url{http://www.ipcc.ch/report/ar5/wg1/}
 #' @keywords color dplot
+#' @importFrom grDevices colorRampPalette
 #' @export
 #' @examples
 #'

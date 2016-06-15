@@ -7,6 +7,7 @@
 #' @seealso \code{\link{showPal}}, \code{\link{divPal}}, \code{\link{addAlpha}}, 
 #'          \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 #' @keywords color dplot
+#' @importFrom grDevices colorRampPalette
 #' @export
 #' @examples
 #' 

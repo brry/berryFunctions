@@ -12,6 +12,8 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2012-2013, outsourced from mReg in July 2014
 #' @seealso \code{\link{mReg}}, \code{\link{lm}}
 #' @keywords regression nonlinear
+#' @importFrom graphics lines par plot
+#' @importFrom stats coef lm optim
 #' @export
 #' @examples
 #' 

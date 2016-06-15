@@ -8,6 +8,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2014
 #' @seealso \code{\link{install.packages}}, \code{\link{library}}
 #' @keywords package
+#' @importFrom utils install.packages
 #' @export
 #' @examples
 #' 

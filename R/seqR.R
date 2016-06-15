@@ -6,6 +6,8 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Feb 2014
 #' @seealso \code{\link{seq}}, \code{\link{range}}, \url{http://r.789695.n4.nabble.com/seq-range-argument-td4684627.html}
 #' @keywords datagen
+#' @importFrom grDevices extendrange
+#' @importFrom utils tail
 #' @export
 #' @examples
 #' 

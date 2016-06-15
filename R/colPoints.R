@@ -12,6 +12,9 @@
 #' @references \url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html},
 #'             \url{http://www.theusrus.de/blog/the-good-the-bad-22012/}
 #' @keywords aplot hplot color
+#' @importFrom grDevices colorRampPalette rainbow
+#' @importFrom graphics plot points segments
+#' @importFrom stats approx median na.omit
 #' @export
 #' @examples
 #' 

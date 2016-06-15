@@ -5,6 +5,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, May 2016
 #' @seealso \code{\link{spiralDate}}, \code{\link{linLogHist}}
 #' @keywords chron hplot aplot color
+#' @importFrom utils setTxtProgressBar txtProgressBar
 #' @export
 #' @examples
 #'

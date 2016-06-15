@@ -7,6 +7,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, November 2015, in search of good datasets for teaching
 #' @seealso \code{\link{str}}
 #' @keywords print documentation
+#' @importFrom utils data str
 #' @export
 #' @examples
 #' 

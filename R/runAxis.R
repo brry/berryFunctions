@@ -6,6 +6,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2016
 #' @seealso \code{\link{logAxis}}, \code{\link{monthAxis}}
 #' @keywords aplot
+#' @importFrom graphics axis box
 #' @export
 #' @examples
 #' plot(1:200, xaxt="n")

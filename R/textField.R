@@ -20,6 +20,7 @@
 #'          \code{s.label} in package \code{ade4}, which is not so versatile and doesn't work with logarithmic axes
 #' @references with inspiration taken from \code{ordilabel} in package \code{vegan} and thanks to Jari Oksanen for his comments
 #' @keywords aplot
+#' @importFrom graphics par polygon rect strheight text
 #' @export
 #' @examples
 #' 

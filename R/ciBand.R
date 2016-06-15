@@ -6,6 +6,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, July 2015
 #' @seealso \code{\link{quantileBands}}, \code{\link{polygon}}, \code{\link{approx2}}
 #' @keywords aplot hplot
+#' @importFrom graphics lines plot polygon
 #' @export
 #' @examples
 #' 

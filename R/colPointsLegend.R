@@ -7,6 +7,8 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2012-2014
 #' @seealso \code{\link{colPoints}} (section examples) for real life example
 #' @keywords aplot color
+#' @importFrom graphics lines par plot.window polygon rect segments strheight strwidth text
+#' @importFrom utils head tail
 #' @export
 #' @examples
 #' 

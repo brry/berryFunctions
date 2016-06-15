@@ -7,6 +7,8 @@
 #' @seealso \code{\link{colPoints}}, \code{\link{as.Date}}
 #' @keywords chron hplot aplot color
 # @importFrom package fun1 fun2
+#' @importFrom graphics plot text
+#' @importFrom utils tail
 #' @export
 #' @examples
 #' # synthetic seasonal Data

@@ -5,6 +5,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, May 2015
 #' @seealso \code{\link{movAv}}, \code{\link{addAlpha}}
 #' @keywords ts manip smooth
+#' @importFrom graphics lines plot
 #' @export
 #' @examples
 #' 

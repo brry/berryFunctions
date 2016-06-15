@@ -9,6 +9,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2010
 #' @seealso \code{\link{ci}}, \code{\link{t.test}}, \code{\link{summary}}
 #' @keywords htest
+#' @importFrom stats median quantile sd t.test
 #' @export
 #' @examples
 #' 

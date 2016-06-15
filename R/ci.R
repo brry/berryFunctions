@@ -19,6 +19,7 @@
 #'   Goldstein, H.; Healey, M.J.R. (1995). "The graphical presentation of a collection of means". Journal of the Royal Statistical Society\cr
 #'   \url{http://www.jstor.org/stable/2983411}
 #' @keywords htest
+#' @importFrom stats t.test
 #' @export
 #' @examples
 #' 

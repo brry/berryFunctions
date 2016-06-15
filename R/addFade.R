@@ -11,6 +11,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Feb 2016
 #' @seealso \code{\link{addAlpha}}, \code{\link{colorRamp}}, \code{\link{colors}}
 #' @keywords dplot color
+#' @importFrom grDevices colorRamp rgb
 #' @export
 #' @examples
 #' 

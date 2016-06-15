@@ -7,6 +7,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Apr 2016
 #' @seealso \code{\link{seqPal}}, \code{\link{divPal}}, package \code{RColorBrewer}
 #' @keywords dplot color
+#' @importFrom graphics par plot text title
 #' @export
 #' @examples
 #' showPal()

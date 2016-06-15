@@ -12,6 +12,9 @@
 #' \url{http://www.ipb.uni-tuebingen.de/kurs/comp/1_excel2007/1_pic/2007diagramm_verbund02.jpg}\cr
 #' \url{http://www.zivatar.hu/felhotar/albums/userpics/wldp.png}
 #' @keywords hplot
+#' @importFrom grDevices rgb
+#' @importFrom graphics abline axis box layout lines mtext par plot text
+#' @importFrom stats coef lm
 #' @export
 #' @examples
 #' 
