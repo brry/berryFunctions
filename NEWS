@@ -2,7 +2,7 @@ package berryFunctions: my collection of miscellaneous helper functions
 Feedback, ideas, code suggestions welcome at berry-b@gmx.de or via github.com/brry/berryFunctions
 Before the actual NEWS, here are some things planned for future development:
 -----------------------------
-- finish funSource and rcor (RandomFields?)
+- finish funSource (search if site not found)
 - exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) ) 
 - lsc: better example dataset, optim problems, sim line not plotted completely
 - tableColVal: add digits argument

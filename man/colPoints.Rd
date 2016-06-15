@@ -190,6 +190,13 @@ colPoints(mx,my,mz, cex=5, pch="*", Range=c(94, 195), col2=NA, legend=FALSE)
 points(mx,my, cex=4)
 text(mx,my,mz, adj=-0.5, font=2)
 
+# santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r
+# library(gstat)
+# xyz <- gstat(formula=z~1, locations=~x+y, dummy=T, beta=1, model=vgm(psill=0.025,model="Exp",range=5), nmax=20)
+# xyz <- predict(xyz, newdata=data.frame(x=runif(200, 20,40),y=runif(200, 50,70)), nsim=1)
+# head(xyz)
+# colPoints(x,y,sim1, data=xyz, col=rainbow2(100), add=F)
+
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2014. I'd be interested in hearing what you used the function for.
