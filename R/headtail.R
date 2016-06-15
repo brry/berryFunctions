@@ -41,7 +41,7 @@
 #' @param n Number of elements/rows/lines at begin and end of object to be returned. DEFAULT: 1
 #' @param nh,nt Number for \code{\link{head}} and \code{\link{tail}}, respectively. DEFAULT: n
 #' @param na Add NA values in between to emphasize visibly that there is
-#'           something inbetween the values? DEFAULT: TRUE
+#'           something inbetween the values? DEFAULT: FALSE
 #' @param \dots Further arguments passed to \code{\link{head}} and \code{\link{tail}}
 #'
 headtail <- function(
@@ -49,7 +49,7 @@ headtail <- function(
 n=1,
 nh=n,
 nt=n,
-na=TRUE,
+na=FALSE,
 ...
 )
 {

@@ -4,7 +4,7 @@
 \alias{headtail}
 \title{head and tail}
 \usage{
-headtail(x, n = 1, nh = n, nt = n, na = TRUE, ...)
+headtail(x, n = 1, nh = n, nt = n, na = FALSE, ...)
 }
 \arguments{
 \item{x}{Object}
@@ -14,7 +14,7 @@ headtail(x, n = 1, nh = n, nt = n, na = TRUE, ...)
 \item{nh, nt}{Number for \code{\link{head}} and \code{\link{tail}}, respectively. DEFAULT: n}
 
 \item{na}{Add NA values in between to emphasize visibly that there is
-something inbetween the values? DEFAULT: TRUE}
+something inbetween the values? DEFAULT: FALSE}
 
 \item{\dots}{Further arguments passed to \code{\link{head}} and \code{\link{tail}}}
 }
