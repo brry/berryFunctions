@@ -98,7 +98,7 @@
 #' @param adj vector of length one or two. DEFAULT: par("adj")
 #' @param pos in 'text', pos overrides adj values. DEFAULT: NULL
 #' @param offset I want the field to still be drawn with adj, but have it based on pos. DEFAULT: 0.5
-#' @param quiet Suppress warning when Arguments are recycled?. DEFAULT: FALSE
+#' @param quiet Suppress warning when Arguments are recycled? DEFAULT: TRUE
 #' @param \dots further arguments passed to strwidth and text, like font, vfont, family
 #' 
 textField <- function(
@@ -119,7 +119,7 @@ xpd=par("xpd"),
 adj=par("adj"),
 pos=NULL,
 offset=0.5,
-quiet=FALSE,
+quiet=TRUE,
 ...)
 {
 # Partial matching field--------------------------------------------------------
