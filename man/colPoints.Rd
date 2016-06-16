@@ -191,11 +191,13 @@ points(mx,my, cex=4)
 text(mx,my,mz, adj=-0.5, font=2)
 
 # santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r
-# library(gstat)
-# xyz <- gstat(formula=z~1, locations=~x+y, dummy=T, beta=1, model=vgm(psill=0.025,model="Exp",range=5), nmax=20)
-# xyz <- predict(xyz, newdata=data.frame(x=runif(200, 20,40),y=runif(200, 50,70)), nsim=1)
-# head(xyz)
-# colPoints(x,y,sim1, data=xyz, col=rainbow2(100), add=F)
+if(require(gstat)){
+xyz <- gstat(formula=z~1, locations=~x+y, dummy=TRUE, beta=1, 
+             model=vgm(psill=0.025,model="Exp",range=5), nmax=20)
+xyz <- predict(xyz, newdata=data.frame(x=runif(200, 20,40),y=runif(200, 50,70)), nsim=1)
+head(xyz)
+colPoints(x,y,sim1, data=xyz, col=rainbow2(100), add=FALSE)
+}
 
 }
 \author{
