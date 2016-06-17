@@ -4,28 +4,45 @@
 \alias{dataDWD}
 \title{download and process data from DWD}
 \usage{
-dataDWD(file, base1 = "ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany",
-  base2 = "climate/hourly/precipitation/recent", dir = "precDWD",
-  converttime = TRUE, format = "\%Y\%m\%d\%H", ...)
+dataDWD(file, stats = substring(file, nchar(file) - 3) == ".txt",
+  widths = "h", files = FALSE, browse = 0,
+  base1 = "ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/climate",
+  base2 = "hourly/precipitation/recent", dir = "precDWD",
+  converttime = missing(base2), format = "\%Y\%m\%d\%H", ...)
 }
 \arguments{
 \item{file}{Filename (must be available at the location given by \code{base1} and \code{base2})}
 
+\item{stats}{Return metadata for all stations instead of actual data?
+DEFAULT: TRUE if \code{file} extension = .txt}
+
+\item{widths}{Column widths for \code{\link{read.fwf}} if \code{stats=TRUE}.
+Uses internal presets if "h" or "d" for hourly RR and daily KL. DEFAULT: "h"}
+
+\item{files}{Return vector with all available files? DEFAULT: FALSE}
+
+\item{browse}{Integer specifying whether and how to open repository via \code{\link{browseURL}}.
+0 for regular file download. 1 to open \code{base1}.
+2 to open \code{base1/base2}). If 1 or 2, no \code{dir} is created. DEFAULT: 0}
+
 \item{base1}{Main directory of DWD ftp server (can probably always be left unchanged)}
 
-\item{base2}{Characterstring with subdirectory. DEFAULT: "climate/hourly/precipitation/recent"}
+\item{base2}{Characterstring with subdirectory. DEFAULT: "hourly/precipitation/recent"}
 
 \item{dir}{Writeable directory on your computer. Created if not existent.
 DEFAULT: "precDWD" at your current \code{\link{getwd}()}}
 
-\item{converttime}{Convert the column MESS_DATUM to POSIXct? DEFAULT: TRUE}
+\item{converttime}{Convert the column MESS_DATUM to POSIXct (if column is present)?
+DEFAULT: TRUE if base2 is missing (because for daily values format must change)}
 
-\item{format}{Format for \code{\link{strptime}}. DEFAULT: "\%Y\%m\%d\%H"}
+\item{format}{Format used in \code{\link{strptime}} if \code{converttime=TRUE}.
+DEFAULT: "\%Y\%m\%d\%H"}
 
 \item{\dots}{Further arguments currently ignored}
 }
 \value{
-data.frame of the desired dataset, if download and processing were successfull
+data.frame of the desired dataset, if download and processing were successfull. 
+        Alternatively, links that were opened if \code{browse}!=0.
 }
 \description{
 Get climate data from the German Weather Service (DWD) FTP-server.
@@ -41,26 +58,22 @@ monthAxis(1, ym=T)
 
 prec2 <- dataDWD("stundenwerte_RR_03987_akt.zip") # writes into the same folder
 
-clim <- dataDWD(base2="climate/monthly/kl/recent", file="monatswerte_03987_akt.zip")
+clim <- dataDWD(base2="monthly/kl/recent", file="monatswerte_03987_akt.zip")
 # Potsdam monthly averages/mins/maxs of: wind, clouds, rainfall, sunshine, temperature
 
-# For several stations (do this at your own risk):
-link_base <- paste0("ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/",
-                    "climate/hourly/precipitation/recent/")
-# List of existing stations:
-link_stats <- paste0(link_base, "/RR_Stundenwerte_Beschreibung_Stationen.txt")
-stats <- read.fwf(link_stats, widths=c(6,9,9,15,12,10,41,100), skip=2, strip.white=TRUE)
-colnames(stats) <- strsplit(readLines(link_stats, n=1), " ")[[1]]
+# For several stations (do this at your own risk of getting banned)
+# metadata for existing stations:
+stats <- dataDWD("RR_Stundenwerte_Beschreibung_Stationen.txt")
 str(stats)  # data.frame with 8 columns (4 int, 2 num, 2 factor), 1292 rows (July 2016)
 head(stats)
 
-# List of actually available files:
+# List of actually available files (needs RCurl):
 # install.packages("RCurl")
-files <- RCurl::getURL(link_base, verbose=FALSE, ftp.use.epsv=TRUE, dirlistonly=TRUE)
-files <- strsplit(files, "\\r\\n")[[1]]
+files <- dataDWD("", files=TRUE)
 headtail(sort(files),6)
 
 # Apply the function to several files, create a list of data.frames:
+# Exclude the pdf and txt files, or dataDWD will break
 prec <- lapply(files[1:2], dataDWD)
 names(prec) <- substr(files[1:2], 14, 21)
 str(prec, max.level=1)
