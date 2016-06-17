@@ -87,7 +87,7 @@ lsc(calib$P, calib$Q, area=3.4, returnsim=TRUE, plot=FALSE)
 dummy <- lsc(valid$P, valid$Q, area=3.4, plotsim=FALSE, type="l")
 Qsim <- superPos(valid$P, UH)
 Qsim <- Qsim + valid$Q[1] # add baseflow
-lines(Qsim, lwd=2)
+lines(Qsim, lwd=2, xpd=NA)
 legend("center", legend=c("Observed","Simulated from calibration"), 
        lwd=c(1,2), col=c(2,1) )
 nse(valid$Q, Qsim[1:nrow(valid)]) # 0.47, which is not really good.
