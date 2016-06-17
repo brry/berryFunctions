@@ -10,7 +10,6 @@ Before the actual NEWS, here are some things planned for future development:
 - implement is.error wherever applicable
 - late 2016: delete pastec and createDoc from package
 - reference to sortDF in addRow, insertRow, etc
-- scaleBarOSM: check for correctness with known distances
 
 
 -----------------------------
