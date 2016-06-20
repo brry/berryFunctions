@@ -50,14 +50,19 @@
 #' @param n Numeric. Number of storages in cascade.
 #' @param k Numeric. Storage coefficient [1/s] (resistance to let water run out). High damping = slowly reacting landscape = high soil water absorbtion = high k.
 #' @param t Numeric, possibly a vector. Time [s].
-#' 
+#' @param force Logical: Force the integral of the hydrograph to be 1? DEFAULT: FALSE
+#'
 unitHydrograph <- function(
 n,
 k,
-t)
+t,
+force=FALSE
+)
 {
 if(length(n)>1 | length(k)>1) stop("n and k can only have one single value!
 For vectorization, use sapply (see documentation examples).")
-t^(n-1) / k^n / gamma(n) * exp(-t/k)  # some say /k^(n-1) for the second term!
+UH <- t^(n-1) / k^n / gamma(n) * exp(-t/k)  # some say /k^(n-1) for the second term!
+if(force) UH <- UH/sum(UH)
+UH
 }
 

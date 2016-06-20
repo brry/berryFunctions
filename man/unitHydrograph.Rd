@@ -4,7 +4,7 @@
 \alias{unitHydrograph}
 \title{Unit Hydrograph}
 \usage{
-unitHydrograph(n, k, t)
+unitHydrograph(n, k, t, force = FALSE)
 }
 \arguments{
 \item{n}{Numeric. Number of storages in cascade.}
@@ -12,6 +12,8 @@ unitHydrograph(n, k, t)
 \item{k}{Numeric. Storage coefficient [1/s] (resistance to let water run out). High damping = slowly reacting landscape = high soil water absorbtion = high k.}
 
 \item{t}{Numeric, possibly a vector. Time [s].}
+
+\item{force}{Logical: Force the integral of the hydrograph to be 1? DEFAULT: FALSE}
 }
 \value{
 Vector with the unit hydrograph along t
