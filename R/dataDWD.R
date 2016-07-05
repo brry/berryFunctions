@@ -115,7 +115,7 @@ if(stats)
 # list available files
 if(files)
   {
-  if(!require("RCurl", quietly=TRUE)) stop("R package 'Rcurl' not available. dataDWD(files=TRUE) not possible.")
+  if(!requireNamespace("RCurl", quietly=TRUE)) stop("R package 'Rcurl' not available. dataDWD(files=TRUE) not possible.")
   f <- RCurl::getURL(paste0(base1,"/",base2,"/"), verbose=F, ftp.use.epsv=TRUE, dirlistonly=TRUE)
   f <- strsplit(f, "\r\n")[[1]]
   write.table(f, file=paste0("INDEX_of_DWD_", gsub("/","_",base2),".txt"), 
