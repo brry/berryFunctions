@@ -8,7 +8,7 @@ Before the actual NEWS, here are some things planned for future development:
 - tableColVal: add digits argument
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
 - implement is.error wherever applicable
-- late 2016: delete pastec and createDoc from package
+- late 2016: delete pastec, pointZoom and createDoc from package
 - reference to sortDF in addRow, insertRow, etc
 - dataDWD: check if file/subfolder already exists (to avoid weird errors)
 

@@ -3,7 +3,7 @@
 #' zoom in x11 graphics - uses locator to define region to zoom into
 #' 
 #' @return none, works in existing graphics
-#' @note Extensive testing is yet to be done!
+#' @note This function will be deprecated in late 2016. Use \code{zoom::\link[zoom]{zm}()} instead.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, ca 2012
 #' @seealso shapeZoom in \url{https://github.com/brry/shapeInteractive}, \code{\link{colPoints}}, \code{\link{locator}}
 #' @keywords aplot iplot dynamic
@@ -55,6 +55,7 @@ quiet=FALSE,
 expr,
 ...)
 {
+warning("This will be deprecated in late 2016. Please use the R package 'zoom' and zm() instead.")
 if(interactive()){ # to silence the R CMD check warnings
 if(!quiet){
   legend("top", "Instructions appear in console", bty="n", text.col="orange")

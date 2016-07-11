@@ -40,7 +40,7 @@ none, works in existing graphics
 zoom in x11 graphics - uses locator to define region to zoom into
 }
 \note{
-Extensive testing is yet to be done!
+This function will be deprecated in late 2016. Use \code{zoom::\link[zoom]{zm}()} instead.
 }
 \examples{
 
