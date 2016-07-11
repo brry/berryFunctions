@@ -52,7 +52,7 @@ climateGraph(temp=c(-9.3,-8.2,-2.8,6.3,13.4,16.8,18.4,17,11.7,5.6,-1,-5.9),
 
 ## ----df------------------------------------------------------------------
 # Convert list with vectors of unequal length to one single data.frame: l2df
-eglist <- list(BB=c(6,9,2,6), KA=1:8, JE=c(-3,2) )
+eglist <- list(AB=c(6,9,2,6), CD=1:8, EF=c(-3,2) )
 eglist
 l2df(eglist)  # names are even kept
 

@@ -30,7 +30,7 @@ instGit("brry/berryFunctions")
 library(berryFunctions)
 ```
 
-[TOC](#header)
+[TOC](#top)
 
 ## Package highlights
 
@@ -91,12 +91,12 @@ climateGraph(temp=c(-9.3,-8.2,-2.8,6.3,13.4,16.8,18.4,17,11.7,5.6,-1,-5.9),
              rain=c(46,46,36,30,31,21,26,57,76,85,59,46))
 ```
 
-[TOC](#header)
+[TOC](#top)
 
 ## Dataframe Operations
 ```{r df}
 # Convert list with vectors of unequal length to one single data.frame: l2df
-eglist <- list(BB=c(6,9,2,6), KA=1:8, JE=c(-3,2) )
+eglist <- list(AB=c(6,9,2,6), CD=1:8, EF=c(-3,2) )
 eglist
 l2df(eglist)  # names are even kept
 
@@ -115,7 +115,7 @@ TFtest(!a & !b, a&b, !(a&b))
 headtail(iris, n=3, na=FALSE)
 ```
 
-[TOC](#header)
+[TOC](#top)
 
 ## Graphics
 
@@ -211,7 +211,7 @@ str(dummy)
 ```
 
 
-[TOC](#header)
+[TOC](#top)
 
 ## Hydrology
 
@@ -240,7 +240,7 @@ rsquare(QOBS, QSIM)
 ```
 
 
-[TOC](#header)
+[TOC](#top)
 
 ## Spatial
 ```{r spatial, echo=-1, fig.height=3.5, fig.width=5.5}
@@ -264,7 +264,7 @@ triangleArea(a,b)
 Zooming in Shapefiles in my package https://github.com/brry/shapeInteractive
 
 
-[TOC](#header)
+[TOC](#top)
 
 ## Miscellaneous
 ```{r misc}
@@ -339,7 +339,7 @@ set.seed(1248272); paste(sample(letters,5,rep=T),collapse='')
 ```
 
 
-[TOC](#header)
+[TOC](#top)
 
 Explore the other possibilities of the package by reading the function help files.  
 Any Feedback on this package (or this vignette) is very welcome via github or <berry-b@gmx.de>!
