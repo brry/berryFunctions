@@ -1,0 +1,38 @@
+#' process data from DWD
+#'
+#' Read climate data that was downloaded with \code{\link{dataDWD}}.
+#'
+#' @return data.frame of the desired dataset
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jul 2016
+#' @seealso \code{\link{dataDWD}}
+#' @keywords aplot
+#' @export
+#'
+#' @param exdir Path to (including name of) extracted Zip-File, e.g. "tageswerte_KL_02575_akt".
+#' @param format Format passed to \code{\link{as.POSIXct}} (see \code{\link{strptime}})
+#'               to convert the date/time column to POSIX time format .
+#'               If NULL, no conversion is performed (date stays a factor).
+#'               If NA, \code{readDWD} tries to find suitable format based on the number of characters.
+#'
+readDWD <- function(
+exdir,
+format=NA
+)
+{
+# file selection
+checkFile(exdir)
+file <- dir(exdir, pattern="produkt*", full=TRUE)
+if(length(file)!=1) warning("There is more/less than 1 'produkt*' file in ", exdir,
+                            ":\n", toString(file), "\nOnly the first one is used.")
+file <- file[1]
+# Actually read data
+dat <- read.table(file, na.strings=na9(), header=TRUE, sep=";", as.is=FALSE)
+# process time-stamp:
+if(!is.null(format) & "MESS_DATUM" %in% colnames(dat))
+  {
+  if(is.na(format)) format <- if(nchar(dat$MESS_DATUM[1])==8) "%Y%m%d" else "%Y%m%d%H"
+  dat$MESS_DATUM <- as.POSIXct(as.character(dat$MESS_DATUM), format=format)
+  }
+# return dataset:
+dat
+}
