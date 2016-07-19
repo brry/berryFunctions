@@ -7,7 +7,7 @@
 dataDWD(file,
   base1 = "ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/climate",
   base2 = "hourly/precipitation/recent", dir = "DWDdata", browse = 0:2,
-  meta = 0:2, format = NA, ...)
+  meta = 0:2, format = NA, quiet = FALSE, ...)
 }
 \arguments{
 \item{file}{Filename (must be available at the location given by \code{base1} and \code{base2})}
@@ -32,6 +32,8 @@ If meta=2, file="" is possible, as it is ignored anyways). DEFAULT: 0}
 
 \item{format}{Format used in \code{\link{strptime}} to convert date/time column,
 see \code{\link{readDWD}}. DEFAULT: NA}
+
+\item{quiet}{Suppress message about directory? DEFAULT: FALSE}
 
 \item{\dots}{Further arguments currently ignored}
 }

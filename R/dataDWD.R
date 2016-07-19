@@ -102,6 +102,7 @@
 #'               If meta=2, file="" is possible, as it is ignored anyways). DEFAULT: 0
 #' @param format Format used in \code{\link{strptime}} to convert date/time column,
 #'               see \code{\link{readDWD}}. DEFAULT: NA
+#' @param quiet Suppress message about directory? DEFAULT: FALSE
 #' @param \dots Further arguments currently ignored
 #'
 dataDWD <- function(
@@ -112,6 +113,7 @@ dir="DWDdata",
 browse=0:2,
 meta=0:2,
 format=NA,
+quiet=FALSE,
 ...
 )
 {
@@ -133,9 +135,9 @@ if(browse==2)
 if(!file.exists(dir))
   {
   dir.create(dir)
-  message("Directory '", dir, "' created at '", getwd(),"'")
+  if(!quiet) message("Directory '", dir, "' created at '", getwd(),"'")
   } else
-  message("Adding to directory '", dir, "' at '", getwd(),"'")
+  if(!quiet) message("Adding to directory '", dir, "' at '", getwd(),"'")
 owd <- setwd(dir)
 on.exit(setwd(owd))
 #
