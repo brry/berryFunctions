@@ -180,7 +180,7 @@ unzip(file, exdir=exdir)
 # read datafile:
 dat <- readDWD(exdir=exdir, format=format)
 # write textfile for later reading:
-write.table(dat, file=paste0(exdir, ".txt"))
+###write.table(dat, file=paste0(exdir, ".txt"))  ## slows things down!
 # return dataset:
 dat
 }

@@ -21,7 +21,7 @@ format=NA
 {
 # file selection
 checkFile(exdir)
-file <- dir(exdir, pattern="produkt*", full=TRUE)
+file <- dir(exdir, pattern="produkt*", full.names=TRUE)
 if(length(file)!=1) warning("There is more/less than 1 'produkt*' file in ", exdir,
                             ":\n", toString(file), "\nOnly the first one is used.")
 file <- file[1]
