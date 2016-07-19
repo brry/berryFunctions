@@ -70,7 +70,7 @@ headtail(sort(files),6)
 
 # Apply the function to several files, create a list of data.frames:
 # Exclude the pdf and txt files, or dataDWD will break
-prec <- lapply(files[1:2], function(f) {dataDWD(f); Sys.sleep(runif(1,0,5))})
+prec <- lapply(files[1:2], function(f) {Sys.sleep(runif(1,0,5)); dataDWD(f)})
 names(prec) <- substr(files[1:2], 14, 21)
 str(prec, max.level=1)
 
