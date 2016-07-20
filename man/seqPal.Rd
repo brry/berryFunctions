@@ -5,7 +5,7 @@
 \title{Sequential color palette}
 \usage{
 seqPal(n = 12, reverse = FALSE, alpha = 1, extr = FALSE, yb = FALSE,
-  yr = FALSE, colors = NULL, ...)
+  yr = FALSE, gb = FALSE, colors = NULL, ...)
 }
 \arguments{
 \item{n}{Number of colors. DEFAULT: 12}
@@ -21,6 +21,8 @@ using the result from \code{RColorBrewer::brewer.pal(9, "YlGnBu")}. DEFAULT: FAL
 \item{yb}{Should colors be in yellow-blue instead of the internal (nice) default? DEFAULT: FALSE}
 
 \item{yr}{Should colors be in yellow-red instead of the default? DEFAULT: FALSE}
+
+\item{gb}{Should colors be in green-blue instead of the default? DEFAULT: FALSE}
 
 \item{colors}{If not NULL, a color vector used in \code{\link{colorRampPalette}}. DEFAULT: NULL}
 

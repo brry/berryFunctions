@@ -12,14 +12,13 @@
 #' @examples
 #' showPal()
 #'
+#' @param cex Caracter EXpansion size (width of color bar). DEFAULT: 4
 #' @param \dots Arguments passed to \code{\link{par}}
 #'
-showPal <- function(...)
+showPal <- function(cex=4,...)
 {
-op <- par(mfcol=c(8,2), mar=c(0,0,0,0), oma=c(0,0,1.8,0), yaxt="n", xaxt="n", ...)
+op <- par(mfcol=c(9,2), mar=c(0,0,0,0), oma=c(0,0,1.8,0), yaxt="n", xaxt="n", ...)
 on.exit(par(op), add=TRUE)
-cex <- 3
-
 # Sequential palette -----------------------------------------------------------
 plot(rep(1, 12), pch=15, cex=cex, col=seqPal(12))            ; text(  6, 1, "default")
 title(main="berryFunctions::seqPal", xpd=NA, line=0.5) 
@@ -30,6 +29,7 @@ plot(rep(1, 12), pch=15, cex=cex, col=seqPal(alpha=0.4))     ; text(  6, 1, "alp
 plot(rep(1, 12), pch=15, cex=cex, col=seqPal(reverse=TRUE))  ; text(  6, 1, "rev=TRUE")
 plot(rep(1,300), pch=15, cex=cex, col=seqPal(300, yb=TRUE))  ; text(150, 1, "yb=TRUE")
 plot(rep(1,300), pch=15, cex=cex, col=seqPal(300, yr=TRUE))  ; text(150, 1, "yr=TRUE")
+plot(rep(1,300), pch=15, cex=cex, col=seqPal(300, gb=TRUE))  ; text(150, 1, "gb=TRUE")
 
 # Diverging palette ------------------------------------------------------------
 plot(rep(1, 12), pch=15, cex=cex, col=divPal(12))            ; text(  6, 1, "default")
@@ -42,5 +42,6 @@ plot(rep(1, 12), pch=15, cex=cex, col=divPal(alpha=0.4))     ; text(  6, 1, "alp
 plot(rep(1, 12), pch=15, cex=cex, col=divPal(reverse=TRUE))  ; text(  6, 1, "rev=TRUE")
 plot(rep(1,300), pch=15, cex=cex, col=divPal(300, rwb=TRUE)) ; text(150, 1, "rwb=TRUE")
 plot(rep(1,300), pch=15, cex=cex, col=divPal(300, ryb=TRUE)) ; text(150, 1, "ryb=TRUE")
-
+plot(rep(1,300), pch=15, cex=cex, col=rainbow2(300))         ; ##
+text(150, 1, "berryFunctions::rainbow2(300)", font=2)
 }

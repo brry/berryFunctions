@@ -4,9 +4,11 @@
 \alias{showPal}
 \title{show color palettes}
 \usage{
-showPal(...)
+showPal(cex = 4, ...)
 }
 \arguments{
+\item{cex}{Caracter EXpansion size (width of color bar). DEFAULT: 4}
+
 \item{\dots}{Arguments passed to \code{\link{par}}}
 }
 \description{
