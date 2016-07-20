@@ -7,7 +7,7 @@
 dataDWD(file,
   base1 = "ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/climate",
   base2 = "hourly/precipitation/recent", dir = "DWDdata", browse = 0:2,
-  meta = 0:2, format = NA, quiet = FALSE, ...)
+  meta = 0:2, read = TRUE, format = NA, quiet = FALSE, ...)
 }
 \arguments{
 \item{file}{Filename (must be available at the location given by \code{base1} and \code{base2})}
@@ -30,6 +30,9 @@ Column widths for \code{\link{read.fwf}} are computed internally).
 2 for a list of the available files (requires \code{RCurl} to be installed.
 If meta=2, file="" is possible, as it is ignored anyways). DEFAULT: 0}
 
+\item{read}{Read the file with \code{\link{readDWD}}?
+If FALSE, only download is performed. DEFAULT: TRUE}
+
 \item{format}{Format used in \code{\link{strptime}} to convert date/time column,
 see \code{\link{readDWD}}. DEFAULT: NA}
 
@@ -39,7 +42,7 @@ see \code{\link{readDWD}}. DEFAULT: NA}
 }
 \value{
 data.frame of the desired dataset (returned by \code{\link{readDWD}} if meta=0), 
-        if download and processing were successfull. 
+        presuming downloading and processing were successfull.
         Alternatively, links that were opened if \code{browse}!=0.
 }
 \description{

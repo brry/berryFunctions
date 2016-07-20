@@ -4,7 +4,7 @@
 #' The desired .zip dataset is downloaded into \code{dir}, unpacked, read, processed and returned as a data.frame
 #'
 #' @return data.frame of the desired dataset (returned by \code{\link{readDWD}} if meta=0), 
-#'         if download and processing were successfull. 
+#'         presuming downloading and processing were successfull.
 #'         Alternatively, links that were opened if \code{browse}!=0.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2016
 #' @seealso \code{\link{readDWD}}, \code{\link{download.file}}, \code{\link{monthAxis}}, \code{\link{climateGraph}}
@@ -100,6 +100,8 @@
 #'               Column widths for \code{\link{read.fwf}} are computed internally).
 #'               2 for a list of the available files (requires \code{RCurl} to be installed.
 #'               If meta=2, file="" is possible, as it is ignored anyways). DEFAULT: 0
+#' @param read Read the file with \code{\link{readDWD}}?
+#'             If FALSE, only download is performed. DEFAULT: TRUE
 #' @param format Format used in \code{\link{strptime}} to convert date/time column,
 #'               see \code{\link{readDWD}}. DEFAULT: NA
 #' @param quiet Suppress message about directory? DEFAULT: FALSE
@@ -112,6 +114,7 @@ base2="hourly/precipitation/recent",
 dir="DWDdata",
 browse=0:2,
 meta=0:2,
+read=TRUE,
 format=NA,
 quiet=FALSE,
 ...
@@ -176,15 +179,5 @@ if(meta==2)
 #
 # Regular file download:
 download.file(url=link, destfile=file, quiet=TRUE)
-#### unzip:
-###exdir <- substr(file, 1, nchar(file)-4)
-###unzip(file, exdir=exdir)
-#### creates large files and reading along with unzipping is not much slower than
-#### only reading (tested for a historical large dataset)
-# read datafile:
-dat <- readDWD(file=file, format=format)
-# write textfile for later reading:
-###write.table(dat, file=paste0(exdir, ".txt"))  ## slows things down!
-# return dataset:
-dat
+if(read) readDWD(file=file, format=format)
 }
