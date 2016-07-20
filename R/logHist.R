@@ -32,7 +32,7 @@ col="tan",
 ...)
 {
 xname <- deparse(substitute(x))
-x <- as.numeric(x)
+x <- na.omit(as.numeric(x))
 neg <- sum(x<=0)
 if(neg>0)
   {
