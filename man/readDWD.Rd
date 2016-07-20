@@ -4,10 +4,11 @@
 \alias{readDWD}
 \title{process data from DWD}
 \usage{
-readDWD(exdir, format = NA)
+readDWD(file, format = NA)
 }
 \arguments{
-\item{exdir}{Path to (including name of) extracted Zip-File, e.g. "tageswerte_KL_02575_akt".}
+\item{file}{Name of Zip-File downloaded with \code{\link{dataDWD}},
+e.g. "tageswerte_KL_02575_akt.zip".}
 
 \item{format}{Format passed to \code{\link{as.POSIXct}} (see \code{\link{strptime}})
 to convert the date/time column to POSIX time format .

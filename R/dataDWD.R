@@ -176,11 +176,13 @@ if(meta==2)
 #
 # Regular file download:
 download.file(url=link, destfile=file, quiet=TRUE)
-# unzip:
-exdir <- substr(file, 1, nchar(file)-4)
-unzip(file, exdir=exdir)
+#### unzip:
+###exdir <- substr(file, 1, nchar(file)-4)
+###unzip(file, exdir=exdir)
+#### creates large files and reading along with unzipping is not much slower than
+#### only reading (tested for a historical large dataset)
 # read datafile:
-dat <- readDWD(exdir=exdir, format=format)
+dat <- readDWD(file=file, format=format)
 # write textfile for later reading:
 ###write.table(dat, file=paste0(exdir, ".txt"))  ## slows things down!
 # return dataset:

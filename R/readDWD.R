@@ -8,23 +8,28 @@
 #' @keywords aplot
 #' @export
 #'
-#' @param exdir Path to (including name of) extracted Zip-File, e.g. "tageswerte_KL_02575_akt".
+#' @param file Name of Zip-File downloaded with \code{\link{dataDWD}},
+#'             e.g. "tageswerte_KL_02575_akt.zip".
 #' @param format Format passed to \code{\link{as.POSIXct}} (see \code{\link{strptime}})
 #'               to convert the date/time column to POSIX time format .
 #'               If NULL, no conversion is performed (date stays a factor).
 #'               If NA, \code{readDWD} tries to find suitable format based on the number of characters.
 #'
 readDWD <- function(
-exdir,
+file,
 format=NA
 )
 {
 # file selection
-checkFile(exdir)
+checkFile(file)
+exdir <- paste0(tempdir(),"/", substr(file, 1, nchar(file)-4))
+unzip(file, exdir=exdir)
+on.exit(unlink(exdir, recursive=TRUE))
+# new filename - the actual data file:
 file <- dir(exdir, pattern="produkt*", full.names=TRUE)
-if(length(file)!=1) warning("There is more/less than 1 'produkt*' file in ", exdir,
-                            ":\n", toString(file), "\nOnly the first one is used.")
-file <- file[1]
+###if(length(file)!=1) warning("There is more/less than 1 'produkt*' file in ", exdir,
+###                            ":\n", toString(file), "\nOnly the first one is used.")
+###file <- file[1]
 # Actually read data
 dat <- read.table(file, na.strings=na9(), header=TRUE, sep=";", as.is=FALSE)
 # process time-stamp:
