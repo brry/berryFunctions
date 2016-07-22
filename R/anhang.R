@@ -9,6 +9,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jul 2016
 #' @seealso \code{\link{funSource}}
 #' @export
+#' @examples
 #'
 anhang <- function()
 {
