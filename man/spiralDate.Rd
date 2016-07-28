@@ -89,7 +89,7 @@ spiralDate(time,vals, data=fakeData, pch=3)      # but not for points
 Berry Boessenkool, \email{berry-b@gmx.de}, May 2016
 }
 \seealso{
-\code{\link{colPoints}}, \code{\link{as.Date}}
+\code{\link{seasonality}}, \code{\link{colPoints}}, \code{\link{as.Date}}
 }
 \keyword{aplot}
 \keyword{chron}

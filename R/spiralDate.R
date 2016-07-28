@@ -4,7 +4,7 @@
 #'
 #' @return invisible data.frame with date, vals, and the plotting coordinates
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, May 2016
-#' @seealso \code{\link{colPoints}}, \code{\link{as.Date}}
+#' @seealso \code{\link{seasonality}}, \code{\link{colPoints}}, \code{\link{as.Date}}
 #' @keywords chron hplot aplot color
 # @importFrom package fun1 fun2
 #' @importFrom graphics plot text
