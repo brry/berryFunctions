@@ -31,7 +31,7 @@ is.error( checkFile("FileThatDoesntExist.txt", fun=MyWarn) ) # nonexisting funct
 # Vectorized:
 file.create("DummyFile2.txt")
 checkFile(paste0("DummyFile",1:3,".txt"), fun=message)
-checkFile(paste0("DummyFile",1:3,".txt") ) 
+checkFile(paste0("DummyFile",1:3,".txt") )
 file.remove("DummyFile2.txt")
 }
 

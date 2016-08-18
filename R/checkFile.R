@@ -13,15 +13,15 @@
 #' checkFile("FileThatDoesntExist.txt", fun=warning)
 #' checkFile("FileThatDoesntExist.txt", fun=message)
 #' is.error( checkFile("FileThatDoesntExist.txt", fun=MyWarn) ) # nonexisting function
-#' 
+#'
 #' \dontrun{## Excluded from CRAN checks because of file creation
 #' # Vectorized:
 #' file.create("DummyFile2.txt")
 #' checkFile(paste0("DummyFile",1:3,".txt"), fun=message)
-#' checkFile(paste0("DummyFile",1:3,".txt") ) 
+#' checkFile(paste0("DummyFile",1:3,".txt") )
 #' file.remove("DummyFile2.txt")
 #' }
-#' 
+#'
 #' \dontrun{## Excluded from CRAN checks because of intentional errors
 #' compareFiles("dummy.nonexist", "dummy2.nonexist")
 #' checkFile("dummy.nonexist")
@@ -46,12 +46,16 @@ trace=TRUE,
 ...
 )
 {
+if(is.character(fun)) stop("fun must be unquoted. Use fun=", fun, " instead of fun='", fun,"'.")
 # tracing the calling function(s):
 if(trace)
   {
   dummy <- capture.output(tb <- traceback(6) )
+  tb <- lapply(tb, "[", 1) # to shorten do.call (function( LONG ( STUFF)))
+  tb <- lapply(tb, function(x) if(substr(x,1,7)=="do.call")
+               sub(",", "(", sub("(", " - ", x, fixed=TRUE), fixed=TRUE) else x)
   calltrace <- sapply(strsplit(unlist(tb), "(", fixed=TRUE), "[", 1)
-  calltrace <- paste(rev(calltrace), collapse=" -> ")
+  calltrace <- paste(rev(calltrace[-1]), collapse=" -> ")
   }
 # check actual file existence:
 exi <- file.exists(file)
