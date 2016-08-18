@@ -8,7 +8,12 @@ If I'm doing anything wrong, I'm terrribly sorry ahead. Just let me know...
 * win-builder (devel and release)
 
 ## R CMD check results
-There were no ERRORs, WARNINGs or NOTES. 
+There were no ERRORs or WARNINGs. 
+
+One NOTE:
+Possibly mis-spelled words in DESCRIPTION: hydrograph 
+
+This is a valid technical term in hydrology describing the time series of flow in a river
 
 ## Downstream dependencies
 * extremeStat - everything appears to work just fine

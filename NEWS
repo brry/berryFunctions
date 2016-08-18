@@ -1,5 +1,6 @@
 package berryFunctions: my collection of miscellaneous helper functions
 Feedback, ideas, code suggestions welcome at berry-b@gmx.de or via github.com/brry/berryFunctions
+
 Before the actual NEWS, here are some things planned for future development:
 -----------------------------
 - finish funSource (search if site not found)
@@ -8,7 +9,7 @@ Before the actual NEWS, here are some things planned for future development:
 - tableColVal: add digits argument
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
 - implement is.error wherever applicable
-- late 2016: delete pastec, pointZoom and createDoc from package
+- late 2016: delete randomPoints, triangleArea, cie, cls, pastec, pointZoom and createDoc from package
 - reference to sortDF in addRow, insertRow, etc
 
 
@@ -16,9 +17,15 @@ Before the actual NEWS, here are some things planned for future development:
 -----------------------------
 
 
-Version 1.11.0 (2016--)
-https://github.com/brry/berryFunctions/compare/master@{2016-04-29}...master@{2016--}
-New functions: exTime, equidistPoints, is.error, checkFile, seasonality, spiralDate, spiralDateAnim, locArrow, runAxis, dataDWD, readDWD, toupper1, anhang
+Version 1.11.0 (2016-08-18)
+https://github.com/brry/berryFunctions/compare/master@{2016-04-29}...master@{2016-08-18}
+- A few function arguments added or refined here and there
+- spatially related functions moved to OSMscle (in development at github.com/brry/OSMscale)
+- na9 is now accurate
+- smallPlot now works correctly in multiple-figure plots (par(mfrow))
+- monthAxis gains a nice ym argument for plots with 1-3 years of data
+- showPal color palette display slightly expanded
+New functions: exTime, is.error, checkFile, seasonality, spiralDate, spiralDateAnim, locArrow, runAxis, dataDWD, readDWD, toupper1, anhang
 
 
 -----------------------------
