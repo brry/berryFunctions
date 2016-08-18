@@ -22,6 +22,7 @@ data.frame of the desired dataset
 Read climate data that was downloaded with \code{\link{dataDWD}}.
 }
 \examples{
+# see dataDWD
 
 }
 \author{

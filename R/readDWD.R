@@ -8,6 +8,7 @@
 #' @keywords aplot
 #' @export
 #' @examples
+#' # see dataDWD
 #'
 #' @param file Name of Zip-File downloaded with \code{\link{dataDWD}},
 #'             e.g. "tageswerte_KL_02575_akt.zip".
