@@ -5,11 +5,10 @@
 \title{Seasonality analysis}
 \usage{
 seasonality(dates, values, data, drange = NULL, vrange = NULL, shift = 0,
-  janline = TRUE, months = c("J", "F", "M", "A", "M", "J", "J", "A", "S",
-  "O", "N", "D"), xlab = "Year", ylab = "Month",
-  zlab = substitute(values), ylim = c(370, -3), yaxs = "i",
-  main = "Seasonality", mar = c(3, 3, 4, 1), mgp = c(1.9, 0.7, 0),
-  keeppar = TRUE, ...)
+  janline = TRUE, months = substr(month.abb, 1, 1), xlab = "Year",
+  ylab = "Month", zlab = substitute(values), ylim = c(370, -3),
+  yaxs = "i", main = "Seasonality", mar = c(3, 3, 4, 1), mgp = c(1.9,
+  0.7, 0), keeppar = TRUE, ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order. 
@@ -26,12 +25,14 @@ can be a vector like \code{dates}. DEFAULT: NULL}
 \item{vrange}{Optional value range (analogous to ylim), 
 can be a vector like \code{values}. DEFAULT: NULL}
 
-\item{shift}{Number of days to move the year-break to. DEFAULT: 0}
+\item{shift}{Number of days to move the year-break to. 
+E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0}
 
 \item{janline}{Logical: Should horizontal line be plotted at 
-January 1st if \code{shift!=0}? DEFAULT: TRUE}
+               January 1st if \code{shift!=0}? DEFAULT: TRUE
+### @param nmax Number of annual maxima to be marked and returned. DEFAULT: 0}
 
-\item{months}{Labels for the months}
+\item{months}{Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D}
 
 \item{xlab, ylab}{Labels for the axes. DEFAULT: Year, Month}
 
@@ -52,7 +53,9 @@ to the previous values. DEFAULT: TRUE}
 pch, main, xaxs, but not Range (use \code{vrange})}
 }
 \value{
-ReturnValue
+Data.frame with DOYs of annual maxima and number of nonNA values included
+        Please Note that the column year does not note the calendrical year 
+        if \code{shift!=0}.
 }
 \description{
 Plot time series to examine it for seasonality
@@ -64,6 +67,7 @@ Q <- read.table(qfile, skip=19, header=TRUE, sep=",", fill=TRUE)[,1:2]
 rm(qfile)
 colnames(Q) <- c("date","discharge")
 Q$date <- as.Date(Q$date)
+Q$discharge[530:540] <- NA
 plot(Q, type="l")
 spiralDate(date, discharge, data=Q) # most floods in winter
 seasonality(date, discharge, data=Q, shift=100, main="NRFA: Thames\\nRoyal Windsor Park")
