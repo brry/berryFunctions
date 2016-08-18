@@ -7,15 +7,15 @@
 anhang()
 }
 \value{
-None, opens pdf in default viewer using \code{\link{system2}}
+None, opens pdf in default viewer using \code{\link{system2}} or \code{\link{browseURL}}
 }
 \description{
 Open the Appendix of my R handbook found online at
 \url{RclickHandbuch.wordpress.com} or directly at
-\url{https://dl.dropboxusercontent.com/u/4836866/Rclick/Anhang.pdf}.
-This function is rather for internal usage on my two computers.
+\url{https://dl.dropbox.com/u/4836866/Rclick/Anhang.pdf}.
 }
 \examples{
+# anhang() # excluded from cran check because of external browser opening policy
 
 }
 \author{
