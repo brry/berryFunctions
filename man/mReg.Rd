@@ -266,7 +266,7 @@ mReg(rep(NA,10), 1:10, quiet=TRUE)
 Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2012, updated April and Aug 2013, sept 2015
 }
 \references{
-Listed here: \url{http://rclickhandbuch.wordpress.com/berryfunctions/#mReg}
+Listed here: \url{http://rclickhandbuch.wordpress.com/rpackages}
 }
 \seealso{
 \code{\link{glm}}, \code{\link{lm}}, \code{\link{optim}}
