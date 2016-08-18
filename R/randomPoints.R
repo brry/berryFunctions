@@ -47,6 +47,7 @@ mindist,
 plot=TRUE,
 ...)
 {
+warning("randomPoints has moved to package OSMscale and will be removed here in late 2016.")
 # benotigte Abstandsfunktion definieren:
 distance <- function(xpt,ypt, xref,yref) sqrt((xref-xpt)^2 + (yref-ypt)^2)
 # Zielvektoren fuer zufaellig verteilte Punkte erstellen

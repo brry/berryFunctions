@@ -24,6 +24,7 @@ x,
 y,
 digits=3)
 {
+warning("triangleArea has moved to package OSMscale and will be removed here in late 2016.")
 if( !is.vector(x) | !is.vector(y) ) stop("Input must be a vector!")
 if(length(x) != 3 | length(y) !=3 ) stop("Vectors must have 3 elements.")
 A <- 0.5*(x[1] * (y[2] - y[3]) + x[2] * (y[3] - y[1]) + x[3] * (y[1] - y[2]))
