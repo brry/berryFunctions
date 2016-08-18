@@ -58,7 +58,7 @@
 #' @param data Optional: data.frame with the column names as given by dates and values
 #' @param drange Optional date range (analogous to xlim), can be a vector like \code{dates}. DEFAULT: NULL
 #' @param vrange Optional value range (analogous to ylim), can be a vector like \code{values}. DEFAULT: NULL
-#' @param months Labels for the months
+#' @param months Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
 #' @param add Add to existing plot? DEFAULT: FALSE
 #' @param prop Proportion of the data to be actually plotted, used in \code{\link{spiralDateAnim}}. DEFAULT: NULL
 #' @param zlab Title of \code{\link{colPointsLegend}}
@@ -73,7 +73,7 @@ values,
 data,
 drange=NULL,
 vrange=NULL,
-months=c("J","F","M","A","M","J","J","A","S","O","N","D"),
+months=substr(month.abb,1,1),
 add=FALSE, 
 prop=NULL,
 zlab=substitute(values),

@@ -5,9 +5,8 @@
 \title{Spiral graph of time series}
 \usage{
 spiralDate(dates, values, data, drange = NULL, vrange = NULL,
-  months = c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"),
-  add = FALSE, prop = NULL, zlab = substitute(values), format = "\%Y",
-  nint = 1, ...)
+  months = substr(month.abb, 1, 1), add = FALSE, prop = NULL,
+  zlab = substitute(values), format = "\%Y", nint = 1, ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order. 
@@ -22,7 +21,7 @@ as accepted (and coerced) by \code{\link{as.Date}}}
 
 \item{vrange}{Optional value range (analogous to ylim), can be a vector like \code{values}. DEFAULT: NULL}
 
-\item{months}{Labels for the months}
+\item{months}{Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D}
 
 \item{add}{Add to existing plot? DEFAULT: FALSE}
 

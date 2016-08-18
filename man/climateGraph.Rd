@@ -5,8 +5,8 @@
 \title{climate graph after Walter and Lieth}
 \usage{
 climateGraph(temp, rain, main = "StatName\\n52\U00B0 24' N / 12\U00B0 58' E\\n42 m aSL",
-  units = c("\U00B0 C", "mm"), labs = c("J", "F", "M", "A", "M", "J", "J", "A",
-  "S", "O", "N", "D"), textprop = 0.2, ylim = range(temp, rain/2),
+  units = c("\U00B0 C", "mm"), labs=substr(month.abb,1,1), 
+  textprop = 0.2, ylim = range(temp, rain/2),
   compress = FALSE, ticks = -5:20 * 10, mar = c(1.5, 2.3, 4.5, 2.3),
   box = TRUE, keeplayout = FALSE, graylines = TRUE, lty = 1,
   colrain = "blue", coltemp = "red", lwd = 2, arghumi = NULL,
@@ -21,7 +21,7 @@ climateGraph(temp, rain, main = "StatName\\n52\U00B0 24' N / 12\U00B0 58' E\\n42
 
 \item{units}{units used for labelling. DEFAULT: c("d C", "mm")}
 
-\item{labs}{labels for x axis. DEFAULT: c("J","F","M","A","M","J","J","A","S","O","N","D")}
+\item{labs}{labels for x axis. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D}
 
 \item{textprop}{proportion of graphic that is used for writing the values in a table to the right. DEFAULT: 0.2}
 
