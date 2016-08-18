@@ -11,7 +11,7 @@ insertRows(df, r, new = NA)
 
 \item{r}{Row number (not name!), at which the \code{new} row is to be inserted. Can be a vector}
 
-\item{new}{Vector with data to be inserted, is recycled. Alternatively, a data.frame, whose rows are put into the r locations. 
+\item{new}{Vector with data to be inserted, is recycled. Alternatively, a data.frame, whose rows are put into the r locations.
 If it has more rows than length(r), the excess rows are ignored. DEFAULT: NA}
 }
 \value{
@@ -28,11 +28,16 @@ Has not yet been tested with RWI (really weird input), so might not be absolutel
 existingDF <- as.data.frame(matrix(1:20, nrow=5, ncol=4))
 existingDF
 insertRows(existingDF, 2) # default new=NA is recycled
-insertRows(existingDF, 2, 3:6)
+insertRows(existingDF, 2, 444:446)
 insertRows(existingDF, 3, new=matrix(10:1,ncol=2)) # input warning
+insertRows(existingDF, 1)
+insertRows(existingDF, 5)
+insertRows(existingDF, 6) # weird stuff...
+insertRows(existingDF, 9) # not supposed to do that
 
 # Works for multiple rows as well:
 insertRows(existingDF, r=c(2,4,5), new=NA)
+insertRows(existingDF, r=c(2,4,4), new=NA)
 
 # Also works with a data.frame for insertion:
 insertDF <- as.data.frame(matrix(101:112, nrow=3, ncol=4))
@@ -42,7 +47,7 @@ insertRows(existingDF, c(2,4:6), new=insertDF) # rows are recycled
 
 }
 \author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Oct 2015, based on code by Ari B. Friedmann 
+Berry Boessenkool, \email{berry-b@gmx.de}, Oct 2015, based on code by Ari B. Friedmann
         (I added the for loop, recycling, input controls and data.framification added by)
 }
 \references{
