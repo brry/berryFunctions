@@ -17,7 +17,7 @@
 #' groupHist(chickwts, weight, feed, col=2, breaks=20, main="Hi there")
 #' groupHist(iris, Petal.Width, Species)
 #' 
-#' @param d data.frame object name
+#' @param df data.frame object name
 #' @param x column name of variable of interest
 #' @param g column name of groups (\code{INDEX in \link{tapply}, f in \link{split}})
 #' @param xlab,ylab axis labels. DEFAULT: ""
@@ -27,7 +27,7 @@
 #' @param \dots further arguments passed to \code{\link{hist}}
 #' 
 groupHist <- function(
-d,
+df,
 x,
 g,
 xlab="", ylab="",
@@ -42,19 +42,19 @@ x <- gsub("\"", "", deparse(substitute(x)), fixed=TRUE)
 g <- gsub("\"", "", deparse(substitute(g)), fixed=TRUE)
 # get break values from full dataset,
 # ignore messages like: argument 'col' is not made use of
-suppressWarnings( h <- hist(d[,x], plot=FALSE, ...)    )
+suppressWarnings( h <- hist(df[,x], plot=FALSE, ...)    )
 # prepare dimensions:
-names <- unique(d[,g])
+names <- unique(df[,g])
 n <- length(names)
 op <- par(mfrow=panelDim(n, landscape=TRUE), mar=c(3,3,2,1), mgp=c(3,0.7,0),
           oma=c(0,0,2,0))
 on.exit(par(op))
 # perform grouping:
-dd <- split(d[,x], d[,g])
+dd <- split(df[,x], df[,g])
 # main title:
 unit2 <- if(is.na(unit)) "" else paste0("  [", unit, "] ")
 if(is.null(main))
-   main <- paste0("Histograms of ",x, unit2," in ",substitute(d),", grouped by ", g)
+   main <- paste0("Histograms of ",x, unit2," in ",substitute(df),", grouped by ", g)
 # actual plotting:
 for(i in 1:n)
   {

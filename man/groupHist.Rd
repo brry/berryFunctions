@@ -4,11 +4,11 @@
 \alias{groupHist}
 \title{Histogramm for classes}
 \usage{
-groupHist(d, x, g, xlab = "", ylab = "", las = 1, main = NULL,
+groupHist(df, x, g, xlab = "", ylab = "", las = 1, main = NULL,
   unit = NA, ...)
 }
 \arguments{
-\item{d}{data.frame object name}
+\item{df}{data.frame object name}
 
 \item{x}{column name of variable of interest}
 
