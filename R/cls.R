@@ -15,6 +15,8 @@
 cls <- function()
 
 {
+  warning("cls will be removed in late 2016.")
+  
     "Does currently not Work"
     #if (!require(rcom)) stop("Package 'rcom' is required for 'cls()'")
     #wsh <- comCreateObject("Wscript.Shell")
