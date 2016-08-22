@@ -11,7 +11,9 @@ checkFile(file, fun = stop, trace = TRUE, ...)
 
 \item{fun}{One of the functions \code{\link{stop}}, \code{\link{warning}}, or \code{\link{message}}. DEFAULT: stop}
 
-\item{trace}{Logical: Add function call stack to the message? DEFAULT: TRUE}
+\item{trace}{Logical: Add function call stack to the message? DEFAULT: TRUE
+WARNING: in \link{do.call} settings with large objects,
+tracing may take a lot of computing time.}
 
 \item{\dots}{Further arguments passed to \code{fun}}
 }

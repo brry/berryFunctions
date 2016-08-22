@@ -37,6 +37,8 @@
 #' @param file Filename(s) as character string to be checked for existence.
 #' @param fun One of the functions \code{\link{stop}}, \code{\link{warning}}, or \code{\link{message}}. DEFAULT: stop
 #' @param trace Logical: Add function call stack to the message? DEFAULT: TRUE
+#'              WARNING: in \link{do.call} settings with large objects,
+#'              tracing may take a lot of computing time.
 #' @param \dots Further arguments passed to \code{fun}
 #'
 checkFile <- function(
