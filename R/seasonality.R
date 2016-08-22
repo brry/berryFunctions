@@ -40,7 +40,8 @@
 #' @param zlab Title of \code{\link{colPointsLegend}}. DEFAULT: \code{values} name
 #' @param ylim,yaxs Parameters specifying y Axis appearance, see \code{\link{par}}. 
 #'                  DEFAULT: c(366,1), "i"
-#' @param main Graph title, offset to the left. DEFAULT: Seasonality 
+#' @param main,adj Graph title and offset to the left 
+#'              (\code{adj} passsed to \code{\link{title}}). DEFAULT: "Seasonality", 0.2
 #' @param mar,mgp Parameters specifying plot margin size and labels placement.
 #'                DEFAULT: c(3,3,4,1), c(2.2,0.7,0)
 #' @param keeppar Logical: Keep the margin parameters? If FALSE, they are reset
@@ -64,6 +65,7 @@ seasonality <- function(
   ylim=c(370,-3),
   yaxs="i",
   main="Seasonality",
+  adj=0.2,
   mar=c(3,3,4,1),
   mgp=c(1.9,0.7,0),
   keeppar=TRUE,
@@ -114,7 +116,7 @@ seasonality <- function(
   lDOY  <- as.numeric(format(labs,"%j"))
   if(janline & shift!=0) abline(h=shift+1)
   axis(2, lDOY, months, las=1)
-  title(main=main, adj=0)
+  title(main=main, adj=adj)
   # Annual maxima
   annmax <- tapply(X=values, INDEX=year, FUN=which.max)# FUN=order, decreasing=TRUE)
   annmax <- data.frame(year=as.numeric(names(annmax)), DOY=annmax)

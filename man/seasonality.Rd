@@ -7,8 +7,8 @@
 seasonality(dates, values, data, drange = NULL, vrange = NULL, shift = 0,
   janline = TRUE, months = substr(month.abb, 1, 1), xlab = "Year",
   ylab = "Month", zlab = substitute(values), ylim = c(370, -3),
-  yaxs = "i", main = "Seasonality", mar = c(3, 3, 4, 1), mgp = c(1.9,
-  0.7, 0), keeppar = TRUE, ...)
+  yaxs = "i", main = "Seasonality", adj = 0.2, mar = c(3, 3, 4, 1),
+  mgp = c(1.9, 0.7, 0), keeppar = TRUE, ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order. 
@@ -41,7 +41,8 @@ E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0}
 \item{ylim, yaxs}{Parameters specifying y Axis appearance, see \code{\link{par}}. 
 DEFAULT: c(366,1), "i"}
 
-\item{main}{Graph title, offset to the left. DEFAULT: Seasonality}
+\item{main, adj}{Graph title and offset to the left 
+(\code{adj} passsed to \code{\link{title}}). DEFAULT: "Seasonality", 0.2}
 
 \item{mar, mgp}{Parameters specifying plot margin size and labels placement.
 DEFAULT: c(3,3,4,1), c(2.2,0.7,0)}
