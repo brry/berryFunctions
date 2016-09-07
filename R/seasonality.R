@@ -121,8 +121,8 @@ seasonality <- function(
   annmax <- tapply(X=values, INDEX=year, FUN=which.max)# FUN=order, decreasing=TRUE)
   annmax <- data.frame(year=as.numeric(names(annmax)), DOY=annmax)
   rownames(annmax) <- NULL
-  year <- year[!is.na(values)]
-  annmax$n <- table(year)
+  annmax$n <- tapply(X=values, INDEX=year, FUN=function(x) sum(!is.na(x)))
+  annmax$max <- tapply(X=values, INDEX=year, FUN=max, na.rm=TRUE)
 ###  lines(annmax, type="o")
   return(annmax)
   }
