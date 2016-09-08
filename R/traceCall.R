@@ -25,5 +25,5 @@ traceCall <- function(
     sub(",", "(", sub("(", " - ", x, fixed=TRUE), fixed=TRUE) else x)
   calltrace <- sapply(strsplit(unlist(tb), "(", fixed=TRUE), "[", 1)
   calltrace <- paste(rev(calltrace), collapse=" -> ")
-  calltrace
+  calltrace <- paste0("\nCall stack: ", calltrace, "\n")
 }

@@ -57,7 +57,7 @@ Text <- if(length(exi)>1)
 paste0("  The files '", toString(file[!exi]), "'\n  do not exist at ", getwd()) else
 paste0("  The file '",           file,      "'\n  does not exist at ", getwd())
 #
-if(trace) Text <- paste(calltrace, Text, sep="\n")
+if(trace) Text <- paste(calltrace, Text)
 # return message, if file nonexistent:
 if(any(!exi)) fun(Text, ...)
 return(invisible(exi))
