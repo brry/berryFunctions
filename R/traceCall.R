@@ -8,6 +8,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sep 2016
 #' @seealso \code{\link{checkFile}} for example usage
 #' @keywords programming error
+#' @importFrom utils capture.output
 #' @export
 #' @examples
 #' 

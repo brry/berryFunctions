@@ -6,7 +6,6 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, May 2016
 #' @seealso \code{\link{file.exists}}
 #' @keywords file
-#' @importFrom utils capture.output
 #' @export
 #' @examples
 #' is.error( checkFile("FileThatDoesntExist.txt") )
