@@ -50,15 +50,7 @@ trace=TRUE,
 {
 if(is.character(fun)) stop("fun must be unquoted. Use fun=", fun, " instead of fun='", fun,"'.")
 # tracing the calling function(s):
-if(trace)
-  {
-  dummy <- capture.output(tb <- traceback(6) )
-  tb <- lapply(tb, "[", 1) # to shorten do.call (function( LONG ( STUFF)))
-  tb <- lapply(tb, function(x) if(substr(x,1,7)=="do.call")
-               sub(",", "(", sub("(", " - ", x, fixed=TRUE), fixed=TRUE) else x)
-  calltrace <- sapply(strsplit(unlist(tb), "(", fixed=TRUE), "[", 1)
-  calltrace <- paste(rev(calltrace[-1]), collapse=" -> ")
-  }
+if(trace)  calltrace <- traceCall()
 # check actual file existence:
 exi <- file.exists(file)
 # prepare message:
