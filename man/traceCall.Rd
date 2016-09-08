@@ -4,10 +4,10 @@
 \alias{traceCall}
 \title{call stack of a function}
 \usage{
-traceCall(...)
+traceCall(skip = 0)
 }
 \arguments{
-\item{\dots}{Currently ignored}
+\item{skip}{Number of levels to skip in \code{\link{traceback}}}
 }
 \value{
 Character string with the call stack
@@ -20,7 +20,11 @@ trace the call stack e.g. for error checking and format output for do.call level
                   tracing may take a lot of computing time.
 }
 \examples{
-
+lower <- function(a, s) warning(traceCall(s), "final value is: ", a+10)
+upper <- function(b, skip=0) lower(b+5, skip)
+upper(3)
+upper(3, skip=1) # traceCall skips last level (warning)
+is.error(upper("four"))
 
 }
 \author{

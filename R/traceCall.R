@@ -11,15 +11,19 @@
 #' @importFrom utils capture.output
 #' @export
 #' @examples
-#' 
+#' lower <- function(a, s) warning(traceCall(s), "final value is: ", a+10)
+#' upper <- function(b, skip=0) lower(b+5, skip)
+#' upper(3)
+#' upper(3, skip=1) # traceCall skips last level (warning)
+#' is.error(upper("four"))
 #'
-#' @param \dots Currently ignored
+#' @param skip Number of levels to skip in \code{\link{traceback}}
 #'
 traceCall <- function(
-...
+skip=0
 )
 {
-  dummy <- capture.output(tb <- traceback(8) )
+  dummy <- capture.output(tb <- traceback(8+skip) )
   tb <- lapply(tb, "[", 1) # to shorten do.call (function( LONG ( STUFF)))
   tb <- lapply(tb, function(x) if(substr(x,1,7)=="do.call")
     sub(",", "(", sub("(", " - ", x, fixed=TRUE), fixed=TRUE) else x)
