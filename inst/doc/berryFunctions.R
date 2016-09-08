@@ -156,24 +156,12 @@ rmse(QOBS, QSIM)
 # R squared (coefficient of determination): rsquare
 rsquare(QOBS, QSIM)
 
-## ----spatial, echo=-1, fig.height=3.5, fig.width=5.5---------------------
-par(mar=c(3.2,3.2,1.5,0.7), mgp=c(2.1,0.7,0))
-
-# arrange points randomly with minimal distance to each other: randomPoints
-rp <- randomPoints(xmin=5,xmax=15, ymin=20,ymax=30, number=25, mindist=1)
-
+## ----misc----------------------------------------------------------------
 # distance between two points on a plane: distance
 A <- c(3,  9,-1)  ;  B <- c(7, -2, 4)
 plot(A,B); points(3,5, col=2, pch=16); segments(3,5, A,B)
 distance(A,B, 3,5)
 
-# calculate Area of a planar triangle: triangleArea
-a <- c(1,5.387965,9); b <- c(1,1,5)
-plot(a[c(1:3,1)], b[c(1:3,1)], type="l", asp=1)
-abline(v=1:9, h=1:5, col=8,lty=2)
-triangleArea(a,b)
-
-## ----misc----------------------------------------------------------------
 # remove leading and trailing white space: removeSpace
 s <- c("space at end     ", "  white at begin", "  both ", " special ^  ")
 removeSpace(s)
