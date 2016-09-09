@@ -1,0 +1,50 @@
+#' get column from data.frame
+#'
+#' Extract columns if they are given in a data frame. 
+#' Watch out not to define objects with the same name as x if you are using
+#' getColumn in a function!
+#'
+#' @return Vector with values in the specified column
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sep 2016
+#' @seealso \code{\link{subset}}
+#' @export
+#' @examples
+#' getColumn(Air.Flow, stackloss)
+#' is.error(getColumn(Acid, stackloss))
+#' 
+#' upper <- function(x) getColumn(x, stackloss)
+#' upper(Water.Temp)
+#' # upper(Water) # error (design choice: partial matching not supported)
+#' 
+#' upper2 <- function(xx) {xx <- 17; getColumn(xx, stackloss)}
+#' stopifnot(is.error(      upper2(Water.Temp)       )) # breaks
+#'
+#' @param x Column name to be subsetted. The safest is to use character strings:
+#'          If there is an object "x" in a function environment, 
+#'          its value will be used as name! (see last example)
+#' @param df dataframe object
+#' @param trace Logical: Add function call stack to the message? DEFAULT: TRUE
+#'              WARNING: in do.call settings with large objects,
+#'              tracing may take a lot of computing time.
+#'
+getColumn <- function(
+x,
+df,
+trace=TRUE
+)
+{
+calltrace <- if(trace) berryFunctions::traceCall() else ""
+# get names of objects as chracter strings:
+nam <- getName(x)
+ndf <- getName(df)
+# check if column exists:
+if(!nam %in% colnames(df)) stop(calltrace, "'", nam, "' is not in ", ndf,
+                           ", which has the columns: ", toString(colnames(df)), ".")
+# actually get the column:
+out <- df[ , nam]
+if(is.null(out) ) stop(calltrace, "'", nam,
+                       "' could not be extracted from ", ndf, ".")
+if(all(is.na(out)) ) warning(calltrace, "'", nam, "' in ", ndf, " only has NAs.")
+# return column values
+out
+}
