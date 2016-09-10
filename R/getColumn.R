@@ -18,6 +18,9 @@
 #' 
 #' upper2 <- function(xx) {xx <- 17; getColumn(xx, stackloss)}
 #' stopifnot(is.error(      upper2(Water.Temp)       )) # breaks
+#' 
+#' upper3 <- function(xx, dd) getColumn(substitute(xx), dd)
+#' upper3(Air.Flow, stackloss) # may be safer in many unusual scoping situations
 #'
 #' @param x Column name to be subsetted. The safest is to use character strings:
 #'          If there is an object "x" in a function environment, 
@@ -33,10 +36,10 @@ df,
 trace=TRUE
 )
 {
-calltrace <- if(trace) berryFunctions::traceCall() else ""
-# get names of objects as chracter strings:
-nam <- getName(x)
-ndf <- getName(df)
+calltrace <- if(trace) traceCall() else ""
+# get names of objects as character strings:
+nam <- if(substr(deparse(substitute(x )),1,10)=="substitute") as.character(x ) else getName(x)
+ndf <- if(substr(deparse(substitute(df)),1,10)=="substitute") as.character(df) else getName(df)
 # check if column exists:
 if(!nam %in% colnames(df)) stop(calltrace, "'", nam, "' is not in ", ndf,
                            ", which has the columns: ", toString(colnames(df)), ".")

@@ -7,7 +7,9 @@
 getColumn(x, df, trace = TRUE)
 }
 \arguments{
-\item{x}{Column name to be subsetted}
+\item{x}{Column name to be subsetted. The safest is to use character strings:
+If there is an object "x" in a function environment, 
+its value will be used as name! (see last example)}
 
 \item{df}{dataframe object}
 
@@ -19,7 +21,9 @@ tracing may take a lot of computing time.}
 Vector with values in the specified column
 }
 \description{
-Extract columns if they are given in a data frame
+Extract columns if they are given in a data frame. 
+Watch out not to define objects with the same name as x if you are using
+getColumn in a function!
 }
 \examples{
 getColumn(Air.Flow, stackloss)
@@ -27,7 +31,13 @@ is.error(getColumn(Acid, stackloss))
 
 upper <- function(x) getColumn(x, stackloss)
 upper(Water.Temp)
-# upper(Water) 
+# upper(Water) # error (design choice: partial matching not supported)
+
+upper2 <- function(xx) {xx <- 17; getColumn(xx, stackloss)}
+stopifnot(is.error(      upper2(Water.Temp)       )) # breaks
+
+upper3 <- function(xx, dd) getColumn(substitute(xx), dd)
+upper3(Air.Flow, stackloss) # may be safer in many unusual scoping situations
 
 }
 \author{
