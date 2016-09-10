@@ -22,9 +22,10 @@
 #' upper3 <- function(xx, dd) getColumn(substitute(xx), dd)
 #' upper3(Air.Flow, stackloss) # may be safer in many unusual scoping situations
 #'
-#' @param x Column name to be subsetted. The safest is to use character strings:
+#' @param x Column name to be subsetted. The safest is to use character strings
+#'          or \code{\link{substitute}(input)}.
 #'          If there is an object "x" in a function environment, 
-#'          its value will be used as name! (see last example)
+#'          its value will be used as name! (see upper2 example)
 #' @param df dataframe object
 #' @param trace Logical: Add function call stack to the message? DEFAULT: TRUE
 #'              WARNING: in do.call settings with large objects,

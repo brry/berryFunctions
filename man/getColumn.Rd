@@ -7,9 +7,10 @@
 getColumn(x, df, trace = TRUE)
 }
 \arguments{
-\item{x}{Column name to be subsetted. The safest is to use character strings:
+\item{x}{Column name to be subsetted. The safest is to use character strings
+or \code{\link{substitute}(input)}.
 If there is an object "x" in a function environment, 
-its value will be used as name! (see last example)}
+its value will be used as name! (see upper2 example)}
 
 \item{df}{dataframe object}
 
