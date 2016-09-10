@@ -50,7 +50,8 @@ high: high resolution in vector graphics as pdf possible. DEFAULT: 1000}
 
 \item{quiet}{Suppress warning when Arguments are recycled? DEFAULT: TRUE}
 
-\item{\dots}{further arguments passed to strwidth and text, like font, vfont, family}
+\item{\dots}{further arguments passed to \code{\link{strwidth}} and 
+\code{\link{text}}, like font, vfont, family}
 }
 \value{
 None
