@@ -24,22 +24,24 @@
 #' clim <- dataDWD(base2="monthly/kl/recent", file="monatswerte_03987_akt.zip")
 #' # Potsdam monthly averages/mins/maxs of: wind, clouds, rainfall, sunshine, temperature
 #'
-#' # For several stations (do this at your own risk of getting kicked off the FTP)
 #' # metadata for existing stations:
 #' stats <- dataDWD("RR_Stundenwerte_Beschreibung_Stationen.txt")
 #' str(stats)  # data.frame with 8 columns (4 int, 2 num, 2 factor), 1292 rows (July 2016)
 #' head(stats)
 #'
+#' # For several stations (do this at your own risk of getting kicked off the FTP)
 #' # List of actually available files (needs RCurl):
 #' # install.packages("RCurl")
 #' files <- dataDWD("", meta=2)
+#' #   files <- strsplit(files, "\n")[[1]]   # needed on linux
 #' headtail(sort(files),6)
-#'
 #' # Apply the function to several files, create a list of data.frames:
-#' # Exclude the pdf and txt files, or dataDWD will break
 #' prec <- lapply(files[1:2], function(f) {Sys.sleep(runif(1,0,5)); dataDWD(f)})
 #' names(prec) <- substr(files[1:2], 14, 21)
 #' str(prec, max.level=1)
+#' # Real life example with data completeness check etc:
+#' browseURL("http://github.com/brry/prectemp/blob/master/Code_example.R")
+#' 
 #' 
 #' # Test Metadata part of function:
 #' files <- read.table(as.is=TRUE, text="
