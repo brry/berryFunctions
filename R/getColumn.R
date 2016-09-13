@@ -6,7 +6,7 @@
 #'
 #' @return Vector with values in the specified column
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sep 2016
-#' @seealso \code{\link{subset}}
+#' @seealso \code{\link{subset}}, \url{https://mran.revolutionanalytics.com/web/packages/car/vignettes/embedding.pdf}
 #' @export
 #' @examples
 #' getColumn(Air.Flow, stackloss)

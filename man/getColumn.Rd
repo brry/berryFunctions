@@ -45,6 +45,6 @@ upper3(Air.Flow, stackloss) # may be safer in many unusual scoping situations
 Berry Boessenkool, \email{berry-b@gmx.de}, Sep 2016
 }
 \seealso{
-\code{\link{subset}}
+\code{\link{subset}}, \url{https://mran.revolutionanalytics.com/web/packages/car/vignettes/embedding.pdf}
 }
 
