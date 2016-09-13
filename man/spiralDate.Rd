@@ -31,7 +31,8 @@ as accepted (and coerced) by \code{\link{as.Date}}}
 
 \item{format}{Format of date labels see details in \code{\link{strptime}}. DEFAULT: "\%Y"}
 
-\item{nint}{Number of interpolation segments between points, only used if lines=TRUE. 
+\item{nint}{Number of interpolation segments between points, 
+only used if \code{lines=TRUE} (passed to \code{\link{colPoints}}). 
 DEFAULT: 1 (with long time series, the colPoints default of 30 is too high!)}
 
 \item{\dots}{Further arguments passed to \code{\link{colPoints}}, but not Range (use \code{vrange})}
