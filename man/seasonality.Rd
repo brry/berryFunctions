@@ -5,10 +5,10 @@
 \title{Seasonality analysis}
 \usage{
 seasonality(dates, values, data, drange = NULL, vrange = NULL, shift = 0,
-  janline = TRUE, months = substr(month.abb, 1, 1), xlab = "Year",
-  ylab = "Month", zlab = substitute(values), ylim = c(370, -3),
-  yaxs = "i", main = "Seasonality", adj = 0.2, mar = c(3, 3, 4, 1),
-  mgp = c(1.9, 0.7, 0), keeppar = TRUE, ...)
+  janline = TRUE, plot = 1, months = substr(month.abb, 1, 1),
+  xlab = "Year", ylab = "Month", zlab = substitute(values),
+  ylim = c(370, -3), yaxs = "i", main = "Seasonality", adj = 0.2,
+  mar = c(3, 3, 4, 1), mgp = c(1.9, 0.7, 0), keeppar = TRUE, ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order. 
@@ -32,6 +32,14 @@ E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0}
                January 1st if \code{shift!=0}? DEFAULT: TRUE
 ### @param nmax Number of annual maxima to be marked and returned. DEFAULT: 0}
 
+\item{plot}{Integer specifying the type of plot. \cr 
+0: none, only data.frame with annual maxima. \cr
+1: color coded DOY (day of the year) over year (the default). \cr
+2: Color coded spiral graph with \code{\link{spiralDate}}. \cr
+3: Spaghetti line plot with discharge over DOY, one line per year. \cr
+4: plot of annmax over time for crude trend analysis. NOT YET! ### todo \cr
+Note that shift is always used except in option 2. DEFAULT: 1}
+
 \item{months}{Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D}
 
 \item{xlab, ylab}{Labels for the axes. DEFAULT: Year, Month}
@@ -51,11 +59,13 @@ DEFAULT: c(3,3,4,1), c(2.2,0.7,0)}
 to the previous values. DEFAULT: TRUE}
 
 \item{\dots}{Further arguments passed to \code{\link{colPoints}} like 
-pch, main, xaxs, but not Range (use \code{vrange})}
+pch, main, xaxs, but not Range (use \code{vrange}).
+Passed to \code{\link{spiralDate}} if \code{plot=2}, like add, format, lines.}
 }
 \value{
-Data.frame with DOYs of annual maxima and number of nonNA values included
-        Please Note that the column year does not note the calendrical year 
+Data.frame with \code{year}, \code{n}umber of nonNA entries, 
+        \code{max} value + \code{DOY} of annual maxima.
+        Please note that the column year does not note the calendrical year 
         if \code{shift!=0}.
 }
 \description{
@@ -68,10 +78,15 @@ Q <- read.table(qfile, skip=19, header=TRUE, sep=",", fill=TRUE)[,1:2]
 rm(qfile)
 colnames(Q) <- c("date","discharge")
 Q$date <- as.Date(Q$date)
-Q$discharge[530:540] <- NA
+Q$discharge[450:581] <- NA
 plot(Q, type="l")
-spiralDate(date, discharge, data=Q) # most floods in winter
-seasonality(date, discharge, data=Q, shift=100, main="NRFA: Thames\\nRoyal Windsor Park")
+seas <- seasonality(date, discharge, data=Q, shift=100, main="NRFA: Thames\\nRoyal Windsor Park")
+head(seas)
+# notice how n for nonmissing values is lower in one single hydrological year, 
+# which includes parts of two consecutive calendarical years.
+seas <- seasonality(date, discharge, data=Q, plot=2) # most floods in winter
+seas <- seasonality(date, discharge, data=Q, plot=3)
+seas <- seasonality(date, discharge, data=Q, plot=3, shift=100)
 
 }
 \author{
