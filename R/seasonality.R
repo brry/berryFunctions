@@ -29,6 +29,8 @@
 #' 
 #' par(mfrow=c(2,2))
 #' seas <- seasonality(date, discharge, data=Q, plot=1:4, shift=100)
+#' seas <- seasonality(date, discharge, data=Q, plot=1:4)
+#' seas <- seasonality(date, discharge, data=Q, plot=1:4, col=divPal(100, ryb=TRUE))
 #' 
 #' @param dates Dates in ascending order. 
 #'              Can be charater strings or \code{\link{strptime}} results, 
@@ -50,7 +52,7 @@
 #'             2: Color coded spiral graph with \code{\link{spiralDate}}. \cr
 #'             3: Spaghetti line plot with discharge over DOY, one line per year. \cr
 #'             4: plot of annmax over time for crude trend analysis. NOT YET! ### todo \cr
-#'             Note that shift is always used except in option 2. DEFAULT: 1
+#'             DEFAULT: 1
 #' @param months Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
 #' @param xlab,ylab Labels for the axes. DEFAULT: Year, Month
 #' @param zlab Title of \code{\link{colPointsLegend}}. DEFAULT: \code{values} name
@@ -159,9 +161,10 @@ if(1 %in% plot) # DOY ~ year, col=Q
 }
 if(2 %in% plot) # Spiral graph, col=Q
 {
-  spiralDate(dates-shift, values, zlab=zlab, drange=drange, vrange=vrange, 
-             months=months, ...)
+  spd <- spiralDate(dates-shift, values, zlab=zlab, drange=drange, vrange=vrange, 
+             months=months, shift=shift, ...)
   title(main=main, adj=adj)
+  if(janline) segments(x0=0, y0=0, x1=sin(shift/365.25*2*pi), y1=cos(shift/365.25*2*pi))
 }
 if(3 %in% plot) # Q~DOY, col=year
 {
@@ -184,6 +187,7 @@ if(3 %in% plot) # Q~DOY, col=year
 }
 if(4 %in% plot) # annmax~year, col=n
 {
+  plot(1)
   warning("plot=4 is not yet implemented")
 }
 ### nmax for each plot method

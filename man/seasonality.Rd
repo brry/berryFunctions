@@ -38,7 +38,7 @@ E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0}
 2: Color coded spiral graph with \code{\link{spiralDate}}. \cr
 3: Spaghetti line plot with discharge over DOY, one line per year. \cr
 4: plot of annmax over time for crude trend analysis. NOT YET! ### todo \cr
-Note that shift is always used except in option 2. DEFAULT: 1}
+DEFAULT: 1}
 
 \item{months}{Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D}
 
@@ -90,6 +90,8 @@ seas <- seasonality(date, discharge, data=Q, plot=3, shift=100)
 
 par(mfrow=c(2,2))
 seas <- seasonality(date, discharge, data=Q, plot=1:4, shift=100)
+seas <- seasonality(date, discharge, data=Q, plot=1:4)
+seas <- seasonality(date, discharge, data=Q, plot=1:4, col=divPal(100, ryb=TRUE))
 
 }
 \author{
