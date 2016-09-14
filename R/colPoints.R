@@ -212,12 +212,10 @@ if(is.na(method)) stop("method can only be equalinterval, quantile, logspaced, s
 # a) argument data is given
 if(!missing(data)) # get x, y and z from data.frame
    {
-   x <- data[ , deparse(substitute(x))]  
-   y <- data[ , deparse(substitute(y))]  
-   z <- data[ , deparse(substitute(z))] 
-   } # now continue with case b
-# error checking:
-if(diff(range(z, finite=TRUE))==0) if(!quiet) warning("All z-values are equal.")
+   x <- getColumn(substitute(x), data)
+   y <- getColumn(substitute(y), data)
+   z <- getColumn(substitute(z), data)
+   } else
 # b) Regular case: z ist a vector
 if(is.vector(z))
    {
@@ -233,6 +231,8 @@ if(is.vector(z))
      stop("Dimension of z (ncol*nrow) is not length(x) * length(y)!")
    x <- rep(x, each=nrow(z));  y <- rep(y, ncol(z));  z <- as.vector(z)
    }
+# error checking:
+if(diff(range(z, finite=TRUE))==0) if(!quiet) warning("All z-values are equal.")
 #
 # CLASSIFICATION # -------------------------------------------------------------
 if(method=="equalinterval") if(!missing(col)) breaks <- length(col)
