@@ -10,13 +10,17 @@
 #' @export
 #' @examples
 #' getColumn(Air.Flow, stackloss)
-#' is.error(getColumn(Acid, stackloss))
-#' 
+#' getColumn(2, stackloss)
+#' getColumn("2",  stackloss) # works too...
+#' is.error(   getColumn(Acid, stackloss)   , tell=TRUE)
+#' is.error(   getColumn(2:3,  stackloss)   , tell=TRUE)
+#'  
 #' upper <- function(x) getColumn(x, stackloss)
 #' upper(Water.Temp)
-#' # upper(Water) # error (design choice: partial matching not supported)
+#' upper(2)
+#' # upper(Water) # error with useful message (design choice: partial matching not supported)
 #' 
-#' upper2 <- function(xx) {xx <- 17; getColumn(xx, stackloss)}
+#' upper2 <- function(xx) {xx <- 17; getColumn(xx, stackloss)} # will break!
 #' stopifnot(is.error(      upper2(Water.Temp)       )) # breaks
 #' 
 #' upper3 <- function(xx, dd) getColumn(substitute(xx), dd)
@@ -50,8 +54,14 @@ trace=TRUE
 {
 calltrace <- if(trace) traceCall() else ""
 # get names of objects as character strings:
-nam <- if(substr(deparse(substitute(x )),1,10)=="substitute") as.character(x ) else getName(x)
 ndf <- if(substr(deparse(substitute(df)),1,10)=="substitute") as.character(df) else getName(df)
+nam <- if(substr(deparse(substitute(x )),1,10)=="substitute") as.character(x ) else getName(x)
+namnum <- suppressWarnings(as.numeric(nam))
+if(any(!is.na(namnum)))
+  {
+  nam <- colnames(df)[namnum]  
+  if(length(nam)!=1) stop(calltrace, "x must be a single value, not ", length(nam))
+  }
 # check if column exists:
 if(!nam %in% colnames(df)) stop(calltrace, "'", nam, "' is not in ", ndf,
                            ", which has the columns: ", toString(colnames(df)), ".")

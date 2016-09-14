@@ -28,13 +28,17 @@ getColumn in a function!
 }
 \examples{
 getColumn(Air.Flow, stackloss)
-is.error(getColumn(Acid, stackloss))
-
+getColumn(2, stackloss)
+getColumn("2",  stackloss) # works too...
+is.error(   getColumn(Acid, stackloss)      )
+is.error(   getColumn(2:3,  stackloss)      )
+ 
 upper <- function(x) getColumn(x, stackloss)
 upper(Water.Temp)
-# upper(Water) # error (design choice: partial matching not supported)
+upper(2)
+# upper(Water) # error with useful message (design choice: partial matching not supported)
 
-upper2 <- function(xx) {xx <- 17; getColumn(xx, stackloss)}
+upper2 <- function(xx) {xx <- 17; getColumn(xx, stackloss)} # will break!
 stopifnot(is.error(      upper2(Water.Temp)       )) # breaks
 
 upper3 <- function(xx, dd) getColumn(substitute(xx), dd)
