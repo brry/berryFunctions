@@ -19,7 +19,7 @@ WARNING: in do.call settings with large objects,
 tracing may take a lot of computing time.}
 }
 \value{
-Vector with values in the specified column
+Vector (or array, factor, etc) with values in the specified column
 }
 \description{
 Extract columns if they are given in a data frame. 
@@ -38,7 +38,15 @@ upper2 <- function(xx) {xx <- 17; getColumn(xx, stackloss)}
 stopifnot(is.error(      upper2(Water.Temp)       )) # breaks
 
 upper3 <- function(xx, dd) getColumn(substitute(xx), dd)
-upper3(Air.Flow, stackloss) # may be safer in many unusual scoping situations
+upper3(Air.Flow, stackloss) # may be safer in many scoping situations
+
+df <- data.frame(x=letters[1:3],y=letters[4:6]) 
+is.vector(df$x)
+is.vector(getColumn("x", df)) # FALSE
+# cannot force output to be a vector, as this will convert:
+as.Date("2016-09-14")  ;  as.vector(as.Date("2016-09-14"))
+# same problem with dfs from tapply results
+# better ideas welcome!! (berry-b@gmx.de)
 
 }
 \author{

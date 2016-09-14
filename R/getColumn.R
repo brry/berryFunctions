@@ -4,7 +4,7 @@
 #' Watch out not to define objects with the same name as x if you are using
 #' getColumn in a function!
 #'
-#' @return Vector with values in the specified column
+#' @return Vector (or array, factor, etc) with values in the specified column
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sep 2016
 #' @seealso \code{\link{subset}}, \url{https://mran.revolutionanalytics.com/web/packages/car/vignettes/embedding.pdf}
 #' @export
@@ -20,7 +20,15 @@
 #' stopifnot(is.error(      upper2(Water.Temp)       )) # breaks
 #' 
 #' upper3 <- function(xx, dd) getColumn(substitute(xx), dd)
-#' upper3(Air.Flow, stackloss) # may be safer in many unusual scoping situations
+#' upper3(Air.Flow, stackloss) # may be safer in many scoping situations
+#' 
+#' df <- data.frame(x=letters[1:3],y=letters[4:6]) 
+#' is.vector(df$x)
+#' is.vector(getColumn("x", df)) # FALSE
+#' # cannot force output to be a vector, as this will convert:
+#' as.Date("2016-09-14")  ;  as.vector(as.Date("2016-09-14"))
+#' # same problem with dfs from tapply results
+#' # better ideas welcome!! (berry-b@gmx.de)
 #'
 #' @param x Column name to be subsetted. The safest is to use character strings
 #'          or \code{\link{substitute}(input)}.
