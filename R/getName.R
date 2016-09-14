@@ -10,15 +10,24 @@
 #' @importFrom utils head
 #' @export
 #' @examples
-#' getName(pi) # returns "pi", as expected
-#' upper <- function(y) getName(y)
-#' upper(pi) # yay!
-#'
-#' # This does not work with
+#' # This does not work well:
+#' 
 #' lower <- function(x) deparse(substitute(x))
 #' upper <- function(y) lower(y)
 #' lower(pi) # returns "pi", as expected
 #' upper(pi) # returns "y".
+#' 
+#' # That's why there is getName:
+#' 
+#' getName(pi) # returns "pi", as expected
+#' upper <- function(y) getName(y)
+#' upper(pi) # yay!
+#' 
+#' upper("dummy")
+#' upper(dummy) # works also for nonexistent objects
+#' dummy <- 7
+#' upper("dummy") # still stable
+#' upper(dummy) # still stable
 #'
 #' @param x input object name or character string
 #'
