@@ -13,7 +13,9 @@
 #' @export
 #' @examples
 #' \dontrun{ ## Not run in CRAN checks because of downloading, writing files, etc
-#' # Basic usage:
+#' 
+#' # 1. Basic usage ------------------------------------------------------------
+#' 
 #' prec <- dataDWD(file="stundenwerte_RR_02787_akt.zip")
 #' plot(prec$MESS_DATUM, prec$NIEDERSCHLAGSHOEHE, main="DWD hourly rain Kupferzell", col="blue",
 #'      xaxt="n", las=1, type="l", xlab="Date", ylab="Hourly rainfall  [mm]")
@@ -21,29 +23,43 @@
 #'
 #' prec2 <- dataDWD("stundenwerte_RR_03987_akt.zip") # writes into the same folder
 #' 
-#' clim <- dataDWD(base2="monthly/kl/recent", file="monatswerte_03987_akt.zip")
-#' # Potsdam monthly averages/mins/maxs of: wind, clouds, rainfall, sunshine, temperature
-#'
-#' # metadata for existing stations:
-#' stats <- dataDWD("RR_Stundenwerte_Beschreibung_Stationen.txt")
-#' str(stats)  # data.frame with 8 columns (4 int, 2 num, 2 factor), 1292 rows (July 2016)
-#' head(stats)
-#'
-#' # For several stations (do this at your own risk of getting kicked off the FTP)
+#' 
+#' # 2. find certain station ---------------------------------------------------
+#' # Get long term climate records of a certain station (e.g. Kirchberg)
+#' 
+#' dataDWD("", browse=2, base2="monthly/kl/historical") # open link in browser
+#' # metadata for all existing stations:
+#' stats <- dataDWD("KL_Monatswerte_Beschreibung_Stationen.txt", base2="monthly/kl/historical")
+#' str(stats)  # data.frame with 8 columns (4 int, 2 num, 2 factor), 1053 rows (July 2016)
+#' stats[grep("kirchberg", stats$Stationsname, ignore.case=TRUE), ] 
+#' # identify the station id you need (there may be multiple matches): 02575 
+#' 
 #' # List of actually available files (needs RCurl):
 #' # install.packages("RCurl")
+#' files <- dataDWD("", meta=2, base2="monthly/kl/historical")
+#' #   files <- strsplit(files, "\n")[[1]]   # needed on linux
+#' clim <- dataDWD(base2="monthly/kl/historical", file=files[grep("_02575_", files)])
+#' # monthly averages/mins/maxs of: wind, clouds, rainfall, sunshine, temperature
+#' head(clim)
+#'
+#' # 3. Get data for several stations ------------------------------------------
+#' # (do this at your own risk of getting kicked off the FTP)
+#' 
 #' files <- dataDWD("", meta=2)
 #' #   files <- strsplit(files, "\n")[[1]]   # needed on linux
 #' headtail(sort(files),6)
 #' # Apply the function to several files, create a list of data.frames:
+#' files <- files[grep(".zip", files, fixed=TRUE)]
 #' prec <- lapply(files[1:2], function(f) {Sys.sleep(runif(1,0,5)); dataDWD(f)})
 #' names(prec) <- substr(files[1:2], 14, 21)
 #' str(prec, max.level=1)
+#' 
 #' # Real life example with data completeness check etc:
 #' browseURL("http://github.com/brry/prectemp/blob/master/Code_example.R")
 #' 
 #' 
-#' # Test Metadata part of function:
+#' # 4. Test metadata part of function -----------------------------------------
+#' 
 #' files <- read.table(as.is=TRUE, text="
 #' #ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/climate/
 #' daily/kl/historical                KL_Tageswerte_Beschreibung_Stationen.txt
@@ -93,15 +109,19 @@
 #' @param base2 Characterstring with subdirectory. DEFAULT: "hourly/precipitation/recent"
 #' @param dir Writeable directory on your computer. Created if not existent.
 #'            DEFAULT: "DWDdata" at your current \code{\link{getwd}()}
-#' @param browse Integer specifying whether and how to open repository via \code{\link{browseURL}}.
-#'               0 for regular file download. 1 to open \code{base1} (no download).
-#'               2 to open \code{base1/base2}). If 1 or 2, no \code{dir} is created. DEFAULT: 0
-#' @param meta Integer specifying whether to get metadata instead of actual data.
-#'               0 for regular file. 1 for meta data of all stations
+#' @param browse Integer specifying whether and how to open repository via \code{\link{browseURL}}.\cr
+#'               0 for regular file download. \cr
+#'               1 to open \code{base1}.\cr
+#'               2 to open \code{base1/base2}).\cr
+#'               If base= 1 or 2, no \code{dir} is created and no download performed. DEFAULT: 0
+#' @param meta Integer specifying whether to get metadata instead of actual data.\cr
+#'               0 for regular file. \cr
+#'               1 for meta data of all stations
 #'               (\code{meta} is automatically set to 1 if \code{file} ends in ".txt".
-#'               Column widths for \code{\link{read.fwf}} are computed internally).
+#'               Column widths for \code{\link{read.fwf}} are computed internally).\cr
 #'               2 for a list of the available files (requires \code{RCurl} to be installed.
-#'               If meta=2, file="" is possible, as it is ignored anyways). DEFAULT: 0
+#'               If meta=2, \code{file=""} is possible, as it is ignored anyways).\cr
+#'               DEFAULT: 0
 #' @param read Read the file with \code{\link{readDWD}}?
 #'             If FALSE, only download is performed. DEFAULT: TRUE
 #' @param format Format used in \code{\link{strptime}} to convert date/time column,
