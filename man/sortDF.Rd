@@ -4,14 +4,17 @@
 \alias{sortDF}
 \title{sort dataframes by column}
 \usage{
-sortDF(df, col, ...)
+sortDF(df, col, decreasing = TRUE, ...)
 }
 \arguments{
 \item{df}{Data.frame to be sorted}
 
-\item{col}{Column (index or name) to be sorted by}
+\item{col}{Column (index or (un)qouted name) to be sorted by}
 
-\item{\dots}{Further arguments passed to \code{\link{order}}, like eg \code{decreasing=TRUE}}
+\item{decreasing}{Logical: should highest value be on top? 
+DEFAULT: TRUE (unlike \code{\link{order}}!)}
+
+\item{\dots}{Further arguments passed to \code{\link{order}}, like eg \code{na.last or method}}
 }
 \value{
 data.frame
@@ -21,8 +24,8 @@ sort a data.frame by column - basically just a wrapper for order
 }
 \examples{
 
-sortDF(USArrests[USArrests$Murder>8,], "Assault")
-sortDF(USArrests[USArrests$Murder>8,], 3, decreasing=TRUE)
+sortDF(USArrests[USArrests$Murder>11,], "Assault")
+sortDF(USArrests[USArrests$Murder>8,], 3)
 
 }
 \author{

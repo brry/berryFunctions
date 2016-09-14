@@ -9,18 +9,22 @@
 #' @export
 #' @examples
 #' 
-#' sortDF(USArrests[USArrests$Murder>8,], "Assault")
-#' sortDF(USArrests[USArrests$Murder>8,], 3, decreasing=TRUE)
+#' sortDF(USArrests[USArrests$Murder>11,], "Assault")
+#' sortDF(USArrests[USArrests$Murder>8,], 3)
 #' 
 #' @param df Data.frame to be sorted
-#' @param col Column (index or name) to be sorted by
-#' @param \dots Further arguments passed to \code{\link{order}}, like eg \code{decreasing=TRUE}
+#' @param col Column (index or (un)qouted name) to be sorted by
+#' @param decreasing Logical: should highest value be on top? 
+#'                   DEFAULT: TRUE (unlike \code{\link{order}}!)
+#' @param \dots Further arguments passed to \code{\link{order}}, like eg \code{na.last or method}
 #' 
 sortDF <- function(
 df,
 col,
+decreasing=TRUE,
 ...
 )
 {
-df[order(df[,col], ...),]
+values <- getColumn(col,df)
+df[order(values, decreasing=decreasing, ...),]
 }
