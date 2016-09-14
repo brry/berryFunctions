@@ -52,17 +52,19 @@
 #'             1: color coded DOY (day of the year) over year (the default). \cr
 #'             2: Color coded spiral graph with \code{\link{spiralDate}}. \cr
 #'             3: Spaghetti line plot with discharge over DOY, one line per year. \cr
-#'             4: plot of annmax over time for crude trend analysis. NOT YET! ### todo \cr
+#'             4: plot of annmax over time for crude trend analysis. \cr
 #'             DEFAULT: 1
 #' @param months Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
-#' @param xlab,ylab Labels for the axes. DEFAULT: Year, Month
-#' @param zlab Title of \code{\link{colPointsLegend}}. DEFAULT: \code{values} name
-#' @param ylim,yaxs Parameters specifying y Axis appearance, see \code{\link{par}}. 
-#'                  DEFAULT: c(366,1), "i"
+#' @param xlab,ylab,zlab Labels for the axes and title of \code{\link{colPointsLegend}}. 
+#'                       Note that these are switched in plot 3 and 4.
+#'                       DEFAULT: Year, Month, substitute(values)
+#' @param ylim Limits of y axis. DEFAULT: NA (specified internally per plot type)
+#' @param xaxs,yays x and y Axis style, see \code{\link{par}}. 
+#'                DEFAULT: "r" (regular 4% expansion), "i" (internal range only)
 #' @param main,adj Graph title and offset to the left 
 #'              (\code{adj} passsed to \code{\link{title}}). DEFAULT: "Seasonality", 0.2
 #' @param mar,mgp Parameters specifying plot margin size and labels placement.
-#'                DEFAULT: c(3,3,4,1), c(2.2,0.7,0)
+#'                DEFAULT: c(3,3,4,1), c(1.7,0.7,0) (Changed for plot 3:4 if not given)
 #' @param keeppar Logical: Keep the margin parameters? If FALSE, they are reset
 #'                to the previous values. DEFAULT: TRUE
 #' @param \dots Further arguments passed to \code{\link{colPoints}} like 
@@ -83,18 +85,20 @@ seasonality <- function(
   xlab="Year",
   ylab="Month",
   zlab=substitute(values),
-  ylim=c(370,-3),
+  ylim=NA,
+  xaxs="r",
   yaxs="i",
   main="Seasonality",
   adj=0.2,
   mar=c(3,3,4,1),
-  mgp=c(1.9,0.7,0),
+  mgp=c(1.7,0.7,0),
   keeppar=TRUE,
   ...
 )
 {
 # Convert before promise is evaluated: 
 missingzlab <- missing(zlab)
+isnaylim <- all(is.na(ylim))
 if(missingzlab) zlab <- deparse(zlab)
 # input columns or vectors
 if(!missing(data)) # get vectors from data.frame
@@ -152,8 +156,10 @@ if(!keeppar) on.exit(par(op))
 labs <- monthLabs(2004,2004, npm=1) + shift
 lDOY <- as.numeric(format(labs,"%j"))
 # Actual plotting
+#
 if(1 %in% plot) # DOY ~ year, col=Q
 {
+  if(isnaylim) ylim <- c(370,-3)
   colPoints(year, DOY, values, Range=vrange, add=FALSE, zlab=zlab,
             ylab=ylab, xlab=xlab, yaxt="n", ylim=ylim, yaxs=yaxs, ...)
   # Axis labelling
@@ -162,6 +168,7 @@ if(1 %in% plot) # DOY ~ year, col=Q
   title(main=main, adj=adj)
   ###  if(annmax) lines(annmax$year, annmax$DOY, type="o")
 }
+#
 if(2 %in% plot) # Spiral graph, col=Q
 {
   spd <- spiralDate(dates-shift, values, zlab=zlab, drange=drange, vrange=vrange, 
@@ -169,10 +176,17 @@ if(2 %in% plot) # Spiral graph, col=Q
   title(main=main, adj=adj)
   if(janline) segments(x0=0, y0=0, x1=sin(shift/365.25*2*pi), y1=cos(shift/365.25*2*pi))
 }
+# parameters for both next plots
+if(missing(mar)) par(mar=c(3,4,4,1))
+if(missing(mgp)) mgp <- c(2.7,0.7,0)
+if(isnaylim) ylim <- range(values, na.rm=TRUE)
+if(missing(yaxs)) yaxs <- "r"
+#
 if(3 %in% plot) # Q~DOY, col=year
 {
   # date year range
   if(!exists("drange3", inherits=FALSE)) drange3 <- range(year)
+  xaxs3 <- if(missing(xaxs)) "i" else xaxs
   # NAs between years
   data3 <- data.frame(DOY, values, year)
   separators <- which(diff(year)!=0)
@@ -181,19 +195,26 @@ if(3 %in% plot) # Q~DOY, col=year
   data3 <- insertRows(data3, separators)
   # plot
   colPoints(DOY, values, year, data=data3, Range=drange3, add=FALSE, zlab=xlab,
-            ylab=zlab, xlab=ylab, xaxt="n", legargs=list(density=FALSE), lines=TRUE, nint=1, ...)
-  ### ylim, col, yaxs,xaxs,  mgp ylab separate
+            ylab="", xlab=ylab, xaxt="n", legargs=list(density=FALSE), 
+            ylim=ylim, yaxs=yaxs, lines=TRUE, nint=1, xaxs=xaxs3,
+            if(!exists("col", inherits=FALSE)) col=seqPal(100, colors=c("red","blue")), 
+             ...)
+  mtext("") # weird behaviour: title not added without this line. ### Is this a bug?
+  title(ylab=zlab, mgp=mgp)
   # Axis labelling
   axis(1, lDOY, months, las=1)
   title(main=main, adj=adj)  
   if(janline & shift!=0) abline(v=shift+1)
 }
+#
 if(4 %in% plot) # annmax~year, col=n
 {
   if(missingzlab) zlab <- paste("Annual max", zlab)
   colPoints(year, max, n, data=annmax, add=FALSE, 
-            ylab=zlab, xlab=xlab, legargs=list(density=FALSE), lines=TRUE, ...)
-  mtext("") # weird behaviour: title not added without this line
+            ylab="", xlab=xlab, legargs=list(density=FALSE), lines=TRUE, ...)
+  mtext("") ### as above
+  title(ylab=zlab, mgp=mgp)
+  if(missing(main)) main <- "Trend of annual maxima"
   title(main=main, adj=adj)  
 }
 ### nmax for each plot method

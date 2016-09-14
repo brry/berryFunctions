@@ -6,9 +6,9 @@
 \usage{
 seasonality(dates, values, data, drange = NULL, vrange = NULL, shift = 0,
   janline = TRUE, plot = 1, months = substr(month.abb, 1, 1),
-  xlab = "Year", ylab = "Month", zlab = substitute(values),
-  ylim = c(370, -3), yaxs = "i", main = "Seasonality", adj = 0.2,
-  mar = c(3, 3, 4, 1), mgp = c(1.9, 0.7, 0), keeppar = TRUE, ...)
+  xlab = "Year", ylab = "Month", zlab = substitute(values), ylim = NA,
+  xaxs = "r", yaxs = "i", main = "Seasonality", adj = 0.2, mar = c(3,
+  3, 4, 1), mgp = c(1.7, 0.7, 0), keeppar = TRUE, ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order. 
@@ -37,23 +37,25 @@ E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0}
 1: color coded DOY (day of the year) over year (the default). \cr
 2: Color coded spiral graph with \code{\link{spiralDate}}. \cr
 3: Spaghetti line plot with discharge over DOY, one line per year. \cr
-4: plot of annmax over time for crude trend analysis. NOT YET! ### todo \cr
+4: plot of annmax over time for crude trend analysis. \cr
 DEFAULT: 1}
 
 \item{months}{Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D}
 
-\item{xlab, ylab}{Labels for the axes. DEFAULT: Year, Month}
+\item{xlab, ylab, zlab}{Labels for the axes and title of \code{\link{colPointsLegend}}. 
+Note that these are switched in plot 3 and 4.
+DEFAULT: Year, Month, substitute(values)}
 
-\item{zlab}{Title of \code{\link{colPointsLegend}}. DEFAULT: \code{values} name}
+\item{ylim}{Limits of y axis. DEFAULT: NA (specified internally per plot type)}
 
-\item{ylim, yaxs}{Parameters specifying y Axis appearance, see \code{\link{par}}. 
-DEFAULT: c(366,1), "i"}
+\item{xaxs, yays}{x and y Axis style, see \code{\link{par}}. 
+DEFAULT: "r" (regular 4% expansion), "i" (internal range only)}
 
 \item{main, adj}{Graph title and offset to the left 
 (\code{adj} passsed to \code{\link{title}}). DEFAULT: "Seasonality", 0.2}
 
 \item{mar, mgp}{Parameters specifying plot margin size and labels placement.
-DEFAULT: c(3,3,4,1), c(2.2,0.7,0)}
+DEFAULT: c(3,3,4,1), c(1.7,0.7,0) (Changed for plot 3:4 if not given)}
 
 \item{keeppar}{Logical: Keep the margin parameters? If FALSE, they are reset
 to the previous values. DEFAULT: TRUE}
