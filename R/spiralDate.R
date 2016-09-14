@@ -60,6 +60,7 @@
 #' @param vrange Optional value range (analogous to ylim), can be a vector like \code{values}. DEFAULT: NULL
 #' @param months Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
 #' @param add Add to existing plot? DEFAULT: FALSE
+#' @param shift Number of days to move january 1st clockwise. DEFAULT: 0
 #' @param prop Proportion of the data to be actually plotted, used in \code{\link{spiralDateAnim}}. DEFAULT: NULL
 #' @param zlab Title of \code{\link{colPointsLegend}}
 #' @param format Format of date labels see details in \code{\link{strptime}}. DEFAULT: "\%Y"
@@ -76,6 +77,7 @@ drange=NULL,
 vrange=NULL,
 months=substr(month.abb,1,1),
 add=FALSE, 
+shift=0,
 prop=NULL,
 zlab=substitute(values),
 format="%Y",
@@ -112,12 +114,11 @@ vrange <- range(   if(!is.null(vrange)) vrange else values  , na.rm=TRUE)
 # coordinates for drawing
 r <- rescale(as.numeric(dates)) # ascending time-dependent radius
 doy <- as.numeric(format(dates, "%j")) # day of year
-x <- r*sin(doy/365.25*2*pi)
-y <- r*cos(doy/365.25*2*pi)
+x <- r*sin((doy+shift)/365.25*2*pi)
+y <- r*cos((doy+shift)/365.25*2*pi)
 # output:
 out <- data.frame(dates,values,x,y)
 # plot selected data only:
-
 if(!is.null(prop))
   {
   sel <- 1:(prop*length(dates))
@@ -132,9 +133,9 @@ if(!add) plot(1, xlim=lim, ylim=lim, type="n", ann=FALSE, axes=FALSE, asp=1)
 colPoints(x=x,y=y,z=values, Range=vrange, add=TRUE, zlab=zlab, nint=nint, ...)
 # labelling months:
 f <- 1.1
-lx <- f*sin(0:11/12*2*pi)
-ly <- f*cos(0:11/12*2*pi)
-lsrt <- 12:1/12*360
+lx <- f*sin((0:11/12+shift/365.25)*2*pi)
+ly <- f*cos((0:11/12+shift/365.25)*2*pi)
+lsrt <- (12:1/12-shift/365.25)*360
 for(i in 1:12) text(lx[i], ly[i], months[i], srt=lsrt[i])
 # labeling years:
 text(headtail(x), headtail(y), format(headtail(dates), format))

@@ -5,7 +5,7 @@
 \title{Spiral graph of time series}
 \usage{
 spiralDate(dates, values, data, drange = NULL, vrange = NULL,
-  months = substr(month.abb, 1, 1), add = FALSE, prop = NULL,
+  months = substr(month.abb, 1, 1), add = FALSE, shift = 0, prop = NULL,
   zlab = substitute(values), format = "\%Y", nint = 1, ...)
 }
 \arguments{
@@ -24,6 +24,8 @@ as accepted (and coerced) by \code{\link{as.Date}}}
 \item{months}{Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D}
 
 \item{add}{Add to existing plot? DEFAULT: FALSE}
+
+\item{shift}{Number of days to move january 1st clockwise. DEFAULT: 0}
 
 \item{prop}{Proportion of the data to be actually plotted, used in \code{\link{spiralDateAnim}}. DEFAULT: NULL}
 
