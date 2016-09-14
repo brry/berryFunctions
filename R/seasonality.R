@@ -27,6 +27,9 @@
 #' seas <- seasonality(date, discharge, data=Q, plot=3)
 #' seas <- seasonality(date, discharge, data=Q, plot=3, shift=100)
 #' 
+#' par(mfrow=c(2,2))
+#' seas <- seasonality(date, discharge, data=Q, plot=1:4, shift=100)
+#' 
 #' @param dates Dates in ascending order. 
 #'              Can be charater strings or \code{\link{strptime}} results, 
 #'              as accepted (and coerced) by \code{\link{as.Date}}
@@ -98,7 +101,7 @@ if(!missing(data)) # get vectors from data.frame
 #check input
 if(length(dates)!=length(values)) stop("length of dates and values not equal (",
                                          length(dates),", ",length(values),").")
-if(!plot %in% 0:4) stop("The argument 'plot' must be an integer in 0:4, not ", plot)
+if(!all(plot %in% 0:4)) stop("The argument 'plot' must be an integer in 0:4, not ", plot)
 #
 # convert to date
 dates <- as.Date(dates)
@@ -144,7 +147,7 @@ if(!keeppar) on.exit(par(op))
 labs <- monthLabs(2004,2004, npm=1) + shift
 lDOY <- as.numeric(format(labs,"%j"))
 # Actual plotting
-if(plot==1) # DOY ~ year, col=Q
+if(1 %in% plot) # DOY ~ year, col=Q
 {
   colPoints(year, DOY, values, Range=vrange, add=FALSE, zlab=zlab,
             ylab=ylab, xlab=xlab, yaxt="n", ylim=ylim, yaxs=yaxs, ...)
@@ -154,13 +157,13 @@ if(plot==1) # DOY ~ year, col=Q
   title(main=main, adj=adj)
   ###  if(annmax) lines(annmax$year, annmax$DOY, type="o")
 }
-if(plot==2) # Spiral graph, col=Q
+if(2 %in% plot) # Spiral graph, col=Q
 {
   spiralDate(dates-shift, values, zlab=zlab, drange=drange, vrange=vrange, 
              months=months, ...)
   title(main=main, adj=adj)
 }
-if(plot==3) # Q~DOY, col=year
+if(3 %in% plot) # Q~DOY, col=year
 {
   # date year range
   if(!exists("drange3", inherits=FALSE)) drange3 <- range(year)
@@ -179,12 +182,11 @@ if(plot==3) # Q~DOY, col=year
   title(main=main, adj=adj)  
   if(janline & shift!=0) abline(v=shift+1)
 }
-if(plot==4) # annmax~year, col=n
+if(4 %in% plot) # annmax~year, col=n
 {
-  stop("plot=4 is not yet implemented")
+  warning("plot=4 is not yet implemented")
 }
 ### nmax for each plot method
-### plot=1:4 - loop over all plots
 #
 # Function output
 return(annmax)
