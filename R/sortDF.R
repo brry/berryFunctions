@@ -10,7 +10,7 @@
 #' @examples
 #' 
 #' sortDF(USArrests[USArrests$Murder>11,], "Assault")
-#' sortDF(USArrests[USArrests$Murder>8,], 3)
+#' sortDF(USArrests[USArrests$Murder>11,], 3)
 #' 
 #' @param df Data.frame to be sorted
 #' @param col Column (index or (un)qouted name) to be sorted by

@@ -25,7 +25,7 @@ sort a data.frame by column - basically just a wrapper for order
 \examples{
 
 sortDF(USArrests[USArrests$Murder>11,], "Assault")
-sortDF(USArrests[USArrests$Murder>8,], 3)
+sortDF(USArrests[USArrests$Murder>11,], 3)
 
 }
 \author{

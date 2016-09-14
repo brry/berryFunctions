@@ -30,8 +30,8 @@ getColumn in a function!
 getColumn(Air.Flow, stackloss)
 getColumn(2, stackloss)
 getColumn("2",  stackloss) # works too...
-is.error(   getColumn(Acid, stackloss)      )
-is.error(   getColumn(2:3,  stackloss)      )
+is.error(   getColumn(Acid, stackloss)   , tell=TRUE)
+is.error(   getColumn(2:3,  stackloss)   , tell=TRUE)
  
 upper <- function(x) getColumn(x, stackloss)
 upper(Water.Temp)
