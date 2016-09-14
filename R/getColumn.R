@@ -22,6 +22,9 @@
 #' upper3 <- function(xx, dd) getColumn(substitute(xx), dd)
 #' upper3(Air.Flow, stackloss) # may be safer in many scoping situations
 #' 
+#' # In packages use "colname" with quotation marks in level 2 functions to avoid 
+#' # the CRAN check NOTE "no visible binding for global variable"
+#' 
 #' df <- data.frame(x=letters[1:3],y=letters[4:6]) 
 #' is.vector(df$x)
 #' is.vector(getColumn("x", df)) # FALSE
