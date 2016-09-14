@@ -88,9 +88,10 @@ seas <- seasonality(date, discharge, data=Q, plot=2) # most floods in winter
 seas <- seasonality(date, discharge, data=Q, plot=3)
 seas <- seasonality(date, discharge, data=Q, plot=3, shift=100)
 
+#    dev.new(noRStudioGD=TRUE, record=TRUE)     # large graph on 2nd monitor
 par(mfrow=c(2,2))
 seas <- seasonality(date, discharge, data=Q, plot=1:4, shift=100)
-seas <- seasonality(date, discharge, data=Q, plot=1:4)
+seas <- seasonality(date, discharge, data=Q, plot=1:4, lwd=2)
 seas <- seasonality(date, discharge, data=Q, plot=1:4, col=divPal(100, ryb=TRUE))
 
 }

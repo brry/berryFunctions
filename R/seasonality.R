@@ -27,9 +27,10 @@
 #' seas <- seasonality(date, discharge, data=Q, plot=3)
 #' seas <- seasonality(date, discharge, data=Q, plot=3, shift=100)
 #' 
+#' #    dev.new(noRStudioGD=TRUE, record=TRUE)     # large graph on 2nd monitor
 #' par(mfrow=c(2,2))
 #' seas <- seasonality(date, discharge, data=Q, plot=1:4, shift=100)
-#' seas <- seasonality(date, discharge, data=Q, plot=1:4)
+#' seas <- seasonality(date, discharge, data=Q, plot=1:4, lwd=2)
 #' seas <- seasonality(date, discharge, data=Q, plot=1:4, col=divPal(100, ryb=TRUE))
 #' 
 #' @param dates Dates in ascending order. 
@@ -93,7 +94,8 @@ seasonality <- function(
 )
 {
 # Convert before promise is evaluated: 
-zlab <- if(missing(zlab)) deparse(zlab) else zlab
+missingzlab <- missing(zlab)
+if(missingzlab) zlab <- deparse(zlab)
 # input columns or vectors
 if(!missing(data)) # get vectors from data.frame
   {
@@ -138,6 +140,7 @@ annmax <- data.frame(year=as.numeric(names(annmax)), n=annmax)
 rownames(annmax) <- NULL
 annmax$max <- tapply(X=values, INDEX=year, FUN=max, na.rm=TRUE)
 annmax$DOY <- tapply(X=values, INDEX=year, FUN=which.max)
+###annmax <- as.data.frame(apply(annmax, 2, as.vector))
 ### nmax for secondary, tertiary, ... maxima. with new function for event separation
 #
 # PLOTTING
@@ -187,8 +190,11 @@ if(3 %in% plot) # Q~DOY, col=year
 }
 if(4 %in% plot) # annmax~year, col=n
 {
-  plot(1)
-  warning("plot=4 is not yet implemented")
+  if(missingzlab) zlab <- paste("Annual max", zlab)
+  colPoints(year, max, n, data=annmax, add=FALSE, 
+            ylab=zlab, xlab=xlab, legargs=list(density=FALSE), lines=TRUE, ...)
+  mtext("") # weird behaviour: title not added without this line
+  title(main=main, adj=adj)  
 }
 ### nmax for each plot method
 #
