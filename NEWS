@@ -8,9 +8,23 @@ Before the actual NEWS, here are some things planned for future development:
 - lsc: better example dataset, optim problems
 - tableColVal: add digits argument
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
-- implement is.error and getColumn wherever applicable
+- implement is.error and getColumn (eg spiralDate) wherever applicable
 - late 2016: delete randomPoints, triangleArea, cie, cls, pastec, pointZoom and createDoc from package
 - reference to sortDF in addRow, insertRow, etc
+
+
+-----------------------------
+-----------------------------
+
+
+Version 1.12.0 (2016-09-19)
+https://github.com/brry/berryFunctions/compare/master@{2016-08-18}...master@{2016-09-19}
+- mainly a release to be able to update OSMscale which will use getColumn et al.
+- seasonality has been expanded quite a bit, spiralDate along with it
+- Goodness of fit measures unified into one file and with common input check function
+- informative error messages possible with the new functions traceCall and getColumn
+New functions: traceCall, getName, getColumn, kge
+removed: randomPoints, triangleArea, equidistPoints (moved to OSMscale)
 
 
 -----------------------------

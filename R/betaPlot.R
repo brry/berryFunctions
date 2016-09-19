@@ -7,7 +7,8 @@
 #' @return None. Used for plotting.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, July 2014
 #' @seealso \code{\link{betaPlotComp}}, \code{\link{normPlot}}, \code{\link{dbeta}}, 
-#'    \url{http://cran.r-project.org/package=denstrip}, \url{http://cran.r-project.org/web/views/Distributions.html}
+#'    \url{https://cran.r-project.org/package=denstrip}, 
+#'    \url{https://cran.r-project.org/web/views/Distributions.html}
 #' @keywords hplot distribution
 #' @importFrom grDevices rgb
 #' @importFrom graphics abline axis box lines par plot polygon

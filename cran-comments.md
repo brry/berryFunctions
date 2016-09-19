@@ -1,4 +1,4 @@
-Tests on win-builder (devel and release) show:
+Tests on win-builder show:
 
 There were no ERRORs or WARNINGs. 
 
