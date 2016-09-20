@@ -71,7 +71,7 @@ TFtest(!a & !b, a&b, !(a&b))
 headtail(iris, n=3, na=FALSE)
 
 ## ----showPal, fig.show='hold'--------------------------------------------
-showPal(cex=0.55)
+showPal(cex=3)
 
 neff <- t(replicate(n=300, sapply(1:200, function(nn) max(rnorm(nn)))   ))
 qB <- quantileBands(neff, x=1:200, smooth=7)
@@ -131,9 +131,8 @@ plot(exdat, log="y", yaxt="n")
 logAxis(side=2) # invisibly returns values and labels
 points(exdat, pch=16)
 
-plot(as.Date("2013-10-25")+sort(sample(0:100, 30)), 
-     cumsum(rnorm(30)), type="o", xaxt="n", ann=F)
-dummy <- monthAxis(side=1, n=4) # tries to find suitable labeling intervall
+plot(as.Date("2013-04-25")+0:500, cumsum(rnorm(501)), type="l", xaxt="n", ann=FALSE)
+dummy <- monthAxis(side=1, ym=TRUE) # tries to find suitable labeling intervall
 str(dummy)
 
 ## ----hydro, echo=-1------------------------------------------------------
@@ -146,9 +145,10 @@ superPos(N, UH)
 # calculate continuous UH with given n and k: unitHydrograph
 plot(0:40, unitHydrograph(n=2,  k=3, t=0:40), type="l")
 
-# Nash-Sutcliffe efficiency: nse
+# Nash-Sutcliffe and kling-gupta efficiency: nse + kge
 QSIM <- lsc(PREC, QOBS, area=10, returnsim=TRUE, plot=FALSE)
 nse(QOBS, QSIM)
+kge(QOBS, QSIM)
 
 # Root Mean Squared Error, e.g. to be minimized: rmse
 rmse(QOBS, QSIM)
