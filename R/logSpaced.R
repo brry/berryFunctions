@@ -52,7 +52,8 @@ base <- sort(unique(base))
 x <- base[1]^(1:n-1)
 # map to min-max:
 if(all(x==1)) x <- 1:n # if base=1
-lmc <- coef(lm(c(min,max)~x[c(1,n)]))
+x2 <- headtail(x[is.finite(x)])
+lmc <- coef(lm(c(min,max)~x2))
 x <- lmc[2]*x + lmc[1]
 # plot first value:
 if(plot) plot(x, rep(base[1],n), ylim=range(base), pch=pch, las=las, ylab=ylab, ...)

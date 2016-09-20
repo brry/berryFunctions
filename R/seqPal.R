@@ -13,6 +13,16 @@
 #' 
 #' plot(rep(1,12),  pch=16, cex=5, col=seqPal(12), xaxt="n")
 #' showPal()
+#' 
+#' # nonlinear color scale (use colPoints + see classify for more options):
+#' v <- rescale(volcano^30)
+#' image(v, col=seqPal(1000), asp=1);  colPointsLegend(v, nbins=1000)
+#' image(v, col=seqPal(1000, logbase=1.007), asp=1)
+#' colPointsLegend(v, col=seqPal(1000, logbase=1.09))
+#' 
+#' plot(    rep(1, 1000), pch=15, cex=3, col=seqPal(1000), ylim=c(0.99, 1.01), ylab="logbase", las=1) 
+#' for(b in seq(0.99, 1.01, len=30))
+#'     points(rep(b, 1000), pch=15, cex=1, col=seqPal(1000, logbase=b)) 
 #'  
 #' @param n Number of colors. DEFAULT: 12
 #' @param reverse Reverse colors? DEFAULT: FALSE
@@ -24,6 +34,7 @@
 #' @param yr Should colors be in yellow-red instead of the default? DEFAULT: FALSE
 #' @param gb Should colors be in green-blue instead of the default? DEFAULT: FALSE
 #' @param colors If not NULL, a color vector used in \code{\link{colorRampPalette}}. DEFAULT: NULL
+#' @param logbase If \code{!=1}, this is passed to \code{\link{classify}} and \code{\link{logSpaced}}. DEFAULT: 1
 #' @param \dots Further arguments passed to \code{\link{colorRamp}}
 #' 
 seqPal <- function(
@@ -35,6 +46,7 @@ yb=FALSE,
 yr=FALSE,
 gb=FALSE,
 colors=NULL,
+logbase=1,
 ...
 )
 {
@@ -47,6 +59,23 @@ if(gb) cols <- c("chartreuse","cornflowerblue","darkblue")
 if(!is.null(colors)) cols <- colors
 if(reverse) cols <- rev(cols)
 outcols <- colorRampPalette(cols)(n)
+if(logbase!=1) 
+  {
+  n1 <- n#*10 # log(90, base=logbase)
+  cl <- classify(1:n1, method="logspaced", breaks=c(n1,logbase))
+  n2 <- cl$nbins
+  outcols <- colorRampPalette(cols)(n2)[cl$index]
+  # message("n: ", round(n1), ", number of bins from classify: ", n2, ", number of unique colors: ", length(unique(outcols)))
+  }
 if(alpha!=1) outcols <- addAlpha(outcols, alpha)
 outcols
 }
+
+
+if(FALSE){
+
+
+
+
+}
+

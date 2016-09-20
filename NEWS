@@ -17,12 +17,13 @@ Before the actual NEWS, here are some things planned for future development:
 -----------------------------
 
 
-Version 1.12.0 (2016-09-19)
+Version 1.12.2 (2016-09-20)
 https://github.com/brry/berryFunctions/compare/master@{2016-08-18}...master@{2016-09-19}
 - mainly a release to be able to update OSMscale which will use getColumn et al.
 - seasonality has been expanded quite a bit, spiralDate along with it
 - Goodness of fit measures unified into one file and with common input check function
 - informative error messages possible with the new functions traceCall and getColumn
+- classify logspaced bug corrected and implemented in seqPal
 New functions: traceCall, getName, getColumn, kge
 removed: randomPoints, triangleArea, equidistPoints (moved to OSMscale)
 

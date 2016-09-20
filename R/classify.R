@@ -99,10 +99,11 @@ ix <- cut(x, breaks=bb, labels=FALSE, include.lowest=TRUE)
 {
 if(missing(breaks)) breaks <- c(100, 1.2)
 if(length(breaks)!=2) stop("breaks must have two values if method='logspaced'.")
-nb <- breaks[1]
+###nb <- breaks[1]
 bb <- logSpaced(base=breaks[2], n=breaks[1], min=0.999*Range[1], max=1.001*Range[2], plot=FALSE)
 bb <- signif(bb, 5) # else min is in reality min + 1e-13
 bb <- unique(bb) # as logspaced produces a lot of breaks in one region
+nb <- length(bb)
 at <- pretty2(bb)
 la <- at
 ix <- cut(x, breaks=bb, labels=FALSE, include.lowest=TRUE)
