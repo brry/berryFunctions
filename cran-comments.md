@@ -10,6 +10,3 @@ Two NOTEs:
 Possibly mis-spelled words in DESCRIPTION: hydrograph 
 - This is a valid technical term in hydrology describing the time series of flow in a river
 
-Found the following (possibly) invalid URLs: https://cran.r-project.org/web/packages/roxygen2/vignettes/rd.html (CRAN URL not in canonical form)
-- This is the best way I know to link directly to the web version of a vignette
-
