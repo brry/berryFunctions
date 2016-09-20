@@ -8,7 +8,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, July 2014
 #' @seealso \code{\link{betaPlot}}, \code{\link{dnorm}},
 #'       \url{https://cran.r-project.org/package=denstrip},
-#'       \url{https://cran.r-project.org/web/views/Distributions.html}
+#'       \url{https://cran.r-project.org/view=Distributions}
 #' @keywords hplot distribution
 #' @importFrom graphics abline axis box lines par plot polygon segments text
 #' @importFrom stats dnorm pnorm qnorm

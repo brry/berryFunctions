@@ -67,7 +67,7 @@ Berry Boessenkool, \email{berry-b@gmx.de}, July 2014
 \seealso{
 \code{\link{betaPlotComp}}, \code{\link{normPlot}}, \code{\link{dbeta}}, 
    \url{https://cran.r-project.org/package=denstrip}, 
-   \url{https://cran.r-project.org/web/views/Distributions.html}
+   \url{https://cran.r-project.org/view=Distributions}
 }
 \keyword{distribution}
 \keyword{hplot}
