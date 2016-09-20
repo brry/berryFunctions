@@ -72,7 +72,8 @@ quantileBands(neff2, x=1:400, smooth=35, ylab="mean of rnorm(n)",
 Berry Boessenkool, \email{berry-b@gmx.de}, Sept 2014
 }
 \seealso{
-\code{\link{quantile}}, \code{\link{quantileMean}}, \code{\link{ciBand}}, \code{\link{polygon}}, \url{cran.r-project.org/package=fanplot}
+\code{\link{quantile}}, \code{\link{quantileMean}}, \code{\link{ciBand}}, 
+         \code{\link{polygon}}, \url{https://cran.r-project.org/package=fanplot}
 }
 \keyword{aplot}
 \keyword{dplot}
