@@ -116,7 +116,7 @@ if(y1>100){y1 <- 100; warning("y (",y1,") set to 100.")}
 if(x2<x1) {temp <- x2;  x2 <- x1;  x1 <- temp;  rm(temp)}
 if(y2>y1) {temp <- y2;  y2 <- y1;  y1 <- temp;  rm(temp)}
 # control for 0:1 input:
-if(diff(range(x, na.rm=TRUE)) < 1  |  diff(range(y, na.rm=TRUE)) < 1  )
+if(  (x1<1 & x2<1) |  (y1<1 & y2<1)  )
    stop("x or y was probably given as coodinates between 0 and 1. They must be between 0 and 100.")
 # old parameters to be restored at exit:
 op <- par(no.readonly=TRUE)
