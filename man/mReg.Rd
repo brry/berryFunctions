@@ -144,9 +144,7 @@ mReg(x,y, extend=0.2) # less empty space around data points
 mReg(x,y, nbest=4) # only 4 distributions plotted
 mReg(x,y, legargs=list(x=7, y=8, bty="o", cex=0.6)) # Legend position as coordinates
 
-\dontrun{
-## Rcmd check --as-cran doesn't like to open external devices,
-## so this View example is excluded from running in the checks.
+\dontrun{# Excluded from Rcmd check (opening external devices)
 View(mReg(x,y, Poly45=TRUE, exp_4=TRUE, plot=FALSE)) # exp_4: fit more distributions
 }
 # optim methods often yield different results, so be careful using this.
@@ -197,6 +195,7 @@ mReg(j,k, legargs=list(x="bottomright"), legendform="form")
 mReg(j,k, legargs=list(x="bottomright"), legendform="nameform")
 mReg(j,k, legargs=list(x="bottomright"), legendform="full")
 
+\dontrun{# Excluded from Rcmd check (long computing time) 
 
 # The question that got me started on this whole function...
 # exponential decline of temperature of a mug of hot chocolate
@@ -217,6 +216,8 @@ mReg(x,y, exp_4=TRUE, selection=11)
 x <- seq(1, 1000, 1)
 y <- (x+22)/(x+123) # can't find an analytical solution so far. Want to check out nls
 mReg(x, y, legargs=list(x="right"))
+
+}
 
 
 # Solitaire Results. According to en.wikipedia.org/wiki/Klondike_(solitaire):
@@ -260,7 +261,7 @@ mReg(rep(1,10), 1:10, quiet=TRUE)
 mReg(rep(0,10), 1:10, quiet=TRUE)
 mReg(c(rep(0,9),NA), 1:10, quiet=TRUE)
 mReg(rep(NA,10), 1:10, quiet=TRUE)
-
+ 
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2012, updated April and Aug 2013, sept 2015
