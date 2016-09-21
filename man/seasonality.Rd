@@ -9,7 +9,7 @@ seasonality(dates, values, data, drange = NULL, vrange = NULL, shift = 0,
   months = substr(month.abb, 1, 1), xlab = "Year", ylab = "Month",
   zlab = substitute(values), ylim = NA, xaxs = "r", yaxs = "i",
   main = "Seasonality", adj = 0.2, mar = c(3, 3, 4, 1), mgp = c(1.7,
-  0.7, 0), keeppar = TRUE, ...)
+  0.7, 0), keeppar = TRUE, legargs = NULL, ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order. 
@@ -65,6 +65,9 @@ DEFAULT: c(3,3,4,1), c(1.7,0.7,0) (Changed for plot 3:4 if not given)}
 
 \item{keeppar}{Logical: Keep the margin parameters? If FALSE, they are reset
 to the previous values. DEFAULT: TRUE}
+
+\item{legargs}{List of arguments passed as \code{legargs} to \code{\link{colPoints}}.
+DEFAULT: NULL (internally, plots 3:4 have density=F as default)}
 
 \item{\dots}{Further arguments passed to \code{\link{colPoints}} like 
 pch, main, xaxs, but not Range (use \code{vrange}).

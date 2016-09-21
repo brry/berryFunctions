@@ -75,6 +75,8 @@
 #'                DEFAULT: c(3,3,4,1), c(1.7,0.7,0) (Changed for plot 3:4 if not given)
 #' @param keeppar Logical: Keep the margin parameters? If FALSE, they are reset
 #'                to the previous values. DEFAULT: TRUE
+#' @param legargs List of arguments passed as \code{legargs} to \code{\link{colPoints}}.
+#'                DEFAULT: NULL (internally, plots 3:4 have density=F as default)
 #' @param \dots Further arguments passed to \code{\link{colPoints}} like 
 #'              pch, main, xaxs, but not Range (use \code{vrange}).
 #'              Passed to \code{\link{spiralDate}} if \code{plot=2}, like add, format, lines.
@@ -102,6 +104,7 @@ seasonality <- function(
   mar=c(3,3,4,1),
   mgp=c(1.7,0.7,0),
   keeppar=TRUE,
+  legargs=NULL,
   ...
 )
 {
@@ -171,7 +174,7 @@ if(1 %in% plot) # doy ~ year, col=Q
 {
   if(isnaylim) ylim <- c(370,-3)
   colPoints(year, doy, values, Range=vrange, add=FALSE, zlab=zlab,
-            ylab=ylab, xlab=xlab, yaxt="n", ylim=ylim, yaxs=yaxs, ...)
+            ylab=ylab, xlab=xlab, yaxt="n", ylim=ylim, yaxs=yaxs, legargs=legargs, ...)
   # Axis labelling
   if(janline & shift!=0) abline(h=shift+1)
   axis(2, ldoy, months, las=1)
@@ -182,7 +185,7 @@ if(1 %in% plot) # doy ~ year, col=Q
 if(2 %in% plot) # Spiral graph, col=Q
 {
   spd <- spiralDate(dates-shift, values, zlab=zlab, drange=drange, vrange=vrange, 
-             months=months, shift=shift, ...)
+             months=months, shift=shift, legargs=legargs, ...)
   title(main=main, adj=adj)
   if(janline) segments(x0=0, y0=0, x1=sin(shift/365.25*2*pi), y1=cos(shift/365.25*2*pi))
   if(missing(nmax)) nmax <- 0 # looks really ugly
@@ -210,7 +213,7 @@ if(3 %in% plot) # Q~doy, col=year
     }
   # plot
   colPoints(doy, values, year, data=data3, Range=drange3, add=FALSE, zlab=xlab,
-            ylab="", xlab=ylab, xaxt="n", legargs=list(density=FALSE), 
+            ylab="", xlab=ylab, xaxt="n", legargs=owa(list(density=FALSE),legargs), 
             ylim=ylim, yaxs=yaxs, lines=TRUE, nint=1, xaxs=xaxs3,
             if(!exists("col", inherits=FALSE)) col=seqPal(100, colors=c("red","blue")), 
              ...)
@@ -227,8 +230,8 @@ if(3 %in% plot) # Q~doy, col=year
 if(4 %in% plot) # annmax~year, col=n
 {
   if(missingzlab) zlab <- paste("Annual max", zlab)
-  colPoints(year, max, "n", data=annmax, add=FALSE, 
-            ylab="", xlab=xlab, legargs=list(density=FALSE), lines=TRUE, ...)
+  colPoints("year", "max", "n", data=annmax, add=FALSE, zlab="n nonNA / hydrol. year",
+            ylab="", xlab=xlab, legargs=owa(list(density=FALSE),legargs), lines=TRUE, ...)
   mtext("") ### as above
   title(ylab=zlab, mgp=mgp)
   if(missing(main)) main <- "Trend of annual maxima"
