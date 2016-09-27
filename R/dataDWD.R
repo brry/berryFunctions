@@ -34,6 +34,7 @@
 #' stats[grep("kirchberg", stats$Stationsname, ignore.case=TRUE), ] 
 #' # identify the station id you need (there may be multiple matches): 02575 
 #' 
+#' 
 #' # List of actually available files (needs RCurl):
 #' # install.packages("RCurl")
 #' files <- dataDWD("", meta=2, base2="monthly/kl/historical")
@@ -41,6 +42,24 @@
 #' clim <- dataDWD(base2="monthly/kl/historical", file=files[grep("_02575_", files)])
 #' # monthly averages/mins/maxs of: wind, clouds, rainfall, sunshine, temperature
 #' head(clim)
+#' 
+#' # Map of all precipitation stations:
+#' if(FALSE){ # pdf saving works only in berryFunctions source directory
+#' pstats <- dataDWD("RR_Stundenwerte_Beschreibung_Stationen.txt", base2="hourly/precipitation/historical")
+#' pfiles <- dataDWD("", meta=2, base2="hourly/precipitation/historical")
+#' hasfile <- pstats$Stations_id %in% na.omit(as.numeric(substr(pfiles, 17, 21)))
+#' library("OSMscale")
+#' map <- pointsMap(geoBreite, geoLaenge, data=pstats, fx=0.28, fy=0.06)
+#' pdf("inst/extdata/RainfallStationsMap.pdf")
+#' plot(map)
+#' scaleBar(map, x=0.05, y=0.03, abslen=200)
+#' points(projectPoints(geoBreite, geoLaenge, data=pstats[!hasfile,], to=posm()), col="red", pch=3)
+#' points(projectPoints(geoBreite, geoLaenge, data=pstats[ hasfile,], to=posm()), col="blue", pch=3)
+#' legend("bottomright", c("in matadata only", "file on FTP server"), 
+#'        col=c("red", "blue"), pch=3, bg="white")
+#' title(main="DWD stations: Rainfall data on ftp server", line=3)
+#' dev.off()
+#' }
 #'
 #' # 3. Get data for several stations ------------------------------------------
 #' # (do this at your own risk of getting kicked off the FTP)
