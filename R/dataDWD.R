@@ -45,7 +45,8 @@
 #' 
 #' # Map of all precipitation stations:
 #' if(FALSE){ # pdf saving works only in berryFunctions source directory
-#' pstats <- dataDWD("RR_Stundenwerte_Beschreibung_Stationen.txt", base2="hourly/precipitation/historical")
+#' pstats <- dataDWD("RR_Stundenwerte_Beschreibung_Stationen.txt", 
+#'                   base2="hourly/precipitation/historical")
 #' pfiles <- dataDWD("", meta=2, base2="hourly/precipitation/historical")
 #' hasfile <- pstats$Stations_id %in% na.omit(as.numeric(substr(pfiles, 17, 21)))
 #' library("OSMscale")
@@ -53,8 +54,9 @@
 #' pdf("inst/extdata/RainfallStationsMap.pdf")
 #' plot(map)
 #' scaleBar(map, x=0.05, y=0.03, abslen=200)
-#' points(projectPoints(geoBreite, geoLaenge, data=pstats[!hasfile,], to=posm()), col="red", pch=3)
-#' points(projectPoints(geoBreite, geoLaenge, data=pstats[ hasfile,], to=posm()), col="blue", pch=3)
+#' pp <- projectPoints(geoBreite, geoLaenge, data=pstats, to=posm())
+#' points(pp[!hasfile,], col="red", pch=3)
+#' points(pp[ hasfile,], col="blue", pch=3)
 #' legend("bottomright", c("in matadata only", "file on FTP server"), 
 #'        col=c("red", "blue"), pch=3, bg="white")
 #' title(main="DWD stations: Rainfall data on ftp server", line=3)
