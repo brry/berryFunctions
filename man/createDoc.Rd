@@ -46,7 +46,7 @@ Berry Boessenkool, \email{berry-b@gmx.de}, June + Dec 2014
 }
 \seealso{
 \code{\link{package.skeleton}}, \code{\link{prompt}}, \code{\link{scan}}, 
-         \code{\link{cat}}, Roxygen2: https://cran.r-project.org/web/packages/roxygen2/vignettes/rd.html
+         \code{\link{cat}}, Roxygen2: \url{https://cran.r-project.org/package=roxygen2/vignettes/rd.html}
 }
 \keyword{documentation}
 
