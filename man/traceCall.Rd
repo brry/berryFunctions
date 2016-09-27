@@ -24,6 +24,8 @@ lower <- function(a, s) warning(traceCall(s), "final value is: ", a+10)
 upper <- function(b, skip=0) lower(b+5, skip)
 upper(3)
 upper(3, skip=1) # traceCall skips last level (warning)
+upper(3, skip=4) # now the stack is empty
+upper(3, skip=-1) # get one more level down
 is.error(upper("four"))
 
 }

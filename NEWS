@@ -12,6 +12,13 @@ Before the actual NEWS, here are some things planned for future development:
 - late 2016: delete randomPoints, triangleArea, cie, cls, pastec, pointZoom and createDoc from package
 - reference to sortDF in addRow, insertRow, etc
 
+-----------------------------
+-----------------------------
+
+
+Version 1.12.3 (2016-09-27)
+- traceCall corrected so that it also works with older versions of R
+- wrong smallPlot coordinate input now actually caught
 
 -----------------------------
 -----------------------------
