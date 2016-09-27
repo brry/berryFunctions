@@ -6,7 +6,8 @@
 #'
 #' @return file name as character string
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, March 2016
-#' @seealso \code{\link{system2}}, \code{\link{funSource}}
+#' @seealso \code{\link{system2}}, \code{\link{funSource}}, Roxygen2: 
+#'          \url{https://cran.r-project.org/package=roxygen2/vignettes/rd.html}
 #' @keywords documentation
 #' @export
 #' @examples
