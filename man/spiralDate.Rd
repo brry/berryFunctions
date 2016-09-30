@@ -4,8 +4,8 @@
 \alias{spiralDate}
 \title{Spiral graph of time series}
 \usage{
-spiralDate(dates, values, data, drange = NULL, vrange = NULL,
-  months = substr(month.abb, 1, 1), add = FALSE, shift = 0, prop = NULL,
+spiralDate(dates, values, data, drange = NA, vrange = NA,
+  months = substr(month.abb, 1, 1), add = FALSE, shift = 0, prop = NA,
   zlab = substitute(values), format = "\%Y", nint = 1, ...)
 }
 \arguments{
@@ -17,9 +17,9 @@ as accepted (and coerced) by \code{\link{as.Date}}}
 
 \item{data}{Optional: data.frame with the column names as given by dates and values}
 
-\item{drange}{Optional date range (analogous to xlim), can be a vector like \code{dates}. DEFAULT: NULL}
+\item{drange}{Optional date range (analogous to xlim), can be a vector like \code{dates}. DEFAULT: NA}
 
-\item{vrange}{Optional value range (analogous to ylim), can be a vector like \code{values}. DEFAULT: NULL}
+\item{vrange}{Optional value range (analogous to ylim), can be a vector like \code{values}. DEFAULT: NA}
 
 \item{months}{Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D}
 
@@ -27,7 +27,7 @@ as accepted (and coerced) by \code{\link{as.Date}}}
 
 \item{shift}{Number of days to move january 1st clockwise. DEFAULT: 0}
 
-\item{prop}{Proportion of the data to be actually plotted, used in \code{\link{spiralDateAnim}}. DEFAULT: NULL}
+\item{prop}{Proportion of the data to be actually plotted, used in \code{\link{spiralDateAnim}}. DEFAULT: NA (ignored)}
 
 \item{zlab}{Title of \code{\link{colPointsLegend}}}
 

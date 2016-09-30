@@ -56,12 +56,12 @@
 #'              as accepted (and coerced) by \code{\link{as.Date}}
 #' @param values Values to be mapped in color with \code{\link{colPoints}} along seasonal spiral
 #' @param data Optional: data.frame with the column names as given by dates and values
-#' @param drange Optional date range (analogous to xlim), can be a vector like \code{dates}. DEFAULT: NULL
-#' @param vrange Optional value range (analogous to ylim), can be a vector like \code{values}. DEFAULT: NULL
+#' @param drange Optional date range (analogous to xlim), can be a vector like \code{dates}. DEFAULT: NA
+#' @param vrange Optional value range (analogous to ylim), can be a vector like \code{values}. DEFAULT: NA
 #' @param months Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
 #' @param add Add to existing plot? DEFAULT: FALSE
 #' @param shift Number of days to move january 1st clockwise. DEFAULT: 0
-#' @param prop Proportion of the data to be actually plotted, used in \code{\link{spiralDateAnim}}. DEFAULT: NULL
+#' @param prop Proportion of the data to be actually plotted, used in \code{\link{spiralDateAnim}}. DEFAULT: NA (ignored)
 #' @param zlab Title of \code{\link{colPointsLegend}}
 #' @param format Format of date labels see details in \code{\link{strptime}}. DEFAULT: "\%Y"
 #' @param nint Number of interpolation segments between points, 
@@ -73,12 +73,12 @@ spiralDate <- function(
 dates,
 values,
 data,
-drange=NULL,
-vrange=NULL,
+drange=NA,
+vrange=NA,
 months=substr(month.abb,1,1),
 add=FALSE, 
 shift=0,
-prop=NULL,
+prop=NA,
 zlab=substitute(values),
 format="%Y",
 nint=1,
@@ -98,7 +98,8 @@ if(length(dates)!=length(values)) stop("length of dates and values not equal (",
 # convert to date
 dates <- as.Date(dates)
 # date range (analogous to xlim):
-if(!is.null(drange))
+notNA <- function(x) !all(is.na(x))
+if(notNA(drange))
   {
   dmin <- min(as.Date(drange), na.rm=TRUE)
   dmax <- max(as.Date(drange), na.rm=TRUE)
@@ -109,7 +110,7 @@ if(!is.null(drange))
   values <- values[inrange]
   }
 # values range
-vrange <- range(   if(!is.null(vrange)) vrange else values  , na.rm=TRUE)  
+vrange <- range(   if(notNA(vrange)) vrange else values  , na.rm=TRUE)  
 #
 # coordinates for drawing
 r <- rescale(as.numeric(dates)) # ascending time-dependent radius
@@ -119,7 +120,7 @@ y <- r*cos((doy+shift)/365.25*2*pi)
 # output:
 out <- data.frame(dates,values,x,y)
 # plot selected data only:
-if(!is.null(prop))
+if(!is.na(prop))
   {
   sel <- 1:(prop*length(dates))
   x <- x[sel]
