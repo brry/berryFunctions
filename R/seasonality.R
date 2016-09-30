@@ -131,6 +131,7 @@ if(length(dates)!=length(values)) stop("length of dates and values not equal (",
                                          length(dates),", ",length(values),").")
 if(!all(plot %in% 0:4)) stop("The argument 'plot' must be an integer in 0:4, not ", plot)
 #
+# ### check dates for completeness ###
 # convert to date
 dates <- as.Date(dates)
 # date range (analogous to xlim):
@@ -163,8 +164,10 @@ doy  <- as.numeric(format(dates,"%j")) # Day of Year
 annmax <- tapply(X=values, INDEX=year, FUN=function(x) sum(!is.na(x)))
 annmax <- data.frame(year=as.numeric(names(annmax)), n=annmax)
 rownames(annmax) <- NULL
-annmax$max <- tapply(X=values, INDEX=year, FUN=max, na.rm=TRUE)
-annmax$doy <- tapply(X=values, INDEX=year, FUN=which.max)
+mymax <- function(xx) if(all(is.na(xx))) NA else max(xx, na.rm=TRUE)
+mywhichmax <- function(xx) if(all(is.na(xx))) NA else which.max(xx)
+annmax$max <- tapply(X=values, INDEX=year, FUN=mymax)
+annmax$doy <- tapply(X=values, INDEX=year, FUN=mywhichmax)
 annmax$index <- tapply(X=values, INDEX=year, FUN=length)
 annmax$index <- c(0,head(cumsum(annmax$index),-1)) + annmax$doy
 ### nmax for secondary, tertiary, ... maxima. with new function for event separation
@@ -183,8 +186,9 @@ if(1 %in% plot) # doy ~ year, col=Q
 {
   ylim1 <- if(is.na(ylim)) c(370,-3) else ylim
   yaxs1 <- if(is.na(yaxs)) "i" else yaxs
-  colPoints(year, doy, values, Range=vrange, add=FALSE, zlab=vlab,
-            ylab=slab, xlab=tlab, yaxt="n", ylim=ylim1, yaxs=yaxs1, legargs=legargs, ...)
+  xaxs1 <- if(is.na(xaxs)) "i" else xaxs
+  colPoints(year, doy, values, Range=vrange, add=FALSE, zlab=vlab, yaxs=yaxs1, xaxs=xaxs1,
+            ylab=slab, xlab=tlab, yaxt="n", ylim=ylim1, legargs=legargs, ...)
   # Axis labelling
   if(janline & shift!=0) abline(h=shift+1)
   axis(2, ldoy, months, las=1)
