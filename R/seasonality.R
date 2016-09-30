@@ -186,12 +186,12 @@ ldoy <- as.numeric(format(labs,"%j"))
 # Actual plotting
 #
 xlim1 <- if(is.na(ylim)) extendrange(year, f=0.01) else xlim
+xaxs1 <- if(is.na(xaxs)) "i" else xaxs
 #
 if(1 %in% plot) # doy ~ year, col=Q
 {
   ylim1 <- if(is.na(ylim)) c(370,-3) else ylim
   yaxs1 <- if(is.na(yaxs)) "i" else yaxs
-  xaxs1 <- if(is.na(xaxs)) "i" else xaxs
   colPoints(year, doy, values, Range=vrange, add=FALSE, yaxt="n",
             xlim=xlim1, ylim=ylim1, xaxs=xaxs1, yaxs=yaxs1,
             ylab=slab, xlab=tlab, zlab=vlab, legargs=legargs, ...)
@@ -249,12 +249,11 @@ if(3 %in% plot) # Q~doy, col=year
 #
 if(4 %in% plot) # annmax~year, col=n
 {
-  xaxs4 <- if(is.na(xaxs)) "r" else xaxs
   nalab <- if(shift==0) "n nonNA / year" else "n nonNA / hydrol. year"
   annmax4 <- annmax
   annmax4[ annmax4$n < nmin , c("n", "max")] <- NA
-  colPoints("year", "max", "n", data=annmax4, add=FALSE, zlab=nalab, xaxs=xaxs4,
-            xlim=xlim1, ylim=ylim3, yaxs=yaxs3, ylab="", xlab=tlab, 
+  colPoints("year", "max", "n", data=annmax4, add=FALSE, zlab=nalab,
+            xlim=xlim1, xaxs=xaxs1, ylim=ylim3, yaxs=yaxs3, ylab="", xlab=tlab, 
             legargs=owa(list(density=FALSE),legargs), lines=TRUE, ...)
   mtext("") ### as above
   title(ylab=vlab, mgp=mgp)
