@@ -74,7 +74,7 @@
 #' @param slab,tlab,vlab Labels for the \bold{s}eason, \bold{t}ime (year) and \bold{v}alues
 #'                       used on the axes and title of \code{\link{colPointsLegend}}. 
 #'                       DEFAULT: "Month", "Year", substitute(values)
-#' @param ylim Limits of y axis. DEFAULT: NA (specified internally per plot type)
+#' @param xlim,ylim Limits of x and y axis. DEFAULT: NA (specified internally per plot type)
 #' @param xaxs,yaxs x and y Axis style, see \code{\link{par}}. 
 #'                  Use "r" for regular 4\% expansion, "i" for in range only.
 #'                  DEFAULT: NA (specified internally per plot type)
@@ -106,6 +106,7 @@ seasonality <- function(
   slab="Month",
   tlab="Year",
   vlab=deparse(substitute(values)),
+  xlim=NA,
   ylim=NA,
   xaxs=NA,
   yaxs=NA,
@@ -170,6 +171,8 @@ annmax$max <- tapply(X=values, INDEX=year, FUN=mymax)
 annmax$doy <- tapply(X=values, INDEX=year, FUN=mywhichmax)
 annmax$index <- tapply(X=values, INDEX=year, FUN=length)
 annmax$index <- c(0,head(cumsum(annmax$index),-1)) + annmax$doy
+# correct doy if time series doesn't start at january 1st - shift:
+annmax$doy <- as.numeric(format(dates[annmax$index],"%j"))
 ### nmax for secondary, tertiary, ... maxima. with new function for event separation
 #
 # PLOTTING
@@ -182,13 +185,16 @@ labs <- monthLabs(2004,2004, npm=1) + shift
 ldoy <- as.numeric(format(labs,"%j"))
 # Actual plotting
 #
+xlim1 <- if(is.na(ylim)) extendrange(year, f=0.01) else xlim
+#
 if(1 %in% plot) # doy ~ year, col=Q
 {
   ylim1 <- if(is.na(ylim)) c(370,-3) else ylim
   yaxs1 <- if(is.na(yaxs)) "i" else yaxs
   xaxs1 <- if(is.na(xaxs)) "i" else xaxs
-  colPoints(year, doy, values, Range=vrange, add=FALSE, zlab=vlab, yaxs=yaxs1, xaxs=xaxs1,
-            ylab=slab, xlab=tlab, yaxt="n", ylim=ylim1, legargs=legargs, ...)
+  colPoints(year, doy, values, Range=vrange, add=FALSE, yaxt="n",
+            xlim=xlim1, ylim=ylim1, xaxs=xaxs1, yaxs=yaxs1,
+            ylab=slab, xlab=tlab, zlab=vlab, legargs=legargs, ...)
   # Axis labelling
   if(janline & shift!=0) abline(h=shift+1)
   axis(2, ldoy, months, las=1)
@@ -216,6 +222,7 @@ if(3 %in% plot) # Q~doy, col=year
   # date year range
   if(!exists("drange3", inherits=FALSE)) drange3 <- range(year)
   xaxs3 <- if(is.na(xaxs)) "i" else xaxs
+  xlim3 <- if(is.na(xlim)) c(0,367) else xlim
   # NAs between years
   data3 <- data.frame(doy, values, year)
   if(diff(range(year, na.rm=TRUE))>0)
@@ -227,7 +234,7 @@ if(3 %in% plot) # Q~doy, col=year
   # plot
   colPoints(doy, values, year, data=data3, Range=drange3, add=FALSE, zlab=tlab,
             ylab="", xlab=slab, xaxt="n", legargs=owa(list(density=FALSE),legargs), 
-            ylim=ylim3, yaxs=yaxs3, lines=TRUE, nint=1, xaxs=xaxs3,
+            xlim=xlim3, ylim=ylim3, xaxs=xaxs3, yaxs=yaxs3, lines=TRUE, nint=1,
             if(!exists("col", inherits=FALSE)) col=seqPal(100, colors=c("red","blue")), 
              ...)
   mtext("") # weird behaviour: title not added without this line. ### Is this a bug?
@@ -247,7 +254,7 @@ if(4 %in% plot) # annmax~year, col=n
   annmax4 <- annmax
   annmax4[ annmax4$n < nmin , c("n", "max")] <- NA
   colPoints("year", "max", "n", data=annmax4, add=FALSE, zlab=nalab, xaxs=xaxs4,
-            ylim=ylim3, yaxs=yaxs3, ylab="", xlab=tlab, 
+            xlim=xlim1, ylim=ylim3, yaxs=yaxs3, ylab="", xlab=tlab, 
             legargs=owa(list(density=FALSE),legargs), lines=TRUE, ...)
   mtext("") ### as above
   title(ylab=vlab, mgp=mgp)

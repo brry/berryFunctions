@@ -7,9 +7,9 @@
 seasonality(dates, values, data, drange = NA, vrange = NA, shift = 0,
   janline = TRUE, nmax = 0, maxargs = NULL, plot = 1, nmin = 100,
   months = substr(month.abb, 1, 1), slab = "Month", tlab = "Year",
-  vlab = deparse(substitute(values)), ylim = NA, xaxs = NA, yaxs = NA,
-  main = "Seasonality", adj = 0.2, mar = c(3, 3, 4, 1), mgp = c(1.7,
-  0.7, 0), keeppar = TRUE, legargs = NULL, ...)
+  vlab = deparse(substitute(values)), xlim = NA, ylim = NA, xaxs = NA,
+  yaxs = NA, main = "Seasonality", adj = 0.2, mar = c(3, 3, 4, 1),
+  mgp = c(1.7, 0.7, 0), keeppar = TRUE, legargs = NULL, ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order. 
@@ -55,7 +55,7 @@ to be plotted in plot type 4. DEFAULT: 100}
 used on the axes and title of \code{\link{colPointsLegend}}. 
 DEFAULT: "Month", "Year", substitute(values)}
 
-\item{ylim}{Limits of y axis. DEFAULT: NA (specified internally per plot type)}
+\item{xlim, ylim}{Limits of x and y axis. DEFAULT: NA (specified internally per plot type)}
 
 \item{xaxs, yaxs}{x and y Axis style, see \code{\link{par}}. 
 Use "r" for regular 4\% expansion, "i" for in range only.
