@@ -211,7 +211,8 @@ if(meta==1)
 if(meta==2)
   {
   if(!requireNamespace("RCurl", quietly=TRUE)) 
-    stop("R package 'Rcurl' not available. dataDWD(..., meta=2) not possible.")
+    stop("The R package 'Rcurl' is not available. dataDWD(..., meta=2) is not possible.
+         install.packages('RCurl')    to enable this.")
   f <- RCurl::getURL(paste0(base1,"/",base2,"/"), verbose=F, ftp.use.epsv=TRUE, dirlistonly=TRUE)
   f <- strsplit(f, "\r\n")[[1]]
   file <- paste0("INDEX_of_DWD_", gsub("/","_",base2),".txt")

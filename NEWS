@@ -11,6 +11,7 @@ Before the actual NEWS, here are some things planned for future development:
 - implement is.error and getColumn (eg spiralDate) wherever applicable
 - late 2016: delete randomPoints, triangleArea, cie, cls, pastec, pointZoom and createDoc from package
 - reference to sortDF in addRow, insertRow, etc
+- dataDWD: own function metaDWD. Also, options for hist/recent etc
 
 -----------------------------
 -----------------------------
