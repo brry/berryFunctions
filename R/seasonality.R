@@ -68,9 +68,13 @@
 #'             2: Color coded spiral graph with \code{\link{spiralDate}}. \cr
 #'             3: Spaghetti line plot with discharge over doy, one line per year. \cr
 #'             4: Annmax over time for crude trend analysis. \cr
+#'             5: \code{prob} \code{\link{quantileMean}} over doy, with optional 
+#'                aggregation window (\code{width}) around each doy. \cr
 #'             DEFAULT: 1
 #' @param nmin Minimum number of values that must be present per (hydrological) year
 #'             to be plotted in plot type 4. DEFAULT: 100
+#' @param prob Probability passed to \code{\link{quantileMean}} for plot=5. DEFAULT: 0.5
+#' @param width Window width for plot=5. DEFAULT: 1
 #' @param months Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
 #' @param slab,tlab,vlab Labels for the \bold{s}eason, \bold{t}ime (year) and \bold{v}alues
 #'                       used on the axes and title of \code{\link{colPointsLegend}}. 
@@ -103,10 +107,12 @@ seasonality <- function(
   maxargs=NULL,
   plot=1,
   nmin=100,
+  prob=0.5,
+  width=1,
   months=substr(month.abb,1,1),
   slab="Month",
   tlab="Year",
-  vlab=deparse(substitute(values)),
+  vlab=NA,
   xlim=NA,
   ylim=NA,
   xaxs=NA,
@@ -121,7 +127,8 @@ seasonality <- function(
 )
 {
 # Convert before promise 'values' is evaluated: 
-vlab <- vlab
+vlab1 <- if(is.na(vlab)) deparse(substitute(values)) else vlab
+allNA <- function(x) all(is.na(x))
 # input columns or vectors
 if(!missing(data)) # get vectors from data.frame
   {
@@ -131,14 +138,13 @@ if(!missing(data)) # get vectors from data.frame
 #check input
 if(length(dates)!=length(values)) stop("length of dates and values not equal (",
                                          length(dates),", ",length(values),").")
-if(!all(plot %in% 0:4)) stop("The argument 'plot' must be an integer in 0:4, not ", plot)
+if(!all(plot %in% 0:5)) stop("The argument 'plot' must be an integer in 0:5, not ", plot)
 #
 # ### check dates for completeness ###
 # convert to date
 dates <- as.Date(dates)
 # date range (analogous to xlim):
-notNA <- function(x) !all(is.na(x))
-if(notNA(drange))
+if(!allNA(drange))
   {
   dmin <- min(as.Date(drange), na.rm=TRUE)
   dmax <- max(as.Date(drange), na.rm=TRUE)
@@ -150,7 +156,7 @@ if(notNA(drange))
   drange3 <- as.numeric(format(c(dmin,dmax), "%Y")) # for plot=3 option
   }
 # values range
-vrange <- range(   if(notNA(vrange)) vrange else values  , na.rm=TRUE)  
+vrange <- range(   if(!allNA(vrange)) vrange else values  , na.rm=TRUE)  
 # shift break to other month
 if(shift<0) warning("'shift' was negative (",shift,"). Absolute value now used.")
 shift <- abs(shift)
@@ -166,8 +172,8 @@ doy  <- as.numeric(format(dates,"%j")) # Day of Year
 annmax <- tapply(X=values, INDEX=year, FUN=function(x) sum(!is.na(x)))
 annmax <- data.frame(year=as.numeric(names(annmax)), n=annmax)
 rownames(annmax) <- NULL
-mymax <- function(xx) if(all(is.na(xx))) NA else max(xx, na.rm=TRUE)
-mywhichmax <- function(xx) if(all(is.na(xx))) NA else which.max(xx)
+mymax <-      function(xx) if(allNA(xx)) NA else max(xx, na.rm=TRUE)
+mywhichmax <- function(xx) if(allNA(xx)) NA else which.max(xx)
 annmax$max <- tapply(X=values, INDEX=year, FUN=mymax)
 annmax$doy <- tapply(X=values, INDEX=year, FUN=mywhichmax)
 annmax$index <- tapply(X=values, INDEX=year, FUN=length)
@@ -186,16 +192,16 @@ labs <- monthLabs(2004,2004, npm=1) + shift
 ldoy <- as.numeric(format(labs,"%j"))
 # Actual plotting
 #
-xlim1 <- if(is.na(ylim)) extendrange(year, f=0.01) else xlim
+xlim1 <- if(allNA(ylim)) extendrange(year, f=0.01) else xlim
 xaxs1 <- if(is.na(xaxs)) "i" else xaxs
 #
 if(1 %in% plot) # doy ~ year, col=Q
 {
-  ylim1 <- if(is.na(ylim)) c(370,-3) else ylim
+  ylim1 <- if(allNA(ylim)) c(370,-3) else ylim
   yaxs1 <- if(is.na(yaxs)) "i" else yaxs
   colPoints(year, doy, values, Range=vrange, add=FALSE, yaxt="n",
             xlim=xlim1, ylim=ylim1, xaxs=xaxs1, yaxs=yaxs1,
-            ylab=slab, xlab=tlab, zlab=vlab, legargs=legargs, ...)
+            ylab=slab, xlab=tlab, zlab=vlab1, legargs=legargs, ...)
   # Axis labelling
   if(janline & shift!=0) abline(h=shift+1)
   axis(2, ldoy, months, las=1)
@@ -206,7 +212,7 @@ if(1 %in% plot) # doy ~ year, col=Q
 #
 if(2 %in% plot) # Spiral graph, col=Q
 {
-  spd <- spiralDate(dates-shift, values, zlab=vlab, drange=drange, vrange=vrange, 
+  spd <- spiralDate(dates-shift, values, zlab=vlab1, drange=drange, vrange=vrange, 
              months=months, shift=shift, legargs=legargs, ...)
   title(main=main, adj=adj)
   if(janline) segments(x0=0, y0=0, x1=sin(shift/365.25*2*pi), y1=cos(shift/365.25*2*pi))
@@ -217,15 +223,15 @@ if(2 %in% plot) # Spiral graph, col=Q
 # parameters for both next plots
 if(missing(mar)) par(mar=c(3,4,4,1))
 if(missing(mgp)) mgp <- c(2.7,0.7,0)
-ylim3 <- if(is.na(ylim)) lim0(values) else ylim
+xlim3 <- if(allNA(xlim)) c(0,367) else xlim
+ylim3 <- if(allNA(ylim)) lim0(values) else ylim
+xaxs3 <- if(is.na(xaxs)) "i" else xaxs
 yaxs3 <- if(is.na(yaxs)) "r" else yaxs
 #
 if(3 %in% plot) # Q~doy, col=year
 {
   # date year range
   if(!exists("drange3", inherits=FALSE)) drange3 <- range(year)
-  xaxs3 <- if(is.na(xaxs)) "i" else xaxs
-  xlim3 <- if(is.na(xlim)) c(0,367) else xlim
   # NAs between years
   data3 <- data.frame(doy, values, year)
   if(diff(range(year, na.rm=TRUE))>0)
@@ -241,7 +247,7 @@ if(3 %in% plot) # Q~doy, col=year
             if(!exists("col", inherits=FALSE)) col=seqPal(100, colors=c("red","blue")), 
              ...)
   mtext("") # weird behaviour: title not added without this line. ### Is this a bug?
-  title(ylab=vlab, mgp=mgp)
+  title(ylab=vlab1, mgp=mgp)
   # Axis labelling
   axis(1, ldoy, months, las=1)
   title(main=main, adj=adj)  
@@ -252,6 +258,7 @@ if(3 %in% plot) # Q~doy, col=year
 #
 if(4 %in% plot) # annmax~year, col=n
 {
+  vlab4 <- if(is.na(vlab)) paste("annual maximum", vlab1) else vlab
   nalab <- if(shift==0) "n nonNA / year" else "n nonNA / hydrol. year"
   annmax4 <- annmax
   annmax4[ annmax4$n < nmin , c("n", "max")] <- NA
@@ -259,10 +266,45 @@ if(4 %in% plot) # annmax~year, col=n
             xlim=xlim1, xaxs=xaxs1, ylim=ylim3, yaxs=yaxs3, ylab="", xlab=tlab, 
             legargs=owa(list(density=FALSE),legargs), lines=TRUE, ...)
   mtext("") ### as above
-  title(ylab=vlab, mgp=mgp)
-  if(missing(main)) main <- "Trend of annual maxima"
+  title(ylab=vlab4, mgp=mgp)
+  if(missing(main)) main <- "Annual maxima"
   title(main=main, adj=adj)  
   ### nmax once larger values are possible
+}
+#
+if(5 %in% plot) # Qpercentile~doy, col=n
+{
+  ## DOY cyclicity (not perfect!!)
+  #doyselect <- function(d) sapply(d, function(d) if(d<1) 365+d else if(d>366) d-366 else d)
+  ## select all the dates width days (e.g one week) around a DOY:
+  #doyselect(day+(-width):width)
+  # width control:
+  if(width %% 2 == 0)
+    {
+    warning("even width (", width, ") is changed to odd width (", width+1, ").")
+    width <- width+1
+  }
+  # Half the width in each direction:
+  s <- floor(width/2)
+  Qp <- sapply(1:366, function(day)
+    {
+    select <- unique(unlist(lapply(which(doy==day), function(w) (w-s):(w+s))))
+    select <- select[select>0 & select<length(doy)]
+    c(length(select), quantileMean(values[select], probs=prob[1], na.rm=TRUE)   )
+    }, USE.NAMES=FALSE)
+  # plot
+  ylim5 <- if(allNA(ylim)) lim0(Qp[2,]) else ylim
+  zlab5 <- if(s==0) "n per doy" else paste0("n per (doy +- ", s,")")
+  vlab5 <- if(is.na(vlab)) paste0(vlab1, " (",prob[1]*100,"th percentile)") else vlab
+  colPoints(1:366, Qp[2,], Qp[1,], add=FALSE, zlab=zlab5,
+            ylab="", xlab=slab, xaxt="n", legargs=owa(list(density=FALSE),legargs), 
+            xlim=xlim3, ylim=ylim5, xaxs=xaxs3, yaxs=yaxs3, lines=TRUE, nint=3, ...)
+  mtext("") # weird behaviour: title not added without this line. ### Is this a bug?
+  title(ylab=vlab5, mgp=mgp)
+  # Axis labelling
+  axis(1, ldoy, months, las=1)
+  title(main=main, adj=adj)  
+  if(janline & shift!=0) abline(v=shift+1)
 }
 #
 # Function output

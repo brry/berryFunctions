@@ -118,7 +118,7 @@ if(missing(weights))  weights <- rep(1,width)
 if(missing(width))    width <- length(weights)
 if(width != length(weights))  stop("width (",width,") and length of weights (",
                                    length(weights),") are not equal!")
-if(ceiling(width) != floor(width))  stop("width (",width,") has to be an (odd) integer.")
+if(ceiling(width) != floor(width))  stop("width (",width,") must be an (odd) integer.")
 ##if(length(weights) %% 2 == 0) stop("Length of weights must be an odd number!")
 if(width %% 2 == 0)
    {
