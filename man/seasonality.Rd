@@ -5,11 +5,12 @@
 \title{Seasonality analysis}
 \usage{
 seasonality(dates, values, data, drange = NA, vrange = NA, shift = 0,
-  janline = TRUE, nmax = 0, maxargs = NULL, plot = 1, nmin = 100,
-  probs = 0.5, width = 1, months = substr(month.abb, 1, 1),
-  slab = "Month", tlab = "Year", vlab = NA, xlim = NA, ylim = NA,
-  xaxs = NA, yaxs = NA, main = "Seasonality", adj = 0.2, mar = c(3, 3,
-  4, 1), mgp = c(1.7, 0.7, 0), keeppar = TRUE, legargs = NULL,
+  janline = TRUE, nmax = 0, maxargs = NULL, plot = 1, add = FALSE,
+  nmin = 100, probs = 0.5, width = 1, text = TRUE, textargs = NULL,
+  months = substr(month.abb, 1, 1), slab = "Month", tlab = "Year",
+  vlab = NA, xlim = NA, ylim = NA, xaxs = NA, yaxs = NA,
+  main = "Seasonality", adj = 0.2, mar = c(3, 3, 4, 1), mgp = c(1.7,
+  0.7, 0), keeppar = TRUE, legend = TRUE, legargs = NULL,
   returnall = FALSE, ...)
 }
 \arguments{
@@ -50,12 +51,18 @@ DEFAULT: NULL (several internal defaults are used, but can be overridden)}
    aggregation window (\code{width}) around each doy. \cr
 DEFAULT: 1}
 
+\item{add}{Logical. Add to existing plot? DEFAULT: FALSE}
+
 \item{nmin}{Minimum number of values that must be present per (hydrological) year
 to be plotted in plot type 4. DEFAULT: 100}
 
 \item{probs}{Probabilities passed to \code{\link{quantileMean}} for plot=5. DEFAULT: 0.5}
 
 \item{width}{Window width for plot=5. DEFAULT: 1}
+
+\item{text}{Logical. Call \code{\link{textField}} if plot=5? DEFAULT: TRUE}
+
+\item{textargs}{List of arguments passed to \code{\link{textField}} for plot=5. DEFAULT: NULL}
 
 \item{months}{Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D}
 
@@ -77,6 +84,8 @@ DEFAULT: c(3,3,4,1), c(1.7,0.7,0) (Changed for plot 3:4 if not given)}
 
 \item{keeppar}{Logical: Keep the margin parameters? If FALSE, they are reset
 to the previous values. DEFAULT: TRUE}
+
+\item{legend}{Logical. Should a legend be drawn? DEFAULT: TRUE}
 
 \item{legargs}{List of arguments passed as \code{legargs} to \code{\link{colPoints}}.
 DEFAULT: NULL (internally, plots 3:4 have density=F as default)}
