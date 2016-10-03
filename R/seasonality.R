@@ -60,7 +60,8 @@
 #' @param nmax Number of annual maxima to be marked, plotted and returned. 
 #'             Currently, only 0 and 1 are implemented. DEFAULT: 0
 #' @param maxargs List of arguments passed to \code{\link{lines}} for annual maxima,
-#'                e.g. \code{maxargs=list(type="l", col="red", lty=3)}. DEFAULT: NULL
+#'                e.g. \code{maxargs=list(type="l", col="red", lty=3)}. 
+#'                DEFAULT: NULL (several internal defaults are used, but can be overridden)
 #' @param plot Integer specifying the type of plot. Can be a vector to produce several plots. \cr 
 #'             0: none, only return the data.frame with annual maxima. \cr
 #'             1: color coded doy (day of the year) over year (the default). \cr
@@ -199,7 +200,8 @@ if(1 %in% plot) # doy ~ year, col=Q
   if(janline & shift!=0) abline(h=shift+1)
   axis(2, ldoy, months, las=1)
   title(main=main, adj=adj)
-  if(nmax==1) do.call(lines, owa(list(x=annmax$year, y=annmax$doy, type="o"), maxargs))
+  if(nmax==1) do.call(lines, owa(list(x=annmax$year, y=annmax$doy, type="p", 
+                                      pch=3, cex=0.5), maxargs, "x","y"))
 }
 #
 if(2 %in% plot) # Spiral graph, col=Q
@@ -209,7 +211,8 @@ if(2 %in% plot) # Spiral graph, col=Q
   title(main=main, adj=adj)
   if(janline) segments(x0=0, y0=0, x1=sin(shift/365.25*2*pi), y1=cos(shift/365.25*2*pi))
   if(nmax==1) do.call(lines, owa(list(x=spd[annmax$index,"x"], 
-                                      y=spd[annmax$index,"y"], type="o"), maxargs))
+                                      y=spd[annmax$index,"y"], type="p", 
+                                      pch=3, cex=0.3), maxargs, "x","y"))
 }
 # parameters for both next plots
 if(missing(mar)) par(mar=c(3,4,4,1))
@@ -244,7 +247,7 @@ if(3 %in% plot) # Q~doy, col=year
   title(main=main, adj=adj)  
   if(janline & shift!=0) abline(v=shift+1)
   if(nmax==1) do.call(lines, owa(list(x=doy[annmax$index], y=values[annmax$index],
-                                    type="p", pch=21, cex=1.5, lwd=2, bg="white"), maxargs))
+                                    type="p", pch=21, cex=0.8, lwd=1.5, bg="white"), maxargs))
 }
 #
 if(4 %in% plot) # annmax~year, col=n

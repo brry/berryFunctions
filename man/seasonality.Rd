@@ -36,7 +36,8 @@ January 1st if \code{shift!=0}? DEFAULT: TRUE}
 Currently, only 0 and 1 are implemented. DEFAULT: 0}
 
 \item{maxargs}{List of arguments passed to \code{\link{lines}} for annual maxima,
-e.g. \code{maxargs=list(type="l", col="red", lty=3)}. DEFAULT: NULL}
+e.g. \code{maxargs=list(type="l", col="red", lty=3)}. 
+DEFAULT: NULL (several internal defaults are used, but can be overridden)}
 
 \item{plot}{Integer specifying the type of plot. Can be a vector to produce several plots. \cr 
 0: none, only return the data.frame with annual maxima. \cr
