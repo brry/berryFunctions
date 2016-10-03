@@ -9,7 +9,8 @@ seasonality(dates, values, data, drange = NA, vrange = NA, shift = 0,
   prob = 0.5, width = 1, months = substr(month.abb, 1, 1),
   slab = "Month", tlab = "Year", vlab = NA, xlim = NA, ylim = NA,
   xaxs = NA, yaxs = NA, main = "Seasonality", adj = 0.2, mar = c(3, 3,
-  4, 1), mgp = c(1.7, 0.7, 0), keeppar = TRUE, legargs = NULL, ...)
+  4, 1), mgp = c(1.7, 0.7, 0), keeppar = TRUE, legargs = NULL,
+  returnall = FALSE, ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order. 
@@ -80,15 +81,23 @@ to the previous values. DEFAULT: TRUE}
 \item{legargs}{List of arguments passed as \code{legargs} to \code{\link{colPoints}}.
 DEFAULT: NULL (internally, plots 3:4 have density=F as default)}
 
+\item{returnall}{Logical: return all relevant output as a list instead of only}
+
 \item{\dots}{Further arguments passed to \code{\link{colPoints}} like 
 quiet=TRUE, pch, main, xaxs, but not Range (use \code{vrange}).
 Passed to \code{\link{spiralDate}} if \code{plot=2}, like add, format, lines.}
 }
 \value{
-Data.frame with \code{year}, \code{n}umber of nonNA entries, 
+The output is always invisible, don't forget to assign it. 
+        If returnall=FALSE: Data.frame with \code{year}, \code{n}umber of nonNA entries, 
         \code{max} value + \code{doy} of annual maxima.
-        Please note that the column year does not note the calendrical year 
-        if \code{shift!=0}.
+        Please note that the column year does not match the calendrical year 
+        if \code{shift!=0}. \cr
+        if returnall=TRUE: a list with \code{annmax} (df from above) as well as: \cr
+        \code{data}: data.frame(doy, values, year) and optionally: \cr
+        \code{plot1, plot3, plot4, plot5}: outputs from \code{\link{colPoints}} \cr
+        \code{plot2}: output list from \code{\link{spiralDate}} \cr
+        and other elements depending on plot type, \code{like data3, data5, prob5, width5}.
 }
 \description{
 Examine time series for seasonality of high (low) values
@@ -114,25 +123,27 @@ seasonality(date, discharge, data=Q[Q$date<as.Date("2007-08-15"),], plot=3, shif
 # Shift is important. You don't want to have this event included twice:
 seasonality(date, discharge, data=Q[850:950,], plot=3, nmax=1, quiet=TRUE, shift=100)
 
-seas <- seasonality(date, discharge, data=Q, plot=2) # most floods in winter
-seas <- seasonality(date, discharge, data=Q, plot=4, vlab="Dude, look at Q!")
-seas <- seasonality(date, discharge, data=Q, plot=4, shift=100)
+seasonality(date, discharge, data=Q, plot=2) # most floods in winter
+seasonality(date, discharge, data=Q, plot=4, vlab="Dude, look at Q!")
+seasonality(date, discharge, data=Q, plot=4, shift=100)
+s <- seasonality(date, discharge, data=Q, plot=5, shift=100, width=7, returnall=TRUE)
+str(s, max.lev=1)
 
 \dontrun{
 dev.new(noRStudioGD=TRUE, record=TRUE)     # large graph on 2nd monitor
 par(mfrow=c(2,2))
-seas <- seasonality(date, discharge, data=Q, plot=1:4, shift=100)
-seas <- seasonality(date, discharge, data=Q, plot=1:4, lwd=2)
-seas <- seasonality(date, discharge, data=Q, plot=1:4, nmax=1, shift=100)
-seas <- seasonality(date, discharge, data=Q, plot=1:4, col=divPal(100, ryb=TRUE))
+seasonality(date, discharge, data=Q, plot=1:4, shift=100)
+seasonality(date, discharge, data=Q, plot=1:4, lwd=2)
+seasonality(date, discharge, data=Q, plot=1:4, nmax=1, shift=100)
+seasonality(date, discharge, data=Q, plot=1:4, col=divPal(100, ryb=TRUE))
 }
 
 }
 \author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Jul 2016
+Berry Boessenkool, \email{berry-b@gmx.de}, Jul-Oct 2016
 }
 \seealso{
-\code{\link{spiralDate}}
+\code{\link{spiralDate}}, \code{\link{colPoints}}
 }
 \keyword{aplot}
 

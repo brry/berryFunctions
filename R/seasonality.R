@@ -2,12 +2,18 @@
 #'
 #' Examine time series for seasonality of high (low) values
 #'
-#' @return Data.frame with \code{year}, \code{n}umber of nonNA entries, 
+#' @return The output is always invisible, don't forget to assign it. 
+#'         If returnall=FALSE: Data.frame with \code{year}, \code{n}umber of nonNA entries, 
 #'         \code{max} value + \code{doy} of annual maxima.
-#'         Please note that the column year does not note the calendrical year 
-#'         if \code{shift!=0}. 
-#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jul 2016
-#' @seealso \code{\link{spiralDate}}
+#'         Please note that the column year does not match the calendrical year 
+#'         if \code{shift!=0}. \cr
+#'         if returnall=TRUE: a list with \code{annmax} (df from above) as well as: \cr
+#'         \code{data}: data.frame(doy, values, year) and optionally: \cr
+#'         \code{plot1, plot3, plot4, plot5}: outputs from \code{\link{colPoints}} \cr
+#'         \code{plot2}: output list from \code{\link{spiralDate}} \cr
+#'         and other elements depending on plot type, \code{like data3, data5, prob5, width5}.
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jul-Oct 2016
+#' @seealso \code{\link{spiralDate}}, \code{\link{colPoints}}
 #' @keywords aplot
 #' @export
 #' @examples
@@ -31,17 +37,19 @@
 #' # Shift is important. You don't want to have this event included twice:
 #' seasonality(date, discharge, data=Q[850:950,], plot=3, nmax=1, quiet=TRUE, shift=100)
 #' 
-#' seas <- seasonality(date, discharge, data=Q, plot=2) # most floods in winter
-#' seas <- seasonality(date, discharge, data=Q, plot=4, vlab="Dude, look at Q!")
-#' seas <- seasonality(date, discharge, data=Q, plot=4, shift=100)
+#' seasonality(date, discharge, data=Q, plot=2) # most floods in winter
+#' seasonality(date, discharge, data=Q, plot=4, vlab="Dude, look at Q!")
+#' seasonality(date, discharge, data=Q, plot=4, shift=100)
+#' s <- seasonality(date, discharge, data=Q, plot=5, shift=100, width=7, returnall=TRUE)
+#' str(s, max.lev=1)
 #' 
 #' \dontrun{
 #' dev.new(noRStudioGD=TRUE, record=TRUE)     # large graph on 2nd monitor
 #' par(mfrow=c(2,2))
-#' seas <- seasonality(date, discharge, data=Q, plot=1:4, shift=100)
-#' seas <- seasonality(date, discharge, data=Q, plot=1:4, lwd=2)
-#' seas <- seasonality(date, discharge, data=Q, plot=1:4, nmax=1, shift=100)
-#' seas <- seasonality(date, discharge, data=Q, plot=1:4, col=divPal(100, ryb=TRUE))
+#' seasonality(date, discharge, data=Q, plot=1:4, shift=100)
+#' seasonality(date, discharge, data=Q, plot=1:4, lwd=2)
+#' seasonality(date, discharge, data=Q, plot=1:4, nmax=1, shift=100)
+#' seasonality(date, discharge, data=Q, plot=1:4, col=divPal(100, ryb=TRUE))
 #' }
 #' 
 #' @param dates Dates in ascending order. 
@@ -91,6 +99,7 @@
 #'                to the previous values. DEFAULT: TRUE
 #' @param legargs List of arguments passed as \code{legargs} to \code{\link{colPoints}}.
 #'                DEFAULT: NULL (internally, plots 3:4 have density=F as default)
+#' @param returnall Logical: return all relevant output as a list instead of only                
 #' @param \dots Further arguments passed to \code{\link{colPoints}} like 
 #'              quiet=TRUE, pch, main, xaxs, but not Range (use \code{vrange}).
 #'              Passed to \code{\link{spiralDate}} if \code{plot=2}, like add, format, lines.
@@ -123,6 +132,7 @@ seasonality <- function(
   mgp=c(1.7,0.7,0),
   keeppar=TRUE,
   legargs=NULL,
+  returnall=FALSE,
   ...
 )
 {
@@ -182,6 +192,8 @@ annmax$index <- c(0,head(cumsum(annmax$index),-1)) + annmax$doy
 annmax$doy <- as.numeric(format(dates[annmax$index],"%j"))
 ### nmax for secondary, tertiary, ... maxima. with new function for event separation
 #
+# output preparation
+output <- list(annmax=annmax)
 # PLOTTING
 #
 # Margin parameters
@@ -199,7 +211,7 @@ if(1 %in% plot) # doy ~ year, col=Q
 {
   ylim1 <- if(allNA(ylim)) c(370,-3) else ylim
   yaxs1 <- if(is.na(yaxs)) "i" else yaxs
-  colPoints(year, doy, values, Range=vrange, add=FALSE, yaxt="n",
+  output$plot1 <- colPoints(year, doy, values, Range=vrange, add=FALSE, yaxt="n",
             xlim=xlim1, ylim=ylim1, xaxs=xaxs1, yaxs=yaxs1,
             ylab=slab, xlab=tlab, zlab=vlab1, legargs=legargs, ...)
   # Axis labelling
@@ -212,8 +224,8 @@ if(1 %in% plot) # doy ~ year, col=Q
 #
 if(2 %in% plot) # Spiral graph, col=Q
 {
-  spd <- spiralDate(dates-shift, values, zlab=vlab1, drange=drange, vrange=vrange, 
-             months=months, shift=shift, legargs=legargs, ...)
+  output$plot2 <- spd <- spiralDate(dates-shift, values, zlab=vlab1, drange=drange, 
+             vrange=vrange, months=months, shift=shift, legargs=legargs, ...)
   title(main=main, adj=adj)
   if(janline) segments(x0=0, y0=0, x1=sin(shift/365.25*2*pi), y1=cos(shift/365.25*2*pi))
   if(nmax==1) do.call(lines, owa(list(x=spd[annmax$index,"x"], 
@@ -228,24 +240,24 @@ ylim3 <- if(allNA(ylim)) lim0(values) else ylim
 xaxs3 <- if(is.na(xaxs)) "i" else xaxs
 yaxs3 <- if(is.na(yaxs)) "r" else yaxs
 #
+output$data <- data3 <- data.frame(doy, values, year)
 if(3 %in% plot) # Q~doy, col=year
 {
   # date year range
   if(!exists("drange3", inherits=FALSE)) drange3 <- range(year)
   # NAs between years
-  data3 <- data.frame(doy, values, year)
   if(diff(range(year, na.rm=TRUE))>0)
     {
     separators <- which(diff(year)!=0)
     separators <- separators + 1:length(separators)
-    data3 <- insertRows(data3, separators)
+    data3 <- insertRows(output$data, separators)
+    output$data3 <- data3
     }
   # plot
-  colPoints(doy, values, year, data=data3, Range=drange3, add=FALSE, zlab=tlab,
-            ylab="", xlab=slab, xaxt="n", legargs=owa(list(density=FALSE),legargs), 
-            xlim=xlim3, ylim=ylim3, xaxs=xaxs3, yaxs=yaxs3, lines=TRUE, nint=1,
-            if(!exists("col", inherits=FALSE)) col=seqPal(100, colors=c("red","blue")), 
-             ...)
+  output$plot3 <- colPoints(doy, values, year, data=data3, Range=drange3, add=FALSE, 
+      zlab=tlab, ylab="", xlab=slab, xaxt="n", legargs=owa(list(density=FALSE),legargs), 
+      xlim=xlim3, ylim=ylim3, xaxs=xaxs3, yaxs=yaxs3, lines=TRUE, nint=1,
+      if(!exists("col", inherits=FALSE)) col=seqPal(100, colors=c("red","blue")),  ...)
   mtext("") # weird behaviour: title not added without this line. ### Is this a bug?
   title(ylab=vlab1, mgp=mgp)
   # Axis labelling
@@ -262,7 +274,7 @@ if(4 %in% plot) # annmax~year, col=n
   nalab <- if(shift==0) "n nonNA / year" else "n nonNA / hydrol. year"
   annmax4 <- annmax
   annmax4[ annmax4$n < nmin , c("n", "max")] <- NA
-  colPoints("year", "max", "n", data=annmax4, add=FALSE, zlab=nalab,
+  output$plot4 <- colPoints("year", "max", "n", data=annmax4, add=FALSE, zlab=nalab,
             xlim=xlim1, xaxs=xaxs1, ylim=ylim3, yaxs=yaxs3, ylab="", xlab=tlab, 
             legargs=owa(list(density=FALSE),legargs), lines=TRUE, ...)
   mtext("") ### as above
@@ -286,7 +298,9 @@ if(5 %in% plot) # Qpercentile~doy, col=n
   }
   # Half the width in each direction:
   s <- floor(width/2)
-  Qp <- sapply(1:366, function(day)
+  output$width5 <- width
+  output$prob5 <- prob[1]
+  output$data5 <- Qp <- sapply(1:366, function(day)
     {
     select <- unique(unlist(lapply(which(doy==day), function(w) (w-s):(w+s))))
     select <- select[select>0 & select<length(doy)]
@@ -296,7 +310,7 @@ if(5 %in% plot) # Qpercentile~doy, col=n
   ylim5 <- if(allNA(ylim)) lim0(Qp[2,]) else ylim
   zlab5 <- if(s==0) "n per doy" else paste0("n per (doy +- ", s,")")
   vlab5 <- if(is.na(vlab)) paste0(vlab1, " (",prob[1]*100,"th percentile)") else vlab
-  colPoints(1:366, Qp[2,], Qp[1,], add=FALSE, zlab=zlab5,
+  output$plot5 <- colPoints(1:366, Qp[2,], Qp[1,], add=FALSE, zlab=zlab5,
             ylab="", xlab=slab, xaxt="n", legargs=owa(list(density=FALSE),legargs), 
             xlim=xlim3, ylim=ylim5, xaxs=xaxs3, yaxs=yaxs3, lines=TRUE, nint=3, ...)
   mtext("") # weird behaviour: title not added without this line. ### Is this a bug?
@@ -308,6 +322,6 @@ if(5 %in% plot) # Qpercentile~doy, col=n
 }
 #
 # Function output
-return(annmax)
+return(invisible(if(returnall) output else annmax))
 }
 
