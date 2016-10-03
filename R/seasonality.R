@@ -11,7 +11,7 @@
 #'         \code{data}: data.frame(doy, values, year) and optionally: \cr
 #'         \code{plot1, plot3, plot4, plot5}: outputs from \code{\link{colPoints}} \cr
 #'         \code{plot2}: output list from \code{\link{spiralDate}} \cr
-#'         and other elements depending on plot type, \code{like data3, data5, prob5, width5}.
+#'         and other elements depending on plot type, \code{like data3, data5, probs5, width5}.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jul-Oct 2016
 #' @seealso \code{\link{spiralDate}}, \code{\link{colPoints}}
 #' @keywords aplot
@@ -76,12 +76,12 @@
 #'             2: Color coded spiral graph with \code{\link{spiralDate}}. \cr
 #'             3: Spaghetti line plot with discharge over doy, one line per year. \cr
 #'             4: Annmax over time for crude trend analysis. \cr
-#'             5: \code{prob} \code{\link{quantileMean}} over doy, with optional 
+#'             5: \code{probs} \code{\link{quantileMean}} over doy, with optional 
 #'                aggregation window (\code{width}) around each doy. \cr
 #'             DEFAULT: 1
 #' @param nmin Minimum number of values that must be present per (hydrological) year
 #'             to be plotted in plot type 4. DEFAULT: 100
-#' @param prob Probability passed to \code{\link{quantileMean}} for plot=5. DEFAULT: 0.5
+#' @param probs Probabilities passed to \code{\link{quantileMean}} for plot=5. DEFAULT: 0.5
 #' @param width Window width for plot=5. DEFAULT: 1
 #' @param months Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
 #' @param slab,tlab,vlab Labels for the \bold{s}eason, \bold{t}ime (year) and \bold{v}alues
@@ -116,7 +116,7 @@ seasonality <- function(
   maxargs=NULL,
   plot=1,
   nmin=100,
-  prob=0.5,
+  probs=0.5,
   width=1,
   months=substr(month.abb,1,1),
   slab="Month",
@@ -299,20 +299,31 @@ if(5 %in% plot) # Qpercentile~doy, col=n
   # Half the width in each direction:
   s <- floor(width/2)
   output$width5 <- width
-  output$prob5 <- prob[1]
-  output$data5 <- Qp <- sapply(1:366, function(day)
+  output$probs5 <- probs
+  Qp <- sapply(1:366, function(day)
     {
     select <- unique(unlist(lapply(which(doy==day), function(w) (w-s):(w+s))))
     select <- select[select>0 & select<length(doy)]
-    c(length(select), quantileMean(values[select], probs=prob[1], na.rm=TRUE)   )
+    c(length(select), quantileMean(values[select], probs=probs, na.rm=TRUE)   )
     }, USE.NAMES=FALSE)
+  Qp <- t(Qp)
+  colnames(Qp)[1] <- "n"
+  output$data5 <- Qp
   # plot
-  ylim5 <- if(allNA(ylim)) lim0(Qp[2,]) else ylim
+  ylim5 <- if(allNA(ylim)) lim0(Qp[,-1]) else ylim
   zlab5 <- if(s==0) "n per doy" else paste0("n per (doy +- ", s,")")
-  vlab5 <- if(is.na(vlab)) paste0(vlab1, " (",prob[1]*100,"th percentile)") else vlab
-  output$plot5 <- colPoints(1:366, Qp[2,], Qp[1,], add=FALSE, zlab=zlab5,
+  vlab5 <- if(length(probs)==1) paste0(vlab1, " (",probs*100,"th percentile") else
+                               paste0(vlab1, " percentile")
+  vlab5 <- if(is.na(vlab))vlab5 else vlab 
+  output$plot5 <- colPoints(1:366, Qp[,2], Qp[,1], add=FALSE, zlab=zlab5,
             ylab="", xlab=slab, xaxt="n", legargs=owa(list(density=FALSE),legargs), 
             xlim=xlim3, ylim=ylim5, xaxs=xaxs3, yaxs=yaxs3, lines=TRUE, nint=3, ...)
+  if(length(probs)!=1) 
+    {
+    for(i in 2:length(probs))
+    colPoints(1:366, Qp[,i+1], Qp[,1], add=TRUE, legend=FALSE, lines=TRUE, nint=3, ...)
+    textField(15, Qp[15,-1], paste0(round(probs*100,1),"%"), quiet=TRUE)
+    }
   mtext("") # weird behaviour: title not added without this line. ### Is this a bug?
   title(ylab=vlab5, mgp=mgp)
   # Axis labelling

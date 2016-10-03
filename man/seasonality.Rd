@@ -6,7 +6,7 @@
 \usage{
 seasonality(dates, values, data, drange = NA, vrange = NA, shift = 0,
   janline = TRUE, nmax = 0, maxargs = NULL, plot = 1, nmin = 100,
-  prob = 0.5, width = 1, months = substr(month.abb, 1, 1),
+  probs = 0.5, width = 1, months = substr(month.abb, 1, 1),
   slab = "Month", tlab = "Year", vlab = NA, xlim = NA, ylim = NA,
   xaxs = NA, yaxs = NA, main = "Seasonality", adj = 0.2, mar = c(3, 3,
   4, 1), mgp = c(1.7, 0.7, 0), keeppar = TRUE, legargs = NULL,
@@ -46,14 +46,14 @@ DEFAULT: NULL (several internal defaults are used, but can be overridden)}
 2: Color coded spiral graph with \code{\link{spiralDate}}. \cr
 3: Spaghetti line plot with discharge over doy, one line per year. \cr
 4: Annmax over time for crude trend analysis. \cr
-5: \code{prob} \code{\link{quantileMean}} over doy, with optional 
+5: \code{probs} \code{\link{quantileMean}} over doy, with optional 
    aggregation window (\code{width}) around each doy. \cr
 DEFAULT: 1}
 
 \item{nmin}{Minimum number of values that must be present per (hydrological) year
 to be plotted in plot type 4. DEFAULT: 100}
 
-\item{prob}{Probability passed to \code{\link{quantileMean}} for plot=5. DEFAULT: 0.5}
+\item{probs}{Probabilities passed to \code{\link{quantileMean}} for plot=5. DEFAULT: 0.5}
 
 \item{width}{Window width for plot=5. DEFAULT: 1}
 
@@ -97,7 +97,7 @@ The output is always invisible, don't forget to assign it.
         \code{data}: data.frame(doy, values, year) and optionally: \cr
         \code{plot1, plot3, plot4, plot5}: outputs from \code{\link{colPoints}} \cr
         \code{plot2}: output list from \code{\link{spiralDate}} \cr
-        and other elements depending on plot type, \code{like data3, data5, prob5, width5}.
+        and other elements depending on plot type, \code{like data3, data5, probs5, width5}.
 }
 \description{
 Examine time series for seasonality of high (low) values
