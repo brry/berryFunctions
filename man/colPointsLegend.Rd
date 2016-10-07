@@ -4,23 +4,27 @@
 \alias{colPointsLegend}
 \title{Legend for colPoints}
 \usage{
-colPointsLegend(z, Range = range(z, finite = TRUE), nbins = 40,
+colPointsLegend(z, Range = range(z, finite = TRUE), nbins = 100,
   colors = seqPal(nbins), bb = seqR(Range, length.out = nbins + 1),
-  at = pretty2(Range), labels = at, adj = 0.5, bg = "white", x1 = 60,
-  y1 = 99, x2 = x1 + 38, y2 = y1 - 11, mar, mgp = c(1.8, 0.6, 0),
-  sborder = NA, resetfocus = TRUE, plottriangle = FALSE,
-  triangle = 0.14, tricol = c(1, 8), density = NULL, lines = TRUE,
-  atminmax = FALSE, horizontal = TRUE, labelpos = 1, titlepos = 3,
-  title = "Legend", las = 1, x, y, index, ...)
+  at = pretty2(Range), labels = at, adj = 0.5, x1 = 0.6, y1 = 0.88,
+  x2 = x1 + 0.38, y2 = y1 + 0.11, outer = FALSE, xpd = NA, mar,
+  mgp = c(1.8, 0.6, 0), bg = "white", sborder = NA, resetfocus = TRUE,
+  plottriangle = FALSE, triangle = 0.14, tricol = c(8, 1),
+  density = NULL, lines = TRUE, atminmax = FALSE, horizontal = TRUE,
+  labelpos = 1, titlepos = 3, title = "Legend", las = 1, x, y, index,
+  ...)
 }
 \arguments{
-\item{z}{Values of third dimension used in \code{\link{colPoints}}, can be matrix, vector, etc, but must be numeric}
+\item{z}{Values of third dimension used in \code{\link{colPoints}}, 
+can be a matrix or a vector etc, but must be numeric}
 
 \item{Range}{Ends of color bar for method=equalinterval. DEFAULT: range(z, finite=TRUE)}
 
-\item{nbins}{Number of classes (thus, colors). DEFAULT: 40}
+\item{nbins}{Number of classes (thus, colors). If \code{colors} is given, 
+\code{nbins} is overwritten with \code{length(colors)}. DEFAULT: 100}
 
-\item{colors}{Color vector. DEFAULT: \code{\link{rainbow}} from blue (lowest) to red (highest value in Range)}
+\item{colors}{Color vector. DEFAULT: \code{\link{seqPal}} 
+from yellow (lowest) to blue (highest value in Range)}
 
 \item{bb}{Borders of bins for the legend (key). DEFAULT: seqR(Range, length.out=nbins+1)}
 
@@ -30,17 +34,22 @@ colPointsLegend(z, Range = range(z, finite = TRUE), nbins = 40,
 
 \item{adj}{label adjustment parallel to legend bar (only one number!). DEFAULT: 0.5}
 
-\item{bg}{Background behind key, labels and title. DEFAULT: "white"}
+\item{x1, x2, y1, y2}{Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}. 
+DEFAULT: x: 0.6-0.99, y: 0.88-0.98}
 
-\item{x1, y1}{Topleft relative coordinates (0:100) of inset plot, see \code{\link{smallPlot}}. DEFAULT: 60,99}
+\item{outer}{Logical: Should legend be relative to device instead of current figure?
+use outer=TRUE when par(mfrow, oma) is set. DEFAULT: FALSE}
 
-\item{x2, y2}{Bottomright -"-. DEFAULT: 98,88}
+\item{xpd}{Logical: should text be expanded outisde of plotting region?
+Must be NA if outer=TRUE. DEFAULT: NA}
 
-\item{mar}{Margins for \code{\link{smallPlot}} in relative values (0:100). 
+\item{mar}{Margins for \code{\link{smallPlot}}. 
 DEFAULT: internal calculations based on title, labelpos and titlepos.}
 
 \item{mgp}{MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, 
 as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.6, 0)}
+
+\item{bg}{Background behind key, labels and title. DEFAULT: "white"}
 
 \item{sborder}{Border around inset subplot. DEFAULT: NA}
 
@@ -54,9 +63,10 @@ If this argument is missing but triangle is given, this is set to TRUE. DEFAULT:
 \item{triangle}{Percentage of bar length at lower and upper end for triangles 
 (can be a vector with two different values). DEFAULT: 0.14}
 
-\item{tricol}{Triangle colors for lower and upper end. DEFAULT: c(1,8)}
+\item{tricol}{Triangle colors for lower and upper end. DEFAULT: c(8,1)}
 
-\item{density}{Plot kernel density line? arguments passed to \code{\link{density}}. DEFAULT: NULL}
+\item{density}{List of arguments passed to \code{kernel \link{density} estimation}. 
+Can also be FALSE to suppress KDE line drawing. DEFAULT: NULL}
 
 \item{lines}{Plot black lines in the color bar at \code{at}? DEFAULT: TRUE}
 
@@ -73,9 +83,11 @@ Possible: 1 (below), 2 (left), 3 (above), 4 (right), 5(on top of bar). DEFAULT: 
 
 \item{las}{LabelAxisStyle. DEFAULT: 1}
 
-\item{x, y, index}{Ignored arguments, so that you can pass the result from colPoints via do.call(cpl, cp_result)}
+\item{x, y, index}{Ignored arguments, so that you can pass the result from 
+\code{\link{colPoints}} via \code{do.call(colPointsLegend, cp_result)}}
 
-\item{\dots}{Further arguments passed to \code{\link{text}} and \code{\link{strwidth}}, e.g. cex, srt, font, col. But NOT adj!}
+\item{\dots}{Further arguments passed to \code{\link{text}} and \code{\link{strwidth}}, 
+e.g. cex, srt, font, col. But NOT adj!}
 }
 \value{
 invisible list of par of \code{\link{smallPlot}}, adds legend bar to current plot
@@ -94,10 +106,10 @@ colPointsLegend(z=z)
 colPointsLegend(z=z, titlepos=2)
 colPointsLegend(z=z, horiz=FALSE) # note the different defaults
 # positioning relative to plot:
-colPointsLegend(z=z, x1=5, x2=30, y1=90, y2=70, title="Booh!", density=FALSE)
+colPointsLegend(z=z, x1=0.05, x2=0.3, y1=0.7,y2=0.9, title="Booh!", density=FALSE)
 # Denote values outside of Range wit a triangle:
-colPointsLegend(z=z, Range=c(-1,3), x1=20, y1=60, y2=40, triangle=c(0,0.5))
-colPointsLegend(z=z, horiz=FALSE, x1=70, y1=60, plottriangle=TRUE, density=FALSE)
+colPointsLegend(z=z, Range=c(-1,3), x1=0.2, y1=0.4, y2=0.6, triangle=0.2)
+colPointsLegend(z=z, horiz=FALSE, x1=0.7, y1=0.6, plottriangle=TRUE, density=FALSE)
 ?colPoints # example section for actual usage
 
 }
@@ -105,7 +117,7 @@ colPointsLegend(z=z, horiz=FALSE, x1=70, y1=60, plottriangle=TRUE, density=FALSE
 Berry Boessenkool, \email{berry-b@gmx.de}, 2012-2014
 }
 \seealso{
-\code{\link{colPoints}} (section examples) for real life example
+\code{\link{colPointsHist}}, \code{\link{colPoints}} for real life example
 }
 \keyword{aplot}
 \keyword{color}

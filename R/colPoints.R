@@ -53,45 +53,43 @@
 #' # sd: normal distribution
 #' mycols <- colorRampPalette(c("blue","yellow", "red"))
 #' colPoints(rx,ry,rz, add=FALSE, col=mycols(5), method="s",
-#'           legargs=list(horiz=FALSE, x1=70, x2=95))
+#'           legargs=list(horiz=FALSE, x1=0.7, x2=0.95))
 #' colPoints(rx,ry,rz, add=FALSE, col=mycols(6), method="s", sdlab=2,
 #'           legargs=list(horiz=FALSE, labelpos=5, lines=FALSE, title=""))
 #' # quantiles: each color is equally often used
 #' colPoints(rx,ry,rz, add=FALSE, method="q",
-#'           legargs=list(mar=c(0,5,3,0), bg="transparent") )
+#'           legargs=list(mar=c(0,1,1,0), bg="transparent") )
 #' text(rx,ry,round(rz), col=8)
 #' # logSpaced for rightly skewed data:
 #' set.seed(41); rz2 <- rbeta(30, 1,7)*100
-#' colPoints(rx,ry,rz2, add=FALSE, method="l", breaks=c(20,1.1708), col=mycols(20),
-#'           legargs=list(mar=c(0,5,3,0), bg="transparent") )
+#' colPoints(rx,ry,rz2, add=FALSE, method="l", breaks=c(20,1.1708), col=mycols(20))
 #' colPoints(rx,ry,rz2, add=FALSE, method="q", breaks=0:20/20, col=mycols(20),
-#'           legargs=list(mar=c(0,5,3,0), at=pretty2(rz2), labels=pretty2(rz2),
-#'                        bg="transparent") )
+#'           legargs=list(at=pretty2(rz2), labels=pretty2(rz2)) )
 #' 
 #' # With histogram:
 #' colPoints(i,j,k, add=FALSE, hist=TRUE)
 #' colPoints(i,j,k, cex=3.5, lwd=3, pch=1, histargs=list(bg=5, breaks=5), add=FALSE)
 #' colPoints(rx,ry,rz, cex=3.5, lwd=3, pch=1, add=FALSE, legend=FALSE,
-#'    histargs=list(mar=c(0,0,0,0), x1=50,y1=99, x2=100,y2=80, yaxt="n"))
+#'    histargs=list(mar=c(0,0,0,0), x1=0.5, x2=1, y1=0.8, y2=0.99, yaxt="n"))
 #' 
 #' # use classify separately:
 #' text(rx,ry,round(rz), col=mycols(100)[classify(rz)$index], cex=0.7)
 #' 
 #' # histogram in lower panel:
 #' layout(matrix(1:2), heights=c(8,4) )
-#' colPoints(i,j,k, add=FALSE, legargs=list(y2=80))
-#' colPointsHist(z=k, x1=10,y1=80, x2=100,y2=10)
+#' colPoints(i,j,k, add=FALSE, legargs=list(y1=0.8, y2=1))
+#' colPointsHist(z=k, x1=0.05, x2=1, y1=0, y2=0.4, mar=3, outer=TRUE)
 #' layout(1)
 #' 
 #' 
 #' # Customizing the legend :
 #' cp <- colPoints(i,j,k, legend=FALSE, add=FALSE)
-#' colPointsLegend(x1=20,y1=50, x2=95,y2=40, z=k, labelpos=5, atminmax=TRUE, bg=7)
-#' colPointsLegend(x1=50,y1=28, x2=90,y2=18, z=k, Range=c(80, 200), nbins=12, font=3)
-#' colPointsLegend(x1=10,y1=15, x2=40,y2= 5, z=k, labelpos=5, lines=FALSE, title="")
+#' colPointsLegend(x1=0.2, x2=0.95, y1=0.50, y2=0.40, z=k, labelpos=5, atminmax=TRUE, bg=7)
+#' colPointsLegend(x1=0.5, x2=0.90, y1=0.28, y2=0.18, z=k, Range=c(80, 200), nbins=12, font=3)
+#' colPointsLegend(x1=0.1, x2=0.40, y1=0.15, y2=0.05, z=k, labelpos=5, lines=FALSE, title="")
 #' colPointsLegend(z=k, horizontal=FALSE)
-#' colPointsLegend(x1=1, y1=90, z=k, horizontal=FALSE, labelpos=4, cex=1.2)
-#' colPointsLegend(x1=23,y1=95, z=k, horizontal=FALSE, labelpos=5, cex=0.8,
+#' colPointsLegend(x1=0.01, y2=0.80, z=k, horizontal=FALSE, labelpos=4, cex=1.2)
+#' colPointsLegend(x1=0.23, y2=0.95, z=k, horizontal=FALSE, labelpos=5, cex=0.8,
 #'   dens=FALSE, title="", at=c(130,150,170), labels=c("y","rr","Be"), lines=FALSE)
 #' # For method other than colPoints' default, it is easiest to include these
 #' # options as a list in legargs, but you can also use the invisible output
@@ -101,23 +99,23 @@
 #' 
 #' # colPoints with matrix:
 #' colPoints(z=volcano, add=FALSE)
-#' # image and contour by default transpose the matrix! This is really in the data
+#' # image and contour by default transpose the matrix! 
+#' # colPoints shows what is really in the data.
 #' colPointsHist(z=volcano)
 #' 
 #' # highlight local character of points on a regular grid normally drawn with image:
-#' # library(datasets), normally already loaded in newer R versions.
 #' z <- t(volcano)  ;  x <- 1:ncol(z)  ;  y <- 1:nrow(z)
 #' colPoints(x,y,z, add=FALSE)  # takes matrix for z
 #' contour(x,y,t(z), add=TRUE)
 #' 
 #' # image only takes a regular matrix, but not scatterpoints...
-#' image(x,y,t(z), col=rev(rainbow(100, start=0, end=.7)))
+#' image(x,y,t(z), col=rainbow2(100))
 #' 
 #' # add single newly measured points to image (fictional data):
 #' mx <- c( 22,  40,  80,  45,  60,  63,  30,  70)
 #' my <- c(  5,  33,  12,  56,  20,  40,  45,  45)
 #' mz <- c(135, 155, 120, 105, 140, 130, 190, 110)
-#' colPoints(mx,my,mz, cex=5, pch="*", Range=c(94, 195), col2=NA, legend=FALSE)
+#' colPoints(mx,my,mz, cex=5, pch="*", Range=c(94, 195), col=rainbow2(100), col2=NA, legend=FALSE)
 #' points(mx,my, cex=4)
 #' text(mx,my,mz, adj=-0.5, font=2)
 #' 

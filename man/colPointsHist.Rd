@@ -6,10 +6,10 @@
 \usage{
 colPointsHist(z, nbins = 40, colors = seqPal(nbins), bb = seqR(z,
   length.out = nbins + 1), at = pretty2(z), labels = at, bg = "white",
-  x = 0:40, y = 0:30, x1, y1, x2, y2, mar = c(6, 7, 3, 2), mgp = c(1.8,
-  0.6, 0), sborder = NA, resetfocus = TRUE, breaks = 20, freq = TRUE,
-  col = par("fg"), border = NA, main = "", ylab = "", xlab = "",
-  las = 1, axes = TRUE, ...)
+  x1 = 0, x2 = 0.4, y1 = 0, y2 = 0.3, outer = FALSE, mar = c(2, 2,
+  1, 0.5), mgp = c(1.8, 0.6, 0), sborder = NA, resetfocus = TRUE,
+  breaks = 20, freq = TRUE, col = par("fg"), border = NA, main = "",
+  ylab = "", xlab = "", las = 1, axes = TRUE, ...)
 }
 \arguments{
 \item{z}{Values of third dimension used in \code{\link{colPoints}}}
@@ -26,17 +26,21 @@ colPointsHist(z, nbins = 40, colors = seqPal(nbins), bb = seqR(z,
 
 \item{bg}{Background behind background and axis labels. DEFAULT: "white"}
 
-\item{x, y}{Relative coordinates (0:100) of inset plot, see \code{\link{smallPlot}}. DEFAULT: 0-30, 0-40}
+\item{x1, x2, y1, y2}{Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}. 
+DEFAULT: x: 0-0.3, y: 0-0.4}
 
-\item{x1, y1, x2, y2}{Positions of topleft and bottomright corner. Replaced with x,y, kept here for backcompatibility.}
+\item{outer}{Logical: Should legend be relative to device instead of current figure?
+use outer=TRUE when par(mfrow, oma) is set. DEFAULT: FALSE}
 
-\item{mar}{Margins for \code{\link{smallPlot}} in relative values (0:100). DEFAULT: c(6, 7, 3, 2)}
+\item{mar}{Margins for \code{\link{smallPlot}}. DEFAULT: c(2, 2, 1, 0.5)}
 
-\item{mgp}{MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.6, 0)}
+\item{mgp}{MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, 
+as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.6, 0)}
 
 \item{sborder}{Border around inset subplot. DEFAULT: par("fg")}
 
-\item{resetfocus}{Reset focus to original plot? Specifies where further low level plot commands are directed to. DEFAULT: TRUE}
+\item{resetfocus}{Reset focus to original plot? Specifies where further 
+low level plot commands are directed to. DEFAULT: TRUE}
 
 \item{breaks}{Breaks as in \code{\link{hist}}, but with a different default. DEFAULT: 20}
 
@@ -71,7 +75,7 @@ colPointsHist(z=z)
 Berry Boessenkool, \email{berry-b@gmx.de}, Aug 2014
 }
 \seealso{
-\code{\link{colPoints}} (section examples) for real life example
+\code{\link{colPointsLegend}} and \code{\link{colPoints}} for real life examples
 }
 \keyword{aplot}
 \keyword{color}

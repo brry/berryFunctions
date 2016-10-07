@@ -39,11 +39,11 @@ Scatterpoints with third dimension classified into colors: `colPoints`, `colPoin
 Write text with colored shape underneath: `textField`  
 Histogram of data with logarithmic axis: `logHist`, using `logAxis`
 ```{r colPoints, fig.show='hold', echo=-c(1:2)}
-par(mar=c(3.2,3.2,1.5,0.7), mgp=c(2.1,0.7,0))
+par(mar=c(3.2,3.2,3,0.7), mgp=c(2.1,0.7,0))
 set.seed(007)
 x <- sample(1:87, 150, TRUE);   y <- sample(1:61, 150, TRUE);  z <- diag(volcano[x,y])-95
-colPoints(x,y,z,  pch="+", legargs=list(y2=80, title="Elevation"), add=FALSE)
-mtext("colPoints, textField", adj=0.05, outer=TRUE, line=-1.2, cex=1.2, font=2)
+colPoints(x,y,z,  pch="+", legargs=list(y1=0.8,y2=1, title="Elevation  [m]"), add=FALSE)
+mtext("colPoints, textField", outer=TRUE, adj=0.05, line=0.5, cex=1.2, font=2)
 
 text(60,30, "unreadable text")
 textField(60, 15, "good text", field="round", fill="orange", cex=1.2)

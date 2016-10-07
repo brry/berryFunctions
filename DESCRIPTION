@@ -1,8 +1,8 @@
 Package: berryFunctions
 Type: Package
 Title: Function Collection Related to Plotting and Hydrology
-Version: 1.12.7
-Date: 2016-10-03
+Version: 1.12.8
+Date: 2016-10-07
 Imports:
     grDevices,
     graphics,
