@@ -3,4 +3,5 @@
 README.md
 cran-comments.md
 ^revdep$
+Tests.R
 
