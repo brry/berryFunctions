@@ -4,8 +4,10 @@
 #' 
 #' @return parameters of small plot, invisible.
 #' @section Warning: setting mai etc does not work!
-#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2014
-#' @seealso \code{\link{colPointsHist}} for an example of usage, \code{\link[TeachingDemos]{subplot}} and \code{\link[ade4]{add.scatter}} for alternative solutions to this problem that do not set margins.
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2014-2016
+#' @seealso \code{\link{colPointsHist}} for an example of usage, 
+#'          \code{\link[TeachingDemos]{subplot}} and \code{\link[ade4]{add.scatter}} 
+#'          for alternative solutions to this problem that do not set margins.
 #' @keywords hplot
 #' @importFrom graphics par plot.new rect
 #' @export
@@ -67,11 +69,34 @@
 #' smallPlot(plot(5:1), bg="bisque")
 #' plot(1:10)
 #' 
+#' # Outer margins (e.g. to add legends to multi-panel plots)
+#' par(op)
+#' par(mfrow=c(3,2), oma=c(0,5,0,0), mar=c(0,0,1,0)+0.5)
+#' for(i in 0:3*3) image(volcano+i, zlim=c(90,200), xaxt="n", yaxt="n",
+#'                       main=paste("volcano +", i))
+#' smallPlot(plot(1:10), mar=c(1,3,1,0), x1=0,x2=20, y1=20,y2=80, bg=3, outer=TRUE)
+#' 
+#' 
+#' # smallPLot does not work for layout, because it sets par(mfrow) for the device
+#' lay <- matrix(c(1,1,1,1,2,2,3,3,2,2,3,3,4,4,5,5), ncol=4)
+#' layout.show(layout(lay))
+#' layout(lay)
+#' plot(1:10)
+#' plot(1:10)
+#' smallPlot(plot(1:10), mar=c(1,3,1,0), x1=0,x2=20, y1=20,y2=80, bg=4, outer=T)
+#' plot(1:10)
+#' plot(1:10)
+#' smallPlot(plot(1:10), mar=c(1,3,1,0), x1=0,x2=20, y1=20,y2=80, bg=3, outer=F)
+#' 
 #' @param expr expression creating a plot. Can be code within {braces}.
 #' @param x,y Position of small plot, relative to current figure region (0:100). 
 #'        max and min from vector are taken. DEFAULT: 5-70, 50-100
 #' @param x1,y1,x2,y2 Positions of topleft and bottomright corner. 
-#'        If any is missing, it is taken from x or y
+#'        Each missing one is taken from x and y.
+#' @param outer Logical. Should inset plot be placed in the device outer margin region
+#'        instead of relative to the current figure region? 
+#'        Useful in multipanel plots with par(oma). \code{outer} here has not 
+#'        exactly the same meaning as in \code{\link{title}}. DEFAULT: FALSE
 #' @param mar Margin vector in relative units (0:100), thus behaves differently than 
 #'        \code{\link{par}(mar)}. DEFAULT: c(12, 14, 3, 3)
 #' @param mgp MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, 
@@ -93,6 +118,7 @@ expr,
 x=c(5,70),
 y=c(50,100),
 x1,y1,x2,y2,
+outer=FALSE,
 mar=c(12, 14, 3, 3),
 mgp=c(1.8, 0.8, 0),
 bg=par("bg"),
@@ -121,12 +147,14 @@ if(  (x1<=1 & x2<=1) |  (y1<=1 & y2<=1)  )
 # old parameters to be restored at exit:
 op <- par(no.readonly=TRUE)
 # inset plot: background, border
-par(plt=c(x1, x2, y2, y1)/100, new=TRUE, mgp=mgp) # plt / fig
+if(outer) par(fig=c(x1, x2, y2, y1)/100, new=TRUE, mgp=mgp, omd=c(0,1,0,1), mar=c(0,0,0,0)) else
+          par(plt=c(x1, x2, y2, y1)/100, new=TRUE, mgp=mgp) # plt / fig
 plot.new() # code line from ade4::add.scatter
 u <- par("usr")
 rect(u[1], u[3], u[2], u[4], col=bg, border=border)
 # inset plot: margins
-par(plt=c(x1+mar[2], x2-mar[4], y2+mar[1], y1-mar[3])/100, new=TRUE, las=las, ...)
+if(outer) par(fig=c(x1+mar[2], x2-mar[4], y2+mar[1], y1-mar[3])/100, new=TRUE, las=las, omd=c(0,1,0,1), mar=c(0,0,0,0), ...) else
+          par(plt=c(x1+mar[2], x2-mar[4], y2+mar[1], y1-mar[3])/100, new=TRUE, las=las, ...)
 # Actual plot:
 expr
 # par of small plot:
