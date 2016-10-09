@@ -51,7 +51,7 @@ data.frame of the desired dataset (returned by \code{\link{readDWD}} if meta=0),
 }
 \description{
 Get climate data from the German Weather Service (DWD) FTP-server.
-The desired .zip dataset is downloaded into \code{dir}, unpacked, read, processed and returned as a data.frame
+The desired .zip dataset is downloaded into \code{dir}, read, processed and returned as a data.frame
 }
 \examples{
 \dontrun{ ## Not run in CRAN checks because of downloading, writing files, etc

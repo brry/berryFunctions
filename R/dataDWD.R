@@ -1,7 +1,14 @@
+# DWD Daten mit R runterladen, Wetter und Klimadaten in R
+# Weather Data Germany download with R, Climate Data Germany
+# Deutscher Wetterdienst R Daten download Klimastationen
+
+# For html rendered documentation, please visit
+#   https://www.rdocumentation.org/packages/berryFunctions/versions/1.12.3/topics/dataDWD
+# 
 #' download data from DWD
 #'
 #' Get climate data from the German Weather Service (DWD) FTP-server.
-#' The desired .zip dataset is downloaded into \code{dir}, unpacked, read, processed and returned as a data.frame
+#' The desired .zip dataset is downloaded into \code{dir}, read, processed and returned as a data.frame
 #'
 #' @return data.frame of the desired dataset (returned by \code{\link{readDWD}} if meta=0), 
 #'         presuming downloading and processing were successfull.
