@@ -1,8 +1,5 @@
-package berryFunctions: my collection of miscellaneous helper functions
-Feedback, ideas, code suggestions welcome at berry-b@gmx.de or via github.com/brry/berryFunctions
 
-Before the actual NEWS, here are some things planned for future development:
------------------------------
+berryFunctions ToDo-list / wishlist / issues
 - finish funSource (search if site not found)
 - exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) ) 
 - lsc: better example dataset, optim problems
@@ -12,6 +9,21 @@ Before the actual NEWS, here are some things planned for future development:
 - late 2016: delete randomPoints, triangleArea, cie, cls, pastec, pointZoom and createDoc from package
 - reference to sortDF in addRow, insertRow, etc
 - dataDWD: own function metaDWD. Also, options for hist/recent etc
+- implement identical(FALSE, legargs) wherever owa is used and that makes sense
+
+
+---------------------------------------
+miscellaneous package by Berry Boessenkool, berry-b@gmx.de
+Any feedback is welcome, per email or on github.com/brry/berryFunctions
+---------------------------------------
+
+
+Version 1.. (2016--)
+- seasonality has been greatly expanded and generalized
+- smallPlot gains the argument 'outer', margins are now given in lines
+- smallPlot locations checked with useful error messages
+- owa example usage clarified, now yields a message if arguments are ignored
+
 
 -----------------------------
 -----------------------------
@@ -20,6 +32,7 @@ Before the actual NEWS, here are some things planned for future development:
 Version 1.12.3 (2016-09-27)
 - traceCall corrected so that it also works with older versions of R
 - wrong smallPlot coordinate input now actually caught
+
 
 -----------------------------
 -----------------------------
@@ -156,8 +169,10 @@ Development version is now on Github
 New functions: rainbow2, quantileMean, quantileBands, (compareFiles and combineFiles)
 removed functions: extremeStatLmom, changeAttribute, showAttribute shapeZoom, (compFiles and combineTextfiles)
 
+
 -----------------------------
 -----------------------------
+
 
 Version 1.5.2 (2014-09-15)
 Functions to be moved to new packages warn about it (extremeStatLmom, changeAttribute, showAttribute and shapeZoom)

@@ -4,14 +4,19 @@
 \alias{owa}
 \title{Overwrite argument default lists}
 \usage{
-owa(d, a, ...)
+owa(d, a, ..., quiet = FALSE)
 }
 \arguments{
-\item{d}{Default arguments}
+\item{d}{Default arguments (list or vector)}
 
-\item{a}{Arguments specified by user}
+\item{a}{Arguments specified by user (list or vector)}
 
-\item{\dots}{Names of unchangeable arguments (that will not be overwritten) as character strings (can also be a vector with characters strings).}
+\item{quiet}{Logical: Should \code{\link{message}} be suppressed if arguments are ignored?
+If FALSE (the DEFAULT), this helps users debugging, as they get
+notified when arguments they specified were ignored.}
+
+\item{\dots}{Names of unchangeable arguments (that will not be overwritten) 
+as character strings. Can also be a vector with characters strings.}
 }
 \value{
 Always a list, disregarding list/vector mode of input
@@ -23,12 +28,32 @@ Internal defaults can be set per function (eg. one list for plot and one for leg
 Some of the defaults can be overwritten, some should be left unchanged, some can be additionally
 specified by users. owa combines everything accordingly. See the example section on how to implement this.
 }
-\note{
-the argument u has been replaced by ellipsis (...) in version 1.7 (Dec. 2014)!
-}
 \examples{
+# The motivation behind owa:
+testfun <- function(...) {plot(7:11, ...) ; legend("top", "some text", ...)}
+testfun()
+is.error( testfun(type="o") , tell=TRUE) # Error: legend doesn't have the argument 'type'!
 
-# basic usage of owa itself:
+# How to solve this:
+testfun <- function(legargs=NULL, ...) # dots passed to plot
+   {
+   plot(7:11, ...)
+   legend_defaults <- list(x="top", lty=1, col="red", legend="owa rocks!")
+   # combine defaults and user specified into final argument list,
+   # overwrite arguments (hence 'owa') in the default list unless specified:
+   legend_final <- owa(d=legend_defaults, a=legargs, "col", "lwd")
+   do.call(legend, args=legend_final)
+   }
+
+testfun()
+testfun(type="l", col="blue")
+testfun(type="o", legargs=list(col="blue", pch=16, lty=3) )
+# color in legargs is ignored, as it is defined as unchangeable
+
+
+#----------------------------------------------------------------------------
+
+# basic tests of owa itself:
 d <- list(bb=1:5, lwd="was d", lty=1,   col="gray")
 a <- list(bb=3,   lwd=5, lty="from a", wachs="A")
 owa(d,a) # all changed, wachs added
@@ -36,38 +61,13 @@ owa(d, a, "bb", "lwd") # lty is overwritten, bb and lwd are ignored
 owa(d, NULL, "bb", "wachs") # NULL is a good default for argument lists
 owa(d, c(HH=2, BBB=3) ) # vectors and lists are all converted to lists
 owa(d, list(lwd=5, bb=3, lty="1") ) # order of arguments doesn't matter
-owa(d, a, c("bb","lwd") ) # unchangable can also be a named vector
+owa(d, a, c("bb","lwd") ) # unchangeable can also be a named vector
 owa(d, a, c("bb","lwd"), c("lty","dummy") ) # or several vectors
 
-# Usage example (see applications eg. in funnelPlot, colPoints or mReg)
-
-# Why we want to do this:
-testfun <- function(...) {plot(7:9, ...) ; legend("top", "Text hier", ...)}
-testfun()
-# testfun(type="o") # Error: legend doesn't have the argument 'type'!
-
-# How to solve this:
-testfun <- function(data=7:9, legarg=NULL, plotarg=NULL)
-   {
-   # defaults for plot and legend:
-   plot_def <- list(x=0.5*data, col="red", cex=2, lty=2, type="o")
-   leg_def <- list(x="top", lty=2, legend="Default text here")
-   # combine defaults and user specified into final argument list
-   plot_fin <- owa(d=plot_def, a=plotarg, "col", "lty")
-   leg_fin <- owa(d=leg_def, a=legarg, "lty")
-   # Execute single functions that each have their own arguments:
-   do.call(  plot, args=plot_fin)
-   do.call(legend, args=leg_fin)
-   }
-
-testfun()
-testfun(plotarg=list(type="l", col="blue") )
-# color is silently ignored, as it is defined as unchangeable
-testfun(plotarg=list(type="l"), legarg=list(col="blue", pch=16) )
 
 }
 \author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Early 2014
+Berry Boessenkool, \email{berry-b@gmx.de}, Early 2014, Update Oct 2016
 }
 \references{
 \url{http://stackoverflow.com/questions/3057341}\cr
