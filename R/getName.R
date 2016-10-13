@@ -28,6 +28,8 @@
 #' dummy <- 7
 #' upper("dummy") # still stable
 #' upper(dummy) # still stable
+#' 
+#' upper(stackloss[1:5,])
 #'
 #' @param x input object name or character string
 #'
@@ -42,5 +44,6 @@ for(i in rev(head(sys.frames(), -1L)))
   my.call[[2]] <- var.name    # replace with the modified variable
   var.name <- eval(my.call, i)
   }
-return(as.character(var.name))
+if(!is.character(var.name)) var.name <- deparse(var.name)
+return(var.name)
 }

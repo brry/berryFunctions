@@ -35,6 +35,8 @@ dummy <- 7
 upper("dummy") # still stable
 upper(dummy) # still stable
 
+upper(stackloss[1:5,])
+
 }
 \author{
 \url{http://stackoverflow.com/users/2725969/brodieg}
