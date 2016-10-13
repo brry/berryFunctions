@@ -85,6 +85,7 @@
 #' @param dat Vector with regularly spaced data
 #' @param width Odd integer specifying window width. DEFAULT: 7
 #' @param weights Vector with weights. Sum is normalized to 1. DEFAULT: rep(1,width) 
+#' @param quiet Logical: suppress allNA message and even width warning? DEFAULT: FALSE
 #' 
 movAv <- function(
 dat,

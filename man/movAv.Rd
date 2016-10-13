@@ -12,6 +12,8 @@ movAv(dat, width = 7, weights = rep(1, width), quiet = FALSE)
 \item{width}{Odd integer specifying window width. DEFAULT: 7}
 
 \item{weights}{Vector with weights. Sum is normalized to 1. DEFAULT: rep(1,width)}
+
+\item{quiet}{Logical: suppress allNA message and even width warning? DEFAULT: FALSE}
 }
 \value{
 Vector of the same length as the original input. 
