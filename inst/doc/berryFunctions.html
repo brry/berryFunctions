@@ -12,7 +12,7 @@
 
 <meta name="author" content="Berry Boessenkool, berry-b@gmx.de" />
 
-<meta name="date" content="2016-10-07" />
+<meta name="date" content="2016-10-13" />
 
 <title>berryFunctions</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">berryFunctions</h1>
 <h4 class="author"><em>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a></em></h4>
-<h4 class="date"><em>2016-10-07</em></h4>
+<h4 class="date"><em>2016-10-13</em></h4>
 
 
 <div id="TOC">
@@ -102,7 +102,7 @@ Write text with colored shape underneath: <code>textField</code><br />
 Histogram of data with logarithmic axis: <code>logHist</code>, using <code>logAxis</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">87</span>, <span class="dv">150</span>, <span class="ot">TRUE</span>);   y &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">61</span>, <span class="dv">150</span>, <span class="ot">TRUE</span>);  z &lt;-<span class="st"> </span><span class="kw">diag</span>(volcano[x,y])-<span class="dv">95</span>
 <span class="kw">colPoints</span>(x,y,z,  <span class="dt">pch=</span><span class="st">&quot;+&quot;</span>, <span class="dt">legargs=</span><span class="kw">list</span>(<span class="dt">y1=</span><span class="fl">0.8</span>,<span class="dt">y2=</span><span class="dv">1</span>, <span class="dt">title=</span><span class="st">&quot;Elevation  [m]&quot;</span>), <span class="dt">add=</span><span class="ot">FALSE</span>)
-<span class="kw">mtext</span>(<span class="st">&quot;colPoints</span><span class="ch">\n</span><span class="st">textField&quot;</span>, <span class="dt">adj=</span><span class="fl">0.05</span>, <span class="dt">line=</span><span class="fl">0.5</span>, <span class="dt">cex=</span><span class="fl">1.2</span>, <span class="dt">font=</span><span class="dv">2</span>)
+<span class="kw">mtext</span>(<span class="st">&quot;colPoints, textField&quot;</span>, <span class="dt">outer=</span><span class="ot">TRUE</span>, <span class="dt">adj=</span><span class="fl">0.05</span>, <span class="dt">line=</span><span class="fl">0.5</span>, <span class="dt">cex=</span><span class="fl">1.2</span>, <span class="dt">font=</span><span class="dv">2</span>)
 
 <span class="kw">text</span>(<span class="dv">60</span>,<span class="dv">30</span>, <span class="st">&quot;unreadable text&quot;</span>)
 <span class="kw">textField</span>(<span class="dv">60</span>, <span class="dv">15</span>, <span class="st">&quot;good text&quot;</span>, <span class="dt">field=</span><span class="st">&quot;round&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;orange&quot;</span>, <span class="dt">cex=</span><span class="fl">1.2</span>)
@@ -263,7 +263,7 @@ x &lt;-<span class="st"> </span><span class="kw">rlnorm</span>(<span class="dv">
 Funnel plot for proportional Data: <code>funnelPlot</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(a, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">las=</span><span class="dv">1</span>)
 <span class="kw">lines</span>(<span class="kw">movAv</span>(a), <span class="dt">col=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">3</span>)
-<span class="kw">movAvLines</span>(a, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">plot=</span><span class="ot">FALSE</span>)
+<span class="kw">movAvLines</span>(<span class="dt">y=</span>a, <span class="dt">lwd=</span><span class="dv">3</span>)
 
 X &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">224</span>,  <span class="dv">54</span>,  <span class="dv">505</span>, <span class="dv">1</span>,  <span class="dv">5</span>, <span class="dv">236</span>,  <span class="dv">92</span>,  <span class="dv">3</span>, <span class="dv">0</span>) <span class="co"># successful events</span>
 N &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">400</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">500</span>, <span class="dv">200</span>, <span class="dv">10</span>, <span class="dv">2</span>) <span class="co"># possible succeses</span>
@@ -336,8 +336,8 @@ s &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot
 <pre><code>## [1] 200 187 174 161 148 135</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Show memory size of the biggest objects in MB: lsMem</span>
 <span class="kw">lsMem</span>(<span class="dt">n=</span><span class="dv">5</span>)</code></pre></div>
-<pre><code>##        neff         dat          qB        hpos ExampleData   sum rest: 
-##    0.480200    0.079744    0.019360    0.003064    0.001640    0.007112</code></pre>
+<pre><code>##      neff       dat        qB    upper2      hpos sum rest: 
+##  0.480200  0.079744  0.019360  0.005608  0.003064  0.008704</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># extract pdf link from google search result url: googleLink2pdf</span>
 Link &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;http://www.google.de/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&quot;</span>,
         <span class="st">&quot;&amp;cad=rja&amp;sqi=2&amp;ved=0CDIQFjAA&amp;url=http%3A%2F%2Fcran.r-project.org&quot;</span>,

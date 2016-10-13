@@ -43,7 +43,7 @@ par(mar=c(3.2,3.2,3,0.7), mgp=c(2.1,0.7,0))
 set.seed(007)
 x <- sample(1:87, 150, TRUE);   y <- sample(1:61, 150, TRUE);  z <- diag(volcano[x,y])-95
 colPoints(x,y,z,  pch="+", legargs=list(y1=0.8,y2=1, title="Elevation  [m]"), add=FALSE)
-mtext("colPoints\ntextField", adj=0.05, line=0.5, cex=1.2, font=2)
+mtext("colPoints, textField", outer=TRUE, adj=0.05, line=0.5, cex=1.2, font=2)
 
 text(60,30, "unreadable text")
 textField(60, 15, "good text", field="round", fill="orange", cex=1.2)
@@ -187,7 +187,7 @@ par(mar=c(3.2,3.2,1.5,0.7), mgp=c(2.1,0.7,0))
 set.seed(42); a <- cumsum(rnorm(100))
 plot(a, type="l", pch=16, las=1)
 lines(movAv(a), col=2, lwd=3)
-movAvLines(a, lwd=3, plot=FALSE)
+movAvLines(y=a, lwd=3)
 
 X <- c(2, 224,  54,  505, 1,  5, 236,  92,  3, 0) # successful events
 N <- c(2, 400, 100, 1000, 2, 10, 500, 200, 10, 2) # possible succeses
