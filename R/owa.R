@@ -81,11 +81,10 @@ u <- as.list(unlist(u)) # so a vector with charstrings can also be given as an i
 ignore <- names(a) %in% u
 if(sum(ignore)!=0)
   {
-  trace <- traceCall()
-  if(trace=="\nCall stack: owa\n") trace <- ""
-  if(sum(ignore)==1 & !quiet) message("Note in owa:",trace," The argument '", 
+  trace <- traceCall(prefix="(called from ", suffix="):\n")
+  if(sum(ignore)==1 & !quiet) message("Note in owa: ",trace," The argument '", 
                    u[ignore], "' is defined as unchangeable and thus ignored.") 
-  if(sum(ignore) >1 & !quiet) message("Note in owa:",trace," The following arguments ",
+  if(sum(ignore) >1 & !quiet) message("Note in owa: ",trace," The following arguments ",
               "are defined as unchangeable and thus ignored: ", toString(u[ignore])) 
   a <- a[ !ignore ] # keep the unignored
   }
