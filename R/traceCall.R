@@ -3,7 +3,7 @@
 #' trace the call stack e.g. for error checking and format output for do.call levels
 #'
 #' @return Character string with the call stack
-#' @section Warning: In \link{do.call} settings with large objects,
+#' @section Warning: Called from \link{do.call} settings with large objects,
 #'                   tracing may take a lot of computing time.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sep 2016
 #' @seealso \code{\link{checkFile}} for example usage
@@ -20,9 +20,13 @@
 #' is.error(upper("four"))
 #'
 #' @param skip Number of levels to skip in \code{\link{traceback}}
+#' @param prefix Prefix prepended to the output character string. DEFAULT: "\\nCall stack: "
+#' @param suffix Suffix appended to the end of the output. DEFAULT: "\\n"
 #'
 traceCall <- function(
-skip=0
+skip=0,
+prefix="\nCall stack: ",
+suffix="\n"
 )
 {
 # the real skip value will be dependent on R version.
@@ -37,6 +41,6 @@ skip=0
     sub(",", "(", sub("(", " - ", x, fixed=TRUE), fixed=TRUE) else x)
   calltrace <- sapply(strsplit(unlist(tb), "(", fixed=TRUE), "[", 1)
   calltrace <- paste(rev(calltrace), collapse=" -> ")
-  calltrace <- paste0("\nCall stack: ", calltrace, "\n")
+  calltrace <- paste0(prefix, calltrace, suffix)
   calltrace
 }

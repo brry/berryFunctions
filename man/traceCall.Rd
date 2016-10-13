@@ -4,10 +4,14 @@
 \alias{traceCall}
 \title{call stack of a function}
 \usage{
-traceCall(skip = 0)
+traceCall(skip = 0, prefix = "\\nCall stack: ", suffix = "\\n")
 }
 \arguments{
 \item{skip}{Number of levels to skip in \code{\link{traceback}}}
+
+\item{prefix}{Prefix prepended to the output character string. DEFAULT: "\\nCall stack: "}
+
+\item{suffix}{Suffix appended to the end of the output. DEFAULT: "\\n"}
 }
 \value{
 Character string with the call stack
@@ -16,7 +20,7 @@ Character string with the call stack
 trace the call stack e.g. for error checking and format output for do.call levels
 }
 \section{Warning}{
- In \link{do.call} settings with large objects,
+ Called from \link{do.call} settings with large objects,
                   tracing may take a lot of computing time.
 }
 \examples{

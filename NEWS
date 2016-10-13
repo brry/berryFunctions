@@ -14,7 +14,6 @@ berryFunctions ToDo-list / wishlist / issues
 - colPoints: zlog=TRUE
 - smallPlot: mtext afterwards not working (maybe because of outer=TRUE). see Tests.R
 - metaDWD + selections in dataDWD like Number, historical/recent, Variable. Potentially own package? Station selection from map with metadata if clicked on point (leaflet/shiny app?)
-- traceCall: prefix="\n Call stack: " and suffix="\n"
 - monthAxis: ym=NA (set automatically depending on axis time length)
 - monthAxis: ypos=6 (with vector option) for ts ending before (or starting after) june/july
 
