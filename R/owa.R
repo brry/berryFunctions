@@ -1,10 +1,12 @@
 #' Overwrite argument default lists
 #' 
-#' combine default and user-specified argument lists. Expansion of ellipsis (three dots). 
-#' Used in functions that pass argument lists separately to several functions. 
-#' Internal defaults can be set per function (eg. one list for plot and one for legend). 
-#' Some of the defaults can be overwritten, some should be left unchanged, some can be additionally
-#' specified by users. owa combines everything accordingly. See the example section on how to implement this.
+#' Second ellipsis (three dots) passed to particular functions,
+#' combining default and user-specified argument lists.\cr
+#' \code{owa} can be used in functions that pass argument lists separately to several functions. 
+#' Internal defaults can be set per function (eg. one list for \code{\link{plot}} 
+#' and one for \code{\link{legend}}). \cr
+#' You can specify which defaults can be overwritten and which should be left unchanged. 
+#' See the example section on how to implement this.
 #' 
 #' @return Always a list, disregarding list/vector mode of input
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Early 2014, Update Oct 2016
@@ -18,7 +20,8 @@
 #' # The motivation behind owa:
 #' testfun <- function(...) {plot(7:11, ...) ; legend("top", "some text", ...)}
 #' testfun()
-#' is.error( testfun(type="o") , tell=TRUE) # Error: legend doesn't have the argument 'type'!
+#' is.error( testfun(type="o") , tell=TRUE) 
+#' # Error: legend doesn't have the argument 'type'!
 #' 
 #' # How to solve this:
 #' testfun <- function(legargs=NULL, ...) # dots passed to plot
@@ -26,7 +29,7 @@
 #'    plot(7:11, ...)
 #'    legend_defaults <- list(x="top", lty=1, col="red", legend="owa rocks!")
 #'    # combine defaults and user specified into final argument list,
-#'    # overwrite arguments (hence 'owa') in the default list unless specified:
+#'    # overwrite arguments ('owa') in the default list unless protected:
 #'    legend_final <- owa(d=legend_defaults, a=legargs, "col", "lwd")
 #'    do.call(legend, args=legend_final)
 #'    }
