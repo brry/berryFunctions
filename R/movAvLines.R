@@ -10,31 +10,32 @@
 #' @examples
 #' 
 #' set.seed(42)
-#' movAvLines(cumsum(rnorm(50)), plot=TRUE, lwd=3)
+#' movAvLines(y=cumsum(rnorm(50)), add=FALSE, lwd=3)
 #' 
-#' @param y y values that are smoothed with several window widths
 #' @param x x values of data. DEFAULT: 1:length(y)
+#' @param y y values that are smoothed with several window widths
 #' @param widths widths of \code{\link{movAv}} windows. DEFAULT: 2:7*2-1
 #' @param weights weights within each window
 #' @param col color passed to \code{\link{addAlpha}}. DEFAULT: "blue"
 #' @param alpha transparency passed to \code{\link{addAlpha}}. DEFAULT: 0.3
-#' @param plot should scatterplot be created first? DEFAULT: FALSE
-#' @param las LabelAxisStyle (only relevant if plot=TRUE). DEFAULT: 1
+#' @param add Logical: Add to existing plot?Set to FALSE to first create
+#'        the scatterplot. DEFAULT: TRUE
+#' @param las LabelAxisStyle (only relevant if add=FALSE). DEFAULT: 1
 #' @param \dots further arguments passed to \code{\link{lines}}
 #' 
 movAvLines <- function(
-y,
 x=1:length(y),
-widths=2:7*2-1,
+y,
+widths=c(3,5,7,9,11,13),
 weights,
 col="blue",
 alpha=0.3,
-plot=FALSE,
+add=TRUE,
 las=1,
 ...
 )
 {
-if(plot) plot(x,y, las=las)
+if(!add) plot(x,y, las=las)
 for(i in 1:length(widths))
    lines(x, movAv(y, width=widths[i], weights=weights), col=addAlpha(col, alpha), ...)
 }

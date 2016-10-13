@@ -4,13 +4,13 @@
 \alias{movAvLines}
 \title{Moving average with different window widths}
 \usage{
-movAvLines(y, x = 1:length(y), widths = 2:7 * 2 - 1, weights,
-  col = "blue", alpha = 0.3, plot = FALSE, las = 1, ...)
+movAvLines(x = 1:length(y), y, widths = c(3, 5, 7, 9, 11, 13), weights,
+  col = "blue", alpha = 0.3, add = TRUE, las = 1, ...)
 }
 \arguments{
-\item{y}{y values that are smoothed with several window widths}
-
 \item{x}{x values of data. DEFAULT: 1:length(y)}
+
+\item{y}{y values that are smoothed with several window widths}
 
 \item{widths}{widths of \code{\link{movAv}} windows. DEFAULT: 2:7*2-1}
 
@@ -20,9 +20,10 @@ movAvLines(y, x = 1:length(y), widths = 2:7 * 2 - 1, weights,
 
 \item{alpha}{transparency passed to \code{\link{addAlpha}}. DEFAULT: 0.3}
 
-\item{plot}{should scatterplot be created first? DEFAULT: FALSE}
+\item{add}{Logical: Add to existing plot?Set to FALSE to first create
+the scatterplot. DEFAULT: TRUE}
 
-\item{las}{LabelAxisStyle (only relevant if plot=TRUE). DEFAULT: 1}
+\item{las}{LabelAxisStyle (only relevant if add=FALSE). DEFAULT: 1}
 
 \item{\dots}{further arguments passed to \code{\link{lines}}}
 }
@@ -32,7 +33,7 @@ Add moving average lines with different window widths to a plot
 \examples{
 
 set.seed(42)
-movAvLines(cumsum(rnorm(50)), plot=TRUE, lwd=3)
+movAvLines(y=cumsum(rnorm(50)), add=FALSE, lwd=3)
 
 }
 \author{
