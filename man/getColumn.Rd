@@ -22,7 +22,7 @@ tracing may take a lot of computing time.}
 Vector (or array, factor, etc) with values in the specified column
 }
 \description{
-Extract columns if they are given in a data frame. 
+(Try to) extract a column from a data frame with USEFUL warnings/errors.\cr
 Watch out not to define objects with the same name as x if you are using
 getColumn in a function!
 }
@@ -30,16 +30,23 @@ getColumn in a function!
 getColumn(Air.Flow, stackloss)
 getColumn(2, stackloss)
 getColumn("2",  stackloss) # works too...
-is.error(   getColumn(Acid, stackloss)   , tell=TRUE)
-is.error(   getColumn(2:3,  stackloss)   , tell=TRUE)
- 
-upper <- function(x) getColumn(x, stackloss)
+getColumn(2,  stackloss[0,])
+# The next examples all return errors:
+try( getColumn(2,  stackloss[0])  )
+try( getColumn(2,  stackloss[,0]) )
+try( getColumn(Acid, stackloss)   ) # design choice: partial matching not supported
+try( getColumn(2:3,  stackloss)   ) # cannot be a vector
+try( getColumn(c("Air.Flow","Acid.Conc"),  stackloss)    )
+
+upper <- function(x, select) getColumn(x, stackloss[select,])
 upper(Water.Temp)
 upper(2)
-# upper(Water) # error with useful message (design choice: partial matching not supported)
+upper(2, select=0)
+# upper(Water)  # error with useful message
 
-upper2 <- function(xx) {xx <- 17; getColumn(xx, stackloss)} # will break!
-stopifnot(is.error(      upper2(Water.Temp)       )) # breaks
+# Pitfall lexical scoping: R only goes up until it finds things:
+upper2 <- function(xx) {xx <- "Timmy!"; getColumn(xx, stackloss)} # will break!
+is.error(      upper2(Water.Temp) ,   force=TRUE, tell=TRUE) # is an error
 
 upper3 <- function(xx, dd) getColumn(substitute(xx), dd)
 upper3(Air.Flow, stackloss) # may be safer in many scoping situations
@@ -54,6 +61,13 @@ is.vector(getColumn("x", df)) # FALSE
 as.Date("2016-09-14")  ;  as.vector(as.Date("2016-09-14"))
 # same problem with dfs from tapply results
 # better ideas welcome!! (berry-b@gmx.de)
+
+# Pitfall numerical column names:
+df <- data.frame(1:5, 3:7)
+colnames(df) <- c("a","1") # this is a bad idea anyways
+getColumn("1", df) # will actually return the first column, not column "1"
+
+getColumn(1, data.frame(AA=rep(NA,10)))
 
 }
 \author{

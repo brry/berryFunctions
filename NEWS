@@ -10,7 +10,6 @@ berryFunctions ToDo-list / wishlist / issues
 - reference to sortDF in addRow, insertRow, etc
 - dataDWD: own function metaDWD. Also, options for hist/recent etc
 - implement identical(FALSE, legargs) wherever owa is used and that makes sense
-- getColumn: "has no columns" / "has no rows" (instead of "only NAs")
 - colPoints: zlog=TRUE
 - smallPlot: mtext afterwards not working (maybe because of outer=TRUE). see Tests.R
 - metaDWD + selections in dataDWD like Number, historical/recent, Variable. Potentially own package? Station selection from map with metadata if clicked on point (leaflet/shiny app?)
