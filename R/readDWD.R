@@ -1,6 +1,9 @@
 #' process data from DWD
 #'
 #' Read climate data that was downloaded with \code{\link{dataDWD}}.
+#' 
+#' @note These functions are now in the package rdwd and will be removed here!
+#' \url{https://github.com/brry/rdwd}
 #'
 #' @return data.frame of the desired dataset
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jul 2016
