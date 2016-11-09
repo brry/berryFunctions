@@ -16,7 +16,9 @@ install.packages("berryFunctions")
 library(berryFunctions)
 vignette("berryFunctions")
 ```
+
 Code to install the most recent development version from github:
+
 <script src="http://gist-it.appspot.com/github/brry/berryFunctions/blob/master/DESCRIPTION?slice=3:5"></script>
 
 ```R
