@@ -1,6 +1,6 @@
 #' check file existance
 #'
-#' check whether a file exists and give a useful error/warning/message
+#' check whether files exist and give a useful error/warning/message
 #'
 #' @return TRUE/FALSE, invisibly
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, May 2016
@@ -8,57 +8,60 @@
 #' @keywords file
 #' @export
 #' @examples
-#' is.error( checkFile("FileThatDoesntExist.txt") )
-#' checkFile("FileThatDoesntExist.txt", fun=warning)
-#' checkFile("FileThatDoesntExist.txt", fun=message)
-#' is.error( checkFile("FileThatDoesntExist.txt", fun=MyWarn) ) # nonexisting function
+#' is.error( checkFile("FileThatDoesntExist.txt")  )
+#' checkFile("FileThatDoesntExist.txt", warnonly=TRUE)
+#' checkFile("FileThatDoesntExist.txt", warnonly=TRUE, trace=FALSE)
 #'
 #' \dontrun{## Excluded from CRAN checks because of file creation
 #' # Vectorized:
 #' file.create("DummyFile2.txt")
-#' checkFile(paste0("DummyFile",1:3,".txt"), fun=message)
+#' checkFile(paste0("DummyFile",1:3,".txt"), warnonly=TRUE)
 #' checkFile(paste0("DummyFile",1:3,".txt") )
 #' file.remove("DummyFile2.txt")
-#' }
-#'
-#' \dontrun{## Excluded from CRAN checks because of intentional errors
+#' 
 #' compareFiles("dummy.nonexist", "dummy2.nonexist")
 #' checkFile("dummy.nonexist")
+#' }
 #'
-#' dingo <- function(k="brute.nonexist") checkFile(k)
+#' dingo <- function(k="brute.nonexist", trace=TRUE) 
+#'          checkFile(k, warnonly=TRUE, trace=trace)
 #' dingo()
 #' dingo("dummy.nonexist")
 #'
-#' upper <- function(h) dingo(c(h, "dumbo.nonexist"))
+#' upper <- function(h, ...) dingo(c(h, "dumbo.nonexist"), ...)
 #' upper("dumbo2.nonexist")
-#' }
+#' upper(paste0("dumbo",2:8,".nonexist"))
+#' upper(paste0("dumbo",2:8,".nonexist"), trace=FALSE)
+#' 
 #'
 #' @param file Filename(s) as character string to be checked for existence.
-#' @param fun One of the functions \code{\link{stop}}, \code{\link{warning}}, or \code{\link{message}}. DEFAULT: stop
+#' @param warnonly Logical: Only issue a \code{\link{warning}} instead of an
+#'                 error with \code{\link{stop}}? DEFAULT: FALSE
 #' @param trace Logical: Add function call stack to the message? DEFAULT: TRUE
 #'              WARNING: in \link{do.call} settings with large objects,
 #'              tracing may take a lot of computing time.
-#' @param \dots Further arguments passed to \code{fun}
 #'
 checkFile <- function(
 file,
-fun=stop,
-trace=TRUE,
-...
+warnonly=FALSE,
+trace=TRUE
 )
 {
-if(is.character(fun)) stop("fun must be unquoted. Use fun=", fun, " instead of fun='", fun,"'.")
-# tracing the calling function(s):
-if(trace)  calltrace <- traceCall()
 # check actual file existence:
 exi <- file.exists(file)
-# prepare message:
-Text <- if(length(exi)>1)
-paste0("  The files '", toString(file[!exi]), "'\n  do not exist at ", getwd()) else
-paste0("  The file '",           file,      "'\n  does not exist at ", getwd())
-#
-if(trace) Text <- paste(calltrace, Text)
-# return message, if file nonexistent:
-if(any(!exi)) fun(Text, ...)
+# warn or stop if file nonexistent:
+if(any(!exi))
+  {
+  # tracing the calling function(s):
+  Text1 <- if(trace) traceCall(prefix="in ", suffix=" :  ") else ""
+  # prepare message:
+  Text2 <- if(sum(!exi)>1) "The files  " else "The file '"
+  Text3 <- if(sum(!exi)>2) paste0(toString(file[!exi][1:2]), " (and ",sum(!exi)-2," others)") else
+                           toString(file[!exi])
+  Text4 <- if(sum(!exi)>1) "\n  do" else "'\n  does"
+  Text5 <- paste0(" not exist at ", getwd() )
+  Text <- paste0(Text1,Text2,Text3,Text4,Text5)
+  if(warnonly) warning(Text, call.=!trace) else stop(Text, call.=!trace)
+  }
 return(invisible(exi))
 }

@@ -4,50 +4,50 @@
 \alias{checkFile}
 \title{check file existance}
 \usage{
-checkFile(file, fun = stop, trace = TRUE, ...)
+checkFile(file, warnonly = FALSE, trace = TRUE)
 }
 \arguments{
 \item{file}{Filename(s) as character string to be checked for existence.}
 
-\item{fun}{One of the functions \code{\link{stop}}, \code{\link{warning}}, or \code{\link{message}}. DEFAULT: stop}
+\item{warnonly}{Logical: Only issue a \code{\link{warning}} instead of an
+error with \code{\link{stop}}? DEFAULT: FALSE}
 
 \item{trace}{Logical: Add function call stack to the message? DEFAULT: TRUE
 WARNING: in \link{do.call} settings with large objects,
 tracing may take a lot of computing time.}
-
-\item{\dots}{Further arguments passed to \code{fun}}
 }
 \value{
 TRUE/FALSE, invisibly
 }
 \description{
-check whether a file exists and give a useful error/warning/message
+check whether files exist and give a useful error/warning/message
 }
 \examples{
-is.error( checkFile("FileThatDoesntExist.txt") )
-checkFile("FileThatDoesntExist.txt", fun=warning)
-checkFile("FileThatDoesntExist.txt", fun=message)
-is.error( checkFile("FileThatDoesntExist.txt", fun=MyWarn) ) # nonexisting function
+is.error( checkFile("FileThatDoesntExist.txt")  )
+checkFile("FileThatDoesntExist.txt", warnonly=TRUE)
+checkFile("FileThatDoesntExist.txt", warnonly=TRUE, trace=FALSE)
 
 \dontrun{## Excluded from CRAN checks because of file creation
 # Vectorized:
 file.create("DummyFile2.txt")
-checkFile(paste0("DummyFile",1:3,".txt"), fun=message)
+checkFile(paste0("DummyFile",1:3,".txt"), warnonly=TRUE)
 checkFile(paste0("DummyFile",1:3,".txt") )
 file.remove("DummyFile2.txt")
-}
 
-\dontrun{## Excluded from CRAN checks because of intentional errors
 compareFiles("dummy.nonexist", "dummy2.nonexist")
 checkFile("dummy.nonexist")
+}
 
-dingo <- function(k="brute.nonexist") checkFile(k)
+dingo <- function(k="brute.nonexist", trace=TRUE) 
+         checkFile(k, warnonly=TRUE, trace=trace)
 dingo()
 dingo("dummy.nonexist")
 
-upper <- function(h) dingo(c(h, "dumbo.nonexist"))
+upper <- function(h, ...) dingo(c(h, "dumbo.nonexist"), ...)
 upper("dumbo2.nonexist")
-}
+upper(paste0("dumbo",2:8,".nonexist"))
+upper(paste0("dumbo",2:8,".nonexist"), trace=FALSE)
+
 
 }
 \author{
