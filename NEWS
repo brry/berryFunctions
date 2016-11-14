@@ -7,9 +7,10 @@ berryFunctions ToDo-list / wishlist / issues
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
 - implement is.error and getColumn (eg spiralDate) wherever applicable
 - late 2016: delete randomPoints, triangleArea, cie, cls, pastec, pointZoom and createDoc from package
+- delete dataDWD and readDWD
 - reference to sortDF in addRow, insertRow, etc
 - implement identical(FALSE, legargs) wherever owa is used and that makes sense
-- colPoints: zlog=TRUE
+- colPoints: zlog=TRUE, use or pass arguments density, x1,x2,y1,y2 for colPointsLegend
 - smallPlot: mtext afterwards not working (maybe because of outer=TRUE). see Tests.R
 - monthAxis: ym=NA (set automatically depending on axis time length)
 - monthAxis: ypos=6 (with vector option) for ts ending before (or starting after) june/july
