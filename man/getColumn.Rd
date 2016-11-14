@@ -74,6 +74,6 @@ getColumn(1, data.frame(AA=rep(NA,10)))
 Berry Boessenkool, \email{berry-b@gmx.de}, Sep 2016
 }
 \seealso{
-\code{\link{subset}}, \url{https://mran.revolutionanalytics.com/web/packages/car/vignettes/embedding.pdf}
+\code{\link{subset}}, \code{\link{getElement}}, \url{https://mran.revolutionanalytics.com/web/packages/car/vignettes/embedding.pdf}
 }
 

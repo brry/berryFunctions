@@ -13,7 +13,8 @@
 #'         \code{plot2}: output list from \code{\link{spiralDate}} \cr
 #'         and other elements depending on plot type, \code{like data3, data5, probs5, width5}.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jul-Oct 2016
-#' @seealso \code{\link{spiralDate}}, \code{\link{colPoints}}
+#' @seealso \code{\link{spiralDate}}, \code{\link{colPoints}},
+#'          \url{http://nwis.waterdata.usgs.gov/nwis/peak?search_site_no=01400500} 
 #' @keywords aplot
 #' @export
 #' @examples
