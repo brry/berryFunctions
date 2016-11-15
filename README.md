@@ -8,36 +8,32 @@ Miscellaneous R functions. Notable: colPoints, horizHist, logAxis, pointZoom, sm
 
 
 ### installation
-Code to install from CRAN:
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/berryFunctions)](http://cran.r-project.org/package=berryFunctions) [![downloads](http://cranlogs.r-pkg.org/badges/berryFunctions)](http://www.r-pkg.org/services)
+Install release version from CRAN:
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version-last-release/berryFunctions)](http://cran.r-project.org/package=berryFunctions) 
+[![downloads](http://cranlogs.r-pkg.org/badges/berryFunctions)](http://www.r-pkg.org/services)
 
 ```R
 install.packages("berryFunctions")
 library(berryFunctions)
 vignette("berryFunctions")
-```
-
-Code to install the most recent development version from github:
-
-<script src="http://gist-it.appspot.com/github/brry/berryFunctions/blob/master/DESCRIPTION?slice=3:5"></script>
-
-```R
-# Avoid installing devtools with all its dependencies:
-source("http://raw.githubusercontent.com/brry/berryFunctions/master/R/instGit.R")
-instGit("brry/berryFunctions")
-
-# or using devtools:
-if(!requireNamespace("devtools", quitly=TRUE)) install.packages("devtools")
-devtools::install_github("brry/berryFunctions")
-
-library(berryFunctions)
 ?berryFunctions
 ```
 
-### troubleshooting
+Update to the current development version from github:
+<script src="http://gist-it.appspot.com/github/brry/berryFunctions/blob/master/DESCRIPTION?slice=3:5"></script>
+```R
+source("http://raw.githubusercontent.com/brry/berryFunctions/master/R/instGit.R")
+instGit("brry/berryFunctions")
+
+# or use devtools:
+if(!requireNamespace("devtools", quitly=TRUE)) install.packages("devtools")
+devtools::install_github("brry/berryFunctions")
+```
+
+### trouble
 
 If direct installation from CRAN doesn't work, your R version might be too old. In that case, an update is really recommendable: [r-project.org](http://www.r-project.org/). If you can't update R, try installing from source (github) via `instGit` or devtools as mentioned above. If that's not possible either, here's a manual workaround:
-click on **Download ZIP** (to the right, [link](https://github.com/brry/berryFunctions/archive/master.zip)), unzip the file to some place, then
+click on **Clone or Download - Download ZIP** (top right, [link](https://github.com/brry/berryFunctions/archive/master.zip)), unzip the file to some place, then
 ```R
 setwd("that/path")
 dd <- dir("berryFunctions-master/R", full=T)
