@@ -11,6 +11,7 @@ berryFunctions ToDo-list / wishlist / issues
 - reference to sortDF in addRow, insertRow, etc
 - implement identical(FALSE, legargs) wherever owa is used and that makes sense
 - colPoints: zlog=TRUE, use or pass arguments density, x1,x2,y1,y2 for colPointsLegend
+- combineFiles: path expansion (see rdwd::fileDWD), remove dir arguments
 - smallPlot: mtext afterwards not working (maybe because of outer=TRUE). see Tests.R
 - monthAxis: ym=NA (set automatically depending on axis time length)
 - monthAxis: ypos=6 (with vector option) for ts ending before (or starting after) june/july
