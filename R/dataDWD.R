@@ -23,8 +23,8 @@
 #' @export
 #' @examples
 #' 
-#' # see 
-#' bowseURL("https://github.com/brry/rdwd#rdwd")
+#' # Don't use this anymore, use instead: 
+#' #   browseURL("https://github.com/brry/rdwd#rdwd")
 #' 
 #'
 #' @param file Filename (must be available at the location given by \code{base1} and \code{base2})

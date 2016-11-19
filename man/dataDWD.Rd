@@ -59,8 +59,8 @@ These functions are now in the package rdwd and will be removed here!
 }
 \examples{
 
-# see 
-bowseURL("https://github.com/brry/rdwd#rdwd")
+# Don't use this anymore, use instead: 
+#   browseURL("https://github.com/brry/rdwd#rdwd")
 
 
 }
