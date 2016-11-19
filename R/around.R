@@ -5,12 +5,15 @@
 #' @return Nothing, calls \code{\link{View}}
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Nov 2016
 #' @seealso \code{\link{sortDF}}, \code{\link{View}}
+#' @importFrom utils View
 #' @export
 #' @examples
+#' \dontrun{ ## View should not be used in examples
 #' myDF <- data.frame(A=1:30, B=cumsum(rnorm(30)))
 #' myDF[c(5,7,23,29),1] <- NA
 #' around(myDF, i=is.na(myDF$A))
 #' around(myDF, i=c(11,19), n2=0)
+#' }
 #'
 #' @param x Data.frame
 #' @param i Index (logical or integers)

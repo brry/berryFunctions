@@ -25,10 +25,12 @@ Nothing, calls \code{\link{View}}
 View index rows of a data.frame with n surrounding rows
 }
 \examples{
+\dontrun{ ## View should not be used in examples
 myDF <- data.frame(A=1:30, B=cumsum(rnorm(30)))
 myDF[c(5,7,23,29),1] <- NA
 around(myDF, i=is.na(myDF$A))
 around(myDF, i=c(11,19), n2=0)
+}
 
 }
 \author{
