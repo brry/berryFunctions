@@ -4,14 +4,16 @@
 \alias{truncMessage}
 \title{truncate message parts}
 \usage{
-truncMessage(x, ntrunc = 3, prefix = "s ", altnix = "'")
+truncMessage(x, ntrunc = 3, prefix = "s", midfix = " ", altnix = "'")
 }
 \arguments{
 \item{x}{Character vector}
 
 \item{ntrunc}{Integer: number of elements printed before truncation. DEFAULT: 3}
 
-\item{prefix}{Character: Prefix added if \code{length(x)>1}. DEFAULT: "s "}
+\item{prefix}{Character: Prefix added if \code{length(x)>1}. DEFAULT: "s"}
+
+\item{midfix}{Character: string added after prefix OR before first altnix. DEFAULT: " "}
 
 \item{altnix}{Character: Alternative string padded around x if \code{length(x)==1}. 
 DEFAULT: "'"}
@@ -24,10 +26,11 @@ truncate long vectors for messages
 }
 \examples{
 truncMessage("hi")
-truncMessage(paste0("hi",1:10))
+message("listing name", truncMessage(       "hi"      ), ".")
+message("listing name", truncMessage(paste0("hi",1:10)), ".")
 truncMessage(paste0("hi",1:10), ntrunc=1)
-truncMessage(paste0("hi",1:10), ntrunc=2, prefix="")
-truncMessage(paste0("hi",1:10), ntrunc=8, prefix="files  ")
+truncMessage(paste0("hi",1:10), ntrunc=2, prefix="", midfix="")
+truncMessage(paste0("hi",1:10), ntrunc=8, prefix="files _ ")
 
 }
 \author{
