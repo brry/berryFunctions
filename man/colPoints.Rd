@@ -9,7 +9,8 @@ colPoints(x, y, z, data, add = TRUE, col = seqPal(cl$nbins), col2 = c(NA,
   method = "equalinterval", breaks, sdlab = 1, legend = TRUE,
   legargs = NULL, hist = FALSE, histargs = NULL, lines = FALSE,
   nint = 30, xlab = substitute(x), ylab = substitute(y),
-  zlab = substitute(z), las = 1, pch = 16, quiet = FALSE, ...)
+  zlab = substitute(z), las = 1, pch = 16, x1 = 0.6, y1 = 0.88,
+  x2 = 0.99, y2 = 0.99, density = TRUE, quiet = FALSE, ...)
 }
 \arguments{
 \item{x, y}{Vectors with coordinates of the points to be drawn}
@@ -66,6 +67,11 @@ DEFAULT: 1 (all labels horizontal)}
 
 \item{pch}{Point CHaracter. See \code{\link{par}}. DEFAULT: 16}
 
+\item{x1, x2, y1, y2}{Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}. 
+Passed to \code{\link{colPointsLegend}}. DEFAULT: x: 0.6-0.99, y: 0.88-0.98}
+
+\item{density}{Logical: plot density line in \code{\link{colPointsLegend}}? DEFAUTL: TRUE}
+
 \item{quiet}{Turn off warnings? DEFAULT: FALSE}
 
 \item{\dots}{Further graphical arguments passed to \code{\link{plot}}, 
@@ -95,7 +101,7 @@ k <- c(175, 168, 163, 132, 120, 117, 110, 130, 131, 160, 105, 174, 190, 183)
 colPoints(i,j,k, cex=1.5, pch="+", add=FALSE)
 
 # with custom Range:
-colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, Range=c(150, 190))
+colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, Range=c(150,190), density=FALSE)
 # can be used to allow comparison between several plots
 # points outside the range are plotted with col2
 

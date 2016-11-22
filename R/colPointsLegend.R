@@ -36,7 +36,7 @@
 #' @param labels Labels that are written at the positions of \code{at}. DEFAULT: at
 #' @param adj label adjustment parallel to legend bar (only one number!). DEFAULT: 0.5
 #' @param x1,x2,y1,y2 Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}. 
-#'                    DEFAULT: x: 0.6-0.99, y: 0.88-0.98
+#'                    DEFAULT: x: 0.6-0.99, y: 0.88-0.99
 #' @param outer Logical: Should legend be relative to device instead of current figure?
 #'              use outer=TRUE when par(mfrow, oma) is set. DEFAULT: FALSE
 #' @param xpd Logical: should text be expanded outisde of plotting region?
@@ -82,8 +82,8 @@ adj=0.5,
 
 x1=0.6,
 y1=0.88,
-x2=x1+0.38,
-y2=y1+0.11,
+x2=0.99,
+y2=0.99,
 outer=FALSE,
 xpd=NA,
 mar,

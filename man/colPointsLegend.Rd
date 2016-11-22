@@ -7,8 +7,8 @@
 colPointsLegend(z, Range = range(z, finite = TRUE), nbins = 100,
   colors = seqPal(nbins), bb = seqR(Range, length.out = nbins + 1),
   at = pretty2(Range), labels = at, adj = 0.5, x1 = 0.6, y1 = 0.88,
-  x2 = x1 + 0.38, y2 = y1 + 0.11, outer = FALSE, xpd = NA, mar,
-  mgp = c(1.8, 0.6, 0), bg = "white", sborder = NA, resetfocus = TRUE,
+  x2 = 0.99, y2 = 0.99, outer = FALSE, xpd = NA, mar, mgp = c(1.8,
+  0.6, 0), bg = "white", sborder = NA, resetfocus = TRUE,
   plottriangle = FALSE, triangle = 0.14, tricol = c(8, 1),
   density = NULL, lines = TRUE, atminmax = FALSE, horizontal = TRUE,
   labelpos = 1, titlepos = 3, title = "Legend", las = 1, x, y, index,
@@ -35,7 +35,7 @@ from yellow (lowest) to blue (highest value in Range)}
 \item{adj}{label adjustment parallel to legend bar (only one number!). DEFAULT: 0.5}
 
 \item{x1, x2, y1, y2}{Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}. 
-DEFAULT: x: 0.6-0.99, y: 0.88-0.98}
+DEFAULT: x: 0.6-0.99, y: 0.88-0.99}
 
 \item{outer}{Logical: Should legend be relative to device instead of current figure?
 use outer=TRUE when par(mfrow, oma) is set. DEFAULT: FALSE}

@@ -26,7 +26,7 @@
 #' colPoints(i,j,k, cex=1.5, pch="+", add=FALSE)
 #' 
 #' # with custom Range:
-#' colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, Range=c(150, 190))
+#' colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, Range=c(150,190), density=FALSE)
 #' # can be used to allow comparison between several plots
 #' # points outside the range are plotted with col2
 #' 
@@ -161,6 +161,9 @@
 #' @param las Label Axis Style. Only used when add=FALSE. See \code{\link{par}}. 
 #'            DEFAULT: 1 (all labels horizontal)
 #' @param pch Point CHaracter. See \code{\link{par}}. DEFAULT: 16
+#' @param x1,x2,y1,y2 Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}. 
+#'                    Passed to \code{\link{colPointsLegend}}. DEFAULT: x: 0.6-0.99, y: 0.88-0.98
+#' @param density Logical: plot density line in \code{\link{colPointsLegend}}? DEFAUTL: TRUE
 #' @param quiet Turn off warnings? DEFAULT: FALSE
 #' @param \dots Further graphical arguments passed to \code{\link{plot}}, 
 #'              \code{\link{points}} and \code{\link{lines}}, 
@@ -189,6 +192,11 @@ colPoints <- function(
   zlab=substitute(z),
   las=1, 
   pch=16, 
+  x1=0.6,
+  y1=0.88,
+  x2=0.99,
+  y2=0.99,
+  density=TRUE,
   quiet=FALSE, 
   ...)
 {
@@ -278,7 +286,7 @@ points(x, y, col=c(col, col2[2:3])[cl$index], pch=pch, ...)
 # add legend:
 legdefs <- list(z=z, at=cl$at, labels=cl$labels, bb=cl$bb, nbins=cl$nbins,
                 plottriangle=c(any(na.omit(cl$index==cl$nbins+1)),any(na.omit(cl$index==cl$nbins+2))), 
-                title=zlab, tricol=col2[2:3], colors=col)
+                title=zlab, x1=x1, x2=x2, y1=y1, y2=y2, density=density, tricol=col2[2:3], colors=col)
 output <- c(output, legdefs[!names(legdefs) %in% c("nbins","bb","at","labels","index","z")])
 if(legend) do.call(colPointsLegend, args=owa(legdefs, legargs))
 #
