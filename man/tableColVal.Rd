@@ -4,46 +4,42 @@
 \alias{tableColVal}
 \title{Table with values with value-dependent colored backgrounds in pdf}
 \usage{
-tableColVal(mat, pdffile = "table_col_val.pdf", pdf = !missing(pdffile),
-  nameswidth = 0.3, namesheight = 0.1, palette = seqPal(nrow(mat) *
-  ncol(mat)), Range = range(mat, finite = TRUE), argclass = NULL,
-  argrow = NULL, argcol = NULL, argcell = NULL, argmain = NULL, ...)
+tableColVal(mat, main = deparse(substitute(mat)), nameswidth = 0.3,
+  namesheight = 0.1, palette = seqPal(100), Range = range(mat, finite =
+  TRUE), digits = 2, classargs = NULL, cellargs = NULL, ...)
 }
 \arguments{
-\item{mat}{Matrix with values}
+\item{mat}{Matrix with values and row/column names}
 
-\item{pdffile}{Name of File to write to. DEFAULT: "table_col_val.pdf"}
+\item{main}{Title for topleft space. DEFAULT: name of mat object.}
 
-\item{pdf}{Should table be written to pdffile? (Else it will plot in x11). DEFAULT: FALSE}
-
-\item{nameswidth}{Relative width of row names at the left, as a percentage of plot. DEFAULT: 0.3}
+\item{nameswidth}{Relative width of row names at the left, as a percentage of plot. 
+DEFAULT: 0.3}
 
 \item{namesheight}{Relative height of column names at the top. DEFAULT: 0.1}
 
-\item{palette}{Color palette for the heatmap. DEFAULT: seqPal(nrow(mat)*ncol(mat))}
+\item{palette}{Color palette for the heatmap. DEFAULT: \code{\link{seqPal}(100)}}
 
-\item{Range}{Range of values mapped linearly to color palette. DEFAULT: range(mat,finite}
+\item{Range}{Range mapped to color palette. DEFAULT: range(mat)}
 
-\item{argclass}{List of arguments specifying how to call \code{\link{classify}}, eg. method. DEFAULT: NULL}
+\item{digits}{Number of digits rounded to for writing. DEFAULT: 2}
 
-\item{argrow, argcol, argcell, argmain}{List of arguments passed to \code{\link{text}} 
-in row and column names, cell content and topleft cell, respectively. Could be cex, col, srt, etc. DEFAULTS: NULL}
+\item{classargs}{List of arguments specifying how to call \code{\link{classify}}, 
+e.g. method. DEFAULT: NULL}
 
-\item{\dots}{Further arguments passed to \code{\link{pdf}}.}
+\item{cellargs}{List of arguments passed to \code{\link{text}} only for the cells.}
+
+\item{\dots}{Further arguments passed to all \code{\link{text}} like cex, col, srt, ...}
 }
 \value{
-None. PDF or plot produced.
+List of locations in plot.
 }
 \description{
 Table with numbers and corresponding color in the background of each cell.
 (heatmap)
 }
 \details{
-I saw a presentation today with a table of values of differences between several
-models and datasets of global precipitation. I decided I don't like reading
-20+ values, and would like to see a corresponding color in the background of each cell. (heatmap)
-Writing this function took me about 1 hour and 30 minutes and was a nice coding excercise.
-Feedback welcome at berry-b@gmx.de!
+Create tables with corresponding color in the background of each cell. (heatmap)
 }
 \examples{
 
@@ -52,29 +48,32 @@ colnames(Bsp) <- paste0("Measure", LETTERS[1:4])
 rownames(Bsp) <- paste("prod", 8:11, sep="_")
 Bsp
 
-tableColVal(Bsp)
+(  tableColVal(Bsp)   )
 tableColVal(Bsp, nameswidth=0.1) # relative to plot width
-tableColVal(Bsp, namesheight=0.5, argcol=list(srt=90))
+tableColVal(Bsp, namesheight=0.5, srt=45)
 
-tableColVal(Bsp, argrow=list(col="red", cex=2) )
+tableColVal(Bsp, cellargs=list(cex=2), col="red")
 tableColVal(Bsp, Range=c(10,40))
 tableColVal(Bsp, Range=c(20,40))
 tableColVal(Bsp, palette=heat.colors(12))
-tableColVal(Bsp, palette=c(2,4,7), argmain=list(labels="last\\ncomparison"))
+tableColVal(Bsp, palette=c(2,4,7), main="more\\nstuff")
+
+Bsp2 <- matrix(rexp(30), ncol=6, byrow=TRUE)
+(  tableColVal(Bsp2)  )
+tableColVal(Bsp2, digits=4)
+colPointsLegend(Bsp2, horizontal=FALSE, x1=0.05, x2=0.15, y1=0.1, y2=0.8, title="")
 
 \dontrun{
 ## Rcmd check --as-cran doesn't like to open external devices such as pdf,
 ## so this example is excluded from running in the checks.
-tableColVal(Bsp, pdf=TRUE, width=12)  # further arguments to pdf possible.
-
-Bsp2 <- matrix(sample(1:100, 30), ncol=6, byrow=TRUE)
-graphics.off(); X11(height=4)
-tableColVal(Bsp2)
+pdf("TableColVal.pdf", height=5);  tableColVal(Bsp);  dev.off()
+system2("open", "TableColVal.pdf")
+unlink("TableColVal.pdf")
 }
 
 }
 \author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Nov. 2012
+Berry Boessenkool, \email{berry-b@gmx.de}, Nov 2012 + Nov 2016
 }
 \seealso{
 \code{\link{pdf}}, \code{\link{heatmap}}

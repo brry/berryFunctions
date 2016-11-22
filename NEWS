@@ -3,7 +3,6 @@ berryFunctions ToDo-list / wishlist / issues
 - finish funSource (search if site not found)
 - exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) ) 
 - lsc: better example dataset, optim problems
-- tableColVal: add digits argument
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
 - implement is.error and getColumn (eg spiralDate) wherever applicable
 - late 2016: delete randomPoints, triangleArea, cie, cls, pastec, pointZoom and createDoc from package
