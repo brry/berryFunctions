@@ -31,7 +31,8 @@ convertUmlaut(examples) # note how lower and upper case is kept
 Berry Boessenkool, \email{berry-b@gmx.de}, Oct-Nov 2016
 }
 \seealso{
-\code{tools::\link[tools]{showNonASCII}}, \code{\link{gsub}}
+\code{tools::\link[tools]{showNonASCII}}, \code{\link{gsub}},
+        \code{\link{iconv}(x, to="ASCII//TRANSLIT")}
 }
 \keyword{character}
 

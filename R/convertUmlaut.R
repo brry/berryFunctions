@@ -5,7 +5,8 @@
 
 #' @return Character strings
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Oct-Nov 2016
-#' @seealso \code{tools::\link[tools]{showNonASCII}}, \code{\link{gsub}}
+#' @seealso \code{tools::\link[tools]{showNonASCII}}, \code{\link{gsub}},
+#'         \code{\link{iconv}(x, to="ASCII//TRANSLIT")}
 #' @keywords character
 #' @export
 #' @examples
