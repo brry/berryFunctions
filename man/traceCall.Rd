@@ -24,20 +24,22 @@ trace the call stack e.g. for error checking and format output for do.call level
                   tracing may take a lot of computing time.
 }
 \examples{
-lower <- function(a, s) warning(traceCall(s), "final value is: ", a+10)
+lower <- function(a, s) {warning(traceCall(s), "stupid berry warning: ", a+10); a}
 upper <- function(b, skip=0) lower(b+5, skip)
 upper(3)
 upper(3, skip=1) # traceCall skips last level (warning)
 upper(3, skip=4) # now the stack is empty
 upper(3, skip=-1) # get one more level down
-is.error(upper("four"))
+d <- tryStack(upper("four"), silent=TRUE)
+inherits(d, "try-error")
+cat(d) 
 
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Sep 2016
 }
 \seealso{
-\code{\link{checkFile}} for example usage
+\code{\link{tryStack}}, \code{\link{checkFile}} for example usage
 }
 \keyword{error}
 \keyword{programming}
