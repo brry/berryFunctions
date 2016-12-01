@@ -41,14 +41,28 @@ d <- tryStack(upper("4"))
 d
 inherits(d, "try-error")
 cat(d)
+cat(tryStack(upper("4")))
 
+myfun <- function(k) tryStack(stop("oh oh"))
+d <- myfun(4)
+cat(d)
+d <- tryStack(myfun(4) ) # nested calls get weird
+cat(d)                   # They make that empty in the second run, for example.
+
+myfun <- function(k) cat( tryStack(stop("oh oh")) )
+myfun(4) 
+d <- tryStack(myfun(4) ) # or give the complete try call...
 
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Nov 2016
 }
 \seealso{
-\code{\link{try}}, \code{\link{traceCall}}
+\code{\link{try}}, \code{\link{traceCall}},
+\url{http://r.789695.n4.nabble.com/Stack-trace-td4021537.html},
+\url{http://stackoverflow.com/questions/15282471/get-stack-trace-on-trycatched-error-in-r},
+\url{http://stackoverflow.com/questions/1975110/printing-stack-trace-and-continuing-after-error-occurs-in-r},
+\url{http://stackoverflow.com/questions/16879821/save-traceback-on-error-using-trycatch}
 }
 \keyword{error}
 \keyword{programming}
