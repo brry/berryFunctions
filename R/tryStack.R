@@ -82,6 +82,8 @@ out <- try(withCallingHandlers(expr, error=function(e)
   toremove <- "withCallingHandlers(expr, error = function(e) {    stack <- sys.calls()"
   removetoo <- sapply(stack, function(x) grepl(toremove, paste(x[1:2],collapse=""), fixed=TRUE))
   stack <- stack[!removetoo]
+  # combine vectors into a single string:
+  stack <- lapply(stack, function(x) paste(x, collapse="\n"))     # collapse=";" could be better here...
   # add error code:
   stack <- c(stack, deparse(conditionCall(e))[1L])
   # add numbers:
