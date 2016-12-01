@@ -26,32 +26,39 @@ Unlike \code{\link{try}}, \code{tryStack} also returns the calling stack to ease
 lower <- function(a) a+10
 middle <- function(b) {plot(b, main=b) ; lower(b) }
 upper <- function(c) {cat("printing c:", c, "\\n") ; middle(c)}
-d <- upper(4)
+d <- upper(42)
 d
 rm(d)
 
-is.error( d <- upper("4") , tell=TRUE)      # error, no d creation 
+is.error( d <- upper("42") , tell=TRUE)      # error, no d creation 
 
-d <- try(upper("4"))
+d <- try(upper("42"))
 d
 inherits(d, "try-error")
 cat(d)
 
-d <- tryStack(upper("4"))
+d <- tryStack(upper("42"))
 d
 inherits(d, "try-error")
 cat(d)
-cat(tryStack(upper("4")))
+cat(tryStack(upper("42")))
+
+stopifnot(tryStack(upper(42))==52)
+
+
+myfun <- function(k) tryStack(upper("42"))
+d <- myfun(42)
+cat(d)
 
 myfun <- function(k) tryStack(stop("oh oh"))
-d <- myfun(4)
-cat(d)
+d <- myfun(42)
+
 d <- tryStack(myfun(4) ) # nested calls get weird
 cat(d)                   # They make that empty in the second run, for example.
 
-myfun <- function(k) cat( tryStack(stop("oh oh")) )
-myfun(4) 
-d <- tryStack(myfun(4) ) # or give the complete try call...
+myfun <- function(k) cat( tryStack(upper("42")) )
+myfun(42) 
+d <- tryStack(myfun(42) ) # or give the complete try call...
 
 }
 \author{
