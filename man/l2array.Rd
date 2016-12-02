@@ -47,7 +47,8 @@ stopifnot(all(avg==A2))
 
 # names check:
 LN <- LA
-dimnames(LN[[2]]) <- list(my_x=paste0("row",1:4), my_y=c("A","B"), intentional=paste0("n",1:3))
+names(dimnames(LN[[2]]))[3] <- "intentional"
+dimnames(LN[[2]])[3] <- list(paste0("k",1:3))
 AN <- l2array(LN)
 
 LN <- LA
