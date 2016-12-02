@@ -57,6 +57,12 @@
 #' # arguments for subfunctions as text may be given this way:
 #' funnelPlot(x=X, n=N, labels=funnel$Name, at=list(cex=0.7, col="red"))
 #' # Labeling many points is not very clear...
+#' funnelPlot(X,N)
+#' sel <- c(1,4,10) # selection
+#' text(N[sel], (X/N*100)[sel], funnel$Name[sel], cex=0.7)
+#' # You could also pass a vector with partly empty strings to funnelPlot
+#' funnelPlot(x=X, n=N, labels=replace(funnel$Name, c(2,3,5:9), ""), at=list(adj=0.5))
+#' 
 #' 
 #' # Even though Jan is more successfull than Mary in succes rate terms, both are
 #' # easily within random variation. Mary may just have had a bad start.
