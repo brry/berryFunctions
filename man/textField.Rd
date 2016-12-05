@@ -136,8 +136,11 @@ Berry Boessenkool, \email{berry-b@gmx.de}, April 2013 + March 2014
 with inspiration taken from \code{ordilabel} in package \code{vegan} and thanks to Jari Oksanen for his comments
 }
 \seealso{
-\code{\link{text}}; \code{shadowtext} in package \code{TeachingDemos}, see \url{http://stackoverflow.com/questions/25631216};
-         \code{s.label} in package \code{ade4}, which is not so versatile and doesn't work with logarithmic axes
+\code{\link{text}}; \code{shadowtext} in package \code{TeachingDemos}, see
+         \url{http://blog.revolutionanalytics.com/2009/05/make-text-stand-out-with-outlines.html}, 
+          and \url{http://stackoverflow.com/questions/25631216}. \cr
+         \code{s.label} in package \code{ade4}, which is not so versatile and 
+         doesn't work with logarithmic axes
 }
 \keyword{aplot}
 
