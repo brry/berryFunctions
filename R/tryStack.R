@@ -25,26 +25,35 @@
 #' d
 #' rm(d)
 #' 
-#' is.error( d <- upper("42") , tell=TRUE)      # error, no d creation 
+#' \dontrun{ ## intentional error
+#' d <- upper("42")                # error, no d creation 
+#' traceback()                     # calling stack, but only in interactive mode
+#' }
 #' 
-#' d <- try(upper("42"), silent=TRUE)
-#' d
-#' inherits(d, "try-error")
+#' 
+#' d <- try(upper("42"), silent=TRUE)      # d created
+#' cat(d)                                  # has error message, but no traceback
+#' inherits(d, "try-error")                # use for coding
+#' 
+#' 
+#' d <- tryStack(upper("42"), silent=TRUE) # like try, but with traceback, even for warnings
 #' cat(d)
+#' cat(tryStack(upper("42"), silent=TRUE)) # level 1 different, but correct
 #' 
-#' d <- tryStack(upper("42"), warn=T)
-#' d
-#' inherits(d, "try-error")
-#' cat(d)
-#' cat(tryStack(upper("42"), silent=TRUE))
+#' d <- tryStack(upper("42"), silent=TRUE, tracewarnings=FALSE) # don't touch warnings
 #' 
+#' tryStack(upper(42)) # returns normal output, but warnings are easier to debug
+#' 
+#' stopifnot(inherits(d, "try-error"))
 #' stopifnot(tryStack(upper(42))==52)
 #' 
 #' 
-#' myfun <- function(k) tryStack(upper("42"))
+#' myfun <- function(k) tryStack(upper(k), silent=TRUE)
 #' d <- myfun(42)
 #' cat(d)
-#' 
+#' d <- myfun("42")
+#' cat(d)
+#'  
 #' myfun <- function(k) tryStack(stop("oh oh"))
 #' d <- myfun(42)
 #' 
@@ -59,57 +68,66 @@
 #'                 spanning several commands.
 #' @param silent   Logical: Should error message + stack printing be suppressed?
 #'                 DEFAULT: FALSE
-#' @param warn2err Logical: Should warnings be converted to errors?
-#'                 With TRUE, they are also easily traceable. DEFAULT: FALSE
+#' @param tracewarnings Logical: Should warnings be traced as well?
+#'                 They will still be printed as regular warnings, 
+#'                 but with trace stack. DEFAULT: TRUE
 #'
 tryStack <- function(
 expr,
 silent=FALSE,
-warn2err=FALSE
+tracewarnings=TRUE
 )
 {
 # warnings to errors:
-if(warn2err) 
+if(tracewarnings)
   {
-  oop <- options(warn=2)
+  oop <- options(warn=-1)
   on.exit(options(oop))
   }
 # environment for stack to (potentially) be written into:
 tryenv <- new.env()
 assign("stackmsg", value="-- empty stack --", envir=tryenv)
-# now try the expression:
-out <- try(withCallingHandlers(expr, error=function(e)
+# error function
+efun <- function(e, iswarning=FALSE)
   {
   # stack of calls, in case of an error:
   stack <- sys.calls()
- # browser()
   # remove the tryCatch part:
   stack <- stack[-(2:7)]
   # remove the current part:
   stack <- head(stack, -2)
   # remove the warning to error conversion part:
-  if(warn2err) stack <- head(stack, -4)
+  if(iswarning) stack <- head(stack, -6)
   # language to character:
   stack <- sapply(stack, deparse)
   # remove element from tryStack being in a function:
-  toremove <- "withCallingHandlers(expr, error = function(e) {    stack <- sys.calls()"
-  removetoo <- sapply(stack, function(x) grepl(toremove, paste(x[1:2],collapse=""), fixed=TRUE))
-  stack <- stack[!removetoo]
+  toremovestring <- "withCallingHandlers(expr, error = efun, warning = wfun)"
+  toremove <- sapply(stack, function(x) any(grepl(toremovestring, x, fixed=TRUE)) )
+  stack <- stack[!toremove]
   # combine vectors into a single string:
-  stack <- lapply(stack, function(x) paste(x, collapse="\n"))     # collapse=";" could be better here...
+  stack <- lapply(stack, function(x) paste(x, collapse="\n"))
   # add error code:
-  stack <- c(stack, deparse(conditionCall(e))[1L])
+  errorcode <- deparse(conditionCall(e))[1L]
+  stack <- c(stack, errorcode)
   # add numbers:
   stack <- sapply(seq_along(stack), function(i) paste0(i, ": ", stack[[i]]))
   # add descriptor:
-  stack <- c("tryStack sys.calls() error stack: ", 
-             paste0("m: ", conditionMessage(e)), rev(stack))
+  info <- paste0("tryStack sys.calls() ", if(iswarning) "warning" else "error", " stack: ") 
+  if(iswarning) info <- c(paste0("in ", errorcode, ": ", conditionMessage(e)), info)
+  stack <- c(info, paste0("m: ", conditionMessage(e)), rev(stack))
   # put message into main function environment:
   assign("stackmsg", value=paste(stack,collapse="\n"), envir=tryenv)
   # print if not silent:
-  if(!silent && isTRUE(getOption("show.error.messages"))) 
+  if(!silent && isTRUE(getOption("show.error.messages")) && !iswarning) 
     cat(tryenv$stackmsg, sep="\n")
-  }), silent=silent)
+  # warn:
+  if(iswarning) warning(tryenv$stackmsg, immediate.=TRUE, call.=FALSE)
+  }
+# warning function
+wfun <- function(e) efun(e, iswarning=TRUE)
+if(!tracewarnings) wfun <- function(e){}
+# now try the expression:
+out <- try(withCallingHandlers(expr, error=efun, warning=wfun), silent=silent)
 # add the trace stack character string to the output:
 if(inherits(out, "try-error")) out[2] <- tryenv$stackmsg
 # Done! return the output:

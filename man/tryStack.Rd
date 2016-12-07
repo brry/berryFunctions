@@ -4,12 +4,18 @@
 \alias{tryStack}
 \title{try an expression, returning the error stack}
 \usage{
-tryStack(expr, silent = FALSE)
+tryStack(expr, silent = FALSE, tracewarnings = TRUE)
 }
 \arguments{
-\item{expr}{Expresssion to try, potentially wrapped in curly braces if spanning several commands.}
+\item{expr}{Expresssion to try, potentially wrapped in curly braces if 
+spanning several commands.}
 
-\item{silent}{Logical: Should error message printing be suppressed?}
+\item{silent}{Logical: Should error message + stack printing be suppressed?
+DEFAULT: FALSE}
+
+\item{tracewarnings}{Logical: Should warnings be traced as well?
+They will still be printed as regular warnings, 
+but with trace stack. DEFAULT: TRUE}
 }
 \value{
 Value of \code{expr} if evaluated successfully. If not, an invisible 
@@ -24,32 +30,41 @@ Unlike \code{\link{try}}, \code{tryStack} also returns the calling stack to ease
 \examples{
 
 lower <- function(a) a+10
-middle <- function(b) {plot(b, main=b) ; lower(b) }
+middle <- function(b) {plot(b, main=b) ; warning("fake warning, b = ", b); lower(b) }
 upper <- function(c) {cat("printing c:", c, "\\n") ; middle(c)}
 d <- upper(42)
 d
 rm(d)
 
-is.error( d <- upper("42") , tell=TRUE)      # error, no d creation 
+\dontrun{ ## intentional error
+d <- upper("42")                # error, no d creation 
+traceback()                     # calling stack, but only in interactive mode
+}
 
-d <- try(upper("42"))
-d
-inherits(d, "try-error")
+
+d <- try(upper("42"), silent=TRUE)      # d created
+cat(d)                                  # has error message, but no traceback
+inherits(d, "try-error")                # use for coding
+
+
+d <- tryStack(upper("42"), silent=TRUE) # like try, but with traceback, even for warnings
 cat(d)
+cat(tryStack(upper("42"), silent=TRUE)) # level 1 different, but correct
 
-d <- tryStack(upper("42"))
-d
-inherits(d, "try-error")
-cat(d)
-cat(tryStack(upper("42")))
+d <- tryStack(upper("42"), silent=TRUE, tracewarnings=FALSE) # don't touch warnings
 
+tryStack(upper(42)) # returns normal output, but warnings are easier to debug
+
+stopifnot(inherits(d, "try-error"))
 stopifnot(tryStack(upper(42))==52)
 
 
-myfun <- function(k) tryStack(upper("42"))
+myfun <- function(k) tryStack(upper(k), silent=TRUE)
 d <- myfun(42)
 cat(d)
-
+d <- myfun("42")
+cat(d)
+ 
 myfun <- function(k) tryStack(stop("oh oh"))
 d <- myfun(42)
 
