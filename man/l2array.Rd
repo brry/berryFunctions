@@ -22,7 +22,8 @@ array
 Convert a list of arrays to a single array, conserving names
 }
 \examples{
-A1 <- array(1:24, dim=c(4,2,3), dimnames=list(my_x=paste0("row",1:4), my_y=c("A","B"), paste0("n",1:3)))
+A1 <- array(1:24, dim=c(4,2,3), dimnames=list(
+                   my_x=paste0("row",1:4), my_y=c("A","B"), paste0("n",1:3)))
 A1
 # Selection:
 A1[,,"n2"]

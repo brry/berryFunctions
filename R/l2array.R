@@ -8,7 +8,8 @@
 #' @keywords list manip array
 #' @export
 #' @examples
-#' A1 <- array(1:24, dim=c(4,2,3), dimnames=list(my_x=paste0("row",1:4), my_y=c("A","B"), paste0("n",1:3)))
+#' A1 <- array(1:24, dim=c(4,2,3), dimnames=list(
+#'                    my_x=paste0("row",1:4), my_y=c("A","B"), paste0("n",1:3)))
 #' A1
 #' # Selection:
 #' A1[,,"n2"]
@@ -70,6 +71,7 @@ elna <- names(x)
 # check names:
 if(checknames && length(x)>1)
   {
+  ###message("Checking dimnames names..."); flush.console()
   # check names of dimnames:
   dummy <- lapply(2:length(x), function(i){
   dina2 <- dimnames(x[[i]])
@@ -78,6 +80,7 @@ if(checknames && length(x)>1)
                        toString(names(dina2)), "' instead of '", toString(names(dina)), "'.", call.=FALSE)
   })
   # check array dimnames:
+  ###message("Checking dimnames..."); flush.console()
   dummy <- lapply(2:length(x), function(i){
   dina2 <- dimnames(x[[i]])
   dummy <- sapply(seq_along(dina), function(j){
@@ -88,6 +91,7 @@ if(checknames && length(x)>1)
   }
 outnames <- NULL
 if(usenames) outnames <- c(dina, list(elna))
+###message("transforming to array..."); flush.console()
 out <- array(unlist(x), dim=c(dim(x[[1]]),length(x)), dimnames=outnames)
 out
 }
