@@ -19,7 +19,7 @@
 #' @examples
 #' 
 #' lower <- function(a) a+10
-#' middle <- function(b) {plot(b, main=b) ; lower(b) }
+#' middle <- function(b) {plot(b, main=b) ; warning("fake warning, b = ", b); lower(b) }
 #' upper <- function(c) {cat("printing c:", c, "\n") ; middle(c)}
 #' d <- upper(42)
 #' d
@@ -27,16 +27,16 @@
 #' 
 #' is.error( d <- upper("42") , tell=TRUE)      # error, no d creation 
 #' 
-#' d <- try(upper("42"))
+#' d <- try(upper("42"), silent=TRUE)
 #' d
 #' inherits(d, "try-error")
 #' cat(d)
 #' 
-#' d <- tryStack(upper("42"))
+#' d <- tryStack(upper("42"), warn=T)
 #' d
 #' inherits(d, "try-error")
 #' cat(d)
-#' cat(tryStack(upper("42")))
+#' cat(tryStack(upper("42"), silent=TRUE))
 #' 
 #' stopifnot(tryStack(upper(42))==52)
 #' 
@@ -55,14 +55,25 @@
 #' myfun(42) 
 #' d <- tryStack(myfun(42) ) # or give the complete try call...
 #'
-#' @param expr Expresssion to try, potentially wrapped in curly braces if spanning several commands.
-#' @param silent Logical: Should error message printing be suppressed?
+#' @param expr     Expresssion to try, potentially wrapped in curly braces if 
+#'                 spanning several commands.
+#' @param silent   Logical: Should error message + stack printing be suppressed?
+#'                 DEFAULT: FALSE
+#' @param warn2err Logical: Should warnings be converted to errors?
+#'                 With TRUE, they are also easily traceable. DEFAULT: FALSE
 #'
 tryStack <- function(
 expr,
-silent=FALSE
+silent=FALSE,
+warn2err=FALSE
 )
 {
+# warnings to errors:
+if(warn2err) 
+  {
+  oop <- options(warn=2)
+  on.exit(options(oop))
+  }
 # environment for stack to (potentially) be written into:
 tryenv <- new.env()
 assign("stackmsg", value="-- empty stack --", envir=tryenv)
@@ -76,6 +87,8 @@ out <- try(withCallingHandlers(expr, error=function(e)
   stack <- stack[-(2:7)]
   # remove the current part:
   stack <- head(stack, -2)
+  # remove the warning to error conversion part:
+  if(warn2err) stack <- head(stack, -4)
   # language to character:
   stack <- sapply(stack, deparse)
   # remove element from tryStack being in a function:
@@ -89,7 +102,8 @@ out <- try(withCallingHandlers(expr, error=function(e)
   # add numbers:
   stack <- sapply(seq_along(stack), function(i) paste0(i, ": ", stack[[i]]))
   # add descriptor:
-  stack <- c("tryStack sys.calls() error stack: ", stack)
+  stack <- c("tryStack sys.calls() error stack: ", 
+             paste0("m: ", conditionMessage(e)), rev(stack))
   # put message into main function environment:
   assign("stackmsg", value=paste(stack,collapse="\n"), envir=tryenv)
   # print if not silent:
