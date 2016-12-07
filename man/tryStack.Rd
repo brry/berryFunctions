@@ -4,7 +4,8 @@
 \alias{tryStack}
 \title{try an expression, returning the error stack}
 \usage{
-tryStack(expr, silent = FALSE, tracewarnings = TRUE, file = "")
+tryStack(expr, silent = FALSE, tracewarnings = TRUE, file = "",
+  removetry = TRUE)
 }
 \arguments{
 \item{expr}{Expresssion to try, potentially wrapped in curly braces if 
@@ -23,6 +24,10 @@ if tracewarnings=TRUE and file!="", warnings will not be shown,
 but also appended to the file.
 This is useful in lapply simulation runs.
 DEFAULT: "" (catted to the console)}
+
+\item{removetry}{Logical: should all stack entries matching typical tryCatch
+expressions be removed? Unless the call contains customized
+\code{\link{tryCatch}} code, this can be left to the DEFAULT: TRUE}
 }
 \value{
 Value of \code{expr} if evaluated successfully. If not, an invisible 
@@ -80,7 +85,22 @@ cat(d)                   # They make that empty in the second run, for example.
 
 myfun <- function(k) cat( tryStack(upper("42")) )
 myfun(42) 
-d <- tryStack(myfun(42) ) # or give the complete try call...
+d <- tryStack(myfun(42) ) 
+rm(myfun)
+
+
+myfun1 <- function(k) try(upper(k), silent=TRUE)
+d <- myfun1(42)
+d <- myfun1("42") ; cat(d) # regular try output
+myfun2 <- function(k) tryStack(myfun1(k), tracewarnings=FALSE, silent=TRUE)
+d <- myfun2(42)
+d <- myfun2("42")
+cat(d) # empty stack - because of try, no real error happened
+
+myfun1 <- function(k) tryStack(upper(k), silent=TRUE)
+d <- myfun2("42")
+cat(d)            # same result again! (ToDo: check if d[2] is the culprit)
+ 
 
 }
 \author{

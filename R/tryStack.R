@@ -62,7 +62,22 @@
 #'
 #' myfun <- function(k) cat( tryStack(upper("42")) )
 #' myfun(42) 
-#' d <- tryStack(myfun(42) ) # or give the complete try call...
+#' d <- tryStack(myfun(42) ) 
+#' rm(myfun)
+#' 
+#' 
+#' myfun1 <- function(k) try(upper(k), silent=TRUE)
+#' d <- myfun1(42)
+#' d <- myfun1("42") ; cat(d) # regular try output
+#' myfun2 <- function(k) tryStack(myfun1(k), tracewarnings=FALSE, silent=TRUE)
+#' d <- myfun2(42)
+#' d <- myfun2("42")
+#' cat(d) # empty stack - because of try, no real error happened
+#' 
+#' myfun1 <- function(k) tryStack(upper(k), silent=TRUE)
+#' d <- myfun2("42")
+#' cat(d)            # same result again! (ToDo: check if d[2] is the culprit)
+#'  
 #'
 #' @param expr     Expresssion to try, potentially wrapped in curly braces if 
 #'                 spanning several commands.
@@ -77,12 +92,16 @@
 #'                 but also appended to the file.
 #'                 This is useful in lapply simulation runs.
 #'                 DEFAULT: "" (catted to the console)
+#' @param removetry Logical: should all stack entries matching typical tryCatch
+#'                 expressions be removed? Unless the call contains customized
+#'                 \code{\link{tryCatch}} code, this can be left to the DEFAULT: TRUE 
 #'
 tryStack <- function(
 expr,
 silent=FALSE,
 tracewarnings=TRUE,
-file=""
+file="",
+removetry=TRUE
 )
 {
 # warnings to errors:
@@ -99,17 +118,22 @@ efun <- function(e, iswarning=FALSE)
   {
   # stack of calls, in case of an error:
   stack <- sys.calls()
-  # remove the tryCatch part:
-  stack <- stack[-(2:7)]
-  # remove the current part:
-  stack <- head(stack, -2)
-  # remove the warning to error conversion part:
-  if(iswarning) stack <- head(stack, -6)
+  # remove the warning part:
+  if(iswarning) stack <- head(stack, -8)
   # language to character:
   stack <- sapply(stack, deparse)
   # remove element from tryStack being in a function:
   toremovestring <- "withCallingHandlers(expr, error = efun, warning = wfun)"
-  toremove <- sapply(stack, function(x) any(grepl(toremovestring, x, fixed=TRUE)) )
+  if(removetry) toremovestring <- c(toremovestring, 
+                          "tryCatch(expr, error = function(e) {",
+                          "tryCatchList(expr, classes, parentenv, handlers)",
+                          "tryCatchOne(expr, names, parentenv, handlers[[1L]])",
+                          "doTryCatch(return(expr), name, parentenv, handler)",
+                          ".handleSimpleError(function (e, iswarning = FALSE)",
+                          "h(simpleError(msg, call))",
+                          "try(withCallingHandlers(expr, error = efun, warning = wfun),")
+  toremove <- sapply(stack, function(x) any(grepl(
+               berryFunctions::removeSpace(x[1]), toremovestring, fixed=TRUE)) )
   stack <- stack[!toremove]
   # combine vectors into a single string:
   stack <- lapply(stack, function(x) paste(x, collapse="\n"))
