@@ -71,11 +71,18 @@
 #' @param tracewarnings Logical: Should warnings be traced as well?
 #'                 They will still be printed as regular warnings, 
 #'                 but with trace stack. DEFAULT: TRUE
+#' @param file     File name passed to \code{\link{cat}}. 
+#'                 If given, Errors will be appended to the file after two empty lines. 
+#'                 if tracewarnings=TRUE and file!="", warnings will not be shown, 
+#'                 but also appended to the file.
+#'                 This is useful in lapply simulation runs.
+#'                 DEFAULT: "" (catted to the console)
 #'
 tryStack <- function(
 expr,
 silent=FALSE,
-tracewarnings=TRUE
+tracewarnings=TRUE,
+file=""
 )
 {
 # warnings to errors:
@@ -115,13 +122,18 @@ efun <- function(e, iswarning=FALSE)
   info <- paste0("tryStack sys.calls() ", if(iswarning) "warning" else "error", " stack: ") 
   if(iswarning) info <- c(paste0("in ", errorcode, ": ", conditionMessage(e)), info)
   stack <- c(info, paste0("m: ", conditionMessage(e)), rev(stack))
+  # add empty lines (-> line breaks -> readability), if file is given:
+  if(file!="") stack <- c("","", stack, "")
   # put message into main function environment:
   assign("stackmsg", value=paste(stack,collapse="\n"), envir=tryenv)
   # print if not silent:
-  if(!silent && isTRUE(getOption("show.error.messages")) && !iswarning) 
-    cat(tryenv$stackmsg, sep="\n")
+  shouldprint <- !silent && isTRUE(getOption("show.error.messages"))
+  shouldprint <- shouldprint || file!=""
+  if(shouldprint && !iswarning) 
+    cat(tryenv$stackmsg, file=file, append=TRUE)
   # warn:
-  if(iswarning) warning(tryenv$stackmsg, immediate.=TRUE, call.=FALSE)
+  if(iswarning) if(file!="") cat(tryenv$stackmsg, file=file, append=TRUE) else
+                         warning(tryenv$stackmsg, immediate.=TRUE, call.=FALSE)
   }
 # warning function
 wfun <- function(e) efun(e, iswarning=TRUE)

@@ -4,7 +4,7 @@
 \alias{tryStack}
 \title{try an expression, returning the error stack}
 \usage{
-tryStack(expr, silent = FALSE, tracewarnings = TRUE)
+tryStack(expr, silent = FALSE, tracewarnings = TRUE, file = "")
 }
 \arguments{
 \item{expr}{Expresssion to try, potentially wrapped in curly braces if 
@@ -16,6 +16,13 @@ DEFAULT: FALSE}
 \item{tracewarnings}{Logical: Should warnings be traced as well?
 They will still be printed as regular warnings, 
 but with trace stack. DEFAULT: TRUE}
+
+\item{file}{File name passed to \code{\link{cat}}. 
+If given, Errors will be appended to the file after two empty lines. 
+if tracewarnings=TRUE and file!="", warnings will not be shown, 
+but also appended to the file.
+This is useful in lapply simulation runs.
+DEFAULT: "" (catted to the console)}
 }
 \value{
 Value of \code{expr} if evaluated successfully. If not, an invisible 
