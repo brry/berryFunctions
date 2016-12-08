@@ -58,11 +58,12 @@
 #' d <- f(42)                 ; cat("-----\n", d, "\n-----\n") ; rm(d)
 #' d <- f("42")               ; cat("-----\n", d, "\n-----\n") ; rm(d)
 #' d <- tryStack(f(4) )       ; cat("-----\n", d, "\n-----\n") ; rm(d) 
-#' # long warning stack (normal if within 'f', tryStack is called with tracewarnings=FALSE)
+#' # warnings in nested calls are printed twice, unless tracewarnings=FALSE
+#' d <- tryStack(f(4), tracewarnings=FALSE) # could also be set within 'f'
 #' 
 #' d <- tryStack(f("4"))      ; cat("-----\n", d, "\n-----\n") 
 #' d[1:3] ; rm(d)
-#' # empty stack at begin - because of tryStack, no real error happened within f
+#' # empty stack at begin - because of tryStack in f, no real error happened in f
 #' 
 #' 
 #' # Other tests -----
@@ -106,7 +107,7 @@ file="",
 removetry=TRUE
 )
 {
-# warnings to errors:
+# silence warnings:
 if(tracewarnings)
   {
   oop <- options(warn=-1)
@@ -115,55 +116,89 @@ if(tracewarnings)
 # environment for stack to (potentially) be written into:
 tryenv <- new.env()
 assign("emsg", value="-- empty error stack --", envir=tryenv)
-assign("wmsg", value="-- empty warning stack --", envir=tryenv)
+assign("wmsg", value=c("-- empty warning stack --", "-- warning stack --"), envir=tryenv)
+stringstoremove <- c("tryCatch(expr, error = function(e) {",
+                     "tryCatchList(expr, classes, parentenv, handlers)",
+                     "tryCatchOne(expr, names, parentenv, handlers[[1L]])",
+                     "doTryCatch(return(expr), name, parentenv, handler)",
+                     ".handleSimpleError(function (e)",
+                     "h(simpleError(msg, call))",
+                     "try(withCallingHandlers(expr, error = efun, warning = wfun),")
+
 # error function
-efun <- function(e, iswarning=FALSE)
+efun <- function(e)
   {
   # stack of calls, in case of an error:
   stack <- sys.calls()
-  # remove the warning part:
-  if(iswarning) stack <- head(stack, -8)
   # language to character:
   stack <- sapply(stack, deparse)
-  # remove element from tryStack being in a function:
+  # remove elements from tryStack:
   toremovestring <- "withCallingHandlers(expr, error = efun, warning = wfun)"
-  if(removetry) toremovestring <- c(toremovestring, 
-                          "tryCatch(expr, error = function(e) {",
-                          "tryCatchList(expr, classes, parentenv, handlers)",
-                          "tryCatchOne(expr, names, parentenv, handlers[[1L]])",
-                          "doTryCatch(return(expr), name, parentenv, handler)",
-                          ".handleSimpleError(function (e, iswarning = FALSE)",
-                          "h(simpleError(msg, call))",
-                          "try(withCallingHandlers(expr, error = efun, warning = wfun),")
-  toremove <- sapply(stack, function(x) any(grepl(
-               berryFunctions::removeSpace(x[1]), toremovestring, fixed=TRUE)) )
+  if(removetry) toremovestring <- c(toremovestring, stringstoremove)
+  toremove <- sapply(stack, function(x) any(grepl(removeSpace(x[1]), toremovestring, fixed=TRUE)) )
   stack <- stack[!toremove]
   # combine vectors into a single string:
   stack <- lapply(stack, function(x) paste(x, collapse="\n"))
   # add error code:
-  errorcode <- deparse(conditionCall(e))[1L]
-  stack <- c(stack, errorcode)
+  stack <- c(stack, deparse(conditionCall(e))[1L])
   # add numbers:
   stack <- sapply(seq_along(stack), function(i) paste0(i, ": ", stack[[i]]))
   # add descriptor:
-  info <- paste0("tryStack sys.calls() ", if(iswarning) "warning" else "error", " stack: ") 
-  if(iswarning) info <- c(paste0("in ", errorcode, ": ", conditionMessage(e)), info)
-  stack <- c(info, paste0("m: ", conditionMessage(e)), rev(stack))
+  stack <- c("tryStack sys.calls() error stack: ", 
+             paste0("m: ", conditionMessage(e)), 
+             rev(stack))
   # add empty lines (-> line breaks -> readability), if file is given:
   if(file!="") stack <- c("","", stack, "")
   # put message into main function environment:
-  assign(x=if(iswarning) "wmsg" else "emsg", value=paste(stack,collapse="\n"), envir=tryenv)
+  assign(x="emsg", value=paste(stack,collapse="\n"), envir=tryenv)
   # print if not silent:
   shouldprint <- !silent && isTRUE(getOption("show.error.messages"))
-  shouldprint <- shouldprint || file!=""
-  if(shouldprint && !iswarning) cat(tryenv$emsg, file=file, append=TRUE)
-  # warn:
-  if(iswarning) if(file!="") cat(tryenv$wmsg, file=file, append=TRUE) else
-                         warning(tryenv$wmsg, immediate.=TRUE, call.=FALSE)
+  if(shouldprint || file!="") cat(tryenv$emsg, file=file, append=TRUE)
   }
+
 # warning function
-wfun <- function(e) efun(e, iswarning=TRUE)
-if(!tracewarnings) wfun <- function(e){}
+wfun <- function(e)
+  {
+  if(!tracewarnings) return()
+  # stack of calls, in case of a warning:
+  stack <- sys.calls()
+  # remove the warning part:
+  stack <- head(stack, -7)
+  # language to character:
+  stack <- sapply(stack, deparse)
+  # remove recursive warning part:
+  irecwarn <- grep(".signalSimpleWarning(", stack, fixed=TRUE)
+  if(length(irecwarn)>0) if(stack[irecwarn+2] == "withOneRestart(expr, restarts[[1L]])")
+      stack <- stack[-(irecwarn+0:2)]
+  stack <- stack[stack!="doWithOneRestart(return(expr), restart)"]
+  # remove elements from tryStack:
+  toremovestring <- "withCallingHandlers(expr, error = efun, warning = wfun)"
+  if(removetry) toremovestring <- c(toremovestring, stringstoremove)
+  toremove <- sapply(stack, function(x) any(grepl(removeSpace(x[1]), toremovestring, fixed=TRUE)) )
+  stack <- stack[!toremove]
+  # combine vectors into a single string:
+  stack <- lapply(stack, function(x) paste(x, collapse="\n"))
+  # add warning code:
+  ccall <- deparse(conditionCall(e))[1L]
+  stack <- c(stack, ccall)
+  # add numbers:
+  stack <- sapply(seq_along(stack), function(i) paste0(i, ": ", stack[[i]]))
+  # add descriptor:
+  cmes <- conditionMessage(e)
+  # catch nested (recursive) calling:
+  wmes <- "tryStack sys.calls() warning stack: "
+  cmes <- strsplit(cmes, paste0("\n",wmes), fixed=TRUE)[[1]][1]
+  info <- c(paste0("in ", ccall, ": ", cmes), wmes)
+  stack <- c(info, paste0("m: ", cmes), rev(stack))
+  # add empty lines (-> line breaks -> readability), if file is given:
+  if(file!="") stack <- c("","", stack, "")
+  # put message into main function environment:
+  assign(x="wmsg", value=paste(stack,collapse="\n"), envir=tryenv)
+  # warn:
+  if(file!="") cat(tryenv$wmsg, file=file, append=TRUE)       else
+           warning(tryenv$wmsg, immediate.=TRUE, call.=FALSE)
+  }
+
 # now try the expression:
 out <- try(withCallingHandlers(expr, error=efun, warning=wfun), silent=silent)
 # add the trace stack character string to the output:

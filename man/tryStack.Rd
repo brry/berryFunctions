@@ -81,11 +81,12 @@ f <- function(k) tryStack(upper(k), silent=TRUE)
 d <- f(42)                 ; cat("-----\\n", d, "\\n-----\\n") ; rm(d)
 d <- f("42")               ; cat("-----\\n", d, "\\n-----\\n") ; rm(d)
 d <- tryStack(f(4) )       ; cat("-----\\n", d, "\\n-----\\n") ; rm(d) 
-# long warning stack (normal if within 'f', tryStack is called with tracewarnings=FALSE)
+# warnings in nested calls are printed twice, unless tracewarnings=FALSE
+d <- tryStack(f(4), tracewarnings=FALSE) # could also be set within 'f'
 
 d <- tryStack(f("4"))      ; cat("-----\\n", d, "\\n-----\\n") 
 d[1:3] ; rm(d)
-# empty stack at begin - because of tryStack, no real error happened within f
+# empty stack at begin - because of tryStack in f, no real error happened in f
 
 
 # Other tests -----
