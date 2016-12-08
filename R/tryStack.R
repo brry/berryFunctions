@@ -1,12 +1,14 @@
 #' try an expression, returning the error stack
 #'
 #' As in \code{\link{try}}, the result of an expression if it works.
-#' If it fails, no error is thrown, but an invisible try-error class object is 
-#' returned and a message \code{\link{cat}ted} to the console. Suppress the latter with silent=TRUE\cr
-#' Unlike \code{\link{try}}, \code{tryStack} also returns the calling stack to ease debugging.
+#' If it fails, execution is not halted, but an invisible try-error class object is 
+#' returned and (unless silent=TRUE) a message \code{\link{cat}ted} to the console.\cr
+#' Unlike \code{\link{try}}, \code{tryStack} also returns the calling stack to 
+#' trace errors and warnings and ease debugging.
 #'
 #' @return Value of \code{expr} if evaluated successfully. If not, an invisible 
 #' object of class "try-error" as in \code{\link{try}} with the stack in \code{object[2]}.
+#' For nested tryStack calls, \code{object[3], object[4]} etc. will contain "-- empty error stack --"
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Nov 2016
 #' @seealso \code{\link{try}}, \code{\link{traceCall}},
 #' \url{http://r.789695.n4.nabble.com/Stack-trace-td4021537.html},
@@ -18,6 +20,8 @@
 #' @export
 #' @examples
 #' 
+#' # Functions -----
+#'
 #' lower <- function(a) a+10
 #' middle <- function(b) {plot(b, main=b) ; warning("fake warning, b = ", b); lower(b) }
 #' upper <- function(c) {cat("printing c:", c, "\n") ; middle(c)}
@@ -25,21 +29,21 @@
 #' d
 #' rm(d)
 #' 
+#' # Classical error management -----
+#' 
 #' \dontrun{ ## intentional error
 #' d <- upper("42")                # error, no d creation 
 #' traceback()                     # calling stack, but only in interactive mode
 #' }
 #' 
-#' 
 #' d <- try(upper("42"), silent=TRUE)      # d created
-#' cat(d)                                  # has error message, but no traceback
+#' cat(d)                                  # with error message, but no traceback
 #' inherits(d, "try-error")                # use for coding
 #' 
+#' # tryStack -----
 #' 
 #' d <- tryStack(upper("42"), silent=TRUE) # like try, but with traceback, even for warnings
 #' cat(d)
-#' cat(tryStack(upper("42"), silent=TRUE)) # level 1 different, but correct
-#' 
 #' d <- tryStack(upper("42"), silent=TRUE, tracewarnings=FALSE) # don't touch warnings
 #' 
 #' tryStack(upper(42)) # returns normal output, but warnings are easier to debug
@@ -48,36 +52,34 @@
 #' stopifnot(tryStack(upper(42))==52)
 #' 
 #' 
-#' myfun <- function(k) tryStack(upper(k), silent=TRUE)
-#' d <- myfun(42)
-#' cat(d)
-#' d <- myfun("42")
-#' cat(d)
-#'  
-#' myfun <- function(k) tryStack(stop("oh oh"))
-#' d <- myfun(42)
+#' # Nested calls -----
 #' 
-#' d <- tryStack(myfun(4) ) # nested calls get weird
-#' cat(d)                   # They make that empty in the second run, for example.
-#'
-#' myfun <- function(k) cat( tryStack(upper("42")) )
-#' myfun(42) 
-#' d <- tryStack(myfun(42) ) 
-#' rm(myfun)
+#' f <- function(k) tryStack(upper(k), silent=TRUE)
+#' d <- f(42)                 ; cat("-----\n", d, "\n-----\n") ; rm(d)
+#' d <- f("42")               ; cat("-----\n", d, "\n-----\n") ; rm(d)
+#' d <- tryStack(f(4) )       ; cat("-----\n", d, "\n-----\n") ; rm(d) 
+#' # long warning stack (normal if within 'f', tryStack is called with tracewarnings=FALSE)
+#' 
+#' d <- tryStack(f("4"))      ; cat("-----\n", d, "\n-----\n") 
+#' d[1:3] ; rm(d)
+#' # empty stack at begin - because of tryStack, no real error happened within f
 #' 
 #' 
-#' myfun1 <- function(k) try(upper(k), silent=TRUE)
-#' d <- myfun1(42)
-#' d <- myfun1("42") ; cat(d) # regular try output
-#' myfun2 <- function(k) tryStack(myfun1(k), tracewarnings=FALSE, silent=TRUE)
-#' d <- myfun2(42)
-#' d <- myfun2("42")
-#' cat(d) # empty stack - because of try, no real error happened
+#' # Other tests -----
 #' 
-#' myfun1 <- function(k) tryStack(upper(k), silent=TRUE)
-#' d <- myfun2("42")
-#' cat(d)            # same result again! (ToDo: check if d[2] is the culprit)
-#'  
+#' cat( tryStack(upper("42")) )
+#' f <- function(k) tryStack(stop("oh oh"))
+#' d <- f(42) ; cat("-----\n", d, "\n-----\n") ; rm(d) # level 4 not helpful, but OK
+#' 
+#' f <- function(k) try(upper(k), silent=TRUE)
+#' d <- f(42)     ; cat("-----\n", d, "\n-----\n") ; rm(d)
+#' d <- f("42")   ; cat("-----\n", d, "\n-----\n") ; rm(d) # regular try output
+#' 
+#' f2 <- function(k) tryStack(f(k), tracewarnings=FALSE, silent=TRUE)
+#' d <- f2(42)    ; cat("-----\n", d, "\n-----\n") ; rm(d)
+#' d <- f2("42")  ; cat("-----\n", d, "\n-----\n") ; rm(d) # try -> no error. 
+#' # -> Use tryCatch and you can nest those calls. note that d gets longer.
+#' 
 #'
 #' @param expr     Expresssion to try, potentially wrapped in curly braces if 
 #'                 spanning several commands.
@@ -112,7 +114,8 @@ if(tracewarnings)
   }
 # environment for stack to (potentially) be written into:
 tryenv <- new.env()
-assign("stackmsg", value="-- empty stack --", envir=tryenv)
+assign("emsg", value="-- empty error stack --", envir=tryenv)
+assign("wmsg", value="-- empty warning stack --", envir=tryenv)
 # error function
 efun <- function(e, iswarning=FALSE)
   {
@@ -149,15 +152,14 @@ efun <- function(e, iswarning=FALSE)
   # add empty lines (-> line breaks -> readability), if file is given:
   if(file!="") stack <- c("","", stack, "")
   # put message into main function environment:
-  assign("stackmsg", value=paste(stack,collapse="\n"), envir=tryenv)
+  assign(x=if(iswarning) "wmsg" else "emsg", value=paste(stack,collapse="\n"), envir=tryenv)
   # print if not silent:
   shouldprint <- !silent && isTRUE(getOption("show.error.messages"))
   shouldprint <- shouldprint || file!=""
-  if(shouldprint && !iswarning) 
-    cat(tryenv$stackmsg, file=file, append=TRUE)
+  if(shouldprint && !iswarning) cat(tryenv$emsg, file=file, append=TRUE)
   # warn:
-  if(iswarning) if(file!="") cat(tryenv$stackmsg, file=file, append=TRUE) else
-                         warning(tryenv$stackmsg, immediate.=TRUE, call.=FALSE)
+  if(iswarning) if(file!="") cat(tryenv$wmsg, file=file, append=TRUE) else
+                         warning(tryenv$wmsg, immediate.=TRUE, call.=FALSE)
   }
 # warning function
 wfun <- function(e) efun(e, iswarning=TRUE)
@@ -165,7 +167,7 @@ if(!tracewarnings) wfun <- function(e){}
 # now try the expression:
 out <- try(withCallingHandlers(expr, error=efun, warning=wfun), silent=silent)
 # add the trace stack character string to the output:
-if(inherits(out, "try-error")) out[2] <- tryenv$stackmsg
+if(inherits(out, "try-error")) out[length(out)+1] <- tryenv$emsg
 # Done! return the output:
 out
 }
