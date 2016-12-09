@@ -4,24 +4,30 @@
 \alias{funSource}
 \title{Source code of a function}
 \usage{
-funSource(x, character.only = FALSE)
+funSource(x, character.only = FALSE, trydirect = TRUE)
 }
 \arguments{
 \item{x}{function name, with or without quotation marks}
 
-\item{character.only}{If TRUE, look for SomeFun instead of MyFun if  MyFun <- "SomeFun". DEFAULT: FALSE}
+\item{character.only}{If TRUE, look for SomeFun instead of MyFun if
+MyFun <- "SomeFun". DEFAULT: FALSE}
+
+\item{trydirect}{If TRUE, try direct url to file \code{x.R}. DEFAULT: TRUE}
 }
 \value{
 link that is also opened
 }
 \description{
-open github.com/cran source code of a function in a package
+open source code of a function in a loaded package on github.com/cran or github.com/wch/r-source
 }
 \note{
 This is not finished yet...
 }
 \examples{
-# ToDo: add message: "function also found in: " 
+library("berryFunctions")
+funSource(colPoints) 
+funSource("head") 
+funSource("require", trydirect=FALSE) 
 
 }
 \author{
