@@ -1,33 +1,64 @@
 
-berryFunctions ToDo-list / wishlist / issues
-- exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) ) 
-- lsc: better example dataset, optim problems
-- textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
-- implement is.error and getColumn (eg spiralDate) wherever applicable
-- late 2016: delete randomPoints, triangleArea, cie, cls, pastec, pointZoom and createDoc from package
-- delete dataDWD and readDWD
-- reference to sortDF in addRow, insertRow, etc
-- implement identical(FALSE, legargs) wherever owa is used and that makes sense
-- colPoints: zlog=TRUE, correct colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, Range=c(150,190), density=T)
-- smallPlot: mtext afterwards not working (maybe because of outer=TRUE). see Tests.R
-- colPointsLegend: improve text placement position for large/small legend fields
-- monthAxis: ym=NA (set automatically depending on axis time length)
-- monthAxis: ypos=6 (with vector option) for ts ending before (or starting after) june/july
-- linReg: col, colline, colband
-- combineFiles: path expansion (see rdwd::fileDWD), remove dir arguments
-
 ---------------------------------------
+berryFunctions
 miscellaneous package by Berry Boessenkool, berry-b@gmx.de
 Any feedback is welcome, per email or on github.com/brry/berryFunctions
 ---------------------------------------
+content: 
+issues
+ToDo-list
+wishlist
+actual NEWS
+
+---------------------------------------
+issues (important to fix)
+---------------------------------------
+- smallPlot: mtext afterwards not working (maybe because of outer=TRUE / mar=0000). see Tests.R
+- after rdwd is on CRAN: delete dataDWD and readDWD
+
+---------------------------------------
+ToDo-list (take care of in the near future)
+---------------------------------------
+- textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
+- implement is.error and getColumn (eg spiralDate) wherever applicable
+- reference to sortDF in addRow, insertRow, etc
+- colPointsLegend: improve text placement position for large/small legend fields
+- contemplate moving tryStack and traceCall to own package, maybe "trace"
+- combineFiles: path expansion (see rdwd::fileDWD), remove dir arguments
+
+---------------------------------------
+wishlist (implement if bored, in order of usefulnes)
+---------------------------------------
+- colPoints: zlog=TRUE, correct colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, Range=c(150,190), density=T)
+- monthAxis: ym=NA (set automatically depending on axis time length)
+- monthAxis: ypos=6 (with vector option) for ts ending before (or starting after) june/july
+- linReg: col, colline, colband
+- lsc: better example dataset, optim problems
+- implement identical(FALSE, legargs) wherever owa is used and that makes sense
+- exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) ) 
+- climateGraph documentation Roxygen issue (escaping unicode)
 
 
-Version 1.. (2016--)
+
+---------------------------------------
+actual NEWS
+---------------------------------------
+
+
+Version 1.13.0 (2016-12-09)
+- numerous smaller commits on https://github.com/brry/berryFunctions/commits/master
 - seasonality has been greatly expanded and generalized
 - smallPlot gains the argument 'outer', margins are now given in lines
 - smallPlot locations checked with useful error messages
 - owa example usage clarified, now yields a message if arguments are ignored
+- dataDWD and readDWD moved to new package rdwd, functionality there greatly expanded
+- getColumn and checkFile gained more useful warning/error messages
+- licence expanded
+- tableColVal massively simplified and improved
+- funSource searches target repos on github
 
+New functions: around, convertUmlaut, truncMessage, tryStack, l2array
+Removed: randomPoints, triangleArea, cie, cls, pastec, pointZoom, createDoc
 
 -----------------------------
 -----------------------------

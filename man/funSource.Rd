@@ -21,6 +21,7 @@ links that are also opened with \code{\link{browseURL}}
 open source code of a function in a loaded or specified package on github.com/cran or github.com/wch/r-source
 }
 \examples{
+\dontrun{ ## browser windows should not be openend in CRAN checks
 library("berryFunctions")
 funSource(colPoints) 
 funSource("head") 
@@ -29,6 +30,7 @@ funSource("require", trydirect=FALSE)
 funSource(earthDist) 
 funSource(OSMscale::earthDist) 
 funSource("OSMscale::earthDist") 
+}
 
 \dontrun{ # developmental testing
 require(plotrix); require(scales)

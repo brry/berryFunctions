@@ -7,6 +7,7 @@
 #' @importFrom utils browseURL find
 #' @export
 #' @examples
+#' \dontrun{ ## browser windows should not be openend in CRAN checks
 #' library("berryFunctions")
 #' funSource(colPoints) 
 #' funSource("head") 
@@ -15,6 +16,7 @@
 #' funSource(earthDist) 
 #' funSource(OSMscale::earthDist) 
 #' funSource("OSMscale::earthDist") 
+#' }
 #' 
 #' \dontrun{ # developmental testing
 #' require(plotrix); require(scales)

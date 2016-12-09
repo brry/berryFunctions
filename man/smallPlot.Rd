@@ -141,8 +141,9 @@ smallPlot(plot(1:10), mar=c(1,3,1,0), x1=0,x2=0.2, y1=0.2,y2=0.8, bg=4, outer=TR
 dev.off()
 plot(1:10)
 mtext("hello", adj=1, col=2)
-smallPlot(plot(2))
-mtext("hello", adj=1) # not working
+smallPlot(plot(2), y1=0.5, y2=0.8)
+mtext("hello", adj=1) # not working     ### figure out why not! 
+                                        ### relates to 'bug' in seasonality, I think
 mtext("hello", adj=1, line=-1) # works
 plot(1:10)
 mtext("hello", adj=1, col=2)

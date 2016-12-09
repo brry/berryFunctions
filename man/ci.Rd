@@ -51,7 +51,7 @@ For newbies: Charles Wheelan: naked statistics - stripping the dread from the da
   \url{http://www.jstor.org/stable/2983411}
 }
 \seealso{
-\code{\link{t.test}} , \code{\link{cie}}
+\code{\link{t.test}}
 }
 \keyword{htest}
 

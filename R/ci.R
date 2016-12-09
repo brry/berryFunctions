@@ -10,7 +10,7 @@
 #' 
 #' @return A dataframe with the lower and upper confidence interval, as well as the level used.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2010
-#' @seealso \code{\link{t.test}} , \code{\link{cie}}
+#' @seealso \code{\link{t.test}}
 #' @references For newbies: Charles Wheelan: naked statistics - stripping the dread from the data, 2013, Norton, ISBN 978-0-393-07195-5.\cr 
 #'   For statisticians: any of your favorite statistics books should cover confidence intervalls ;-)\cr 
 #'   \url{http://en.wikipedia.org/wiki/Confidence_interval}\cr
