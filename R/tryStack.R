@@ -51,6 +51,11 @@
 #' stopifnot(inherits(d, "try-error"))
 #' stopifnot(tryStack(upper(42))==52)
 #' 
+#' \dontrun{ ## file writing not wanted by CRAN checks
+#' d <- tryStack(upper("42"), silent=TRUE, file="log.txt")
+#' system2("open", "log.txt")
+#' unlink("log.txt")
+#' }
 #' 
 #' # Nested calls -----
 #' 
@@ -137,18 +142,23 @@ efun <- function(e)
   if(removetry) toremovestring <- c(toremovestring, stringstoremove)
   toremove <- sapply(stack, function(x) any(grepl(removeSpace(x[1]), toremovestring, fixed=TRUE)) )
   stack <- stack[!toremove]
+  toremove2 <- sapply(stack, function(x) substr(x[1],1,9)=="tryCatch(") # this one may remove too much
+  if(removetry) stack <- stack[!toremove2]
   # combine vectors into a single string:
   stack <- lapply(stack, function(x) paste(x, collapse="\n"))
   # add error code:
-  stack <- c(stack, deparse(conditionCall(e))[1L])
+  ccall <- deparse(conditionCall(e))[1L]
+  stack <- c(stack, ccall)
   # add numbers:
   stack <- sapply(seq_along(stack), function(i) paste0(i, ": ", stack[[i]]))
   # add descriptor:
-  stack <- c("tryStack sys.calls() error stack: ", 
-             paste0("m: ", conditionMessage(e)), 
+  cmes <- conditionMessage(e)
+  stack <- c(if(file!="") paste0("Error in ", ccall,": ", cmes),
+             "tryStack sys.calls() error stack: ", 
+             paste0("m: ", cmes), 
              rev(stack))
   # add empty lines (-> line breaks -> readability), if file is given:
-  if(file!="") stack <- c("","", stack, "")
+  if(file!="") stack <- c("---------------",as.character(Sys.time()),"",stack,"","")
   # put message into main function environment:
   assign(x="emsg", value=paste(stack,collapse="\n"), envir=tryenv)
   # print if not silent:
@@ -176,6 +186,8 @@ wfun <- function(e)
   if(removetry) toremovestring <- c(toremovestring, stringstoremove)
   toremove <- sapply(stack, function(x) any(grepl(removeSpace(x[1]), toremovestring, fixed=TRUE)) )
   stack <- stack[!toremove]
+  toremove2 <- sapply(stack, function(x) substr(x[1],1,9)=="tryCatch(") # this one may remove too much
+  if(removetry) stack <- stack[!toremove2]
   # combine vectors into a single string:
   stack <- lapply(stack, function(x) paste(x, collapse="\n"))
   # add warning code:
@@ -188,10 +200,10 @@ wfun <- function(e)
   # catch nested (recursive) calling:
   wmes <- "tryStack sys.calls() warning stack: "
   cmes <- strsplit(cmes, paste0("\n",wmes), fixed=TRUE)[[1]][1]
-  info <- c(paste0("in ", ccall, ": ", cmes), wmes)
+  info <- c(paste0(if(file!="") "warning ", "in ", ccall, ": ", cmes), wmes)
   stack <- c(info, paste0("m: ", cmes), rev(stack))
   # add empty lines (-> line breaks -> readability), if file is given:
-  if(file!="") stack <- c("","", stack, "")
+  if(file!="") stack <- c("---------------",as.character(Sys.time()),"",stack,"","")
   # put message into main function environment:
   assign(x="wmsg", value=paste(stack,collapse="\n"), envir=tryenv)
   # warn:

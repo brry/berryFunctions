@@ -74,6 +74,11 @@ tryStack(upper(42)) # returns normal output, but warnings are easier to debug
 stopifnot(inherits(d, "try-error"))
 stopifnot(tryStack(upper(42))==52)
 
+\dontrun{ ## file writing not wanted by CRAN checks
+d <- tryStack(upper("42"), silent=TRUE, file="log.txt")
+system2("open", "log.txt")
+unlink("log.txt")
+}
 
 # Nested calls -----
 
