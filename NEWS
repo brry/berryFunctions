@@ -45,7 +45,7 @@ actual NEWS
 ---------------------------------------
 
 
-Version 1.13.0 (2016-12-09)
+Version 1.13.0 (2016-12-10)
 - numerous smaller commits on https://github.com/brry/berryFunctions/commits/master
 - seasonality has been greatly expanded and generalized
 - smallPlot gains the argument 'outer', margins are now given in lines
@@ -59,6 +59,7 @@ Version 1.13.0 (2016-12-09)
 
 New functions: around, convertUmlaut, truncMessage, tryStack, l2array
 Removed: randomPoints, triangleArea, cie, cls, pastec, pointZoom, createDoc
+
 
 -----------------------------
 -----------------------------
