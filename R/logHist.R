@@ -21,6 +21,7 @@
 #' @param main Title of graph, internally from x. DEFAULT: internal name representation
 #' @param xlab X axis label. DEFAULT: internal: name of x
 #' @param col Color of histogram bars
+#' @param add Logical: add to existing plot?
 #' @param \dots further arguments passed to \code{\link{hist}} like breaks, freq, xlim=c(-1,3), ..., but not xaxt or add.
 #' 
 logHist <- function(
@@ -29,6 +30,7 @@ logargs=NULL,
 main=xmain,
 xlab=xname,
 col="tan",
+add=FALSE,
 ...)
 {
 xname <- deparse(substitute(x))
@@ -41,7 +43,7 @@ if(neg>0)
   x <- x[x>0]
   }
 xmain <- paste0("Histogram of log10(",xname,")")
-hist(x=log10(x), ..., main=main, xlab=xlab, xaxt="n")
+hist(x=log10(x), ..., add=add, main=main, xlab=xlab, xaxt="n")
 do.call(logAxis, owa(list(), logargs))
 hist(x=log10(x), col=col, ..., add=TRUE)
 }

@@ -4,7 +4,8 @@
 \alias{logHist}
 \title{Histogram of logarithmic values}
 \usage{
-logHist(x, logargs = NULL, main = xmain, xlab = xname, col = "tan", ...)
+logHist(x, logargs = NULL, main = xmain, xlab = xname, col = "tan",
+  add = FALSE, ...)
 }
 \arguments{
 \item{x}{Vector of numerical values}
@@ -16,6 +17,8 @@ logHist(x, logargs = NULL, main = xmain, xlab = xname, col = "tan", ...)
 \item{xlab}{X axis label. DEFAULT: internal: name of x}
 
 \item{col}{Color of histogram bars}
+
+\item{add}{Logical: add to existing plot?}
 
 \item{\dots}{further arguments passed to \code{\link{hist}} like breaks, freq, xlim=c(-1,3), ..., but not xaxt or add.}
 }
