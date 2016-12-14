@@ -47,7 +47,11 @@ n=length(x),
 )
 {
 # Input controls
-if(all(is.na(x))) stop("There are no non-NA values in x.")
+if(all(is.na(x))) 
+  {
+  warning("There are no non-NA values in x.")
+  return(rep(NA,n))
+  }
 L <- length(x)
 # Fill leading NAs (with the first available value):
 if(is.na(x[1])) x[1] <- if(is.null(fill)) head(x[!is.na(x)],1) else fill(x, na.rm=TRUE)
