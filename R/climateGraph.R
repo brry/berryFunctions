@@ -13,7 +13,7 @@
 #' \url{http://www.zivatar.hu/felhotar/albums/userpics/wldp.png}
 #' @keywords hplot
 #' @importFrom grDevices rgb
-#' @importFrom graphics abline axis box layout lines mtext par plot text
+#' @importFrom graphics axis box layout lines mtext par plot text
 #' @importFrom stats coef lm
 #' @export
 #' @examples
@@ -29,11 +29,16 @@
 #' # fill color for arid without transparency:
 #' climateGraph(temp, rain, argarid=list(col="gold")) 
 #' # for the Americans ;-) (axes should be different, though!):
-#' climateGraph(temp, rain, units=c("\U00B0 F","in")) 
+#' climateGraph(temp, rain, units=c("\U{00B0}F","in")) 
 #' 
-#' rain <- c(23, 11, 4, 2, 10, 53, 40, 15, 21, 25, 29, 22)
+#' rain2 <- c(23, 11, 4, 2, 10, 53, 40, 15, 21, 25, 29, 22)
 #' # fix ylim if you want to compare diagrams of different stations:
-#' climateGraph(temp, rain, ylim=c(-15, 50)) # works with two arid phases as well
+#' climateGraph(temp, rain2, ylim=c(-15, 50)) # works with two arid phases as well
+#' 
+#' op <- par(mfrow=c(2,1)) # mulipanel plot
+#' climateGraph(temp, rain, argtext=list(cex=0.7))
+#' climateGraph(temp, rain2, argtext=list(cex=0.7))
+#' par(op)
 #' 
 #' rain <- c(54, 23, 5, 2, 5, 70, 181, 345, 265, 145, 105, 80) # with extrema
 #' climateGraph(temp, rain) # August can be visually compared to June
@@ -121,41 +126,45 @@
 #' 
 #' @param temp monthly temperature mean in degrees C
 #' @param rain monthly rain sum in mm (12 values)
-#' @param main location info as character string. can have \\n. DEFAULT: "StatName\\n52d 24' N / 12d 58' E\\n42 m aSL"
+#' @param main location info as character string. can have \\n. 
+#'            DEFAULT: "StatName\\n52d 24' N / 12d 58' E\\n42 m aSL"
 #' @param units units used for labelling. DEFAULT: c("d C", "mm")
 #' @param labs labels for x axis. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
-#' @param textprop proportion of graphic that is used for writing the values in a table to the right. DEFAULT: 0.2
+#' @param textprop proportion of graphic that is used for writing the values 
+#'                 in a table to the right. DEFAULT: 0.2
 #' @param ylim limit for y axis in temp units. DEFAULT: range(temp, rain/2)
-#' @param compress should rain>100 mm be compressed with adjusted labelling? (not recommended for casual visualization!). DEFAULT: FALSE
-#' @param ticks positions for vertical labelling and line drawing. DEFAULT: -5:20*10
-#' @param mar plot margins. DEFAULT: c(1.5,2.3,4.5,2.3)
+#' @param compress should rain>100 mm be compressed with adjusted labelling? 
+#'                 (not recommended for casual visualization!). DEFAULT: FALSE
+#' @param ticklab positions for vertical labelling. DEFAULT: -8:30*10
+#' @param ticklin positions for horizontal line drawing. DEFAULT: -15:60*5
 #' @param box draw box along outer margins of graph? DEFAULT: TRUE
-#' @param keeplayout Keep the layout and parameters changed with par? DEFAULT: FALSE
-#' @param graylines plot horizontal gray lines at every 10 degrees and vertically for each month?. DEFAULT: TRUE
-#' @param lty line type of gray lines, see \code{\link{par}}. DEFAULT: 1
+#' @param mar plot margins. DEFAULT: c(1.5,2.3,4.5,2.3)
+#' @param keeppar Keep the changed graphical parameters? DEFAULT: TRUE
 #' @param colrain Color for rain line and axis labels. DEFAULT: "blue"
 #' @param coltemp color for temperature line and axis labels. DEFAULT: "red"
 #' @param lwd line width of actual temp and rain lines. DEFAULT: 2
-#' @param arghumi Arguments for humid \code{\link{polygon}}, like density, angle. DEFAULT: NULL (internal x,y, col, border)
-#' @param argarid Arguments for arid area. DEFAULT: NULL
-#' @param argcomp Arguments for compressed rainfall polygon. DEFAULT: NULL
+#' @param arghumi List of arguments for humid \code{\link{polygon}}, 
+#'                like density, angle. DEFAULT: NULL (internal x,y, col, border)
+#' @param argarid List of arguments for arid area. DEFAULT: NULL
+#' @param argcomp List of arguments for compressed rainfall polygon. DEFAULT: NULL
+#' @param arggrid List of arguments for bachground grid lines. DEFAULT: NULL
+#' @param argtext List of arguments for text at right hand if textprop>0. DEFAULT: NULL
 #' @param \dots further arguments passed to plot, like col.main
 #' 
 climateGraph <- function(
      temp, 
      rain, 
-     main="StatName\n52\U00B0 24' N / 12\U00B0 58' E\n42 m aSL",
-     units=c("\U00B0 C", "mm"), 
+     main="StatName\n52\U{00B0}24' N / 12\U{00B0}58' E\n42 m aSL",
+     units=c("\U{00B0}C", "mm"), 
      labs=substr(month.abb,1,1),
-     textprop=0.2,
+     textprop=0.25,
      ylim=range(temp, rain/2), 
      compress=FALSE, 
-     ticks=-5:20*10,
-     mar=c(1.5,2.3,4.5,2.3), 
-     box=TRUE, 
-     keeplayout=FALSE, 
-     graylines=TRUE, 
-     lty=1, 
+     ticklab= -8:30*10,
+     ticklin=-15:60*5,
+     box=TRUE,
+     mar=c(1.5,2.3,4.5,0.2), 
+     keeppar=TRUE,
      colrain="blue", 
      coltemp="red", 
      lwd=2, 
@@ -163,24 +172,16 @@ climateGraph <- function(
      arghumi=NULL, 
      argarid=NULL, 
      argcomp=NULL, 
+     arggrid=NULL,
+     argtext=NULL,
      ... 
      )
 {
 # function start ---------------------------------------------
 # input checking:
 if(length(temp)!=12 | length(rain)!=12) stop("temp and rain each need to have 12 elements.")
+if(textprop>0.99) stop("textprop (",textprop,") is too large, must be <0.99")
 # prepare plot, write table of values at the right:
-if(textprop > 0)
-  {
-  layout(matrix(2:1, ncol=2), widths=c(1-textprop, textprop))
-  op <- par(mar=rep(0,4))
-  plot(1:9, type="n", ann=FALSE, axes=FALSE)
-  text(2.8, 5, paste(c(" m \n", "----", labs), collapse="\n"), adj=1 )
-  text(5.8, 5, paste(c(" T ",units[1], "----", sprintf("%4.1f", round(temp,1))), collapse="\n"), adj=1 )
-  text(8.8, 5, paste(c(" P ",units[2], "----", sprintf("%4.0f", round(rain)  )), collapse="\n"), adj=1 )
-  if(box) box()
-  par(op)
-  }
 rainsum <- sum(rain) # must be calculated before compression
 if(compress)
   {
@@ -190,12 +191,23 @@ if(compress)
   if(missing(ylim)) ylim <- range(temp, rain/2)
   }
 # set margins around plot, avoid empty space along x-axis
-op <- par(mar=mar, mgp=c(3,0.8,0), xaxs="i") 
+op <- par(mar=mar, mgp=c(3,0.8,0) ) 
+if(!keeppar) on.exit(par(op))
+xlim <- xlim2 <- c(0.6, 12.4)
+if(textprop > 0) xlim2[2] <- diff(xlim2)/(1-textprop)+xlim2[1]
 # Empty plot:
-plot(1, type="n", xlim=c(0.6, 12.4), ylim=ylim, main=main, xaxt="n", yaxt="n", ylab="", xlab="", ...)
+plot(1, type="n", xlim=xlim2, ylim=ylim, xaxs="i", axes=FALSE, ann=FALSE, ...)
+mtext(main, side=3, at=6.5, line=1, cex=1.2, font=2)
 # background lines:
-if(graylines)  abline(h=ticks, v=1:11+0.5, col=8, lty=lty) # h=pretty(ylim)
-abline(h=0)
+for(t in ticklin) do.call(lines, owa(list(x=xlim, y=rep(t,2), col=8), arggrid) )
+lines(xlim, c(0,0))
+do.call(abline, owa(list(v=1:11+0.5, col=8), arggrid) )
+if(box) 
+  { 
+  lines(xlim, rep(par("usr")[3],2))
+  lines(xlim, rep(par("usr")[4],2)) 
+  lines(rep(xlim[2],2), c(-100,500))
+  }
 
 # determine arid and humid times: ---------------------------------------------------
 # determine interception months: (each before the actual interception):
@@ -264,20 +276,24 @@ do.call(polygon, args=owa(d=argcomp_def, a=argcomp, "x","y")  )
 lines(temp, col=coltemp, type="l", lwd=lwd)
 # plot rain line:
 lines(rain/2, col=colrain, type="l", lwd=lwd)
+# text block:
+if(textprop > 0)
+  {
+  xpos <- xlim[2] + (xlim2[2]-xlim[2])/4*2:4-0.3
+  ypos <- rep(mean(ylim),3)
+  column1 <- paste(c(" m \n", "----", labs), collapse="\n")
+  column2 <- paste(c(" T ",units[1], "----", sprintf("%4.1f", round(temp,1))), collapse="\n")
+  column3 <- paste(c(" P ",units[2], "----", sprintf("%4.0f", round(rain)  )), collapse="\n")
+  argtextdef <- list(x=xpos, y=ypos, labels=c(column1,column2,column3), adj=1, xpd=TRUE)
+  do.call(text, owa(argtextdef, argtext, "x","y","labels"))
+  }
 # labelling:
-mtext(paste("\U00D8", round(mean(temp),1), units[1]),         side=3, col=coltemp, line=-2.0, adj=0.02, outer=T)
-mtext(bquote(sum()* " "*.(round(rainsum,1))*" "*.(units[2])), side=3, col=colrain, line=-2.2, adj=1.08, outer=T, at=par("fig")[2])
-if(compress) ticks <- ticks[ticks<=50]
-axis(side=2, at=ticks, col.axis=coltemp, las=1)
-axis(side=4, at=ticks[ticks>=0], ticks[ticks>=0]*2, col.axis=colrain, las=1)
+mtext( paste("\U00D8", round(mean(temp),1), units[1]),        side=3, col=coltemp, line=1, adj=0.01)
+mtext(bquote(sum()* " "*.(round(rainsum,1))*" "*.(units[2])), side=3, col=colrain, line=1, adj=1.08, at=xlim[2])
+if(compress) ticklab <- ticklab[ticklab<=50]
+axis(side=2, at=ticklab, col.axis=coltemp, las=1)
+axis(side=4, at=ticklab[ticklab>=0], ticklab[ticklab>=0]*2, col.axis=colrain, pos=xlim[2], las=1)
 if(compress) axis(4, 6:9*10, 6:9*100-400, col.axis=owa(argcomp_def, argcomp)$col, las=1)
 axis(1, 1:12, labs, mgp=c(3,0.3,0), tick=FALSE)
-box() # cover up gray lines on top of original box
-if(box) box("outer") # draw box along outer margins of graph
-if(!keeplayout)
-  {
-  par(op) # set old margins again
-  layout(matrix(1)) # set old layout again
-  }
 } # end of function
 
