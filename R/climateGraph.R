@@ -21,14 +21,14 @@
 #' temp <- c(-9.3,-8.2,-2.8,6.3,13.4,16.8,18.4,17,11.7,5.6,-1,-5.9)#
 #' rain <- c(46,46,36,30,31,21,26,57,76,85,59,46)
 #' 
-#' climateGraph(temp, rain) # default settings
-#' climateGraph(temp, rain, textprop=0) # no table written to the right
-#' climateGraph(temp, rain, lty=3) # dotted background lines
+#' climateGraph(temp, rain) 
+#' climateGraph(temp, rain, textprop=0.6) 
+#' climateGraph(temp, rain, mar=c(2,3,4,3), textprop=0) # no table written to the right
 #' # vertical lines instead of filled polygon:
 #' climateGraph(temp, rain, arghumi=list(density=15, angle=90)) 
 #' # fill color for arid without transparency:
 #' climateGraph(temp, rain, argarid=list(col="gold")) 
-#' # for the Americans ;-) (axes should be different, though!):
+#' # for the Americans - axes should be different, though!:
 #' climateGraph(temp, rain, units=c("\U{00B0}F","in")) 
 #' 
 #' rain2 <- c(23, 11, 4, 2, 10, 53, 40, 15, 21, 25, 29, 22)
@@ -42,80 +42,70 @@
 #' 
 #' rain <- c(54, 23, 5, 2, 5, 70, 181, 345, 265, 145, 105, 80) # with extrema
 #' climateGraph(temp, rain) # August can be visually compared to June
-#' climateGraph(temp, rain, compress=TRUE) # compressing extrema enables a better
-#' # view of the temperature, but heigths of rain cannot be visually compared anymore
+#' climateGraph(temp, rain, compress=TRUE) 
+#' # compressing extrema enables a better view of the temperature, 
+#' # but heigths of rain cannot be visually compared anymore
 #' climateGraph(temp, rain, compress=TRUE, ylim=c(-10, 90))
 #' # needs ylim in linearly continued temp units
 #' climateGraph(temp, rain, compress=TRUE, argcomp=list(density=30, col=6))
 #' 
 #' \dontrun{
-#' ## Rcmd check --as-cran doesn't like to open external devices such as pdf,
-#' ## so this example is excluded from running in the checks.
-#' setwd("C:/Users/berry/Desktop")
 #' pdf("ClimateGraph.pdf")
-#' climateGraph(temp, rain, main="Another Station\nlocated somewhere\n369 ft a sl")
+#' climateGraph(temp, rain, main="Another Station\nlocated somewhere else")
 #' dev.off()
+#' system2("open", "ClimateGraph.pdf")
+#' unlink("ClimateGraph.pdf")
 #' 
 #' # further German reading:
 #' browseURL("http://www.klimadiagramme.de/all.html")
 #' 
 #' 
-#' # One large Dataset:
+#' # Climate Graphs for the USA:
 #' NOOAlink <- "http://www1.ncdc.noaa.gov/pub/data/normals/1981-2010/"
 #' browseURL(NOOAlink)
 #' # Find your Station here:
-#' browseURL(paste0(NOOAlink,"/station-inventories/allstations.txt")
+#' browseURL(paste0(NOOAlink,"/station-inventories/allstations.txt"))
 #' 
-#' # Data from Roseburg, Oregon, where I once lived:
+#' # Data from Roseburg, Oregon:
 #' download.file(destfile="Roseburg.txt", url=paste0("http://www1.ncdc.noaa.gov/",
-#'           "pub/data/normals/1981-2010/products/station/USC00357331.normals.txt")
+#'           "pub/data/normals/1981-2010/products/station/USC00357331.normals.txt"))
 #' RT <- read.table(file="Roseburg.txt", skip=11, nrows=1, as.is=TRUE)[1,-1]
 #' RT <- ( as.numeric(substr(RT,1,3))/10   - 32) * 5/9     # converted to degrees C
 #' RP <- read.table(file="Roseburg.txt", skip=580, nrows=1, as.is=TRUE)[1,-1]
 #' RP <-  as.numeric(substr(RP,1,nchar(RP)-1))/100*25.4
 #' meta <- read.table(file="Roseburg.txt", nrows=5, as.is=TRUE, sep=":")
 #' meta <- paste(meta[1,2], paste(meta[3:4 ,2], collapse=" /"), meta[5,2], sep="\n")
+#' unlink("Roseburg.txt")
 #' 
 #' climateGraph(RT, RP, main=meta)
 #' climateGraph(RT, RP, main=meta, compress=TRUE)
 #' 
 #' 
-#' # abstract mean values from weather data
-#' 
-#' browseURL("http://www.dwd.de") # Klima Umwelt - Klimadaten - online,frei
-#' # - Klimadaten Deutschland - Messstationen - Tageswerte
-#' 
-#' download.file(destfile="Potsdam.zip", url= paste(
-#' "http://www.dwd.de/bvbw/generator/DWDWWW/Content/Oeffentlichkeit/KU/KU2/KU21/",
-#' "klimadaten/german/download/tageswerte/kl__10379__hist__txt,templateId=raw,",
-#' "property=publicationFile.zip/kl_10379_hist_txt.zip", sep=""))
-#' 
-#' unzip("Potsdam.zip", exdir="PotsdamKlima")
-#' pk <- read.table(dir("PotsdamKlima", pattern="^[p]", full.names=TRUE), sep=";",
-#'                  header=TRUE, na="-999")
-#' dates <- strptime(pk$Mess_Datum, "%Y%m%d")
-#' temp <- tapply(pk$LUFTTEMPERATUR, INDEX=format(dates, "%m"), FUN=mean, na.rm=FALSE)
-#' precsums <- tapply(pk$NIEDERSCHLAGSHOEHE, INDEX=format(dates, "%Y-%m"), FUN=sum)
+#' # Climate Graphs for Germany:
+#' browseURL("https://github.com/brry/rdwd#rdwd") 
+#' instGit("brry/rdwd")
+#' link <- rdwd::selectDWD("Potsdam", res="monthly", var="kl", per="h")
+#' clim <- rdwd::dataDWD(link, dir=tempdir())
+#' dates <- strptime(clim$MESS_DATUM_BEGINN, "%Y%m%d")
+#' temp <- tapply(clim$LUFTTEMPERATUR, INDEX=format(dates, "%m"), FUN=mean, na.rm=FALSE)
+#' precsums <- tapply(clim$NIEDERSCHLAGSHOEHE, INDEX=format(dates, "%Y-%m"), FUN=sum)
 #' eachmonth <- format(strptime(paste(names(precsums),"01"), "%Y-%m %d"),"%m")
 #' prec <- tapply(precsums, eachmonth, FUN=mean)
-#' meta <- paste("Potsdam\n", paste(range(dates), collapse=" to "), "\n", sep="")
+#' meta <- paste("Potsdam\n", paste(range(dates, na.rm=TRUE), collapse=" to "), "\n", sep="")
 #' 
-#' # If you want to add things later, use keeplayout and graphics.off() to reset par
-#' climateGraph(temp, prec, main=meta, ylim=c(-2, 45), keeplayout=TRUE)
+#' climateGraph(temp, prec, main=meta, ylim=c(-2, 45))
 #' # Add Quartiles (as in boxplots): numerically sorted, 50% of the data lie inbetween
-#' T25 <- tapply(pk$LUFTTEMPERATUR, INDEX=format(dates, "%m"),
-#'               FUN=quantile, na.rm=FALSE, probs=0.25)
-#' T75 <- tapply(pk$LUFTTEMPERATUR, INDEX=format(dates, "%m"),
-#'               FUN=quantile, na.rm=FALSE, probs=0.75)
-#' arrows(x0=1:12, y0=T25, y1=T75, angle=90, code=3, col=2, len=0.1)
+#' TQ <- tapply(clim$LUFTTEMPERATUR, INDEX=format(dates, "%m"), FUN=quantile)
+#' TQ <- sapply(TQ, I)
+#' arrows(x0=1:12, y0=TQ["25%",], y1=TQ["75%",], angle=90, code=3, col=2, len=0.1)
 #' #
-#' P25 <- tapply(precsums, eachmonth, FUN=quantile, na.rm=FALSE, probs=0.25)
-#' P75 <- tapply(precsums, eachmonth, FUN=quantile, na.rm=FALSE, probs=0.75)
-#' arrows(x0=1:12, y0=P25/2, y1=P75/2, angle=90, code=3, col=4, len=0, lwd=3, lend=1)
-#' title(main=c("","","IQR shown als lines"), col.main=8)
+#' PQ <- tapply(precsums, eachmonth, FUN=quantile)
+#' PQ <- sapply(PQ, I)
+#' arrows(x0=1:12, y0=PQ["25%",]/2, y1=PQ["75%",]/2, angle=90, code=3, col=4, len=0, lwd=3, lend=1)
+#' mtext("IQR shown als lines", col=8, at=6.5, line=0.7, cex=1.2, font=2)
 #' 
 #' 
-#' # Comparison to diagrams in climatol
+#' # Comparison to diagram in climatol
 #' install.packages("climatol")
 #' help(package="climatol")
 #' library(climatol)
@@ -131,14 +121,14 @@
 #' @param units units used for labelling. DEFAULT: c("d C", "mm")
 #' @param labs labels for x axis. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
 #' @param textprop proportion of graphic that is used for writing the values 
-#'                 in a table to the right. DEFAULT: 0.2
+#'                 in a table to the right. DEFAULT: 0.25
 #' @param ylim limit for y axis in temp units. DEFAULT: range(temp, rain/2)
 #' @param compress should rain>100 mm be compressed with adjusted labelling? 
 #'                 (not recommended for casual visualization!). DEFAULT: FALSE
 #' @param ticklab positions for vertical labelling. DEFAULT: -8:30*10
 #' @param ticklin positions for horizontal line drawing. DEFAULT: -15:60*5
 #' @param box draw box along outer margins of graph? DEFAULT: TRUE
-#' @param mar plot margins. DEFAULT: c(1.5,2.3,4.5,2.3)
+#' @param mar plot margins. DEFAULT: c(1.5,2.3,4.5,0.2)
 #' @param keeppar Keep the changed graphical parameters? DEFAULT: TRUE
 #' @param colrain Color for rain line and axis labels. DEFAULT: "blue"
 #' @param coltemp color for temperature line and axis labels. DEFAULT: "red"
@@ -290,10 +280,10 @@ if(textprop > 0)
 # labelling:
 mtext( paste("\U00D8", round(mean(temp),1), units[1]),        side=3, col=coltemp, line=1, adj=0.01)
 mtext(bquote(sum()* " "*.(round(rainsum,1))*" "*.(units[2])), side=3, col=colrain, line=1, adj=1.08, at=xlim[2])
-if(compress) ticklab <- ticklab[ticklab<=50]
 axis(side=2, at=ticklab, col.axis=coltemp, las=1)
+if(compress) ticklab <- ticklab[ticklab<=50]
 axis(side=4, at=ticklab[ticklab>=0], ticklab[ticklab>=0]*2, col.axis=colrain, pos=xlim[2], las=1)
-if(compress) axis(4, 6:9*10, 6:9*100-400, col.axis=owa(argcomp_def, argcomp)$col, las=1)
+if(compress) axis(4, 6:9*10, 6:9*100-400, col.axis=owa(argcomp_def, argcomp)$col, pos=xlim[2], las=1)
 axis(1, 1:12, labs, mgp=c(3,0.3,0), tick=FALSE)
 } # end of function
 
