@@ -11,8 +11,11 @@
 #' A1 <- array(1:24, dim=c(4,2,3), dimnames=list(
 #'                    my_x=paste0("row",1:4), my_y=c("A","B"), paste0("n",1:3)))
 #' A1
+#' which(A1==20, arr.ind=TRUE)
+#' 
 #' # Selection:
 #' A1[,,"n2"]
+#' A1[,,1:2]
 #' A1["row2",,] # result rotated against expectation
 #' A1[,"A",]
 #' # aggregation:
@@ -44,6 +47,14 @@
 #' 
 #' # data type check
 #' A <- l2array(c(LA, 999))
+#' 
+#' 
+#' A <- array(1:24, dim=c(2,3,4), dimnames=list(x=paste0("x",1:2), 
+#'                                              y=paste0("y",1:3), 
+#'                                              z=paste0("z",1:4)))
+#' str(A)
+#' 
+#' 
 #' 
 #'
 #' @param x List with arrays. The dimension of the first is target dimension.
