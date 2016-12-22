@@ -44,7 +44,7 @@
 #' 
 #' d <- tryStack(upper("42"), silent=TRUE) # like try, but with traceback, even for warnings
 #' cat(d)
-#' d <- tryStack(upper("42"), silent=TRUE, tracewarnings=FALSE) # don't touch warnings
+#' d <- tryStack(upper("42"), silent=TRUE, warn=0) # don't touch warnings
 #' 
 #' tryStack(upper(42)) # returns normal output, but warnings are easier to debug
 #' 
@@ -63,8 +63,8 @@
 #' d <- f(42)                 ; cat("-----\n", d, "\n-----\n") ; rm(d)
 #' d <- f("42")               ; cat("-----\n", d, "\n-----\n") ; rm(d)
 #' d <- tryStack(f(4) )       ; cat("-----\n", d, "\n-----\n") ; rm(d) 
-#' # warnings in nested calls are printed twice, unless tracewarnings=FALSE
-#' d <- tryStack(f(4), tracewarnings=FALSE) # could also be set within 'f'
+#' # warnings in nested calls are printed twice, unless warn=0
+#' d <- tryStack(f(4), warn=0) # could also be set within 'f'
 #' 
 #' d <- tryStack(f("4"))      ; cat("-----\n", d, "\n-----\n") 
 #' d[1:3] ; rm(d)
@@ -77,11 +77,12 @@
 #' f <- function(k) tryStack(stop("oh oh"))
 #' d <- f(42) ; cat("-----\n", d, "\n-----\n") ; rm(d) # level 4 not helpful, but OK
 #' 
+#' # stuff with base::try
 #' f <- function(k) try(upper(k), silent=TRUE)
 #' d <- f(42)     ; cat("-----\n", d, "\n-----\n") ; rm(d)
 #' d <- f("42")   ; cat("-----\n", d, "\n-----\n") ; rm(d) # regular try output
 #' 
-#' f2 <- function(k) tryStack(f(k), tracewarnings=FALSE, silent=TRUE)
+#' f2 <- function(k) tryStack(f(k), warn=0, silent=TRUE)
 #' d <- f2(42)    ; cat("-----\n", d, "\n-----\n") ; rm(d)
 #' d <- f2("42")  ; cat("-----\n", d, "\n-----\n") ; rm(d) # try -> no error. 
 #' # -> Use tryCatch and you can nest those calls. note that d gets longer.
@@ -91,12 +92,14 @@
 #'                 spanning several commands.
 #' @param silent   Logical: Should error message + stack printing be suppressed?
 #'                 DEFAULT: FALSE
-#' @param tracewarnings Logical: Should warnings be traced as well?
-#'                 They will still be printed as regular warnings, 
-#'                 but with trace stack. DEFAULT: TRUE
+#' @param warn     Integer. 0: Don't touch warnings.
+#'                 1: warning in upper -> middle -> lower: message.
+#'                 2: complete calling stack as with errors.
+#'                 If 1 or 2, they are still handled like regular \code{\link{warning}s}
+#'                 (unless \code{file !=""}). DEFAULT: 1
 #' @param file     File name passed to \code{\link{cat}}. 
 #'                 If given, Errors will be appended to the file after two empty lines. 
-#'                 if tracewarnings=TRUE and file!="", warnings will not be shown, 
+#'                 if \code{warn>0} and file!="", warnings will not be shown, 
 #'                 but also appended to the file.
 #'                 This is useful in lapply simulation runs.
 #'                 DEFAULT: "" (catted to the console)
@@ -107,17 +110,18 @@
 tryStack <- function(
 expr,
 silent=FALSE,
-tracewarnings=TRUE,
+warn=1,
 file="",
 removetry=TRUE
 )
 {
 # silence warnings:
-if(tracewarnings)
+if(warn>0)
   {
   oop <- options(warn=-1)
   on.exit(options(oop))
   }
+if(!warn %in% 0:2) stop("warn must be 0, 1, or 2, not ", warn)
 # environment for stack to (potentially) be written into:
 tryenv <- new.env()
 assign("emsg", value="-- empty error stack --", envir=tryenv)
@@ -169,7 +173,7 @@ efun <- function(e)
 # warning function
 wfun <- function(e)
   {
-  if(!tracewarnings) return()
+  if(warn==0) return()
   # stack of calls, in case of a warning:
   stack <- sys.calls()
   # remove the warning part:
@@ -190,22 +194,43 @@ wfun <- function(e)
   if(removetry) stack <- stack[!toremove2]
   # combine vectors into a single string:
   stack <- lapply(stack, function(x) paste(x, collapse="\n"))
+  
+  # only function names (warn=1)
+if(warn==1)
+{
+  # shorten do.call (function( LONG ( STUFF)))
+  stack <- lapply(stack, function(x) if(substr(x,1,7)=="do.call") 
+               sub(",", "(", sub("(", " - ", x, fixed=TRUE), fixed=TRUE) else x)
+  # keep try calls more informative:
+  stack <- lapply(stack, function(x) if(substr(x,1,4)=="try(") 
+               sub("(", " - ", x, fixed=TRUE) else x)  
+  stack <- sapply(strsplit(unlist(stack), "(", fixed=TRUE), "[", 1)
+}
   # add warning code:
   ccall <- deparse(conditionCall(e))[1L]
   stack <- c(stack, ccall)
   # add numbers:
-  stack <- sapply(seq_along(stack), function(i) paste0(i, ": ", stack[[i]]))
+  if(warn==2) stack <- sapply(seq_along(stack), function(i) paste0(i, ": ", stack[[i]]))
   # add descriptor:
   cmes <- conditionMessage(e)
   # catch nested (recursive) calling:
   wmes <- "tryStack sys.calls() warning stack: "
   cmes <- strsplit(cmes, paste0("\n",wmes), fixed=TRUE)[[1]][1]
+if(warn==2)
+{
   info <- c(paste0(if(file!="") "warning ", "in ", ccall, ": ", cmes), wmes)
   stack <- c(info, paste0("m: ", cmes), rev(stack))
+}
+if(warn==1)
+{
+  stack <- paste0(if(file!="") "warning ", "in ", paste(stack,collapse=" -> "), ": ", cmes)
+}
   # add empty lines (-> line breaks -> readability), if file is given:
   if(file!="") stack <- c("---------------",as.character(Sys.time()),"",stack,"","")
+  # create single character string (potentially with newlines):
+  stack <-  paste(stack, collapse="\n")
   # put message into main function environment:
-  assign(x="wmsg", value=paste(stack,collapse="\n"), envir=tryenv)
+  assign(x="wmsg", value=stack, envir=tryenv)
   # warn:
   if(file!="") cat(tryenv$wmsg, file=file, append=TRUE)       else
            warning(tryenv$wmsg, immediate.=TRUE, call.=FALSE)

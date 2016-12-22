@@ -4,8 +4,7 @@
 \alias{tryStack}
 \title{try an expression, returning the error stack}
 \usage{
-tryStack(expr, silent = FALSE, tracewarnings = TRUE, file = "",
-  removetry = TRUE)
+tryStack(expr, silent = FALSE, warn = 1, file = "", removetry = TRUE)
 }
 \arguments{
 \item{expr}{Expresssion to try, potentially wrapped in curly braces if 
@@ -14,13 +13,15 @@ spanning several commands.}
 \item{silent}{Logical: Should error message + stack printing be suppressed?
 DEFAULT: FALSE}
 
-\item{tracewarnings}{Logical: Should warnings be traced as well?
-They will still be printed as regular warnings, 
-but with trace stack. DEFAULT: TRUE}
+\item{warn}{Integer. 0: Don't touch warnings.
+1: warning in upper -> middle -> lower: message.
+2: complete calling stack as with errors.
+If 1 or 2, they are still handled like regular \code{\link{warning}s}
+(unless \code{file !=""}). DEFAULT: 1}
 
 \item{file}{File name passed to \code{\link{cat}}. 
 If given, Errors will be appended to the file after two empty lines. 
-if tracewarnings=TRUE and file!="", warnings will not be shown, 
+if \code{warn>0} and file!="", warnings will not be shown, 
 but also appended to the file.
 This is useful in lapply simulation runs.
 DEFAULT: "" (catted to the console)}
@@ -67,7 +68,7 @@ inherits(d, "try-error")                # use for coding
 
 d <- tryStack(upper("42"), silent=TRUE) # like try, but with traceback, even for warnings
 cat(d)
-d <- tryStack(upper("42"), silent=TRUE, tracewarnings=FALSE) # don't touch warnings
+d <- tryStack(upper("42"), silent=TRUE, warn=0) # don't touch warnings
 
 tryStack(upper(42)) # returns normal output, but warnings are easier to debug
 
@@ -86,8 +87,8 @@ f <- function(k) tryStack(upper(k), silent=TRUE)
 d <- f(42)                 ; cat("-----\\n", d, "\\n-----\\n") ; rm(d)
 d <- f("42")               ; cat("-----\\n", d, "\\n-----\\n") ; rm(d)
 d <- tryStack(f(4) )       ; cat("-----\\n", d, "\\n-----\\n") ; rm(d) 
-# warnings in nested calls are printed twice, unless tracewarnings=FALSE
-d <- tryStack(f(4), tracewarnings=FALSE) # could also be set within 'f'
+# warnings in nested calls are printed twice, unless warn=0
+d <- tryStack(f(4), warn=0) # could also be set within 'f'
 
 d <- tryStack(f("4"))      ; cat("-----\\n", d, "\\n-----\\n") 
 d[1:3] ; rm(d)
@@ -100,11 +101,12 @@ cat( tryStack(upper("42")) )
 f <- function(k) tryStack(stop("oh oh"))
 d <- f(42) ; cat("-----\\n", d, "\\n-----\\n") ; rm(d) # level 4 not helpful, but OK
 
+# stuff with base::try
 f <- function(k) try(upper(k), silent=TRUE)
 d <- f(42)     ; cat("-----\\n", d, "\\n-----\\n") ; rm(d)
 d <- f("42")   ; cat("-----\\n", d, "\\n-----\\n") ; rm(d) # regular try output
 
-f2 <- function(k) tryStack(f(k), tracewarnings=FALSE, silent=TRUE)
+f2 <- function(k) tryStack(f(k), warn=0, silent=TRUE)
 d <- f2(42)    ; cat("-----\\n", d, "\\n-----\\n") ; rm(d)
 d <- f2("42")  ; cat("-----\\n", d, "\\n-----\\n") ; rm(d) # try -> no error. 
 # -> Use tryCatch and you can nest those calls. note that d gets longer.
