@@ -3,7 +3,6 @@
 #' Time the execution of examples. Useful in package development to identify functions takeing much time.
 #'
 #' @return Time used as per \code{\link{system.time}}
-#' @section Warning: warningMayBeRemoved
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, May 2016
 #' @seealso \code{\link{example}}, \code{\link{system.time}}
 #' @keywords documentation utilities

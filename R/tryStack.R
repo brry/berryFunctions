@@ -95,10 +95,11 @@
 #'                 spanning several commands.
 #' @param silent   Logical: Should error message + stack printing be suppressed?
 #'                 DEFAULT: FALSE
-#' @param warn     Integer. 0: Don't touch \code{\link{warning}s} and \code{\link{message}s}
-#'                 1: warning in upper -> middle -> lower: message.
-#'                 2: complete calling stack as with errors.
-#'                 If 1 or 2, they are still handled like regular warnings / messages.
+#' @param warn     Integer.\cr
+#'                 0: Don't touch \code{\link{warning}s} and \code{\link{message}s}\cr
+#'                 1: warning in upper -> middle -> lower: message.\cr
+#'                 2: complete calling stack as with errors.\cr
+#'                 If 1 or 2, they are still handled like regular warnings / messages
 #'                 (unless \code{file !=""}). DEFAULT: 1
 #' @param file     File name passed to \code{\link{cat}}. 
 #'                 If given, Errors will be appended to the file after two empty lines. 

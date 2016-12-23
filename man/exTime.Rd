@@ -32,9 +32,6 @@ Time used as per \code{\link{system.time}}
 \description{
 Time the execution of examples. Useful in package development to identify functions takeing much time.
 }
-\section{Warning}{
- warningMayBeRemoved
-}
 \examples{
 exTime("yearSample")
 exTime("yearSample", quiet=TRUE)
