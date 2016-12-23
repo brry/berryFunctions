@@ -4,25 +4,27 @@
 \alias{tryStack}
 \title{try an expression, returning the error stack}
 \usage{
-tryStack(expr, silent = FALSE, warn = 1, file = "", removetry = TRUE)
+tryStack(expr, silent = FALSE, warn = TRUE, short = TRUE, file = "",
+  removetry = TRUE)
 }
 \arguments{
 \item{expr}{Expresssion to try, potentially wrapped in curly braces if 
 spanning several commands.}
 
-\item{silent}{Logical: Should error message + stack printing be suppressed?
-DEFAULT: FALSE}
+\item{silent}{Logical: Should printing of error message + stack be suppressed?
+Does not affect warnings and messages. DEFAULT: FALSE}
 
-\item{warn}{Integer.\cr
-0: Don't touch \code{\link{warning}s} and \code{\link{message}s}\cr
-1: warning in upper -> middle -> lower: message.\cr
-2: complete calling stack as with errors.\cr
-If 1 or 2, they are still handled like regular warnings / messages
-(unless \code{file !=""}). DEFAULT: 1}
+\item{warn}{Logical: trace \code{\link{warning}s} and \code{\link{message}s} also?
+They are still handled like regular warnings / messages unless 
+\code{file !=""}, when they are catted into that file. DEFAULT: TRUE}
+
+\item{short}{Logical: should trace be abbreviated to upper -> middle -> lower?
+If NA, it is set to TRUE for warnings and messages, FALSE for errors.
+DEFAULT: TRUE}
 
 \item{file}{File name passed to \code{\link{cat}}. 
 If given, Errors will be appended to the file after two empty lines. 
-if \code{warn>0} and file!="", warnings will not be shown, 
+if \code{warn=T} and file!="", warnings and messages will not be shown, 
 but also appended to the file.
 This is useful in lapply simulation runs.
 DEFAULT: "" (catted to the console)}
