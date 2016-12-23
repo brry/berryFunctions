@@ -13,10 +13,10 @@ spanning several commands.}
 \item{silent}{Logical: Should error message + stack printing be suppressed?
 DEFAULT: FALSE}
 
-\item{warn}{Integer. 0: Don't touch warnings.
+\item{warn}{Integer. 0: Don't touch \code{\link{warning}s} and \code{\link{message}s}
 1: warning in upper -> middle -> lower: message.
 2: complete calling stack as with errors.
-If 1 or 2, they are still handled like regular \code{\link{warning}s}
+If 1 or 2, they are still handled like regular warnings / messages.
 (unless \code{file !=""}). DEFAULT: 1}
 
 \item{file}{File name passed to \code{\link{cat}}. 
@@ -46,14 +46,15 @@ trace errors and warnings and ease debugging.
 
 # Functions -----
 
-lower <- function(a) a+10
+lower <- function(a) {message("fake message, a = ", a); a+10}
 middle <- function(b) {plot(b, main=b) ; warning("fake warning, b = ", b); lower(b) }
 upper <- function(c) {cat("printing c:", c, "\\n") ; middle(c)}
 d <- upper(42)
 d
 rm(d)
 
-# Classical error management -----
+
+# Classical error management with try -----
 
 \dontrun{ ## intentional error
 d <- upper("42")                # error, no d creation 
@@ -64,7 +65,8 @@ d <- try(upper("42"), silent=TRUE)      # d created
 cat(d)                                  # with error message, but no traceback
 inherits(d, "try-error")                # use for coding
 
-# tryStack -----
+
+# way cooler with tryStack -----
 
 d <- tryStack(upper("42"), silent=TRUE) # like try, but with traceback, even for warnings
 cat(d)
@@ -80,6 +82,7 @@ d <- tryStack(upper("42"), silent=TRUE, file="log.txt")
 system2("open", "log.txt")
 unlink("log.txt")
 }
+
 
 # Nested calls -----
 
