@@ -39,6 +39,8 @@ wishlist (implement if bored, in order of usefulnes)
 - implement identical(FALSE, legargs) wherever owa is used and that makes sense
 - exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) ) 
 - climateGraph documentation Roxygen issue (escaping unicode)
+- tryStack: if silent=TRUE, put warnings and messages into final output (all of them, not just last one)
+- tryStack: example warning with log(-1:6) for non-repeated call stack
 
 
 

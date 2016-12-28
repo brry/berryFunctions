@@ -213,22 +213,24 @@ stack <- if(short) paste(    stack , collapse=" -> ") else
 cmes <- conditionMessage(e)
 # catch nested (recursive) calling:
 cmes <- strsplit(cmes, "tryStack sys.calls", fixed=TRUE)[[1]][1]
+# remove end line breaks
 lcmes <- nchar(cmes)
-while(substr(cmes,lcmes,lcmes)=="\n") cmes <- substr(cmes,1,lcmes-1)
+while(substring(cmes,lcmes)=="\n") cmes <- substring(cmes,1,lcmes-1)
 
 # additional information (line breaks and sys.time) if file is given:
 prefix <- suffix <- ""
 if(file!="") 
   {
-  prefix <- paste0("---------------\n", as.character(Sys.time()),
+  prefix <- paste0("\n---------------\n", as.character(Sys.time()),
                    "\n\n", type, if(short) ":" , " ")
   suffix <- "\n"
   }
 
 # short or long informational description:
 info <- ""
-if(type!="message") info <- paste0("in ", ccall, ": ")
-info <- paste0(info, cmes, "\ntryStack sys.calls")
+if(type=="warning" | (type=="error" & file!="") ) info <- paste0("in ", ccall, ": ")
+if(type!="error" | file!="") info <- paste0(info, cmes, "\n")
+info <- paste0(info, "-- tryStack sys.calls")
 stack <- if(short) paste0(info, ": ", stack) else
          paste0(info, " ", type, " stack:\nm: ", cmes, "\n", stack)
 
@@ -253,7 +255,7 @@ if(type=="error")
   {
   # print error if not silent:
   shouldprint <- !silent && isTRUE(getOption("show.error.messages"))
-  if(shouldprint || file!="") cat("tryStack error", tryenv$emsg, file=file, append=TRUE)
+  if(shouldprint || file!="") cat(if(file=="")"tryStack error", tryenv$emsg, file=file, append=TRUE)
   }
 } # efun end
 
