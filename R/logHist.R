@@ -54,7 +54,7 @@ if(neg>0)
 xmain <- paste0("Histogram of log10(",xname,")")
 if(is.null(ylim))
   {
-  suppressWarnings(h <- hist(log10(x),...,plot=FALSE)) # suppress warnings argument ‘xlim’ is not made use of
+  suppressWarnings(h <- hist(log10(x),...,plot=FALSE)) # suppress warnings argument 'xlim' is not made use of
   ylim <- lim0(   if(freq) h$counts else h$density   )
   }
 hist(x=log10(x), ..., freq=freq, ylim=ylim, las=las, add=add, main=main, xlab=xlab, xaxt="n")
