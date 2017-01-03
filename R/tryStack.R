@@ -163,7 +163,7 @@ if(type=="warning" | type=="message")
   {
   stack <- head(stack, -5) # also for message?
   # usually, two more need to be removed:
-  if(grepl(".signalSimpleWarning(", stack[[length(stack)]], fixed=TRUE)) 
+  if(any(grepl(".signalSimpleWarning(", stack[[length(stack)]], fixed=TRUE)))
     stack <- head(stack,-1)
   # remove recursive warning part:
   irecwarn <- grep(".signalSimpleWarning(", stack, fixed=TRUE)
