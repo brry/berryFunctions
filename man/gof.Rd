@@ -73,12 +73,25 @@ kge(rep(NA,20), y)
 rmse(0,0, quiet=TRUE)
 rsquare(1:6, tapply(chickwts$weight, chickwts$feed, mean) )
 
+# sample size bias
+x <- 1:1000
+y <- x+rnorm(1000)
+rmse(x,y) # 0.983
+ssize <- rep(5:1000, 3)
+sgofs <- sapply(ssize, function(n){i <- sample(1:1000,n); c(rsquare(x[i],y[i]),rmse(x[i],y[i]))})
+plot(ssize, sgofs[2,]) # RMSE: no bias, symmetric convergence
+plot(ssize, sgofs[1,]) # R2: small underestimation in small samples
+
+
 \dontrun{ # time consuming Simulation
+if(require(pbapply)) sapply <- pbsapply
 r2 <- sapply(1:10000, function(i){
-   x <- rnorm(20);  y <- 2*x + rnorm(20);  rsquare(x,y) })
-hist(r2, breaks=70, col=5,
+   x <- rnorm(20);  y <- 2*x + rnorm(20);  c(rsquare(x,y), rmse(x,y)) })
+hist(r2[1,], breaks=70, col=5,
 main= "10'000 times   x <- rnorm(20);  y <- 2*x + rnorm(20);  rsquare(x,y)")
 # For small samples, R^2 can by chance be far off the 'real' value!
+hist(r2[2,], breaks=70, col=5, main= "... rsquare(x,y)")
+# RMSE is more symmetric and gaussian
 }
 
 # NSE and KGE ---------------------------------------------------------------
