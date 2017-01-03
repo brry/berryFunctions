@@ -4,22 +4,26 @@
 \alias{exTime}
 \title{Time to run examples}
 \usage{
-exTime(topic, echo = FALSE, elapsed = FALSE, imagefile = TRUE,
-  quiet = FALSE, ...)
+exTime(topic = NA, package = NA, echo = FALSE, elapsed = FALSE,
+  imagefile = TRUE, quiet = FALSE, ...)
 }
 \arguments{
-\item{topic}{Character string: the online \code{\link{help}} topic the examples of which should be run}
+\item{topic}{Character string: the online \code{\link{help}} topic 
+of which the examples should be run.}
+
+\item{package}{Charstring: installed and loaded package from which all examples should be run.}
 
 \item{echo}{Show the R input when sourcing? DEFAULT: FALSE}
 
 \item{elapsed}{Return *only* the third element (total elapsed time)? DEFAULT: FALSE}
 
 \item{imagefile}{Reroute graphics to \code{\link{pdf}} device? 
-Will \code{\link{message}} the \code{\link{tempfile}} location if quiet=FALSE. 
-DEFAULT: TRUE}
+Will \code{\link{message}} the \code{\link{tempfile}} 
+location if quiet=FALSE.  DEFAULT: TRUE}
 
 \item{quiet}{Suppress warnings with both \code{\link{suppressWarnings}} and 
-\code{\link{suppressMessages}}, also \code{\link{capture.output}} for str and cat results 
+\code{\link{suppressMessages}}, 
+also \code{\link{capture.output}} for str and cat results 
 as well as setting \code{pboptions(type="none")} if \code{pbapply} is available.}
 
 \item{\dots}{Further arguments to \code{\link{example}}, especially 
@@ -33,18 +37,19 @@ Time used as per \code{\link{system.time}}
 Time the execution of examples. Useful in package development to identify functions takeing much time.
 }
 \examples{
-exTime("yearSample")
+exTime("plot")
 exTime("yearSample", quiet=TRUE)
 exTime(yearSample) # does NOT work, gives NULL and warning
 exTime("yearSample", elapsed=TRUE, quiet=TRUE)
+exTime("addFade", elapsed=TRUE, quiet=TRUE, run.dontrun=TRUE, run.donttest=TRUE)
 
-## this takes quite some time if done for all functions in the package:
+## this takes quite some time if done for all functions in a package:
 \dontrun{
-fn <- ls("package:berryFunctions")[1:7]
-ft <- rep(NA,length(fn))  ; names(ft) <- fn
-for(f in fn)  ft[f] <- exTime(f, quiet=TRUE, elapsed=TRUE, run.dontrun=FALSE)
-as.matrix(sort(ft))
+times <- exTime(package="rdwd")
+as.matrix(sort(times))
 system2("open", tempdir()) # to view the pdf graphics created by exTime
+
+# times <- exTime(package="rdwd", run.dontrun=FALSE)
 }
 
 }
