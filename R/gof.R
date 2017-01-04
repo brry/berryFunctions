@@ -107,12 +107,13 @@ if( anyNA(a) | anyNA(b) )
   if(!quiet) warning(fun, length(Na), " NAs were omitted from ", length(a), 
                      " data points (",round(length(Na)/length(a)*100,1),"%).", call.=FALSE)
   a <- a[-Na] ; b <- b[-Na]
-} 
+}
+if(length(a)==0) return(NULL)
 # zero check:
 if(all(a==0) | all(b==0))
 {
   if(!quiet) warning(fun, "all a (or all b) values are zero, returning NA.", call.=FALSE)
-  return(NULL)
+  return(NULL) # changed to NA in actual gof functions
 } # end if zero
 # Output:
 data.frame(a,b)

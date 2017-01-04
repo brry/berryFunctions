@@ -47,8 +47,9 @@
 #' d <- tryStack(upper("42"), silent=TRUE) # like try, but with traceback, even for warnings
 #' cat(d)
 #' d <- tryStack(upper("42"), silent=TRUE, warn=0) # don't touch warnings
-#' 
+#'  
 #' tryStack(upper(42)) # returns normal output, but warnings are easier to debug
+#' # Note: you can also set options(showWarnCalls=TRUE)
 #' 
 #' stopifnot(inherits(d, "try-error"))
 #' stopifnot(tryStack(upper(42))==52)
