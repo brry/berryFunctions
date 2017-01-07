@@ -26,6 +26,17 @@ Link <- paste0("http://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1",
         "&usg=AFQjCNGejDwPlor4togQZmQEQv72cK9z8A&bvm=bv.45580626,d.Yms")
 googleLink2pdf(Link)
 
+Link <- paste0("https://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1",
+        "&cad=rja&uact=8&ved=0ahUKEwjLlfmClavRAhWaN1AKHcGSBjEQFgghMAA",
+        "&url=http\%3A\%2F\%2Fstackoverflow.com\%2Fquestions\%2Ftagged\%2Fr",
+        "&usg=AFQjCNHYj6HjSs6Lvczn9wMWxE3slCdq1Q&bvm=bv.142059868,d.ZWM")
+googleLink2pdf(Link)
+Link <- paste0("https://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2",
+        "&cad=rja&uact=8&ved=0ahUKEwjLlfmClavRAhWaN1AKHcGSBjEQFggpMAE&",
+        "url=http\%3A\%2F\%2Fstackoverflow.com\%2Fquestions\%2Ftagged\%2F\%3Ftagnames",
+        "\%3Dr\%26sort\%3Dactive&usg=AFQjCNGkPGHq05qwKLLW4vRXdmk2Olhmig&bvm=bv.142059868,d.ZWM")
+googleLink2pdf(Link)
+
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, 2012
