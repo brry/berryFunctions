@@ -16,7 +16,7 @@ array
 }
 \description{
 Convert a list of arrays to a single array, conserving names.
-You can also directly use
+If dimnames do not need to be checked, you can also directly use \cr
 \code{do.call(abind::abind, list(LIST, rev.along=0, use.dnns=TRUE)) }
 }
 \examples{
@@ -27,6 +27,10 @@ LIST[[2]]
 LISTa1 <- l2array(LIST)
 LISTa1
 str(LISTa1)
+
+LISTm <- lapply(list(1:6,7:12,13:18,19:24), matrix, ncol=3, 
+               dimnames=list(x=c("a","b"), y=c("i","j","k"))  )
+l2array(LISTm)
 
 # The old l2array (<1.13.14, 2017-01-06) was very slow on large lists.
 # I then found abind, which is much much much faster and easier on memory!
