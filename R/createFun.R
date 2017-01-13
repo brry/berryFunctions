@@ -64,7 +64,9 @@ part1 <- "' title
 ' @author Berry Boessenkool, \\email{berry-b@@gmx.de}, "
 part1 <- paste0("#", strsplit(part1, "\n", fixed=TRUE)[[1]])
 part1 <- paste(part1, collapse="\n")
+lct <- Sys.getlocale("LC_TIME"); Sys.setlocale("LC_TIME", "C")
 part2 <- paste0(format(Sys.Date(), "%b %Y"), "\n")
+Sys.setlocale("LC_TIME", lct)
 part3 <- "' @seealso \\code{\\link{help}}, \\code{\\link{help}}
 ' @keywords aplot
 ' @importFrom package fun1 fun2
@@ -90,9 +92,11 @@ fun," <- function(
 }
 ")
 cat(part1,part2,part3,part4, file=rfile, sep="")
+message(rfile)
 # Open the file with the program associated with its file extension:
-system2("open", rfile)
+linux <- Sys.info()["sysname"]=="Linux"
+try(if(!linux) system2("open", rfile) else system2("xdg-open", rfile), silent=TRUE)
 # return file name:
-rfile
+invisible(rfile)
 }
 
