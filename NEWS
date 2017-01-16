@@ -49,6 +49,23 @@ actual NEWS
 ---------------------------------------
 
 
+-----------------------------
+-----------------------------
+
+
+Version 1.14.0 (2017-01-16)
+- tryStack: API change (new and changed arguments), now also traces messages
+- logHist: can now handle add=TRUE input, nicer y axis limits by default 
+- climateGraph: now in a single layout plot for multipanel plot usage
+- exTime: can now time a complete package 
+- googleLink2pdf: all regular hex characters converted to ascii
+- l2array: now uses abind for much faster results, handles lists with matrices
+
+
+-----------------------------
+-----------------------------
+
+
 Version 1.13.0 (2016-12-10)
 - numerous smaller commits on https://github.com/brry/berryFunctions/commits/master
 - seasonality has been greatly expanded and generalized
