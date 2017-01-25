@@ -3,7 +3,7 @@
 \name{dataDWD}
 \alias{dataDWD}
 \alias{readDWD}
-\title{Get climate data from the German Weather Service (DWD) FTP-server.}
+\title{dataDWD and readDWD are now in 'rdwd'.}
 \description{
 \code{dataDWD} and \code{readDWD} have been greatly improved and are now in the package \code{rdwd}.
 This provides a much better infrastructure for file selection and downloading. 
