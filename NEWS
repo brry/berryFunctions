@@ -26,6 +26,7 @@ ToDo-list (take care of in the near future)
 - contemplate moving tryStack and traceCall to own package, maybe "trace"
 - combineFiles: path expansion (see rdwd::fileDWD), remove dir arguments
 - plot(c(50,1000), c(2500,35000), log="yx", axes=F) ; logAxis(1:2) # Error 'at' and 'labels' lengths differ, 9 != 12
+- insertRows: r <- r + seq_along(r)-1
 
 
 ---------------------------------------
@@ -47,6 +48,11 @@ wishlist (implement if bored, in order of usefulnes)
 ---------------------------------------
 actual NEWS
 ---------------------------------------
+
+
+For all changes, see:
+https://github.com/brry/berryFunctions/compare/master@{2017-01-16}...master@{2017-01-19}#files_bucket
+
 
 
 -----------------------------
