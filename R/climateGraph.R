@@ -278,8 +278,8 @@ if(textprop > 0)
   do.call(text, owa(argtextdef, argtext, "x","y","labels"))
   }
 # labelling:
-mtext( paste("\U00D8", round(mean(temp),1), units[1]),        side=3, col=coltemp, line=1, adj=0.01)
-mtext(bquote(sum()* " "*.(round(rainsum,1))*" "*.(units[2])), side=3, col=colrain, line=1, adj=1.08, at=xlim[2])
+mtext( paste("\U00D8", round(mean(temp),1), units[1]),        side=3, col=coltemp, line=1,   adj=0.01)
+mtext(bquote(sum()* " "*.(round(rainsum,1))*" "*.(units[2])), side=3, col=colrain, line=0.8, adj=1.08, at=xlim[2])
 axis(side=2, at=ticklab, col.axis=coltemp, las=1)
 if(compress) ticklab <- ticklab[ticklab<=50]
 axis(side=4, at=ticklab[ticklab>=0], ticklab[ticklab>=0]*2, col.axis=colrain, pos=xlim[2], las=1)
