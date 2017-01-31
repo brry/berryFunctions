@@ -50,9 +50,16 @@ actual NEWS
 ---------------------------------------
 
 
-For all changes, see:
-https://github.com/brry/berryFunctions/compare/master@{2017-01-16}...master@{2017-01-19}#files_bucket
 
+-----------------------------
+-----------------------------
+
+
+Version 1.. (2017-0-)
+- 
+New functions: almost.equal
+For all changes, see:
+https://github.com/brry/berryFunctions/compare/master@{2017-01-16}...master@{2017-01-31}#files_bucket
 
 
 -----------------------------
