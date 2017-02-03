@@ -24,11 +24,14 @@
 #' @param skip Number of levels to skip in \code{\link{traceback}}
 #' @param prefix Prefix prepended to the output character string. DEFAULT: "\\nCall stack: "
 #' @param suffix Suffix appended to the end of the output. DEFAULT: "\\n"
+#' @param vigremove Logical: remove call created using devtools::build_vignettes()?
+#'                  DEFAULT: TRUE
 #'
 traceCall <- function(
 skip=0,
 prefix="\nCall stack: ",
-suffix="\n"
+suffix="\n",
+vigremove=TRUE
 )
 {
 # the real skip value will be dependent on R version.
@@ -44,5 +47,12 @@ suffix="\n"
   calltrace <- sapply(strsplit(unlist(tb), "(", fixed=TRUE), "[", 1)
   calltrace <- paste(rev(calltrace), collapse=" -> ")
   calltrace <- paste0(prefix, calltrace, suffix)
+  if(vigremove)  calltrace <- sub(paste0("tools::buildVignettes -> tryCatch -> ",
+        "tryCatchList -> tryCatchOne -> doTryCatch -> engine"), "", calltrace)
+  if(vigremove)  calltrace <- sub(paste0("weave -> ",
+        "vweave_rmarkdown -> rmarkdown::render -> knitr::knit -> process_file -> ",
+        "withCallingHandlers -> process_group -> process_group.block -> call_block ",
+        "-> block_exec -> in_dir -> evaluate -> evaluate_call -> timing_fn -> handle ",
+        "-> withCallingHandlers -> withVisible -> eval -> eval"), "", calltrace)
   calltrace
 }

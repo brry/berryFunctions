@@ -4,7 +4,8 @@
 \alias{traceCall}
 \title{call stack of a function}
 \usage{
-traceCall(skip = 0, prefix = "\\nCall stack: ", suffix = "\\n")
+traceCall(skip = 0, prefix = "\\nCall stack: ", suffix = "\\n",
+  vigremove = TRUE)
 }
 \arguments{
 \item{skip}{Number of levels to skip in \code{\link{traceback}}}
@@ -12,6 +13,9 @@ traceCall(skip = 0, prefix = "\\nCall stack: ", suffix = "\\n")
 \item{prefix}{Prefix prepended to the output character string. DEFAULT: "\\nCall stack: "}
 
 \item{suffix}{Suffix appended to the end of the output. DEFAULT: "\\n"}
+
+\item{vigremove}{Logical: remove call created using devtools::build_vignettes()?
+DEFAULT: TRUE}
 }
 \value{
 Character string with the call stack
