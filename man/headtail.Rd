@@ -59,11 +59,10 @@ head(table(state.division, state.region), n=3)
 headtail(table(state.division, state.region), n=3, na=TRUE)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Mrz 2016
-}
 \seealso{
 \code{\link{head}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Mrz 2016
+}
 \keyword{manip}
-

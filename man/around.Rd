@@ -33,10 +33,9 @@ around(myDF, i=c(11,19), n2=0)
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Nov 2016
-}
 \seealso{
 \code{\link{sortDF}}, \code{\link{View}}
 }
-
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Nov 2016
+}

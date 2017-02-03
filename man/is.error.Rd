@@ -31,12 +31,11 @@ is.error(  log("a"), force=TRUE)
 stopifnot(is.error(  is.error(log(3), force=TRUE)  ))
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, May 2016
-}
 \seealso{
 \code{\link{stop}}, \code{\link{try}}, \code{\link{inherits}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, May 2016
+}
 \keyword{error}
 \keyword{programming}
-

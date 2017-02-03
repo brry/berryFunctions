@@ -44,11 +44,10 @@ instGit("jrnold/ggthemes")
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2015 + Mar/Apr 2016
-}
 \seealso{
 \code{\link{funSource}}, \code{install_github} in each of the packages \code{devtools, ghit, remotes}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2015 + Mar/Apr 2016
+}
 \keyword{package}
-

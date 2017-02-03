@@ -19,12 +19,11 @@ Do not use \code{rainbow}: \url{https://eagereyes.org/basics/rainbow-color-map}
 showPal()
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Apr 2016
-}
 \seealso{
 \code{\link{seqPal}}, \code{\link{divPal}}, package \code{RColorBrewer}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Apr 2016
+}
 \keyword{color}
 \keyword{dplot}
-

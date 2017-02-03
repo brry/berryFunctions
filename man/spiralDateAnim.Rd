@@ -47,14 +47,13 @@ saveVideo(spiralDateAnim(x,y, steps=300), video.name="spiral_anim.mp4", interval
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, May 2016
-}
 \seealso{
 \code{\link{spiralDate}}, \code{\link{linLogHist}}
+}
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, May 2016
 }
 \keyword{aplot}
 \keyword{chron}
 \keyword{color}
 \keyword{hplot}
-

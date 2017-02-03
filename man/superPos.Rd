@@ -85,12 +85,11 @@ lines(superPos(P=P_c, UH=UH_2), col=5)
 legend("topright", c("P a","P b", "P c"), title="with UH_2", col=3:5, lty=1)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, July 2013
-}
 \seealso{
 \code{\link{lsc}} where superPos is used, \code{\link{unitHydrograph}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, July 2013
+}
 \keyword{hplot}
 \keyword{ts}
-

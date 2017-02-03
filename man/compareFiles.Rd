@@ -30,14 +30,13 @@ filenames <- system.file(paste0("extdata/versuch",1:2,".txt"), package="berryFun
 compareFiles(filenames[1], filenames[2], warn=FALSE)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Aug 2014
-}
 \seealso{
 \url{http://text-compare.com/} which I sadly only discovered after writing this function, 
          \code{\link{dupes}} for finding duplicate lines, \code{\link{combineFiles}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Aug 2014
+}
 \keyword{IO}
 \keyword{character}
 \keyword{file}
-

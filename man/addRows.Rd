@@ -25,11 +25,10 @@ MYDF <- data.frame(A=5:3, B=2:4)
 addRows(MYDF, 3)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2014
-}
 \seealso{
 \code{\link{insertRows}}, \code{\link{data.frame}}, \code{\link{matrix}}, \code{\link{rbind}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2014
+}
 \keyword{misc}
-

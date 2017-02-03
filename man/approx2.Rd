@@ -48,12 +48,11 @@ approx2(c( 2,NA, 6, 4, 8, 9, 3, 2, 1), n=17)
 approx2(c( 2, 4, 6, 4, 8, 9,NA, 2,NA), n=17)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, July 2015
-}
 \seealso{
 \code{\link{approx}}, zoo::na.locf, \code{\link{ciBand}} for usage example
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, July 2015
+}
 \keyword{arith}
 \keyword{dplot}
-

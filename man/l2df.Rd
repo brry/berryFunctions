@@ -44,9 +44,6 @@ do.call(cbind, eg3) # but this recycles the values of shorter tables!
 # check some of the links above if you really have this problem...
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2014
-}
 \references{
 \url{http://stackoverflow.com/questions/5531471/combining-unequal-columns-in-r}\cr
   \url{http://stackoverflow.com/questions/15753091/convert-mixed-length-named-list-to-data-frame}\cr
@@ -59,6 +56,8 @@ Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2014
          If you have a LARGE list each with the same number of values, 
          use the (much!) faster: \code{plyr::quickdf}.
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2014
+}
 \keyword{list}
 \keyword{manip}
-

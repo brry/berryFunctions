@@ -64,12 +64,11 @@ legend("topright", bty="n", legend=Explain)
 # median of simulations relative to the n2k8 line.
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, July 2013
-}
 \seealso{
 \code{\link{lsc}} on how to estimate n and k for a given discharge dataset. \code{deconvolution.uh} in the package hydromad, \url{http://hydromad.catchment.org}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, July 2013
+}
 \keyword{hplot}
 \keyword{ts}
-

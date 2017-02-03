@@ -79,13 +79,12 @@ linReg(a, b, digits=c(7,4,3), add=TRUE, col=3, lty=2, lwd=4, level=0.8)
 linReg(a, b, pos1="topleft", inset=c(-0.1, 0.3), legargs=list(xpd=TRUE), add=TRUE)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2012, 2015
-}
 \seealso{
 \code{\link{lm}}, \code{\link{mReg}}, \code{\link{expReg}}, \code{\link{legend}}, \code{\link{par}}, \code{\link{abline}}.
+}
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2012, 2015
 }
 \keyword{aplot}
 \keyword{hplot}
 \keyword{regression}
-

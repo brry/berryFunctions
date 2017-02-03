@@ -86,13 +86,12 @@ ffmpeg="C:/ffmpeg-20150424-git-cd69c0e-win64-static/bin/ffmpeg.exe")
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, April 2015
-}
 \seealso{
 \code{\link{linLogTrans}}
+}
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, April 2015
 }
 \keyword{dplot}
 \keyword{dynamic}
 \keyword{hplot}
-

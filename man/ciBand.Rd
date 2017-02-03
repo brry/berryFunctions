@@ -83,12 +83,11 @@ ciBand(yl=res_max[2,], yu=res_max[4,], ym=res_max[3,], x=x, ylim=c(-0.5, 3))
 ciBand(res_mean[2,], res_mean[4,], res_mean[3,], x=x, add=TRUE, colm="purple")
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, July 2015
-}
 \seealso{
 \code{\link{quantileBands}}, \code{\link{polygon}}, \code{\link{approx2}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, July 2015
+}
 \keyword{aplot}
 \keyword{hplot}
-

@@ -45,11 +45,10 @@ d <- logSpaced()
 plot(d, rep(1,20), log="x")
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Oct 2014
-}
 \seealso{
 \code{\link{classify}}, \code{\link{log}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Oct 2014
+}
 \keyword{arith}
-

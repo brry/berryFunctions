@@ -133,9 +133,6 @@ abline(b=1, a=0)
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, June 2014
-}
 \references{
 x^(1/t) is based on the first comment on \url{http://stackoverflow.com/questions/15994442/}\cr 
   besides the nice graphic properties of logtransformations, check this page for the implications on rates of change: \cr
@@ -145,7 +142,9 @@ x^(1/t) is based on the first comment on \url{http://stackoverflow.com/questions
 \seealso{
 \code{\link{logVals}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, June 2014
+}
 \keyword{dplot}
 \keyword{dynamic}
 \keyword{hplot}
-

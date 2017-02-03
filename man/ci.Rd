@@ -38,9 +38,6 @@ ci(yourdata)[1,2]     # returns upper boundary of the interval as a numeric
 ci                    # shows the function itself
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, 2010
-}
 \references{
 For newbies: Charles Wheelan: naked statistics - stripping the dread from the data, 2013, Norton, ISBN 978-0-393-07195-5.\cr 
   For statisticians: any of your favorite statistics books should cover confidence intervalls ;-)\cr 
@@ -53,5 +50,7 @@ For newbies: Charles Wheelan: naked statistics - stripping the dread from the da
 \seealso{
 \code{\link{t.test}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, 2010
+}
 \keyword{htest}
-

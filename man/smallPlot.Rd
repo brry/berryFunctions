@@ -58,6 +58,7 @@ multipanel-compatible inset plot with margins, background and border
 \section{Warning}{
  setting mai etc does not work!
 }
+
 \examples{
 
 # Basic usage:
@@ -152,15 +153,14 @@ mtext("hello", adj=1) # works
 mtext("hello", adj=1, line=-1) # works
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, 2014-2016
-}
 \seealso{
 \code{\link{colPointsLegend}} for an example of usage. 
          \code{\link[TeachingDemos]{subplot}} and \code{\link[ade4]{add.scatter}} 
          for alternative solutions to this problem that do not set margins.
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, 2014-2016
+}
 \keyword{aplot}
 \keyword{dplot}
 \keyword{hplot}
-

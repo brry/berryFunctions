@@ -117,13 +117,12 @@ monthAxis(n=3)
 monthAxis()
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Feb 2015, update labels and midyear Dec 2015
-}
 \seealso{
 \code{\link{monthLabs}} for the numbercrunching itself, \code{\link{axis.Date}} with defaults that are less nice.
+}
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Feb 2015, update labels and midyear Dec 2015
 }
 \keyword{aplot}
 \keyword{chron}
 \keyword{dplot}
-

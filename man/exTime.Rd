@@ -53,12 +53,11 @@ system2("open", tempdir()) # to view the pdf graphics created by exTime
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, May 2016
-}
 \seealso{
 \code{\link{example}}, \code{\link{system.time}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, May 2016
+}
 \keyword{documentation}
 \keyword{utilities}
-

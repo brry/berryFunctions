@@ -52,12 +52,11 @@ betaPlotComp(oma=c(2,2,2,2), ylim=lim0(5.5), textargs=list(y=NA))
 betaPlotComp(shape1=c(3,10,34), shape2=c(7,9,24))
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2015
-}
 \seealso{
 \code{\link{betaPlot}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2015
+}
 \keyword{distribution}
 \keyword{hplot}
-

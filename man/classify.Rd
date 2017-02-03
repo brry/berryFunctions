@@ -60,9 +60,6 @@ classify( c(1:10, 20), "u", breaks=c(5,27) )
 classify( c(1:10, 20), "l")
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, 2014
-}
 \references{
 See this page on the effect of classification (binning) methods: \cr 
 \url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html}
@@ -70,5 +67,7 @@ See this page on the effect of classification (binning) methods: \cr
 \seealso{
 \code{\link{colPoints}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, 2014
+}
 \keyword{classif}
-

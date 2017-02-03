@@ -204,9 +204,6 @@ colPoints(x,y,sim1, data=xyz, col=rainbow2(100), add=FALSE)
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2014. I'd be interested in hearing what you used the function for.
-}
 \references{
 \url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html},
             \url{http://www.theusrus.de/blog/the-good-the-bad-22012/}
@@ -214,7 +211,9 @@ Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2014. I'd be interested in heari
 \seealso{
 \code{\link{classify}}, \code{\link{colPointsLegend}}, \code{\link{colPointsHist}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2014. I'd be interested in hearing what you used the function for.
+}
 \keyword{aplot}
 \keyword{color}
 \keyword{hplot}
-

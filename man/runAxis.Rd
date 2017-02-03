@@ -30,11 +30,10 @@ plot(1:200, xaxt="n")
 runAxis(t=200, int1=20, int2=10)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Jun 2016
-}
 \seealso{
 \code{\link{logAxis}}, \code{\link{monthAxis}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Jun 2016
+}
 \keyword{aplot}
-

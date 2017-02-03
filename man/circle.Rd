@@ -38,11 +38,10 @@ circle(x,y,r, col=rgb(1,0.5,0,alpha=0.4), border=NA)
 for(i in 1:15) circle(x[i],y[i],r[i], col=rgb(1,0.5,0,alpha=0.4), border=NA)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, 2012
-}
 \seealso{
 \code{\link{symbols}}, \code{\link{polygon}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, 2012
+}
 \keyword{aplot}
-

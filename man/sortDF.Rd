@@ -28,13 +28,12 @@ sortDF(USArrests[USArrests$Murder>11,], "Assault")
 sortDF(USArrests[USArrests$Murder>11,], 3)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, June 2015
-}
 \seealso{
 \code{\link{sort}}, \code{\link{order}}
+}
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, June 2015
 }
 \keyword{arith}
 \keyword{manip}
 \keyword{univar}
-

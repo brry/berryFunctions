@@ -35,9 +35,6 @@ plot(rep(1,12), pch=16, cex=5, col=divPal(12), xaxt="n")
 showPal()
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2016
-}
 \references{
 Originally in 12 shades in the IPCC Assesment Report 5 Chapter 12 Fig 12.22, \url{http://www.ipcc.ch/report/ar5/wg1/}
 }
@@ -45,6 +42,8 @@ Originally in 12 shades in the IPCC Assesment Report 5 Chapter 12 Fig 12.22, \ur
 \code{\link{showPal}}, \code{\link{seqPal}}, \code{\link{addAlpha}}, 
          \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2016
+}
 \keyword{color}
 \keyword{dplot}
-

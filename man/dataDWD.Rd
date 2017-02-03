@@ -9,4 +9,3 @@
 This provides a much better infrastructure for file selection and downloading. 
 See \url{https://github.com/brry/rdwd#rdwd} for usage instructions.
 }
-

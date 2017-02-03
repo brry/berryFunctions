@@ -73,13 +73,12 @@ for(i in 1:50)  panelDim(i, plot=TRUE)
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2014, Jan 2015
-}
 \seealso{
 \code{\link{groupHist}}, which is using this function
+}
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2014, Jan 2015
 }
 \keyword{array}
 \keyword{dplot}
 \keyword{optimize}
-

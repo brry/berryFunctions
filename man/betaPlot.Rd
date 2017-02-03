@@ -61,14 +61,13 @@ betaPlotComp()
 # both bigger: narrower HDI, stronger peak
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, July 2014
-}
 \seealso{
 \code{\link{betaPlotComp}}, \code{\link{normPlot}}, \code{\link{dbeta}}, 
    \url{https://cran.r-project.org/package=denstrip}, 
    \url{https://cran.r-project.org/view=Distributions}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, July 2014
+}
 \keyword{distribution}
 \keyword{hplot}
-

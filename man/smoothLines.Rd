@@ -47,11 +47,10 @@ text(5,10, "default", adj=c(0.5,-0.2)); text(45,50, "default", adj=c(0.5,-0.2))
 #dev.off()
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, 2011/2012
-}
 \seealso{
 \code{\link{lines}}, \code{\link{col2rgb}}, \code{\link{rgb}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, 2011/2012
+}
 \keyword{aplot}
-

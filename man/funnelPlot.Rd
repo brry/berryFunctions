@@ -76,6 +76,7 @@ higher rate fails to take experience and opportunity (n) into account! This
 dilemma is what the funnel plot with the confidence interval (ci) solves.
 See Stephen Few and Katherine Rowel's PDF for details on the interpretation.
 }
+
 \examples{
 
 # Taken directly from Stephen Few's PDF:
@@ -142,14 +143,13 @@ abline(v=10)
 # more x-resolution is needed in the first region, so it gets more of the points
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Oct 2013
-}
 \references{
 http://www.perceptualedge.com/articles/visual_business_intelligence/variation_and_its_discontents.pdf\cr
    \url{http://sfew.websitetoolbox.com/post/variation-and-its-discontents-6555336?}\cr
    Excellent explanation of bayesian take on proportions: \url{http://varianceexplained.org/r/empirical_bayes_baseball/}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Oct 2013
+}
 \keyword{aplot}
 \keyword{hplot}
-

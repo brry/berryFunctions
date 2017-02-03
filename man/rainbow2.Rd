@@ -28,12 +28,11 @@ Reversed \code{\link{rainbow}} with different defaults, resulting in a color vec
 plot(1:10, pch=16, cex=2, col=rainbow2(10))
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Sept 2014
-}
 \seealso{
 \code{\link{seqPal}} for a better palette, \code{\link{rainbow}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Sept 2014
+}
 \keyword{color}
 \keyword{dplot}
-

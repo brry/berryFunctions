@@ -70,10 +70,9 @@ getColumn("1", df) # will actually return the first column, not column "1"
 getColumn(1, data.frame(AA=rep(NA,10)))
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Sep 2016
-}
 \seealso{
 \code{\link{subset}}, \code{\link{getElement}}, \url{https://mran.revolutionanalytics.com/web/packages/car/vignettes/embedding.pdf}
 }
-
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Sep 2016
+}

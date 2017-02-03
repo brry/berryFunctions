@@ -68,14 +68,13 @@ quantileBands(neff2, x=1:400, smooth=35, ylab="mean of rnorm(n)",
   meanargs=list(col=2, lty=1), main="Mean converges to true population mean")
    
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Sept 2014
-}
 \seealso{
 \code{\link{quantile}}, \code{\link{quantileMean}}, \code{\link{ciBand}}, 
          \code{\link{polygon}}, \url{https://cran.r-project.org/package=fanplot}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Sept 2014
+}
 \keyword{aplot}
 \keyword{dplot}
 \keyword{univar}
-

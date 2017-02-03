@@ -72,11 +72,10 @@ unlink("TableColVal.pdf")
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Nov 2012 + Nov 2016
-}
 \seealso{
 \code{\link{pdf}}, \code{\link{heatmap}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Nov 2012 + Nov 2016
+}
 \keyword{hplot}
-

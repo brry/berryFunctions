@@ -31,12 +31,11 @@ plot(cumsum(rnorm(60)), type="l")
 ## locArrow(col="blue", lwd=3)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Jun 2016
-}
 \seealso{
 \code{\link{locLine}}, \code{\link{locator}}, \code{\link{abline}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Jun 2016
+}
 \keyword{aplot}
 \keyword{iplot}
-

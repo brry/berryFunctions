@@ -71,12 +71,11 @@ plot(1:10)
 colPointsHist(z=z)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Aug 2014
-}
 \seealso{
 \code{\link{colPointsLegend}} and \code{\link{colPoints}} for real life examples
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Aug 2014
+}
 \keyword{aplot}
 \keyword{color}
-

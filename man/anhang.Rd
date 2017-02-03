@@ -18,10 +18,9 @@ Open the Appendix of my R handbook found online at
 # anhang() # excluded from cran check because of external browser opening policy
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Jul 2016
-}
 \seealso{
 \code{\link{funSource}}
 }
-
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Jul 2016
+}

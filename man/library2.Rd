@@ -32,11 +32,10 @@ library2("statmod")
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, 2014
-}
 \seealso{
 \code{\link{install.packages}}, \code{\link{library}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, 2014
+}
 \keyword{package}
-

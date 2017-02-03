@@ -72,11 +72,10 @@ hpos <- horizHist(ExampleData, breaks=20, col="orange")
 axis(2, hpos(0:10), labels=FALSE, col=2) # another use of hpos()
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2012
-}
 \seealso{
 \code{\link{hist}}, \code{\link{barplot}}, \code{\link{axis}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2012
+}
 \keyword{hplot}
-

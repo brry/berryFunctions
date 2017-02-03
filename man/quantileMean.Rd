@@ -101,11 +101,10 @@ lines(n[-1], pmedians_trunc, col=6) # much better!
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Sept 2014
-}
 \seealso{
 \code{\link{quantile}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Sept 2014
+}
 \keyword{univar}
-

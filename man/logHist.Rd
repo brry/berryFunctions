@@ -46,12 +46,11 @@ logHist(dat,xlim=c(0,2)) # xlim in powers of ten
 logHist(c(-1,0,1,2,2,3,3,4,8,10,50)) # warning for negative values
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Feb 2016
-}
 \seealso{
 \code{\link{logAxis}}, \code{\link{hist}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Feb 2016
+}
 \keyword{aplot}
 \keyword{dplot}
-

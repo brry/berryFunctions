@@ -84,14 +84,13 @@ spiralDate(time,vals, data=fakeData, pch=3)      # but not for points
 #spiralDate(dates, val, data=q05054000LT, lines=TRUE, lwd=3)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, May 2016
-}
 \seealso{
 \code{\link{seasonality}}, \code{\link{colPoints}}, \code{\link{as.Date}}
+}
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, May 2016
 }
 \keyword{aplot}
 \keyword{chron}
 \keyword{color}
 \keyword{hplot}
-

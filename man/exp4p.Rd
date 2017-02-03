@@ -55,12 +55,11 @@ exp4p(x,y, plot=TRUE)
 # optmethod="Nelder-Mead"  # y=52*e^(-0.031*(x + 3.4)) + 26 wrong
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, 2012-2013, outsourced from mReg in July 2014
-}
 \seealso{
 \code{\link{mReg}}, \code{\link{lm}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, 2012-2013, outsourced from mReg in July 2014
+}
 \keyword{nonlinear}
 \keyword{regression}
-

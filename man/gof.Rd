@@ -3,10 +3,14 @@
 \name{gof}
 \alias{gof}
 \alias{gofNA}
-\alias{kge}
-\alias{nse}
-\alias{rmse}
 \alias{rsquare}
+\alias{rmse}
+\alias{nse}
+\alias{kge}
+\alias{rsquare}
+\alias{rmse}
+\alias{nse}
+\alias{kge}
 \title{GOF measures}
 \usage{
 gofNA(a, b, quiet = FALSE, fun = "")
@@ -107,14 +111,13 @@ kge(x,y) ; kge(y,x)
 
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Sept 2016
-}
 \seealso{
 \code{\link{cor}}, \code{\link{lm}}.
             \url{http://en.wikipedia.org/wiki/R-squared}, 
             \url{http://en.wikipedia.org/wiki/Mean_squared_error}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Sept 2016
+}
 \keyword{ts}
 \keyword{univar}
-

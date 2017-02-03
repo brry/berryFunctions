@@ -29,15 +29,14 @@ timer(interval=0.2, n=8, write=TRUE) # a slight deviation occurs for a large n
 # timer() # to practice lightning talks at useR! conferences
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, June 2015
-}
 \references{
 \url{http://user2015.math.aau.dk/lightning_talks}
 }
 \seealso{
 \code{\link{alarm}}, \code{\link{Sys.sleep}}, \code{\link{txtProgressBar}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, June 2015
+}
 \keyword{chron}
 \keyword{utilities}
-

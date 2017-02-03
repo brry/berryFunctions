@@ -29,14 +29,13 @@ values <- rbeta(1e3, shape1=4, shape2=35)
 hist(rescale(values, 135, 200), breaks=25, col=3)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2016
-}
 \references{
 \url{http://stackoverflow.com/a/18303620}
 }
 \seealso{
 \code{scales::rescale}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2016
+}
 \keyword{manip}
-

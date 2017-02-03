@@ -120,9 +120,6 @@ d <- f2("42")  ; cat("-----\\n", d, "\\n-----\\n") ; rm(d) # try -> no error.
 
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Nov 2016
-}
 \seealso{
 \code{\link{try}}, \code{\link{traceCall}},
 \url{http://r.789695.n4.nabble.com/Stack-trace-td4021537.html},
@@ -130,6 +127,8 @@ Berry Boessenkool, \email{berry-b@gmx.de}, Nov 2016
 \url{http://stackoverflow.com/questions/1975110/printing-stack-trace-and-continuing-after-error-occurs-in-r},
 \url{http://stackoverflow.com/questions/16879821/save-traceback-on-error-using-trycatch}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Nov 2016
+}
 \keyword{error}
 \keyword{programming}
-

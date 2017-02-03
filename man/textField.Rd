@@ -129,9 +129,6 @@ textField(c(1,2.5,4)*1000, 0.2, paste("expression=\\n", c("FALSE","TRUE","NA")))
 # I'm working on it through expression, which does not work with newlines yet
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, April 2013 + March 2014
-}
 \references{
 with inspiration taken from \code{ordilabel} in package \code{vegan} and thanks to Jari Oksanen for his comments
 }
@@ -142,5 +139,7 @@ with inspiration taken from \code{ordilabel} in package \code{vegan} and thanks 
          \code{s.label} in package \code{ade4}, which is not so versatile and 
          doesn't work with logarithmic axes
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, April 2013 + March 2014
+}
 \keyword{aplot}
-

@@ -39,11 +39,10 @@ format(x, justify="centre")
 format(x, width=9)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2014
-}
 \seealso{
 \code{\link{sub}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2014
+}
 \keyword{character}
-

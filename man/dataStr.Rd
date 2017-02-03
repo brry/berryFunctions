@@ -23,12 +23,11 @@ by default in the package \code{\link{datasets}}
 # dataStr()
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, November 2015, in search of good datasets for teaching
-}
 \seealso{
 \code{\link{str}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, November 2015, in search of good datasets for teaching
+}
 \keyword{documentation}
 \keyword{print}
-

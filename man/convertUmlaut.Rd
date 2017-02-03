@@ -27,12 +27,11 @@ convertUmlaut(examples) # note how lower and upper case is kept
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Oct-Nov 2016
-}
 \seealso{
 \code{tools::\link[tools]{showNonASCII}}, \code{\link{gsub}},
         \code{\link{iconv}(x, to="ASCII//TRANSLIT")}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Oct-Nov 2016
+}
 \keyword{character}
-

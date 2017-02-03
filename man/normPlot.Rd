@@ -58,14 +58,13 @@ normPlot(81.7, 11.45)
 normPlot(180, 11, quant=FALSE, width=2)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, July 2014
-}
 \seealso{
 \code{\link{betaPlot}}, \code{\link{dnorm}},
       \url{https://cran.r-project.org/package=denstrip},
       \url{https://cran.r-project.org/view=Distributions}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, July 2014
+}
 \keyword{distribution}
 \keyword{hplot}
-

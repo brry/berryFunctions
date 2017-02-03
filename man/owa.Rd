@@ -11,12 +11,12 @@ owa(d, a, ..., quiet = FALSE)
 
 \item{a}{Arguments specified by user (list or vector)}
 
+\item{\dots}{Names of unchangeable arguments (that will not be overwritten) 
+as character strings. Can also be a vector with characters strings.}
+
 \item{quiet}{Logical: Should \code{\link{message}} be suppressed if arguments are ignored?
 If FALSE (the DEFAULT), this helps users debugging, as they get
 notified when arguments they specified were ignored.}
-
-\item{\dots}{Names of unchangeable arguments (that will not be overwritten) 
-as character strings. Can also be a vector with characters strings.}
 }
 \value{
 Always a list, disregarding list/vector mode of input
@@ -69,14 +69,13 @@ owa(d, a, c("bb","lwd"), c("lty","dummy") ) # or several vectors
 
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Early 2014, Update Oct 2016
-}
 \references{
 \url{http://stackoverflow.com/questions/3057341}\cr
    \url{http://stackoverflow.com/questions/5890576}\cr
    \url{http://stackoverflow.com/questions/4124900}\cr
    \url{http://stackoverflow.com/questions/16774946}\cr
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Early 2014, Update Oct 2016
+}
 \keyword{programming}
-

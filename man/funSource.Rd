@@ -45,4 +45,3 @@ rm(tail)
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jan+Dec 2016
 }
-

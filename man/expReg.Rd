@@ -76,13 +76,12 @@ expReg(x,y, predictnew=6, plot=FALSE)
 expReg(x,y, predictnew=3:6, interval="none", plot=FALSE)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Dec. 2014
-}
 \seealso{
 \code{\link{lm}}, \code{\link{mReg}}, \code{\link{linReg}}.
+}
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Dec. 2014
 }
 \keyword{aplot}
 \keyword{hplot}
 \keyword{regression}
-

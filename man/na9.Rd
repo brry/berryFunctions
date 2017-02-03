@@ -34,12 +34,11 @@ na9(nspace=0, sep=".")
 na9(nspace=0, sep=".", more=c(NA,"-"))
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2016
-}
 \seealso{
 \code{\link{paste}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2016
+}
 \keyword{IO}
 \keyword{file}
-

@@ -40,11 +40,10 @@ monthLabs(2014,2014,  npy=4) # 4 months per year
 # see monthAxis for automatic plot labelling
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, early 2013
-}
 \seealso{
 \code{\link{monthAxis}} for automatic determination of npm/npy, \code{\link{as.Date}}, \code{\link{paste}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, early 2013
+}
 \keyword{chron}
-

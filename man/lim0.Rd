@@ -44,9 +44,6 @@ plot(b)
 plot(b, ylim=lim0(b) ) # works with only negative values as well
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, 6.6.2013
-}
 \references{
 \code{methods(plot)}, \code{\link[graphics]{plot.default}}.
             Actually, I found extendrange via \code{plot.function} in \code{curve}
@@ -54,5 +51,7 @@ Berry Boessenkool, \email{berry-b@gmx.de}, 6.6.2013
 \seealso{
 The \code{\link{extendrange}()} utility in package \pkg{grDevices}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, 6.6.2013
+}
 \keyword{dplot}
-

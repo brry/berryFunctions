@@ -41,13 +41,12 @@ groupHist(chickwts, weight, feed, col=2, breaks=20, main="Hi there")
 groupHist(iris, Petal.Width, Species)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2015
-}
 \seealso{
 \code{\link{hist}}, \code{\link{tapply}}
+}
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2015
 }
 \keyword{distribution}
 \keyword{dplot}
 \keyword{hplot}
-

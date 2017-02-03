@@ -37,11 +37,10 @@ pretty2(c(0.2, 0.9), n=2)
 pretty2(c(0.2, 0.9), n=2, force=TRUE)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Aug 2014
-}
 \seealso{
 \code{\link{pretty}} , \code{\link{logVals}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Aug 2014
+}
 \keyword{dplot}
-

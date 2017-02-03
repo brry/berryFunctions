@@ -121,6 +121,7 @@ exp_4par was originally developed for exponential temperature decline in a cup o
         Avoid overfitting: Poly45 will often yield good results (in terms of R^2), but can be way overfitted. 
         And outside the range of values, they act wildly.
 }
+
 \examples{
 
 set.seed(12)
@@ -263,18 +264,17 @@ mReg(c(rep(0,9),NA), 1:10, quiet=TRUE)
 mReg(rep(NA,10), 1:10, quiet=TRUE)
  
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2012, updated April and Aug 2013, sept 2015
-}
 \references{
 Listed here: \url{http://rclickhandbuch.wordpress.com/rpackages}
 }
 \seealso{
 \code{\link{glm}}, \code{\link{lm}}, \code{\link{optim}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2012, updated April and Aug 2013, sept 2015
+}
 \keyword{aplot}
 \keyword{hplot}
 \keyword{multivariate}
 \keyword{nonlinear}
 \keyword{regression}
-

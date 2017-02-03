@@ -23,11 +23,10 @@ toupper1("berry")
 toupper1(c("berRy","likes to code"))
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Jul 2016
-}
 \seealso{
 \code{\link{toupper}}, \code{\link{substr}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Jul 2016
+}
 \keyword{character}
-

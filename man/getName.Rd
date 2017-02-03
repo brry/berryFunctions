@@ -38,13 +38,12 @@ upper(dummy) # still stable
 upper(stackloss[1:5,])
 
 }
+\seealso{
+\url{http://stackoverflow.com/a/26558733}, \code{\link{substitute}}
+}
 \author{
 \url{http://stackoverflow.com/users/2725969/brodieg}
         Implementation Berry Boessenkool, \email{berry-b@gmx.de}, Sep 2016
 }
-\seealso{
-\url{http://stackoverflow.com/a/26558733}, \code{\link{substitute}}
-}
 \keyword{IO}
 \keyword{character}
-

@@ -52,13 +52,12 @@ for(b in seq(0.99, 1.01, len=30))
     points(rep(b, 1000), pch=15, cex=1, col=seqPal(1000, logbase=b)) 
  
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2016
-}
 \seealso{
 \code{\link{showPal}}, \code{\link{divPal}}, \code{\link{addAlpha}}, 
          \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2016
+}
 \keyword{color}
 \keyword{dplot}
-

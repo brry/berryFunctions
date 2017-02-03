@@ -2,8 +2,8 @@
 % Please edit documentation in R/berryFunctions-package.R
 \docType{package}
 \name{berryFunctions-package}
-\alias{berryFunctions}
 \alias{berryFunctions-package}
+\alias{berryFunctions}
 \title{Berry's functions}
 \description{
 Collection of functions, mainly connected with graphics and hydrology.\cr 
@@ -41,4 +41,3 @@ Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2016
 }
 \keyword{documentation}
 \keyword{package}
-

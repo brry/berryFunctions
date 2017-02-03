@@ -33,11 +33,10 @@ truncMessage(paste0("hi",1:10), ntrunc=2, prefix="", midfix="")
 truncMessage(paste0("hi",1:10), ntrunc=8, prefix="files _ ")
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Nov 2016
-}
 \seealso{
 \code{\link{message}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Nov 2016
+}
 \keyword{character}
-

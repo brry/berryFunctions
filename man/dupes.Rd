@@ -54,13 +54,12 @@ system.file("extdata", package="berryFunctions")
 # "explorer" or "start" on windows
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2014
-}
 \seealso{
 \code{\link{compareFiles}}
+}
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2014
 }
 \keyword{IO}
 \keyword{character}
 \keyword{file}
-

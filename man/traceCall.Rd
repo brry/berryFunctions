@@ -23,6 +23,7 @@ trace the call stack e.g. for error checking and format output for do.call level
  Called from \link{do.call} settings with large objects,
                   tracing may take a lot of computing time.
 }
+
 \examples{
 lower <- function(a, s) {warning(traceCall(s), "stupid berry warning: ", a+10); a}
 upper <- function(b, skip=0) lower(b+5, skip)
@@ -35,12 +36,11 @@ inherits(d, "try-error")
 cat(d) 
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Sep 2016
-}
 \seealso{
 \code{\link{tryStack}}, \code{\link{checkFile}} for example usage
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Sep 2016
+}
 \keyword{error}
 \keyword{programming}
-

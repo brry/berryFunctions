@@ -32,12 +32,11 @@ segments(x0=1:29,y0=head(x,-1), x1=2:30,y1=x[-1], col=addAlpha(4, 29:0/30), lwd=
 segments(x0=1:29,y0=head(y,-1), x1=2:30,y1=y[-1], col=addFade (4, 29:0/30), lwd=10)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, June 2014 Based on suggestion by Mathias Seibert, Dec. 2013
-}
 \seealso{
 \code{\link{addFade}}, \code{\link{rgb}}, \code{\link{colors}}, \code{\link{col2rgb}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, June 2014 Based on suggestion by Mathias Seibert, Dec. 2013
+}
 \keyword{color}
 \keyword{dplot}
-

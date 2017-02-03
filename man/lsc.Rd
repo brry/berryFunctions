@@ -135,9 +135,6 @@ lsc(calib$P, calib$Q, area=1.6) # not bad indeed
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, July 2013
-}
 \references{
 \url{http://ponce.sdsu.edu/onlineuhcascade.php}\cr 
    Skript 'Abflusskonzentration' zur Vorlesungsreihe Abwasserentsorgung I von Prof. Krebs an der TU Dresden\cr
@@ -148,7 +145,9 @@ Berry Boessenkool, \email{berry-b@gmx.de}, July 2013
 \code{\link{unitHydrograph}}, \code{\link{superPos}}, \code{\link{nse}}, \code{\link{rmse}}. 
          \code{deconvolution.uh} in the package hydromad, \url{http://hydromad.catchment.org}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, July 2013
+}
 \keyword{hplot}
 \keyword{optimize}
 \keyword{ts}
-

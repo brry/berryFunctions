@@ -38,11 +38,10 @@ Link <- paste0("https://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2",
 googleLink2pdf(Link)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, 2012
-}
 \seealso{
 \code{\link{strsplit}}, \code{\link{gsub}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, 2012
+}
 \keyword{character}
-

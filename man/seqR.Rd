@@ -34,11 +34,10 @@ seqR(range=c(12,6), by=-2, extend=0.1)
 # internaly calls extendrange with f=extend
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Feb 2014
-}
 \seealso{
 \code{\link{seq}}, \code{\link{range}}, \url{http://r.789695.n4.nabble.com/seq-range-argument-td4684627.html}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Feb 2014
+}
 \keyword{datagen}
-

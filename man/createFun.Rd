@@ -25,12 +25,11 @@ Tries to open the file in the standard editor for .R files using \code{\link{sys
 \examples{
 #createFun("myNewFunction")
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, March 2016
-}
 \seealso{
 \code{\link{system2}}, \code{\link{funSource}}, Roxygen2: 
          \url{https://cran.r-project.org/package=roxygen2/vignettes/rd.html}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, March 2016
+}
 \keyword{documentation}
-

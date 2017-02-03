@@ -148,12 +148,11 @@ seasonality(date, discharge, data=Q, plot=1:4, col=divPal(100, ryb=TRUE))
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Jul-Oct 2016
-}
 \seealso{
 \code{\link{spiralDate}}, \code{\link{colPoints}},
          \url{http://nwis.waterdata.usgs.gov/nwis/peak?search_site_no=01400500}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Jul-Oct 2016
+}
 \keyword{aplot}
-

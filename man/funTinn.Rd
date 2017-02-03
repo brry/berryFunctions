@@ -21,11 +21,10 @@ Opens function or object in external editor with an R command
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Aug 2014
-}
 \seealso{
 \code{\link{edit}}, \url{http://stackoverflow.com/questions/13873528}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Aug 2014
+}
 \keyword{connection}
-

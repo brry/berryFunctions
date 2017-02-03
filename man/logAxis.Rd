@@ -92,12 +92,11 @@ plot(10^(1:5), log="y"); logAxis(4, expon=3, base=c(1,2,5), expobase1=TRUE)
 plot(-8:5); logAxis(4, allbase=c(1,2,5)) # In case you want to mislead...
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Sept 2014
-}
 \seealso{
 \code{\link{logVals}}, \code{\link{log10}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Sept 2014
+}
 \keyword{aplot}
 \keyword{dplot}
-

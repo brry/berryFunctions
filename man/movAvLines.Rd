@@ -36,13 +36,12 @@ set.seed(42)
 movAvLines(y=cumsum(rnorm(50)), add=FALSE, lwd=3)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, May 2015
-}
 \seealso{
 \code{\link{movAv}}, \code{\link{addAlpha}}
+}
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, May 2015
 }
 \keyword{manip}
 \keyword{smooth}
 \keyword{ts}
-

@@ -27,15 +27,14 @@ lsMem()
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Feb 2014
-}
 \references{
 \url{http://stackoverflow.com/questions/1358003/tricks-to-manage-the-available-memory-in-an-r-session}
 }
 \seealso{
 \code{\link{object.size}}, \code{\link{ls}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Feb 2014
+}
 \keyword{file}
 \keyword{programming}
-

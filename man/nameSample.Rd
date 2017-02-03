@@ -57,11 +57,10 @@ expReg(nchar(rownames(calctime))-8, calctime[,1], xlim=c(1,7), ylim=c(-3,4),
 }
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, April 2014
-}
 \seealso{
 \code{\link{yearSample}} to wish a happy new year, \code{\link{set.seed}}, \code{\link{sample}}, \code{\link{letters}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, April 2014
+}
 \keyword{character}
-

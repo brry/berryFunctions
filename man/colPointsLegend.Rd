@@ -113,12 +113,11 @@ colPointsLegend(z=z, horiz=FALSE, x1=0.7, y1=0.6, plottriangle=TRUE, density=FAL
 ?colPoints # example section for actual usage
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, 2012-2014
-}
 \seealso{
 \code{\link{colPointsHist}}, \code{\link{colPoints}} for real life example
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, 2012-2014
+}
 \keyword{aplot}
 \keyword{color}
-

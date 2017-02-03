@@ -50,11 +50,10 @@ upper(paste0("dumbo",2:8,".nonexist"), trace=FALSE)
 
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, May 2016
-}
 \seealso{
 \code{\link{file.exists}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, May 2016
+}
 \keyword{file}
-

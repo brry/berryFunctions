@@ -32,12 +32,11 @@ NewColors <- addFade(c("red","blue","yellow","green", "purple"), 0:200/200)
 plot(runif(1000), col=NewColors, pch=16, cex=2)
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Feb 2016
-}
 \seealso{
 \code{\link{addAlpha}}, \code{\link{colorRamp}}, \code{\link{colors}}
 }
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Feb 2016
+}
 \keyword{color}
 \keyword{dplot}
-

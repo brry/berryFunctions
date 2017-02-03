@@ -103,13 +103,12 @@ is.error(   A <- l2array(c(LA, 999)),  tell=TRUE, force=TRUE)
 
 
 }
-\author{
-Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2016
-}
 \seealso{
 \code{\link{l2df}}, \code{\link{help}}, \url{http://stackoverflow.com/a/4310747}
+}
+\author{
+Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2016
 }
 \keyword{array}
 \keyword{list}
 \keyword{manip}
-
