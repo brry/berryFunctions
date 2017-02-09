@@ -4,12 +4,16 @@
 \alias{newFilename}
 \title{Create new filename if file already exists}
 \usage{
-newFilename(filename, ignore = FALSE, quiet = FALSE, ntrunc = 3)
+newFilename(filename, ignore = FALSE, pre = "", mid = "\\n  ", end = "",
+  quiet = FALSE, ntrunc = 3)
 }
 \arguments{
 \item{filename}{Char (vector): file name(s).}
 
-\item{ignore}{Logical (vector): Ignore file? DEFAULT: FALSE}
+\item{ignore}{Logical (vector, recycled): Ignore file? DEFAULT: FALSE}
+
+\item{pre, mid, end}{Char: strings to append after traceback / message / filenames. 
+DEFAULT: "", "\\n  ", ""}
 
 \item{quiet}{Logical: Suppress messages about creating file(s)? DEFAULT: FALSE}
 
@@ -32,7 +36,7 @@ newFilename(fns)
 newFilename(fns, ignore=TRUE)
 newFilename(fns, ignore=rep(0:1, each=4))
 newFilename(fns, ntrunc=2)
-newFilename("ExampleGraph.png")
+newFilename("README.md")
 
 }
 \seealso{

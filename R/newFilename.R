@@ -19,10 +19,12 @@
 #' newFilename(fns, ignore=TRUE)
 #' newFilename(fns, ignore=rep(0:1, each=4))
 #' newFilename(fns, ntrunc=2)
-#' newFilename("ExampleGraph.png")
+#' newFilename("README.md")
 #'
 #' @param filename Char (vector): file name(s).
-#' @param ignore   Logical (vector): Ignore file? DEFAULT: FALSE
+#' @param ignore   Logical (vector, recycled): Ignore file? DEFAULT: FALSE
+#' @param pre,mid,end Char: strings to append after traceback / message / filenames. 
+#'                 DEFAULT: "", "\\n  ", ""
 #' @param quiet    Logical: Suppress messages about creating file(s)? DEFAULT: FALSE
 #' @param ntrunc   Integer: Number of filenames printed in messages before they
 #'                 get truncated with message "(and xx more)". DEFAULT: 3
@@ -30,6 +32,9 @@
 newFilename <- function(
 filename,
 ignore=FALSE,
+pre="",
+mid="\n  ",
+end="",
 quiet=FALSE,
 ntrunc=3
 )
@@ -62,11 +67,11 @@ if(!quiet)
   n_e <- sum(existed, na.rm=TRUE) # number of existing files
   n_n <- sum(!is.na(existed)) # number of new files
   n_i <- sum(is.na(existed)) # number of ignored files
-  message(traceCall(1, "", ": "),
+  message(traceCall(1, "", ": "), pre,
           if(n_i>0) paste0("ignoring ", n_i, " file", if(n_i>1) "s", "; "),
           if(n_n>0) paste0("creating ", n_n, " file", if(n_n>1) "s"),
           if(n_e>0) paste0(" (",n_e," already existed for which '_n' is appended)"),
-          ":", truncMessage(fnames, ntrunc=ntrunc, prefix=""))
+          ":", mid, truncMessage(fnames, ntrunc=ntrunc, prefix=""), end)
   }
 fnames
 }
