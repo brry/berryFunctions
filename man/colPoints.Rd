@@ -8,9 +8,9 @@ colPoints(x, y, z, data, add = TRUE, col = seqPal(cl$nbins), col2 = c(NA,
   "grey", "black"), Range = range(z, finite = TRUE),
   method = "equalinterval", breaks, sdlab = 1, legend = TRUE,
   legargs = NULL, hist = FALSE, histargs = NULL, lines = FALSE,
-  nint = 30, xlab = substitute(x), ylab = substitute(y),
-  zlab = substitute(z), las = 1, pch = 16, x1 = 0.6, y1 = 0.88,
-  x2 = 0.99, y2 = 0.99, density = TRUE, quiet = FALSE, ...)
+  nint = 30, xlab = deparse(substitute(x)), ylab = deparse(substitute(y)),
+  zlab = deparse(substitute(z)), las = 1, pch = 16, x1 = 0.6,
+  y1 = 0.88, x2 = 0.99, y2 = 0.99, density = TRUE, quiet = FALSE, ...)
 }
 \arguments{
 \item{x, y}{Vectors with coordinates of the points to be drawn}
@@ -27,7 +27,7 @@ palette \code{\link{seqPal}} (color-blind safe, black/white-print safe)}
 
 \item{col2}{Color for points where z is NA, or lower / higher than \code{Range}. DEFAULT: c(NA, 1, 8)}
 
-\item{Range}{Ends of color bar. DEFAULT: range(z, finite=TRUE)}
+\item{Range}{Ends of color bar. If NULL, is again the DEFAULT: range(z, finite=TRUE)}
 
 \item{method}{Classification method (partial matching is performed), 
 see \code{\link{classify}} (ways to get color breakpoints). DEFAULT: "equalinterval")}
@@ -56,7 +56,7 @@ If lines=TRUE and pch is not given, pch ist set to NA. DEFAULT: FALSE}
 coordinate if \code{lines=TRUE}. nint=1 means no interpolation. 
 Values below 10 will smooth coordinates and might miss the original points. DEFAULT: 30}
 
-\item{xlab}{x-axis label. DEFAULT: \code{\link{substitute}(x)}}
+\item{xlab}{x-axis label. DEFAULT: \code{deparse(\link{substitute}(x))}}
 
 \item{ylab}{y-axis label. DEFAULT: ditto}
 
@@ -152,7 +152,7 @@ text(rx,ry,round(rz), col=mycols(100)[classify(rz)$index], cex=0.7)
 
 # histogram in lower panel:
 layout(matrix(1:2), heights=c(8,4) )
-colPoints(i,j,k, add=FALSE, legargs=list(y1=0.8, y2=1))
+colPoints(i,j,k, add=FALSE, y1=0.8, y2=1)
 colPointsHist(z=k, x1=0.05, x2=1, y1=0, y2=0.4, mar=3, outer=TRUE)
 layout(1)
 

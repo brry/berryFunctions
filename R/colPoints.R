@@ -77,7 +77,7 @@
 #' 
 #' # histogram in lower panel:
 #' layout(matrix(1:2), heights=c(8,4) )
-#' colPoints(i,j,k, add=FALSE, legargs=list(y1=0.8, y2=1))
+#' colPoints(i,j,k, add=FALSE, y1=0.8, y2=1)
 #' colPointsHist(z=k, x1=0.05, x2=1, y1=0, y2=0.4, mar=3, outer=TRUE)
 #' layout(1)
 #' 
@@ -136,7 +136,7 @@
 #' @param col Vector of colors to be used. DEFAULT: 100 colors from sequential 
 #'            palette \code{\link{seqPal}} (color-blind safe, black/white-print safe)
 #' @param col2 Color for points where z is NA, or lower / higher than \code{Range}. DEFAULT: c(NA, 1, 8)
-#' @param Range Ends of color bar. DEFAULT: range(z, finite=TRUE)
+#' @param Range Ends of color bar. If NULL, is again the DEFAULT: range(z, finite=TRUE)
 #' @param method Classification method (partial matching is performed), 
 #'              see \code{\link{classify}} (ways to get color breakpoints). DEFAULT: "equalinterval")
 #' @param breaks Specification for method, see \code{\link{classify}}. 
@@ -155,7 +155,7 @@
 #' @param nint Numeric of length 1. Number of interpolation points between each 
 #'             coordinate if \code{lines=TRUE}. nint=1 means no interpolation. 
 #'             Values below 10 will smooth coordinates and might miss the original points. DEFAULT: 30
-#' @param xlab x-axis label. DEFAULT: \code{\link{substitute}(x)}
+#' @param xlab x-axis label. DEFAULT: \code{deparse(\link{substitute}(x))}
 #' @param ylab y-axis label. DEFAULT: ditto
 #' @param zlab \code{\link{colPointsLegend} title}. DEFAULT: ditto
 #' @param las Label Axis Style. Only used when add=FALSE. See \code{\link{par}}. 
@@ -187,9 +187,9 @@ colPoints <- function(
   histargs=NULL, 
   lines=FALSE, 
   nint=30,
-  xlab=substitute(x),
-  ylab=substitute(y),
-  zlab=substitute(z),
+  xlab=deparse(substitute(x)),
+  ylab=deparse(substitute(y)),
+  zlab=deparse(substitute(z)),
   las=1, 
   pch=16, 
   x1=0.6,
@@ -201,9 +201,7 @@ colPoints <- function(
   ...)
 {
  # default labels need to be obtained before x and y are evaluated
-xlab <- if(missing(xlab)) deparse(xlab) else xlab
-ylab <- if(missing(ylab)) deparse(ylab) else ylab
-zlab <- if(missing(zlab)) deparse(zlab) else zlab
+xlab <- xlab ; ylab <- ylab ; zlab <- zlab
 # error checking:
 if(length(nint)>1) if(!quiet) warning("Only the first value of 'nint' is used.")
 nint <- nint[1]
@@ -212,7 +210,8 @@ col2 <- rep(col2, length.out=3) # in case only one, two or >3 values are given.
 # Partial matching of method:
 PossibleValues <- c("equalinterval", "quantile", "logspaced", "standarddeviation", "usergiven")
 method <- PossibleValues[pmatch(tolower(method),  PossibleValues)]
-if(is.na(method)) stop("method can only be equalinterval, quantile, logspaced, standarddeviation, or usergiven (but the name can be abbreviated).")
+if(is.na(method)) stop("method can only be equalinterval, quantile, logspaced, ",
+                       "standarddeviation, or usergiven (but the name can be abbreviated).")
 #
 # vector vs matrix and dimension check: ----------------------------------------
 # a) argument data is given
@@ -234,11 +233,13 @@ if(is.vector(z))
    if(missing(x)) {x <- 1:ncol(z) ; if(missing(xlab)) xlab <- "x" }
    if(missing(y)) {y <- nrow(z):1 ; if(missing(ylab)) ylab <- "y" }
    if(!(length(x)==ncol(z) & length(y)==nrow(z)))
-     stop("Dimension of z (ncol*nrow) is not length(x) * length(y)!")
+     stop("Dimension of z (ncol*nrow=",ncol(z),",",nrow(z),
+          ") is not length(x) * length(y) (=",length(x),",",length(y),")!")
    x <- rep(x, each=nrow(z));  y <- rep(y, ncol(z));  z <- as.vector(z)
    }
 # error checking:
 if(diff(range(z, finite=TRUE))==0) if(!quiet) warning("All z-values are equal.")
+if(is.null(Range)) Range <- range(z, finite=TRUE)
 #
 # CLASSIFICATION # -------------------------------------------------------------
 if(method=="equalinterval") if(!missing(col)) breaks <- length(col)
@@ -259,15 +260,15 @@ if(lines)
   if(missing(pch)) pch <- NA
   # linear interpolation between coordinates (smoother line colors):
   np <- length(x)*nint-nint+1 # replacing NA necessary if NAs are at start or end
-  x2 <- approx2(x,n=np) #approx(replace(x, is.na(x), median(x, na.rm=TRUE)), n=np)$y
-  y2 <- approx2(y,n=np) #approx(replace(y, is.na(y), median(y, na.rm=TRUE)), n=np)$y
-  z2 <- approx2(z,n=np) #approx(replace(z, is.na(z), median(z, na.rm=TRUE)), n=np)$y
+  xl <- approx2(x,n=np) #approx(replace(x, is.na(x), median(x, na.rm=TRUE)), n=np)$y
+  yl <- approx2(y,n=np) #approx(replace(y, is.na(y), median(y, na.rm=TRUE)), n=np)$y
+  zl <- approx2(z,n=np) #approx(replace(z, is.na(z), median(z, na.rm=TRUE)), n=np)$y
   # classify interpolated values:
-  cl2 <- classify(x=z2, method=method, breaks=breaks, sdlab=sdlab, Range=Range, quiet=quiet)
+  cl2 <- classify(x=zl, method=method, breaks=breaks, sdlab=sdlab, Range=Range, quiet=quiet)
   output <- cl
-  output$x <- x2
-  output$y <- y2
-  output$z <- z2
+  output$x <- xl
+  output$y <- yl
+  output$z <- zl
   # Where are NAs in the vectors?
   wNA <- is.na(x) | is.na(y) | is.na(z)
   # change single values (surrounded by NA) to NA:
@@ -277,7 +278,7 @@ if(lines)
   for(i in which(wNA))
       cl2$index[pmax((i-2)*nint+1, 1) : pmin(i*nint, np)] <- NA
   # Actually draw segments:
-  segments(x0=x2[-length(x2)],  y0=y2[-length(y2)],  x1=x2[-1],  y1=y2[-1],
+  segments(x0=xl[-length(xl)],  y0=yl[-length(yl)],  x1=xl[-1],  y1=yl[-1],
            col=col[cl2$index], ...)
   }
 points(x[is.na(z)], y[is.na(z)], col=col2[1], pch=pch, ...)
