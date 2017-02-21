@@ -2,6 +2,22 @@
 # Function development testing
 # Berry Boessenkool, started Oct 2016
 
+# colPointsLegend potentially extremely dependent on graphics size.
+# may also require changes in smallPlot
+
+
+i <- c( 22,  40,  48,  60,  80,  70,  70,  63,  55,  48,  45,  40,  30,  32)
+j <- c(  5,  10,  15,  20,  12,  30,  45,  40,  30,  36,  56,  33,  45,  23)
+k <- c(175, 168, 163, 132, 120, 117, 110, 130, 131, 160, 105, 174, 190, 183)
+ 
+for(hh in c(400,350,300))
+{
+png(paste0("test",hh,".png"), width=800, height=hh)
+tryStack(colPoints(i,j,k, cex=1.5, pch="+", add=FALSE))
+dev.off()
+}
+unlink(paste0("test",c(400,350,300),".png"))
+
 
 # smallPlot
 
