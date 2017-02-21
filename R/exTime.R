@@ -1,6 +1,6 @@
 #' Time to run examples
 #'
-#' Time the execution of examples. Useful in package development to identify functions takeing much time.
+#' Time the execution of examples. Useful in package development to identify functions taking much time.
 #'
 #' @return Time used as per \code{\link{system.time}}
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, May 2016
@@ -22,24 +22,24 @@
 #' times <- exTime(package="rdwd")
 #' as.matrix(sort(times))
 #' system2("open", tempdir()) # to view the pdf graphics created by exTime
-#' 
+#'
 #' # times <- exTime(package="rdwd", run.dontrun=FALSE)
 #' }
 #'
-#' @param topic     Character string: the online \code{\link{help}} topic 
+#' @param topic     Character string: the online \code{\link{help}} topic
 #'                  of which the examples should be run.
 #' @param package   Charstring: installed and loaded package from which all examples should be run.
 #' @param echo      Show the R input when sourcing? DEFAULT: FALSE
 #' @param elapsed   Return *only* the third element (total elapsed time)? DEFAULT: FALSE
-#' @param imagefile Reroute graphics to \code{\link{pdf}} device? 
-#'                  Will \code{\link{message}} the \code{\link{tempfile}} 
+#' @param imagefile Reroute graphics to \code{\link{pdf}} device?
+#'                  Will \code{\link{message}} the \code{\link{tempfile}}
 #'                  location if quiet=FALSE.  DEFAULT: TRUE
-#' @param quiet     Suppress warnings with both \code{\link{suppressWarnings}} and 
-#'                  \code{\link{suppressMessages}}, 
-#'                  also \code{\link{capture.output}} for str and cat results 
+#' @param quiet     Suppress warnings with both \code{\link{suppressWarnings}} and
+#'                  \code{\link{suppressMessages}},
+#'                  also \code{\link{capture.output}} for str and cat results
 #'                  as well as setting \code{pboptions(type="none")} if \code{pbapply} is available.
-#' @param \dots     Further arguments to \code{\link{example}}, especially 
-#'                  \code{run.dontrun}, \code{run.donttest} and \code{package}, 
+#' @param \dots     Further arguments to \code{\link{example}}, especially
+#'                  \code{run.dontrun}, \code{run.donttest} and \code{package},
 #'                  but NOT \code{character.only} and \code{ask}
 #'
 exTime <- function(
@@ -95,7 +95,7 @@ if(imagefile)
 result
 }
 # actually run stuff
-if(!is.na(package)) 
+if(!is.na(package))
   {
   if(missing(quiet)) quiet <- TRUE
   if(missing(elapsed)) elapsed <- TRUE

@@ -8,7 +8,7 @@ exTime(topic = NA, package = NA, echo = FALSE, elapsed = FALSE,
   imagefile = TRUE, quiet = FALSE, ...)
 }
 \arguments{
-\item{topic}{Character string: the online \code{\link{help}} topic 
+\item{topic}{Character string: the online \code{\link{help}} topic
 of which the examples should be run.}
 
 \item{package}{Charstring: installed and loaded package from which all examples should be run.}
@@ -17,24 +17,24 @@ of which the examples should be run.}
 
 \item{elapsed}{Return *only* the third element (total elapsed time)? DEFAULT: FALSE}
 
-\item{imagefile}{Reroute graphics to \code{\link{pdf}} device? 
-Will \code{\link{message}} the \code{\link{tempfile}} 
+\item{imagefile}{Reroute graphics to \code{\link{pdf}} device?
+Will \code{\link{message}} the \code{\link{tempfile}}
 location if quiet=FALSE.  DEFAULT: TRUE}
 
-\item{quiet}{Suppress warnings with both \code{\link{suppressWarnings}} and 
-\code{\link{suppressMessages}}, 
-also \code{\link{capture.output}} for str and cat results 
+\item{quiet}{Suppress warnings with both \code{\link{suppressWarnings}} and
+\code{\link{suppressMessages}},
+also \code{\link{capture.output}} for str and cat results
 as well as setting \code{pboptions(type="none")} if \code{pbapply} is available.}
 
-\item{\dots}{Further arguments to \code{\link{example}}, especially 
-\code{run.dontrun}, \code{run.donttest} and \code{package}, 
+\item{\dots}{Further arguments to \code{\link{example}}, especially
+\code{run.dontrun}, \code{run.donttest} and \code{package},
 but NOT \code{character.only} and \code{ask}}
 }
 \value{
 Time used as per \code{\link{system.time}}
 }
 \description{
-Time the execution of examples. Useful in package development to identify functions takeing much time.
+Time the execution of examples. Useful in package development to identify functions taking much time.
 }
 \examples{
 exTime("plot")
