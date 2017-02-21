@@ -37,6 +37,7 @@ newFilename(fns, ignore=TRUE)
 newFilename(fns, ignore=rep(0:1, each=4))
 newFilename(fns, ntrunc=2)
 newFilename("README.md")
+newFilename("dummy", mid="") # no line break
 
 }
 \seealso{
