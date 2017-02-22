@@ -191,6 +191,7 @@ if(resetfocus) on.exit(
   if(colwise) par(mfcol=op$mfcol)
   par(mfg=op$mfg) # needed for multiple figure plots
   par(new=op$new)
+  text(0,0,"") # fixes bug of margin text not being written after smallPlot calls
   })
 # inset plot: background, border
 if(!outer) par(plt=c(x1, x2, y1, y2), new=TRUE, mgp=mgp) else     # plt / fig

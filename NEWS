@@ -1,23 +1,10 @@
 
----------------------------------------
 berryFunctions
 miscellaneous package by Berry Boessenkool, berry-b@gmx.de
 Any feedback is welcome, per email or on github.com/brry/berryFunctions
+
 ---------------------------------------
-content: 
-issues
 ToDo-list
-wishlist
-actual NEWS
-
----------------------------------------
-issues (important to fix)
----------------------------------------
-- smallPlot: mtext afterwards not working (maybe because of outer=TRUE / mar=0000). see Tests.R
-- after rdwd is on CRAN: delete dataDWD and readDWD
-
----------------------------------------
-ToDo-list (take care of in the near future)
 ---------------------------------------
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
 - implement is.error and getColumn (eg spiralDate) wherever applicable
@@ -27,11 +14,7 @@ ToDo-list (take care of in the near future)
 - combineFiles: path expansion (see rdwd::fileDWD), remove dir arguments
 - plot(c(50,1000), c(2500,35000), log="yx", axes=F) ; logAxis(1:2) # Error 'at' and 'labels' lengths differ, 9 != 12
 - insertRows: r <- r + seq_along(r)-1
-
-
----------------------------------------
-wishlist (implement if bored, in order of usefulnes)
----------------------------------------
+- late 2017: delete dataDWD and readDWD
 - colPoints: zlog=TRUE, correct colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, Range=c(150,190), density=T)
 - monthAxis: ym=NA (set automatically depending on axis time length)
 - monthAxis: ypos=6 (with vector option) for ts ending before (or starting after) june/july
@@ -57,7 +40,7 @@ actual NEWS
 
 
 Version 1.. (2017-0-)
-- 
+- after smallPlot calls, mtext, axis etc can be used normally again
 New functions: almost.equal
 For all changes, see:
 https://github.com/brry/berryFunctions/compare/master@{2017-01-16}...master@{2017-01-31}#files_bucket
