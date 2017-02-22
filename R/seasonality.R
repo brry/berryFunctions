@@ -51,6 +51,7 @@
 #' seasonality(date, discharge, data=Q, plot=1:4, lwd=2)
 #' seasonality(date, discharge, data=Q, plot=1:4, nmax=1, shift=100)
 #' seasonality(date, discharge, data=Q, plot=1:4, col=divPal(100, ryb=TRUE))
+#' dev.off()
 #' }
 #' 
 #' @param dates Dates in ascending order. 
@@ -83,8 +84,8 @@
 #' @param add Logical. Add to existing plot? DEFAULT: FALSE
 #' @param nmin Minimum number of values that must be present per (hydrological) year
 #'             to be plotted in plot type 4. DEFAULT: 100
-#' @param probs Probabilities passed to \code{\link{quantileMean}} for plot=5. DEFAULT: 0.5
-#' @param width Window width for plot=5. DEFAULT: 1
+#' @param probs Probabilities passed to \code{\link{quantileMean}} for plot=5. DEFAULT: 0:5/5
+#' @param width Window width for plot=5. DEFAULT: 31
 #' @param text Logical. Call \code{\link{textField}} if plot=5? DEFAULT: TRUE
 #' @param textargs List of arguments passed to \code{\link{textField}} for plot=5. DEFAULT: NULL
 #' @param months Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
@@ -122,8 +123,8 @@ seasonality <- function(
   plot=1,
   add=FALSE,
   nmin=100,
-  probs=0.5,
-  width=1,
+  probs=0:5/5,
+  width=31,
   text=TRUE,
   textargs=NULL,
   months=substr(month.abb,1,1),
@@ -175,6 +176,7 @@ if(!allNA(drange))
   drange3 <- as.numeric(format(c(dmin,dmax), "%Y")) # for plot=3 option
   }
 # values range
+missingvrange <- allNA(vrange)
 vrange <- range(   if(!allNA(vrange)) vrange else values  , na.rm=TRUE)  
 # shift break to other month
 if(shift<0) warning("'shift' was negative (",shift,"). Absolute value now used.")
@@ -231,6 +233,7 @@ if(1 %in% plot) # doy ~ year, col=Q
   }
   if(nmax==1) do.call(points, owa(list(x=annmax$year, y=annmax$doy, 
                                       pch=3, cex=0.5), maxargs, "x","y"))
+  if(length(plot)>1) cat(1)
 }
 #
 if(2 %in% plot) # Spiral graph, col=Q
@@ -243,12 +246,13 @@ if(2 %in% plot) # Spiral graph, col=Q
   }
   if(nmax==1) do.call(points, owa(list(x=spd[annmax$index,"x"], y=spd[annmax$index,"y"],
                                        pch=3, cex=0.3), maxargs, "x","y"))
+  if(length(plot)>1) cat(2)
 }
 # parameters for both next plots
 if(missing(mar)) par(mar=c(3,4,4,1))
 if(missing(mgp)) mgp <- c(2.7,0.7,0)
 xlim3 <- if(allNA(xlim)) c(0,367) else xlim
-ylim3 <- if(allNA(ylim)) lim0(values) else ylim
+ylim3 <- if(allNA(ylim)) lim0(vrange) else ylim
 xaxs3 <- if(is.na(xaxs)) "i" else xaxs
 yaxs3 <- if(is.na(yaxs)) "r" else yaxs
 #
@@ -271,7 +275,6 @@ if(3 %in% plot) # Q~doy, col=year
       xlim=xlim3, ylim=ylim3, xaxs=xaxs3, yaxs=yaxs3, lines=TRUE, nint=1,
       if(!exists("col", inherits=FALSE)) col=seqPal(100, colors=c("red","blue")),  ...)
   if(!add){
-  mtext("") # weird behaviour: title not added without this line. ### Is this a bug?
   title(ylab=vlab1, mgp=mgp)
   # Axis labelling
   axis(1, ldoy, months, las=1)
@@ -280,24 +283,26 @@ if(3 %in% plot) # Q~doy, col=year
   if(nmax==1) do.call(points, owa(list(x=doy[annmax$index], y=values[annmax$index],
                                   pch=21, cex=0.8, lwd=1.5, bg="white"), maxargs))
   }
+  if(length(plot)>1) cat(3)
 }
 #
 if(4 %in% plot) # annmax~year, col=n
 {
   vlab4 <- if(is.na(vlab)) paste("annual maximum", vlab1) else vlab
   nalab <- if(shift==0) "n nonNA / year" else "n nonNA / hydrol. year"
+  main4 <- if(missing(main)) "Annual maxima" else main
   annmax4 <- annmax
   annmax4[ annmax4$n < nmin , c("n", "max")] <- NA
+  ylim4 <- if(allNA(ylim)) range(annmax4$max, na.rm=TRUE) else ylim
   output$plot4 <- colPoints("year", "max", "n", data=annmax4, add=add, zlab=nalab,
-            xlim=xlim1, xaxs=xaxs1, ylim=ylim3, yaxs=yaxs3, ylab="", xlab=tlab, 
+            xlim=xlim1, xaxs=xaxs1, ylim=ylim4, yaxs=yaxs3, ylab="", xlab=tlab, 
             legend=legend, legargs=owa(list(density=FALSE),legargs), lines=TRUE, ...)
   if(!add){
-  mtext("") ### as above
   title(ylab=vlab4, mgp=mgp)
-  if(missing(main)) main <- "Annual maxima"
-  title(main=main, adj=adj)  
+  title(main=main4, adj=adj)  
   }
   ### nmax once larger values are possible
+  if(length(plot)>1) cat(4)
 }
 #
 if(5 %in% plot) # Qpercentile~doy, col=n
@@ -307,6 +312,7 @@ if(5 %in% plot) # Qpercentile~doy, col=n
   ## select all the dates width days (e.g one week) around a DOY:
   #doyselect(day+(-width):width)
   # width control:
+  width <- width[1]
   if(width %% 2 == 0)
     {
     warning("even width (", width, ") is changed to odd width (", width+1, ").")
@@ -326,10 +332,11 @@ if(5 %in% plot) # Qpercentile~doy, col=n
   colnames(Qp)[1] <- "n"
   output$data5 <- Qp
   # plot
-  ylim5 <- if(allNA(ylim)) lim0(Qp[,-1]) else ylim
+  ylim5 <- if(missingvrange) lim0(Qp[,-1]) else lim0(vrange)
+  ylim5 <- if(allNA(ylim)) ylim5 else ylim
   zlab5 <- if(s==0) "n per doy" else paste0("n per (doy +- ", s,")")
-  vlab5 <- if(length(probs)==1) paste0(vlab1, " (",probs*100,"th percentile") else
-                               paste0(vlab1, " percentile")
+  vlab5 <- if(length(probs)==1) paste0(vlab1, " (",probs*100,"th percentile)") else
+                               paste0(vlab1, "  Percentiles")
   vlab5 <- if(is.na(vlab))vlab5 else vlab 
   output$plot5 <- colPoints(1:366, Qp[,2], Qp[,1], add=add, zlab=zlab5,
             ylab="", xlab=slab, xaxt="n", legend=legend, legargs=owa(list(density=FALSE),legargs), 
@@ -338,16 +345,17 @@ if(5 %in% plot) # Qpercentile~doy, col=n
     {
     for(i in 2:length(probs))
     colPoints(1:366, Qp[,i+1], Qp[,1], add=TRUE, legend=FALSE, lines=TRUE, nint=3, ...)
-    if(text) do.call(textField, owa(list(x=15, y=Qp[15,-1], labels=paste0(round(probs*100,1),"%"), quiet=TRUE), textargs))
+    if(text) do.call(textField, owa(list(x=183, y=Qp[183,-1], labels=paste0(round(probs*100,1),"%"), quiet=TRUE), textargs))
     }
   if(!add){
-  mtext("") # weird behaviour: title not added without this line. ### Is this a bug?
   title(ylab=vlab5, mgp=mgp)
   # Axis labelling
   axis(1, ldoy, months, las=1)
   title(main=main, adj=adj)  
   if(janline & shift!=0) abline(v=shift+1)
+  # if(width>1) legend("topleft", paste("smoothing width:",width), bty="n") # already in zlab
   }
+  if(length(plot)>1) cat(5)
 }
 #
 # Function output

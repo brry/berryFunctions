@@ -6,7 +6,7 @@
 \usage{
 seasonality(dates, values, data, drange = NA, vrange = NA, shift = 0,
   janline = TRUE, nmax = 0, maxargs = NULL, plot = 1, add = FALSE,
-  nmin = 100, probs = 0.5, width = 1, text = TRUE, textargs = NULL,
+  nmin = 100, probs = 0:5/5, width = 31, text = TRUE, textargs = NULL,
   months = substr(month.abb, 1, 1), slab = "Month", tlab = "Year",
   vlab = NA, xlim = NA, ylim = NA, xaxs = NA, yaxs = NA,
   main = "Seasonality", adj = 0.2, mar = c(3, 3, 4, 1), mgp = c(1.7,
@@ -56,9 +56,9 @@ DEFAULT: 1}
 \item{nmin}{Minimum number of values that must be present per (hydrological) year
 to be plotted in plot type 4. DEFAULT: 100}
 
-\item{probs}{Probabilities passed to \code{\link{quantileMean}} for plot=5. DEFAULT: 0.5}
+\item{probs}{Probabilities passed to \code{\link{quantileMean}} for plot=5. DEFAULT: 0:5/5}
 
-\item{width}{Window width for plot=5. DEFAULT: 1}
+\item{width}{Window width for plot=5. DEFAULT: 31}
 
 \item{text}{Logical. Call \code{\link{textField}} if plot=5? DEFAULT: TRUE}
 
@@ -145,6 +145,7 @@ seasonality(date, discharge, data=Q, plot=1:4, shift=100)
 seasonality(date, discharge, data=Q, plot=1:4, lwd=2)
 seasonality(date, discharge, data=Q, plot=1:4, nmax=1, shift=100)
 seasonality(date, discharge, data=Q, plot=1:4, col=divPal(100, ryb=TRUE))
+dev.off()
 }
 
 }
