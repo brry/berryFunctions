@@ -11,6 +11,8 @@ Miscellaneous R functions. Notable: colPoints, horizHist, logAxis, pointZoom, sm
 Install release version from CRAN:
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version-last-release/berryFunctions)](http://cran.r-project.org/package=berryFunctions) 
 [![downloads](http://cranlogs.r-pkg.org/badges/berryFunctions)](http://www.r-pkg.org/services)
+[![Rdoc](http://www.rdocumentation.org/badges/version/berryFunctions)](http://www.rdocumentation.org/packages/berryFunctions)
+
 
 ```R
 install.packages("berryFunctions")

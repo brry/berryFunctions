@@ -71,6 +71,7 @@ smallPlot(plot(5:1), x1=0.5,x2=1, y1=0.3,y2=0.6, bg="yellow", yaxt="n")
 # select focus for further add-on's:
 points(2, 2, pch="+", cex=2, col=2) # main window
 smallPlot( plot(5:1), bg="lightblue", resetfocus=FALSE )
+mtext("dude")
 points(2, 2, pch="+", cex=2, col=2) # smallPlot window
 par(op)
 
@@ -138,19 +139,6 @@ plot(1:10)
 plot(1:10)
 smallPlot(plot(1:10), mar=c(1,3,1,0), x1=0,x2=0.2, y1=0.2,y2=0.8, bg=4, outer=TRUE)
 # plot(1:10) # now in a weird location
-
-dev.off()
-plot(1:10)
-mtext("hello", adj=1, col=2)
-smallPlot(plot(2), y1=0.5, y2=0.8)
-mtext("hello", adj=1) # not working     ### figure out why not! 
-                                        ### relates to 'bug' in seasonality, I think
-mtext("hello", adj=1, line=-1) # works
-plot(1:10)
-mtext("hello", adj=1, col=2)
-smallPlot("")
-mtext("hello", adj=1) # works
-mtext("hello", adj=1, line=-1) # works
 
 }
 \seealso{

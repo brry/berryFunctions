@@ -23,6 +23,7 @@
 #' # select focus for further add-on's:
 #' points(2, 2, pch="+", cex=2, col=2) # main window
 #' smallPlot( plot(5:1), bg="lightblue", resetfocus=FALSE )
+#' mtext("dude")
 #' points(2, 2, pch="+", cex=2, col=2) # smallPlot window
 #' par(op)
 #' 
@@ -90,19 +91,6 @@
 #' plot(1:10)
 #' smallPlot(plot(1:10), mar=c(1,3,1,0), x1=0,x2=0.2, y1=0.2,y2=0.8, bg=4, outer=TRUE)
 #' # plot(1:10) # now in a weird location
-#' 
-#' dev.off()
-#' plot(1:10)
-#' mtext("hello", adj=1, col=2)
-#' smallPlot(plot(2), y1=0.5, y2=0.8)
-#' mtext("hello", adj=1) # not working     ### figure out why not! 
-#'                                         ### relates to 'bug' in seasonality, I think
-#' mtext("hello", adj=1, line=-1) # works
-#' plot(1:10)
-#' mtext("hello", adj=1, col=2)
-#' smallPlot("")
-#' mtext("hello", adj=1) # works
-#' mtext("hello", adj=1, line=-1) # works
 #' 
 #' @param expr expression creating a plot. Can be code within {braces}.
 #' @param x1,x2,y1,y2 Position of small plot, relative to current figure region [0:1]. 
@@ -177,7 +165,7 @@ if(round(y2-y1,3)<0.001) stop("Difference too small between y1 (",y1,") and y2 (
 if(round(x2-x1,2)<0.05) warning("x1 (",x1,") and x2 (",x2,") are likely too close to each other.")
 if(round(y2-y1,2)<0.05) warning("y1 (",y1,") and y2 (",y2,") are likely too close to each other.")
 # margins recycled / truncated (if shorter or longer than 4):
-mar <- rep(mar, length.out=4)
+mar <- mar_input <- rep(mar, length.out=4)
 # smaller margins for outer margin plots
 if(outer) if(!all(par("mfrow")==c(1,1))) mar <- mar/4 # not sure why 4, but it works well
 # margins in relative units: 
@@ -201,12 +189,14 @@ plot.new() # code line from ade4::add.scatter
 u <- par("usr")
 rect(u[1], u[3], u[2], u[4], col=bg, border=border)
 # inset plot: margins
-### message("---x1,x2,y1,y2: ", toString(round(c(x1, x2, y1, y2),3))) # diagnostics
 marpos <- c(x1+mar[2], x2-mar[4], y1+mar[1], y2-mar[3])
-if(marpos[1]>=marpos[2]) stop("smallPlot horizontal margins are too large. 
-  (Cannot set par plt/fig to: ", toString(round(marpos[1:4],3)),")")
-if(marpos[3]>=marpos[4]) stop("smallPlot vertical margins are too large. 
-  (Cannot set par plt/fig to: ", toString(round(marpos[1:4],3)),")")
+tlh <- marpos[1]>=marpos[2] # margins tlh: too large horizontally
+tlv <- marpos[3]>=marpos[4] 
+if(tlh|tlv) stop(traceCall(1,"in ",": "), if(tlh)"horizontal", if(tlh&tlv)" and ", 
+   if(tlv)"vertical", " margins are too large.\nTry margins smaller than mar=c(",
+                 paste(mar_input, collapse=","),"). Cannot set par(plt/fig) to: ", 
+                 toString(round(marpos[1:4],3)),".", call.=FALSE)
+# actually set margins:
 if(!outer) par(plt=marpos, new=TRUE, las=las, xpd=xpd, ...) else
            par(fig=marpos, new=TRUE, las=las, xpd=xpd,
                omd=c(0,1,0,1), mar=c(0,0,0,0),  ...) 
