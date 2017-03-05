@@ -37,19 +37,21 @@
 #' @param x Vector with (numeric) values
 #' @param fill Function to fill NAs at the start or end of the vector. See Details. DEFAULT: NULL
 #' @param n Number of points to interpolate to
+#' @param quiet Logical: suppress warning for no non-NA values? DEFAULT: FALSE
 #' @param \dots Further arguments passed to \code{\link{approx}}
 
 approx2 <- function(
 x, 
 fill=NULL,
 n=length(x),
+quiet=FALSE,
 ...
 )
 {
 # Input controls
 if(all(is.na(x))) 
   {
-  warning("There are no non-NA values in x.")
+  if(!quiet) warning("There are no non-NA values in x.")
   return(rep(NA,n))
   }
 L <- length(x)

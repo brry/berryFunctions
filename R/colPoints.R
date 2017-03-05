@@ -260,9 +260,9 @@ if(lines)
   if(missing(pch)) pch <- NA
   # linear interpolation between coordinates (smoother line colors):
   np <- length(x)*nint-nint+1 # replacing NA necessary if NAs are at start or end
-  xl <- approx2(x,n=np) #approx(replace(x, is.na(x), median(x, na.rm=TRUE)), n=np)$y
-  yl <- approx2(y,n=np) #approx(replace(y, is.na(y), median(y, na.rm=TRUE)), n=np)$y
-  zl <- approx2(z,n=np) #approx(replace(z, is.na(z), median(z, na.rm=TRUE)), n=np)$y
+  xl <- approx2(x,n=np, quiet=quiet) #approx(replace(x, is.na(x), median(x, na.rm=TRUE)), n=np)$y
+  yl <- approx2(y,n=np, quiet=quiet) #approx(replace(y, is.na(y), median(y, na.rm=TRUE)), n=np)$y
+  zl <- approx2(z,n=np, quiet=quiet) #approx(replace(z, is.na(z), median(z, na.rm=TRUE)), n=np)$y
   # classify interpolated values:
   cl2 <- classify(x=zl, method=method, breaks=breaks, sdlab=sdlab, Range=Range, quiet=quiet)
   output <- cl

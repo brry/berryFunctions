@@ -4,7 +4,7 @@
 \alias{approx2}
 \title{Smart linear NA interpolation}
 \usage{
-approx2(x, fill = NULL, n = length(x), ...)
+approx2(x, fill = NULL, n = length(x), quiet = FALSE, ...)
 }
 \arguments{
 \item{x}{Vector with (numeric) values}
@@ -12,6 +12,8 @@ approx2(x, fill = NULL, n = length(x), ...)
 \item{fill}{Function to fill NAs at the start or end of the vector. See Details. DEFAULT: NULL}
 
 \item{n}{Number of points to interpolate to}
+
+\item{quiet}{Logical: suppress warning for no non-NA values? DEFAULT: FALSE}
 
 \item{\dots}{Further arguments passed to \code{\link{approx}}}
 }
