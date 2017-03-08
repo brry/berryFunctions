@@ -9,8 +9,9 @@ colPoints(x, y, z, data, add = TRUE, col = seqPal(cl$nbins), col2 = c(NA,
   method = "equalinterval", breaks, sdlab = 1, legend = TRUE,
   legargs = NULL, hist = FALSE, histargs = NULL, lines = FALSE,
   nint = 30, xlab = deparse(substitute(x)), ylab = deparse(substitute(y)),
-  zlab = deparse(substitute(z)), las = 1, pch = 16, x1 = 0.6,
-  y1 = 0.88, x2 = 0.99, y2 = 0.99, density = TRUE, quiet = FALSE, ...)
+  zlab = deparse(substitute(z)), axes = TRUE, las = 1, pch = 16,
+  x1 = 0.6, y1 = 0.88, x2 = 0.99, y2 = 0.99, density = TRUE,
+  quiet = FALSE, ...)
 }
 \arguments{
 \item{x, y}{Vectors with coordinates of the points to be drawn}
@@ -62,8 +63,8 @@ Values below 10 will smooth coordinates and might miss the original points. DEFA
 
 \item{zlab}{\code{\link{colPointsLegend} title}. DEFAULT: ditto}
 
-\item{las}{Label Axis Style. Only used when add=FALSE. See \code{\link{par}}. 
-DEFAULT: 1 (all labels horizontal)}
+\item{axes, las}{Draw axes? Label Axis Style. Only used when add=FALSE. See \code{\link{par}}. 
+DEFAULT: axes=TRUE, las=1 (all labels horizontal)}
 
 \item{pch}{Point CHaracter. See \code{\link{par}}. DEFAULT: 16}
 
@@ -75,7 +76,7 @@ Passed to \code{\link{colPointsLegend}}. DEFAULT: x: 0.6-0.99, y: 0.88-0.98}
 \item{quiet}{Turn off warnings? DEFAULT: FALSE}
 
 \item{\dots}{Further graphical arguments passed to \code{\link{plot}}, 
-\code{\link{points}} and \code{\link{lines}}, 
+\code{\link{points}} and \code{\link{segments}}, 
 eg cex, xlim (when add=F), mgp, main, sub, asp (when add=F), etc. 
 Note: col does not work, as it is already another argument}
 }

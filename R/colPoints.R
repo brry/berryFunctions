@@ -158,15 +158,15 @@
 #' @param xlab x-axis label. DEFAULT: \code{deparse(\link{substitute}(x))}
 #' @param ylab y-axis label. DEFAULT: ditto
 #' @param zlab \code{\link{colPointsLegend} title}. DEFAULT: ditto
-#' @param las Label Axis Style. Only used when add=FALSE. See \code{\link{par}}. 
-#'            DEFAULT: 1 (all labels horizontal)
+#' @param axes,las Draw axes? Label Axis Style. Only used when add=FALSE. See \code{\link{par}}. 
+#'                 DEFAULT: axes=TRUE, las=1 (all labels horizontal)
 #' @param pch Point CHaracter. See \code{\link{par}}. DEFAULT: 16
 #' @param x1,x2,y1,y2 Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}. 
 #'                    Passed to \code{\link{colPointsLegend}}. DEFAULT: x: 0.6-0.99, y: 0.88-0.98
 #' @param density Logical: plot density line in \code{\link{colPointsLegend}}? DEFAUTL: TRUE
 #' @param quiet Turn off warnings? DEFAULT: FALSE
 #' @param \dots Further graphical arguments passed to \code{\link{plot}}, 
-#'              \code{\link{points}} and \code{\link{lines}}, 
+#'              \code{\link{points}} and \code{\link{segments}}, 
 #'              eg cex, xlim (when add=F), mgp, main, sub, asp (when add=F), etc. 
 #'              Note: col does not work, as it is already another argument
 #' 
@@ -190,7 +190,8 @@ colPoints <- function(
   xlab=deparse(substitute(x)),
   ylab=deparse(substitute(y)),
   zlab=deparse(substitute(z)),
-  las=1, 
+  axes=TRUE,
+  las=1,
   pch=16, 
   x1=0.6,
   y1=0.88,
@@ -253,7 +254,7 @@ output$z <- z
 if(length(col) != cl$nbins) stop("Number of colors is not equal to number of classes.")
 #
 # ACTUAL PLOTTING --------------------------------------------------------------
-if(!add) plot(x, y, col=NA, pch=pch, xlab=xlab, ylab=ylab, las=las, ...)
+if(!add) plot(x, y, type="n", xlab=xlab, ylab=ylab, las=las, axes=axes, ...)
 # Plot lines if wanted:
 if(lines)
   {
