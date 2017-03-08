@@ -128,47 +128,55 @@
 #' colPoints(x,y,sim1, data=xyz, col=rainbow2(100), add=FALSE)
 #' }
 #' 
-#' @param x,y Vectors with coordinates of the points to be drawn
-#' @param z z values belonging to coordinates. Vector or matrix with the color-defining height values
-#' @param data Optional: data.frame with the column names as given by x,y and z.
-#' @param add Logical. Should the points be added to current (existing!) plot? 
-#'            If FALSE, a new plot is started. DEFAULT: TRUE (It's called col\bold{Points}, after all)
-#' @param col Vector of colors to be used. DEFAULT: 100 colors from sequential 
-#'            palette \code{\link{seqPal}} (color-blind safe, black/white-print safe)
-#' @param col2 Color for points where z is NA, or lower / higher than \code{Range}. DEFAULT: c(NA, 1, 8)
-#' @param Range Ends of color bar. If NULL, is again the DEFAULT: range(z, finite=TRUE)
-#' @param method Classification method (partial matching is performed), 
-#'              see \code{\link{classify}} (ways to get color breakpoints). DEFAULT: "equalinterval")
-#' @param breaks Specification for method, see \code{\link{classify}}. 
-#'               DEFAULT: different defaults for each method
-#' @param sdlab Type of label and breakpoints if \code{method=standarddeviation}, 
-#'              see \code{\link{classify}}. DEFAULT: 1
-#' @param legend Logical. Should a \code{\link{colPointsLegend}} be drawn? DEFAULT: TRUE
-#' @param legargs List. Arguments passed to \code{\link{colPointsLegend}}. 
-#'                DEFAULT: NULL, with some defaults specified internally
-#' @param hist Logical. Should a \code{\link{colPointsHist}} be drawn? 
-#'             DEFAULT: FALSE (TRUE if histargs are given)
+#' @param x,y      Vectors with coordinates of the points to be drawn
+#' @param z        z values belonging to coordinates. 
+#'                 Vector or matrix with the color-defining height values
+#' @param data     Optional: data.frame with the column names as given by x,y and z.
+#' @param add      Logical. Should the points be added to current (existing!) plot? 
+#'                 If FALSE, a new plot is started. 
+#'                 DEFAULT: TRUE (It's called col\bold{Points}, after all)
+#' @param col      Vector of colors to be used. DEFAULT: 100 colors from sequential 
+#'                 palette \code{\link{seqPal}} (color-blind safe, black/white-print safe)
+#' @param col2     Color for points where z is NA, or lower / higher than \code{Range}.
+#'                 DEFAULT: c(NA, 1, 8)
+#' @param Range    Ends of color bar. If NULL, it is again the DEFAULT: range(z, finite=TRUE)
+#' @param method   Classification method (partial matching is performed), 
+#'                 see \code{\link{classify}} (ways to get color breakpoints). 
+#'                 DEFAULT: "equalinterval")
+#' @param breaks   Specification for method, see \code{\link{classify}}. 
+#'                 DEFAULT: different defaults for each method
+#' @param sdlab    Type of label and breakpoints if \code{method=standarddeviation}, 
+#'                 see \code{\link{classify}}. DEFAULT: 1
+#' @param legend   Logical. Should a \code{\link{colPointsLegend}} be drawn? DEFAULT: TRUE
+#' @param legargs  List. Arguments passed to \code{\link{colPointsLegend}}. 
+#'                 DEFAULT: NULL, with some defaults specified internally
+#' @param hist     Logical. Should a \code{\link{colPointsHist}} be drawn? 
+#'                 DEFAULT: FALSE (TRUE if histargs are given)
 #' @param histargs List. Arguments passed to \code{\link{colPointsHist}}. DEFAULT: NULL
-#' @param lines Logical. Should lines be drawn instead of / underneath the points? 
-#'             (color of each \code{\link{segments}} is taken from starting point, last point is endpoint.) 
-#'             If lines=TRUE and pch is not given, pch ist set to NA. DEFAULT: FALSE
-#' @param nint Numeric of length 1. Number of interpolation points between each 
-#'             coordinate if \code{lines=TRUE}. nint=1 means no interpolation. 
-#'             Values below 10 will smooth coordinates and might miss the original points. DEFAULT: 30
-#' @param xlab x-axis label. DEFAULT: \code{deparse(\link{substitute}(x))}
-#' @param ylab y-axis label. DEFAULT: ditto
-#' @param zlab \code{\link{colPointsLegend} title}. DEFAULT: ditto
-#' @param axes,las Draw axes? Label Axis Style. Only used when add=FALSE. See \code{\link{par}}. 
-#'                 DEFAULT: axes=TRUE, las=1 (all labels horizontal)
-#' @param pch Point CHaracter. See \code{\link{par}}. DEFAULT: 16
+#' @param lines    Logical. Should lines be drawn instead of / underneath the points? 
+#'                 (color of each \code{\link{segments}} is taken from starting point, 
+#'                 last point is endpoint.) If lines=TRUE and pch is not given, 
+#'                 pch ist set to NA. DEFAULT: FALSE
+#' @param nint     Numeric of length 1. Number of interpolation points between each 
+#'                 coordinate if \code{lines=TRUE}. nint=1 means no interpolation. 
+#'                 Values below 10 will smooth coordinates and might 
+#'                 miss the original points. DEFAULT: 30
+#' @param xlab     x-axis label. DEFAULT: \code{deparse(\link{substitute}(x))}
+#' @param ylab     y-axis label. DEFAULT: ditto
+#' @param zlab     \code{\link{colPointsLegend} title}. DEFAULT: ditto
+#' @param axes,las Draw axes? Label Axis Style. Only used when add=FALSE. 
+#'                 See \code{\link{par}}. DEFAULT: axes=TRUE, las=1 (all labels horizontal)
+#' @param pch      Point CHaracter. See \code{\link{par}}. DEFAULT: 16
 #' @param x1,x2,y1,y2 Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}. 
-#'                    Passed to \code{\link{colPointsLegend}}. DEFAULT: x: 0.6-0.99, y: 0.88-0.98
-#' @param density Logical: plot density line in \code{\link{colPointsLegend}}? DEFAUTL: TRUE
-#' @param quiet Turn off warnings? DEFAULT: FALSE
-#' @param \dots Further graphical arguments passed to \code{\link{plot}}, 
-#'              \code{\link{points}} and \code{\link{segments}}, 
-#'              eg cex, xlim (when add=F), mgp, main, sub, asp (when add=F), etc. 
-#'              Note: col does not work, as it is already another argument
+#'                 Passed to \code{\link{colPointsLegend}}. 
+#'                 DEFAULT: x: 0.6-0.99, y: 0.88-0.98
+#' @param density  Logical: plot density line in \code{\link{colPointsLegend}}? 
+#'                 DEFAULT: TRUE
+#' @param quiet    Turn off warnings? DEFAULT: FALSE
+#' @param \dots    Further graphical arguments passed to \code{\link{plot}}, 
+#'                 \code{\link{points}} and \code{\link{segments}}, 
+#'                 eg cex, xlim (when add=F), mgp, main, sub, asp (when add=F), etc. 
+#'                 Note: col does not work, as it is already another argument
 #' 
 colPoints <- function(
   x, y, 
