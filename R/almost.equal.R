@@ -63,7 +63,7 @@ if(!goodclass) warning("Input class is '", toString(class(x)), "' and '", toStri
 len <- max(length(x), length(y), na.rm=TRUE)
 x <- rep(x, length.out=len)
 y <- rep(y, length.out=len)
-sapply(seq_len(len), function(i) isTRUE(all.equal(x[i],y[i])))
+sapply(seq_len(len), function(i) isTRUE(all.equal(x[i],y[i], ...)))
 }
 
 
