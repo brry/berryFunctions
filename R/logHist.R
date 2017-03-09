@@ -44,11 +44,12 @@ freq=TRUE,
 {
 xname <- deparse(substitute(x))
 x <- na.omit(as.numeric(x))
-neg <- sum(x<=0)
-if(neg>0)
+neg <- sum(x<0)
+nul <- sum(x==0)
+if(sum(neg,nul)>0)
   {
-  warning(neg," values <= 0 are discarded (",
-          round(neg/length(x)*100,1),"% of ",length(x)," values).")
+  warning(neg," values < 0 and ",nul," values == 0 are discarded (",
+          round(sum(x<=0)/length(x)*100,1),"% of ",length(x)," values).")
   x <- x[x>0]
   }
 xmain <- paste0("Histogram of log10(",xname,")")
