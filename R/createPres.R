@@ -35,6 +35,9 @@ pdf(file.path(dir, "fig_extern/MyFig.pdf"), height=5)
 par(mar=c(3,3,2,1), mgp=c(2.1,0.7,0), las=1)
 plot(cumsum(rnorm(800)), type="l", lwd=3, col="purple", main="Existing Figure")
 dev.off()
+Sys.setlocale(category = "LC_TIME", locale="C")
+curmonth <- format(Sys.Date(), "%B %Y")
+Sys.setlocale(category = "LC_TIME", locale="")
 
 cat(
 "% presentation aboutSomething
@@ -99,7 +102,7 @@ opts_chunk$set(cache=T, echo=TRUE, fig.height=3.3, fig.width=5, out.width='0.9\\
 \\Large
 \\textbf{NiceTitle\\\\[1.5em] \\large SubTitle}\\\\[2em]
 \\normalsize
-Berry Boessenkool, \\href{http://www.geo.uni-potsdam.de/geoecology.html}{uni-potsdam.de}, March 2017\\\\[1em]
+Berry Boessenkool, \\href{http://www.geo.uni-potsdam.de/geoecology.html}{uni-potsdam.de},",curmonth,"\\\\[1em]
 \\texttt{berry-b@gmx.de}\\\\[1em]
 \\href{https://github.com/brry/rdwd\\#rdwd}{github.com/brry/rdwd}\\\\
 \\href{https://cran.r-project.org/package=extremeStat/vignettes/extremeStat.html}{cran.r-project.org/package=extremeStat}
