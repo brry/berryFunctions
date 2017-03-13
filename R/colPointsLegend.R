@@ -227,7 +227,7 @@ else # if not horizontal, thus if vertical -------------------------------------
     # kernel density:
   if(is.list(density) | is.null(density) )
     {
-    dp <- do.call(stats::density, args=owa(list(x=z, from=min(z), to=max(z)), density))
+    dp <- do.call(stats::density, args=owa(list(x=z, from=min(z), to=max(z), bw="SJ"), density))
     lines(y=dp$x, x=dp$y/max(dp$y))
     }
   } # end vertical -------------------------------------------------------------
