@@ -35,6 +35,13 @@ pdf(file.path(dir, "fig_extern/MyFig.pdf"), height=5)
 par(mar=c(3,3,2,1), mgp=c(2.1,0.7,0), las=1)
 plot(cumsum(rnorm(800)), type="l", lwd=3, col="purple", main="Existing Figure")
 dev.off()
+
+# Camera image
+cam1 <- system.file("extdata/camera1.jpg", package="berryFunctions")
+cam2 <- system.file("extdata/camera2.png", package="berryFunctions")
+file.copy(cam1, file.path(dir, "fig_extern/camera1.jpg"))
+file.copy(cam2, file.path(dir, "fig_extern/camera2.png"))
+
 Sys.setlocale(category = "LC_TIME", locale="C")
 curmonth <- format(Sys.Date(), "%B %Y")
 Sys.setlocale(category = "LC_TIME", locale="")
@@ -106,6 +113,17 @@ Berry Boessenkool, \\href{http://www.geo.uni-potsdam.de/geoecology.html}{uni-pot
 \\texttt{berry-b@gmx.de}\\\\[1em]
 \\href{https://github.com/brry/rdwd\\#rdwd}{github.com/brry/rdwd}\\\\
 \\href{https://cran.r-project.org/package=extremeStat/vignettes/extremeStat.html}{cran.r-project.org/package=extremeStat}
+
+\\only<2>{
+\\begin{textblock*}{8em}(250pt,60pt)
+\\centering
+\\textblockcolour{red}
+\\vspace{0.5em}
+\\includegraphics[width=4em]{fig_extern/camera2.png}\\\\
+ENCOURAGED%
+\\vspace{0.5em}
+\\end{textblock*}
+}
 \\end{frame}
 
 % ---------------------------
