@@ -40,6 +40,14 @@ quiet=FALSE,
 ntrunc=3
 )
 {
+# check folder existence:
+dirs <- unique(dirname(filename))
+dirs <- normalizePath(dirs, winslash="/", mustWork=FALSE)
+direxi <- file.exists(dirs)
+l1 <- sum(!direxi)>1
+if(any(!direxi)) stop(traceCall(1, "", ": "), "The following folder", if(l1)"s", 
+                      " do", if(!l1)"es", " not exist: ", dirs[!direxi], call.=FALSE)
+# Actual code:  
 ignore <- rep(ignore, length.out=length(filename))
 output <- lapply(seq_along(filename), function(i)
   {
