@@ -45,8 +45,11 @@ dirs <- unique(dirname(filename))
 dirs <- normalizePath(dirs, winslash="/", mustWork=FALSE)
 direxi <- file.exists(dirs)
 l1 <- sum(!direxi)>1
-if(any(!direxi)) stop(traceCall(1, "", ": "), "The following folder", if(l1)"s", 
-                      " do", if(!l1)"es", " not exist: ", dirs[!direxi], call.=FALSE)
+if(any(!direxi)) stop(traceCall(1, "", ": "), "The following ",
+                      if(l1)paste0(sum(!direxi)," "), "folder", if(l1)"s", 
+                      " do", if(!l1)"es", " not exist: ", 
+                      truncMessage(dirs[!direxi], ntrunc=ntrunc, prefix=""), 
+                      call.=FALSE)
 # Actual code:  
 ignore <- rep(ignore, length.out=length(filename))
 output <- lapply(seq_along(filename), function(i)
