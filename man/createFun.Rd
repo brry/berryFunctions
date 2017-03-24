@@ -4,7 +4,7 @@
 \alias{createFun}
 \title{create function framework}
 \usage{
-createFun(fun, package = "berryFunctions", path = "S:/Dropbox/Public")
+createFun(fun, package = "berryFunctions", path = "S:/Dropbox/Rpack")
 }
 \arguments{
 \item{fun}{Character string or unquoted name. Function that will be crated with identical filename}

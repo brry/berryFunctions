@@ -21,7 +21,7 @@
 createFun <- function(
 fun,
 package="berryFunctions",
-path="S:/Dropbox/Public"
+path="S:/Dropbox/Rpack"
 )
 {
 fun <- deparse(substitute(fun))
