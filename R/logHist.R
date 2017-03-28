@@ -27,6 +27,7 @@
 #' @param las     Integer: label axis style. DEFAULT: 1 (numbers upright)
 #' @param ylim    2 Numbers: y-axis range. DEFAULT: NULL
 #' @param freq    Logical: counts instead of density? DEFAULT: TRUE
+#' @param quiet   Logical: suppress warning about non-positive values? DEFAULT: FALSE
 #' @param \dots   further arguments passed to \code{\link{hist}} 
 #'                like breaks, xlim=c(-1,3), ..., but not xaxt
 #' 
@@ -40,6 +41,7 @@ add=FALSE,
 las=1,
 ylim=NULL,
 freq=TRUE,
+quiet=FALSE,
 ...)
 {
 xname <- deparse(substitute(x))
@@ -48,7 +50,7 @@ neg <- sum(x<0)
 nul <- sum(x==0)
 if(sum(neg,nul)>0)
   {
-  warning(neg," values < 0 and ",nul," values == 0 are discarded (",
+  if(!quiet) warning(neg," values < 0 and ",nul," values == 0 are discarded (",
           round(sum(x<=0)/length(x)*100,1),"% of ",length(x)," values).")
   x <- x[x>0]
   }
