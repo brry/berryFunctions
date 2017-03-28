@@ -16,7 +16,7 @@
 
 #' @param fun Character string or unquoted name. Function that will be crated with identical filename
 #' @param package Character String with package name. DEFAULT: "berryFunctions"
-#' @param path Path to package in development (not package name itself) DEFAULT: "S:/Dropbox/Public"
+#' @param path Path to package in development (not package name itself) DEFAULT: "S:/Dropbox/Rpack"
 #'
 createFun <- function(
 fun,

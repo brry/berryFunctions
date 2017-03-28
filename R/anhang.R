@@ -13,7 +13,7 @@
 #'
 anhang <- function()
 {
-file <- "S:/Dropbox/Public/Rclick/Anhang.pdf"
+file <- "S:/Dropbox/R/rclick/Anhang.pdf"
 # laptop linux path change:
 if(!file.exists(file)) file <- gsub("S:", "~", file)
 # work PC path change:
@@ -23,5 +23,5 @@ if(!file.exists(file)) file <- gsub("~", "C:/Users/boessenkool", file)
 # open pdf
 if(file.exists(file)) system2("open", file)
 else
-browseURL("https://dl.dropbox.com/u/4836866/Rclick/Anhang.pdf")  
+browseURL("https://www.dropbox.com/s/d72jnau7fzbqjnc/Anhang.pdf?dl=0")  
 }

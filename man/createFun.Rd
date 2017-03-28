@@ -11,7 +11,7 @@ createFun(fun, package = "berryFunctions", path = "S:/Dropbox/Rpack")
 
 \item{package}{Character String with package name. DEFAULT: "berryFunctions"}
 
-\item{path}{Path to package in development (not package name itself) DEFAULT: "S:/Dropbox/Public"}
+\item{path}{Path to package in development (not package name itself) DEFAULT: "S:/Dropbox/Rpack"}
 }
 \value{
 file name as character string
