@@ -36,8 +36,8 @@ extend=0,
 if(!missing(range)) 
   {
   # Input checking:
-  if(!is.vector(range)) stop("'range' must be a vector.")
-  if(!is.numeric(range)) stop("'range' must be numeric.")
+  #if(!is.vector(range)) warning("'range' must be a vector, not ", class(range))
+  if(!is.numeric(range)) warning("'range' is not numeric, but '", class(range),"'.")
   # accept long vectors:
   if(length(range)>2) range <- base::range(range, na.rm=TRUE)
   # actual work:
