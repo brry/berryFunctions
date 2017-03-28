@@ -211,7 +211,9 @@ output <- list(annmax=annmax)
 op <- par(mar=mar, mgp=mgp)
 if(!keeppar) on.exit(par(op))
 # Axis labelling
-labs <- monthLabs(2004,2004, npm=1) + shift
+tick <- monthLabs(2004,2004, npm=1) + shift
+labs <- tick + 15
+tdoy <- as.numeric(format(tick,"%j"))
 ldoy <- as.numeric(format(labs,"%j"))
 # Actual plotting
 #
@@ -228,7 +230,8 @@ if(1 %in% plot) # doy ~ year, col=Q
   # Axis labelling
   if(!add){
   if(janline & shift!=0) abline(h=shift+1)
-  axis(2, ldoy, months, las=1)
+  axis(2, ldoy, months, tick=FALSE, las=1)
+  axis(2, tdoy, labels=FALSE, las=1)
   title(main=main, adj=adj)
   }
   if(nmax==1) do.call(points, owa(list(x=annmax$year, y=annmax$doy, 
@@ -277,7 +280,8 @@ if(3 %in% plot) # Q~doy, col=year
   if(!add){
   title(ylab=vlab1, mgp=mgp)
   # Axis labelling
-  axis(1, ldoy, months, las=1)
+  axis(1, ldoy, months, tick=FALSE, las=1)
+  axis(1, tdoy, labels=FALSE, las=1)
   title(main=main, adj=adj)  
   if(janline & shift!=0) abline(v=shift+1)
   if(nmax==1) do.call(points, owa(list(x=doy[annmax$index], y=values[annmax$index],
@@ -350,7 +354,8 @@ if(5 %in% plot) # Qpercentile~doy, col=n
   if(!add){
   title(ylab=vlab5, mgp=mgp)
   # Axis labelling
-  axis(1, ldoy, months, las=1)
+  axis(1, ldoy, months, tick=FALSE, las=1)
+  axis(1, tdoy, labels=FALSE, las=1)
   title(main=main, adj=adj)  
   if(janline & shift!=0) abline(v=shift+1)
   # if(width>1) legend("topleft", paste("smoothing width:",width), bty="n") # already in zlab
