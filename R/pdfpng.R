@@ -65,6 +65,7 @@ fig <- normalizePath(file, winslash="/", mustWork=FALSE)
 fig <- paste0(fig, c(".pdf",".png"))
 # do not overwrite existing files
 fig <- newFilename(fig[c(pdf,png)], ignore=overwrite)
+fig <- rep(fig, length.out=2) # in case pdf=FALSE, fig[2] should be the png path
 # Arguments
 dots <- list(...)
 seed <- seed # force evaluation
