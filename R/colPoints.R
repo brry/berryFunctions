@@ -170,8 +170,8 @@
 #' @param x1,x2,y1,y2 Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}. 
 #'                 Passed to \code{\link{colPointsLegend}}. 
 #'                 DEFAULT: x: 0.6-0.99, y: 0.88-0.98
-#' @param density  Logical: plot density line in \code{\link{colPointsLegend}}? 
-#'                 DEFAULT: TRUE
+#' @param density  Arguments for density line in \code{\link{colPointsLegend}} 
+#'                 DEFAULT: NULL
 #' @param quiet    Turn off warnings? DEFAULT: FALSE
 #' @param \dots    Further graphical arguments passed to \code{\link{plot}}, 
 #'                 \code{\link{points}} and \code{\link{segments}}, 
@@ -205,7 +205,7 @@ colPoints <- function(
   y1=0.88,
   x2=0.99,
   y2=0.99,
-  density=TRUE,
+  density=NULL,
   quiet=FALSE, 
   ...)
 {

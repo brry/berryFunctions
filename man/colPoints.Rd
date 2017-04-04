@@ -10,7 +10,7 @@ colPoints(x, y, z, data, add = TRUE, col = seqPal(cl$nbins), col2 = c(NA,
   legargs = NULL, hist = FALSE, histargs = NULL, lines = FALSE,
   nint = 30, xlab = deparse(substitute(x)), ylab = deparse(substitute(y)),
   zlab = deparse(substitute(z)), axes = TRUE, las = 1, pch = 16,
-  x1 = 0.6, y1 = 0.88, x2 = 0.99, y2 = 0.99, density = TRUE,
+  x1 = 0.6, y1 = 0.88, x2 = 0.99, y2 = 0.99, density = NULL,
   quiet = FALSE, ...)
 }
 \arguments{
@@ -78,8 +78,8 @@ See \code{\link{par}}. DEFAULT: axes=TRUE, las=1 (all labels horizontal)}
 Passed to \code{\link{colPointsLegend}}. 
 DEFAULT: x: 0.6-0.99, y: 0.88-0.98}
 
-\item{density}{Logical: plot density line in \code{\link{colPointsLegend}}? 
-DEFAULT: TRUE}
+\item{density}{Arguments for density line in \code{\link{colPointsLegend}} 
+DEFAULT: NULL}
 
 \item{quiet}{Turn off warnings? DEFAULT: FALSE}
 
