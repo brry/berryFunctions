@@ -73,6 +73,12 @@ nam <- if(substr(deparse(substitute(x )),1,10)=="substitute") as.character(x ) e
 # deal with numeric input
 namnum <- suppressWarnings(as.numeric(nam))
 if(any(!is.na(namnum)))  nam <- colnames(df)[namnum]
+# check if it's a data.frame
+if(!all(class(df)=="data.frame")) 
+ {
+ warning("df is not a data.frame, but a '", toString(class(df)), "'. Converting with as.data.frame.")
+ df <- as.data.frame(df)
+ }
 # check if column exists:
 if(length(colnames(df))==0) stop(calltrace, ndf, " has no columns.")
 if(!nam %in% colnames(df)) stop(calltrace, "Column '", nam, "' is not in ", ndf,
