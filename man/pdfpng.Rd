@@ -4,9 +4,10 @@
 \alias{pdfpng}
 \title{Create pdf and png graph}
 \usage{
-pdfpng(expr, file, pdf = TRUE, png = TRUE, overwrite = FALSE, width = 7,
-  height = 5, units = "in", res = 500, seed = runif(1, -1e+09, 1e+09),
-  envlevel = 1, pdfargs = NULL, pngargs = NULL, ...)
+pdfpng(expr, file, pdf = TRUE, png = TRUE, overwrite = FALSE,
+  quiet = FALSE, filargs = NULL, width = 7, height = 5, units = "in",
+  res = 500, seed = runif(1, -1e+09, 1e+09), envlevel = 1,
+  pdfargs = NULL, pngargs = NULL, ...)
 }
 \arguments{
 \item{expr}{Expression creating the plot, can be included in curly braces.}
@@ -22,6 +23,11 @@ Unless overwrite=TRUE, files will not be overwritten, but
 \item{overwrite}{Logical: Overwrite existing \code{file}? Can be a vector
 for pdf and png separately.
 DEFAULT: FALSE (_n appended in filename)}
+
+\item{quiet}{Logical: suppress file creation messages? DEFAULT: FALSE}
+
+\item{filargs}{List of other arguments passed to \code{\link{newFilename}}. 
+DEFAULT: NULL}
 
 \item{width, height}{Graph dimensions. DEFAULT: 7x5 inches}
 

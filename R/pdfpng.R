@@ -40,6 +40,9 @@
 #' @param overwrite    Logical: Overwrite existing \code{file}? Can be a vector
 #'                     for pdf and png separately.
 #'                     DEFAULT: FALSE (_n appended in filename)
+#' @param quiet        Logical: suppress file creation messages? DEFAULT: FALSE
+#' @param filargs      List of other arguments passed to \code{\link{newFilename}}. 
+#'                     DEFAULT: NULL
 #' @param width,height Graph dimensions. DEFAULT: 7x5 inches
 #' @param units,res    Graph quality arguments passed only to \code{\link{png}}.
 #'                     DEFAULT: inches ("in"), 500 ppi
@@ -57,6 +60,8 @@ pdfpng <- function(
  pdf=TRUE,
  png=TRUE,
  overwrite=FALSE,
+ quiet=FALSE,
+ filargs=NULL,
  width=7,
  height=5,
  units="in",
@@ -76,7 +81,8 @@ if(!pdf & !png) {warning("pdf and png both FALSE, not saving plot."); return(exp
 fig <- normalizePath(file, winslash="/", mustWork=FALSE)
 fig <- paste0(fig, c(".pdf",".png"))
 # do not overwrite existing files
-fig <- newFilename(fig[c(pdf,png)], ignore=overwrite)
+fig <- do.call(newFilename, owa(
+              list(filename=fig[c(pdf,png)], ignore=overwrite, quiet=quiet), filargs))
 fig <- rep(fig, length.out=2) # in case pdf=FALSE, fig[2] should be the png path
 # Arguments
 dots <- list(...)
