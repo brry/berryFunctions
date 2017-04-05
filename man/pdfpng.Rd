@@ -6,7 +6,7 @@
 \usage{
 pdfpng(expr, file, pdf = TRUE, png = TRUE, overwrite = FALSE, width = 7,
   height = 5, units = "in", res = 500, seed = runif(1, -1e+09, 1e+09),
-  pdfargs = NULL, pngargs = NULL, ...)
+  envlevel = 1, pdfargs = NULL, pngargs = NULL, ...)
 }
 \arguments{
 \item{expr}{Expression creating the plot, can be included in curly braces.}
@@ -31,6 +31,9 @@ DEFAULT: inches ("in"), 500 ppi}
 \item{seed}{Seed passed to \code{\link{set.seed}} before each call. 
 DEFAULT: runif(1,-1e9,1e9)}
 
+\item{envlevel}{Environment level passed to \code{\link{eval.parent}}.
+Never needs to be changed, as far as I can tell. DEFAULT: 1}
+
 \item{pdfargs}{List of arguments only passed to \code{\link{pdf}}.}
 
 \item{pngargs}{List of arguments only passed to \code{\link{png}}.}
@@ -53,6 +56,15 @@ pdfpng({par(bg=8, las=1); plot(cumsum(rnorm(500)), type="l")},
        file="dummyplot", res=100)
 pdfpng({par(bg=8, las=1); plot(cumsum(rnorm(500)), type="l")}, 
        file="dummyplot", overwrite=c(TRUE,FALSE))
+
+# Nesting of functions is possible:
+a <- list( cumsum(rnorm(2000)), cumsum(rnorm(20)) )
+pdfpng(plot(a[[1]]), file="dummyplot", overwrite=TRUE)
+bfun <- function(b) pdfpng(plot(b,type="l"), file="dummyplot", overwrite=TRUE)
+cfun <- function(c) bfun(c)
+bfun(a[[1]])   
+sapply(a, function(d) cfun(d))    
+
        
 unlink("dummyplot.pdf") ; unlink("dummyplot.png") ; unlink("dummyplot_1.png")
 

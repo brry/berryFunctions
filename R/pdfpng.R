@@ -19,6 +19,15 @@
 #'        file="dummyplot", res=100)
 #' pdfpng({par(bg=8, las=1); plot(cumsum(rnorm(500)), type="l")}, 
 #'        file="dummyplot", overwrite=c(TRUE,FALSE))
+#'
+#' # Nesting of functions is possible:
+#' a <- list( cumsum(rnorm(2000)), cumsum(rnorm(20)) )
+#' pdfpng(plot(a[[1]]), file="dummyplot", overwrite=TRUE)
+#' bfun <- function(b) pdfpng(plot(b,type="l"), file="dummyplot", overwrite=TRUE)
+#' cfun <- function(c) bfun(c)
+#' bfun(a[[1]])   
+#' sapply(a, function(d) cfun(d))    
+#'
 #'        
 #' unlink("dummyplot.pdf") ; unlink("dummyplot.png") ; unlink("dummyplot_1.png")
 #'
@@ -36,6 +45,8 @@
 #'                     DEFAULT: inches ("in"), 500 ppi
 #' @param seed         Seed passed to \code{\link{set.seed}} before each call. 
 #'                     DEFAULT: runif(1,-1e9,1e9)
+#' @param envlevel     Environment level passed to \code{\link{eval.parent}}.
+#'                     Never needs to be changed, as far as I can tell. DEFAULT: 1
 #' @param pdfargs      List of arguments only passed to \code{\link{pdf}}.
 #' @param pngargs      List of arguments only passed to \code{\link{png}}.
 #' @param \dots        Further arguments passed to both \code{\link{pdf}} and \code{\link{png}}
@@ -51,6 +62,7 @@ pdfpng <- function(
  units="in",
  res=500,
  seed=runif(1,-1e9,1e9),
+ envlevel=1,
  pdfargs=NULL,
  pngargs=NULL,
  ...
@@ -75,7 +87,7 @@ if(pdf)
   do.call(grDevices::pdf, owa(
     c(list(file=fig[1], width=width, height=height), dots), pdfargs))
   set.seed(seed)
-  eval(substitute(expr))
+  eval.parent(substitute(expr), envlevel)
   dev.off()
 }
 if(png) 
@@ -83,7 +95,7 @@ if(png)
   do.call(grDevices::png, owa(
     c(list(file=fig[2], width=width, height=height, units=units, res=res), dots), pngargs))
   set.seed(seed)
-  eval(substitute(expr))
+  eval.parent(substitute(expr), envlevel)
   dev.off()
 } 
 
