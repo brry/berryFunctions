@@ -95,16 +95,16 @@ if(pdf)
   do.call(grDevices::pdf, owa(
     c(list(file=fig[1], width=width, height=height), dots), pdfargs))
   set.seed(seed)
+  on.exit(dev.off(), add=TRUE)
   eval.parent(substitute(expr), envlevel)
-  dev.off()
 }
 if(png) 
 { 
   do.call(grDevices::png, owa(
     c(list(file=fig[2], width=width, height=height, units=units, res=res), dots), pngargs))
   set.seed(seed)
+  on.exit(dev.off(), add=TRUE)
   eval.parent(substitute(expr), envlevel)
-  dev.off()
 } 
 
 }
