@@ -21,8 +21,7 @@ vignette("berryFunctions")
 ?berryFunctions
 ```
 
-Update to the current development version from github:
-<script src="http://gist-it.appspot.com/github/brry/berryFunctions/blob/master/DESCRIPTION?slice=3:5"></script>
+Update to the [current development version](https://github.com/brry/berryFunctions/blob/master/DESCRIPTION#L4-L5) from github:
 ```R
 source("http://raw.githubusercontent.com/brry/berryFunctions/master/R/instGit.R")
 instGit("brry/berryFunctions")
