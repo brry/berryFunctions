@@ -28,6 +28,7 @@ ToDo-list
 - tryStack: mapply, do.call etc put function name in next element
 - tryStack: return output invisibly?
 - checkFile: eror in ->-> checkFile: n/n file(s) do not exist at getwd: \n truncMessage(files[nonexi])
+- anhang() # open not in dropbox viewer
 
 
 
