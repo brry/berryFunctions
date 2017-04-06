@@ -35,6 +35,8 @@
 #' @param file         Character: Filename without pdf/png extension. 
 #'                     Unless overwrite=TRUE, files will not be overwritten, but
 #'                     "_1" will be appended instead, see \code{\link{newFilename}}.
+#'                     If \code{expr} creates several plots, use file="fname%02d",
+#'                     otherwise the png will only contain the last figure.
 #' @param pdf          Logical: Create pdf? DEFAULT: TRUE
 #' @param png          Logical: Create png? DEFAULT: TRUE
 #' @param overwrite    Logical: Overwrite existing \code{file}? Can be a vector
