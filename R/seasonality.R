@@ -251,13 +251,16 @@ if(2 %in% plot) # Spiral graph, col=Q
                                        pch=3, cex=0.3), maxargs, "x","y"))
   if(length(plot)>1) cat(2)
 }
-# parameters for both next plots
+# parameters for all next plots
+if(any(plot>2))
+{
 if(missing(mar)) par(mar=c(3,4,4,1))
 if(missing(mgp)) mgp <- c(2.7,0.7,0)
 xlim3 <- if(allNA(xlim)) c(0,367) else xlim
 ylim3 <- if(allNA(ylim)) lim0(vrange) else ylim
 xaxs3 <- if(is.na(xaxs)) "i" else xaxs
 yaxs3 <- if(is.na(yaxs)) "r" else yaxs
+}
 #
 output$data <- data3 <- data.frame(doy, values, year)
 if(3 %in% plot) # Q~doy, col=year
