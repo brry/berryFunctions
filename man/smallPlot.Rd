@@ -129,16 +129,17 @@ par(plt=new_plt)
 plot(1:10) # canot keep mfcol, only mfrow, if colwise is left FALSE.
 smallPlot(plot(5:1), bg="yellow") 
 points(3, 2, pch="+", cex=2, col=2)   # everything back to normal
+par(op)
 
-
-# smallPlot does not work with layout, because it sets par(mfrow) for the device:
+# if layout is used instead of par(mfrow), it is difficult to add graphs 
+# after using smallPlot
 lay <- matrix(c(1,1,1,1,2,2,3,3,2,2,3,3,4,4,5,5), ncol=4)
 layout.show(layout(lay))
 layout(lay)
 plot(1:10)
 plot(1:10)
 smallPlot(plot(1:10), mar=c(1,3,1,0), x1=0,x2=0.2, y1=0.2,y2=0.8, bg=4, outer=TRUE)
-# plot(1:10) # now in a weird location
+# plot(1:10) # now in a weird location (par("mfrow") is 4x4 after layout)
 
 }
 \seealso{

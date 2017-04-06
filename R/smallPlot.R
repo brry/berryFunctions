@@ -81,16 +81,17 @@
 #' plot(1:10) # canot keep mfcol, only mfrow, if colwise is left FALSE.
 #' smallPlot(plot(5:1), bg="yellow") 
 #' points(3, 2, pch="+", cex=2, col=2)   # everything back to normal
+#' par(op)
 #' 
-#' 
-#' # smallPlot does not work with layout, because it sets par(mfrow) for the device:
+#' # if layout is used instead of par(mfrow), it is difficult to add graphs 
+#' # after using smallPlot
 #' lay <- matrix(c(1,1,1,1,2,2,3,3,2,2,3,3,4,4,5,5), ncol=4)
 #' layout.show(layout(lay))
 #' layout(lay)
 #' plot(1:10)
 #' plot(1:10)
 #' smallPlot(plot(1:10), mar=c(1,3,1,0), x1=0,x2=0.2, y1=0.2,y2=0.8, bg=4, outer=TRUE)
-#' # plot(1:10) # now in a weird location
+#' # plot(1:10) # now in a weird location (par("mfrow") is 4x4 after layout)
 #' 
 #' @param expr expression creating a plot. Can be code within {braces}.
 #' @param x1,x2,y1,y2 Position of small plot, relative to current figure region [0:1]. 
@@ -175,11 +176,12 @@ op <- par(no.readonly=TRUE)
 # par reset
 if(resetfocus) on.exit(
   {
-  par(op)
+  par(op[names(op) != "mfg"]) # mfg not resetted, see http://stackoverflow.com/a/42798556/1587132
   if(colwise) par(mfcol=op$mfcol)
-  par(mfg=op$mfg) # needed for multiple figure plots
+  if(!all(op$mfg==1)) par(mfg=op$mfg) # needed for multiple figure plots
+  #par(mar=op$mar)
   par(new=op$new)
-  text(0,0,"") # fixes bug of margin text not being written after smallPlot calls
+  text(0,0,"") # fixes bug of margin text not being written after mfg has been resetted
   })
 # inset plot: background, border
 if(!outer) par(plt=c(x1, x2, y1, y2), new=TRUE, mgp=mgp) else     # plt / fig
