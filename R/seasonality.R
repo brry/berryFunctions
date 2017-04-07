@@ -11,7 +11,7 @@
 #'         \code{data}: data.frame(doy, values, year) and optionally: \cr
 #'         \code{plot1, plot3, plot4, plot5}: outputs from \code{\link{colPoints}} \cr
 #'         \code{plot2}: output list from \code{\link{spiralDate}} \cr
-#'         and other elements depending on plot type, \code{like data3, data5, probs5, width5}.
+#'         and other elements depending on plot type, \code{like data3, data4, probs4, width4}.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jul-Oct 2016
 #' @seealso \code{\link{spiralDate}}, \code{\link{colPoints}},
 #'          \url{http://nwis.waterdata.usgs.gov/nwis/peak?search_site_no=01400500} 
@@ -39,18 +39,18 @@
 #' seasonality(date, discharge, data=Q[850:950,], plot=3, nmax=1, quiet=TRUE, shift=100)
 #' 
 #' seasonality(date, discharge, data=Q, plot=2) # most floods in winter
-#' seasonality(date, discharge, data=Q, plot=4, vlab="Dude, look at Q!")
-#' seasonality(date, discharge, data=Q, plot=4, shift=100)
-#' s <- seasonality(date, discharge, data=Q, plot=5, shift=100, width=7, returnall=TRUE)
+#' seasonality(date, discharge, data=Q, plot=5, vlab="Dude, look at annual max Q!")
+#' seasonality(date, discharge, data=Q, plot=5, shift=100, col=4)
+#' s <- seasonality(date, discharge, data=Q, plot=4, shift=100, width=7, returnall=TRUE)
 #' str(s, max.lev=1)
 #' 
 #' \dontrun{
 #' dev.new(noRStudioGD=TRUE, record=TRUE)     # large graph on 2nd monitor
 #' par(mfrow=c(2,2))
-#' seasonality(date, discharge, data=Q, plot=1:4, shift=100)
-#' seasonality(date, discharge, data=Q, plot=1:4, lwd=2)
-#' seasonality(date, discharge, data=Q, plot=1:4, nmax=1, shift=100)
-#' seasonality(date, discharge, data=Q, plot=1:4, col=divPal(100, ryb=TRUE))
+#' seasonality(date, discharge, data=Q, plot=(1:5)[-4], shift=100)
+#' seasonality(date, discharge, data=Q, plot=(1:5)[-4], lwd=2)
+#' seasonality(date, discharge, data=Q, plot=(1:5)[-4], nmax=1, shift=100)
+#' seasonality(date, discharge, data=Q, plot=(1:5)[-4], col=divPal(100, ryb=TRUE))
 #' dev.off()
 #' }
 #' 
@@ -77,17 +77,17 @@
 #'             1: color coded doy (day of the year) over year (the default). \cr
 #'             2: Color coded spiral graph with \code{\link{spiralDate}}. \cr
 #'             3: Spaghetti line plot with discharge over doy, one line per year. \cr
-#'             4: Annmax over time for crude trend analysis. \cr
-#'             5: \code{probs} \code{\link{quantileMean}} over doy, with optional 
+#'             4: \code{probs} \code{\link{quantileMean}} over doy, with optional 
 #'                aggregation window (\code{width}) around each doy. \cr
+#'             5: Annmax over time for crude trend analysis. \cr
 #'             DEFAULT: 1
 #' @param add Logical. Add to existing plot? DEFAULT: FALSE
 #' @param nmin Minimum number of values that must be present per (hydrological) year
-#'             to be plotted in plot type 4. DEFAULT: 100
-#' @param probs Probabilities passed to \code{\link{quantileMean}} for plot=5. DEFAULT: 0:5/5
-#' @param width Window width for plot=5. DEFAULT: 31
-#' @param text Logical. Call \code{\link{textField}} if plot=5? DEFAULT: TRUE
-#' @param textargs List of arguments passed to \code{\link{textField}} for plot=5. DEFAULT: NULL
+#'             to be plotted in plot type 5. DEFAULT: 100
+#' @param probs Probabilities passed to \code{\link{quantileMean}} for plot=4. DEFAULT: 0:5/5
+#' @param width Window width for plot=4. DEFAULT: 31
+#' @param text Logical. Call \code{\link{textField}} if plot=4? DEFAULT: TRUE
+#' @param textargs List of arguments passed to \code{\link{textField}} for plot=4. DEFAULT: NULL
 #' @param months Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
 #' @param slab,tlab,vlab Labels for the \bold{s}eason, \bold{t}ime (year) and \bold{v}alues
 #'                       used on the axes and title of \code{\link{colPointsLegend}}. 
@@ -99,12 +99,12 @@
 #' @param main,adj Graph title and offset to the left 
 #'                 (\code{adj} passsed to \code{\link{title}}). DEFAULT: "Seasonality", 0.2
 #' @param mar,mgp Parameters specifying plot margin size and labels placement.
-#'                DEFAULT: c(3,3,4,1), c(1.7,0.7,0) (Changed for plot 3:4 if not given)
+#'                DEFAULT: c(3,3,4,1), c(1.7,0.7,0) (Changed for plot 3:5 if not given)
 #' @param keeppar Logical: Keep the margin parameters? If FALSE, they are reset
 #'                to the previous values. DEFAULT: TRUE
 #' @param legend Logical. Should a legend be drawn? DEFAULT: TRUE
 #' @param legargs List of arguments passed as \code{legargs} to \code{\link{colPoints}}.
-#'                DEFAULT: NULL (internally, plots 3:4 have density=F as default)
+#'                DEFAULT: NULL (internally, plots 3 and 5 have density=F as default)
 #' @param returnall Logical: return all relevant output as a list instead of only                
 #' @param \dots Further arguments passed to \code{\link{colPoints}} like 
 #'              quiet=TRUE, pch, main, xaxs, but not Range (use \code{vrange}).
@@ -293,26 +293,7 @@ if(3 %in% plot) # Q~doy, col=year
   if(length(plot)>1) cat(3)
 }
 #
-if(4 %in% plot) # annmax~year, col=n
-{
-  vlab4 <- if(is.na(vlab)) paste("annual maximum", vlab1) else vlab
-  nalab <- if(shift==0) "n nonNA / year" else "n nonNA / hydrol. year"
-  main4 <- if(missing(main)) "Annual maxima" else main
-  annmax4 <- annmax
-  annmax4[ annmax4$n < nmin , c("n", "max")] <- NA
-  ylim4 <- if(allNA(ylim)) range(annmax4$max, na.rm=TRUE) else ylim
-  output$plot4 <- colPoints("year", "max", "n", data=annmax4, add=add, zlab=nalab,
-            xlim=xlim1, xaxs=xaxs1, ylim=ylim4, yaxs=yaxs3, ylab="", xlab=tlab, 
-            legend=legend, legargs=owa(list(density=FALSE),legargs), lines=TRUE, ...)
-  if(!add){
-  title(ylab=vlab4, mgp=mgp)
-  title(main=main4, adj=adj)  
-  }
-  ### nmax once larger values are possible
-  if(length(plot)>1) cat(4)
-}
-#
-if(5 %in% plot) # Qpercentile~doy, col=n
+if(4 %in% plot) # Qpercentile~doy, col=n
 {
   ## DOY cyclicity (not perfect!!)
   #doyselect <- function(d) sapply(d, function(d) if(d<1) 365+d else if(d>366) d-366 else d)
@@ -327,8 +308,8 @@ if(5 %in% plot) # Qpercentile~doy, col=n
   }
   # Half the width in each direction:
   s <- floor(width/2)
-  output$width5 <- width
-  output$probs5 <- probs
+  output$width4 <- width
+  output$probs4 <- probs
   Qp <- sapply(1:366, function(day)
     {
     select <- unique(unlist(lapply(which(doy==day), function(w) (w-s):(w+s))))
@@ -337,17 +318,17 @@ if(5 %in% plot) # Qpercentile~doy, col=n
     }, USE.NAMES=FALSE)
   Qp <- t(Qp)
   colnames(Qp)[1] <- "n"
-  output$data5 <- Qp
+  output$data4 <- Qp
   # plot
-  ylim5 <- if(missingvrange) lim0(Qp[,-1]) else lim0(vrange)
-  ylim5 <- if(allNA(ylim)) ylim5 else ylim
-  zlab5 <- if(s==0) "n per doy" else paste0("n per (doy +- ", s,")")
-  vlab5 <- if(length(probs)==1) paste0(vlab1, " (",probs*100,"th percentile)") else
+  ylim4 <- if(missingvrange) lim0(Qp[,-1]) else lim0(vrange)
+  ylim4 <- if(allNA(ylim)) ylim4 else ylim
+  zlab4 <- if(s==0) "n per doy" else paste0("n per (doy +- ", s,")")
+  vlab4 <- if(length(probs)==1) paste0(vlab1, " (",probs*100,"th percentile)") else
                                paste0(vlab1, "  Percentiles")
-  vlab5 <- if(is.na(vlab))vlab5 else vlab 
-  output$plot5 <- colPoints(1:366, Qp[,2], Qp[,1], add=add, zlab=zlab5,
+  vlab4 <- if(is.na(vlab))vlab4 else vlab 
+  output$plot4 <- colPoints(1:366, Qp[,2], Qp[,1], add=add, zlab=zlab4,
             ylab="", xlab=slab, xaxt="n", legend=legend, legargs=owa(list(density=FALSE),legargs), 
-            xlim=xlim3, ylim=ylim5, xaxs=xaxs3, yaxs=yaxs3, lines=TRUE, nint=3, ...)
+            xlim=xlim3, ylim=ylim4, xaxs=xaxs3, yaxs=yaxs3, lines=TRUE, nint=3, ...)
   if(length(probs)!=1) 
     {
     for(i in 2:length(probs))
@@ -355,7 +336,7 @@ if(5 %in% plot) # Qpercentile~doy, col=n
     if(text) do.call(textField, owa(list(x=183, y=Qp[183,-1], labels=paste0(round(probs*100,1),"%"), quiet=TRUE), textargs))
     }
   if(!add){
-  title(ylab=vlab5, mgp=mgp)
+  title(ylab=vlab4, mgp=mgp)
   # Axis labelling
   axis(1, ldoy, months, tick=FALSE, las=1)
   axis(1, tdoy, labels=FALSE, las=1)
@@ -363,6 +344,25 @@ if(5 %in% plot) # Qpercentile~doy, col=n
   if(janline & shift!=0) abline(v=shift+1)
   # if(width>1) legend("topleft", paste("smoothing width:",width), bty="n") # already in zlab
   }
+  if(length(plot)>1) cat(4)
+}
+#
+if(5 %in% plot) # annmax~year, col=n
+{
+  vlab5 <- if(is.na(vlab)) paste("annual maximum", vlab1) else vlab
+  nalab <- if(shift==0) "n nonNA / year" else "n nonNA / hydrol. year"
+  main5 <- if(missing(main)) "Annual maxima" else main
+  annmax5 <- annmax
+  annmax5[ annmax5$n < nmin , c("n", "max")] <- NA
+  ylim5 <- if(allNA(ylim)) range(annmax5$max, na.rm=TRUE) else ylim
+  output$plot5 <- colPoints("year", "max", "n", data=annmax5, add=add, zlab=nalab,
+            xlim=xlim1, xaxs=xaxs1, ylim=ylim5, yaxs=yaxs3, ylab="", xlab=tlab, 
+            legend=legend, legargs=owa(list(density=FALSE),legargs), lines=TRUE, ...)
+  if(!add){
+  title(ylab=vlab5, mgp=mgp)
+  title(main=main5, adj=adj)  
+  }
+  ### nmax once larger values are possible
   if(length(plot)>1) cat(5)
 }
 #

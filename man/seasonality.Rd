@@ -46,23 +46,23 @@ DEFAULT: NULL (several internal defaults are used, but can be overridden)}
 1: color coded doy (day of the year) over year (the default). \cr
 2: Color coded spiral graph with \code{\link{spiralDate}}. \cr
 3: Spaghetti line plot with discharge over doy, one line per year. \cr
-4: Annmax over time for crude trend analysis. \cr
-5: \code{probs} \code{\link{quantileMean}} over doy, with optional 
+4: \code{probs} \code{\link{quantileMean}} over doy, with optional 
    aggregation window (\code{width}) around each doy. \cr
+5: Annmax over time for crude trend analysis. \cr
 DEFAULT: 1}
 
 \item{add}{Logical. Add to existing plot? DEFAULT: FALSE}
 
 \item{nmin}{Minimum number of values that must be present per (hydrological) year
-to be plotted in plot type 4. DEFAULT: 100}
+to be plotted in plot type 5. DEFAULT: 100}
 
-\item{probs}{Probabilities passed to \code{\link{quantileMean}} for plot=5. DEFAULT: 0:5/5}
+\item{probs}{Probabilities passed to \code{\link{quantileMean}} for plot=4. DEFAULT: 0:5/5}
 
-\item{width}{Window width for plot=5. DEFAULT: 31}
+\item{width}{Window width for plot=4. DEFAULT: 31}
 
-\item{text}{Logical. Call \code{\link{textField}} if plot=5? DEFAULT: TRUE}
+\item{text}{Logical. Call \code{\link{textField}} if plot=4? DEFAULT: TRUE}
 
-\item{textargs}{List of arguments passed to \code{\link{textField}} for plot=5. DEFAULT: NULL}
+\item{textargs}{List of arguments passed to \code{\link{textField}} for plot=4. DEFAULT: NULL}
 
 \item{months}{Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D}
 
@@ -80,7 +80,7 @@ DEFAULT: NA (specified internally per plot type)}
 (\code{adj} passsed to \code{\link{title}}). DEFAULT: "Seasonality", 0.2}
 
 \item{mar, mgp}{Parameters specifying plot margin size and labels placement.
-DEFAULT: c(3,3,4,1), c(1.7,0.7,0) (Changed for plot 3:4 if not given)}
+DEFAULT: c(3,3,4,1), c(1.7,0.7,0) (Changed for plot 3:5 if not given)}
 
 \item{keeppar}{Logical: Keep the margin parameters? If FALSE, they are reset
 to the previous values. DEFAULT: TRUE}
@@ -88,7 +88,7 @@ to the previous values. DEFAULT: TRUE}
 \item{legend}{Logical. Should a legend be drawn? DEFAULT: TRUE}
 
 \item{legargs}{List of arguments passed as \code{legargs} to \code{\link{colPoints}}.
-DEFAULT: NULL (internally, plots 3:4 have density=F as default)}
+DEFAULT: NULL (internally, plots 3 and 5 have density=F as default)}
 
 \item{returnall}{Logical: return all relevant output as a list instead of only}
 
@@ -106,7 +106,7 @@ The output is always invisible, don't forget to assign it.
         \code{data}: data.frame(doy, values, year) and optionally: \cr
         \code{plot1, plot3, plot4, plot5}: outputs from \code{\link{colPoints}} \cr
         \code{plot2}: output list from \code{\link{spiralDate}} \cr
-        and other elements depending on plot type, \code{like data3, data5, probs5, width5}.
+        and other elements depending on plot type, \code{like data3, data4, probs4, width4}.
 }
 \description{
 Examine time series for seasonality of high (low) values
@@ -133,18 +133,18 @@ seasonality(date, discharge, data=Q[Q$date<as.Date("2007-08-15"),], plot=3, shif
 seasonality(date, discharge, data=Q[850:950,], plot=3, nmax=1, quiet=TRUE, shift=100)
 
 seasonality(date, discharge, data=Q, plot=2) # most floods in winter
-seasonality(date, discharge, data=Q, plot=4, vlab="Dude, look at Q!")
-seasonality(date, discharge, data=Q, plot=4, shift=100)
-s <- seasonality(date, discharge, data=Q, plot=5, shift=100, width=7, returnall=TRUE)
+seasonality(date, discharge, data=Q, plot=5, vlab="Dude, look at annual max Q!")
+seasonality(date, discharge, data=Q, plot=5, shift=100, col=4)
+s <- seasonality(date, discharge, data=Q, plot=4, shift=100, width=7, returnall=TRUE)
 str(s, max.lev=1)
 
 \dontrun{
 dev.new(noRStudioGD=TRUE, record=TRUE)     # large graph on 2nd monitor
 par(mfrow=c(2,2))
-seasonality(date, discharge, data=Q, plot=1:4, shift=100)
-seasonality(date, discharge, data=Q, plot=1:4, lwd=2)
-seasonality(date, discharge, data=Q, plot=1:4, nmax=1, shift=100)
-seasonality(date, discharge, data=Q, plot=1:4, col=divPal(100, ryb=TRUE))
+seasonality(date, discharge, data=Q, plot=(1:5)[-4], shift=100)
+seasonality(date, discharge, data=Q, plot=(1:5)[-4], lwd=2)
+seasonality(date, discharge, data=Q, plot=(1:5)[-4], nmax=1, shift=100)
+seasonality(date, discharge, data=Q, plot=(1:5)[-4], col=divPal(100, ryb=TRUE))
 dev.off()
 }
 
