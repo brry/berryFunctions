@@ -6,12 +6,13 @@
 \usage{
 seasonality(dates, values, data, drange = NA, vrange = NA, shift = 0,
   janline = TRUE, nmax = 0, maxargs = NULL, plot = 1, add = FALSE,
-  nmin = 100, probs = c(0, 25, 50, 75, 95, 100), width = 31,
-  text = TRUE, textargs = NULL, months = substr(month.abb, 1, 1),
-  slab = "Month", tlab = "Year", vlab = NA, xlim = NA, ylim = NA,
-  xaxs = NA, yaxs = NA, main = "Seasonality", adj = 0.2, mar = c(3, 3,
-  4, 1), mgp = c(1.7, 0.7, 0), keeppar = TRUE, legend = TRUE,
-  legargs = NULL, returnall = FALSE, ...)
+  nmin = 100, probs = c(0, 25, 50, 75, 95, 99.9)/100, width = 31,
+  text = TRUE, texti = seq(200, 20, length.out = length(probs)),
+  textargs = NULL, months = substr(month.abb, 1, 1), slab = "Month",
+  tlab = "Year", vlab = NA, xlim = NA, ylim = NA, xaxs = NA,
+  yaxs = NA, main = "Seasonality", adj = 0.2, mar = c(3, 3, 4, 1),
+  mgp = c(1.7, 0.7, 0), keeppar = TRUE, legend = TRUE, legargs = NULL,
+  returnall = FALSE, ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order. 
@@ -41,7 +42,8 @@ Currently, only 0 and 1 are implemented. DEFAULT: 0}
 e.g. \code{maxargs=list(type="l", col="red", lty=3)}. 
 DEFAULT: NULL (several internal defaults are used, but can be overridden)}
 
-\item{plot}{Integer specifying the type of plot. Can be a vector to produce several plots. \cr 
+\item{plot}{Integer specifying the type of plot. 
+Can be a vector to produce several plots. \cr 
 0: none, only return the data.frame with annual maxima. \cr
 1: color coded doy (day of the year) over year (the default). \cr
 2: Color coded spiral graph with \code{\link{spiralDate}}. \cr
@@ -53,17 +55,21 @@ DEFAULT: 1}
 
 \item{add}{Logical. Add to existing plot? DEFAULT: FALSE}
 
-\item{nmin}{Minimum number of values that must be present per (hydrological) year
-to be plotted in plot type 5. DEFAULT: 100}
+\item{nmin}{Minimum number of values that must be present per (hydrological) 
+year to be plotted in plot type 5. DEFAULT: 100}
 
 \item{probs}{Probabilities passed to \code{\link{quantileMean}} for plot=4. 
-DEFAULT: c(0,25,50,75,95,100)}
+DEFAULT: c(0,25,50,75,95,99)/100}
 
 \item{width}{Window width for plot=4. DEFAULT: 31}
 
 \item{text}{Logical. Call \code{\link{textField}} if plot=4? DEFAULT: TRUE}
 
-\item{textargs}{List of arguments passed to \code{\link{textField}} for plot=4. DEFAULT: NULL}
+\item{texti}{Numerical (vector): indices at which to label the lines.
+DEFAULT: seq(200,20,length.out=length(probs))}
+
+\item{textargs}{List of arguments passed to \code{\link{textField}} for plot=4. 
+DEFAULT: NULL}
 
 \item{months}{Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D}
 
@@ -78,7 +84,8 @@ Use "r" for regular 4\% expansion, "i" for in range only.
 DEFAULT: NA (specified internally per plot type)}
 
 \item{main, adj}{Graph title and offset to the left 
-(\code{adj} passsed to \code{\link{title}}). DEFAULT: "Seasonality", 0.2}
+(\code{adj} passsed to \code{\link{title}}). 
+DEFAULT: "Seasonality", 0.2}
 
 \item{mar, mgp}{Parameters specifying plot margin size and labels placement.
 DEFAULT: c(3,3,4,1), c(1.7,0.7,0) (Changed for plot 3:5 if not given)}
@@ -95,7 +102,8 @@ DEFAULT: NULL (internally, plots 3 and 5 have density=F as default)}
 
 \item{\dots}{Further arguments passed to \code{\link{colPoints}} like 
 quiet=TRUE, pch, main, xaxs, but not Range (use \code{vrange}).
-Passed to \code{\link{spiralDate}} if \code{plot=2}, like add, format, lines.}
+Passed to \code{\link{spiralDate}} if \code{plot=2}, 
+like add, format, lines.}
 }
 \value{
 The output is always invisible, don't forget to assign it. 

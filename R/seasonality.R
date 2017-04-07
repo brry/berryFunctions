@@ -54,64 +54,68 @@
 #' dev.off()
 #' }
 #' 
-#' @param dates Dates in ascending order. 
-#'              Can be charater strings or \code{\link{strptime}} results, 
-#'              as accepted (and coerced) by \code{\link{as.Date}}
-#' @param values Values to be mapped in color with \code{\link{colPoints}} 
-#' @param data Optional: data.frame with the column names as given by dates and values
-#' @param drange Optional date range (analogous to xlim), can be a vector like 
-#'               \code{dates}. DEFAULT: NA (computed from \code{dates} internally)
-#' @param vrange Optional value range (analogous to ylim), can be a vector like
-#'              \code{values}. DEFAULT: NA (computed from \code{values} internally)
-#' @param shift Number of days to move the year-break to. 
-#'              E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0
-#' @param janline Logical: Should horizontal line be plotted at 
-#'                January 1st if \code{shift!=0}? DEFAULT: TRUE
-#' @param nmax Number of annual maxima to be marked, plotted and returned. 
-#'             Currently, only 0 and 1 are implemented. DEFAULT: 0
-#' @param maxargs List of arguments passed to \code{\link{lines}} for annual maxima,
-#'                e.g. \code{maxargs=list(type="l", col="red", lty=3)}. 
-#'                DEFAULT: NULL (several internal defaults are used, but can be overridden)
-#' @param plot Integer specifying the type of plot. Can be a vector to produce several plots. \cr 
-#'             0: none, only return the data.frame with annual maxima. \cr
-#'             1: color coded doy (day of the year) over year (the default). \cr
-#'             2: Color coded spiral graph with \code{\link{spiralDate}}. \cr
-#'             3: Spaghetti line plot with discharge over doy, one line per year. \cr
-#'             4: \code{probs} \code{\link{quantileMean}} over doy, with optional 
-#'                aggregation window (\code{width}) around each doy. \cr
-#'             5: Annmax over time for crude trend analysis. \cr
-#'             DEFAULT: 1
-#' @param add Logical. Add to existing plot? DEFAULT: FALSE
-#' @param nmin Minimum number of values that must be present per (hydrological) year
-#'             to be plotted in plot type 5. DEFAULT: 100
-#' @param probs Probabilities passed to \code{\link{quantileMean}} for plot=4. 
-#'              DEFAULT: c(0,25,50,75,95,99)/100
-#' @param width Window width for plot=4. DEFAULT: 31
-#' @param text Logical. Call \code{\link{textField}} if plot=4? DEFAULT: TRUE
-#' @param texti Numerical (vector): indices at which to label the lines.
-#'              DEFAULT: seq(200,20,length.out=length(probs))
-#' @param textargs List of arguments passed to \code{\link{textField}} for plot=4. DEFAULT: NULL
-#' @param months Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
+#' @param dates    Dates in ascending order. 
+#'                 Can be charater strings or \code{\link{strptime}} results, 
+#'                 as accepted (and coerced) by \code{\link{as.Date}}
+#' @param values   Values to be mapped in color with \code{\link{colPoints}} 
+#' @param data     Optional: data.frame with the column names as given by dates and values
+#' @param drange   Optional date range (analogous to xlim), can be a vector like 
+#'                 \code{dates}. DEFAULT: NA (computed from \code{dates} internally)
+#' @param vrange   Optional value range (analogous to ylim), can be a vector like
+#'                 \code{values}. DEFAULT: NA (computed from \code{values} internally)
+#' @param shift    Number of days to move the year-break to. 
+#'                 E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0
+#' @param janline  Logical: Should horizontal line be plotted at 
+#'                 January 1st if \code{shift!=0}? DEFAULT: TRUE
+#' @param nmax     Number of annual maxima to be marked, plotted and returned. 
+#'                 Currently, only 0 and 1 are implemented. DEFAULT: 0
+#' @param maxargs  List of arguments passed to \code{\link{lines}} for annual maxima,
+#'                 e.g. \code{maxargs=list(type="l", col="red", lty=3)}. 
+#'                 DEFAULT: NULL (several internal defaults are used, but can be overridden)
+#' @param plot     Integer specifying the type of plot. 
+#'                 Can be a vector to produce several plots. \cr 
+#'                 0: none, only return the data.frame with annual maxima. \cr
+#'                 1: color coded doy (day of the year) over year (the default). \cr
+#'                 2: Color coded spiral graph with \code{\link{spiralDate}}. \cr
+#'                 3: Spaghetti line plot with discharge over doy, one line per year. \cr
+#'                 4: \code{probs} \code{\link{quantileMean}} over doy, with optional 
+#'                    aggregation window (\code{width}) around each doy. \cr
+#'                 5: Annmax over time for crude trend analysis. \cr
+#'                 DEFAULT: 1
+#' @param add      Logical. Add to existing plot? DEFAULT: FALSE
+#' @param nmin     Minimum number of values that must be present per (hydrological) 
+#'                 year to be plotted in plot type 5. DEFAULT: 100
+#' @param probs    Probabilities passed to \code{\link{quantileMean}} for plot=4. 
+#'                 DEFAULT: c(0,25,50,75,95,99)/100
+#' @param width    Window width for plot=4. DEFAULT: 31
+#' @param text     Logical. Call \code{\link{textField}} if plot=4? DEFAULT: TRUE
+#' @param texti    Numerical (vector): indices at which to label the lines.
+#'                 DEFAULT: seq(200,20,length.out=length(probs))
+#' @param textargs List of arguments passed to \code{\link{textField}} for plot=4. 
+#'                 DEFAULT: NULL
+#' @param months   Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
 #' @param slab,tlab,vlab Labels for the \bold{s}eason, \bold{t}ime (year) and \bold{v}alues
-#'                       used on the axes and title of \code{\link{colPointsLegend}}. 
-#'                       DEFAULT: "Month", "Year", substitute(values)
+#'                 used on the axes and title of \code{\link{colPointsLegend}}. 
+#'                 DEFAULT: "Month", "Year", substitute(values)
 #' @param xlim,ylim Limits of x and y axis. DEFAULT: NA (specified internally per plot type)
 #' @param xaxs,yaxs x and y Axis style, see \code{\link{par}}. 
-#'                  Use "r" for regular 4\% expansion, "i" for in range only.
-#'                  DEFAULT: NA (specified internally per plot type)
+#'                 Use "r" for regular 4\% expansion, "i" for in range only.
+#'                 DEFAULT: NA (specified internally per plot type)
 #' @param main,adj Graph title and offset to the left 
-#'                 (\code{adj} passsed to \code{\link{title}}). DEFAULT: "Seasonality", 0.2
-#' @param mar,mgp Parameters specifying plot margin size and labels placement.
-#'                DEFAULT: c(3,3,4,1), c(1.7,0.7,0) (Changed for plot 3:5 if not given)
-#' @param keeppar Logical: Keep the margin parameters? If FALSE, they are reset
-#'                to the previous values. DEFAULT: TRUE
-#' @param legend Logical. Should a legend be drawn? DEFAULT: TRUE
-#' @param legargs List of arguments passed as \code{legargs} to \code{\link{colPoints}}.
-#'                DEFAULT: NULL (internally, plots 3 and 5 have density=F as default)
+#'                 (\code{adj} passsed to \code{\link{title}}). 
+#'                 DEFAULT: "Seasonality", 0.2
+#' @param mar,mgp  Parameters specifying plot margin size and labels placement.
+#'                 DEFAULT: c(3,3,4,1), c(1.7,0.7,0) (Changed for plot 3:5 if not given)
+#' @param keeppar  Logical: Keep the margin parameters? If FALSE, they are reset
+#'                 to the previous values. DEFAULT: TRUE
+#' @param legend   Logical. Should a legend be drawn? DEFAULT: TRUE
+#' @param legargs  List of arguments passed as \code{legargs} to \code{\link{colPoints}}.
+#'                 DEFAULT: NULL (internally, plots 3 and 5 have density=F as default)
 #' @param returnall Logical: return all relevant output as a list instead of only                
-#' @param \dots Further arguments passed to \code{\link{colPoints}} like 
-#'              quiet=TRUE, pch, main, xaxs, but not Range (use \code{vrange}).
-#'              Passed to \code{\link{spiralDate}} if \code{plot=2}, like add, format, lines.
+#' @param \dots    Further arguments passed to \code{\link{colPoints}} like 
+#'                 quiet=TRUE, pch, main, xaxs, but not Range (use \code{vrange}).
+#'                 Passed to \code{\link{spiralDate}} if \code{plot=2}, 
+#'                 like add, format, lines.
 #'
 seasonality <- function(
   dates,
