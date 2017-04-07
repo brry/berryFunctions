@@ -6,13 +6,13 @@
 \usage{
 seasonality(dates, values, data, drange = NA, vrange = NA, shift = 0,
   janline = TRUE, nmax = 0, maxargs = NULL, plot = 1, add = FALSE,
-  nmin = 100, probs = c(0, 25, 50, 75, 95, 99.9)/100, width = 31,
+  nmin = 100, probs = c(0, 25, 50, 75, 95, 99.9)/100, width = 3,
   text = TRUE, texti = seq(200, 20, length.out = length(probs)),
   textargs = NULL, months = substr(month.abb, 1, 1), slab = "Month",
   tlab = "Year", vlab = NA, xlim = NA, ylim = NA, xaxs = NA,
   yaxs = NA, main = "Seasonality", adj = 0.2, mar = c(3, 3, 4, 1),
   mgp = c(1.7, 0.7, 0), keeppar = TRUE, legend = TRUE, legargs = NULL,
-  returnall = FALSE, ...)
+  returnall = FALSE, quiet = FALSE, ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order. 
@@ -61,7 +61,12 @@ year to be plotted in plot type 5. DEFAULT: 100}
 \item{probs}{Probabilities passed to \code{\link{quantileMean}} for plot=4. 
 DEFAULT: c(0,25,50,75,95,99)/100}
 
-\item{width}{Window width for plot=4. DEFAULT: 31}
+\item{width}{Numeric: window width for plot=4. Used as sd in gaussian weighting.
+Support (number of values around a DOY passed to 
+quantile funtion at least once) is ca 4.9*width. 
+The value at doy itself is used 10 times. 
+Larger values of width require more computing time.
+DEFAULT: 3}
 
 \item{text}{Logical. Call \code{\link{textField}} if plot=4? DEFAULT: TRUE}
 
@@ -98,10 +103,14 @@ to the previous values. DEFAULT: TRUE}
 \item{legargs}{List of arguments passed as \code{legargs} to \code{\link{colPoints}}.
 DEFAULT: NULL (internally, plots 3 and 5 have density=F as default)}
 
-\item{returnall}{Logical: return all relevant output as a list instead of only}
+\item{returnall}{Logical: return all relevant output as a list instead of only
+annmax data.frame? DEFAULT: FALSE}
+
+\item{quiet}{Logical: suppress progress stuff and colPoints messages?
+DEFAULT: FALSE}
 
 \item{\dots}{Further arguments passed to \code{\link{colPoints}} like 
-quiet=TRUE, pch, main, xaxs, but not Range (use \code{vrange}).
+pch, main, xaxs, but not Range (use \code{vrange}).
 Passed to \code{\link{spiralDate}} if \code{plot=2}, 
 like add, format, lines.}
 }
@@ -144,11 +153,13 @@ seasonality(date, discharge, data=Q[850:950,], plot=3, nmax=1, quiet=TRUE, shift
 seasonality(date, discharge, data=Q, plot=2) # most floods in winter
 seasonality(date, discharge, data=Q, plot=5, vlab="Dude, look at annual max Q!")
 seasonality(date, discharge, data=Q, plot=5, shift=100)
-s <- seasonality(date, discharge, data=Q, plot=4, shift=100, width=7, returnall=TRUE)
+s <- seasonality(date, discharge, data=Q, plot=4, shift=100, width=3, returnall=TRUE)
 str(s, max.lev=1)
 
+\dontrun{ # excluded from CRAN checks because it is slow
 seasonality(date, discharge, data=Q, plot=3:4, add=0:1, ylim=lim0(400), shift=117)
-seasonality(date, discharge, data=Q, plot=4, add=TRUE, lwd=3, shift=117)
+seasonality(date, discharge, data=Q, plot=4, add=TRUE, lwd=3, shift=117, width=3)
+}
 
 \dontrun{
 dev.new(noRStudioGD=TRUE, record=TRUE)     # large graph on 2nd monitor

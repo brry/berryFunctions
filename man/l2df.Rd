@@ -27,7 +27,7 @@ class(  l2df(eglist, byrow=FALSE)  ) # data.frame (since 2016-05-24)
 
 eglist <- list(AA=c(6,9,2,6), BB="no", CC=c(-3,2) )
 eglist
-l2df(eglist)  # now everything is a character
+str(l2df(eglist))  # now everything is a character
 
 eg2 <- list(AA=c(6,9,2,6), BB=matrix(1:8, ncol=2), CC=c(-3,2) )
 eg2

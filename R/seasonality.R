@@ -41,11 +41,13 @@
 #' seasonality(date, discharge, data=Q, plot=2) # most floods in winter
 #' seasonality(date, discharge, data=Q, plot=5, vlab="Dude, look at annual max Q!")
 #' seasonality(date, discharge, data=Q, plot=5, shift=100)
-#' s <- seasonality(date, discharge, data=Q, plot=4, shift=100, width=7, returnall=TRUE)
+#' s <- seasonality(date, discharge, data=Q, plot=4, shift=100, width=3, returnall=TRUE)
 #' str(s, max.lev=1)
 #' 
+#' \dontrun{ # excluded from CRAN checks because it is slow
 #' seasonality(date, discharge, data=Q, plot=3:4, add=0:1, ylim=lim0(400), shift=117)
-#' seasonality(date, discharge, data=Q, plot=4, add=TRUE, lwd=3, shift=117)
+#' seasonality(date, discharge, data=Q, plot=4, add=TRUE, lwd=3, shift=117, width=3)
+#' }
 #' 
 #' \dontrun{
 #' dev.new(noRStudioGD=TRUE, record=TRUE)     # large graph on 2nd monitor
@@ -90,7 +92,12 @@
 #'                 year to be plotted in plot type 5. DEFAULT: 100
 #' @param probs    Probabilities passed to \code{\link{quantileMean}} for plot=4. 
 #'                 DEFAULT: c(0,25,50,75,95,99)/100
-#' @param width    Window width for plot=4. DEFAULT: 31
+#' @param width    Numeric: window width for plot=4. Used as sd in gaussian weighting.
+#'                 Support (number of values around a DOY passed to 
+#'                 quantile funtion at least once) is ca 4.9*width. 
+#'                 The value at doy itself is used 10 times. 
+#'                 Larger values of width require more computing time.
+#'                 DEFAULT: 3
 #' @param text     Logical. Call \code{\link{textField}} if plot=4? DEFAULT: TRUE
 #' @param texti    Numerical (vector): indices at which to label the lines.
 #'                 DEFAULT: seq(200,20,length.out=length(probs))
@@ -114,9 +121,12 @@
 #' @param legend   Logical. Should a legend be drawn? DEFAULT: TRUE
 #' @param legargs  List of arguments passed as \code{legargs} to \code{\link{colPoints}}.
 #'                 DEFAULT: NULL (internally, plots 3 and 5 have density=F as default)
-#' @param returnall Logical: return all relevant output as a list instead of only                
+#' @param returnall Logical: return all relevant output as a list instead of only
+#'                 annmax data.frame? DEFAULT: FALSE
+#' @param quiet    Logical: suppress progress stuff and colPoints messages?
+#'                 DEFAULT: FALSE            
 #' @param \dots    Further arguments passed to \code{\link{colPoints}} like 
-#'                 quiet=TRUE, pch, main, xaxs, but not Range (use \code{vrange}).
+#'                 pch, main, xaxs, but not Range (use \code{vrange}).
 #'                 Passed to \code{\link{spiralDate}} if \code{plot=2}, 
 #'                 like add, format, lines.
 #'
@@ -134,7 +144,7 @@ seasonality <- function(
   add=FALSE,
   nmin=100,
   probs=c(0,25,50,75,95,99.9)/100,
-  width=31,
+  width=3,
   text=TRUE,
   texti=seq(200,20,length.out=length(probs)),
   textargs=NULL,
@@ -154,6 +164,7 @@ seasonality <- function(
   legend=TRUE,
   legargs=NULL,
   returnall=FALSE,
+  quiet=FALSE,
   ...
 )
 {
@@ -240,7 +251,7 @@ if(1 %in% plot) # doy ~ year, col=Q ----
   ylim1 <- if(allNA(ylim)) c(370,-3) else ylim
   yaxs1 <- if(is.na(yaxs)) "i" else yaxs
   output$plot1 <- colPoints(year, doy, values, Range=vrange, add=add[1], yaxt="n",
-            xlim=xlim1, ylim=ylim1, xaxs=xaxs1, yaxs=yaxs1, 
+            xlim=xlim1, ylim=ylim1, xaxs=xaxs1, yaxs=yaxs1, quiet=quiet, 
             ylab=slab, xlab=tlab, zlab=vlab1, legend=legend, legargs=legargs, ...)
   # Axis labelling
   if(!add[1]){
@@ -294,7 +305,7 @@ if(3 %in% plot) # Q~doy, col=year ----
   # plot
   output$plot3 <- colPoints(doy, values, year, data=data3, Range=drange3, 
       zlab=tlab, ylab="", xlab=slab, xaxt="n", legend=legend, add=add[3], 
-      legargs=owa(list(density=FALSE),legargs), 
+      legargs=owa(list(density=FALSE),legargs), quiet=quiet,
       xlim=xlim3, ylim=ylim3, xaxs=xaxs3, yaxs=yaxs3, lines=TRUE, nint=1,
       if(!exists("col", inherits=FALSE)) col=seqPal(100, colors=c("red","blue")),  ...)
   if(!add[3]){
@@ -312,47 +323,60 @@ if(3 %in% plot) # Q~doy, col=year ----
 #
 if(4 %in% plot) # Qpercentile~doy, col=n ----
 {
-  ## DOY cyclicity (not perfect!!)
-  #doyselect <- function(d) sapply(d, function(d) if(d<1) 365+d else if(d>366) d-366 else d)
-  ## select all the dates width days (e.g one week) around a DOY:
-  #doyselect(day+(-width):width)
-  # width control:
-  width <- width[1]
-  if(width %% 2 == 0)
-    {
-    warning("even width (", width, ") is changed to odd width (", width+1, ").")
-    width <- width+1
+  # deciding weights:
+  if(FALSE){ # kept here for reference only
+  width=1; x <- unique(round((-3*width):(3*width)))
+  d <- dnorm(x,sd=width) ; plot(x, round(d*10/max(d)) )
+  # number of entries used (support) as multiple of width
+  xx <- seq(0.6,20,len=1000); plot(xx, sapply(xx, function(width){
+      d <- dnorm((-3*width):(3*width), sd=width)
+      sum(round(d*10/max(d))>0) / width}), type="l", ylab=""); axis(4,line=-2,las=1)
+  if(width< 0) stop("width must be a positive number, not ", width)
+  if(width>50) stop("width must be smaller than 50. It is ", width)
   }
-  # Half the width in each direction:
-  s <- floor(width/2)
+  # preparing weights:
   output$width4 <- width
   output$probs4 <- probs
-  Qp <- sapply(1:366, function(day)
+  if(width<1)
+  {
+  Qp <- lapply(1:366, function(day) quantileMean(values[which(doy==day)], 
+                                                 probs=probs, na.rm=TRUE)  )
+  }
+  else
+  {
+  xx4 <- unique(ceiling(  (-3*width):(3*width)  ))
+  w <- dnorm(xx4, sd=width)
+  w <- round(w*10/max(w))
+  # computing weighted quantile around DOYs
+  if(requireNamespace("pbapply", quietly=TRUE) && !quiet) lapply <- pbapply::pblapply
+  Qp <- lapply(1:366, function(day)
     {
-    select <- unique(unlist(lapply(which(doy==day), function(w) (w-s):(w+s))))
+    select <- base::lapply(which(doy==day), function(i) rep(i+xx4, w) )
+    select <- unlist(select)
     select <- select[select>0 & select<length(doy)]
-    c(length(select), quantileMean(values[select], probs=probs, na.rm=TRUE)   )
-    }, USE.NAMES=FALSE)
-  Qp <- t(Qp)
-  colnames(Qp)[1] <- "n"
+    # output: weighted quantile
+    quantileMean(values[select], probs=probs, na.rm=TRUE) 
+    })
+  }
+  Qp <- as.matrix(l2df(Qp))
   output$data4 <- Qp
   # plot
-  ylim4 <- if(missingvrange) lim0(Qp[,-1]) else lim0(vrange)
+  ylim4 <- if(missingvrange) lim0(Qp) else lim0(vrange)
   ylim4 <- if(allNA(ylim)) ylim4 else ylim
-  zlab4 <- if(s==0) "n per doy" else paste0("n per (doy +- ", s,")")
   vlab4 <- if(length(probs)==1) paste0(vlab1, " (",probs*100,"th percentile)") else
-                               paste0(vlab1, "  percentiles")
+                                paste0(vlab1, "  percentiles")
   vlab4 <- if(is.na(vlab))vlab4 else vlab 
-  output$plot4 <- colPoints(1:366, Qp[,2], Qp[,1], add=add[4], zlab=zlab4,
-            ylab="", xlab=slab, xaxt="n", legend=legend, 
-            legargs=owa(list(density=FALSE),legargs), 
-            xlim=xlim3, ylim=ylim4, xaxs=xaxs3, yaxs=yaxs3, lines=TRUE, nint=3, ...)
+  output$plot3 <- do.call(colPoints, owa(list(x=1:366, y=Qp[,1], z=Qp[,1], add=add[4], 
+       ylab="", xlab=slab, xaxt="n", legend=FALSE, quiet=quiet, col="blue",
+       xlim=xlim3, ylim=ylim4, xaxs=xaxs3, yaxs=yaxs3, lines=TRUE, nint=3), list(...)))
   if(length(probs)!=1)  for(i in 2:length(probs))
-     colPoints(1:366, Qp[,i+1], Qp[,1], add=TRUE, legend=FALSE, 
-               lines=TRUE, nint=3, ...)
+     do.call(colPoints, owa(list(x=1:366, y=Qp[,i], z=Qp[,1], add=TRUE, legend=FALSE, 
+               lines=TRUE, nint=3, col="blue", quiet=quiet), list(...)))
   if(text){  
     texti <- rep_len(texti, length(probs))
-    do.call(textField, owa(list(x=texti, y=diag(Qp[texti,-1]), 
+    texty <- Qp[texti,]
+    if(length(probs)!=1) texty <- diag(texty)
+    do.call(textField, owa(list(x=texti, y=texty, 
                   labels=paste0(round(probs*100,1),"%"), quiet=TRUE), textargs))
     }
   if(!add[4]){
@@ -362,7 +386,8 @@ if(4 %in% plot) # Qpercentile~doy, col=n ----
   axis(1, tdoy, labels=FALSE, las=1)
   title(main=main, adj=adj)  
   if(janline & shift!=0) abline(v=shift+1)
-  # if(width>1) legend("topleft", paste("smoothing width:",width), bty="n") # already in zlab
+  if(width>=1 & legend) colPointsLegend(rep(xx4,w), colors=NA, title="Smoothing weights", 
+                              lines=FALSE, ...)
   }
   if(length(plot)>1) cat(4)
 }
@@ -376,7 +401,7 @@ if(5 %in% plot) # annmax~year, col=n ----
   annmax5[ annmax5$n < nmin , c("n", "max")] <- NA
   ylim5 <- if(allNA(ylim)) range(annmax5$max, na.rm=TRUE) else ylim
   output$plot5 <- colPoints("year", "max", "n", data=annmax5, add=add[5], zlab=nalab,
-            xlim=xlim1, xaxs=xaxs1, ylim=ylim5, yaxs=yaxs3, ylab="", xlab=tlab, 
+            xlim=xlim1, xaxs=xaxs1, ylim=ylim5, yaxs=yaxs3, ylab="", xlab=tlab, quiet=quiet,
             legend=legend, legargs=owa(list(density=FALSE),legargs), lines=TRUE, ...)
   if(!add[5]){
   title(ylab=vlab5, mgp=mgp)
