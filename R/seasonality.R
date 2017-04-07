@@ -44,6 +44,9 @@
 #' s <- seasonality(date, discharge, data=Q, plot=4, shift=100, width=7, returnall=TRUE)
 #' str(s, max.lev=1)
 #' 
+#' seasonality(date, discharge, data=Q, plot=3:4, add=0:1, ylim=lim0(400), shift=117)
+#' seasonality(date, discharge, data=Q, plot=4, add=TRUE, lwd=3, shift=117)
+#' 
 #' \dontrun{
 #' dev.new(noRStudioGD=TRUE, record=TRUE)     # large graph on 2nd monitor
 #' par(mfrow=c(2,2))
@@ -167,6 +170,10 @@ if(!missing(data)) # get vectors from data.frame
 if(length(dates)!=length(values)) stop("length of dates and values not equal (",
                                          length(dates),", ",length(values),").")
 if(!all(plot %in% 0:5)) stop("The argument 'plot' must be an integer in 0:5, not ", plot)
+add <- rep_len(add, length(plot))
+add5 <- rep_len(FALSE, 5)
+add5[plot] <- add
+add <- add5
 #
 # ### check dates for completeness ###
 # convert to date
@@ -228,15 +235,15 @@ ldoy <- as.numeric(format(labs,"%j"))
 xlim1 <- if(allNA(ylim)) extendrange(year, f=0.01) else xlim
 xaxs1 <- if(is.na(xaxs)) "i" else xaxs
 #
-if(1 %in% plot) # doy ~ year, col=Q
+if(1 %in% plot) # doy ~ year, col=Q ----
 {
   ylim1 <- if(allNA(ylim)) c(370,-3) else ylim
   yaxs1 <- if(is.na(yaxs)) "i" else yaxs
-  output$plot1 <- colPoints(year, doy, values, Range=vrange, add=add, yaxt="n",
+  output$plot1 <- colPoints(year, doy, values, Range=vrange, add=add[1], yaxt="n",
             xlim=xlim1, ylim=ylim1, xaxs=xaxs1, yaxs=yaxs1, 
             ylab=slab, xlab=tlab, zlab=vlab1, legend=legend, legargs=legargs, ...)
   # Axis labelling
-  if(!add){
+  if(!add[1]){
   if(janline & shift!=0) abline(h=shift+1)
   axis(2, ldoy, months, tick=FALSE, las=1)
   axis(2, tdoy, labels=FALSE, las=1)
@@ -247,11 +254,12 @@ if(1 %in% plot) # doy ~ year, col=Q
   if(length(plot)>1) cat(1)
 }
 #
-if(2 %in% plot) # Spiral graph, col=Q
+if(2 %in% plot) # Spiral graph, col=Q ----
 {
   output$plot2 <- spd <- spiralDate(dates-shift, values, zlab=vlab1, drange=drange, 
-             vrange=vrange, months=months, shift=shift, legend=legend, legargs=legargs, add=add, ...)
-  if(!add){
+             vrange=vrange, months=months, shift=shift, legend=legend, 
+             legargs=legargs, add=add[2], ...)
+  if(!add[2]){
   title(main=main, adj=adj)
   if(janline) segments(x0=0, y0=0, x1=sin(shift/365.25*2*pi), y1=cos(shift/365.25*2*pi))
   }
@@ -271,7 +279,7 @@ yaxs3 <- if(is.na(yaxs)) "r" else yaxs
 }
 #
 output$data <- data3 <- data.frame(doy, values, year)
-if(3 %in% plot) # Q~doy, col=year
+if(3 %in% plot) # Q~doy, col=year ----
 {
   # date year range
   if(!exists("drange3", inherits=FALSE)) drange3 <- range(year)
@@ -284,11 +292,12 @@ if(3 %in% plot) # Q~doy, col=year
     output$data3 <- data3
     }
   # plot
-  output$plot3 <- colPoints(doy, values, year, data=data3, Range=drange3, add=add, 
-      zlab=tlab, ylab="", xlab=slab, xaxt="n", legend=legend, legargs=owa(list(density=FALSE),legargs), 
+  output$plot3 <- colPoints(doy, values, year, data=data3, Range=drange3, 
+      zlab=tlab, ylab="", xlab=slab, xaxt="n", legend=legend, add=add[3], 
+      legargs=owa(list(density=FALSE),legargs), 
       xlim=xlim3, ylim=ylim3, xaxs=xaxs3, yaxs=yaxs3, lines=TRUE, nint=1,
       if(!exists("col", inherits=FALSE)) col=seqPal(100, colors=c("red","blue")),  ...)
-  if(!add){
+  if(!add[3]){
   title(ylab=vlab1, mgp=mgp)
   # Axis labelling
   axis(1, ldoy, months, tick=FALSE, las=1)
@@ -301,7 +310,7 @@ if(3 %in% plot) # Q~doy, col=year
   if(length(plot)>1) cat(3)
 }
 #
-if(4 %in% plot) # Qpercentile~doy, col=n
+if(4 %in% plot) # Qpercentile~doy, col=n ----
 {
   ## DOY cyclicity (not perfect!!)
   #doyselect <- function(d) sapply(d, function(d) if(d<1) 365+d else if(d>366) d-366 else d)
@@ -332,19 +341,21 @@ if(4 %in% plot) # Qpercentile~doy, col=n
   ylim4 <- if(allNA(ylim)) ylim4 else ylim
   zlab4 <- if(s==0) "n per doy" else paste0("n per (doy +- ", s,")")
   vlab4 <- if(length(probs)==1) paste0(vlab1, " (",probs*100,"th percentile)") else
-                               paste0(vlab1, "  Percentiles")
+                               paste0(vlab1, "  percentiles")
   vlab4 <- if(is.na(vlab))vlab4 else vlab 
-  output$plot4 <- colPoints(1:366, Qp[,2], Qp[,1], add=add, zlab=zlab4,
-            ylab="", xlab=slab, xaxt="n", legend=legend, legargs=owa(list(density=FALSE),legargs), 
+  output$plot4 <- colPoints(1:366, Qp[,2], Qp[,1], add=add[4], zlab=zlab4,
+            ylab="", xlab=slab, xaxt="n", legend=legend, 
+            legargs=owa(list(density=FALSE),legargs), 
             xlim=xlim3, ylim=ylim4, xaxs=xaxs3, yaxs=yaxs3, lines=TRUE, nint=3, ...)
   if(length(probs)!=1)  for(i in 2:length(probs))
-     colPoints(1:366, Qp[,i+1], Qp[,1], add=TRUE, legend=FALSE, lines=TRUE, nint=3, ...)
+     colPoints(1:366, Qp[,i+1], Qp[,1], add=TRUE, legend=FALSE, 
+               lines=TRUE, nint=3, ...)
   if(text){  
     texti <- rep_len(texti, length(probs))
     do.call(textField, owa(list(x=texti, y=diag(Qp[texti,-1]), 
                   labels=paste0(round(probs*100,1),"%"), quiet=TRUE), textargs))
     }
-  if(!add){
+  if(!add[4]){
   title(ylab=vlab4, mgp=mgp)
   # Axis labelling
   axis(1, ldoy, months, tick=FALSE, las=1)
@@ -356,7 +367,7 @@ if(4 %in% plot) # Qpercentile~doy, col=n
   if(length(plot)>1) cat(4)
 }
 #
-if(5 %in% plot) # annmax~year, col=n
+if(5 %in% plot) # annmax~year, col=n ----
 {
   vlab5 <- if(is.na(vlab)) paste("annual maximum", vlab1) else vlab
   nalab <- if(shift==0) "n nonNA / year" else "n nonNA / hydrol. year"
@@ -364,10 +375,10 @@ if(5 %in% plot) # annmax~year, col=n
   annmax5 <- annmax
   annmax5[ annmax5$n < nmin , c("n", "max")] <- NA
   ylim5 <- if(allNA(ylim)) range(annmax5$max, na.rm=TRUE) else ylim
-  output$plot5 <- colPoints("year", "max", "n", data=annmax5, add=add, zlab=nalab,
+  output$plot5 <- colPoints("year", "max", "n", data=annmax5, add=add[5], zlab=nalab,
             xlim=xlim1, xaxs=xaxs1, ylim=ylim5, yaxs=yaxs3, ylab="", xlab=tlab, 
             legend=legend, legargs=owa(list(density=FALSE),legargs), lines=TRUE, ...)
-  if(!add){
+  if(!add[5]){
   title(ylab=vlab5, mgp=mgp)
   title(main=main5, adj=adj)  
   }

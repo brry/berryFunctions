@@ -147,6 +147,9 @@ seasonality(date, discharge, data=Q, plot=5, shift=100)
 s <- seasonality(date, discharge, data=Q, plot=4, shift=100, width=7, returnall=TRUE)
 str(s, max.lev=1)
 
+seasonality(date, discharge, data=Q, plot=3:4, add=0:1, ylim=lim0(400), shift=117)
+seasonality(date, discharge, data=Q, plot=4, add=TRUE, lwd=3, shift=117)
+
 \dontrun{
 dev.new(noRStudioGD=TRUE, record=TRUE)     # large graph on 2nd monitor
 par(mfrow=c(2,2))
