@@ -7,7 +7,7 @@
 anhang()
 }
 \value{
-None, opens pdf in default viewer using \code{\link{system2}} or \code{\link{browseURL}}
+None, opens pdf in default viewer using \code{\link{system2}}
 }
 \description{
 Open the Appendix of my R handbook found online at
