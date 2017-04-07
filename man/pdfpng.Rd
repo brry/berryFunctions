@@ -16,7 +16,9 @@ pdfpng(expr, file, pdf = TRUE, png = TRUE, overwrite = FALSE,
 Unless overwrite=TRUE, files will not be overwritten, but
 "_1" will be appended instead, see \code{\link{newFilename}}.
 If \code{expr} creates several plots, use file="fname%02d",
-otherwise the png will only contain the last figure.}
+otherwise the png will only contain the last figure.
+Note: this overwrites files as the % notation is not 
+captured by newFilename. You may also have to run dev.off().}
 
 \item{pdf}{Logical: Create pdf? DEFAULT: TRUE}
 

@@ -37,6 +37,8 @@
 #'                     "_1" will be appended instead, see \code{\link{newFilename}}.
 #'                     If \code{expr} creates several plots, use file="fname%02d",
 #'                     otherwise the png will only contain the last figure.
+#'                     Note: this overwrites files as the % notation is not 
+#'                     captured by newFilename. You may also have to run dev.off().
 #' @param pdf          Logical: Create pdf? DEFAULT: TRUE
 #' @param png          Logical: Create png? DEFAULT: TRUE
 #' @param overwrite    Logical: Overwrite existing \code{file}? Can be a vector
