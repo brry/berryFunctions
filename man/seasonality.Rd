@@ -6,12 +6,12 @@
 \usage{
 seasonality(dates, values, data, drange = NA, vrange = NA, shift = 0,
   janline = TRUE, nmax = 0, maxargs = NULL, plot = 1, add = FALSE,
-  nmin = 100, probs = 0:5/5, width = 31, text = TRUE, textargs = NULL,
-  months = substr(month.abb, 1, 1), slab = "Month", tlab = "Year",
-  vlab = NA, xlim = NA, ylim = NA, xaxs = NA, yaxs = NA,
-  main = "Seasonality", adj = 0.2, mar = c(3, 3, 4, 1), mgp = c(1.7,
-  0.7, 0), keeppar = TRUE, legend = TRUE, legargs = NULL,
-  returnall = FALSE, ...)
+  nmin = 100, probs = c(0, 25, 50, 75, 95, 100), width = 31,
+  text = TRUE, textargs = NULL, months = substr(month.abb, 1, 1),
+  slab = "Month", tlab = "Year", vlab = NA, xlim = NA, ylim = NA,
+  xaxs = NA, yaxs = NA, main = "Seasonality", adj = 0.2, mar = c(3, 3,
+  4, 1), mgp = c(1.7, 0.7, 0), keeppar = TRUE, legend = TRUE,
+  legargs = NULL, returnall = FALSE, ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order. 
@@ -56,7 +56,8 @@ DEFAULT: 1}
 \item{nmin}{Minimum number of values that must be present per (hydrological) year
 to be plotted in plot type 5. DEFAULT: 100}
 
-\item{probs}{Probabilities passed to \code{\link{quantileMean}} for plot=4. DEFAULT: 0:5/5}
+\item{probs}{Probabilities passed to \code{\link{quantileMean}} for plot=4. 
+DEFAULT: c(0,25,50,75,95,100)}
 
 \item{width}{Window width for plot=4. DEFAULT: 31}
 
@@ -134,7 +135,7 @@ seasonality(date, discharge, data=Q[850:950,], plot=3, nmax=1, quiet=TRUE, shift
 
 seasonality(date, discharge, data=Q, plot=2) # most floods in winter
 seasonality(date, discharge, data=Q, plot=5, vlab="Dude, look at annual max Q!")
-seasonality(date, discharge, data=Q, plot=5, shift=100, col=4)
+seasonality(date, discharge, data=Q, plot=5, shift=100)
 s <- seasonality(date, discharge, data=Q, plot=4, shift=100, width=7, returnall=TRUE)
 str(s, max.lev=1)
 

@@ -40,7 +40,7 @@
 #' 
 #' seasonality(date, discharge, data=Q, plot=2) # most floods in winter
 #' seasonality(date, discharge, data=Q, plot=5, vlab="Dude, look at annual max Q!")
-#' seasonality(date, discharge, data=Q, plot=5, shift=100, col=4)
+#' seasonality(date, discharge, data=Q, plot=5, shift=100)
 #' s <- seasonality(date, discharge, data=Q, plot=4, shift=100, width=7, returnall=TRUE)
 #' str(s, max.lev=1)
 #' 
@@ -84,9 +84,12 @@
 #' @param add Logical. Add to existing plot? DEFAULT: FALSE
 #' @param nmin Minimum number of values that must be present per (hydrological) year
 #'             to be plotted in plot type 5. DEFAULT: 100
-#' @param probs Probabilities passed to \code{\link{quantileMean}} for plot=4. DEFAULT: 0:5/5
+#' @param probs Probabilities passed to \code{\link{quantileMean}} for plot=4. 
+#'              DEFAULT: c(0,25,50,75,95,99)/100
 #' @param width Window width for plot=4. DEFAULT: 31
 #' @param text Logical. Call \code{\link{textField}} if plot=4? DEFAULT: TRUE
+#' @param texti Numerical (vector): indices at which to label the lines.
+#'              DEFAULT: seq(200,20,length.out=length(probs))
 #' @param textargs List of arguments passed to \code{\link{textField}} for plot=4. DEFAULT: NULL
 #' @param months Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
 #' @param slab,tlab,vlab Labels for the \bold{s}eason, \bold{t}ime (year) and \bold{v}alues
@@ -123,9 +126,10 @@ seasonality <- function(
   plot=1,
   add=FALSE,
   nmin=100,
-  probs=0:5/5,
+  probs=c(0,25,50,75,95,99.9)/100,
   width=31,
   text=TRUE,
+  texti=seq(200,20,length.out=length(probs)),
   textargs=NULL,
   months=substr(month.abb,1,1),
   slab="Month",
@@ -329,11 +333,12 @@ if(4 %in% plot) # Qpercentile~doy, col=n
   output$plot4 <- colPoints(1:366, Qp[,2], Qp[,1], add=add, zlab=zlab4,
             ylab="", xlab=slab, xaxt="n", legend=legend, legargs=owa(list(density=FALSE),legargs), 
             xlim=xlim3, ylim=ylim4, xaxs=xaxs3, yaxs=yaxs3, lines=TRUE, nint=3, ...)
-  if(length(probs)!=1) 
-    {
-    for(i in 2:length(probs))
-    colPoints(1:366, Qp[,i+1], Qp[,1], add=TRUE, legend=FALSE, lines=TRUE, nint=3, ...)
-    if(text) do.call(textField, owa(list(x=183, y=Qp[183,-1], labels=paste0(round(probs*100,1),"%"), quiet=TRUE), textargs))
+  if(length(probs)!=1)  for(i in 2:length(probs))
+     colPoints(1:366, Qp[,i+1], Qp[,1], add=TRUE, legend=FALSE, lines=TRUE, nint=3, ...)
+  if(text){  
+    texti <- rep_len(texti, length(probs))
+    do.call(textField, owa(list(x=texti, y=diag(Qp[texti,-1]), 
+                  labels=paste0(round(probs*100,1),"%"), quiet=TRUE), textargs))
     }
   if(!add){
   title(ylab=vlab4, mgp=mgp)
