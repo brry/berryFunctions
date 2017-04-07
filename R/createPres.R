@@ -39,8 +39,10 @@ dev.off()
 # Camera image
 cam1 <- system.file("extdata/camera1.jpg", package="berryFunctions")
 cam2 <- system.file("extdata/camera2.png", package="berryFunctions")
+ccby <- system.file("extdata/ccby.png",    package="berryFunctions")
 file.copy(cam1, file.path(dir, "fig_extern/camera1.jpg"))
 file.copy(cam2, file.path(dir, "fig_extern/camera2.png"))
+file.copy(ccby, file.path(dir, "fig_extern/ccby.png"))
 
 Sys.setlocale(category = "LC_TIME", locale="C")
 curmonth <- format(Sys.Date(), "%B %Y")
@@ -114,16 +116,23 @@ Berry Boessenkool, \\href{http://www.geo.uni-potsdam.de/geoecology.html}{uni-pot
 \\href{https://github.com/brry/rdwd\\#rdwd}{github.com/brry/rdwd}\\\\
 \\href{https://cran.r-project.org/package=extremeStat/vignettes/extremeStat.html}{cran.r-project.org/package=extremeStat}
 
-\\only<2>{
-\\begin{textblock*}{8em}(250pt,60pt)
+\\only<2-3>{ % photography note and licence
+\\begin{textblock*}{8em}(250pt,30pt) % topleft corner x=250pt, y=30pt
 \\centering
-\\textblockcolour{red}
+\\textblockcolour{Dandelion}
 \\vspace{0.5em}
-\\includegraphics[width=4em]{fig_extern/camera2.png}\\\\
-ENCOURAGED%
+\\includegraphics[width=3em]{fig_extern/camera2.png}\\\\
+\\footnotesize
+ENCOURAGED\\\\[0.5em]%
+\\onslide<3>{
+\\includegraphics[width=6em]{fig_extern/ccby.png}\\\\[-0.3em]
+\\href{https://creativecommons.org/licenses/by/4.0}{use freely, cite me}%
+}
+\\normalsize
 \\vspace{0.5em}
 \\end{textblock*}
 }
+
 \\end{frame}
 
 % ---------------------------
