@@ -17,32 +17,72 @@
 #' @export
 #' @examples
 #' 
-#' eglist <- list(BB=c(6,9,2,6), KA=1:8, JE=c(-3,2) )
+#' eglist <- list(AA=c(6,9,2,6), BB=1:8, CC=c(-3,2) )
 #' eglist
 #' l2df(eglist)  # names are even kept
 #' l2df(eglist, byrow=FALSE)
 #' class(  l2df(eglist, byrow=FALSE)  ) # data.frame (since 2016-05-24)
 #' 
-#' eglist <- list(BB=c(6,9,2,6), KA="no", JE=c(-3,2) )
+#' eglist <- list(AA=c(6,9,2,6), BB="no", CC=c(-3,2) )
 #' eglist
-#' l2df(eglist)  # now everything is a character
+#' str(l2df(eglist))  # now everything is a character
 #' 
-#' eg2 <- list(BB=c(6,9,2,6), KA=matrix(1:8, ncol=2), JE=c(-3,2) )
+#' eg2 <- list(AA=c(6,9,2,6), BB=matrix(1:8, ncol=2), CC=c(-3,2) )
 #' eg2
 #' l2df(eg2, FALSE)
 #' # so a matrix is internally converted to a vector and then used regularly
 #' 
-#' eg2 <- list(BB=c(6,9,2,6), KA=data.frame(SW=1:8, SB=4:-3), JE=c(-3,2) )
-#' eg2
-#' is.error( l2df(eg2) )# it is not possible to do this with a data.frame
+#' 
+#' # Naming ----
+#' 
+#' eg3 <- list(EE=c(AA=3.4),        FF=c(AA=3.5),        GG=c(AA=3.6))
+#' eg4 <- list(EE=c(AA=3.4,BB=2.4), FF=c(AA=3.5,BB=2.5), GG=c(AA=3.6,BB=2.6))
+#' l2df(eg3)
+#' l2df(eg4)
+#' l2df(eg3, byrow=FALSE)
+#' l2df(eg4, byrow=FALSE)
+#' 
+#' eg3 <- list(c(AA=3.4),        c(AA=3.5),        c(AA=3.6))
+#' eg4 <- list(c(AA=3.4,BB=2.4), c(AA=3.5,BB=2.5), c(AA=3.6,BB=2.6))
+#' l2df(eg3)
+#' l2df(eg4)
+#' l2df(eg3, byrow=FALSE)
+#' l2df(eg4, byrow=FALSE)
+#' 
+#' eg3 <- list(EE=c(3.4),     FF=c(3.5),     GG=c(3.6))
+#' eg4 <- list(EE=c(3.4,2.4), FF=c(3.5,2.5), GG=c(3.6,2.6))
+#' l2df(eg3)
+#' l2df(eg4)
+#' l2df(eg3, byrow=FALSE)
+#' l2df(eg4, byrow=FALSE)
+#' 
+#' eg3 <- list(EE=c(3.4),     c(3.5),     c(3.6))
+#' eg4 <- list(EE=c(3.4,2.4), c(3.5,2.5), c(3.6,2.6))
+#' l2df(eg3)
+#' l2df(eg4)
+#' l2df(eg3, byrow=FALSE)
+#' l2df(eg4, byrow=FALSE)
+#' 
+#' 
+#' # Lists with dfs ----
+#' 
+#' eg5 <- list(AA=c(6,9,2,6), BB=data.frame(CC=1:8, DD=4:-3), EE=c(-3,2) )
+#' eg5
+#' is.error( l2df(eg5), tell=TRUE )# it is not possible to do this with a data.frame
+#' 
 #' # If you have a list with only data.frames, you could use the following:
-#' eg3 <- list(KA=data.frame(SW=1:8, SB=4:-3), LS=data.frame(BB=23:24, JE=c(-3,2)))
-#' eg3
-#' do.call(cbind, eg3) # but this recycles the values of shorter tables!
-#' # check some of the links above if you really have this problem...
+#' eg6 <- list(AA=data.frame(BB=1:8, CC=4:-3), DD=data.frame(EE=23:24, FF=c(-3,2)))
+#' eg6
+#' do.call(cbind, eg6) # but this recycles the values of shorter tables!
+#' names(eg6$DD) <- names(eg6$AA)
+#' do.call(rbind, eg6)
+#' # check some of the links above for more solutions...
 #' 
 #' @param list List with vectors of irregular length.
 #' @param byrow Transposed output? DEFAULT: TRUE
+# @param makenames Logical: (try to) create names correctly?
+#                  Set to FALSE if list elements are only partially named.
+#                  DEFAULT: TRUE
 #' 
 l2df <- function(
 list,
@@ -50,6 +90,18 @@ byrow=TRUE)
 {
 maxlen <- max(sapply(list,length))
 df <- sapply(list, "[", 1:maxlen) # apply the indexing function to each element
-if(byrow) df <- t(df)
-as.data.frame(df, stringsAsFactors=FALSE)
+###cn <- colnames(df)
+df <- as.data.frame(df, stringsAsFactors=FALSE)
+###if(byrow & checknames & maxlen>1) colnames(df) <- cn
+if(maxlen==1) 
+  {
+  n1 <- names(list[[1]])
+  if(is.null(n1)) n1 <- "V1"
+  colnames(df) <- n1
+  n2 <- names(list)
+  if(!any(duplicated(n2))) rownames(df) <- n2
+  }
+if(maxlen==1) byrow <- !byrow
+if(byrow) df <- as.data.frame(t(df), stringsAsFactors=FALSE)
+df
 }
