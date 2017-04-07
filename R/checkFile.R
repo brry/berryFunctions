@@ -55,7 +55,7 @@ if(any(!exi))
   # tracing the calling function(s):
   Text1 <- if(trace) traceCall(prefix="in ", suffix=" :  ") else ""
   # prepare message:
-  Text2 <- if(sum(!exi)>1) "The files  " else "The file '"
+  Text2 <- if(sum(!exi)>1) paste0("The ",sum(!exi)," files  ") else "The file '"
   Text3 <- if(sum(!exi)>2) paste0(toString(file[!exi][1:2]), " (and ",sum(!exi)-2," others)") else
                            toString(file[!exi])
   Text4 <- if(sum(!exi)>1) "\n  do" else "'\n  does"
