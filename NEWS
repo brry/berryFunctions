@@ -28,7 +28,6 @@ ToDo-list
 - tryStack: mapply, do.call etc put function name in next element
 - tryStack: return output invisibly?
 - checkFile: eror in ->-> checkFile: n/n file(s) do not exist at getwd: \n truncMessage(files[nonexi])
-- anhang() # open not in dropbox viewer
 
 
 
@@ -42,11 +41,16 @@ actual NEWS
 -----------------------------
 
 
-Version 1.. (2017-0-)
-- after smallPlot calls, mtext, axis etc can be used normally again
-New functions: almost.equal
+Version 1.15.0 (2017-04-10)
+- traceCall: vignette and knitr stuff removed from trace, speed gain through sys.calls
+- after smallPlot calls, mtext, axis etc can be used normally again. Messages are improved.
+- colPoints: lines bug fixed, new legend density bandwidth default
+- seasonality: plotting defaults improved, plotting order changed, moving window now gaussian
+- some functions gain quiet arguments and improved messages and argument defaults, see github url below
+New functions: almost.equal, newFilename, createPres, pdfpng, popleaf, legendmt
+Removed functions: dataDWD, readDWD (kept as help file with reference to rdwd until late 2017)
 For all changes, see:
-https://github.com/brry/berryFunctions/compare/master@{2017-01-16}...master@{2017-01-31}#files_bucket
+https://github.com/brry/berryFunctions/compare/master@{2017-01-16}...master@{2017-04-07}#files_bucket
 
 
 -----------------------------

@@ -14,7 +14,7 @@
 #'         and other elements depending on plot type, \code{like data3, data4, probs4, width4}.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jul-Oct 2016
 #' @seealso \code{\link{spiralDate}}, \code{\link{colPoints}},
-#'          \url{http://nwis.waterdata.usgs.gov/nwis/peak?search_site_no=01400500} 
+#'          \url{https://waterdata.usgs.gov/nwis} 
 #' @keywords aplot
 #' @export
 #' @examples
@@ -325,7 +325,7 @@ if(4 %in% plot) # Qpercentile~doy, col=n ----
 {
   # deciding weights:
   if(FALSE){ # kept here for reference only
-  width=1; x <- unique(round((-3*width):(3*width)))
+  width=1; x <- unique(ceiling((-3*width):(3*width)))
   d <- dnorm(x,sd=width) ; plot(x, round(d*10/max(d)) )
   # number of entries used (support) as multiple of width
   xx <- seq(0.6,20,len=1000); plot(xx, sapply(xx, function(width){

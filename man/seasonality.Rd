@@ -174,7 +174,7 @@ dev.off()
 }
 \seealso{
 \code{\link{spiralDate}}, \code{\link{colPoints}},
-         \url{http://nwis.waterdata.usgs.gov/nwis/peak?search_site_no=01400500}
+         \url{https://waterdata.usgs.gov/nwis}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jul-Oct 2016
