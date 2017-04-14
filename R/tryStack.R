@@ -119,14 +119,17 @@
 #' @param removetry Logical: should all stack entries matching typical tryCatch
 #'                 expressions be removed? Unless the call contains customized
 #'                 \code{\link{tryCatch}} code, this can be left to the DEFAULT: TRUE 
-#'
+#' @param skip     Character string(s) to be removed from the stack.
+#'                 e.g. "eval(expr, p)". Use short=F to find exact matches.
+#'                 DEFAULT: NULL
 tryStack <- function(
 expr,
 silent=FALSE,
 warn=TRUE,
 short=TRUE,
 file="",
-removetry=TRUE
+removetry=TRUE,
+skip=NULL
 )
 {
 # silence warnings:
@@ -144,6 +147,7 @@ assign("mmsg", value="-- empty message stack --", envir=tryenv)
 
 # strings that will be removed from stack (if matching exactly):
 toremovestring <- "try(withCallingHandlers(expr, error = efun, warning = wfun, message = mfun),"
+toremovestring <- c(toremovestring, skip)
 if(removetry) toremovestring <- c(toremovestring,
                      "tryCatch(expr, error = function(e) {",
                      "tryCatchList(expr, classes, parentenv, handlers)",

@@ -27,7 +27,6 @@ ToDo-list
 - tryStack: example warning with log(-1:6) for non-repeated call stack
 - tryStack: mapply, do.call etc put function name in next element
 - tryStack: return output invisibly?
-- tryStack: add skip argument as in traceCall
 - checkFile: eror in ->-> checkFile: n/n file(s) do not exist at getwd: \n truncMessage(files[nonexi])
 
 

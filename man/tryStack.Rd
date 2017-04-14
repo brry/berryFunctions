@@ -5,7 +5,7 @@
 \title{try an expression, returning the error stack}
 \usage{
 tryStack(expr, silent = FALSE, warn = TRUE, short = TRUE, file = "",
-  removetry = TRUE)
+  removetry = TRUE, skip = NULL)
 }
 \arguments{
 \item{expr}{Expresssion to try, potentially wrapped in curly braces if 
@@ -32,6 +32,10 @@ DEFAULT: "" (catted to the console)}
 \item{removetry}{Logical: should all stack entries matching typical tryCatch
 expressions be removed? Unless the call contains customized
 \code{\link{tryCatch}} code, this can be left to the DEFAULT: TRUE}
+
+\item{skip}{Character string(s) to be removed from the stack.
+e.g. "eval(expr, p)". Use short=F to find exact matches.
+DEFAULT: NULL}
 }
 \value{
 Value of \code{expr} if evaluated successfully. If not, an invisible 
