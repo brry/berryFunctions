@@ -71,9 +71,10 @@ inherits(d, "try-error")                # use for coding
 
 # way cooler with tryStack -----
 
-d <- tryStack(upper("42"), silent=TRUE) # like try, but with traceback, even for warnings
+d <- tryStack(upper("42") ) # like try, but with traceback, even for warnings
 cat(d)
-d <- tryStack(upper("42"), silent=TRUE, warn=0) # don't touch warnings
+d <- tryStack(upper("42"), silent=TRUE, warn=0) # don't trace warnings
+d <- tryStack(upper("42"), short=FALSE)
  
 tryStack(upper(42)) # returns normal output, but warnings are easier to debug
 # Note: you can also set options(showWarnCalls=TRUE)
@@ -83,10 +84,17 @@ stopifnot(tryStack(upper(42))==52)
 
 \dontrun{ ## file writing not wanted by CRAN checks
 d <- tryStack(upper("42"), silent=TRUE, file="log.txt")
-system2("open", "log.txt")
+system2("open", "log.txt") # on linux, try xdg-open
 unlink("log.txt")
 }
 
+op <- options(warn=2)
+d <- try(upper("42") )
+cat(d)
+d <- tryStack(upper("42") )
+d <- tryStack(upper("42"), warn=FALSE)
+cat(d)
+options(op) ; rm(op)
 
 # Nested calls -----
 

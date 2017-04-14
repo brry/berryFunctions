@@ -44,9 +44,10 @@
 #' 
 #' # way cooler with tryStack -----
 #' 
-#' d <- tryStack(upper("42"), silent=TRUE) # like try, but with traceback, even for warnings
+#' d <- tryStack(upper("42") ) # like try, but with traceback, even for warnings
 #' cat(d)
-#' d <- tryStack(upper("42"), silent=TRUE, warn=0) # don't touch warnings
+#' d <- tryStack(upper("42"), silent=TRUE, warn=0) # don't trace warnings
+#' d <- tryStack(upper("42"), short=FALSE)
 #'  
 #' tryStack(upper(42)) # returns normal output, but warnings are easier to debug
 #' # Note: you can also set options(showWarnCalls=TRUE)
@@ -56,10 +57,17 @@
 #' 
 #' \dontrun{ ## file writing not wanted by CRAN checks
 #' d <- tryStack(upper("42"), silent=TRUE, file="log.txt")
-#' system2("open", "log.txt")
+#' system2("open", "log.txt") # on linux, try xdg-open
 #' unlink("log.txt")
 #' }
 #' 
+#' op <- options(warn=2)
+#' d <- try(upper("42") )
+#' cat(d)
+#' d <- tryStack(upper("42") )
+#' d <- tryStack(upper("42"), warn=FALSE)
+#' cat(d)
+#' options(op) ; rm(op)
 #' 
 #' # Nested calls -----
 #' 
@@ -215,8 +223,10 @@ cmes <- conditionMessage(e)
 # catch nested (recursive) calling:
 cmes <- strsplit(cmes, "tryStack sys.calls", fixed=TRUE)[[1]][1]
 # remove end line breaks
-lcmes <- nchar(cmes)
-while(substring(cmes,lcmes)=="\n") cmes <- substring(cmes,1,lcmes-1)
+while(substring(cmes,nchar(cmes))=="\n") cmes <- substring(cmes,1,nchar(cmes)-1)
+
+if(!short) stack <- paste0("m: ", cmes, "\n", stack)
+
 
 # additional information (line breaks and sys.time) if file is given:
 prefix <- suffix <- ""
@@ -229,15 +239,13 @@ if(file!="")
 
 # short or long informational description:
 info <- ""
-if(type=="warning" | (type=="error" & file!="") ) info <- paste0("in ", ccall, ": ")
-if(type!="error" | file!="") info <- paste0(info, cmes, "\n")
-info <- paste0(info, "-- tryStack sys.calls")
-stack <- if(short) paste0(info, ": ", stack) else
-         paste0(info, " ", type, " stack:\nm: ", cmes, "\n", stack)
+if(type=="warning" | type=="error") info <- paste0("in ", ccall, ": ")
+info <- paste0(info, cmes, "\n-- tryStack sys.calls")
+info <- paste0(info, if(short) ": " else "\n")
 
 # put message into main function environment: emsg/wmsg/mmsg
 assign(x=paste0(substr(type,1,1),"msg"), 
-       value=paste0(prefix, stack, suffix), 
+       value=paste0(prefix, if(type!="error"||file!="")info, stack, suffix), 
        envir=tryenv)
 
 # generate warning / message / error:
@@ -256,7 +264,8 @@ if(type=="error")
   {
   # print error if not silent:
   shouldprint <- !silent && isTRUE(getOption("show.error.messages"))
-  if(shouldprint || file!="") cat(if(file=="")"tryStack error", tryenv$emsg, file=file, append=TRUE)
+  if(shouldprint || file!="") cat(if(file=="")paste0("tryStack error ", info),
+                                  tryenv$emsg, file=file, append=TRUE, sep="")
   }
 } # efun end
 
