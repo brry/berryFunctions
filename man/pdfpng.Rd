@@ -5,9 +5,9 @@
 \title{Create pdf and png graph}
 \usage{
 pdfpng(expr, file, pdf = TRUE, png = TRUE, overwrite = FALSE,
-  quiet = FALSE, filargs = NULL, width = 7, height = 5, units = "in",
-  res = 500, seed = runif(1, -1e+09, 1e+09), envlevel = 1,
-  pdfargs = NULL, pngargs = NULL, ...)
+  quiet = FALSE, tracewarnmes = !quiet, filargs = NULL, width = 7,
+  height = 5, units = "in", res = 500, seed = runif(1, -1e+09, 1e+09),
+  envlevel = 1, pdfargs = NULL, pngargs = NULL, ...)
 }
 \arguments{
 \item{expr}{Expression creating the plot, can be included in curly braces.}
@@ -28,7 +28,11 @@ captured by newFilename. You may also have to run dev.off().}
 for pdf and png separately.
 DEFAULT: FALSE (_n appended in filename)}
 
-\item{quiet}{Logical: suppress file creation messages? DEFAULT: FALSE}
+\item{quiet}{Logical: suppress file creation messages and 
+expr execution error tracing? DEFAULT: FALSE}
+
+\item{tracewarnmes}{Logical: trace warnings and messages in expr execution? 
+Errors are always traced. Default: !quiet}
 
 \item{filargs}{List of other arguments passed to \code{\link{newFilename}}. 
 DEFAULT: NULL}
@@ -74,6 +78,10 @@ bfun <- function(b) pdfpng(plot(b,type="l"), file="dummyplot", overwrite=TRUE)
 cfun <- function(c) bfun(c)
 bfun(a[[1]])   
 sapply(a, function(d) cfun(d))    
+
+
+pdfpng(plot(-10:100, log="y"), "dummyplot", overwrite=TRUE, png=FALSE)
+pdfpng({plot(1); plot(dummyobject)}, "dummyplot", overwrite=TRUE, png=FALSE)
 
        
 unlink("dummyplot.pdf") ; unlink("dummyplot.png") ; unlink("dummyplot_1.png")

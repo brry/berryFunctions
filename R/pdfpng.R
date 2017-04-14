@@ -27,6 +27,10 @@
 #' cfun <- function(c) bfun(c)
 #' bfun(a[[1]])   
 #' sapply(a, function(d) cfun(d))    
+#' 
+#' 
+#' pdfpng(plot(-10:100, log="y"), "dummyplot", overwrite=TRUE, png=FALSE)
+#' pdfpng({plot(1); plot(dummyobject)}, "dummyplot", overwrite=TRUE, png=FALSE)
 #'
 #'        
 #' unlink("dummyplot.pdf") ; unlink("dummyplot.png") ; unlink("dummyplot_1.png")
@@ -44,7 +48,10 @@
 #' @param overwrite    Logical: Overwrite existing \code{file}? Can be a vector
 #'                     for pdf and png separately.
 #'                     DEFAULT: FALSE (_n appended in filename)
-#' @param quiet        Logical: suppress file creation messages? DEFAULT: FALSE
+#' @param quiet        Logical: suppress file creation messages and 
+#'                     expr execution error tracing? DEFAULT: FALSE
+#' @param tracewarnmes Logical: trace warnings and messages in expr execution? 
+#'                     Errors are always traced. Default: !quiet
 #' @param filargs      List of other arguments passed to \code{\link{newFilename}}. 
 #'                     DEFAULT: NULL
 #' @param width,height Graph dimensions. DEFAULT: 7x5 inches
@@ -65,6 +72,7 @@ pdfpng <- function(
  png=TRUE,
  overwrite=FALSE,
  quiet=FALSE,
+ tracewarnmes=!quiet,
  filargs=NULL,
  width=7,
  height=5,
@@ -97,16 +105,20 @@ if(pdf)
   do.call(grDevices::pdf, owa(
     c(list(file=fig[1], width=width, height=height), dots), pdfargs))
   set.seed(seed)
-  on.exit(dev.off(), add=TRUE)
-  eval.parent(substitute(expr), envlevel)
+  tryStack( eval.parent(substitute(expr), envlevel), silent=quiet, warn=tracewarnmes,
+            skip=c("tryStack(eval.parent(substitute(expr), envlevel), silent = quiet, ",
+                   "eval(expr, p)"))
+  dev.off()
 }
 if(png) 
 { 
   do.call(grDevices::png, owa(
     c(list(file=fig[2], width=width, height=height, units=units, res=res), dots), pngargs))
   set.seed(seed)
-  on.exit(dev.off(), add=TRUE)
-  eval.parent(substitute(expr), envlevel)
+  tryStack( eval.parent(substitute(expr), envlevel), silent=quiet, warn=tracewarnmes,
+            skip=c("tryStack(eval.parent(substitute(expr), envlevel), silent = quiet, ",
+                   "eval(expr, p)"))
+  dev.off()
 } 
-
+return(invisible(NULL))
 }
