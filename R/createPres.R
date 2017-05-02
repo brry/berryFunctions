@@ -114,7 +114,10 @@ opts_chunk$set(cache=T, echo=TRUE, fig.height=3.3, fig.width=5, out.width='0.9\\
 Berry Boessenkool, \\href{http://www.geo.uni-potsdam.de/geoecology.html}{uni-potsdam.de},",curmonth,"\\\\[1em]
 \\texttt{berry-b@gmx.de}\\\\[1em]
 \\href{https://github.com/brry/rdwd\\#rdwd}{github.com/brry/rdwd}\\\\
-\\href{https://cran.r-project.org/package=extremeStat/vignettes/extremeStat.html}{cran.r-project.org/package=extremeStat}
+\\href{https://cran.r-project.org/package=extremeStat/vignettes/extremeStat.html}{cran.r-project.org/package=extremeStat}\\\\[1em]
+\\scriptsize
+\\textit{Presentation template generated with} \\rcode{berryFunctions::createPres}\\\\
+\\normalsize
 
 \\only<2-3>{ % photography note and licence
 \\begin{textblock*}{8em}(250pt,30pt) % topleft corner x=250pt, y=30pt
