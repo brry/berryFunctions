@@ -91,7 +91,7 @@ if(missing(breaks)) breaks <- 0:4/4
 if(!missing(breaks) & length(breaks)==1) breaks <- seq(0,1, length.out=breaks)
 if(any(breaks<0 | breaks>1)) stop("breaks must be between 0 and 1 if method='quantile'.")
 nb <- length(breaks) - 1
-bb <- unique(quantile(x, probs=breaks))
+bb <- unique(quantile(x, probs=breaks, na.rm=TRUE))
 at <- bb
 la <- signif(bb, 2) # rounding
 ix <- cut(x, breaks=bb, labels=FALSE, include.lowest=TRUE)
