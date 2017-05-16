@@ -53,7 +53,12 @@ cat(
 % Berry Boessenkool, Potsdam University, Germany
 % berry-b@gmx.de
 
-\\documentclass[compress, xcolor=dvipsnames]{beamer}
+
+% Make sure to set weaving to knitr before compiling:
+% Rstudio - Tools - Global Options - Sweave - weave Rnw files using: knitr
+
+
+\\documentclass[compress, xcolor=dvipsnames]{beamer} % handout option for non-animated slides
 \\setbeamerfont{frametitle}{size=\\normalsize}
 
 \\usepackage{hyperref, graphicx}
