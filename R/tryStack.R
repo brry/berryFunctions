@@ -283,6 +283,6 @@ out <- try(withCallingHandlers(expr, error=efun, warning=wfun, message=mfun), si
 # add the trace stack character string to the output:
 if(inherits(out, "try-error")) out[length(out)+1] <- tryenv$emsg
 # Done! return the output:
-out
+return(invisible(out))
 }
 
