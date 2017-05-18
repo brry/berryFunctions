@@ -5,6 +5,8 @@
 # colPointsLegend potentially extremely dependent on graphics size.
 # may also require changes in smallPlot
 
+# example comment to show off git
+
 
 i <- c( 22,  40,  48,  60,  80,  70,  70,  63,  55,  48,  45,  40,  30,  32)
 j <- c(  5,  10,  15,  20,  12,  30,  45,  40,  30,  36,  56,  33,  45,  23)
