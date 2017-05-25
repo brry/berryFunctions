@@ -72,8 +72,9 @@ if(length(pn)>1)
 
 # select mirror (base R or CRAN) -----------------------------------------------
 
-if(pn %in% c("base", "compiler", "datasets", "grDevices", "graphics", "methods", 
-        "parallel", "profile", "stats", "stats4", "tools", "translations", "utils"))
+if(pn %in% c("base", "compiler", "datasets", "grDevices", "graphics", "grid",
+             "methods", "parallel", "profile", "splines", "stats", "stats4",
+             "tcltk", "tools", "translations", "utils"))
   {
   baselink <- "https://github.com/wch/r-source/tree/trunk/src/library/"
   finallink <- paste0(baselink,pn,"/R/", x,".R")
