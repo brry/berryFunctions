@@ -42,6 +42,9 @@ rm(tail)
 }
 
 }
+\seealso{
+\url{https://github.com/brry/rstudioberry} to add this as a keyboard shortcut
+}
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jan+Dec 2016
 }

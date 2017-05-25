@@ -6,6 +6,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan+Dec 2016
 #' @importFrom utils browseURL find
 #' @export
+#' @seealso \url{https://github.com/brry/rstudioberry} to add this as a keyboard shortcut
 #' @examples
 #' \dontrun{ ## browser windows should not be openend in CRAN checks
 #' library("berryFunctions")
