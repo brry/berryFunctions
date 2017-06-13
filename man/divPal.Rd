@@ -5,7 +5,7 @@
 \title{Diverging color palette}
 \usage{
 divPal(n = 12, reverse = FALSE, alpha = 1, rwb = FALSE, ryb = FALSE,
-  colors = NULL, ...)
+  gp = FALSE, br = FALSE, colors = NULL, ...)
 }
 \arguments{
 \item{n}{Number of colors. DEFAULT: 12}
@@ -17,6 +17,10 @@ divPal(n = 12, reverse = FALSE, alpha = 1, rwb = FALSE, ryb = FALSE,
 \item{rwb}{Should colors be in red-white-blue instead of brown-blue? DEFAULT: FALSE}
 
 \item{ryb}{Use red-yellow-blue instead of the default, with "khaki" in the center. DEFAULT: FALSE}
+
+\item{gp}{Use green-purple instead of the default. DEFAULT: FALSE}
+
+\item{br}{Use blue-red instead of the default. DEFAULT: FALSE}
 
 \item{colors}{If not NULL, a color vector used in \code{\link{colorRampPalette}}. DEFAULT: NULL}
 
@@ -36,7 +40,10 @@ showPal()
 
 }
 \references{
-Originally in 12 shades in the IPCC Assesment Report 5 Chapter 12 Fig 12.22, \url{http://www.ipcc.ch/report/ar5/wg1/}
+The default palette is originally in 12 shades in the IPCC Assesment Report 5 
+            Chapter 12 Fig 12.22, \url{http://www.ipcc.ch/report/ar5/wg1/}.\cr
+            The green-purple and blue-red palettes are from NYtimes (originally with 8 shades), 
+            \url{https://nyti.ms/2mL0o4J}
 }
 \seealso{
 \code{\link{showPal}}, \code{\link{seqPal}}, \code{\link{addAlpha}}, 
