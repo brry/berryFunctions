@@ -40,9 +40,10 @@ quiet=FALSE,
 ntrunc=3
 )
 {
+# change "./someFile" to actual location:
+filename <- normalizePath(filename, winslash="/", mustWork=FALSE)
 # check folder existence:
 dirs <- unique(dirname(filename))
-dirs <- normalizePath(dirs, winslash="/", mustWork=FALSE)
 direxi <- file.exists(dirs)
 l1 <- sum(!direxi)>1
 if(any(!direxi)) stop(traceCall(1, "", ": "), "The following ",
