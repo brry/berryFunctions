@@ -9,13 +9,15 @@ createFun(fun, path = ".")
 \arguments{
 \item{fun}{Character string or unquoted name. Function that will be created with identical filename.}
 
-\item{path}{Path to package in development (including package name itself) DEFAULT: "."}
+\item{path}{Path to package in development (including package name itself).
+Paths ending in /R,man,inst,vignettes will be changed to one level up.
+DEFAULT: "."}
 }
 \value{
 file name as character string
 }
 \description{
-create a file with a complete (Roxygen) framework for a new function in this package
+create a file with a complete (Roxygen) framework for a new function in a package
 }
 \details{
 Tries to open the file in the standard editor for .R files using \code{\link{system2}}
