@@ -12,9 +12,7 @@ checkFile(file, warnonly = FALSE, trace = TRUE)
 \item{warnonly}{Logical: Only issue a \code{\link{warning}} instead of an
 error with \code{\link{stop}}? DEFAULT: FALSE}
 
-\item{trace}{Logical: Add function call stack to the message? DEFAULT: TRUE
-WARNING: in \link{do.call} settings with large objects,
-tracing may take a lot of computing time.}
+\item{trace}{Logical: Add function call stack to the message? DEFAULT: TRUE}
 }
 \value{
 TRUE/FALSE, invisibly

@@ -38,8 +38,6 @@
 #' @param warnonly Logical: Only issue a \code{\link{warning}} instead of an
 #'                 error with \code{\link{stop}}? DEFAULT: FALSE
 #' @param trace Logical: Add function call stack to the message? DEFAULT: TRUE
-#'              WARNING: in \link{do.call} settings with large objects,
-#'              tracing may take a lot of computing time.
 #'
 checkFile <- function(
 file,
