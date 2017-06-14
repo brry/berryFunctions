@@ -4,14 +4,12 @@
 \alias{createFun}
 \title{create function framework}
 \usage{
-createFun(fun, package = "berryFunctions", path = "S:/Dropbox/Rpack")
+createFun(fun, path = ".")
 }
 \arguments{
-\item{fun}{Character string or unquoted name. Function that will be crated with identical filename}
+\item{fun}{Character string or unquoted name. Function that will be created with identical filename.}
 
-\item{package}{Character String with package name. DEFAULT: "berryFunctions"}
-
-\item{path}{Path to package in development (not package name itself) DEFAULT: "S:/Dropbox/Rpack"}
+\item{path}{Path to package in development (including package name itself) DEFAULT: "."}
 }
 \value{
 file name as character string

@@ -14,47 +14,28 @@
 
 #' #createFun("myNewFunction")
 
-#' @param fun Character string or unquoted name. Function that will be crated with identical filename
-#' @param package Character String with package name. DEFAULT: "berryFunctions"
-#' @param path Path to package in development (not package name itself) DEFAULT: "S:/Dropbox/Rpack"
+#' @param fun Character string or unquoted name. Function that will be created with identical filename.
+#' @param path Path to package in development (including package name itself) DEFAULT: "."
 #'
 createFun <- function(
 fun,
-package="berryFunctions",
-path="S:/Dropbox/Rpack"
+path="."
 )
 {
+# check and deparse input:
 fun <- deparse(substitute(fun))
 fun <- gsub("\"", "", fun, fixed=TRUE)
 if(length(fun) >1)     stop("'fun' must be a single function name.")
-if(length(package) >1) stop("'package' must be a single name.")
 if(length(path)>1)     stop("'path' must be a single character string.")
-
-# laptop linux path change:
-if(!file.exists(path)) path <- gsub("S:", "~", path)
-# work PC path change:
-if(!file.exists(path)) path <- gsub("~", "C:/Users/boessenkool", path)
-# path control
-if(!file.exists(path)) stop("path does not exist. ", path)
-path <- paste0(path, "/", package, "/R")
-if(!file.exists(path)) stop("path does not exist. ", path)
-#
-rfile <- paste0(path,"/",fun,".R")
-# control for existence:
-Newfilecreated <- FALSE  ;  file_nr <- 1
-while(file.exists(rfile))
-    {
-    rfile <- paste0(path,"/",fun,"_", file_nr,".R")
-    file_nr <- file_nr + 1
-    Newfilecreated <- TRUE
-    }
-if(Newfilecreated) warning("File already existed. Created the file\n ", rfile)
-#
+checkFile(path)
+# Filename
+rfile <- paste0(path,"/R/",fun,".R")
+rfile <- newFilename(rfile) # append _1 if existent
 #
 # Write function structure
-part1 <- "' title
+part1 <- "' @title title
 '
-' description
+' @description description
 '
 ' @details detailsMayBeRemoved
 ' @aliases aliasMayBeRemoved
@@ -92,7 +73,6 @@ fun," <- function(
 }
 ")
 cat(part1,part2,part3,part4, file=rfile, sep="")
-message(rfile)
 # Open the file with the program associated with its file extension:
 linux <- Sys.info()["sysname"]=="Linux"
 try(if(!linux) system2("open", rfile) else system2("xdg-open", rfile), silent=TRUE)
