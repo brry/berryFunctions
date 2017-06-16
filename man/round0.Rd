@@ -4,17 +4,20 @@
 \alias{round0}
 \title{Round numbers with leading and trailing zeros}
 \usage{
-round0(x, digits = 0, width = digits + ifelse(digits == 0, 2, 3),
-  flag = 0, ...)
+round0(x, digits = 0, pre = 2, width = digits + pre + ifelse(digits == 0,
+  0, 1), flag = 0, ...)
 }
 \arguments{
-\item{x}{Values}
+\item{x}{Value(s)}
 
-\item{digits}{Number of digits to keep. DEFAULT: 2}
+\item{digits}{Number of digits (after decimal separator) to keep. DEFAULT: 0}
 
-\item{width}{Total width (number of characters including dot). DEFAULT: digits+2}
+\item{pre}{Number of characters before the decimal separator. DEFAULT: 2}
 
-\item{flag}{Flag. DEFAULT: "0"}
+\item{width}{Total width (number of characters including dot). 
+DEFAULT: digits+pre (+1 if needed)}
+
+\item{flag}{Flag. Could be "" for spaces. DEFAULT: "0"}
 
 \item{\dots}{Further arguments passed to \code{\link{formatC}},
 except for "format".}
@@ -30,6 +33,8 @@ round0( pi*10^(-3:5), 2)
 stopifnot(round0(17.3, 2) == "17.30")
 round0(7.3)
 round0(7.3, 2)
+round0(c(0.2,7.3,12.8), 2, pre=1)
+round0(c(0.2,7.3,12.8), 1, pre=3, flag="") # spaces instead of zeros
 
 }
 \seealso{

@@ -11,18 +11,23 @@
 #' stopifnot(round0(17.3, 2) == "17.30")
 #' round0(7.3)
 #' round0(7.3, 2)
+#' round0(c(0.2,7.3,12.8), 2, pre=1)
+#' round0(c(0.2,7.3,12.8), 1, pre=3, flag="") # spaces instead of zeros
 #'
-#' @param x      Values
-#' @param digits Number of digits to keep. DEFAULT: 2
-#' @param width  Total width (number of characters including dot). DEFAULT: digits+2
-#' @param flag   Flag. DEFAULT: "0"
+#' @param x      Value(s)
+#' @param digits Number of digits (after decimal separator) to keep. DEFAULT: 0
+#' @param pre    Number of characters before the decimal separator. DEFAULT: 2
+#' @param width  Total width (number of characters including dot). 
+#'               DEFAULT: digits+pre (+1 if needed)
+#' @param flag   Flag. Could be "" for spaces. DEFAULT: "0"
 #' @param \dots  Further arguments passed to \code{\link{formatC}},
 #'               except for "format".
 #'
 round0 <- function(
 x,
 digits=0,
-width=digits+ifelse(digits==0,2,3),
+pre=2,
+width=digits+pre+ifelse(digits==0,0,1),
 flag=0,
 ...
 )
