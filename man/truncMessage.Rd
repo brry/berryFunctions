@@ -4,7 +4,8 @@
 \alias{truncMessage}
 \title{truncate message parts}
 \usage{
-truncMessage(x, ntrunc = 3, prefix = "s", midfix = " ", altnix = "'")
+truncMessage(x, ntrunc = 3, prefix = "s", midfix = " ", altnix = "'",
+  sep = ", ")
 }
 \arguments{
 \item{x}{Character vector}
@@ -17,6 +18,8 @@ truncMessage(x, ntrunc = 3, prefix = "s", midfix = " ", altnix = "'")
 
 \item{altnix}{Character: Alternative string padded around x if \code{length(x)==1}. 
 DEFAULT: "'"}
+
+\item{sep}{Character: Separator between elements. DEFAULT: ", "}
 }
 \value{
 Character string
