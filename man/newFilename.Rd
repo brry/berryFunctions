@@ -4,7 +4,7 @@
 \alias{newFilename}
 \title{Create new filename if file already exists}
 \usage{
-newFilename(filename, ignore = FALSE, pre = "", mid = "\\n  ", end = "",
+newFilename(filename, ignore = FALSE, pre = "", mid = "\\n", end = "",
   quiet = FALSE, ntrunc = 3)
 }
 \arguments{
@@ -30,14 +30,14 @@ thereby giving useful messages.
 }
 \examples{
 
-fns <- c("data", "stupiddummy", "ExampleGraph.png", "berryFunctions.Rproj", 
-         "README.md", "stupiddummy.txtdude", "DESCRIPTION", "test_devel.R")
+fns <- c("dummy1", "dummy2.txt", "berryFunctions.Rproj",
+         "README.md", "dummy2.dummy", "DESCRIPTION", "dummy4.R", "dummy5")
 newFilename(fns)
 newFilename(fns, ignore=TRUE)
-newFilename(fns, ignore=rep(0:1, each=4))
+newFilename(fns, ignore=c(FALSE,FALSE,FALSE,FALSE, TRUE,TRUE,TRUE,TRUE) )
 newFilename(fns, ntrunc=2)
 newFilename("README.md")
-newFilename("dummy", mid="") # no line break
+newFilename("dummy", mid=" ") # no line break
 
 }
 \seealso{
