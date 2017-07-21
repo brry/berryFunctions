@@ -23,6 +23,7 @@ package="datasets",
 {
 d <- data(package=package, envir=new.env(), ...)$results[,"Item"]
 d <- sapply(strsplit(d, split=" ", fixed=TRUE), "[", 1)
+d <- d[order(tolower(d))]
 for(x in d){ message(x, ":  ", class(get(x))); message(str(get(x)))}
 }
 
