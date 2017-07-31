@@ -1,7 +1,6 @@
 #' str of datasets
 #' 
-#' Print the \code{\link{str}} of each dataset returned by \code{\link{data}},
-#' by default in the package \code{\link{datasets}}
+#' Print the \code{\link{str}} of each dataset returned by \code{\link{data}}
 #' 
 #' @return NULL. prints via \code{\link{message}} in a for loop.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, November 2015, in search of good datasets for teaching
@@ -11,20 +10,37 @@
 #' @export
 #' @examples
 #' 
-#' # dataStr()
+#' dataStr() # all loaded packages on search path (package=NULL)
+#' dataStr("datasets") # only datasets in base R
+#' dataStr("colorspace") # works with an installed but unloaded package
 #' 
-#' @param package package. DEFAULT: "datasets"
+#' @param package Package name. DEFAULT: NULL
 #' @param \dots other arguments passed to \code{\link{data}}
 #' 
 dataStr <- function(
-package="datasets",
+package=NULL,
 ...
 )
 {
-d <- data(package=package, envir=new.env(), ...)$results[,"Item"]
-d <- sapply(strsplit(d, split=" ", fixed=TRUE), "[", 1)
-d <- d[order(tolower(d))]
-for(x in d){ message(x, ":  ", class(get(x))); message(str(get(x)))}
+env <- new.env()
+d <- data(..., package=package, envir=env)$results
+d <- as.data.frame(d, stringsAsFactors=FALSE)
+# change things like  "beaver1 (beavers)"  to  "beaver1"
+itemsplit <- strsplit(d$Item, split=" ", fixed=TRUE)
+d$Object <- sapply(itemsplit, "[", 1)
+d$Call <- sapply(itemsplit, "[", 2)
+d$Call <- gsub("(","",gsub(")","",d$Call, fixed=TRUE), fixed=TRUE)
+d$Call[is.na(d$Call)] <- d$Object[is.na(d$Call)]
+# sort alphabetically within packages:
+d <- d[order(d$Package, tolower(d$Object)),]
+for(i in 1:nrow(d))
+  {
+  x <- d[i,, drop=FALSE]
+  data(list=x$Call, package=x$Package, envir=env)
+  obj <- get(x$Object, envir=env) # getExportedValue(asNamespace(package), x$Object) 
+  message(x$Package, "  |  ", x$Object, "  |  ", toString(class(obj)), "  |  ", x$Title)
+  message(str(obj))
+  }
 }
 
 

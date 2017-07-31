@@ -4,10 +4,10 @@
 \alias{dataStr}
 \title{str of datasets}
 \usage{
-dataStr(package = "datasets", ...)
+dataStr(package = NULL, ...)
 }
 \arguments{
-\item{package}{package. DEFAULT: "datasets"}
+\item{package}{Package name. DEFAULT: NULL}
 
 \item{\dots}{other arguments passed to \code{\link{data}}}
 }
@@ -15,12 +15,13 @@ dataStr(package = "datasets", ...)
 NULL. prints via \code{\link{message}} in a for loop.
 }
 \description{
-Print the \code{\link{str}} of each dataset returned by \code{\link{data}},
-by default in the package \code{\link{datasets}}
+Print the \code{\link{str}} of each dataset returned by \code{\link{data}}
 }
 \examples{
 
-# dataStr()
+dataStr() # all loaded packages on search path (package=NULL)
+dataStr("datasets") # only datasets in base R
+dataStr("colorspace") # works with an installed but unloaded package
 
 }
 \seealso{
