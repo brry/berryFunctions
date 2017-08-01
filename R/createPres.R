@@ -74,6 +74,13 @@ cat(
 \\beamersetrightmargin{0.5cm}
 \\let\\Tiny=\\tiny % avoid warning: Font shape `OT1/cmss/m/n' in size <4> not available. size <5> substituted on input line
 \\setbeamertemplate{footline}[frame number]
+\\setbeamertemplate{footline}[text line]{%
+  \\parbox{\\linewidth}{\\vspace*{-12pt}
+   % \\scriptsize
+  ~~ Berry Boessenkool, ",curmonth,":
+  NiceFooterTitle,
+  \\href{https://github.com/brry/course\\#slides}{github.com/brry/course} \\hfill 
+  ~~ \\insertframenumber / \\inserttotalframenumber~~~~~~~~~}}
 
 % Reference images:
 \\newcommand{\\bildlink}[1]{\\flushleft{\\tiny \\href{#1}{\\textcolor{gray}{#1}} \\normalsize }}
@@ -116,7 +123,7 @@ opts_chunk$set(cache=T, echo=TRUE, fig.height=3.3, fig.width=5, out.width='0.9\\
 \\Large
 \\textbf{NiceTitle\\\\[1.5em] \\large SubTitle}\\\\[2em]
 \\normalsize
-Berry Boessenkool, \\href{http://www.geo.uni-potsdam.de/geoecology.html}{uni-potsdam.de},",curmonth,"\\\\[1em]
+Berry Boessenkool, \\href{http://www.geo.uni-potsdam.de/geoecology.html}{uni-potsdam.de}, ",curmonth,"\\\\[1em]
 \\texttt{berry-b@gmx.de}\\\\[1em]
 \\href{https://github.com/brry/rdwd\\#rdwd}{github.com/brry/rdwd}\\\\
 \\href{https://cran.r-project.org/package=extremeStat/vignettes/extremeStat.html}{cran.r-project.org/package=extremeStat}\\\\[1em]
@@ -221,6 +228,6 @@ Works with pause
 
 \\appendixend
 
-\\end{document}", file=paste0(dir, "/", presname, ".Rnw") )
+\\end{document}", file=paste0(dir, "/", presname, ".Rnw"), sep="")
 
 }
