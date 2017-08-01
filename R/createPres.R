@@ -27,7 +27,7 @@ path="."
 owd <- setwd(path)
 on.exit(setwd(owd))
 dir <- newFilename(dir, quiet=TRUE)
-message("Creating '", presname, ".Rnw' in '", normalizePath(path,"/"),"/",dir,"'.")
+message("Creating '", presname, ".Rnw' in '", dir,"'.")
 
 dir.create(dir)
 dir.create(file.path(dir, "fig_extern"))
@@ -64,7 +64,7 @@ cat(
 \\usepackage{hyperref, graphicx}
 \\usepackage[dvipsnames]{xcolor}
 \\renewcommand\\appendixname{Appendix}
-\\usepackage[absolute,overlay]{textpos}
+\\usepackage[absolute,overlay,showboxes]{textpos}
 \\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
 % \\beamertemplatenavigationsymbolsempty
 \\setbeamertemplate{navigation symbols}[only frame symbol]
@@ -124,6 +124,7 @@ Berry Boessenkool, \\href{http://www.geo.uni-potsdam.de/geoecology.html}{uni-pot
 \\textit{Presentation template generated with} \\rcode{berryFunctions::createPres}\\\\
 \\normalsize
 
+\\TPshowboxesfalse % no border around this box
 \\only<2-3>{ % photography note and licence
 \\begin{textblock*}{8em}(250pt,30pt) % topleft corner x=250pt, y=30pt
 \\centering
@@ -139,9 +140,11 @@ ENCOURAGED\\\\[0.5em]%
 \\normalsize
 \\vspace{0.5em}
 \\end{textblock*}
-}
-
+\\TPshowboxestrue % borders around other boxes, as specified by \\usepackage[...,showboxes]{textpos}
+} % end camera + licence
+\\textblockcolour{} % reset block fill color to none/transparent
 \\end{frame}
+
 
 % ---------------------------
 
@@ -158,6 +161,7 @@ plot(rnorm(1000))
 % ---------------------------
 
 \\begin{frame}[fragile]{Frametitle}
+\\textblockrulecolour{red}
 \\pause
 \\begin{itemize}[<+->]
 \\item ItemOne
@@ -165,6 +169,11 @@ plot(rnorm(1000))
 \\end{itemize}
 \\onslide<+->
 \\begin{flushleft} SomeMore \\end{flushleft}
+\\only<5>{
+\\begin{textblock*}{1.2cm}(2.0cm,3.6cm)
+\\vspace{1.1cm} ~
+\\end{textblock*}
+}
 \\end{frame}
 
 % ---------------------------
