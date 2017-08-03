@@ -53,7 +53,7 @@
 #' pdf("ClimateGraph.pdf")
 #' climateGraph(temp, rain, main="Another Station\nlocated somewhere else")
 #' dev.off()
-#' system2("open", "ClimateGraph.pdf")
+#' openFile(ClimateGraph.pdf")
 #' unlink("ClimateGraph.pdf")
 #' 
 #' # further German reading:

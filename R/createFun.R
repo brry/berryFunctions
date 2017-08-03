@@ -79,8 +79,7 @@ part1 <- paste0("#", strsplit(part1, "\n", fixed=TRUE)[[1]])
 part1 <- paste(part1, collapse="\n")
 cat(part1,part2, file=rfile, sep="")
 # Open the file with the program associated with its file extension:
-linux <- Sys.info()["sysname"]=="Linux"
-try(if(!linux) system2("open", rfile) else system2("xdg-open", rfile), silent=TRUE)
+openFile(rfile)
 # return file name:
 invisible(rfile)
 }

@@ -38,7 +38,7 @@
 #' ## Rcmd check --as-cran doesn't like to open external devices such as pdf,
 #' ## so this example is excluded from running in the checks.
 #' pdf("TableColVal.pdf", height=5);  tableColVal(Bsp);  dev.off()
-#' system2("open", "TableColVal.pdf")
+#' openFile("TableColVal.pdf")
 #' unlink("TableColVal.pdf")
 #' }
 #' 

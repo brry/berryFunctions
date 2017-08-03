@@ -13,7 +13,5 @@
 anhang <- function()
 {
 file <- system.file("extdata/Anhang.pdf", package="berryFunctions")
-linux <- Sys.info()["sysname"]=="Linux"
-try(if(!linux) system2("open", file) else system2("xdg-open", file), silent=TRUE)
-file
+openFile(file)
 }

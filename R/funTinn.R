@@ -27,5 +27,5 @@ print(name)
 sink()
 #dummy <- edit(name, editor=path)
 # Open the file with the program associated with its file extension
-system2("open", File)
+openFile(File)
 }

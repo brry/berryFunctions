@@ -57,7 +57,7 @@
 #' 
 #' \dontrun{ ## file writing not wanted by CRAN checks
 #' d <- tryStack(upper("42"), silent=TRUE, file="log.txt")
-#' system2("open", "log.txt") # on linux, try xdg-open
+#' openFile("log.txt")
 #' unlink("log.txt")
 #' }
 #' 
