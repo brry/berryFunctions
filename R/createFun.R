@@ -18,10 +18,14 @@
 #' @param path Path to package in development (including package name itself).
 #'             Paths ending in /R,man,inst,vignettes will be changed to one level up.
 #'             DEFAULT: "."
+#' @param open Logical: open the file? If several instances of Rstudio are open, 
+#'             the last one (not necessarily the active one) will be used.
+#'             DEFAULT: TRUE
 #'
 createFun <- function(
 fun,
-path="."
+path=".",
+open=TRUE
 )
 {
 # check and deparse input:
@@ -50,28 +54,34 @@ part1 <- paste0(
 ' @description description
 ' @details detailsMayBeRemoved
 ' @aliases aliasMayBeRemoved
-' @return ReturnValue
 ' @section Warning: warningMayBeRemoved
+' @return ReturnValue
 ' @author Berry Boessenkool, \\email{berry-b@@gmx.de}, ", date, 
 "' @seealso \\code{\\link{help}}, \\code{\\link{help}}
 ' @keywords aplot
  @importFrom package fun1 fun2
 ' @export
 ' @examples
+' ",fun,"(rnorm(20))
 '
-'
-' @param
-' @param
-' @param
+' @param a     Numerical vector.
+' @param plot  Logical. Should values be plotted? This can be turnd off if
+'              only the computation is needed. DEFAULT: TRUE
+' @param dummy currently_Unused
 ' @param \\dots Further arguments passed to \\code{\\link{plot}}
 '
 ")
 part2 <- paste0("\n",
 fun," <- function(
-
+a,
+plot=TRUE,
+dummy,
+...
 )
 {
-
+if(plot) plot(a, ...)
+# Output:
+return(invisible(a))
 }
 ")
 
@@ -79,7 +89,7 @@ part1 <- paste0("#", strsplit(part1, "\n", fixed=TRUE)[[1]])
 part1 <- paste(part1, collapse="\n")
 cat(part1,part2, file=rfile, sep="")
 # Open the file with the program associated with its file extension:
-openFile(rfile)
+if(open) openFile(rfile)
 # return file name:
 invisible(rfile)
 }

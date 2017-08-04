@@ -4,7 +4,7 @@
 \alias{createFun}
 \title{create function framework}
 \usage{
-createFun(fun, path = ".")
+createFun(fun, path = ".", open = TRUE)
 }
 \arguments{
 \item{fun}{Character string or unquoted name. Function that will be created with identical filename.}
@@ -12,6 +12,10 @@ createFun(fun, path = ".")
 \item{path}{Path to package in development (including package name itself).
 Paths ending in /R,man,inst,vignettes will be changed to one level up.
 DEFAULT: "."}
+
+\item{open}{Logical: open the file? If several instances of Rstudio are open, 
+the last one (not necessarily the active one) will be used.
+DEFAULT: TRUE}
 }
 \value{
 file name as character string
