@@ -34,7 +34,7 @@
 #' @param y Numeric. Vector with values of dependent variable. DEFAULT: NULL
 #' @param data Dataframe. If x is a formula, the according columns from data are used as x and y. DEFAULT: NULL
 #' @param add Logical. If TRUE, line and text are added to the existing graphic. DEFAULT: FALSE (plots datapoints first and then the line.)
-#' @param digits Numeric vector of length \eqn{\ge 1}. Specifies number of digits a,b,r,e are rounded to 
+#' @param digits Numeric vector of length \eqn{\ge 1}. Specifies number of digits a,b,r,e are rounded to
 #'        in the formula "y=a*x+b \\n R^2=r \\n RMSE=e", respectively.
 #'        If values are not specified, they are set equal to the first. DEFAULT: 2
 #' @param pch Point Character of datapoints, see \code{\link{par}}. DEFAULT: 16
@@ -48,8 +48,8 @@
 #' @param pos1 \code{\link{xy.coords}}-acceptable position of the formula. DEFAULT: "top"
 #' @param pos2 For numerical coordinates, this is the y-position. DEFAULT: NULL, as in \code{\link{legend}}
 #' @param inset Numeric vector of length \eqn{\le 2}. inset distance(s) from the margins as a fraction of the plot region when formula legend is placed by keyword. DEFAULT: 0
-#' @param legargs list of arguments passed to legend, like list(cex=0.8, xpd=TRUE, bg="white"), ...  
-#'        xpd specifies whether formula can be written only inside the plot region (when FALSE) 
+#' @param legargs list of arguments passed to legend, like list(cex=0.8, xpd=TRUE, bg="white"), ...
+#'        xpd specifies whether formula can be written only inside the plot region (when FALSE)
 #'        or inside the figure region including mar (when TRUE) or in the entire device region including oma (when NA). DEFAULT: NULL
 #' @param \dots Further arguments passed to \code{\link{plot}} and \code{\link{abline}}.
 #' 

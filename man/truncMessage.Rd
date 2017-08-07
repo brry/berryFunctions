@@ -16,7 +16,7 @@ truncMessage(x, ntrunc = 3, prefix = "s", midfix = " ", altnix = "'",
 
 \item{midfix}{Character: string added after prefix OR before first altnix. DEFAULT: " "}
 
-\item{altnix}{Character: Alternative string padded around x if \code{length(x)==1}. 
+\item{altnix}{Character: Alternative string padded around x if \code{length(x)==1}.
 DEFAULT: "'"}
 
 \item{sep}{Character: Separator between elements. DEFAULT: ", "}

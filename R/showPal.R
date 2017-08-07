@@ -1,8 +1,8 @@
 #' show color palettes
-#'
+#' 
 #' Plot examples of the seqential and diverging color palettes in this package.
 #' Do not use \code{rainbow}: \url{https://eagereyes.org/basics/rainbow-color-map}
-#'
+#' 
 #' @return NULL
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Apr 2016
 #' @seealso \code{\link{seqPal}}, \code{\link{divPal}}, package \code{RColorBrewer}
@@ -11,17 +11,17 @@
 #' @export
 #' @examples
 #' showPal()
-#'
+#' 
 #' @param cex Caracter EXpansion size (width of color bar). DEFAULT: 4
 #' @param \dots Arguments passed to \code{\link{par}}
-#'
+#' 
 showPal <- function(cex=4,...)
 {
 op <- par(mfcol=c(10,2), mar=c(0,0,0,0), oma=c(0,0,1.8,0), yaxt="n", xaxt="n", ...)
 on.exit(par(op), add=TRUE)
 # Sequential palette -----------------------------------------------------------
 plot(rep(1, 12), pch=15, cex=cex, col=seqPal(12))            ; text(  6, 1, "default")
-title(main="berryFunctions::seqPal", xpd=NA, line=0.5) 
+title(main="berryFunctions::seqPal", xpd=NA, line=0.5)
 plot(rep(1,300), pch=15, cex=cex, col=seqPal(300))           ; text(150, 1, "n=300")
 plot(rep(1,  7), pch=15, cex=cex, col=seqPal(7))             ; text(  3, 1, "n=7 works, too")
 plot(rep(1,300), pch=15, cex=cex, col=seqPal(300, extr=TRUE)); text(150, 1, "extr=TRUE")

@@ -14,14 +14,14 @@ dupes(file, ignore.empty = TRUE, ignore.space = TRUE, tofile = missing(n),
 
 \item{ignore.space}{Should leading/trailing whitespace be ignored? DEFAULT: TRUE}
 
-\item{tofile}{Logical: should output be directed to a file? 
-Otherwise, a dataframe with line numbers and number of duplicates of that line 
+\item{tofile}{Logical: should output be directed to a file?
+Otherwise, a dataframe with line numbers and number of duplicates of that line
 will be printed in the console. DEFAULT: missing(n)}
 
 \item{n}{Show only the first n values if \code{tofile=FALSE}. DEFAULT: length(d)}
 }
 \value{
-Either: a data.frame with line numbers of duplicate rows and the number of duplicates\cr 
+Either: a data.frame with line numbers of duplicate rows and the number of duplicates\cr
         Or: a file is written with the number of duplicates and the original \code{file} content.
 }
 \description{
@@ -38,7 +38,7 @@ This has not been tested al that much - feedback is heavily welcome!
 
 file <- system.file("extdata/doublelines.txt", package="berryFunctions")
 dupes(file, tofile=FALSE)
-dupes(file, tofile=FALSE, ignore.empty=TRUE)  
+dupes(file, tofile=FALSE, ignore.empty=TRUE)
 
 ## These are skipped by rcmd check (opening external places is not allowed):
 \dontrun{dupes(file)}

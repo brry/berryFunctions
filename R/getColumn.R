@@ -1,9 +1,9 @@
 #' get column from data.frame
-#'
+#' 
 #' (Try to) extract a column from a data frame with USEFUL warnings/errors.\cr
 #' Watch out not to define objects with the same name as x if you are using
 #' getColumn in a function!
-#'
+#' 
 #' @return Vector (or array, factor, etc) with values in the specified column
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sep 2016
 #' @seealso \code{\link{subset}}, \code{\link{getElement}}, \url{https://mran.revolutionanalytics.com/web/packages/car/vignettes/embedding.pdf}
@@ -33,10 +33,10 @@
 #' upper3 <- function(xx, dd) getColumn(substitute(xx), dd)
 #' upper3(Air.Flow, stackloss) # may be safer in many scoping situations
 #' 
-#' # In packages use "colname" with quotation marks in level 2 functions to avoid 
+#' # In packages use "colname" with quotation marks in level 2 functions to avoid
 #' # the CRAN check NOTE "no visible binding for global variable"
 #' 
-#' df <- data.frame(x=letters[1:3],y=letters[4:6]) 
+#' df <- data.frame(x=letters[1:3],y=letters[4:6])
 #' is.vector(df$x)
 #' is.vector(getColumn("x", df)) # FALSE
 #' # cannot force output to be a vector, as this will convert:
@@ -50,16 +50,16 @@
 #' getColumn("1", df) # will actually return the first column, not column "1"
 #' 
 #' getColumn(1, data.frame(AA=rep(NA,10)))
-#'
+#' 
 #' @param x Column name to be subsetted. The safest is to use character strings
 #'          or \code{\link{substitute}(input)}.
-#'          If there is an object "x" in a function environment, 
+#'          If there is an object "x" in a function environment,
 #'          its value will be used as name! (see upper2 example)
 #' @param df dataframe object
 #' @param trace Logical: Add function call stack to the message? DEFAULT: TRUE
 #'              WARNING: in do.call settings with large objects,
 #'              tracing may take a lot of computing time.
-#'
+#' 
 getColumn <- function(
 x,
 df,
@@ -74,7 +74,7 @@ nam <- if(substr(deparse(substitute(x )),1,10)=="substitute") as.character(x ) e
 namnum <- suppressWarnings(as.numeric(nam))
 if(any(!is.na(namnum)))  nam <- colnames(df)[namnum]
 # check if it's a data.frame
-if(!all(class(df)=="data.frame")) 
+if(!all(class(df)=="data.frame"))
  {
  warning("df is not a data.frame, but a '", toString(class(df)), "'. Converting with as.data.frame.")
  df <- as.data.frame(df)
@@ -85,14 +85,14 @@ if(!nam %in% colnames(df)) stop(calltrace, "Column '", nam, "' is not in ", ndf,
                            ", which has the columns: ", toString(colnames(df)), ".")
 # actually get the column:
 out <- df[ , nam]
-if(is.null(out) ) 
+if(is.null(out) )
   {
   warning(calltrace, "Column '",nam,"' could not be extracted from ", ndf, ".")
   return(out)
-  }  
-if(NROW(out)==0) 
+  }
+if(NROW(out)==0)
   {
-  warning(calltrace, ndf, " has no rows.") 
+  warning(calltrace, ndf, " has no rows.")
   return(out)
   }
 # Further testing:

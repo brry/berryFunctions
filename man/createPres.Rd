@@ -9,7 +9,7 @@ createPres(presname = "pres", dir = "presentation", path = ".")
 \arguments{
 \item{presname}{Name of .Rnw file to be created. DEFAULT: "pres"}
 
-\item{dir}{Name of directory that will contain .Rnw file and 
+\item{dir}{Name of directory that will contain .Rnw file and
 fig_extern folder. "_1" will be appended if already existing,
 see \code{\link{newFilename}}. DEFAULT: "presentation"}
 

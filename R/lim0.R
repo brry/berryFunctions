@@ -34,7 +34,7 @@
 #' 
 #' @param x Numeric. Vector with values
 #' @param f Numeric. Extension factor. DEFAULT: 0.04 as in extendrange used eg. by \code{\link{curve}}
-#' @param curtail Logical. Should the range returned be trimmed by 4\%? That way, 
+#' @param curtail Logical. Should the range returned be trimmed by 4\%? That way,
 #'         plotting doesn't need the default \code{\link{par}} xaxs or yaxs changed. DEFAULT: TRUE
 #' 
 lim0 <- function(

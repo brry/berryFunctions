@@ -7,7 +7,7 @@
 TFtest(..., na = TRUE)
 }
 \arguments{
-\item{\dots}{Expression(s) with logical operators to be evaluated, 
+\item{\dots}{Expression(s) with logical operators to be evaluated,
 with single letters for variables. Each expression is to be separated with a comma}
 
 \item{na}{Logical: should NAs be included in the truth table? DEFAULT: TRUE}

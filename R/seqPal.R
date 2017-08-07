@@ -4,7 +4,7 @@
 #' 
 #' @return Character string vector with color names
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2016
-#' @seealso \code{\link{showPal}}, \code{\link{divPal}}, \code{\link{addAlpha}}, 
+#' @seealso \code{\link{showPal}}, \code{\link{divPal}}, \code{\link{addAlpha}},
 #'          \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 #' @keywords color dplot
 #' @importFrom grDevices colorRampPalette
@@ -20,15 +20,15 @@
 #' image(v, col=seqPal(1000, logbase=1.007), asp=1)
 #' colPointsLegend(v, col=seqPal(1000, logbase=1.09))
 #' 
-#' plot(    rep(1, 1000), pch=15, cex=3, col=seqPal(1000), ylim=c(0.99, 1.01), ylab="logbase", las=1) 
+#' plot(    rep(1, 1000), pch=15, cex=3, col=seqPal(1000), ylim=c(0.99, 1.01), ylab="logbase", las=1)
 #' for(b in seq(0.99, 1.01, len=30))
-#'     points(rep(b, 1000), pch=15, cex=1, col=seqPal(1000, logbase=b)) 
-#'  
+#'     points(rep(b, 1000), pch=15, cex=1, col=seqPal(1000, logbase=b))
+#' 
 #' @param n Number of colors. DEFAULT: 12
 #' @param reverse Reverse colors? DEFAULT: FALSE
 #' @param alpha Transparency (0=transparent, 1=fully colored). DEFAULT: 1
-#' @param extr Should colors span possible range more extremely? 
-#'       If TRUE, it has very light yellow and very dark blue values included, 
+#' @param extr Should colors span possible range more extremely?
+#'       If TRUE, it has very light yellow and very dark blue values included,
 #'       using the result from \code{RColorBrewer::brewer.pal(9, "YlGnBu")}. DEFAULT: FALSE
 #' @param yb Should colors be in yellow-blue instead of the internal (nice) default? DEFAULT: FALSE
 #' @param yr Should colors be in yellow-red instead of the default? DEFAULT: FALSE
@@ -59,7 +59,7 @@ if(gb) cols <- c("chartreuse","cornflowerblue","darkblue")
 if(!is.null(colors)) cols <- colors
 if(reverse) cols <- rev(cols)
 outcols <- colorRampPalette(cols)(n)
-if(logbase!=1) 
+if(logbase!=1)
   {
   n1 <- n#*10 # log(90, base=logbase)
   cl <- classify(1:n1, method="logspaced", breaks=c(n1,logbase))

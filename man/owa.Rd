@@ -11,7 +11,7 @@ owa(d, a, ..., quiet = FALSE)
 
 \item{a}{Arguments specified by user (list or vector)}
 
-\item{\dots}{Names of unchangeable arguments (that will not be overwritten) 
+\item{\dots}{Names of unchangeable arguments (that will not be overwritten)
 as character strings. Can also be a vector with characters strings.}
 
 \item{quiet}{Logical: Should \code{\link{message}} be suppressed if arguments are ignored?
@@ -24,17 +24,17 @@ Always a list, disregarding list/vector mode of input
 \description{
 Second ellipsis (three dots) passed to particular functions,
 combining default and user-specified argument lists.\cr
-\code{owa} can be used in functions that pass argument lists separately to several functions. 
-Internal defaults can be set per function (eg. one list for \code{\link{plot}} 
+\code{owa} can be used in functions that pass argument lists separately to several functions.
+Internal defaults can be set per function (eg. one list for \code{\link{plot}}
 and one for \code{\link{legend}}). \cr
-You can specify which defaults can be overwritten and which should be left unchanged. 
+You can specify which defaults can be overwritten and which should be left unchanged.
 See the example section on how to implement this.
 }
 \examples{
 # The motivation behind owa:
 testfun <- function(...) {plot(7:11, ...) ; legend("top", "some text", ...)}
 testfun()
-is.error( testfun(type="o") , tell=TRUE) 
+is.error( testfun(type="o") , tell=TRUE)
 # Error: legend doesn't have the argument 'type'!
 
 # How to solve this:

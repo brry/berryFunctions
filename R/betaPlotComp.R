@@ -32,18 +32,18 @@
 #' 
 betaPlotComp <- function(
   shape1=c(0.5, 1:4, 10,20),
-  shape2=shape1, 
+  shape2=shape1,
   cumulative=FALSE,
-  cex=0.8, 
-  las=1, 
-  main="", 
-  ylim=lim0(4), 
-  mar=rep(0,4), 
-  oma=c(2,2,4.5,2),  
-  mgp=c(3,0.7,0), 
+  cex=0.8,
+  las=1,
+  main="",
+  ylim=lim0(4),
+  mar=rep(0,4),
+  oma=c(2,2,4.5,2),
+  mgp=c(3,0.7,0),
   keeppar=FALSE,
-  textargs=NULL,  
-  ... 
+  textargs=NULL,
+  ...
   )
 {
 a <- shape1
@@ -55,7 +55,7 @@ for(y in b)
   {
   betaPlot(x,y, main=main, ylim=ylim, mar=mar, cumulative=cumulative, ...)
   #mtext(text=paste("a=",x,", b=",y, sep=""), side=3, line=-1.5, cex=0.7)
-  textdef <- list(x=0.5, y=0.9*ylim[2], labels=paste("a=",x,", b=",y, sep=""), 
+  textdef <- list(x=0.5, y=0.9*ylim[2], labels=paste("a=",x,", b=",y, sep=""),
                   mar=0.1, fill=addAlpha("white", 0.7), cex=1)
   do.call(textField, owa(textdef, textargs))
   if(y==min(b)) mtext(paste("a =",x), side=3, line=0.5, cex=cex)

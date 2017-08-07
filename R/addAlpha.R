@@ -26,7 +26,7 @@
 #' segments(x0=1:29,y0=head(y,-1), x1=2:30,y1=y[-1], col=addFade (4, 29:0/30), lwd=10)
 #' 
 addAlpha <- function(
-  col, 
+  col,
   alpha=0.3
   )
 {

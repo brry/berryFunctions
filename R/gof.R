@@ -1,22 +1,22 @@
 #' GOF measures
-#'
+#' 
 #' Goodness of Fit measures (GOF) for two vectors.\cr
 #' \bold{gofNA}: not exported, checks input for each of the functions:\cr
 #' \bold{rsquare}: Coefficient of determination (R2)\cr
 #' \bold{rmse}: Root Mean Square Error (for minimising in \code{\link{optim}})\cr
 #' \bold{nse}: Nash-Sutcliffe efficiency, based on RHydro::eval.NSeff\cr
-#' \bold{kge}: Kling-Gupta efficiency (better than NSE), 
+#' \bold{kge}: Kling-Gupta efficiency (better than NSE),
 #'             based on hydroGOF::KGE, where there are many more options
 #' 
 #' @name gof
 #' @aliases rsquare rmse nse kge
-#'
+#' 
 #' @return Single numerical value
 #' 
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sept 2016
 #' @note NAs are omitted with warning.
 #' @seealso \code{\link{cor}}, \code{\link{lm}}.
-#'             \url{http://en.wikipedia.org/wiki/R-squared}, 
+#'             \url{http://en.wikipedia.org/wiki/R-squared},
 #'             \url{http://en.wikipedia.org/wiki/Mean_squared_error}
 #' @keywords ts univar
 #' @importFrom stats cor
@@ -30,7 +30,7 @@
 #' legGOF <- function(a,b)
 #'   {
 #'   text(a,b, paste(c("      R2","RMSE","  NSE","  KGE"), collapse="\n"), adj=1.2)
-#'   text(a,b, paste(round(c(rsquare(x,y), rmse(x,y), nse(x,y), kge(x,y)),5), 
+#'   text(a,b, paste(round(c(rsquare(x,y), rmse(x,y), nse(x,y), kge(x,y)),5),
 #'                   collapse="\n"), adj=0)
 #'   }
 #' legGOF(-1.5, 2) # R2 good, but does not check for bias (distance from 1:1 line)
@@ -70,7 +70,7 @@
 #' hist(r2[2,], breaks=70, col=5, main= "... rsquare(x,y)")
 #' # RMSE is more symmetric and gaussian
 #' }
-#'
+#' 
 #' # NSE and KGE ---------------------------------------------------------------
 #' 
 #' y <- dbeta(1:40/40, 3, 10) # simulated
@@ -82,10 +82,10 @@
 #' nse(x,y) ; nse(y,x)  # x=obs, y=sim  (second command is wrong)
 #' kge(x,y) ; kge(y,x)
 #' 
-#'
+#' 
 #' @param a Numerical vector with observational data
 #' @param b Simulated data (to be compared to a)
-#' @param quiet Should NA-removal warnings be suppressed? 
+#' @param quiet Should NA-removal warnings be suppressed?
 #'              This may be helpful within functions. DEFAULT: FALSE
 #' @param fun Character string with function name for error and warning messages
 
@@ -96,15 +96,15 @@ gofNA <- function(a, b, quiet=FALSE, fun="")
 {
 # Input checks on type and length:
 if(fun!="") fun <- paste0(fun, ": ")
-if(!(is.vector(a) & is.vector(b))) warning(fun, "inputs are not vectors, but: ", 
+if(!(is.vector(a) & is.vector(b))) warning(fun, "inputs are not vectors, but: ",
                                            class(a), " and ", class(b), call.=FALSE)
-if(length(a) != length(b)) stop(fun, "vectors not of equal length, but: ", 
+if(length(a) != length(b)) stop(fun, "vectors not of equal length, but: ",
                                 length(a), " and ", length(b), call.=FALSE)
 # NA checks
 if( anyNA(a) | anyNA(b) )
 {
   Na <- which(is.na(a)|is.na(b))
-  if(!quiet) warning(fun, length(Na), " NAs were omitted from ", length(a), 
+  if(!quiet) warning(fun, length(Na), " NAs were omitted from ", length(a),
                      " data points (",round(length(Na)/length(a)*100,1),"%).", call.=FALSE)
   a <- a[-Na] ; b <- b[-Na]
 }
@@ -185,16 +185,16 @@ if(FALSE)
 {
 # rsquare2: 3.4 instead of 2.1 seconds (with 1e8 in the example below)
 # crucial difference if calculations are done iteratively or performed multiple times
-  
-rsquare2 <- function(a, b, quiet=FALSE) 
-{ 
+
+rsquare2 <- function(a, b, quiet=FALSE)
+{
 g <- gofNA(a, b, quiet=quiet, fun="rsquare2")
 if(is.null(g)) return(NA)
 aa <-  a-mean(a)
 bb <-  b-mean(b)
-sum(aa*bb)^2/sum(aa^2)/sum(bb^2) 
+sum(aa*bb)^2/sum(aa^2)/sum(bb^2)
 }
-  
+
 a <- sort(rnorm(1e7)); b <- 2*a+3+rnorm(length(a))
 system.time(rsquare(a,b))
 system.time(rsquare2(a,b))

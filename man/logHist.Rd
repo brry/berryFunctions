@@ -28,7 +28,7 @@ logHist(x, logargs = NULL, main = xmain, xlab = xname, col = "tan",
 
 \item{quiet}{Logical: suppress warning about non-positive values? DEFAULT: FALSE}
 
-\item{\dots}{further arguments passed to \code{\link{hist}} 
+\item{\dots}{further arguments passed to \code{\link{hist}}
 like breaks, xlim=c(-1,3), ..., but not xaxt}
 }
 \value{

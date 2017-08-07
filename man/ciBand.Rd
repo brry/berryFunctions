@@ -22,8 +22,8 @@ ciBand(yu, yl, ym = NULL, x = 1:length(yu), na = "interpolate",
 
 \item{nastars}{If na="interpolate", should stars be drawn at places that used to be NA? DEFAULT: TRUE}
 
-\item{singlepoints}{If na="remove", add points for places surrounded by NAs? 
-can be a boolean (T/F) vector of length three for upper, lower, median. 
+\item{singlepoints}{If na="remove", add points for places surrounded by NAs?
+can be a boolean (T/F) vector of length three for upper, lower, median.
 Code to identify isolated points is taken from wq::plotTs. DEFAULT: TRUE}
 
 \item{args}{List of arguments passed to \code{\link{points}} for the previous two arguments. DEFAULT: NULL}

@@ -53,9 +53,9 @@ logAxis(side = 1, log = NULL, lcol = "grey", lty = 1, lwd = 1,
 \item{\dots}{Further arguments passed to axis, like \code{lwd, col.ticks, hadj, lty}, ...}
 }
 \value{
-An invisible list with 
-       \item{vals}{Values for lines and label positions} 
-       \item{labs}{Formatted values for labels} 
+An invisible list with
+       \item{vals}{Values for lines and label positions}
+       \item{labs}{Formatted values for labels}
        \item{all}{Values for lines}
 }
 \description{

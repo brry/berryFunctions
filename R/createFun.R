@@ -1,12 +1,12 @@
 #' create function framework
-#'
+#' 
 #' create a file with a complete (Roxygen) framework for a new function in a package
-#'
+#' 
 #' @details Tries to open the file in the standard editor for .R files using \code{\link{system2}}
-#'
+#' 
 #' @return file name as character string
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, March 2016
-#' @seealso \code{\link{system2}}, \code{\link{funSource}}, Roxygen2: 
+#' @seealso \code{\link{system2}}, \code{\link{funSource}}, Roxygen2:
 #'          \url{https://cran.r-project.org/package=roxygen2/vignettes/rd.html}
 #' @keywords documentation
 #' @export
@@ -18,10 +18,10 @@
 #' @param path Path to package in development (including package name itself).
 #'             Paths ending in /R,man,inst,vignettes will be changed to one level up.
 #'             DEFAULT: "."
-#' @param open Logical: open the file? If several instances of Rstudio are open, 
+#' @param open Logical: open the file? If several instances of Rstudio are open,
 #'             the last one (not necessarily the active one) will be used.
 #'             DEFAULT: TRUE
-#'
+#' 
 createFun <- function(
 fun,
 path=".",
@@ -56,7 +56,7 @@ part1 <- paste0(
 ' @aliases aliasMayBeRemoved
 ' @section Warning: warningMayBeRemoved
 ' @return ReturnValue
-' @author Berry Boessenkool, \\email{berry-b@@gmx.de}, ", date, 
+' @author Berry Boessenkool, \\email{berry-b@@gmx.de}, ", date,
 "' @seealso \\code{\\link{help}}, \\code{\\link{help}}
 ' @keywords aplot
  @importFrom package fun1 fun2

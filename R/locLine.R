@@ -1,7 +1,7 @@
 #' abline at locator point in graph
-#'
+#' 
 #' Draw vertical and/or horizontal lines at positions in a graph located by clicking
-#'
+#' 
 #' @details Not tested across platforms yet...
 #' @return \code{\link{locator}} result
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Mar 2016
@@ -10,7 +10,7 @@
 #' @importFrom graphics abline locator
 #' @export
 #' @examples
-#'
+#' 
 #' plot(cumsum(rnorm(60)), type="l")
 #' ## locLine() # only do this manually in interactive() mode
 

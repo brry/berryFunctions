@@ -1,7 +1,7 @@
 #' Spiral graph of time series
-#'
+#' 
 #' Plot seasonality of (daily) time series along spiral
-#'
+#' 
 #' @return invisible data.frame with date, vals, and the plotting coordinates
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, May 2016
 #' @seealso \code{\link{seasonality}}, \code{\link{colPoints}}, \code{\link{as.Date}}
@@ -28,11 +28,11 @@
 #' 
 #' seasonality(time, vals, fakeData, col=divPal(100), mar=c(3,3,6,1), legend=FALSE, main="", shift=61)
 #' title(main="yearly time series\nday of year over time\nfails for cyclicity over all year")
-#'
+#' 
 #' spiralDate(time,vals, data=fakeData, col=divPal(100), legargs=list(y1=0.7,y2=0.8))
-#' title(main="spiral graph\nshows cyclic values nicely 
+#' title(main="spiral graph\nshows cyclic values nicely
 #'             trends are harder to detect\nrecent values = more visual weight")
-#'
+#' 
 #' par(mfrow=c(1,1))
 #' 
 #' # Data with missing values:
@@ -43,13 +43,13 @@
 #' spiralDate(time,vals, data=fakeData, lines=TRUE) # problematic for lines
 #' spiralDate(time,vals, data=fakeData, pch=3)      # but not for points
 #' 
-#' ## Real data:    
+#' ## Real data:
 #' #library2("waterData")
 #' #data(exampleWaterData)
 #' #spiralDate(dates, val, data=q05054000LT, lines=TRUE, lwd=3)
 #' 
-#' @param dates Dates in ascending order. 
-#'              Can be charater strings or \code{\link{strptime}} results, 
+#' @param dates Dates in ascending order.
+#'              Can be charater strings or \code{\link{strptime}} results,
 #'              as accepted (and coerced) by \code{\link{as.Date}}
 #' @param values Values to be mapped in color with \code{\link{colPoints}} along seasonal spiral
 #' @param data Optional: data.frame with the column names as given by dates and values
@@ -61,11 +61,11 @@
 #' @param prop Proportion of the data to be actually plotted, used in \code{\link{spiralDateAnim}}. DEFAULT: NA (ignored)
 #' @param zlab Title of \code{\link{colPointsLegend}}
 #' @param format Format of date labels see details in \code{\link{strptime}}. DEFAULT: "\%Y"
-#' @param nint Number of interpolation segments between points, 
-#'             only used if \code{lines=TRUE} (passed to \code{\link{colPoints}}). 
+#' @param nint Number of interpolation segments between points,
+#'             only used if \code{lines=TRUE} (passed to \code{\link{colPoints}}).
 #'             DEFAULT: 1 (with long time series, the colPoints default of 30 is too high!)
 #' @param \dots Further arguments passed to \code{\link{colPoints}}, but not Range (use \code{vrange})
-#'
+#' 
 spiralDate <- function(
 dates,
 values,
@@ -73,7 +73,7 @@ data,
 drange=NA,
 vrange=NA,
 months=substr(month.abb,1,1),
-add=FALSE, 
+add=FALSE,
 shift=0,
 prop=NA,
 zlab=substitute(values),
@@ -83,12 +83,12 @@ nint=1,
 )
 {
 zlab <- if(missing(zlab)) deparse(zlab) else zlab
-#  
+#
 if(!missing(data)) # get vectors from data.frame
   {
-  dates <- data[ , deparse(substitute(dates))]  
-  values<- data[ , deparse(substitute(values))]  
-  } 
+  dates <- data[ , deparse(substitute(dates))]
+  values<- data[ , deparse(substitute(values))]
+  }
 #check input
 if(length(dates)!=length(values)) stop("length of dates and values not equal (",
                                        length(dates),", ",length(values),").")
@@ -107,7 +107,7 @@ if(notNA(drange))
   values <- values[inrange]
   }
 # values range
-vrange <- range(   if(notNA(vrange)) vrange else values  , na.rm=TRUE)  
+vrange <- range(   if(notNA(vrange)) vrange else values  , na.rm=TRUE)
 #
 # coordinates for drawing
 r <- rescale(as.numeric(dates)) # ascending time-dependent radius

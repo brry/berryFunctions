@@ -28,11 +28,11 @@
 #' @param \dots further arguments passed to \code{\link{polygon}}, like col, border, lwd
 #' 
 circle <- function(
-  x, 
-  y, 
-  r, 
-  locnum=100, 
-  ...) 
+  x,
+  y,
+  r,
+  locnum=100,
+  ...)
 {
 # input checking - only one circle can be drawn:
 if(length(x) >1 | length(y) >1 | length(r) >1 | length(locnum) >1)

@@ -28,7 +28,7 @@
 #' @param ylim    2 Numbers: y-axis range. DEFAULT: NULL
 #' @param freq    Logical: counts instead of density? DEFAULT: TRUE
 #' @param quiet   Logical: suppress warning about non-positive values? DEFAULT: FALSE
-#' @param \dots   further arguments passed to \code{\link{hist}} 
+#' @param \dots   further arguments passed to \code{\link{hist}}
 #'                like breaks, xlim=c(-1,3), ..., but not xaxt
 #' 
 logHist <- function(

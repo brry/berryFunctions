@@ -33,7 +33,7 @@ funnelPlot(x, n, labels = NULL, method = "classic", add = FALSE,
 
 \item{main}{DEFAULT: "Funnel plot for Proportions"}
 
-\item{a3}{List with arguments for CI lines at 3*sd (eg: col, lty, lwd, lend, etc.). 
+\item{a3}{List with arguments for CI lines at 3*sd (eg: col, lty, lwd, lend, etc.).
 Overwrites defaults that are defined within the function (if contentually possible). DEFAULT: NULL}
 
 \item{a2}{Arguments for line of 2 sd. DEFAULT: NULL}

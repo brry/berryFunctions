@@ -80,7 +80,7 @@ monthAxis(ym=TRUE)
 monthAxis(ym=TRUE, mgp=c(3,1,0))
 monthAxis(ym=TRUE, cex.axis=1.4)
 monthAxis(ym=TRUE, mcex=0.9, col.axis="red")
- 
+
 plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
 monthAxis(labels=FALSE, col.ticks=2)
 monthAxis(1, format=" ")  # equivalent to axis(labels=FALSE)

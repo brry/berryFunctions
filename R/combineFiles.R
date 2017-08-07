@@ -14,7 +14,7 @@
 #' \dontrun{
 #' cat("This is Sparta.\nKicking your face.", file="BujakashaBerry1.txt")
 #' cat("Chuck Norris will roundhousekick you.", file="BujakashaBerry2.txt")
-#' combineFiles(inFiles=paste0("BujakashaBerry", 1:2, ".txt"), 
+#' combineFiles(inFiles=paste0("BujakashaBerry", 1:2, ".txt"),
 #'              outFile="BujakashaBerry3.txt")
 #' file.show("BujakashaBerry3.txt")
 #' unlink(paste0("BujakashaBerry", 1:3, ".txt"))
@@ -32,7 +32,7 @@
 #' 
 combineFiles <- function(
    inFiles = dir(),
-   inDir = getwd(), 
+   inDir = getwd(),
    outFile = "combined_Textfiles.txt",
    outDir = inDir,
    sep = NULL,
@@ -65,7 +65,7 @@ if(progbar) pb <- txtProgressBar(max=length(inFiles), style=3)
 for(i in 1:length(inFiles))
    {
    # Read file:
-   inFile_i <- scan(file=paste(inDir, inFiles[i], sep="/"), what="char", 
+   inFile_i <- scan(file=paste(inDir, inFiles[i], sep="/"), what="char",
                     blank.lines.skip=FALSE, sep="\n", quiet=TRUE)
    # Write filename if wanted:
    if(names) write(paste(inFiles[i], "\n"), file=File, append=TRUE)

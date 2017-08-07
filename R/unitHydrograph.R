@@ -51,7 +51,7 @@
 #' @param k Numeric. Storage coefficient [1/s] (resistance to let water run out). High damping = slowly reacting landscape = high soil water absorbtion = high k.
 #' @param t Numeric, possibly a vector. Time [s].
 #' @param force Logical: Force the integral of the hydrograph to be 1? DEFAULT: FALSE
-#'
+#' 
 unitHydrograph <- function(
 n,
 k,

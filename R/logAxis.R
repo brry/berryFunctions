@@ -2,9 +2,9 @@
 #' 
 #' Shortcut to calling \code{\link{logVals}}, \code{\link{axis}} and \code{\link{abline}}
 #' 
-#' @return An invisible list with 
-#'        \item{vals}{Values for lines and label positions} 
-#'        \item{labs}{Formatted values for labels} 
+#' @return An invisible list with
+#'        \item{vals}{Values for lines and label positions}
+#'        \item{labs}{Formatted values for labels}
 #'        \item{all}{Values for lines}
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sept 2014
 #' @seealso \code{\link{logVals}}, \code{\link{log10}}

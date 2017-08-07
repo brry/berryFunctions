@@ -1,5 +1,5 @@
 #' Convert German Umlaute to ASCII
-#'
+#' 
 #' Convert German Umlaute (ae, oe, ue, ss) to ASCII.
 #' Conversion happens case sensitive for the first three.
 
@@ -18,9 +18,9 @@
 #' examples
 #' convertUmlaut(examples) # note how lower and upper case is kept
 #' }
-#'
+#' 
 #' @param x Character string(s) containing German Umlaute
-#'
+#' 
 convertUmlaut <- function(
 x
 )

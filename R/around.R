@@ -1,7 +1,7 @@
 #' View values around an index
-#'
+#' 
 #' View index rows of a data.frame with n surrounding rows
-#'
+#' 
 #' @return Nothing, calls \code{\link{View}}
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Nov 2016
 #' @seealso \code{\link{sortDF}}, \code{\link{View}}
@@ -14,7 +14,7 @@
 #' around(myDF, i=is.na(myDF$A))
 #' around(myDF, i=c(11,19), n2=0)
 #' }
-#'
+#' 
 #' @param x Data.frame
 #' @param i Index (logical or integers)
 #' @param n1 Number of elements shown before each i. DEFAULT: 2

@@ -8,23 +8,23 @@ tryStack(expr, silent = FALSE, warn = TRUE, short = TRUE, file = "",
   removetry = TRUE, skip = NULL)
 }
 \arguments{
-\item{expr}{Expresssion to try, potentially wrapped in curly braces if 
+\item{expr}{Expresssion to try, potentially wrapped in curly braces if
 spanning several commands.}
 
 \item{silent}{Logical: Should printing of error message + stack be suppressed?
 Does not affect warnings and messages. DEFAULT: FALSE}
 
 \item{warn}{Logical: trace \code{\link{warning}s} and \code{\link{message}s} also?
-They are still handled like regular warnings / messages unless 
+They are still handled like regular warnings / messages unless
 \code{file !=""}, when they are catted into that file. DEFAULT: TRUE}
 
 \item{short}{Logical: should trace be abbreviated to upper -> middle -> lower?
 If NA, it is set to TRUE for warnings and messages, FALSE for errors.
 DEFAULT: TRUE}
 
-\item{file}{File name passed to \code{\link{cat}}. 
-If given, Errors will be appended to the file after two empty lines. 
-if \code{warn=T} and file!="", warnings and messages will not be shown, 
+\item{file}{File name passed to \code{\link{cat}}.
+If given, Errors will be appended to the file after two empty lines.
+if \code{warn=T} and file!="", warnings and messages will not be shown,
 but also appended to the file.
 This is useful in lapply simulation runs.
 DEFAULT: "" (catted to the console)}
@@ -38,15 +38,15 @@ e.g. "eval(expr, p)". Use short=F to find exact matches.
 DEFAULT: NULL}
 }
 \value{
-Value of \code{expr} if evaluated successfully. If not, an invisible 
+Value of \code{expr} if evaluated successfully. If not, an invisible
 object of class "try-error" as in \code{\link{try}} with the stack in \code{object[2]}.
 For nested tryStack calls, \code{object[3], object[4]} etc. will contain "-- empty error stack --"
 }
 \description{
 As in \code{\link{try}}, the result of an expression if it works.
-If it fails, execution is not halted, but an invisible try-error class object is 
+If it fails, execution is not halted, but an invisible try-error class object is
 returned and (unless silent=TRUE) a message \code{\link{cat}ted} to the console.\cr
-Unlike \code{\link{try}}, \code{tryStack} also returns the calling stack to 
+Unlike \code{\link{try}}, \code{tryStack} also returns the calling stack to
 trace errors and warnings and ease debugging.
 }
 \examples{
@@ -64,7 +64,7 @@ rm(d)
 # Classical error management with try -----
 
 \dontrun{ ## intentional error
-d <- upper("42")                # error, no d creation 
+d <- upper("42")                # error, no d creation
 traceback()                     # calling stack, but only in interactive mode
 }
 
@@ -79,7 +79,7 @@ d <- tryStack(upper("42") ) # like try, but with traceback, even for warnings
 cat(d)
 d <- tryStack(upper("42"), silent=TRUE, warn=0) # don't trace warnings
 d <- tryStack(upper("42"), short=FALSE)
- 
+
 tryStack(upper(42)) # returns normal output, but warnings are easier to debug
 # Note: you can also set options(showWarnCalls=TRUE)
 
@@ -105,11 +105,11 @@ options(op) ; rm(op)
 f <- function(k) tryStack(upper(k), silent=TRUE)
 d <- f(42)                 ; cat("-----\\n", d, "\\n-----\\n") ; rm(d)
 d <- f("42")               ; cat("-----\\n", d, "\\n-----\\n") ; rm(d)
-d <- tryStack(f(4) )       ; cat("-----\\n", d, "\\n-----\\n") ; rm(d) 
+d <- tryStack(f(4) )       ; cat("-----\\n", d, "\\n-----\\n") ; rm(d)
 # warnings in nested calls are printed twice, unless warn=0
 d <- tryStack(f(4), warn=0) # could also be set within 'f'
 
-d <- tryStack(f("4"))      ; cat("-----\\n", d, "\\n-----\\n") 
+d <- tryStack(f("4"))      ; cat("-----\\n", d, "\\n-----\\n")
 d[1:3] ; rm(d)
 # empty stack at begin - because of tryStack in f, no real error happened in f
 
@@ -127,7 +127,7 @@ d <- f("42")   ; cat("-----\\n", d, "\\n-----\\n") ; rm(d) # regular try output
 
 f2 <- function(k) tryStack(f(k), warn=0, silent=TRUE)
 d <- f2(42)    ; cat("-----\\n", d, "\\n-----\\n") ; rm(d)
-d <- f2("42")  ; cat("-----\\n", d, "\\n-----\\n") ; rm(d) # try -> no error. 
+d <- f2("42")  ; cat("-----\\n", d, "\\n-----\\n") ; rm(d) # try -> no error.
 # -> Use tryCatch and you can nest those calls. note that d gets longer.
 
 

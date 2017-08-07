@@ -50,7 +50,7 @@ high: high resolution in vector graphics as pdf possible. DEFAULT: 1000}
 
 \item{quiet}{Suppress warning when Arguments are recycled? DEFAULT: TRUE}
 
-\item{\dots}{further arguments passed to \code{\link{strwidth}} and 
+\item{\dots}{further arguments passed to \code{\link{strwidth}} and
 \code{\link{text}}, like font, vfont, family}
 }
 \value{
@@ -62,9 +62,9 @@ the text can be read easily even if there are many points in the plot.
 Fields can be rectangular, elliptic or rectangular with roundeed edges.
 }
 \details{
-Specifying pos and offset will currently change the position of the text, but not of the field.\cr 
-srt is not supported yet.\cr 
-lend, ljoin and lmitre can not be specified for rect, to keep argument number low.\cr 
+Specifying pos and offset will currently change the position of the text, but not of the field.\cr
+srt is not supported yet.\cr
+lend, ljoin and lmitre can not be specified for rect, to keep argument number low.\cr
 density (crosshatch etc.) is not supported, as this would distract from the text.
 # Search Engine Keywords:
 R Text visible on top
@@ -134,9 +134,9 @@ with inspiration taken from \code{ordilabel} in package \code{vegan} and thanks 
 }
 \seealso{
 \code{\link{text}}; \code{shadowtext} in package \code{TeachingDemos}, see
-         \url{http://blog.revolutionanalytics.com/2009/05/make-text-stand-out-with-outlines.html}, 
+         \url{http://blog.revolutionanalytics.com/2009/05/make-text-stand-out-with-outlines.html},
           and \url{http://stackoverflow.com/questions/25631216}. \cr
-         \code{s.label} in package \code{ade4}, which is not so versatile and 
+         \code{s.label} in package \code{ade4}, which is not so versatile and
          doesn't work with logarithmic axes
 }
 \author{

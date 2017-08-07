@@ -21,13 +21,13 @@ approx2(x, fill = NULL, n = length(x), quiet = FALSE, ...)
 Vector with NAs replaced with interpolation (not a list, as in \code{\link{approx}}!)
 }
 \description{
-Smart interpolation: as \code{\link{approx}}, approx2 fills NAs in a vector with linear interpolation, 
-but unlike \code{\link{approx}}, it can handle NAs at the ends of a vector 
+Smart interpolation: as \code{\link{approx}}, approx2 fills NAs in a vector with linear interpolation,
+but unlike \code{\link{approx}}, it can handle NAs at the ends of a vector
 (takes the first/last value available for those). Also, approx2 returns a vector only.
 }
 \details{
 The function fill is used to fill missing values at the ends of the vector.
-It could be mean or median, for example, but must be a function that accepts \code{na.rm=TRUE} as an argument. 
+It could be mean or median, for example, but must be a function that accepts \code{na.rm=TRUE} as an argument.
 The default (NULL) means to use the first (or last) observation available.
 }
 \examples{

@@ -44,7 +44,7 @@
 #' @param progress Logical. Monitor progress by printing a dot every 10000 tries? DEFAULT: TRUE for long names (nchar(name)>3).
 #' @param estimatetime Estimate computation time? DEFAULT: nc>4
 #' @param continue Continue without asking? DEFAULT:  FALSE
-#'
+#' 
 nameSample <- function(
 name,
 progress=FALSE,

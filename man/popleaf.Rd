@@ -19,7 +19,7 @@ Vector with character strings
 combine data.frame columns into a leaflet popup-box compatible format
 }
 \examples{
-dat <- data.frame(a=14:16, b=letters[14:16], c=LETTERS[14:16], 
+dat <- data.frame(a=14:16, b=letters[14:16], c=LETTERS[14:16],
                  lat=c(52.58,53.45,52.4), lon=c(6.34,7.23,13.05))
 popleaf(dat)
 dat$display <- popleaf(dat, 1:4)

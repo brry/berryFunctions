@@ -5,10 +5,10 @@
 #' @details Nerdy way to wish someone a happy new year, eg:\cr
 #' Have a great \cr
 #' \code{set.seed(1244); sample(0:9,4,T)}
-#'
+#' 
 #' @return \code{\link{cat}}s command into the console that can be copypasted to anyone's R script.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, April 2014
-#' @seealso \code{\link{nameSample}} to impress with "randomly" finding a name, 
+#' @seealso \code{\link{nameSample}} to impress with "randomly" finding a name,
 #'          \code{\link{set.seed}}, \code{\link{sample}}, \code{\link{letters}}
 #' @export
 #' @examples

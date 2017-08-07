@@ -1,7 +1,7 @@
 #' Create .Rnw presentation template
-#'
+#' 
 #' Create folder with .Rnw presentation template and fig_extern folder.
-#'
+#' 
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Mar 2017
 #' @seealso \code{\link{createFun}}
 #' @keywords file
@@ -9,21 +9,21 @@
 #' @export
 #' @examples
 #' createPres("Berry_Conference")
-#'
+#' 
 #' @param presname Name of .Rnw file to be created. DEFAULT: "pres"
-#' @param dir      Name of directory that will contain .Rnw file and 
+#' @param dir      Name of directory that will contain .Rnw file and
 #'                 fig_extern folder. "_1" will be appended if already existing,
 #'                 see \code{\link{newFilename}}. DEFAULT: "presentation"
 #' @param path     Location of \code{dir}. Passed to \code{\link{setwd}}.
 #'                 DEFAULT: "."
-#'
+#' 
 createPres <- function(
 presname="pres",
 dir="presentation",
 path="."
 )
 {
-#  
+#
 owd <- setwd(path)
 on.exit(setwd(owd))
 dir <- newFilename(dir, quiet=TRUE)
@@ -79,7 +79,7 @@ cat(
    % \\scriptsize
   ~~ Berry Boessenkool, ",curmonth,":
   NiceFooterTitle,
-  \\href{https://github.com/brry/course\\#slides}{github.com/brry/course} \\hfill 
+  \\href{https://github.com/brry/course\\#slides}{github.com/brry/course} \\hfill
   ~~ \\insertframenumber / \\inserttotalframenumber~~~~~~~~~}}
 
 % Reference images:
@@ -95,7 +95,7 @@ cat(
 }
 \\newcommand{\\appendixend}{
    \\addtocounter{framenumberappendix}{-\\value{framenumber}}
-   \\addtocounter{framenumber}{\\value{framenumberappendix}} 
+   \\addtocounter{framenumber}{\\value{framenumberappendix}}
 }
 
 

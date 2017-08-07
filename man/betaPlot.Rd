@@ -49,7 +49,7 @@ This function very quickly plots a beta distribution by just specifying alpha an
 \examples{
 
 betaPlot()
-betaPlot(2,1) 
+betaPlot(2,1)
 betaPlot(0.5, 2)
 
 # beta distribution is often used for proportions or probabilities
@@ -62,8 +62,8 @@ betaPlotComp()
 
 }
 \seealso{
-\code{\link{betaPlotComp}}, \code{\link{normPlot}}, \code{\link{dbeta}}, 
-   \url{https://cran.r-project.org/package=denstrip}, 
+\code{\link{betaPlotComp}}, \code{\link{normPlot}}, \code{\link{dbeta}},
+   \url{https://cran.r-project.org/package=denstrip},
    \url{https://cran.r-project.org/view=Distributions}
 }
 \author{

@@ -26,7 +26,7 @@ colPointsHist(z, nbins = 40, colors = seqPal(nbins), bb = seqR(z,
 
 \item{bg}{Background behind background and axis labels. DEFAULT: "white"}
 
-\item{x1, x2, y1, y2}{Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}. 
+\item{x1, x2, y1, y2}{Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}.
 DEFAULT: x: 0-0.3, y: 0-0.4}
 
 \item{outer}{Logical: Should legend be relative to device instead of current figure?
@@ -34,12 +34,12 @@ use outer=TRUE when par(mfrow, oma) is set. DEFAULT: FALSE}
 
 \item{mar}{Margins for \code{\link{smallPlot}}. DEFAULT: c(2, 2, 1, 0.5)}
 
-\item{mgp}{MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, 
+\item{mgp}{MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin,
 as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.6, 0)}
 
 \item{sborder}{Border around inset subplot. DEFAULT: par("fg")}
 
-\item{resetfocus}{Reset focus to original plot? Specifies where further 
+\item{resetfocus}{Reset focus to original plot? Specifies where further
 low level plot commands are directed to. DEFAULT: TRUE}
 
 \item{breaks}{Breaks as in \code{\link{hist}}, but with a different default. DEFAULT: 20}

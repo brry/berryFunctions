@@ -9,8 +9,8 @@ spiralDate(dates, values, data, drange = NA, vrange = NA,
   zlab = substitute(values), format = "\%Y", nint = 1, ...)
 }
 \arguments{
-\item{dates}{Dates in ascending order. 
-Can be charater strings or \code{\link{strptime}} results, 
+\item{dates}{Dates in ascending order.
+Can be charater strings or \code{\link{strptime}} results,
 as accepted (and coerced) by \code{\link{as.Date}}}
 
 \item{values}{Values to be mapped in color with \code{\link{colPoints}} along seasonal spiral}
@@ -33,8 +33,8 @@ as accepted (and coerced) by \code{\link{as.Date}}}
 
 \item{format}{Format of date labels see details in \code{\link{strptime}}. DEFAULT: "\%Y"}
 
-\item{nint}{Number of interpolation segments between points, 
-only used if \code{lines=TRUE} (passed to \code{\link{colPoints}}). 
+\item{nint}{Number of interpolation segments between points,
+only used if \code{lines=TRUE} (passed to \code{\link{colPoints}}).
 DEFAULT: 1 (with long time series, the colPoints default of 30 is too high!)}
 
 \item{\dots}{Further arguments passed to \code{\link{colPoints}}, but not Range (use \code{vrange})}
@@ -65,7 +65,7 @@ seasonality(time, vals, fakeData, col=divPal(100), mar=c(3,3,6,1), legend=FALSE,
 title(main="yearly time series\\nday of year over time\\nfails for cyclicity over all year")
 
 spiralDate(time,vals, data=fakeData, col=divPal(100), legargs=list(y1=0.7,y2=0.8))
-title(main="spiral graph\\nshows cyclic values nicely 
+title(main="spiral graph\\nshows cyclic values nicely
             trends are harder to detect\\nrecent values = more visual weight")
 
 par(mfrow=c(1,1))
@@ -78,7 +78,7 @@ fakeData <- na.omit(fakeData)
 spiralDate(time,vals, data=fakeData, lines=TRUE) # problematic for lines
 spiralDate(time,vals, data=fakeData, pch=3)      # but not for points
 
-## Real data:    
+## Real data:
 #library2("waterData")
 #data(exampleWaterData)
 #spiralDate(dates, val, data=q05054000LT, lines=TRUE, lwd=3)

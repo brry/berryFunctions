@@ -21,15 +21,15 @@
 #' @param at Positions of x-axis labels. DEFAULT: pretty2(z)
 #' @param labels X-axis labels themselves. DEFAULT: at
 #' @param bg Background behind background and axis labels. DEFAULT: "white"
-#' @param x1,x2,y1,y2 Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}. 
+#' @param x1,x2,y1,y2 Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}.
 #'        DEFAULT: x: 0-0.3, y: 0-0.4
 #' @param outer Logical: Should legend be relative to device instead of current figure?
 #'              use outer=TRUE when par(mfrow, oma) is set. DEFAULT: FALSE
 #' @param mar Margins for \code{\link{smallPlot}}. DEFAULT: c(2, 2, 1, 0.5)
-#' @param mgp MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, 
+#' @param mgp MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin,
 #'        as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.6, 0)
 #' @param sborder Border around inset subplot. DEFAULT: par("fg")
-#' @param resetfocus Reset focus to original plot? Specifies where further 
+#' @param resetfocus Reset focus to original plot? Specifies where further
 #'        low level plot commands are directed to. DEFAULT: TRUE
 #' @param breaks Breaks as in \code{\link{hist}}, but with a different default. DEFAULT: 20
 #' @param freq Plot count data in hist? (if FALSE, plot density instead). DEFAULT: TRUE

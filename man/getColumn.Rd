@@ -9,7 +9,7 @@ getColumn(x, df, trace = TRUE)
 \arguments{
 \item{x}{Column name to be subsetted. The safest is to use character strings
 or \code{\link{substitute}(input)}.
-If there is an object "x" in a function environment, 
+If there is an object "x" in a function environment,
 its value will be used as name! (see upper2 example)}
 
 \item{df}{dataframe object}
@@ -51,10 +51,10 @@ is.error(      upper2(Water.Temp) ,   force=TRUE, tell=TRUE) # is an error
 upper3 <- function(xx, dd) getColumn(substitute(xx), dd)
 upper3(Air.Flow, stackloss) # may be safer in many scoping situations
 
-# In packages use "colname" with quotation marks in level 2 functions to avoid 
+# In packages use "colname" with quotation marks in level 2 functions to avoid
 # the CRAN check NOTE "no visible binding for global variable"
 
-df <- data.frame(x=letters[1:3],y=letters[4:6]) 
+df <- data.frame(x=letters[1:3],y=letters[4:6])
 is.vector(df$x)
 is.vector(getColumn("x", df)) # FALSE
 # cannot force output to be a vector, as this will convert:

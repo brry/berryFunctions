@@ -28,7 +28,7 @@ set.seed(12353); sample(0:9, 4, replace=TRUE)
 
 }
 \seealso{
-\code{\link{nameSample}} to impress with "randomly" finding a name, 
+\code{\link{nameSample}} to impress with "randomly" finding a name,
          \code{\link{set.seed}}, \code{\link{sample}}, \code{\link{letters}}
 }
 \author{

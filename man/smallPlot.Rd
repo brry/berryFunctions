@@ -11,23 +11,23 @@ smallPlot(expr, x1 = 0.05, x2 = 0.7, y1 = 0.5, y2 = 1, outer = FALSE,
 \arguments{
 \item{expr}{expression creating a plot. Can be code within {braces}.}
 
-\item{x1, x2, y1, y2}{Position of small plot, relative to current figure region [0:1]. 
+\item{x1, x2, y1, y2}{Position of small plot, relative to current figure region [0:1].
 DEFAULT: x: 0.05-0.7, y: 0.5-1}
 
 \item{outer}{Logical. Should inset plot be placed in the device outer margin region
-instead of relative to the current figure region? 
-Useful in multipanel plots with par(oma). \code{outer} here does not 
+instead of relative to the current figure region?
+Useful in multipanel plots with par(oma). \code{outer} here does not
 have exactly the same meaning as in \code{\link{title}}. DEFAULT: FALSE}
 
 \item{xpd}{Plotting and notation clipped to plot region (if xpd=FALSE),
 figure region (TRUE) or device region (xpd=NA). DEFAULT: NA}
 
-\item{mar}{Margin vector in (approximate) number of lines. It is internally 
-multiplied with \code{\link{strheight}} to convert it to relative units [0:1], 
-thus the behaviour is a bit different from \code{\link{par}(mar)}. 
+\item{mar}{Margin vector in (approximate) number of lines. It is internally
+multiplied with \code{\link{strheight}} to convert it to relative units [0:1],
+thus the behaviour is a bit different from \code{\link{par}(mar)}.
 It's recycled, so you can use \code{mar=0}. DEFAULT: c(3,3,1,1)}
 
-\item{mgp}{MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, 
+\item{mgp}{MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin,
 as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.8, 0)}
 
 \item{bg}{Background. DEFAULT: par("bg")}
@@ -36,15 +36,15 @@ as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.8, 0)}
 
 \item{las}{LabelAxisStyle. DEFAULT: 1}
 
-\item{resetfocus}{Reset focus to original plot? Specifies where further 
+\item{resetfocus}{Reset focus to original plot? Specifies where further
 low level plot commands are directed to. DEFAULT: TRUE}
 
-\item{colwise}{Logical: Continue next plot below current plot? 
-If you had \code{par(mfcol=...)}, you must use \code{colwise=TRUE}, 
-otherwise the next plot will be to the right of the current plot 
+\item{colwise}{Logical: Continue next plot below current plot?
+If you had \code{par(mfcol=...)}, you must use \code{colwise=TRUE},
+otherwise the next plot will be to the right of the current plot
 (as with \code{par(mfrow=...)}). DEFAULT: FALSE}
 
-\item{\dots}{further arguments passed to \code{\link{par}}. 
+\item{\dots}{further arguments passed to \code{\link{par}}.
 This may mess things up - please tell me for which arguments!
 You can do \code{par(las=1, las=2)} (the last will be set), so
 \code{smallPlot(plot(1), new=FALSE)} works, but may not yield the intended result.}
@@ -93,7 +93,7 @@ par(mfcol=c(3,4))
 plot(1:10)
 plot(1:10)
 smallPlot(plot(5:1), bg="lightblue")
-plot(1:10) 
+plot(1:10)
 smallPlot(plot(5:1), bg="bisque", colwise=TRUE) # if mfcol (not mfrow) was set
 plot(1:10)
 
@@ -127,11 +127,11 @@ smallPlot(plot(5:1), bg="palegreen")
 points(3, 2, pch="+", cex=2, col=2, xpd=NA) # not drawn with default xpd
 par(plt=new_plt)
 plot(1:10) # canot keep mfcol, only mfrow, if colwise is left FALSE.
-smallPlot(plot(5:1), bg="yellow") 
+smallPlot(plot(5:1), bg="yellow")
 points(3, 2, pch="+", cex=2, col=2)   # everything back to normal
 par(op)
 
-# if layout is used instead of par(mfrow), it is difficult to add graphs 
+# if layout is used instead of par(mfrow), it is difficult to add graphs
 # after using smallPlot
 lay <- matrix(c(1,1,1,1,2,2,3,3,2,2,3,3,4,4,5,5), ncol=4)
 layout.show(layout(lay))
@@ -143,8 +143,8 @@ smallPlot(plot(1:10), mar=c(1,3,1,0), x1=0,x2=0.2, y1=0.2,y2=0.8, bg=4, outer=TR
 
 }
 \seealso{
-\code{\link{colPointsLegend}} for an example of usage. 
-         \code{\link[TeachingDemos]{subplot}} and \code{\link[ade4]{add.scatter}} 
+\code{\link{colPointsLegend}} for an example of usage.
+         \code{\link[TeachingDemos]{subplot}} and \code{\link[ade4]{add.scatter}}
          for alternative solutions to this problem that do not set margins.
 }
 \author{

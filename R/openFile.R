@@ -19,10 +19,10 @@
 #' # "nautilus" on linux ubuntu
 #' # "open" or "dolphin" on mac
 #' # "explorer" or "start" on windows
-#'
+#' 
 #' @param file Filename to be opened, as character string.
 #' @param \dots Further arguments passed to \code{\link{system2}}
-#'
+#' 
 openFile <- function(
 file,
 ...

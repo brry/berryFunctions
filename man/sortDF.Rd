@@ -11,7 +11,7 @@ sortDF(df, col, decreasing = TRUE, ...)
 
 \item{col}{Column (index or (un)qouted name) to be sorted by}
 
-\item{decreasing}{Logical: should highest value be on top? 
+\item{decreasing}{Logical: should highest value be on top?
 DEFAULT: TRUE (unlike \code{\link{order}}!)}
 
 \item{\dots}{Further arguments passed to \code{\link{order}}, like eg \code{na.last or method}}

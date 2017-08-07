@@ -1,9 +1,9 @@
 #' arrow at locator point in graph
-#'
+#' 
 #' Draw arrow at positions in a graph located by clicking and return the code to recreate it
-#'
+#' 
 #' @details Not tested across platforms yet...
-#'
+#' 
 #' @return Character string with code
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2016
 #' @seealso \code{\link{locLine}}, \code{\link{locator}}, \code{\link{abline}}
@@ -11,16 +11,16 @@
 #' @importFrom graphics locator
 #' @export
 #' @examples
-#'
+#' 
 #' plot(cumsum(rnorm(60)), type="l")
 #' ## locArrow() # only do this manually in interactive() mode
 #' ## locArrow(col="blue", lwd=3)
-#'
+#' 
 #' @param digits Number of digits coordinates are rounded to with \code{\link{signif}}
 #' @param length Length of the edges of the arrow head (in inches). DEFAULT: 0.1
 #' @param code Direction of arrow head. DEFAULT: 2 (from first to last point clicked)
 #' @param \dots Further arguments passed to \code{\link{arrows}}  like lwd, col etc
-#'
+#' 
 locArrow <- function(
 digits=2,
 length=0.1,

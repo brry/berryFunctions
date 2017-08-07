@@ -12,12 +12,12 @@ pdfpng(expr, file, pdf = TRUE, png = TRUE, overwrite = FALSE,
 \arguments{
 \item{expr}{Expression creating the plot, can be included in curly braces.}
 
-\item{file}{Character: Filename without pdf/png extension. 
+\item{file}{Character: Filename without pdf/png extension.
 Unless overwrite=TRUE, files will not be overwritten, but
 "_1" will be appended instead, see \code{\link{newFilename}}.
 If \code{expr} creates several plots, use file="fname%02d",
 otherwise the png will only contain the last figure.
-Note: this overwrites files as the % notation is not 
+Note: this overwrites files as the % notation is not
 captured by newFilename. You may also have to run dev.off().}
 
 \item{pdf}{Logical: Create pdf? DEFAULT: TRUE}
@@ -28,13 +28,13 @@ captured by newFilename. You may also have to run dev.off().}
 for pdf and png separately.
 DEFAULT: FALSE (_n appended in filename)}
 
-\item{quiet}{Logical: suppress file creation messages and 
+\item{quiet}{Logical: suppress file creation messages and
 expr execution error tracing? DEFAULT: FALSE}
 
-\item{tracewarnmes}{Logical: trace warnings and messages in expr execution? 
+\item{tracewarnmes}{Logical: trace warnings and messages in expr execution?
 Errors are always traced. Default: !quiet}
 
-\item{filargs}{List of other arguments passed to \code{\link{newFilename}}. 
+\item{filargs}{List of other arguments passed to \code{\link{newFilename}}.
 DEFAULT: NULL}
 
 \item{width, height}{Graph dimensions. DEFAULT: 7x5 inches}
@@ -42,7 +42,7 @@ DEFAULT: NULL}
 \item{units, res}{Graph quality arguments passed only to \code{\link{png}}.
 DEFAULT: inches ("in"), 500 ppi}
 
-\item{seed}{Seed passed to \code{\link{set.seed}} before each call. 
+\item{seed}{Seed passed to \code{\link{set.seed}} before each call.
 DEFAULT: runif(1,-1e9,1e9)}
 
 \item{envlevel}{Environment level passed to \code{\link{eval.parent}}.
@@ -60,15 +60,15 @@ Nothing
 \description{
 Create both a \code{\link{pdf}} and a \code{\link{png}} file with a graph,
 with custom size default values.
-To iteratively create pdfs without closing and reopening the pdf viewer, you 
+To iteratively create pdfs without closing and reopening the pdf viewer, you
 might want to use e.g. Sumatra, which comes with Rstudio. It can be found e.g. in
 C:/Program Files/RStudio/bin/sumatra
 }
 \examples{
 
-pdfpng({par(bg=8, las=1); plot(cumsum(rnorm(500)), type="l")}, 
+pdfpng({par(bg=8, las=1); plot(cumsum(rnorm(500)), type="l")},
        file="dummyplot", res=100)
-pdfpng({par(bg=8, las=1); plot(cumsum(rnorm(500)), type="l")}, 
+pdfpng({par(bg=8, las=1); plot(cumsum(rnorm(500)), type="l")},
        file="dummyplot", overwrite=c(TRUE,FALSE))
 
 # Nesting of functions is possible:
@@ -76,14 +76,14 @@ a <- list( cumsum(rnorm(2000)), cumsum(rnorm(20)) )
 pdfpng(plot(a[[1]]), file="dummyplot", overwrite=TRUE)
 bfun <- function(b) pdfpng(plot(b,type="l"), file="dummyplot", overwrite=TRUE)
 cfun <- function(c) bfun(c)
-bfun(a[[1]])   
-sapply(a, function(d) cfun(d))    
+bfun(a[[1]])
+sapply(a, function(d) cfun(d))
 
 
 pdfpng(plot(-10:100, log="y"), "dummyplot", overwrite=TRUE, png=FALSE)
 pdfpng({plot(1); plot(dummyobject)}, "dummyplot", overwrite=TRUE, png=FALSE)
 
-       
+
 unlink("dummyplot.pdf") ; unlink("dummyplot.png") ; unlink("dummyplot_1.png")
 
 }

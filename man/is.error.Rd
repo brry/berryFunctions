@@ -26,7 +26,7 @@ is.error(  log("a")            )
 is.error(  log(3),   tell=TRUE )
 is.error(  log("a"), tell=TRUE )
 stopifnot( is.error( log("a")  )  ) # or shorter:
-is.error(  log("a"), force=TRUE) 
+is.error(  log("a"), force=TRUE)
 # is.error(  log(3),   force=TRUE)
 stopifnot(is.error(  is.error(log(3), force=TRUE)  ))
 

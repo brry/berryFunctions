@@ -37,7 +37,7 @@ for(i in 1:nrow(d))
   {
   x <- d[i,, drop=FALSE]
   data(list=x$Call, package=x$Package, envir=env)
-  obj <- get(x$Object, envir=env) # getExportedValue(asNamespace(package), x$Object) 
+  obj <- get(x$Object, envir=env) # getExportedValue(asNamespace(package), x$Object)
   message(x$Package, "  |  ", x$Object, "  |  ", toString(class(obj)), "  |  ", x$Title)
   message(str(obj))
   }

@@ -19,7 +19,7 @@ Quickly install a package from github without having to install devtools with al
 \details{
 Works only for pure R package structure repositories from the master branch.
 Installs package dependencies listed in 'Imports' and 'Depends', but ignores version requirements!
-Tested only on windows 7 with R3.2.2. 
+Tested only on windows 7 with R3.2.2.
 Note: \code{devtools::install_github} is much more extensive! \cr
 Note: drat is also much better than this quick hack.
 \url{http://dirk.eddelbuettel.com/code/drat.html},

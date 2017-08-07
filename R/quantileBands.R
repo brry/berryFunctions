@@ -5,7 +5,7 @@
 #' @return Quantiles of each column, invisible. Smoothed if \code{smooth} is given!
 #' @note This is the first version and is not tested very well yet.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sept 2014
-#' @seealso \code{\link{quantile}}, \code{\link{quantileMean}}, \code{\link{ciBand}}, 
+#' @seealso \code{\link{quantile}}, \code{\link{quantileMean}}, \code{\link{ciBand}},
 #'          \code{\link{polygon}}, \url{https://cran.r-project.org/package=fanplot}
 #' @keywords dplot aplot univar
 #' @importFrom grDevices rgb
@@ -32,7 +32,7 @@
 #'   xlab="sample size (n)", probs=0:10/10, col=brewer.pal(5,"BuGn"),
 #'   txi=c(40,50,60), textargs=list(col="yellow"), medargs=list(lwd=2),
 #'   meanargs=list(col=2, lty=1), main="Mean converges to true population mean")
-#'    
+#' 
 #' @param mat Matrix or data.frame with columns of data
 #' @param x X-axis positions for each column. DEFAULT: 1:ncol(mat)
 #' @param col Vector of colors for each quantile group, recycled reversively if necessary. DEFAULT: rgb(0,0,1, alpha=c(0.5, 0.7))
@@ -46,7 +46,7 @@
 #' @param meanargs List of arguments passed to lines drawing \code{\link{mean}}. Not drawn if NULL. DEFAULT: NULL
 #' @param txi Text x position index (along columns of mat), recyled if necessary. NA to suppress. INTERNAL DEFAULT: middle of the plot for all.
 #' @param textargs List of arguments passed to \code{\link{text}}, like col, adj, ... DEFAULT: NULL
-#' @param \dots Further arguments passed to \code{\link{polygon}}, like border, lty, ... 
+#' @param \dots Further arguments passed to \code{\link{polygon}}, like border, lty, ...
 #' 
 quantileBands <- function(
 mat,

@@ -1,7 +1,7 @@
 #' call stack of a function
-#'
+#' 
 #' trace the call stack e.g. for error checking and format output for do.call levels
-#'
+#' 
 #' @return Character string with the call stack
 # @section Warning: Called from \link{do.call} settings with large objects,
 #                   tracing may take a lot of computing time.
@@ -18,18 +18,18 @@
 #' upper(3, skip=4) # now the stack is empty
 #' d <- tryStack(upper("four"), silent=TRUE)
 #' inherits(d, "try-error")
-#' cat(d) 
+#' cat(d)
 #' 
-#' lower <- function(a,...) {warning(traceCall(1,"",": "), "stupid berry warning: ", 
+#' lower <- function(a,...) {warning(traceCall(1,"",": "), "stupid berry warning: ",
 #'                                   a+10, call.=FALSE); a}
 #' upper(3)
-#'
+#' 
 #' @param skip Number of levels to skip in \code{\link{traceback}}
 #' @param prefix Prefix prepended to the output character string. DEFAULT: "\\nCall stack: "
 #' @param suffix Suffix appended to the end of the output. DEFAULT: "\\n"
 #' @param vigremove Logical: remove call created using devtools::build_vignettes()?
 #'                  DEFAULT: TRUE
-#'
+#' 
 traceCall <- function(
 skip=0,
 prefix="\nCall stack: ",
@@ -54,14 +54,14 @@ vigremove=TRUE
   #calltrace <- paste(rev(calltrace), collapse=" -> ")
   calltrace <- paste(calltrace, collapse=" -> ")
   calltrace <- paste0(prefix, calltrace, suffix)
-  if(vigremove) 
+  if(vigremove)
   {
     elements <- c("-> withCallingHandlers -> withVisible -> eval -> eval ",
                   "-> tryCatch -> tryCatchList -> tryCatchOne -> doTryCatch ",
                   "-> process_file -> withCallingHandlers -> process_group -> process_group.block ",
                   "-> call_block -> block_exec -> in_dir -> evaluate -> evaluate_call -> timing_fn -> handle ",
                   "-> vweave_rmarkdown -> rmarkdown::render -> knitr::knit ",
-                  "-> tools::buildVignettes -> engine", 
+                  "-> tools::buildVignettes -> engine",
                   "weave ->",
                   "knit -> try ->"
                   )

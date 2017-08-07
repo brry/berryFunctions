@@ -1,6 +1,6 @@
 #' Source code of a function
 #' 
-#' open source code of a function in a loaded or specified package on github.com/cran or github.com/wch/r-source 
+#' open source code of a function in a loaded or specified package on github.com/cran or github.com/wch/r-source
 #' 
 #' @return links that are also opened with \code{\link{browseURL}}
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan+Dec 2016
@@ -10,13 +10,13 @@
 #' @examples
 #' \dontrun{ ## browser windows should not be openend in CRAN checks
 #' library("berryFunctions")
-#' funSource(colPoints) 
-#' funSource("head") 
-#' funSource("require", trydirect=FALSE) 
+#' funSource(colPoints)
+#' funSource("head")
+#' funSource("require", trydirect=FALSE)
 #' 
-#' funSource(earthDist) 
-#' funSource(OSMscale::earthDist) 
-#' funSource("OSMscale::earthDist") 
+#' funSource(earthDist)
+#' funSource(OSMscale::earthDist)
+#' funSource("OSMscale::earthDist")
 #' }
 #' 
 #' \dontrun{ # developmental testing
@@ -29,12 +29,12 @@
 #' }
 #' 
 #' @param x function name, with or without quotation marks
-#' @param character.only If TRUE, look for SomeFun instead of MyFun if  
+#' @param character.only If TRUE, look for SomeFun instead of MyFun if
 #'                       MyFun <- "SomeFun". DEFAULT: \code{\link{is.character}(x)}
-#' @param trydirect If TRUE, try direct url to file \code{x.R}. DEFAULT: TRUE                      
+#' @param trydirect If TRUE, try direct url to file \code{x.R}. DEFAULT: TRUE
 #' 
 funSource <- function(
-x, 
+x,
 character.only=is.character(x),
 trydirect=TRUE
 )

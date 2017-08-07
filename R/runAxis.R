@@ -1,7 +1,7 @@
 #' Label axis with typical running times
-#'
+#' 
 #' Label a numerical axis (in minutes) with time units that are typical for running times (10 sec intervals)
-#'
+#' 
 #' @return List with the positions and labels
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2016
 #' @seealso \code{\link{logAxis}}, \code{\link{monthAxis}}
@@ -18,7 +18,7 @@
 #' @param side Side of the plot to draw \code{\link{axis}} (1,2,3,4 = bottom, left, top, right)
 #' @param linarg List of arguments passed to \code{\link{abline}}
 #' @param \dots Further arguments passed to \code{\link{axis}}
-#'
+#' 
 runAxis <- function(
   t=3*60,
   int1=10,

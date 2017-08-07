@@ -2,18 +2,18 @@
 #' 
 #' Weighted moving average (running mean) with overlapping windows
 #' 
-#' @details Width has to be odd, so there is a defined middle point of each window. 
-#' Even inputs will be changed with a warning (unless quiet=TRUE).\cr 
-#' Weights doesn't have to be symmetrical, but is always mapped to the middle 
-#' of each window!\cr 
-#' If there are NAs in the window, the corresponding weight is distributed 
+#' @details Width has to be odd, so there is a defined middle point of each window.
+#' Even inputs will be changed with a warning (unless quiet=TRUE).\cr
+#' Weights doesn't have to be symmetrical, but is always mapped to the middle
+#' of each window!\cr
+#' If there are NAs in the window, the corresponding weight is distributed
 #' evenly to the other weights.
 #' 
-#' @return Vector of the same length as the original input. 
+#' @return Vector of the same length as the original input.
 #'         Padded with NAs at width/2 margin elements
 #' @note You can specify just one of weights or width.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, ca 2012
-#' @seealso \code{\link{filter}}, \code{\link{decompose}}, \code{\link{smooth}}, 
+#' @seealso \code{\link{filter}}, \code{\link{decompose}}, \code{\link{smooth}},
 #'          \code{\link{loess}}, \code{\link[zoo]{rollapply}} (no overlapping!)
 #' @keywords ts manip smooth
 #' @importFrom utils head tail
@@ -48,7 +48,7 @@
 #' plot(1871:1970, Nile, type="l", col=8)
 #' movAvLines(1871:1970, Nile, lwd=3)
 #' 
-#' for(i in 1:30*2-1) 
+#' for(i in 1:30*2-1)
 #'   {
 #'   plot(a, type="o", pch=16, las=1, main=paste("moving average, width =", i))
 #'   lines(movAv(a, i), col=2, lwd=4)
@@ -84,7 +84,7 @@
 #' 
 #' @param dat Vector with regularly spaced data
 #' @param width Odd integer specifying window width. DEFAULT: 7
-#' @param weights Vector with weights. Sum is normalized to 1. DEFAULT: rep(1,width) 
+#' @param weights Vector with weights. Sum is normalized to 1. DEFAULT: rep(1,width)
 #' @param quiet Logical: suppress allNA message and even width warning? DEFAULT: FALSE
 #' 
 movAv <- function(
@@ -113,7 +113,7 @@ if(ceiling(width) != floor(width))  stop("width (",width,") must be an (odd) int
 ##if(length(weights) %% 2 == 0) stop("Length of weights must be an odd number!")
 if(width %% 2 == 0)
   {
-  if(!quiet) warning("even width (", width, ") is changed to odd width (", 
+  if(!quiet) warning("even width (", width, ") is changed to odd width (",
         width+1, ").", if(!missing(weights)) "\nWeights are now set uniformly!")
   width <- width+1
   weights <- rep(1,width)
@@ -156,7 +156,7 @@ v <- c(rep(NA, s), v, rep(NA, s) )
 # 1:s and (n-s+1):n elements at margins remain NA
 
 # Error checking:
-if(length(v) != length(dat)) stop("Window size was computed wrongly. (", 
+if(length(v) != length(dat)) stop("Window size was computed wrongly. (",
 length(v), "/", length(dat), "). Please report conditions: berry-b@gmx.de")
 # Re-append NAs at beginning and end of vector:
 if(nNAbegin!=0) v <- c(rep(NA, nNAbegin), v)

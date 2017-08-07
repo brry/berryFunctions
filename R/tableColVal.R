@@ -5,7 +5,7 @@
 #' 
 #' @details Create tables with corresponding color in the background of each cell. (heatmap)
 #' 
-#' @return List of locations in plot. 
+#' @return List of locations in plot.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Nov 2012 + Nov 2016
 #' @seealso \code{\link{pdf}}, \code{\link{heatmap}}
 #' @keywords hplot
@@ -44,15 +44,15 @@
 #' 
 #' @param mat         Matrix with values and row/column names
 #' @param main        Title for topleft space. DEFAULT: name of mat object.
-#' @param nameswidth  Relative width of row names at the left, as a percentage of plot. 
+#' @param nameswidth  Relative width of row names at the left, as a percentage of plot.
 #'                    DEFAULT: 0.3
 #' @param namesheight Relative height of column names at the top. DEFAULT: 0.1
 #' @param palette     Color palette for the heatmap. DEFAULT: \code{\link{seqPal}(100)}
 #' @param Range       Range mapped to color palette. DEFAULT: range(mat)
 #' @param digits      Number of digits rounded to for writing. DEFAULT: 2
-#' @param classargs   List of arguments specifying how to call \code{\link{classify}}, 
+#' @param classargs   List of arguments specifying how to call \code{\link{classify}},
 #'                    e.g. method. DEFAULT: NULL
-#' @param cellargs    List of arguments passed to \code{\link{text}} only for the cells. 
+#' @param cellargs    List of arguments passed to \code{\link{text}} only for the cells.
 #' @param \dots Further arguments passed to all \code{\link{text}} like cex, col, srt, ...
 #' 
 tableColVal <- function(
@@ -69,7 +69,7 @@ cellargs=NULL,
 {
 main <- main # evaluate promise before mat is evaluated
 mat <- as.matrix(mat)
-nc <- ncol(mat) 
+nc <- ncol(mat)
 nr <- nrow(mat)
 # set plot
 op <- par(mar=rep(0,4))

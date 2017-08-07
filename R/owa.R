@@ -2,10 +2,10 @@
 #' 
 #' Second ellipsis (three dots) passed to particular functions,
 #' combining default and user-specified argument lists.\cr
-#' \code{owa} can be used in functions that pass argument lists separately to several functions. 
-#' Internal defaults can be set per function (eg. one list for \code{\link{plot}} 
+#' \code{owa} can be used in functions that pass argument lists separately to several functions.
+#' Internal defaults can be set per function (eg. one list for \code{\link{plot}}
 #' and one for \code{\link{legend}}). \cr
-#' You can specify which defaults can be overwritten and which should be left unchanged. 
+#' You can specify which defaults can be overwritten and which should be left unchanged.
 #' See the example section on how to implement this.
 #' 
 #' @return Always a list, disregarding list/vector mode of input
@@ -20,7 +20,7 @@
 #' # The motivation behind owa:
 #' testfun <- function(...) {plot(7:11, ...) ; legend("top", "some text", ...)}
 #' testfun()
-#' is.error( testfun(type="o") , tell=TRUE) 
+#' is.error( testfun(type="o") , tell=TRUE)
 #' # Error: legend doesn't have the argument 'type'!
 #' 
 #' # How to solve this:
@@ -56,7 +56,7 @@
 #' 
 #' @param d Default arguments (list or vector)
 #' @param a Arguments specified by user (list or vector)
-#' @param \dots Names of unchangeable arguments (that will not be overwritten) 
+#' @param \dots Names of unchangeable arguments (that will not be overwritten)
 #'              as character strings. Can also be a vector with characters strings.
 #' @param quiet Logical: Should \code{\link{message}} be suppressed if arguments are ignored?
 #'              If FALSE (the DEFAULT), this helps users debugging, as they get
@@ -68,7 +68,7 @@ a,
 ...,
 quiet=FALSE)
 {
-# Input controls: 
+# Input controls:
 if( isTRUE(a) ) a <- NULL # catch where users try to give eg legargs=TRUE
 if(is.null(a) | length(a)==0) return( as.list(d) )
 if(is.null(names(a))) stop("owa: Arguments must be named!")
@@ -82,16 +82,16 @@ ignore <- names(a) %in% u
 if(sum(ignore)!=0)
   {
   trace <- traceCall(prefix="(called from ", suffix="):\n")
-  if(sum(ignore)==1 & !quiet) message("Note in owa: ",trace," The argument '", 
-                   u[ignore], "' is defined as unchangeable and thus ignored.") 
+  if(sum(ignore)==1 & !quiet) message("Note in owa: ",trace," The argument '",
+                   u[ignore], "' is defined as unchangeable and thus ignored.")
   if(sum(ignore) >1 & !quiet) message("Note in owa: ",trace," The following arguments ",
-              "are defined as unchangeable and thus ignored: ", toString(u[ignore])) 
+              "are defined as unchangeable and thus ignored: ", toString(u[ignore]))
   a <- a[ !ignore ] # keep the unignored
   }
 #
 # replace (overwrite) arguments already present in d:
 a_replace <- a[names(a) %in% names(d)]
-d[names(a_replace)] <- a_replace 
+d[names(a_replace)] <- a_replace
 # add further arguments given by the user:
 a_add <- a[ !names(a) %in% names(d) ]
 # ensure output to be a list:

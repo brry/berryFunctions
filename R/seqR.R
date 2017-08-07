@@ -33,7 +33,7 @@ extend=0,
 ...)
 {
 # only set from and to if range is given as input:
-if(!missing(range)) 
+if(!missing(range))
   {
   # Input checking:
   #if(!is.vector(range)) warning("'range' must be a vector, not ", class(range))

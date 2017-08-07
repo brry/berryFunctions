@@ -1,7 +1,7 @@
 #' check file existance
-#'
+#' 
 #' check whether files exist and give a useful error/warning/message
-#'
+#' 
 #' @return TRUE/FALSE, invisibly
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, May 2016
 #' @seealso \code{\link{file.exists}}
@@ -11,7 +11,7 @@
 #' is.error( checkFile("FileThatDoesntExist.txt")  )
 #' checkFile("FileThatDoesntExist.txt", warnonly=TRUE)
 #' checkFile("FileThatDoesntExist.txt", warnonly=TRUE, trace=FALSE)
-#'
+#' 
 #' \dontrun{## Excluded from CRAN checks because of file creation
 #' # Vectorized:
 #' file.create("DummyFile2.txt")
@@ -22,23 +22,23 @@
 #' compareFiles("dummy.nonexist", "dummy2.nonexist")
 #' checkFile("dummy.nonexist")
 #' }
-#'
-#' dingo <- function(k="brute.nonexist", trace=TRUE) 
+#' 
+#' dingo <- function(k="brute.nonexist", trace=TRUE)
 #'          checkFile(k, warnonly=TRUE, trace=trace)
 #' dingo()
 #' dingo("dummy.nonexist")
-#'
+#' 
 #' upper <- function(h, ...) dingo(c(h, "dumbo.nonexist"), ...)
 #' upper("dumbo2.nonexist")
 #' upper(paste0("dumbo",2:8,".nonexist"))
 #' upper(paste0("dumbo",2:8,".nonexist"), trace=FALSE)
 #' 
-#'
+#' 
 #' @param file Filename(s) as character string to be checked for existence.
 #' @param warnonly Logical: Only issue a \code{\link{warning}} instead of an
 #'                 error with \code{\link{stop}}? DEFAULT: FALSE
 #' @param trace Logical: Add function call stack to the message? DEFAULT: TRUE
-#'
+#' 
 checkFile <- function(
 file,
 warnonly=FALSE,

@@ -32,9 +32,9 @@ Fits an exponential function of the form a*e^(b*(x+c))+d
 This is mainly a building block for mReg
 }
 \note{
-Optim can be slow! It refers to the functions rmse and rsquare, also in this package. 
-      L-BFGS-B needs finite values. In case it doesn't get any 
-      with the initial parameters (as in the first example Dataset), 
+Optim can be slow! It refers to the functions rmse and rsquare, also in this package.
+      L-BFGS-B needs finite values. In case it doesn't get any
+      with the initial parameters (as in the first example Dataset),
       it trys again with the parameters optimized via Nelder Mead.
 }
 \examples{
@@ -46,7 +46,7 @@ head(temp)
 plot(temp)
 temp <- temp[-20,] # missing value - rmse would complain about it
 x <- temp$Minuten
-y <- temp$Temp 
+y <- temp$Temp
 rm(tfile, temp)
 
 exp4p(x,y, plot=TRUE)

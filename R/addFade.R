@@ -24,10 +24,10 @@
 #' plot(runif(1000), col=NewColors, pch=16, cex=2)
 #' 
 addFade <- function(
-  col, 
+  col,
   fade=0.3,
-  target="white", 
-  ... 
+  target="white",
+  ...
   )
 {
 if(any(fade<0 | fade>1)) stop("fade must be between 0 and 1, not ",

@@ -1,8 +1,8 @@
 #' Create new filename if file already exists
-#'
+#' 
 #' Check if files already exist and append \code{_1} or \code{_2}, etc to the filename if needed,
 #' thereby giving useful messages.
-#'
+#' 
 #' @name newFilename
 #' @return newFilename returns the input with an added "_n" in the filename
 #'         for each file that already existed.
@@ -12,7 +12,7 @@
 #' @importFrom tools file_ext file_path_sans_ext
 #' @export
 #' @examples
-#'
+#' 
 #' fns <- c("dummy1", "dummy2.txt", "berryFunctions.Rproj",
 #'          "README.md", "dummy2.dummy", "DESCRIPTION", "dummy4.R", "dummy5")
 #' newFilename(fns)
@@ -21,15 +21,15 @@
 #' newFilename(fns, ntrunc=2)
 #' newFilename("README.md")
 #' newFilename("dummy", mid=" ") # no line break
-#'
+#' 
 #' @param filename Char (vector): file name(s).
 #' @param ignore   Logical (vector, recycled): Ignore file? DEFAULT: FALSE
-#' @param pre,mid,end Char: strings to append after traceback / message / filenames. 
+#' @param pre,mid,end Char: strings to append after traceback / message / filenames.
 #'                 DEFAULT: "", "\\n  ", ""
 #' @param quiet    Logical: Suppress messages about creating file(s)? DEFAULT: FALSE
 #' @param ntrunc   Integer: Number of filenames printed in messages before they
 #'                 get truncated with message "(and xx more)". DEFAULT: 3
-#'
+#' 
 newFilename <- function(
 filename,
 ignore=FALSE,
@@ -47,11 +47,11 @@ dirs <- unique(dirname(filename))
 direxi <- file.exists(dirs)
 l1 <- sum(!direxi)>1
 if(any(!direxi)) stop(traceCall(1, "", ": "), "The following ",
-                      if(l1)paste0(sum(!direxi)," "), "folder", if(l1)"s", 
-                      " do", if(!l1)"es", " not exist: ", 
-                      truncMessage(dirs[!direxi], ntrunc=ntrunc, prefix=""), 
+                      if(l1)paste0(sum(!direxi)," "), "folder", if(l1)"s",
+                      " do", if(!l1)"es", " not exist: ",
+                      truncMessage(dirs[!direxi], ntrunc=ntrunc, prefix=""),
                       call.=FALSE)
-# Actual code:  
+# Actual code:
 ignore <- rep(ignore, length.out=length(filename))
 output <- lapply(seq_along(filename), function(i)
   {

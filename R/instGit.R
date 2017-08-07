@@ -1,10 +1,10 @@
 #' install github package
-#'
+#' 
 #' Quickly install a package from github without having to install devtools with all its dependencies.
-#'
+#' 
 #' @details Works only for pure R package structure repositories from the master branch.
 #' Installs package dependencies listed in 'Imports' and 'Depends', but ignores version requirements!
-#' Tested only on windows 7 with R3.2.2. 
+#' Tested only on windows 7 with R3.2.2.
 #' Note: \code{devtools::install_github} is much more extensive! \cr
 #' Note: drat is also much better than this quick hack.
 #' \url{http://dirk.eddelbuettel.com/code/drat.html},
@@ -14,7 +14,7 @@
 #' \code{source("https://raw.githubusercontent.com/brry/berryFunctions/master/R/instGit.R")}\cr
 #' \code{instGit("brry/extremeStat")}\cr
 #' \code{library(extremeStat)}\cr
-#'
+#' 
 #' @return NULL
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Dec 2015 + Mar/Apr 2016
 #' @seealso \code{\link{funSource}}, \code{install_github} in each of the packages \code{devtools, ghit, remotes}
@@ -22,7 +22,7 @@
 #' @importFrom utils download.file flush.console install.packages installed.packages unzip
 #' @export
 #' @examples
-#'
+#' 
 # Worked fine on my computer for:
 #' if(FALSE){
 #' instGit("talgalili/installr")
@@ -34,11 +34,11 @@
 #' instGit("ramnathv/slidify")
 #' instGit("jrnold/ggthemes")
 #' }
-#'
+#' 
 #' @param pk Character string in the from of "user/package"
 #' @param cleanup Remove downloaded zipfile and folder with source code. DEFAULT: TRUE
 #' @param \dots Further arguments passed to \code{\link{install.packages}}, untested so far
-#'
+#' 
 instGit <- function(
   pk,
   cleanup=TRUE,

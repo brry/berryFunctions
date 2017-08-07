@@ -19,7 +19,7 @@
 #' @param n Number of Objects to be shown separately. The rest is combined into "sum rest". DEFAULT: 6
 #' @param pos Environment where \code{\link{ls}} looks for objects.
 #' @param \dots Further arguments passed to \code{\link{ls}}
-#'  
+#' 
 lsMem <- function(
 n=6,
 pos=1,

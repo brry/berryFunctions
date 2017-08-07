@@ -26,14 +26,14 @@ expReg(x, y = NULL, data = NULL, logy = TRUE, predictnew = NULL,
 
 \item{plot}{Plot things at all? If FALSE, predictnew will still be returned. DEFAULT: TRUE}
 
-\item{digits}{Numeric vector of length \eqn{\ge 1}. Specifies number of digits a,b,r,e are rounded to 
-in the formula "y=a*log(x)+b, R^2, RMSE=e", respectively. 
+\item{digits}{Numeric vector of length \eqn{\ge 1}. Specifies number of digits a,b,r,e are rounded to
+in the formula "y=a*log(x)+b, R^2, RMSE=e", respectively.
 If values are not specified, they are set equal to the first. DEFAULT: 2}
 
-\item{inset}{Numeric vector of length \eqn{\le 2}. inset distance(s) from the margins 
+\item{inset}{Numeric vector of length \eqn{\le 2}. inset distance(s) from the margins
 as a fraction of the plot region when formula is placed by keyword. DEFAULT: 0}
 
-\item{xpd}{Logical, specifying wheter formula can be written only inside the plot region (when FALSE) 
+\item{xpd}{Logical, specifying wheter formula can be written only inside the plot region (when FALSE)
 or inside the figure region including mar (when TRUE)
 or in the entire device region including oma (when NA). DEFAULT: par("xpd")}
 

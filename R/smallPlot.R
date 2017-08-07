@@ -5,8 +5,8 @@
 #' @return parameters of small plot, invisible.
 #' @section Warning: setting mai etc does not work!
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2014-2016
-#' @seealso \code{\link{colPointsLegend}} for an example of usage. 
-#'          \code{\link[TeachingDemos]{subplot}} and \code{\link[ade4]{add.scatter}} 
+#' @seealso \code{\link{colPointsLegend}} for an example of usage.
+#'          \code{\link[TeachingDemos]{subplot}} and \code{\link[ade4]{add.scatter}}
 #'          for alternative solutions to this problem that do not set margins.
 #' @keywords hplot dplot aplot
 #' @importFrom graphics par plot.new rect
@@ -45,10 +45,10 @@
 #' plot(1:10)
 #' plot(1:10)
 #' smallPlot(plot(5:1), bg="lightblue")
-#' plot(1:10) 
+#' plot(1:10)
 #' smallPlot(plot(5:1), bg="bisque", colwise=TRUE) # if mfcol (not mfrow) was set
 #' plot(1:10)
-#'
+#' 
 #' # Outer margins (e.g. to add legends to multi-panel plots)
 #' par(op)
 #' par(mfrow=c(3,2), oma=c(0,5,0,0), mar=c(0,0,1,0)+0.5)
@@ -79,11 +79,11 @@
 #' points(3, 2, pch="+", cex=2, col=2, xpd=NA) # not drawn with default xpd
 #' par(plt=new_plt)
 #' plot(1:10) # canot keep mfcol, only mfrow, if colwise is left FALSE.
-#' smallPlot(plot(5:1), bg="yellow") 
+#' smallPlot(plot(5:1), bg="yellow")
 #' points(3, 2, pch="+", cex=2, col=2)   # everything back to normal
 #' par(op)
 #' 
-#' # if layout is used instead of par(mfrow), it is difficult to add graphs 
+#' # if layout is used instead of par(mfrow), it is difficult to add graphs
 #' # after using smallPlot
 #' lay <- matrix(c(1,1,1,1,2,2,3,3,2,2,3,3,4,4,5,5), ncol=4)
 #' layout.show(layout(lay))
@@ -94,34 +94,34 @@
 #' # plot(1:10) # now in a weird location (par("mfrow") is 4x4 after layout)
 #' 
 #' @param expr expression creating a plot. Can be code within {braces}.
-#' @param x1,x2,y1,y2 Position of small plot, relative to current figure region [0:1]. 
+#' @param x1,x2,y1,y2 Position of small plot, relative to current figure region [0:1].
 #'                    DEFAULT: x: 0.05-0.7, y: 0.5-1
 #' @param outer Logical. Should inset plot be placed in the device outer margin region
-#'              instead of relative to the current figure region? 
-#'              Useful in multipanel plots with par(oma). \code{outer} here does not 
+#'              instead of relative to the current figure region?
+#'              Useful in multipanel plots with par(oma). \code{outer} here does not
 #'              have exactly the same meaning as in \code{\link{title}}. DEFAULT: FALSE
 #' @param xpd Plotting and notation clipped to plot region (if xpd=FALSE),
-#'            figure region (TRUE) or device region (xpd=NA). DEFAULT: NA      
-#' @param mar Margin vector in (approximate) number of lines. It is internally 
-#'            multiplied with \code{\link{strheight}} to convert it to relative units [0:1], 
-#'            thus the behaviour is a bit different from \code{\link{par}(mar)}. 
+#'            figure region (TRUE) or device region (xpd=NA). DEFAULT: NA
+#' @param mar Margin vector in (approximate) number of lines. It is internally
+#'            multiplied with \code{\link{strheight}} to convert it to relative units [0:1],
+#'            thus the behaviour is a bit different from \code{\link{par}(mar)}.
 #'            It's recycled, so you can use \code{mar=0}. DEFAULT: c(3,3,1,1)
-#' @param mgp MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, 
+#' @param mgp MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin,
 #'            as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.8, 0)
 #' @param bg Background. DEFAULT: par("bg")
 #' @param border Border around inset plot. DEFAULT: par("fg")
 #' @param las LabelAxisStyle. DEFAULT: 1
-#' @param resetfocus Reset focus to original plot? Specifies where further 
+#' @param resetfocus Reset focus to original plot? Specifies where further
 #'                   low level plot commands are directed to. DEFAULT: TRUE
-#' @param colwise Logical: Continue next plot below current plot? 
-#'        If you had \code{par(mfcol=...)}, you must use \code{colwise=TRUE}, 
-#'        otherwise the next plot will be to the right of the current plot 
+#' @param colwise Logical: Continue next plot below current plot?
+#'        If you had \code{par(mfcol=...)}, you must use \code{colwise=TRUE},
+#'        otherwise the next plot will be to the right of the current plot
 #'        (as with \code{par(mfrow=...)}). DEFAULT: FALSE
-#' @param \dots further arguments passed to \code{\link{par}}. 
+#' @param \dots further arguments passed to \code{\link{par}}.
 #'        This may mess things up - please tell me for which arguments!
 #'        You can do \code{par(las=1, las=2)} (the last will be set), so
 #'        \code{smallPlot(plot(1), new=FALSE)} works, but may not yield the intended result.
-#'  
+#' 
 smallPlot <- function(
 expr,
 x1=0.05, x2=0.70,
@@ -136,7 +136,7 @@ las=1,
 resetfocus=TRUE,
 colwise=FALSE,
 ...)
-{                                            
+{
 #     ------------
 #  y2 |          |
 #     |          |
@@ -169,7 +169,7 @@ if(round(y2-y1,2)<0.05) warning("y1 (",y1,") and y2 (",y2,") are likely too clos
 mar <- mar_input <- rep(mar, length.out=4)
 # smaller margins for outer margin plots
 if(outer) if(!all(par("mfrow")==c(1,1))) mar <- mar/4 # not sure why 4, but it works well
-# margins in relative units: 
+# margins in relative units:
 mar <- mar * rep(c(strheight("m",units="figure")*1.7,strwidth("m",units="figure")*1.5), 2)
 # old parameters to be restored at exit:
 op <- par(no.readonly=TRUE)
@@ -185,7 +185,7 @@ if(resetfocus) on.exit(
   })
 # inset plot: background, border
 if(!outer) par(plt=c(x1, x2, y1, y2), new=TRUE, mgp=mgp) else     # plt / fig
-           par(fig=c(x1, x2, y1, y2), new=TRUE, mgp=mgp, 
+           par(fig=c(x1, x2, y1, y2), new=TRUE, mgp=mgp,
                omd=c(0,1,0,1), mar=c(0,0,0,0))
 plot.new() # code line from ade4::add.scatter
 u <- par("usr")
@@ -193,15 +193,15 @@ rect(u[1], u[3], u[2], u[4], col=bg, border=border)
 # inset plot: margins
 marpos <- c(x1+mar[2], x2-mar[4], y1+mar[1], y2-mar[3])
 tlh <- marpos[1]>=marpos[2] # margins tlh: too large horizontally
-tlv <- marpos[3]>=marpos[4] 
-if(tlh|tlv) stop(traceCall(1,"in ",": "), if(tlh)"horizontal", if(tlh&tlv)" and ", 
+tlv <- marpos[3]>=marpos[4]
+if(tlh|tlv) stop(traceCall(1,"in ",": "), if(tlh)"horizontal", if(tlh&tlv)" and ",
    if(tlv)"vertical", " margins are too large.\nTry margins smaller than mar=c(",
-                 paste(mar_input, collapse=","),"). Cannot set par(plt/fig) to: ", 
+                 paste(mar_input, collapse=","),"). Cannot set par(plt/fig) to: ",
                  toString(round(marpos[1:4],3)),".", call.=FALSE)
 # actually set margins:
 if(!outer) par(plt=marpos, new=TRUE, las=las, xpd=xpd, ...) else
            par(fig=marpos, new=TRUE, las=las, xpd=xpd,
-               omd=c(0,1,0,1), mar=c(0,0,0,0),  ...) 
+               omd=c(0,1,0,1), mar=c(0,0,0,0),  ...)
 # Actual plot:
 expr
 # par of small plot:

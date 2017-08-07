@@ -1,6 +1,6 @@
 #' Prepend spaces before na.strings
 #' 
-#' Returns a number of useful character strings with varying amount of spaces prepended. 
+#' Returns a number of useful character strings with varying amount of spaces prepended.
 #' It can be used as \code{na.strings=na9()} in \code{\link{read.table}}.
 #' 
 #' @return Character strings
@@ -13,7 +13,7 @@
 #' na9()
 #' na9(nspace=0, sep=".")
 #' na9(nspace=0, sep=".", more=c(NA,"-"))
-#'
+#' 
 #' @param nspace number of spaces prepended. DEFAULT: 5
 #' @param base Numeric: basic na.string numbers
 #' @param sep Separator string (comma or decimal point or both). DEFAULT: c(",",".")

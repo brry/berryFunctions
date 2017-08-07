@@ -6,10 +6,10 @@
 #' - intervals based on  distance from the mean in normal distributions,\cr
 #' - user specified class borders (e.g. for legal or critical limits).
 #' 
-#' @details 
+#' @details
 #' Binning methods are explained very nicely in the link in the section References.\cr
 #' \emph{nbins} indicates the number of classes (and thus, colors).\cr \cr
-#'
+#' 
 #' \tabular{llll}{
 #'  \bold{\code{method}}     \tab |  explanation                         \tab |  meaning of \code{breaks}                             \tab |  default   \cr
 #'  ----------               \tab |  -----------                         \tab |  -----------                                          \tab |  -------   \cr
@@ -26,7 +26,7 @@
 #' @return list with class numbers (index) and other elements for \code{\link{colPoints}}
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2014
 #' @seealso \code{\link{colPoints}}
-#' @references See this page on the effect of classification (binning) methods: \cr 
+#' @references See this page on the effect of classification (binning) methods: \cr
 #' \url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html}
 #' @keywords classif
 #' @importFrom stats quantile sd
@@ -41,26 +41,26 @@
 #' classify( c(1:10, 20), "l")
 #' 
 #' @param x Vector with numeric values
-#' @param method Character string (partial matching is performed). Classification method or 
+#' @param method Character string (partial matching is performed). Classification method or
 #'        type of binning to compute the class breakpoints. See section Details. DEFAULT: "equalinterval")
 #' @param breaks Specification for method, see Details. DEFAULT: different defaults for each method
 #' @param Range Ends of color bar for method=equalinterval. DEFAULT: range(x, finite=TRUE)
-#' @param sdlab Type of label and breakpoints if \code{method=standarddeviation}. 
-#'        1 means \code{-0.5 sd, 0.5 sd}, 2 means \code{-1 sd, mean, 1 sd}, 
+#' @param sdlab Type of label and breakpoints if \code{method=standarddeviation}.
+#'        1 means \code{-0.5 sd, 0.5 sd}, 2 means \code{-1 sd, mean, 1 sd},
 #'        3 means actual numbers for type 1, 4 means numbers for type 2.
 #' @param quiet Suppress warnings, eg for values outside Range? DEFAULT: FALSE
 #' 
 classify <- function(
-  x, 
-  method="equalinterval", 
-  breaks, 
-  Range=range(x, finite=TRUE), 
-  sdlab=1, 
+  x,
+  method="equalinterval",
+  breaks,
+  Range=range(x, finite=TRUE),
+  sdlab=1,
   quiet=FALSE)
 {
 x <- as.numeric(x)
 # error checking:
-if(length(Range) != 2) 
+if(length(Range) != 2)
   {
   if(!quiet) warning("Range did not have two values.")
   Range <- range(Range, finite=TRUE)

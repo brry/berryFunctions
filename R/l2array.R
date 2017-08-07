@@ -1,9 +1,9 @@
 #' Convert list of arrays to array
-#'
+#' 
 #' Convert a list of arrays to a single array, conserving names.
 #' If dimnames do not need to be checked, you can also directly use \cr
 #' \code{do.call(abind::abind, list(LIST, rev.along=0, use.dnns=TRUE)) }
-#'
+#' 
 #' @return array
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Dec 2016
 #' @seealso \code{\link{l2df}}, \code{\link{help}}, \url{http://stackoverflow.com/a/4310747}
@@ -19,7 +19,7 @@
 #' LISTa1
 #' str(LISTa1)
 #' 
-#' LISTm <- lapply(list(1:6,7:12,13:18,19:24), matrix, ncol=3, 
+#' LISTm <- lapply(list(1:6,7:12,13:18,19:24), matrix, ncol=3,
 #'                dimnames=list(x=c("a","b"), y=c("i","j","k"))  )
 #' l2array(LISTm)
 #' 
@@ -27,12 +27,12 @@
 #' # I then found abind, which is much much much faster and easier on memory!
 #' # It now replaces the internal old actual conversion code
 #' # l2array still checks the dimnames
-#' LISTa2 <- do.call(abind::abind, list(LIST, rev.along=0, use.dnns=TRUE)) 
+#' LISTa2 <- do.call(abind::abind, list(LIST, rev.along=0, use.dnns=TRUE))
 #' LISTa2
 #' stopifnot(all(LISTa1==LISTa2))
 #' rm(LIST, LISTa1, LISTa2)
 #' 
-#'  
+#' 
 #' # General intro to arrays -----
 #' 
 #' A1 <- array(1:24, dim=c(4,2,3), dimnames=list(
@@ -52,8 +52,8 @@
 #' 
 #' as.vector(A1)
 #' 
-#' A <- array(1:24, dim=c(3,4,2), dimnames=list(x=paste0("x",1:3), 
-#'                                              y=paste0("y",1:4), 
+#' A <- array(1:24, dim=c(3,4,2), dimnames=list(x=paste0("x",1:3),
+#'                                              y=paste0("y",1:4),
 #'                                              z=paste0("z",1:2)))
 #' str(A)
 #' rm(A)
@@ -81,7 +81,7 @@
 #' dimnames(LISTN[[3]])[3] <- list(paste0("k",1:3))
 #' LAN <- l2array(LISTN)
 #' LAN["row2", ,"k2",] # n2 is now changed to k2
-#' LANa <- do.call(abind::abind, list(LISTN, rev.along=0, use.dnns=TRUE)) 
+#' LANa <- do.call(abind::abind, list(LISTN, rev.along=0, use.dnns=TRUE))
 #' all(LAN==LANa)
 #' str(LANa)
 #' 
@@ -107,7 +107,7 @@ if(!all(isar)) warning("all elements in x should be arrays. The following are no
                        toString(which(!isar)), "\n Please inspect your output carefully! ",
                        "The first values may be recycled at the end.")
 # dimension names:
-dina <- dimnames(x[[1]]) 
+dina <- dimnames(x[[1]])
 elna <- names(x)
 # check names:
 if(length(x)>1)

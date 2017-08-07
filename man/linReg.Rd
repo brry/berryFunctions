@@ -19,7 +19,7 @@ linReg(x, y = NULL, data = NULL, add = FALSE, digits = 2, pch = 16,
 
 \item{add}{Logical. If TRUE, line and text are added to the existing graphic. DEFAULT: FALSE (plots datapoints first and then the line.)}
 
-\item{digits}{Numeric vector of length \eqn{\ge 1}. Specifies number of digits a,b,r,e are rounded to 
+\item{digits}{Numeric vector of length \eqn{\ge 1}. Specifies number of digits a,b,r,e are rounded to
 in the formula "y=a*x+b \\n R^2=r \\n RMSE=e", respectively.
 If values are not specified, they are set equal to the first. DEFAULT: 2}
 
@@ -46,7 +46,7 @@ If values are not specified, they are set equal to the first. DEFAULT: 2}
 \item{inset}{Numeric vector of length \eqn{\le 2}. inset distance(s) from the margins as a fraction of the plot region when formula legend is placed by keyword. DEFAULT: 0}
 
 \item{legargs}{list of arguments passed to legend, like list(cex=0.8, xpd=TRUE, bg="white"), ...
-xpd specifies whether formula can be written only inside the plot region (when FALSE) 
+xpd specifies whether formula can be written only inside the plot region (when FALSE)
 or inside the figure region including mar (when TRUE) or in the entire device region including oma (when NA). DEFAULT: NULL}
 
 \item{\dots}{Further arguments passed to \code{\link{plot}} and \code{\link{abline}}.}

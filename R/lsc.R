@@ -3,12 +3,12 @@
 #' Optimize the parameters for unit hydrograph as in the framework of the
 #' linear storage cascade. Plot observed & simulated data
 #' 
-#' @return \emph{Either} vector with optimized n and k and the Nash-Sutcliffe Index, 
+#' @return \emph{Either} vector with optimized n and k and the Nash-Sutcliffe Index,
 #'         \emph{or} simulated discharge, depending on the value of \code{returnsim}
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, July 2013
-#' @seealso \code{\link{unitHydrograph}}, \code{\link{superPos}}, \code{\link{nse}}, \code{\link{rmse}}. 
+#' @seealso \code{\link{unitHydrograph}}, \code{\link{superPos}}, \code{\link{nse}}, \code{\link{rmse}}.
 #'          \code{deconvolution.uh} in the package hydromad, \url{http://hydromad.catchment.org}
-#' @references \url{http://ponce.sdsu.edu/onlineuhcascade.php}\cr 
+#' @references \url{http://ponce.sdsu.edu/onlineuhcascade.php}\cr
 #'    Skript 'Abflusskonzentration' zur Vorlesungsreihe Abwasserentsorgung I von Prof. Krebs an der TU Dresden\cr
 #'   \url{http://tu-dresden.de/die_tu_dresden/fakultaeten/fakultaet_forst_geo_und_hydrowissenschaften/fachrichtung_wasserwesen/isiw/sww/lehre/dateien/abwasserbehandlung/uebung_ws09_10/uebung_awe_1_abflusskonzentration.pdf}\cr
 #'   \url{http://www.uni-potsdam.de/fs-g3/file.php?fileserver=klausuren&file=\%2FMaster_of_Science\%2FHydroII_Lernzettel.pdf}
@@ -21,13 +21,13 @@
 #' qpfile <- system.file("extdata/Q_P.txt", package="berryFunctions")
 #' qp <- read.table(qpfile, sep="\t", dec=",", header=TRUE)
 #' calib <- qp[1:90,]
-#' valid <- qp[-(1:90),]   
+#' valid <- qp[-(1:90),]
 #' 
 #' # Area can be estimated from runoff coefficient (proportion of N becoming Q):
 #' #    k*P * A = Q * t      A = Qt / kP
 #' # Q=0.25 m^3/s  * t=89 h   *  3600 s/h   k=psi* P =34mm = 0.034m = m^3/m^2
 #' #                                                      / 1e6 m^2/km^2   = km^2
-#' mean(calib$Q) * length(calib$Q) *3600  / ( 0.7 * sum(calib$P)/1000) / 1e6 
+#' mean(calib$Q) * length(calib$Q) *3600  / ( 0.7 * sum(calib$P)/1000) / 1e6
 #' # 3.368 km^2
 #' 
 #' 
@@ -54,7 +54,7 @@
 #' Qsim <- superPos(valid$P, UH)
 #' Qsim <- Qsim + valid$Q[1] # add baseflow
 #' lines(Qsim, lwd=2, xpd=NA)
-#' legend("center", legend=c("Observed","Simulated from calibration"), 
+#' legend("center", legend=c("Observed","Simulated from calibration"),
 #'        lwd=c(1,2), col=c(2,1) )
 #' nse(valid$Q, Qsim[1:nrow(valid)]) # 0.47, which is not really good.
 #' # performs OK for the first event, but misses the peak from the second.
@@ -64,7 +64,7 @@
 #' 
 #' # Now for the second peak in the validation dataset:
 #' lsc(valid$P, valid$Q, type="l", area=3.4, fit=60:90) # overestimates first peak
-#' # Area cannot be right - is supposedly 17 km^2. 
+#' # Area cannot be right - is supposedly 17 km^2.
 #' 
 #' ## Not run in Rcmd check after Version 1.5 because it takes so much time
 #' \dontrun{

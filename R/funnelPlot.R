@@ -106,7 +106,7 @@
 #' @param xlab DEFAULT: "Sample size n"
 #' @param ylab DEFAULT: "Success rate [\%]"
 #' @param main DEFAULT: "Funnel plot for Proportions"
-#' @param a3 List with arguments for CI lines at 3*sd (eg: col, lty, lwd, lend, etc.). 
+#' @param a3 List with arguments for CI lines at 3*sd (eg: col, lty, lwd, lend, etc.).
 #'        Overwrites defaults that are defined within the function (if contentually possible). DEFAULT: NULL
 #' @param a2 Arguments for line of 2 sd. DEFAULT: NULL
 #' @param am Arguments for mean line. DEFAULT: NULL

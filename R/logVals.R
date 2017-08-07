@@ -2,9 +2,9 @@
 #' 
 #' Create nice values and labels to write at logartihmic axes
 #' 
-#' @return A list with 
+#' @return A list with
 #'        \item{vals}{Values for lines and label positions}
-#'        \item{labs}{Formatted values for labels} 
+#'        \item{labs}{Formatted values for labels}
 #'        \item{all}{Values for lines}
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Feb 2014
 #' @seealso \code{\link{log10}}, \code{\link{logAxis}}, \url{http://r.789695.n4.nabble.com/expression-exponent-labeling-td4661174.html}
@@ -79,7 +79,7 @@ if( !missing(Range)  )
 # values for lines and labels:
 vals <- base*10^rep(floor(from):ceiling(to), each=length(base))
 # formatted values for labels:
-labs <-  format(vals, big.mark=big.mark, trim=TRUE, scientific=scientific, 
+labs <-  format(vals, big.mark=big.mark, trim=TRUE, scientific=scientific,
                       drop0trailing=TRUE, decimal.mark=decimal.mark)
 # change to expression if value > exponent :
 change1 <- abs(log10(vals)) >= exponent  & log10(vals)%%1 ==0 # base=1

@@ -3,7 +3,7 @@
 #' restrict pdf link from a google search to actual link with text processing
 #' 
 #' @return Characterstring with only the basic link
-#' @note The function is not vectorized! If you have many links, use a loop around this function... 
+#' @note The function is not vectorized! If you have many links, use a loop around this function...
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2012
 #' @seealso \code{\link{strsplit}}, \code{\link{gsub}}
 #' @keywords character

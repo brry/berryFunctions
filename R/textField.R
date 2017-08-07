@@ -4,9 +4,9 @@
 #' the text can be read easily even if there are many points in the plot.
 #' Fields can be rectangular, elliptic or rectangular with roundeed edges.
 #' 
-#' @details Specifying pos and offset will currently change the position of the text, but not of the field.\cr 
-#' srt is not supported yet.\cr 
-#' lend, ljoin and lmitre can not be specified for rect, to keep argument number low.\cr 
+#' @details Specifying pos and offset will currently change the position of the text, but not of the field.\cr
+#' srt is not supported yet.\cr
+#' lend, ljoin and lmitre can not be specified for rect, to keep argument number low.\cr
 #' density (crosshatch etc.) is not supported, as this would distract from the text.
 #' # Search Engine Keywords:
 #' R Text visible on top
@@ -17,9 +17,9 @@
 #' @return None
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, April 2013 + March 2014
 #' @seealso \code{\link{text}}; \code{shadowtext} in package \code{TeachingDemos}, see
-#'          \url{http://blog.revolutionanalytics.com/2009/05/make-text-stand-out-with-outlines.html}, 
+#'          \url{http://blog.revolutionanalytics.com/2009/05/make-text-stand-out-with-outlines.html},
 #'           and \url{http://stackoverflow.com/questions/25631216}. \cr
-#'          \code{s.label} in package \code{ade4}, which is not so versatile and 
+#'          \code{s.label} in package \code{ade4}, which is not so versatile and
 #'          doesn't work with logarithmic axes
 #' @references with inspiration taken from \code{ordilabel} in package \code{vegan} and thanks to Jari Oksanen for his comments
 #' @keywords aplot
@@ -86,7 +86,7 @@
 #' @param labels labels to be placed at the coordinates, as in \code{\link{text}}. DEFAULT: seq_along(x)
 #' @param fill fill is recycled if necessary. With a message when quiet = FALSE. DEFAULT: "white"
 #' @param border ditto for border. DEFAULT: NA
-#' @param expression If TRUE, labels are converted to expression for better field positioning through expression bounding boxes.  
+#' @param expression If TRUE, labels are converted to expression for better field positioning through expression bounding boxes.
 #'        If NA, it is set to TRUE for labels without line breaks (Newlines, "\\n").
 #'        If FALSE, no conversion happens. DEFAULT: NA
 #' @param margin added field space around words (multiple of em/ex). DEFAULT: 0.3
@@ -102,7 +102,7 @@
 #' @param pos in 'text', pos overrides adj values. DEFAULT: NULL
 #' @param offset I want the field to still be drawn with adj, but have it based on pos. DEFAULT: 0.5
 #' @param quiet Suppress warning when Arguments are recycled? DEFAULT: TRUE
-#' @param \dots further arguments passed to \code{\link{strwidth}} and 
+#' @param \dots further arguments passed to \code{\link{strwidth}} and
 #'              \code{\link{text}}, like font, vfont, family
 #' 
 textField <- function(
@@ -181,7 +181,7 @@ h <- sapply(labels2, strheight, cex=cex, ...)
 if(isTRUE(expression))
 ##   h <- h + h*sapply(gregexpr("\n", labels), function(x) sum(x>0)) # false
 ##labels=c("Bug","oo-\nbahg", "Bug-\nbahg\ngrh")
-h <- sapply(as.list(labels), function(xx) 
+h <- sapply(as.list(labels), function(xx)
     {
     xxsplit <- strsplit(xx, "\n")[[1]]
     sum(sapply( lapply(as.list(xxsplit), as.expression), strheight, cex=cex, ...))

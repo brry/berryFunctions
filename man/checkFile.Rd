@@ -36,7 +36,7 @@ compareFiles("dummy.nonexist", "dummy2.nonexist")
 checkFile("dummy.nonexist")
 }
 
-dingo <- function(k="brute.nonexist", trace=TRUE) 
+dingo <- function(k="brute.nonexist", trace=TRUE)
          checkFile(k, warnonly=TRUE, trace=trace)
 dingo()
 dingo("dummy.nonexist")

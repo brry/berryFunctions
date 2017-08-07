@@ -5,7 +5,7 @@
 #' @return None. Plots data and table.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, June 2013
 #' @seealso \code{diagwl} in package \code{climatol}
-#' @references Heinrich Walter, Helmut Lieth: Klimadiagramm-Weltatlas. Gustav Fischer Verlag, Jena 1967\cr 
+#' @references Heinrich Walter, Helmut Lieth: Klimadiagramm-Weltatlas. Gustav Fischer Verlag, Jena 1967\cr
 #' Examples:\cr
 #' \url{http://www.hoelzel.at/_verlag/geojournal/archiv/klima/2006_01/lieth.gif}\cr
 #' \url{http://www.hoelzel.at/_verlag/geojournal/archiv/klima/istanbul/istanbul200.gif}\cr
@@ -21,15 +21,15 @@
 #' temp <- c(-9.3,-8.2,-2.8,6.3,13.4,16.8,18.4,17,11.7,5.6,-1,-5.9)#
 #' rain <- c(46,46,36,30,31,21,26,57,76,85,59,46)
 #' 
-#' climateGraph(temp, rain) 
-#' climateGraph(temp, rain, textprop=0.6) 
+#' climateGraph(temp, rain)
+#' climateGraph(temp, rain, textprop=0.6)
 #' climateGraph(temp, rain, mar=c(2,3,4,3), textprop=0) # no table written to the right
 #' # vertical lines instead of filled polygon:
-#' climateGraph(temp, rain, arghumi=list(density=15, angle=90)) 
+#' climateGraph(temp, rain, arghumi=list(density=15, angle=90))
 #' # fill color for arid without transparency:
-#' climateGraph(temp, rain, argarid=list(col="gold")) 
+#' climateGraph(temp, rain, argarid=list(col="gold"))
 #' # for the Americans - axes should be different, though!:
-#' climateGraph(temp, rain, units=c("\U{00B0}F","in")) 
+#' climateGraph(temp, rain, units=c("\U{00B0}F","in"))
 #' 
 #' rain2 <- c(23, 11, 4, 2, 10, 53, 40, 15, 21, 25, 29, 22)
 #' # fix ylim if you want to compare diagrams of different stations:
@@ -42,8 +42,8 @@
 #' 
 #' rain <- c(54, 23, 5, 2, 5, 70, 181, 345, 265, 145, 105, 80) # with extrema
 #' climateGraph(temp, rain) # August can be visually compared to June
-#' climateGraph(temp, rain, compress=TRUE) 
-#' # compressing extrema enables a better view of the temperature, 
+#' climateGraph(temp, rain, compress=TRUE)
+#' # compressing extrema enables a better view of the temperature,
 #' # but heigths of rain cannot be visually compared anymore
 #' climateGraph(temp, rain, compress=TRUE, ylim=c(-10, 90))
 #' # needs ylim in linearly continued temp units
@@ -82,7 +82,7 @@
 #' 
 #' 
 #' # Climate Graphs for Germany:
-#' browseURL("https://github.com/brry/rdwd#rdwd") 
+#' browseURL("https://github.com/brry/rdwd#rdwd")
 #' instGit("brry/rdwd")
 #' link <- rdwd::selectDWD("Potsdam", res="monthly", var="kl", per="h")
 #' clim <- rdwd::dataDWD(link, dir=tempdir())
@@ -116,14 +116,14 @@
 #' 
 #' @param temp monthly temperature mean in degrees C
 #' @param rain monthly rain sum in mm (12 values)
-#' @param main location info as character string. can have \\n. 
+#' @param main location info as character string. can have \\n.
 #'            DEFAULT: "StatName\\n52d 24' N / 12d 58' E\\n42 m aSL"
 #' @param units units used for labelling. DEFAULT: c("d C", "mm")
 #' @param labs labels for x axis. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
-#' @param textprop proportion of graphic that is used for writing the values 
+#' @param textprop proportion of graphic that is used for writing the values
 #'                 in a table to the right. DEFAULT: 0.25
 #' @param ylim limit for y axis in temp units. DEFAULT: range(temp, rain/2)
-#' @param compress should rain>100 mm be compressed with adjusted labelling? 
+#' @param compress should rain>100 mm be compressed with adjusted labelling?
 #'                 (not recommended for casual visualization!). DEFAULT: FALSE
 #' @param ticklab positions for vertical labelling. DEFAULT: -8:30*10
 #' @param ticklin positions for horizontal line drawing. DEFAULT: -15:60*5
@@ -133,7 +133,7 @@
 #' @param colrain Color for rain line and axis labels. DEFAULT: "blue"
 #' @param coltemp color for temperature line and axis labels. DEFAULT: "red"
 #' @param lwd line width of actual temp and rain lines. DEFAULT: 2
-#' @param arghumi List of arguments for humid \code{\link{polygon}}, 
+#' @param arghumi List of arguments for humid \code{\link{polygon}},
 #'                like density, angle. DEFAULT: NULL (internal x,y, col, border)
 #' @param argarid List of arguments for arid area. DEFAULT: NULL
 #' @param argcomp List of arguments for compressed rainfall polygon. DEFAULT: NULL
@@ -142,29 +142,29 @@
 #' @param \dots further arguments passed to plot, like col.main
 #' 
 climateGraph <- function(
-     temp, 
-     rain, 
+     temp,
+     rain,
      main="StatName\n52\U{00B0}24' N / 12\U{00B0}58' E\n42 m aSL",
-     units=c("\U{00B0}C", "mm"), 
+     units=c("\U{00B0}C", "mm"),
      labs=substr(month.abb,1,1),
      textprop=0.25,
-     ylim=range(temp, rain/2), 
-     compress=FALSE, 
+     ylim=range(temp, rain/2),
+     compress=FALSE,
      ticklab= -8:30*10,
      ticklin=-15:60*5,
      box=TRUE,
-     mar=c(1.5,2.3,4.5,0.2), 
+     mar=c(1.5,2.3,4.5,0.2),
      keeppar=TRUE,
-     colrain="blue", 
-     coltemp="red", 
-     lwd=2, 
+     colrain="blue",
+     coltemp="red",
+     lwd=2,
      #colcomp="purple", # color for compressed polygon ##### or in argcomp?
-     arghumi=NULL, 
-     argarid=NULL, 
-     argcomp=NULL, 
+     arghumi=NULL,
+     argarid=NULL,
+     argcomp=NULL,
      arggrid=NULL,
      argtext=NULL,
-     ... 
+     ...
      )
 {
 # function start ---------------------------------------------
@@ -181,7 +181,7 @@ if(compress)
   if(missing(ylim)) ylim <- range(temp, rain/2)
   }
 # set margins around plot, avoid empty space along x-axis
-op <- par(mar=mar, mgp=c(3,0.8,0) ) 
+op <- par(mar=mar, mgp=c(3,0.8,0) )
 if(!keeppar) on.exit(par(op))
 xlim <- xlim2 <- c(0.6, 12.4)
 if(textprop > 0) xlim2[2] <- diff(xlim2)/(1-textprop)+xlim2[1]
@@ -192,10 +192,10 @@ mtext(main, side=3, at=6.5, line=1, cex=1.2, font=2)
 for(t in ticklin) do.call(lines, owa(list(x=xlim, y=rep(t,2), col=8), arggrid) )
 lines(xlim, c(0,0))
 do.call(abline, owa(list(v=1:11+0.5, col=8), arggrid) )
-if(box) 
-  { 
+if(box)
+  {
   lines(xlim, rep(par("usr")[3],2))
-  lines(xlim, rep(par("usr")[4],2)) 
+  lines(xlim, rep(par("usr")[4],2))
   lines(rep(xlim[2],2), c(-100,500))
   }
 
@@ -228,7 +228,7 @@ if(length(intm) >0 )
 
 # polygon drawing - ARID ------------------------------------------------------------
 arid <- which(rpy<=tpy)
-argarid_def <- list(x=px[c(arid, rev(arid))], y=c(rpy[arid],rev(tpy[arid])), 
+argarid_def <- list(x=px[c(arid, rev(arid))], y=c(rpy[arid],rev(tpy[arid])),
                     col=rgb(1,0.84,0, alpha=0.3), border=NA) # col from col2rgb("gold")/255
 do.call(polygon, args=owa(d=argarid_def, a=argarid, "x","y")  )
 

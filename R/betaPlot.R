@@ -6,8 +6,8 @@
 #' 
 #' @return None. Used for plotting.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, July 2014
-#' @seealso \code{\link{betaPlotComp}}, \code{\link{normPlot}}, \code{\link{dbeta}}, 
-#'    \url{https://cran.r-project.org/package=denstrip}, 
+#' @seealso \code{\link{betaPlotComp}}, \code{\link{normPlot}}, \code{\link{dbeta}},
+#'    \url{https://cran.r-project.org/package=denstrip},
 #'    \url{https://cran.r-project.org/view=Distributions}
 #' @keywords hplot distribution
 #' @importFrom grDevices rgb
@@ -17,7 +17,7 @@
 #' @examples
 #' 
 #' betaPlot()
-#' betaPlot(2,1) 
+#' betaPlot(2,1)
 #' betaPlot(0.5, 2)
 #' 
 #' # beta distribution is often used for proportions or probabilities
@@ -44,22 +44,22 @@
 #' 
 betaPlot <- function(
   shape1=1.5,
-  shape2=5, 
+  shape2=5,
   lines=NA,
-  fill=rgb(0,0.3,0.8, 0.4), 
+  fill=rgb(0,0.3,0.8, 0.4),
   cumulative=TRUE,
-  mar=c(2,3,3,3), 
+  mar=c(2,3,3,3),
   keeppar=FALSE,
-  las=1, 
-  main=paste("Beta density with\nalpha =", signif(shape1,3), "and beta =", signif(shape2,3)), 
+  las=1,
+  main=paste("Beta density with\nalpha =", signif(shape1,3), "and beta =", signif(shape2,3)),
   ylim=lim0(y),
   xlim=0:1,
-  ylab="", 
+  ylab="",
   xlab="",
-  type="l", 
+  type="l",
   lty=1,
   col=par("fg"),
-  ... 
+  ...
   )
 {
 op <- par(mar=mar)
@@ -67,7 +67,7 @@ op <- par(mar=mar)
 x <- seq(1e-3,1-1e-3, length=200)
 y <- dbeta(x, shape1, shape2)
 # plot
-plot(x, y, las=las, type=type, col=col, lty=lty, xaxs="i", 
+plot(x, y, las=las, type=type, col=col, lty=lty, xaxs="i",
      ylab=ylab, xlab=xlab, main=main, ylim=ylim, xlim=xlim, ...)
 # vertical lines
 abline(v=qbeta(lines, shape1, shape2), col=8)

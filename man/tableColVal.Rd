@@ -13,7 +13,7 @@ tableColVal(mat, main = deparse(substitute(mat)), nameswidth = 0.3,
 
 \item{main}{Title for topleft space. DEFAULT: name of mat object.}
 
-\item{nameswidth}{Relative width of row names at the left, as a percentage of plot. 
+\item{nameswidth}{Relative width of row names at the left, as a percentage of plot.
 DEFAULT: 0.3}
 
 \item{namesheight}{Relative height of column names at the top. DEFAULT: 0.1}
@@ -24,7 +24,7 @@ DEFAULT: 0.3}
 
 \item{digits}{Number of digits rounded to for writing. DEFAULT: 2}
 
-\item{classargs}{List of arguments specifying how to call \code{\link{classify}}, 
+\item{classargs}{List of arguments specifying how to call \code{\link{classify}},
 e.g. method. DEFAULT: NULL}
 
 \item{cellargs}{List of arguments passed to \code{\link{text}} only for the cells.}

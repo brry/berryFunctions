@@ -23,7 +23,7 @@
 #' monthAxis(ym=TRUE, mgp=c(3,1,0))
 #' monthAxis(ym=TRUE, cex.axis=1.4)
 #' monthAxis(ym=TRUE, mcex=0.9, col.axis="red")
-#'  
+#' 
 #' plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
 #' monthAxis(labels=FALSE, col.ticks=2)
 #' monthAxis(1, format=" ")  # equivalent to axis(labels=FALSE)
@@ -53,12 +53,12 @@
 #' # mid-month labels:
 #' plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
 #' monthAxis(midmonth=TRUE)
-#'
+#' 
 #' # Time axis instead of date axis:
 #' plot(as.POSIXct(Sys.time()+c(0,10)*24*3600), 1:2, xaxt="n")
 #' monthAxis(n=3)
 #' monthAxis()
-#'
+#' 
 #' @param side Which \code{\link{axis}} are to be labeled? (can be several). DEFAULT: 1
 #' @param timeAxis Logical indicating whether the axis is \code{\link{POSIXct}}, not date.
 #'                 DEFAULT: NA, meaning axis value >1e5
@@ -85,7 +85,7 @@
 #'            Changed to -2.5 for year borders if ym=TRUE. DEFAULT: par("tcl")
 #' @param las LabelAxisStyle for orientation of labels. DEFAULT: 1 (upright)
 #' @param \dots Further arguments passed to \code{\link{axis}}, like \code{lwd, col.ticks, hadj, lty}, ...
-#'  
+#' 
 monthAxis <- function(
 side=1,
 timeAxis=NA,

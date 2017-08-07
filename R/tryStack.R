@@ -1,12 +1,12 @@
 #' try an expression, returning the error stack
-#'
+#' 
 #' As in \code{\link{try}}, the result of an expression if it works.
-#' If it fails, execution is not halted, but an invisible try-error class object is 
+#' If it fails, execution is not halted, but an invisible try-error class object is
 #' returned and (unless silent=TRUE) a message \code{\link{cat}ted} to the console.\cr
-#' Unlike \code{\link{try}}, \code{tryStack} also returns the calling stack to 
+#' Unlike \code{\link{try}}, \code{tryStack} also returns the calling stack to
 #' trace errors and warnings and ease debugging.
-#'
-#' @return Value of \code{expr} if evaluated successfully. If not, an invisible 
+#' 
+#' @return Value of \code{expr} if evaluated successfully. If not, an invisible
 #' object of class "try-error" as in \code{\link{try}} with the stack in \code{object[2]}.
 #' For nested tryStack calls, \code{object[3], object[4]} etc. will contain "-- empty error stack --"
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Nov 2016
@@ -21,7 +21,7 @@
 #' @examples
 #' 
 #' # Functions -----
-#'
+#' 
 #' lower <- function(a) {message("fake message, a = ", a); a+10}
 #' middle <- function(b) {plot(b, main=b) ; warning("fake warning, b = ", b); lower(b) }
 #' upper <- function(c) {cat("printing c:", c, "\n") ; middle(c)}
@@ -33,7 +33,7 @@
 #' # Classical error management with try -----
 #' 
 #' \dontrun{ ## intentional error
-#' d <- upper("42")                # error, no d creation 
+#' d <- upper("42")                # error, no d creation
 #' traceback()                     # calling stack, but only in interactive mode
 #' }
 #' 
@@ -48,7 +48,7 @@
 #' cat(d)
 #' d <- tryStack(upper("42"), silent=TRUE, warn=0) # don't trace warnings
 #' d <- tryStack(upper("42"), short=FALSE)
-#'  
+#' 
 #' tryStack(upper(42)) # returns normal output, but warnings are easier to debug
 #' # Note: you can also set options(showWarnCalls=TRUE)
 #' 
@@ -74,11 +74,11 @@
 #' f <- function(k) tryStack(upper(k), silent=TRUE)
 #' d <- f(42)                 ; cat("-----\n", d, "\n-----\n") ; rm(d)
 #' d <- f("42")               ; cat("-----\n", d, "\n-----\n") ; rm(d)
-#' d <- tryStack(f(4) )       ; cat("-----\n", d, "\n-----\n") ; rm(d) 
+#' d <- tryStack(f(4) )       ; cat("-----\n", d, "\n-----\n") ; rm(d)
 #' # warnings in nested calls are printed twice, unless warn=0
 #' d <- tryStack(f(4), warn=0) # could also be set within 'f'
 #' 
-#' d <- tryStack(f("4"))      ; cat("-----\n", d, "\n-----\n") 
+#' d <- tryStack(f("4"))      ; cat("-----\n", d, "\n-----\n")
 #' d[1:3] ; rm(d)
 #' # empty stack at begin - because of tryStack in f, no real error happened in f
 #' 
@@ -96,29 +96,29 @@
 #' 
 #' f2 <- function(k) tryStack(f(k), warn=0, silent=TRUE)
 #' d <- f2(42)    ; cat("-----\n", d, "\n-----\n") ; rm(d)
-#' d <- f2("42")  ; cat("-----\n", d, "\n-----\n") ; rm(d) # try -> no error. 
+#' d <- f2("42")  ; cat("-----\n", d, "\n-----\n") ; rm(d) # try -> no error.
 #' # -> Use tryCatch and you can nest those calls. note that d gets longer.
 #' 
-#'
-#' @param expr     Expresssion to try, potentially wrapped in curly braces if 
+#' 
+#' @param expr     Expresssion to try, potentially wrapped in curly braces if
 #'                 spanning several commands.
 #' @param silent   Logical: Should printing of error message + stack be suppressed?
 #'                 Does not affect warnings and messages. DEFAULT: FALSE
 #' @param warn     Logical: trace \code{\link{warning}s} and \code{\link{message}s} also?
-#'                 They are still handled like regular warnings / messages unless 
+#'                 They are still handled like regular warnings / messages unless
 #'                 \code{file !=""}, when they are catted into that file. DEFAULT: TRUE
 #' @param short    Logical: should trace be abbreviated to upper -> middle -> lower?
 #'                 If NA, it is set to TRUE for warnings and messages, FALSE for errors.
 #'                 DEFAULT: TRUE
-#' @param file     File name passed to \code{\link{cat}}. 
-#'                 If given, Errors will be appended to the file after two empty lines. 
-#'                 if \code{warn=T} and file!="", warnings and messages will not be shown, 
+#' @param file     File name passed to \code{\link{cat}}.
+#'                 If given, Errors will be appended to the file after two empty lines.
+#'                 if \code{warn=T} and file!="", warnings and messages will not be shown,
 #'                 but also appended to the file.
 #'                 This is useful in lapply simulation runs.
 #'                 DEFAULT: "" (catted to the console)
 #' @param removetry Logical: should all stack entries matching typical tryCatch
 #'                 expressions be removed? Unless the call contains customized
-#'                 \code{\link{tryCatch}} code, this can be left to the DEFAULT: TRUE 
+#'                 \code{\link{tryCatch}} code, this can be left to the DEFAULT: TRUE
 #' @param skip     Character string(s) to be removed from the stack.
 #'                 e.g. "eval(expr, p)". Use short=F to find exact matches.
 #'                 DEFAULT: NULL
@@ -164,15 +164,15 @@ if(removetry) toremovestring <- c(toremovestring,
 efun <- function(e, type="error")
 {
 # don't touch warnings/messages if warn=FALSE:
-if(type!="error") if(!warn) return() 
-  
+if(type!="error") if(!warn) return()
+
 # stack of calls, only determined in case of an error/warning/message:
 stack <- sys.calls()
 # language to character:
 stack <- lapply(stack, deparse)
 
 # remove the warning part:
-if(type=="warning" | type=="message") 
+if(type=="warning" | type=="message")
   {
   stack <- head(stack, -5) # also for message?
   # usually, two more need to be removed:
@@ -182,7 +182,7 @@ if(type=="warning" | type=="message")
   irecwarn <- grep(".signalSimpleWarning(", stack, fixed=TRUE)
   if(length(irecwarn)>0) if(stack[irecwarn+2] == "withOneRestart(expr, restarts[[1L]])")
       stack <- stack[-(irecwarn+0:2)]
-  
+
   }
 stack <- stack[stack!="doWithOneRestart(return(expr), restart)"]
 
@@ -204,11 +204,11 @@ if(is.na(short)) short <- type!="error"
 if(short)
   {
   # shorten do.call (function( LONG ( STUFF)))
-  stack <- lapply(stack, function(x) if(substr(x,1,7)=="do.call") 
+  stack <- lapply(stack, function(x) if(substr(x,1,7)=="do.call")
                sub(",", "(", sub("(", " - ", x, fixed=TRUE), fixed=TRUE) else x)
   # keep try calls more informative:
-  stack <- lapply(stack, function(x) if(substr(x,1,4)=="try(") 
-               sub("(", " - ", x, fixed=TRUE) else x)  
+  stack <- lapply(stack, function(x) if(substr(x,1,4)=="try(")
+               sub("(", " - ", x, fixed=TRUE) else x)
   stack <- lapply(strsplit(unlist(stack), "(", fixed=TRUE), "[", 1)
 }
 
@@ -219,7 +219,7 @@ stack <- c(stack, ccall)
 if(!short) stack <- lapply(seq_along(stack), function(i) paste0(i, ": ", stack[[i]]))
 
 # concatenate:
-stack <- if(short) paste(    stack , collapse=" -> ") else 
+stack <- if(short) paste(    stack , collapse=" -> ") else
                    paste(rev(stack), collapse="\n"  )
 
 # condition message:
@@ -234,7 +234,7 @@ if(!short) stack <- paste0("m: ", cmes, "\n", stack)
 
 # additional information (line breaks and sys.time) if file is given:
 prefix <- suffix <- ""
-if(file!="") 
+if(file!="")
   {
   prefix <- paste0("\n---------------\n", as.character(Sys.time()),
                    "\n\n", type, if(short) ":" , " ")
@@ -248,23 +248,23 @@ info <- paste0(info, cmes, "\n-- tryStack sys.calls")
 info <- paste0(info, if(short) ": " else "\n")
 
 # put message into main function environment: emsg/wmsg/mmsg
-assign(x=paste0(substr(type,1,1),"msg"), 
-       value=paste0(prefix, if(type!="error"||file!="")info, stack, suffix), 
+assign(x=paste0(substr(type,1,1),"msg"),
+       value=paste0(prefix, if(type!="error"||file!="")info, stack, suffix),
        envir=tryenv)
 
 # generate warning / message / error:
-if(type=="warning") 
+if(type=="warning")
   {
-  if(file=="") warning(tryenv$wmsg, immediate.=TRUE, call.=FALSE) 
+  if(file=="") warning(tryenv$wmsg, immediate.=TRUE, call.=FALSE)
   else             cat(tryenv$wmsg, file=file, append=TRUE)
   }
-if(type=="message") 
+if(type=="message")
   {
   if(file=="") message("Message: ", tryenv$mmsg, appendLF=TRUE)
   else             cat(tryenv$mmsg, file=file, append=TRUE)
   invokeRestart("muffleMessage")
   }
-if(type=="error") 
+if(type=="error")
   {
   # print error if not silent:
   shouldprint <- !silent && isTRUE(getOption("show.error.messages"))

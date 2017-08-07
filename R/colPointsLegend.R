@@ -24,50 +24,50 @@
 #' colPointsLegend(z=z, horiz=FALSE, x1=0.7, y1=0.6, plottriangle=TRUE, density=FALSE)
 #' ?colPoints # example section for actual usage
 #' 
-#' @param z Values of third dimension used in \code{\link{colPoints}}, 
+#' @param z Values of third dimension used in \code{\link{colPoints}},
 #'          can be a matrix or a vector etc, but must be numeric
 #' @param Range Ends of color bar for method=equalinterval. DEFAULT: range(z, finite=TRUE)
-#' @param nbins Number of classes (thus, colors). If \code{colors} is given, 
+#' @param nbins Number of classes (thus, colors). If \code{colors} is given,
 #'              \code{nbins} is overwritten with \code{length(colors)}. DEFAULT: 100
-#' @param colors Color vector. DEFAULT: \code{\link{seqPal}} 
+#' @param colors Color vector. DEFAULT: \code{\link{seqPal}}
 #'               from yellow (lowest) to blue (highest value in Range)
 #' @param bb Borders of bins for the legend (key). DEFAULT: seqR(Range, length.out=nbins+1)
 #' @param at Positions of legend labels. DEFAULT: pretty2(Range)
 #' @param labels Labels that are written at the positions of \code{at}. DEFAULT: at
 #' @param adj label adjustment parallel to legend bar (only one number!). DEFAULT: 0.5
-#' @param x1,x2,y1,y2 Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}. 
+#' @param x1,x2,y1,y2 Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}.
 #'                    DEFAULT: x: 0.6-0.99, y: 0.88-0.99
 #' @param outer Logical: Should legend be relative to device instead of current figure?
 #'              use outer=TRUE when par(mfrow, oma) is set. DEFAULT: FALSE
 #' @param xpd Logical: should text be expanded outisde of plotting region?
 #'            Must be NA if outer=TRUE. DEFAULT: NA
-#' @param mar Margins for \code{\link{smallPlot}}. 
+#' @param mar Margins for \code{\link{smallPlot}}.
 #'            DEFAULT: internal calculations based on title, labelpos and titlepos.
-#' @param mgp MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin, 
+#' @param mgp MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin,
 #'            as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.6, 0)
 #' @param bg Background behind key, labels and title. DEFAULT: "white"
 #' @param sborder Border around inset subplot. DEFAULT: NA
-#' @param resetfocus Reset focus to original plot? 
+#' @param resetfocus Reset focus to original plot?
 #'                   Specifies where further low level plot commands are directed to. DEFAULT: TRUE
-#' @param plottriangle Should triangles be plotted at the end of the legend for values outside Range? 
-#'                     Vector of length two (for lower and upper, internally recycled). 
+#' @param plottriangle Should triangles be plotted at the end of the legend for values outside Range?
+#'                     Vector of length two (for lower and upper, internally recycled).
 #'                     If this argument is missing but triangle is given, this is set to TRUE. DEFAULT: FALSE
-#' @param triangle Percentage of bar length at lower and upper end for triangles 
+#' @param triangle Percentage of bar length at lower and upper end for triangles
 #'                 (can be a vector with two different values). DEFAULT: 0.14
 #' @param tricol Triangle colors for lower and upper end. DEFAULT: c(8,1)
-#' @param density List of arguments passed to \code{kernel \link{density} estimation}. 
+#' @param density List of arguments passed to \code{kernel \link{density} estimation}.
 #'                Can also be FALSE to suppress KDE line drawing. DEFAULT: NULL
 #' @param lines Plot black lines in the color bar at \code{at}? DEFAULT: TRUE
 #' @param atminmax Should the extrema of the legend be added to \code{at}? DEFAULT: FALSE
 #' @param horizontal Horizontal bar? if FALSE, a vertical bar is drawn. DEFAULT: TRUE
-#' @param labelpos Position of labels relative to the bar. 
+#' @param labelpos Position of labels relative to the bar.
 #'                 Possible: 1 (below), 2 (left), 3 (above), 4 (right), 5(on top of bar). DEFAULT: 1
 #' @param titlepos Position of title -"-. DEFAULT: 3
 #' @param title Legend title. DEFAULT: "Legend"
 #' @param las LabelAxisStyle. DEFAULT: 1
-#' @param x,y,index Ignored arguments, so that you can pass the result from 
+#' @param x,y,index Ignored arguments, so that you can pass the result from
 #'                  \code{\link{colPoints}} via \code{do.call(colPointsLegend, cp_result)}
-#' @param \dots Further arguments passed to \code{\link{text}} and \code{\link{strwidth}}, 
+#' @param \dots Further arguments passed to \code{\link{text}} and \code{\link{strwidth}},
 #'         e.g. cex, srt, font, col. But NOT adj!
 #' 
 colPointsLegend <- function(
@@ -142,10 +142,10 @@ if(any(plottriangle))
   tricol   <- rep(tricol  , length.out=2)
   # coordinates of triangle points
   barlength <- tail(bb,1) - bb[1]
-  trimin <-  bb[1]      - barlength*triangle[1] 
+  trimin <-  bb[1]      - barlength*triangle[1]
   trimax <-  tail(bb,1) + barlength*triangle[2]
-  } 
-plotrange <- c(if(plottriangle[1]) trimin else bb[1], 
+  }
+plotrange <- c(if(plottriangle[1]) trimin else bb[1],
                if(plottriangle[2]) trimax else tail(bb,1))
 # margin preparation:
 if(missing(mar))
@@ -159,7 +159,7 @@ if(labelpos==1 | titlepos==1) mar[1] <- nch
 if(labelpos==3 | titlepos==3) mar[3] <- nch
 } # if mar is specified, it is used, of course.
 # subplot setup:
-smallPlot(x1=x1, y1=y1, x2=x2, y2=y2, outer=outer, xpd=xpd, mar=mar, mgp=mgp, 
+smallPlot(x1=x1, y1=y1, x2=x2, y2=y2, outer=outer, xpd=xpd, mar=mar, mgp=mgp,
           bg=bg, border=sborder, las=las, resetfocus=resetfocus, expr={
 if(horizontal) # ---------------------------------------------------------------
   {

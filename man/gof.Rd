@@ -28,7 +28,7 @@ kge(a, b, quiet = FALSE)
 
 \item{b}{Simulated data (to be compared to a)}
 
-\item{quiet}{Should NA-removal warnings be suppressed? 
+\item{quiet}{Should NA-removal warnings be suppressed?
 This may be helpful within functions. DEFAULT: FALSE}
 
 \item{fun}{Character string with function name for error and warning messages}
@@ -42,7 +42,7 @@ Goodness of Fit measures (GOF) for two vectors.\cr
 \bold{rsquare}: Coefficient of determination (R2)\cr
 \bold{rmse}: Root Mean Square Error (for minimising in \code{\link{optim}})\cr
 \bold{nse}: Nash-Sutcliffe efficiency, based on RHydro::eval.NSeff\cr
-\bold{kge}: Kling-Gupta efficiency (better than NSE), 
+\bold{kge}: Kling-Gupta efficiency (better than NSE),
             based on hydroGOF::KGE, where there are many more options
 }
 \note{
@@ -57,7 +57,7 @@ plot(x,y)
 legGOF <- function(a,b)
   {
   text(a,b, paste(c("      R2","RMSE","  NSE","  KGE"), collapse="\\n"), adj=1.2)
-  text(a,b, paste(round(c(rsquare(x,y), rmse(x,y), nse(x,y), kge(x,y)),5), 
+  text(a,b, paste(round(c(rsquare(x,y), rmse(x,y), nse(x,y), kge(x,y)),5),
                   collapse="\\n"), adj=0)
   }
 legGOF(-1.5, 2) # R2 good, but does not check for bias (distance from 1:1 line)
@@ -113,7 +113,7 @@ kge(x,y) ; kge(y,x)
 }
 \seealso{
 \code{\link{cor}}, \code{\link{lm}}.
-            \url{http://en.wikipedia.org/wiki/R-squared}, 
+            \url{http://en.wikipedia.org/wiki/R-squared},
             \url{http://en.wikipedia.org/wiki/Mean_squared_error}
 }
 \author{

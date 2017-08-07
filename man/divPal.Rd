@@ -40,13 +40,13 @@ showPal()
 
 }
 \references{
-The default palette is originally in 12 shades in the IPCC Assesment Report 5 
+The default palette is originally in 12 shades in the IPCC Assesment Report 5
             Chapter 12 Fig 12.22, \url{http://www.ipcc.ch/report/ar5/wg1/}.\cr
-            The green-purple and blue-red palettes are from NYtimes (originally with 8 shades), 
+            The green-purple and blue-red palettes are from NYtimes (originally with 8 shades),
             \url{https://nyti.ms/2mL0o4J}
 }
 \seealso{
-\code{\link{showPal}}, \code{\link{seqPal}}, \code{\link{addAlpha}}, 
+\code{\link{showPal}}, \code{\link{seqPal}}, \code{\link{addAlpha}},
          \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 }
 \author{

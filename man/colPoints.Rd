@@ -16,16 +16,16 @@ colPoints(x, y, z, data, add = TRUE, col = seqPal(cl$nbins), col2 = c(NA,
 \arguments{
 \item{x, y}{Vectors with coordinates of the points to be drawn}
 
-\item{z}{z values belonging to coordinates. 
+\item{z}{z values belonging to coordinates.
 Vector or matrix with the color-defining height values}
 
 \item{data}{Optional: data.frame with the column names as given by x,y and z.}
 
-\item{add}{Logical. Should the points be added to current (existing!) plot? 
-If FALSE, a new plot is started. 
+\item{add}{Logical. Should the points be added to current (existing!) plot?
+If FALSE, a new plot is started.
 DEFAULT: TRUE (It's called col\bold{Points}, after all)}
 
-\item{col}{Vector of colors to be used. DEFAULT: 100 colors from sequential 
+\item{col}{Vector of colors to be used. DEFAULT: 100 colors from sequential
 palette \code{\link{seqPal}} (color-blind safe, black/white-print safe)}
 
 \item{col2}{Color for points where z is NA, or lower / higher than \code{Range}.
@@ -33,34 +33,34 @@ DEFAULT: c(NA, 1, 8)}
 
 \item{Range}{Ends of color bar. If NULL, it is again the DEFAULT: range(z, finite=TRUE)}
 
-\item{method}{Classification method (partial matching is performed), 
-see \code{\link{classify}} (ways to get color breakpoints). 
+\item{method}{Classification method (partial matching is performed),
+see \code{\link{classify}} (ways to get color breakpoints).
 DEFAULT: "equalinterval")}
 
-\item{breaks}{Specification for method, see \code{\link{classify}}. 
+\item{breaks}{Specification for method, see \code{\link{classify}}.
 DEFAULT: different defaults for each method}
 
-\item{sdlab}{Type of label and breakpoints if \code{method=standarddeviation}, 
+\item{sdlab}{Type of label and breakpoints if \code{method=standarddeviation},
 see \code{\link{classify}}. DEFAULT: 1}
 
 \item{legend}{Logical. Should a \code{\link{colPointsLegend}} be drawn? DEFAULT: TRUE}
 
-\item{legargs}{List. Arguments passed to \code{\link{colPointsLegend}}. 
+\item{legargs}{List. Arguments passed to \code{\link{colPointsLegend}}.
 DEFAULT: NULL, with some defaults specified internally}
 
-\item{hist}{Logical. Should a \code{\link{colPointsHist}} be drawn? 
+\item{hist}{Logical. Should a \code{\link{colPointsHist}} be drawn?
 DEFAULT: FALSE (TRUE if histargs are given)}
 
 \item{histargs}{List. Arguments passed to \code{\link{colPointsHist}}. DEFAULT: NULL}
 
-\item{lines}{Logical. Should lines be drawn instead of / underneath the points? 
-(color of each \code{\link{segments}} is taken from starting point, 
-last point is endpoint.) If lines=TRUE and pch is not given, 
+\item{lines}{Logical. Should lines be drawn instead of / underneath the points?
+(color of each \code{\link{segments}} is taken from starting point,
+last point is endpoint.) If lines=TRUE and pch is not given,
 pch ist set to NA. DEFAULT: FALSE}
 
-\item{nint}{Numeric of length 1. Number of interpolation points between each 
-coordinate if \code{lines=TRUE}. nint=1 means no interpolation. 
-Values below 10 will smooth coordinates and might 
+\item{nint}{Numeric of length 1. Number of interpolation points between each
+coordinate if \code{lines=TRUE}. nint=1 means no interpolation.
+Values below 10 will smooth coordinates and might
 miss the original points. DEFAULT: 30}
 
 \item{xlab}{x-axis label. DEFAULT: \code{deparse(\link{substitute}(x))}}
@@ -69,23 +69,23 @@ miss the original points. DEFAULT: 30}
 
 \item{zlab}{\code{\link{colPointsLegend} title}. DEFAULT: ditto}
 
-\item{axes, las}{Draw axes? Label Axis Style. Only used when add=FALSE. 
+\item{axes, las}{Draw axes? Label Axis Style. Only used when add=FALSE.
 See \code{\link{par}}. DEFAULT: axes=TRUE, las=1 (all labels horizontal)}
 
 \item{pch}{Point CHaracter. See \code{\link{par}}. DEFAULT: 16}
 
-\item{x1, x2, y1, y2}{Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}. 
-Passed to \code{\link{colPointsLegend}}. 
+\item{x1, x2, y1, y2}{Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}.
+Passed to \code{\link{colPointsLegend}}.
 DEFAULT: x: 0.6-0.99, y: 0.88-0.98}
 
-\item{density}{Arguments for density line in \code{\link{colPointsLegend}} 
+\item{density}{Arguments for density line in \code{\link{colPointsLegend}}
 DEFAULT: NULL}
 
 \item{quiet}{Turn off warnings? DEFAULT: FALSE}
 
-\item{\dots}{Further graphical arguments passed to \code{\link{plot}}, 
-\code{\link{points}} and \code{\link{segments}}, 
-eg cex, xlim (when add=F), mgp, main, sub, asp (when add=F), etc. 
+\item{\dots}{Further graphical arguments passed to \code{\link{plot}},
+\code{\link{points}} and \code{\link{segments}},
+eg cex, xlim (when add=F), mgp, main, sub, asp (when add=F), etc.
 Note: col does not work, as it is already another argument}
 }
 \value{
@@ -97,7 +97,7 @@ dimension, by different classification methods. Can take 3 vectors or, as in
 \code{\link{image}}, 2 vectors and a matrix for z.
 }
 \note{
-Rstudio scales graphics really badly, so don't expect the right legend width out of the box if you use Rstudio! 
+Rstudio scales graphics really badly, so don't expect the right legend width out of the box if you use Rstudio!
      Exporting via \code{png("myplot.png", 600,400); colPoints(x,y,z); dev.off()} usually works much better
 }
 \examples{
@@ -183,7 +183,7 @@ do.call(colPointsLegend, owa(cp, list(colors=rainbow2(100), cex=1.2)))
 
 # colPoints with matrix:
 colPoints(z=volcano, add=FALSE)
-# image and contour by default transpose the matrix! 
+# image and contour by default transpose the matrix!
 # colPoints shows what is really in the data.
 colPointsHist(z=volcano)
 
@@ -205,7 +205,7 @@ text(mx,my,mz, adj=-0.5, font=2)
 
 # santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r
 if(require(gstat)){
-xyz <- gstat(formula=z~1, locations=~x+y, dummy=TRUE, beta=1, 
+xyz <- gstat(formula=z~1, locations=~x+y, dummy=TRUE, beta=1,
              model=vgm(psill=0.025,model="Exp",range=5), nmax=20)
 xyz <- predict(xyz, newdata=data.frame(x=runif(200, 20,40),y=runif(200, 50,70)), nsim=1)
 head(xyz)

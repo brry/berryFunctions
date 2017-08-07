@@ -1,7 +1,7 @@
 #' get the name of an input in nested function calls
-#'
+#' 
 #' get the name of an input in nested function calls
-#'
+#' 
 #' @return Character string with the name
 #' @author \url{http://stackoverflow.com/users/2725969/brodieg}
 #'         Implementation Berry Boessenkool, \email{berry-b@@gmx.de}, Sep 2016
@@ -30,9 +30,9 @@
 #' upper(dummy) # still stable
 #' 
 #' upper(stackloss[1:5,])
-#'
+#' 
 #' @param x input object name or character string
-#'
+#' 
 getName <- function(x)
 {
 my.call <- quote(substitute(x))

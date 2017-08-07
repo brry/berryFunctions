@@ -33,9 +33,9 @@ Compare to \code{\link{options}("scipen")}. This is mainly for \code{\link{logAx
 \item{\dots}{Ignored arguments}
 }
 \value{
-A list with 
+A list with
        \item{vals}{Values for lines and label positions}
-       \item{labs}{Formatted values for labels} 
+       \item{labs}{Formatted values for labels}
        \item{all}{Values for lines}
 }
 \description{

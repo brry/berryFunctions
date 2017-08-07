@@ -13,7 +13,7 @@ panelDim(n, weight = c(1, 1), maxempty = round(n/4), landscape = FALSE,
 \item{weight}{Weights to avoid \emph{empty panels} and \emph{discrepancy between ncol and nrow}, respectively. DEFAULT: c(1,1)}
 
 \item{maxempty}{Maximum number of panels that are allowed to be left empty.
-If \code{maxempty=0}, no panel is left blank, so 11 plots would be beneath each other 
+If \code{maxempty=0}, no panel is left blank, so 11 plots would be beneath each other
 instead of in a 4x3 grid with one panel left blank. DEFAULT: round(n/4)}
 
 \item{landscape}{Use landscape orientation instead of portrait? DEFAULT: FALSE}

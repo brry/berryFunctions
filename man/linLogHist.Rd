@@ -43,7 +43,7 @@ linLogHist(x, steps = 100, breaks = 20, col = "blue", las = 1,
 
 \item{write_t}{write transformation value in lower right corner? DEFAULT: TRUE}
 
-\item{values_t}{Supply vector with values for transformation (1/t). Overides steps. 
+\item{values_t}{Supply vector with values for transformation (1/t). Overides steps.
 If you have a better algorithm than I do, please let me know! DEFAULT: NULL}
 
 \item{\dots}{further arguments passed to \code{\link{hist}}, like freq, main, xlim, ylab. Excluded: x, xaxt, possibly add}

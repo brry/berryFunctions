@@ -77,7 +77,7 @@ lines(superPos(P=P_b, UH=UH_1), col=4)
 lines(superPos(P=P_c, UH=UH_1), col=5)
 legend("topright", c("P a","P b", "P c"), title="with UH_1", col=3:5, lty=1)
 #
-plot( superPos(P=P_a, UH=UH_2), col=3, ylim=c(0,5), type="l", 
+plot( superPos(P=P_a, UH=UH_2), col=3, ylim=c(0,5), type="l",
       main="Discharge", ylab="Q [m^3/s]")
 lines(superPos(P=P_b, UH=UH_2), col=4)
 lines(superPos(P=P_c, UH=UH_2), col=5)

@@ -15,7 +15,7 @@ horizHist(Data, breaks = "Sturges", freq = TRUE, plot = TRUE,
 
 \item{breaks}{character or numerical as explained in \code{\link{hist}}. DEFAULT: "Sturges"}
 
-\item{freq}{logical. if TRUE, the histogram graphic is a representation of frequencies, the counts component of the result; 
+\item{freq}{logical. if TRUE, the histogram graphic is a representation of frequencies, the counts component of the result;
 if FALSE, probability densities, component density, are plotted (so that the histogram has a total area of one). DEFAULT: TRUE}
 
 \item{plot}{logical. Should histogramm be plotted? FALSE to get just the hpos function. DEFAULT: TRUE}
@@ -48,8 +48,8 @@ Draw a histogram with bars horizontally
 Uses barplot to draw the histogram horizontally.
 }
 \note{
-Doesn't work with breakpoints provided as a vector with different widths of the bars.\cr 
-     Please do not forget to use the function for vertical positioning from the \bold{current} horizontal histogram. 
+Doesn't work with breakpoints provided as a vector with different widths of the bars.\cr
+     Please do not forget to use the function for vertical positioning from the \bold{current} horizontal histogram.
      If It is not working correctly, you might have the function defined from some prior horizHist result.
 }
 \examples{
@@ -57,15 +57,15 @@ Doesn't work with breakpoints provided as a vector with different widths of the 
 # Data and basic concept
 set.seed(8); ExampleData <- rnorm(50,8,5)+5
 hist(ExampleData)
-hpos <- horizHist(ExampleData) 
+hpos <- horizHist(ExampleData)
 # Caution: the labels at the y-axis are not the real coordinates!
-# abline(h=2) will draw above the second bar, not at the label value 2. 
+# abline(h=2) will draw above the second bar, not at the label value 2.
 # Use hpos (horizontal position), the function returned by horizHist:
 abline(h=hpos(11), col=2, lwd=2)
 
 # Further arguments
-horizHist(ExampleData, xlim=c(-8,20)) 
-horizHist(ExampleData, ylab="the ... argument worked!", col.axis=3) 
+horizHist(ExampleData, xlim=c(-8,20))
+horizHist(ExampleData, ylab="the ... argument worked!", col.axis=3)
 hist(ExampleData, xlim=c(-10,40)) # with xlim
 horizHist(ExampleData, ylim=c(-10,40), border="red") # with ylim
 hpos <- horizHist(ExampleData, breaks=20, col="orange")

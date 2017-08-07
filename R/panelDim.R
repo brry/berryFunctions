@@ -52,7 +52,7 @@
 #' @param n Number of panels to be arranged
 #' @param weight Weights to avoid \emph{empty panels} and \emph{discrepancy between ncol and nrow}, respectively. DEFAULT: c(1,1)
 #' @param maxempty Maximum number of panels that are allowed to be left empty.
-#'        If \code{maxempty=0}, no panel is left blank, so 11 plots would be beneath each other 
+#'        If \code{maxempty=0}, no panel is left blank, so 11 plots would be beneath each other
 #'        instead of in a 4x3 grid with one panel left blank. DEFAULT: round(n/4)
 #' @param landscape Use landscape orientation instead of portrait? DEFAULT: FALSE
 #' @param all Show all reasonable possibilities in a data.frame? DEFAULT: FALSE
@@ -76,7 +76,7 @@ weight <- rep(weight, length=2)
 maxempty <- maxempty[1]
 #
 # matrix of possibilities:
-n2 <- n+maxempty 
+n2 <- n+maxempty
 m <- outer(1:n2, 1:n2)
 # Get the possibilities that would yield n (or up to n+maxempty) panels
 getpossibilities <- function(nblank)
@@ -101,7 +101,7 @@ colnames(g) <- c("x","y")
 g$empty <- g$x * g$y - n
 # difference between ncol and nrow, = distance from diagonal:
 g$diff <- g$x - g$y
-# ranking of possibilities via weigted penalty points: 
+# ranking of possibilities via weigted penalty points:
 penalty <- weight[1]*g$empty + weight[2]*g$diff
 g <- g[order(penalty),]
 rownames(g) <- NULL
@@ -122,19 +122,19 @@ if(plot & !all)
     box("figure")
     }
   }
-if(plot & all) 
+if(plot & all)
   {
   op <- par(mfrow=c(2,2), mar=rep(0.3,4))
   on.exit( par(op) )
   # 4 best plots (b):
   for(b in 1:pmin(4, nrow(g)))
     {
-    nr <- g[b,1]  ; nc <- g[b,2] 
+    nr <- g[b,1]  ; nc <- g[b,2]
     if(landscape) { nr <- g[b,2]  ; nc <- g[b,1]  }
     #cat("b: ", b, ", nr: ", nr, ", nc: ", nc, "\n")
     plot(1, ylim=c(nr,0), xlim=c(0,nc), type="n", yaxs="i", xaxs="i", ann=F, axes=F)
-    #if(mfcol) 
-    for(j in 1:n) rect(xleft=(j-1)%%nc, ybottom=ceiling(j/nc), 
+    #if(mfcol)
+    for(j in 1:n) rect(xleft=(j-1)%%nc, ybottom=ceiling(j/nc),
                       xright=(j-1)%%nc+1,  ytop=ceiling(j/nc)-1, col=8)
     #box("figure")
     }

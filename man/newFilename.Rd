@@ -12,7 +12,7 @@ newFilename(filename, ignore = FALSE, pre = "", mid = "\\n", end = "",
 
 \item{ignore}{Logical (vector, recycled): Ignore file? DEFAULT: FALSE}
 
-\item{pre, mid, end}{Char: strings to append after traceback / message / filenames. 
+\item{pre, mid, end}{Char: strings to append after traceback / message / filenames.
 DEFAULT: "", "\\n  ", ""}
 
 \item{quiet}{Logical: Suppress messages about creating file(s)? DEFAULT: FALSE}

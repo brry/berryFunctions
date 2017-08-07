@@ -10,15 +10,15 @@ classify(x, method = "equalinterval", breaks, Range = range(x, finite =
 \arguments{
 \item{x}{Vector with numeric values}
 
-\item{method}{Character string (partial matching is performed). Classification method or 
+\item{method}{Character string (partial matching is performed). Classification method or
 type of binning to compute the class breakpoints. See section Details. DEFAULT: "equalinterval")}
 
 \item{breaks}{Specification for method, see Details. DEFAULT: different defaults for each method}
 
 \item{Range}{Ends of color bar for method=equalinterval. DEFAULT: range(x, finite=TRUE)}
 
-\item{sdlab}{Type of label and breakpoints if \code{method=standarddeviation}. 
-1 means \code{-0.5 sd, 0.5 sd}, 2 means \code{-1 sd, mean, 1 sd}, 
+\item{sdlab}{Type of label and breakpoints if \code{method=standarddeviation}.
+1 means \code{-0.5 sd, 0.5 sd}, 2 means \code{-1 sd, mean, 1 sd},
 3 means actual numbers for type 1, 4 means numbers for type 2.}
 
 \item{quiet}{Suppress warnings, eg for values outside Range? DEFAULT: FALSE}
@@ -61,7 +61,7 @@ classify( c(1:10, 20), "l")
 
 }
 \references{
-See this page on the effect of classification (binning) methods: \cr 
+See this page on the effect of classification (binning) methods: \cr
 \url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html}
 }
 \seealso{

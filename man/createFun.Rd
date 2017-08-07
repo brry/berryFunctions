@@ -13,7 +13,7 @@ createFun(fun, path = ".", open = TRUE)
 Paths ending in /R,man,inst,vignettes will be changed to one level up.
 DEFAULT: "."}
 
-\item{open}{Logical: open the file? If several instances of Rstudio are open, 
+\item{open}{Logical: open the file? If several instances of Rstudio are open,
 the last one (not necessarily the active one) will be used.
 DEFAULT: TRUE}
 }
@@ -30,7 +30,7 @@ Tries to open the file in the standard editor for .R files using \code{\link{sys
 #createFun("myNewFunction")
 }
 \seealso{
-\code{\link{system2}}, \code{\link{funSource}}, Roxygen2: 
+\code{\link{system2}}, \code{\link{funSource}}, Roxygen2:
          \url{https://cran.r-project.org/package=roxygen2/vignettes/rd.html}
 }
 \author{

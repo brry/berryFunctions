@@ -23,7 +23,7 @@ mReg(x, y = NULL, data = NULL, Poly45 = FALSE, exp_4 = FALSE,
 \item{Poly45}{Logical. Should 4th and 5th degree polynomials also be fitted? DEFAULT: FALSE, as the formulas are very long.}
 
 \item{exp_4}{Logical. Return 4-parametric exponential distribution fits (via \code{\link{exp4p}}) in the output table? (only best fit is plotted).
-exp_4par_ini has the initial values of exponential fitting with the data relocated to first quadrant. 
+exp_4par_ini has the initial values of exponential fitting with the data relocated to first quadrant.
 The others are optimized with the methods of \code{\link{optim}}. DEFAULT: FALSE}
 
 \item{xf}{Character. x name for Formula. DEFAULT: substitute(x) before replacing zeros in x and y}
@@ -38,7 +38,7 @@ The others are optimized with the methods of \code{\link{optim}}. DEFAULT: FALSE
 
 \item{nbest}{Integer. Number of best fitting functions to be plotted (console output table always has all). DEFAULT: 12}
 
-\item{R2min}{Numerical. Minimum Rsquared value for function type to be plotted. 
+\item{R2min}{Numerical. Minimum Rsquared value for function type to be plotted.
 Suggestion: 0.6 (2/3 of variation of y is explained by function of x). DEFAULT: empty}
 
 \item{selection}{Integers of functions to be plotted, assigned as in list in section "note". DEFAULT: NULL, meaning all}
@@ -78,47 +78,47 @@ Suggestion: 0.6 (2/3 of variation of y is explained by function of x). DEFAULT: 
 \item{\dots}{Further graphical parameters passed to plot}
 }
 \value{
-data.frame with rounded R squared, formulas, and full R^2 and parameters for further use. 
+data.frame with rounded R squared, formulas, and full R^2 and parameters for further use.
         Rownames are the names (types) of function. Sorted decreasingly by R^2
 }
 \description{
-Multiple regression fitting various function types including e.g. linear, cubic, logarithmic, exponential, power, reciprocal. 
-Quick way to find out what function type fits the data best. 
-Plots data and fitted functions and adds a legend with the functions (or their types=structure) sorted by R squared. 
+Multiple regression fitting various function types including e.g. linear, cubic, logarithmic, exponential, power, reciprocal.
+Quick way to find out what function type fits the data best.
+Plots data and fitted functions and adds a legend with the functions (or their types=structure) sorted by R squared.
 Returns the fitted functions with their parameters and R^2 values in a data.frame.
 }
 \details{
-legendform : example\cr 
-         full : 7.8*x + 6.31\cr 
-         form : a*x+b\cr 
-         nameform : linear a*x+b\cr 
-         name : linear\cr\cr 
+legendform : example\cr
+         full : 7.8*x + 6.31\cr
+         form : a*x+b\cr
+         nameform : linear a*x+b\cr
+         name : linear\cr\cr
          full can be quite long, especially with Poly45=TRUE!
 }
 \note{
 If you're adjusting the appearance (lwd, lty, col) of single lines,
-set parameters in the following order:\cr 
-# 1 linear a*x + b\cr 
-# 2 quadratic (parabola) a*x^2 + b*x + c\cr 
+set parameters in the following order:\cr
+# 1 linear a*x + b\cr
+# 2 quadratic (parabola) a*x^2 + b*x + c\cr
 # 3 kubic a*x^3 + b*x^2 + c*x + d\cr
-# 4 Polynom 4th degree a*x^4 + b*x^3 + c*x^2 + d*x + e\cr 
-# 5 Polynom 5 a*x^5 + b*x^4 + c*x^3 + d*x^2 + e*x + f \cr 
+# 4 Polynom 4th degree a*x^4 + b*x^3 + c*x^2 + d*x + e\cr
+# 5 Polynom 5 a*x^5 + b*x^4 + c*x^3 + d*x^2 + e*x + f \cr
 # 6 logarithmic a*log(x) + b \cr
-# 7 exponential a*e^(b*x) \cr 
-# 8 power/root a*x^b \cr 
-# 9 reciprocal a/x + b \cr 
-# 10 rational 1 / (a*x + b) \cr 
+# 7 exponential a*e^(b*x) \cr
+# 8 power/root a*x^b \cr
+# 9 reciprocal a/x + b \cr
+# 10 rational 1 / (a*x + b) \cr
 # 11 exponential 4 Param a*e^(b*(x+c)) + d \cr
 
 Negative values are not used for regressions containing logarithms; with warning.\cr
 exp_4par was originally developed for exponential temperature decline in a cup of hot water.
 }
 \section{warning}{
- A well fitting function does NOT imply correct causation!\cr 
-        A good fit does NOT mean that you describe the bahaviour of a system adequatly!\cr 
-        Extrapolation can be DANGEROUS!\cr 
-        Always extrapolate to see if a function fits the expected results there as well.\cr 
-        Avoid overfitting: Poly45 will often yield good results (in terms of R^2), but can be way overfitted. 
+ A well fitting function does NOT imply correct causation!\cr
+        A good fit does NOT mean that you describe the bahaviour of a system adequatly!\cr
+        Extrapolation can be DANGEROUS!\cr
+        Always extrapolate to see if a function fits the expected results there as well.\cr
+        Avoid overfitting: Poly45 will often yield good results (in terms of R^2), but can be way overfitted.
         And outside the range of values, they act wildly.
 }
 
@@ -167,7 +167,7 @@ mReg(c(x,11,13,15), c(y,2,2,2), xf="myX", yf="myY", Poly45=TRUE, legendform="nam
 points(x,y, cex=2, lwd=2)
 # The Polynomials are still very good: they have 5 to 6 Parameters, after all!
 # Poly45 is set to FALSE by default to avoid such overfitting.
- 
+
 mReg(x,y, pcol=8, ncol=0) # no return to console
 
 # only plot a subset: best n fits, minimum fit quality, or user selection
@@ -196,7 +196,7 @@ mReg(j,k, legargs=list(x="bottomright"), legendform="form")
 mReg(j,k, legargs=list(x="bottomright"), legendform="nameform")
 mReg(j,k, legargs=list(x="bottomright"), legendform="full")
 
-\dontrun{# Excluded from Rcmd check (long computing time) 
+\dontrun{# Excluded from Rcmd check (long computing time)
 
 # The question that got me started on this whole function...
 # exponential decline of temperature of a mug of hot chocolate
@@ -207,7 +207,7 @@ plot(temp)
 temp <- temp[-20,] # missing value - rmse would complain about it
 
 x <- temp$Minuten
-y <- temp$Temp 
+y <- temp$Temp
 mReg(x,y, exp_4=TRUE, selection=11)
 # y=49*e^(-0.031*(x - 0  )) + 25 correct, judged from the model:
 # Temp=T0 - Te *exp(k*t) + Te     with    T0=73.76,  Tend=26.21, k=-0.031
@@ -243,10 +243,10 @@ x <- read.table(sfile, header=TRUE)$x
 y <- read.table(sfile, header=TRUE)$y
 mReg(x,y,  digits=6) # all very equal
 x2 <- x-min(x)
-mReg(x2,y, digits=6)          #  Formulas are wrong if digits is too low!! 
+mReg(x2,y, digits=6)          #  Formulas are wrong if digits is too low!!
 #mReg(x2,y, legendform="full")
 
-# Zero and NA testing (to be moved to unit testing someday...) 
+# Zero and NA testing (to be moved to unit testing someday...)
 mReg(1:10, rep(0,10))
 mReg(1:10, c(rep(0,9),NA))
 mReg(1:10, rep(NA,10))
@@ -262,7 +262,7 @@ mReg(rep(1,10), 1:10, quiet=TRUE)
 mReg(rep(0,10), 1:10, quiet=TRUE)
 mReg(c(rep(0,9),NA), 1:10, quiet=TRUE)
 mReg(rep(NA,10), 1:10, quiet=TRUE)
- 
+
 }
 \references{
 Listed here: \url{http://rclickhandbuch.wordpress.com/rpackages}

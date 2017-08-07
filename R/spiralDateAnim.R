@@ -1,20 +1,20 @@
 #' Animated spiral graph
-#'
+#' 
 #' Animation of (daily) time series along spiral
-#'
+#' 
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, May 2016
 #' @seealso \code{\link{spiralDate}}, \code{\link{linLogHist}}
 #' @keywords chron hplot aplot color
 #' @importFrom utils setTxtProgressBar txtProgressBar
 #' @export
 #' @examples
-#'
+#' 
 #' set.seed(42)
 #' x <- as.Date("1985-01-01")+0:5000
 #' y <- cumsum(rnorm(5001))+50
 #' y <- y + sin(0:5000/366*2*pi)*max(abs(y))/2
 #' plot(x,y)
-#'
+#' 
 #' spiralDateAnim(x,y, steps=10, sleep=0.01) # 0.05 might be smoother...
 #' spiralDateAnim(x,y, steps=20)
 #' 
@@ -31,13 +31,13 @@
 #'     ffmpeg="C:/Program Files/R/ffmpeg/bin/ffmpeg.exe")
 #' 
 #' }
-#'
+#' 
 #' @param dates,values,data Input as in \code{\link{spiralDate}}
 #' @param steps Number of steps (images) in animation. DEFAULT: 100
 #' @param sleep Pause time between frames, in seconds, passed to \code{\link{Sys.sleep}}. DEFAULT: 0
-#' @param progbar Should a progress bar be drawn? Useful if you have a large dataset or many steps. DEFAULT: TRUE 
+#' @param progbar Should a progress bar be drawn? Useful if you have a large dataset or many steps. DEFAULT: TRUE
 #' @param \dots Further arguments passed to \code{\link{spiralDate}}
-#'
+#' 
 spiralDateAnim <- function(
 dates,
 values,
@@ -48,12 +48,12 @@ progbar=TRUE,
 ...
 )
 {
-# 
+#
 if(!missing(data)) # get vectors from data.frame
   {
-  dates <- data[ , deparse(substitute(dates))]  
-  values<- data[ , deparse(substitute(values))]  
-  } 
+  dates <- data[ , deparse(substitute(dates))]
+  values<- data[ , deparse(substitute(values))]
+  }
 #
 steps <- max(steps) # in case the user inputs a vector
 s <- seq_len(steps) # basically, safe way to get  s <- 1:steps

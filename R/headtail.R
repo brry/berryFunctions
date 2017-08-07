@@ -1,9 +1,9 @@
 #' head and tail
-#'
+#' 
 #' show head and tail of an object with one command
-#'
+#' 
 #' @details Tries to find good methods of combining the two results acccording to {code{class(x)}}.
-#'
+#' 
 #' @return \code{\link{head}} result
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Mrz 2016
 #' @seealso \code{\link{head}}
@@ -40,14 +40,14 @@
 #' 
 #' head(table(state.division, state.region), n=3)
 #' headtail(table(state.division, state.region), n=3, na=TRUE)
-#'
+#' 
 #' @param x Object
 #' @param n Number of elements/rows/lines at begin and end of object to be returned. DEFAULT: 1
 #' @param nh,nt Number for \code{\link{head}} and \code{\link{tail}}, respectively. DEFAULT: n
 #' @param na Add NA values in between to emphasize visibly that there is
 #'           something inbetween the values? DEFAULT: FALSE
 #' @param \dots Further arguments passed to \code{\link{head}} and \code{\link{tail}}
-#'
+#' 
 headtail <- function(
   x,
 n=1,

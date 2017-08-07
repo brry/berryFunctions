@@ -28,7 +28,7 @@ LISTa1 <- l2array(LIST)
 LISTa1
 str(LISTa1)
 
-LISTm <- lapply(list(1:6,7:12,13:18,19:24), matrix, ncol=3, 
+LISTm <- lapply(list(1:6,7:12,13:18,19:24), matrix, ncol=3,
                dimnames=list(x=c("a","b"), y=c("i","j","k"))  )
 l2array(LISTm)
 
@@ -36,12 +36,12 @@ l2array(LISTm)
 # I then found abind, which is much much much faster and easier on memory!
 # It now replaces the internal old actual conversion code
 # l2array still checks the dimnames
-LISTa2 <- do.call(abind::abind, list(LIST, rev.along=0, use.dnns=TRUE)) 
+LISTa2 <- do.call(abind::abind, list(LIST, rev.along=0, use.dnns=TRUE))
 LISTa2
 stopifnot(all(LISTa1==LISTa2))
 rm(LIST, LISTa1, LISTa2)
 
- 
+
 # General intro to arrays -----
 
 A1 <- array(1:24, dim=c(4,2,3), dimnames=list(
@@ -61,8 +61,8 @@ A1["row1",,]                                    # 1+5=6, 9+13=22, 17+21=38
 
 as.vector(A1)
 
-A <- array(1:24, dim=c(3,4,2), dimnames=list(x=paste0("x",1:3), 
-                                             y=paste0("y",1:4), 
+A <- array(1:24, dim=c(3,4,2), dimnames=list(x=paste0("x",1:3),
+                                             y=paste0("y",1:4),
                                              z=paste0("z",1:2)))
 str(A)
 rm(A)
@@ -90,7 +90,7 @@ names(dimnames(LISTN[[2]]))[3] <- "intentional"
 dimnames(LISTN[[3]])[3] <- list(paste0("k",1:3))
 LAN <- l2array(LISTN)
 LAN["row2", ,"k2",] # n2 is now changed to k2
-LANa <- do.call(abind::abind, list(LISTN, rev.along=0, use.dnns=TRUE)) 
+LANa <- do.call(abind::abind, list(LISTN, rev.along=0, use.dnns=TRUE))
 all(LAN==LANa)
 str(LANa)
 

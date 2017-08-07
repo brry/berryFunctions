@@ -15,56 +15,56 @@ seasonality(dates, values, data, drange = NA, vrange = NA, shift = 0,
   returnall = FALSE, quiet = FALSE, ...)
 }
 \arguments{
-\item{dates}{Dates in ascending order. 
-Can be charater strings or \code{\link{strptime}} results, 
+\item{dates}{Dates in ascending order.
+Can be charater strings or \code{\link{strptime}} results,
 as accepted (and coerced) by \code{\link{as.Date}}}
 
 \item{values}{Values to be mapped in color with \code{\link{colPoints}}}
 
 \item{data}{Optional: data.frame with the column names as given by dates and values}
 
-\item{drange}{Optional date range (analogous to xlim), can be a vector like 
+\item{drange}{Optional date range (analogous to xlim), can be a vector like
 \code{dates}. DEFAULT: NA (computed from \code{dates} internally)}
 
 \item{vrange}{Optional value range (analogous to ylim), can be a vector like
 \code{values}. DEFAULT: NA (computed from \code{values} internally)}
 
-\item{shift}{Number of days to move the year-break to. 
+\item{shift}{Number of days to move the year-break to.
 E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0}
 
-\item{janline}{Logical: Should horizontal line be plotted at 
+\item{janline}{Logical: Should horizontal line be plotted at
 January 1st if \code{shift!=0}? DEFAULT: TRUE}
 
-\item{nmax}{Number of annual maxima to be marked, plotted and returned. 
+\item{nmax}{Number of annual maxima to be marked, plotted and returned.
 Currently, only 0 and 1 are implemented. DEFAULT: 0}
 
 \item{maxargs}{List of arguments passed to \code{\link{lines}} for annual maxima,
-e.g. \code{maxargs=list(type="l", col="red", lty=3)}. 
+e.g. \code{maxargs=list(type="l", col="red", lty=3)}.
 DEFAULT: NULL (several internal defaults are used, but can be overridden)}
 
-\item{plot}{Integer specifying the type of plot. 
-Can be a vector to produce several plots. \cr 
+\item{plot}{Integer specifying the type of plot.
+Can be a vector to produce several plots. \cr
 0: none, only return the data.frame with annual maxima. \cr
 1: color coded doy (day of the year) over year (the default). \cr
 2: Color coded spiral graph with \code{\link{spiralDate}}. \cr
 3: Spaghetti line plot with discharge over doy, one line per year. \cr
-4: \code{probs} \code{\link{quantileMean}} over doy, with optional 
+4: \code{probs} \code{\link{quantileMean}} over doy, with optional
    aggregation window (\code{width}) around each doy. \cr
 5: Annmax over time for crude trend analysis. \cr
 DEFAULT: 1}
 
 \item{add}{Logical. Add to existing plot? DEFAULT: FALSE}
 
-\item{nmin}{Minimum number of values that must be present per (hydrological) 
+\item{nmin}{Minimum number of values that must be present per (hydrological)
 year to be plotted in plot type 5. DEFAULT: 100}
 
-\item{probs}{Probabilities passed to \code{\link{quantileMean}} for plot=4. 
+\item{probs}{Probabilities passed to \code{\link{quantileMean}} for plot=4.
 DEFAULT: c(0,25,50,75,95,99)/100}
 
 \item{width}{Numeric: window width for plot=4. Used as sd in gaussian weighting.
-Support (number of values around a DOY passed to 
-quantile funtion at least once) is ca 4.9*width. 
-The value at doy itself is used 10 times. 
+Support (number of values around a DOY passed to
+quantile funtion at least once) is ca 4.9*width.
+The value at doy itself is used 10 times.
 Larger values of width require more computing time.
 DEFAULT: 3}
 
@@ -73,23 +73,23 @@ DEFAULT: 3}
 \item{texti}{Numerical (vector): indices at which to label the lines.
 DEFAULT: seq(200,20,length.out=length(probs))}
 
-\item{textargs}{List of arguments passed to \code{\link{textField}} for plot=4. 
+\item{textargs}{List of arguments passed to \code{\link{textField}} for plot=4.
 DEFAULT: NULL}
 
 \item{months}{Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D}
 
 \item{slab, tlab, vlab}{Labels for the \bold{s}eason, \bold{t}ime (year) and \bold{v}alues
-used on the axes and title of \code{\link{colPointsLegend}}. 
+used on the axes and title of \code{\link{colPointsLegend}}.
 DEFAULT: "Month", "Year", substitute(values)}
 
 \item{xlim, ylim}{Limits of x and y axis. DEFAULT: NA (specified internally per plot type)}
 
-\item{xaxs, yaxs}{x and y Axis style, see \code{\link{par}}. 
+\item{xaxs, yaxs}{x and y Axis style, see \code{\link{par}}.
 Use "r" for regular 4\% expansion, "i" for in range only.
 DEFAULT: NA (specified internally per plot type)}
 
-\item{main, adj}{Graph title and offset to the left 
-(\code{adj} passsed to \code{\link{title}}). 
+\item{main, adj}{Graph title and offset to the left
+(\code{adj} passsed to \code{\link{title}}).
 DEFAULT: "Seasonality", 0.2}
 
 \item{mar, mgp}{Parameters specifying plot margin size and labels placement.
@@ -109,16 +109,16 @@ annmax data.frame? DEFAULT: FALSE}
 \item{quiet}{Logical: suppress progress stuff and colPoints messages?
 DEFAULT: FALSE}
 
-\item{\dots}{Further arguments passed to \code{\link{colPoints}} like 
+\item{\dots}{Further arguments passed to \code{\link{colPoints}} like
 pch, main, xaxs, but not Range (use \code{vrange}).
-Passed to \code{\link{spiralDate}} if \code{plot=2}, 
+Passed to \code{\link{spiralDate}} if \code{plot=2},
 like add, format, lines.}
 }
 \value{
-The output is always invisible, don't forget to assign it. 
-        If returnall=FALSE: Data.frame with \code{year}, \code{n}umber of nonNA entries, 
+The output is always invisible, don't forget to assign it.
+        If returnall=FALSE: Data.frame with \code{year}, \code{n}umber of nonNA entries,
         \code{max} value + \code{doy} of annual maxima.
-        Please note that the column year does not match the calendrical year 
+        Please note that the column year does not match the calendrical year
         if \code{shift!=0}. \cr
         if returnall=TRUE: a list with \code{annmax} (df from above) as well as: \cr
         \code{data}: data.frame(doy, values, year) and optionally: \cr
@@ -140,7 +140,7 @@ Q$discharge[450:581] <- NA
 plot(Q, type="l")
 seas <- seasonality(date, discharge, data=Q, shift=100, main="NRFA: Thames\\nRoyal Windsor Park")
 head(seas)
-# notice how n for nonmissing values is lower in one single hydrological year, 
+# notice how n for nonmissing values is lower in one single hydrological year,
 # which includes parts of two consecutive calendarical years.
 
 # Be careful with your interpretation. This looks normal up to 2007, but then BAM!:

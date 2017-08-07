@@ -66,10 +66,10 @@ quantileBands(neff2, x=1:400, smooth=35, ylab="mean of rnorm(n)",
   xlab="sample size (n)", probs=0:10/10, col=brewer.pal(5,"BuGn"),
   txi=c(40,50,60), textargs=list(col="yellow"), medargs=list(lwd=2),
   meanargs=list(col=2, lty=1), main="Mean converges to true population mean")
-   
+
 }
 \seealso{
-\code{\link{quantile}}, \code{\link{quantileMean}}, \code{\link{ciBand}}, 
+\code{\link{quantile}}, \code{\link{quantileMean}}, \code{\link{ciBand}},
          \code{\link{polygon}}, \url{https://cran.r-project.org/package=fanplot}
 }
 \author{

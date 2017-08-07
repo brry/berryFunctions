@@ -1,7 +1,7 @@
 #' insert rows to data.frame
-#'
+#' 
 #' Insert (multiple) rows to a data.frame, possibly coming from another data.frame, with value and row recycling
-#'
+#' 
 #' @return data.frame
 #' @note Has not yet been tested with RWI (really weird input), so might not be absolutely foolproof
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Oct 2015, based on code by Ari B. Friedmann
@@ -11,7 +11,7 @@
 #' @keywords misc manip array
 #' @export
 #' @examples
-#'
+#' 
 #' existingDF <- as.data.frame(matrix(1:20, nrow=5, ncol=4))
 #' existingDF
 #' insertRows(existingDF, 2) # default new=NA is recycled
@@ -21,22 +21,22 @@
 #' insertRows(existingDF, 5)
 #' insertRows(existingDF, 6) # weird stuff...
 #' insertRows(existingDF, 9) # not supposed to do that
-#'
+#' 
 #' # Works for multiple rows as well:
 #' insertRows(existingDF, r=c(2,4,5), new=NA)
 #' insertRows(existingDF, r=c(2,4,4), new=NA)
-#'
+#' 
 #' # Also works with a data.frame for insertion:
 #' insertDF <- as.data.frame(matrix(101:112, nrow=3, ncol=4))
 #' insertRows(existingDF, 3, new=insertDF) # excess rows in new are ignored
 #' insertRows(existingDF, c(2,4,5), new=insertDF)
 #' insertRows(existingDF, c(2,4:6), new=insertDF) # rows are recycled
-#'
+#' 
 #' @param df data.frame
 #' @param r Row number (not name!), at which the \code{new} row is to be inserted. Can be a vector
 #' @param new Vector with data to be inserted, is recycled. Alternatively, a data.frame, whose rows are put into the r locations.
 #'        If it has more rows than length(r), the excess rows are ignored. DEFAULT: NA
-#'
+#' 
 insertRows <- function(
 df,
 r,

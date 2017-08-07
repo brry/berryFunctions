@@ -1,11 +1,11 @@
 #' Test logical expressions
-#'
+#' 
 #' Check if logical expressions return what you expect with a truth table
 #' 
 #' @details This is a nice way to check operator precedence, see \code{\link{Syntax}}
-#'
+#' 
 #' @return Truth table as data.frame with TRUE and FALSE (and NA) combinations
-#' @author Berry Boessenkool, \email{berry-b@@gmx.de},  Mrz 2016 
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de},  Mrz 2016
 #' @seealso \code{\link{logical}}
 #' @keywords logic
 #' @export
@@ -16,8 +16,8 @@
 #' TFtest(!a & !b | c, na=FALSE)
 #' TFtest(!a)
 #' TFtest(a&b|c, (a&b)|c, a&(b|c), na=FALSE) # AND has precedence over OR
-#'
-#' @param \dots Expression(s) with logical operators to be evaluated, 
+#' 
+#' @param \dots Expression(s) with logical operators to be evaluated,
 #'        with single letters for variables. Each expression is to be separated with a comma
 #' @param na Logical: should NAs be included in the truth table? DEFAULT: TRUE
 #' 

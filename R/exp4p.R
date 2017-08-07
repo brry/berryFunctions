@@ -5,9 +5,9 @@
 #' @details This is mainly a building block for mReg
 #' 
 #' @return Data.frame with the 4 parameters for each \code{\link{optim}} method
-#' @note Optim can be slow! It refers to the functions rmse and rsquare, also in this package. 
-#'       L-BFGS-B needs finite values. In case it doesn't get any 
-#'       with the initial parameters (as in the first example Dataset), 
+#' @note Optim can be slow! It refers to the functions rmse and rsquare, also in this package.
+#'       L-BFGS-B needs finite values. In case it doesn't get any
+#'       with the initial parameters (as in the first example Dataset),
 #'       it trys again with the parameters optimized via Nelder Mead.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2012-2013, outsourced from mReg in July 2014
 #' @seealso \code{\link{mReg}}, \code{\link{lm}}
@@ -24,7 +24,7 @@
 #' plot(temp)
 #' temp <- temp[-20,] # missing value - rmse would complain about it
 #' x <- temp$Minuten
-#' y <- temp$Temp 
+#' y <- temp$Temp
 #' rm(tfile, temp)
 #' 
 #' exp4p(x,y, plot=TRUE)

@@ -14,8 +14,8 @@ seqPal(n = 12, reverse = FALSE, alpha = 1, extr = FALSE, yb = FALSE,
 
 \item{alpha}{Transparency (0=transparent, 1=fully colored). DEFAULT: 1}
 
-\item{extr}{Should colors span possible range more extremely? 
-If TRUE, it has very light yellow and very dark blue values included, 
+\item{extr}{Should colors span possible range more extremely?
+If TRUE, it has very light yellow and very dark blue values included,
 using the result from \code{RColorBrewer::brewer.pal(9, "YlGnBu")}. DEFAULT: FALSE}
 
 \item{yb}{Should colors be in yellow-blue instead of the internal (nice) default? DEFAULT: FALSE}
@@ -47,13 +47,13 @@ image(v, col=seqPal(1000), asp=1);  colPointsLegend(v, nbins=1000)
 image(v, col=seqPal(1000, logbase=1.007), asp=1)
 colPointsLegend(v, col=seqPal(1000, logbase=1.09))
 
-plot(    rep(1, 1000), pch=15, cex=3, col=seqPal(1000), ylim=c(0.99, 1.01), ylab="logbase", las=1) 
+plot(    rep(1, 1000), pch=15, cex=3, col=seqPal(1000), ylim=c(0.99, 1.01), ylab="logbase", las=1)
 for(b in seq(0.99, 1.01, len=30))
-    points(rep(b, 1000), pch=15, cex=1, col=seqPal(1000, logbase=b)) 
- 
+    points(rep(b, 1000), pch=15, cex=1, col=seqPal(1000, logbase=b))
+
 }
 \seealso{
-\code{\link{showPal}}, \code{\link{divPal}}, \code{\link{addAlpha}}, 
+\code{\link{showPal}}, \code{\link{divPal}}, \code{\link{addAlpha}},
          \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 }
 \author{

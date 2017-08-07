@@ -24,7 +24,7 @@ na9(nspace = 5, base = c(-9999, -999, -9.99, -9.999), sep = c(",", "."),
 Character strings
 }
 \description{
-Returns a number of useful character strings with varying amount of spaces prepended. 
+Returns a number of useful character strings with varying amount of spaces prepended.
 It can be used as \code{na.strings=na9()} in \code{\link{read.table}}.
 }
 \examples{

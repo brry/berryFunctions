@@ -5,7 +5,7 @@
 #' \code{\link{image}}, 2 vectors and a matrix for z.
 #' 
 #' @return Invisible list of values that can be passed to colPointsLegend or colPointsHist.
-#' @note Rstudio scales graphics really badly, so don't expect the right legend width out of the box if you use Rstudio! 
+#' @note Rstudio scales graphics really badly, so don't expect the right legend width out of the box if you use Rstudio!
 #'      Exporting via \code{png("myplot.png", 600,400); colPoints(x,y,z); dev.off()} usually works much better
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2011-2014. I'd be interested in hearing what you used the function for.
 #' @seealso \code{\link{classify}}, \code{\link{colPointsLegend}}, \code{\link{colPointsHist}}
@@ -99,7 +99,7 @@
 #' 
 #' # colPoints with matrix:
 #' colPoints(z=volcano, add=FALSE)
-#' # image and contour by default transpose the matrix! 
+#' # image and contour by default transpose the matrix!
 #' # colPoints shows what is really in the data.
 #' colPointsHist(z=volcano)
 #' 
@@ -121,7 +121,7 @@
 #' 
 #' # santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r
 #' if(require(gstat)){
-#' xyz <- gstat(formula=z~1, locations=~x+y, dummy=TRUE, beta=1, 
+#' xyz <- gstat(formula=z~1, locations=~x+y, dummy=TRUE, beta=1,
 #'              model=vgm(psill=0.025,model="Exp",range=5), nmax=20)
 #' xyz <- predict(xyz, newdata=data.frame(x=runif(200, 20,40),y=runif(200, 50,70)), nsim=1)
 #' head(xyz)
@@ -129,84 +129,84 @@
 #' }
 #' 
 #' @param x,y      Vectors with coordinates of the points to be drawn
-#' @param z        z values belonging to coordinates. 
+#' @param z        z values belonging to coordinates.
 #'                 Vector or matrix with the color-defining height values
 #' @param data     Optional: data.frame with the column names as given by x,y and z.
-#' @param add      Logical. Should the points be added to current (existing!) plot? 
-#'                 If FALSE, a new plot is started. 
+#' @param add      Logical. Should the points be added to current (existing!) plot?
+#'                 If FALSE, a new plot is started.
 #'                 DEFAULT: TRUE (It's called col\bold{Points}, after all)
-#' @param col      Vector of colors to be used. DEFAULT: 100 colors from sequential 
+#' @param col      Vector of colors to be used. DEFAULT: 100 colors from sequential
 #'                 palette \code{\link{seqPal}} (color-blind safe, black/white-print safe)
 #' @param col2     Color for points where z is NA, or lower / higher than \code{Range}.
 #'                 DEFAULT: c(NA, 1, 8)
 #' @param Range    Ends of color bar. If NULL, it is again the DEFAULT: range(z, finite=TRUE)
-#' @param method   Classification method (partial matching is performed), 
-#'                 see \code{\link{classify}} (ways to get color breakpoints). 
+#' @param method   Classification method (partial matching is performed),
+#'                 see \code{\link{classify}} (ways to get color breakpoints).
 #'                 DEFAULT: "equalinterval")
-#' @param breaks   Specification for method, see \code{\link{classify}}. 
+#' @param breaks   Specification for method, see \code{\link{classify}}.
 #'                 DEFAULT: different defaults for each method
-#' @param sdlab    Type of label and breakpoints if \code{method=standarddeviation}, 
+#' @param sdlab    Type of label and breakpoints if \code{method=standarddeviation},
 #'                 see \code{\link{classify}}. DEFAULT: 1
 #' @param legend   Logical. Should a \code{\link{colPointsLegend}} be drawn? DEFAULT: TRUE
-#' @param legargs  List. Arguments passed to \code{\link{colPointsLegend}}. 
+#' @param legargs  List. Arguments passed to \code{\link{colPointsLegend}}.
 #'                 DEFAULT: NULL, with some defaults specified internally
-#' @param hist     Logical. Should a \code{\link{colPointsHist}} be drawn? 
+#' @param hist     Logical. Should a \code{\link{colPointsHist}} be drawn?
 #'                 DEFAULT: FALSE (TRUE if histargs are given)
 #' @param histargs List. Arguments passed to \code{\link{colPointsHist}}. DEFAULT: NULL
-#' @param lines    Logical. Should lines be drawn instead of / underneath the points? 
-#'                 (color of each \code{\link{segments}} is taken from starting point, 
-#'                 last point is endpoint.) If lines=TRUE and pch is not given, 
+#' @param lines    Logical. Should lines be drawn instead of / underneath the points?
+#'                 (color of each \code{\link{segments}} is taken from starting point,
+#'                 last point is endpoint.) If lines=TRUE and pch is not given,
 #'                 pch ist set to NA. DEFAULT: FALSE
-#' @param nint     Numeric of length 1. Number of interpolation points between each 
-#'                 coordinate if \code{lines=TRUE}. nint=1 means no interpolation. 
-#'                 Values below 10 will smooth coordinates and might 
+#' @param nint     Numeric of length 1. Number of interpolation points between each
+#'                 coordinate if \code{lines=TRUE}. nint=1 means no interpolation.
+#'                 Values below 10 will smooth coordinates and might
 #'                 miss the original points. DEFAULT: 30
 #' @param xlab     x-axis label. DEFAULT: \code{deparse(\link{substitute}(x))}
 #' @param ylab     y-axis label. DEFAULT: ditto
 #' @param zlab     \code{\link{colPointsLegend} title}. DEFAULT: ditto
-#' @param axes,las Draw axes? Label Axis Style. Only used when add=FALSE. 
+#' @param axes,las Draw axes? Label Axis Style. Only used when add=FALSE.
 #'                 See \code{\link{par}}. DEFAULT: axes=TRUE, las=1 (all labels horizontal)
 #' @param pch      Point CHaracter. See \code{\link{par}}. DEFAULT: 16
-#' @param x1,x2,y1,y2 Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}. 
-#'                 Passed to \code{\link{colPointsLegend}}. 
+#' @param x1,x2,y1,y2 Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}.
+#'                 Passed to \code{\link{colPointsLegend}}.
 #'                 DEFAULT: x: 0.6-0.99, y: 0.88-0.98
-#' @param density  Arguments for density line in \code{\link{colPointsLegend}} 
+#' @param density  Arguments for density line in \code{\link{colPointsLegend}}
 #'                 DEFAULT: NULL
 #' @param quiet    Turn off warnings? DEFAULT: FALSE
-#' @param \dots    Further graphical arguments passed to \code{\link{plot}}, 
-#'                 \code{\link{points}} and \code{\link{segments}}, 
-#'                 eg cex, xlim (when add=F), mgp, main, sub, asp (when add=F), etc. 
+#' @param \dots    Further graphical arguments passed to \code{\link{plot}},
+#'                 \code{\link{points}} and \code{\link{segments}},
+#'                 eg cex, xlim (when add=F), mgp, main, sub, asp (when add=F), etc.
 #'                 Note: col does not work, as it is already another argument
 #' 
 colPoints <- function(
-  x, y, 
-  z, 
+  x, y,
+  z,
   data,
-  add=TRUE, 
+  add=TRUE,
   col=seqPal(cl$nbins),
   col2=c(NA, "grey", "black"),
-  Range=range(z, finite=TRUE), 
+  Range=range(z, finite=TRUE),
   method="equalinterval",
-  breaks, 
-  sdlab=1, 
-  legend=TRUE, 
-  legargs=NULL, 
-  hist=FALSE, 
-  histargs=NULL, 
-  lines=FALSE, 
+  breaks,
+  sdlab=1,
+  legend=TRUE,
+  legargs=NULL,
+  hist=FALSE,
+  histargs=NULL,
+  lines=FALSE,
   nint=30,
   xlab=deparse(substitute(x)),
   ylab=deparse(substitute(y)),
   zlab=deparse(substitute(z)),
   axes=TRUE,
   las=1,
-  pch=16, 
+  pch=16,
   x1=0.6,
   y1=0.88,
   x2=0.99,
   y2=0.99,
   density=NULL,
-  quiet=FALSE, 
+  quiet=FALSE,
   ...)
 {
  # default labels need to be obtained before x and y are evaluated
@@ -295,7 +295,7 @@ points(x, y, col=c(col, col2[2:3])[cl$index], pch=pch, ...)
 #
 # add legend:
 legdefs <- list(z=z, at=cl$at, labels=cl$labels, bb=cl$bb, nbins=cl$nbins,
-                plottriangle=c(any(na.omit(cl$index==cl$nbins+1)),any(na.omit(cl$index==cl$nbins+2))), 
+                plottriangle=c(any(na.omit(cl$index==cl$nbins+1)),any(na.omit(cl$index==cl$nbins+2))),
                 title=zlab, x1=x1, x2=x2, y1=y1, y2=y2, density=density, tricol=col2[2:3], colors=col)
 output <- c(output, legdefs[!names(legdefs) %in% c("nbins","bb","at","labels","index","z")])
 if(legend) do.call(colPointsLegend, args=owa(legdefs, legargs))

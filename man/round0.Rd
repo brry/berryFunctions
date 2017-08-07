@@ -14,7 +14,7 @@ round0(x, digits = 0, pre = 2, width = digits + pre + ifelse(digits == 0,
 
 \item{pre}{Number of characters before the decimal separator. DEFAULT: 2}
 
-\item{width}{Total width (number of characters including dot). 
+\item{width}{Total width (number of characters including dot).
 DEFAULT: digits+pre (+1 if needed)}
 
 \item{flag}{Flag. Could be "" for spaces. DEFAULT: "0"}

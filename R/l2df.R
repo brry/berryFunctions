@@ -1,11 +1,11 @@
 #' List to data.frame
 #' 
 #' Convert list with vectors of unequal length to dataframe, pad with NAs
-#'
+#' 
 #' @return data.frame
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2014
-#' @seealso \code{\link{l2array}}, \code{\link{sapply}}. 
-#'          If you have a LARGE list each with the same number of values, 
+#' @seealso \code{\link{l2array}}, \code{\link{sapply}}.
+#'          If you have a LARGE list each with the same number of values,
 #'          use the (much!) faster: \code{plyr::quickdf}.
 #' @references
 #'   \url{http://stackoverflow.com/questions/5531471/combining-unequal-columns-in-r}\cr
@@ -93,7 +93,7 @@ df <- sapply(list, "[", 1:maxlen) # apply the indexing function to each element
 ###cn <- colnames(df)
 df <- as.data.frame(df, stringsAsFactors=FALSE)
 ###if(byrow & checknames & maxlen>1) colnames(df) <- cn
-if(maxlen==1) 
+if(maxlen==1)
   {
   n1 <- names(list[[1]])
   if(is.null(n1)) n1 <- "V1"

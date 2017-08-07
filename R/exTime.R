@@ -1,7 +1,7 @@
 #' Time to run examples
-#'
+#' 
 #' Time the execution of examples. Useful in package development to identify functions taking much time.
-#'
+#' 
 #' @return Time used as per \code{\link{system.time}}
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, May 2016
 #' @seealso \code{\link{example}}, \code{\link{system.time}}
@@ -16,16 +16,16 @@
 #' exTime(yearSample) # does NOT work, gives NULL and warning
 #' exTime("yearSample", elapsed=TRUE, quiet=TRUE)
 #' exTime("addFade", elapsed=TRUE, quiet=TRUE, run.dontrun=TRUE, run.donttest=TRUE)
-#'
+#' 
 #' ## this takes quite some time if done for all functions in a package:
 #' \dontrun{
 #' times <- exTime(package="rdwd")
 #' as.matrix(sort(times))
 #' system2("open", tempdir()) # to view the pdf graphics created by exTime
-#'
+#' 
 #' # times <- exTime(package="rdwd", run.dontrun=FALSE)
 #' }
-#'
+#' 
 #' @param topic     Character string: the online \code{\link{help}} topic
 #'                  of which the examples should be run.
 #' @param package   Charstring: installed and loaded package from which all examples should be run.
@@ -41,7 +41,7 @@
 #' @param \dots     Further arguments to \code{\link{example}}, especially
 #'                  \code{run.dontrun}, \code{run.donttest} and \code{package},
 #'                  but NOT \code{character.only} and \code{ask}
-#'
+#' 
 exTime <- function(
 topic=NA,
 package=NA,

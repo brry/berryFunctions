@@ -16,18 +16,18 @@ movAv(dat, width = 7, weights = rep(1, width), quiet = FALSE)
 \item{quiet}{Logical: suppress allNA message and even width warning? DEFAULT: FALSE}
 }
 \value{
-Vector of the same length as the original input. 
+Vector of the same length as the original input.
         Padded with NAs at width/2 margin elements
 }
 \description{
 Weighted moving average (running mean) with overlapping windows
 }
 \details{
-Width has to be odd, so there is a defined middle point of each window. 
-Even inputs will be changed with a warning (unless quiet=TRUE).\cr 
-Weights doesn't have to be symmetrical, but is always mapped to the middle 
-of each window!\cr 
-If there are NAs in the window, the corresponding weight is distributed 
+Width has to be odd, so there is a defined middle point of each window.
+Even inputs will be changed with a warning (unless quiet=TRUE).\cr
+Weights doesn't have to be symmetrical, but is always mapped to the middle
+of each window!\cr
+If there are NAs in the window, the corresponding weight is distributed
 evenly to the other weights.
 }
 \note{
@@ -63,7 +63,7 @@ lines(movAv(Nile,21), col=3) # even widths are changed to a higher value
 plot(1871:1970, Nile, type="l", col=8)
 movAvLines(1871:1970, Nile, lwd=3)
 
-for(i in 1:30*2-1) 
+for(i in 1:30*2-1)
   {
   plot(a, type="o", pch=16, las=1, main=paste("moving average, width =", i))
   lines(movAv(a, i), col=2, lwd=4)
@@ -99,7 +99,7 @@ par(op)
 
 }
 \seealso{
-\code{\link{filter}}, \code{\link{decompose}}, \code{\link{smooth}}, 
+\code{\link{filter}}, \code{\link{decompose}}, \code{\link{smooth}},
          \code{\link{loess}}, \code{\link[zoo]{rollapply}} (no overlapping!)
 }
 \author{
