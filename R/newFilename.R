@@ -83,7 +83,7 @@ if(!quiet)
   n_o <- sum(file.exists(fnames[is.na(existed)])) # overwritten
   n_i <- n_i-n_o
   message(traceCall(1, "", ": "), pre,
-          if(n_i>0) paste0("not checking ", n_i+n_o, " file", if(n_i+n_o>1)"s",
+          if(n_i+n_o>0) paste0("not checking ", n_i+n_o, " file", if(n_i+n_o>1)"s",
                            " (",n_o," already exist",if(n_o==1)"s",")", if(n_n>0)", "),
           if(n_n>0) paste0(    "creating ", n_n, " file", if(n_n>1)"s"),
           if(n_e>0) paste0(" (",n_e," already existed for which '_n' is appended)"),
