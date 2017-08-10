@@ -43,6 +43,10 @@ b <- -val
 plot(b)
 plot(b, ylim=lim0(b) ) # works with only negative values as well
 
+# can handle only-NA input:
+lim0(c(7,NA,NA,NA)[-1])
+lim0(c(NA,NA,NA))
+
 }
 \references{
 \code{methods(plot)}, \code{\link[graphics]{plot.default}}.

@@ -32,6 +32,10 @@
 #' plot(b)
 #' plot(b, ylim=lim0(b) ) # works with only negative values as well
 #' 
+#' # can handle only-NA input:
+#' lim0(c(7,NA,NA,NA)[-1])
+#' lim0(c(NA,NA,NA))
+#' 
 #' @param x Numeric. Vector with values
 #' @param f Numeric. Extension factor. DEFAULT: 0.04 as in extendrange used eg. by \code{\link{curve}}
 #' @param curtail Logical. Should the range returned be trimmed by 4\%? That way,
@@ -43,7 +47,8 @@ f=1/27,
 curtail=TRUE)
 {
 if(length(x)==1) x <- c(0,x)
-r <- range(as.matrix(x), finite=TRUE)
+r <- suppressWarnings(range(as.matrix(x), finite=TRUE))
+if(!all(is.finite(r))) {warning("x has no finite values, returning plot range 0:1."); r <- 0:1}
 r2 <- r + c(-f,f) * diff(r) # classical procedure of extendrange
 r2[which.min(abs(r2))] <- 0 # set one end to zero
 if(curtail) # if par xaxs is "r" as it is by default, first trim the range, so that
