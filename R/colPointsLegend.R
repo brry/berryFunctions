@@ -45,7 +45,7 @@
 #'            DEFAULT: internal calculations based on title, labelpos and titlepos.
 #' @param mgp MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin,
 #'            as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.6, 0)
-#' @param bg Background behind key, labels and title. DEFAULT: "white"
+#' @param bg Background behind key, labels and title. DEFAULT: par("bg")
 #' @param sborder Border around inset subplot. DEFAULT: NA
 #' @param resetfocus Reset focus to original plot?
 #'                   Specifies where further low level plot commands are directed to. DEFAULT: TRUE
@@ -88,7 +88,7 @@ outer=FALSE,
 xpd=NA,
 mar,
 mgp=c(1.8, 0.6, 0),
-bg="white",
+bg=par("bg"),
 sborder=NA,
 resetfocus=TRUE,
 

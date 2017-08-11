@@ -8,7 +8,7 @@ colPointsLegend(z, Range = range(z, finite = TRUE), nbins = 100,
   colors = seqPal(nbins), bb = seqR(Range, length.out = nbins + 1),
   at = pretty2(Range), labels = at, adj = 0.5, x1 = 0.6, y1 = 0.88,
   x2 = 0.99, y2 = 0.99, outer = FALSE, xpd = NA, mar, mgp = c(1.8,
-  0.6, 0), bg = "white", sborder = NA, resetfocus = TRUE,
+  0.6, 0), bg = par("bg"), sborder = NA, resetfocus = TRUE,
   plottriangle = FALSE, triangle = 0.14, tricol = c(8, 1),
   density = NULL, lines = TRUE, atminmax = FALSE, horizontal = TRUE,
   labelpos = 1, titlepos = 3, title = "Legend", las = 1, x, y, index,
@@ -49,7 +49,7 @@ DEFAULT: internal calculations based on title, labelpos and titlepos.}
 \item{mgp}{MarGinPlacement: distance of xlab/ylab, numbers and line from plot margin,
 as in \code{\link{par}}, but with different defaults. DEFAULT: c(1.8, 0.6, 0)}
 
-\item{bg}{Background behind key, labels and title. DEFAULT: "white"}
+\item{bg}{Background behind key, labels and title. DEFAULT: par("bg")}
 
 \item{sborder}{Border around inset subplot. DEFAULT: NA}
 
