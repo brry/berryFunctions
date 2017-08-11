@@ -28,6 +28,8 @@ ToDo-list
 - tryStack: mapply, do.call etc put function name in next element
 - checkFile: eror in ->-> checkFile: n/n file(s) do not exist at getwd: \n truncMessage(files[nonexi])
 - ciBand: check if at all x values yl,ym,yu are in ascending order
+- instGit: check versions of dependencies
+- catPal for categorical palettes
 
 
 

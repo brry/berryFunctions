@@ -17,7 +17,7 @@
 #' 
 showPal <- function(cex=4,...)
 {
-op <- par(mfcol=c(10,2), mar=c(0,0,0,0), oma=c(0,0,1.8,0), yaxt="n", xaxt="n", ...)
+op <- par(mfcol=c(11,2), mar=c(0,0,0,0), oma=c(0,0,1.8,0), yaxt="n", xaxt="n", ...)
 on.exit(par(op), add=TRUE)
 # Sequential palette -----------------------------------------------------------
 plot(rep(1, 12), pch=15, cex=cex, col=seqPal(12))            ; text(  6, 1, "default")
@@ -30,6 +30,7 @@ plot(rep(1, 12), pch=15, cex=cex, col=seqPal(reverse=TRUE))  ; text(  6, 1, "rev
 plot(rep(1,300), pch=15, cex=cex, col=seqPal(300, yb=TRUE))  ; text(150, 1, "yb=TRUE")
 plot(rep(1,300), pch=15, cex=cex, col=seqPal(300, yr=TRUE))  ; text(150, 1, "yr=TRUE")
 plot(rep(1,300), pch=15, cex=cex, col=seqPal(300, gb=TRUE))  ; text(150, 1, "gb=TRUE")
+plot(rep(1,300), pch=15, cex=cex, col=seqPal(300,  b=TRUE))  ; text(150, 1, "b=TRUE")
 plot(rep(1,300), pch=15, cex=cex, col=rainbow2(300))         ; text(150, 1, "berryFunctions::rainbow2(300)", font=2)
 
 # Diverging palette ------------------------------------------------------------

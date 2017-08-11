@@ -33,6 +33,7 @@
 #' @param yb Should colors be in yellow-blue instead of the internal (nice) default? DEFAULT: FALSE
 #' @param yr Should colors be in yellow-red instead of the default? DEFAULT: FALSE
 #' @param gb Should colors be in green-blue instead of the default? DEFAULT: FALSE
+#' @param b  Should colors be in an increasingly saturated blue? DEFAULT: FALSE
 #' @param colors If not NULL, a color vector used in \code{\link{colorRampPalette}}. DEFAULT: NULL
 #' @param logbase If \code{!=1}, this is passed to \code{\link{classify}} and \code{\link{logSpaced}}. DEFAULT: 1
 #' @param \dots Further arguments passed to \code{\link{colorRamp}}
@@ -45,6 +46,7 @@ extr=FALSE,
 yb=FALSE,
 yr=FALSE,
 gb=FALSE,
+b=FALSE,
 colors=NULL,
 logbase=1,
 ...
@@ -56,6 +58,7 @@ if(extr) cols <- c("#FFFFD9", "#EDF8B1", "#C7E9B4", "#7FCDBB", "#41B6C4",
 if(yb) cols <- c("yellow","blue")
 if(yr) cols <- c("yellow","red")
 if(gb) cols <- c("chartreuse","cornflowerblue","darkblue")
+if(b)  cols <- c("#BADEF4","#3D6088")
 if(!is.null(colors)) cols <- colors
 if(reverse) cols <- rev(cols)
 outcols <- colorRampPalette(cols)(n)
