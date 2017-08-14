@@ -9,7 +9,7 @@
 #'          \code{\link[TeachingDemos]{subplot}} and \code{\link[ade4]{add.scatter}}
 #'          for alternative solutions to this problem that do not set margins.
 #' @keywords hplot dplot aplot
-#' @importFrom graphics par plot.new rect
+#' @importFrom graphics par plot.new rect strheight strwidth text
 #' @export
 #' @examples
 #' 

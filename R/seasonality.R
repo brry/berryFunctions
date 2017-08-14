@@ -16,6 +16,10 @@
 #' @seealso \code{\link{spiralDate}}, \code{\link{colPoints}},
 #'          \url{https://waterdata.usgs.gov/nwis}
 #' @keywords aplot
+#' @importFrom graphics abline axis par plot segments title
+#' @importFrom grDevices extendrange
+#' @importFrom stats dnorm
+#' @importFrom utils head
 #' @export
 #' @examples
 #' # browseURL("http://nrfa.ceh.ac.uk/data/station/meanflow/39072")

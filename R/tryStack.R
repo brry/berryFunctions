@@ -17,6 +17,7 @@
 #' \url{http://stackoverflow.com/questions/16879821/save-traceback-on-error-using-trycatch}
 #' 
 #' @keywords programming error
+#' @importFrom utils head
 #' @export
 #' @examples
 #' 

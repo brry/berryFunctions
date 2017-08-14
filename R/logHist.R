@@ -7,6 +7,7 @@
 #' @seealso \code{\link{logAxis}}, \code{\link{hist}}
 #' @keywords aplot dplot
 #' @importFrom graphics hist
+#' @importFrom stats na.omit
 #' @export
 #' @examples
 #' 

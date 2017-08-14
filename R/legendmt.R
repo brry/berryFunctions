@@ -7,7 +7,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Apr 2017
 #' @seealso \code{\link{legend}}
 #' @keywords aplot
-# @importFrom package fun1 fun2
+#' @importFrom graphics legend par
 #' @export
 #' @examples
 #' plot(1:10)

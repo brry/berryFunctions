@@ -8,7 +8,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sep 2016 + March 2017
 #' @seealso \code{\link{tryStack}}, \code{\link{checkFile}} for example usage
 #' @keywords programming error
-#' @importFrom utils capture.output
+#' @importFrom utils capture.output head
 #' @export
 #' @examples
 #' lower <- function(a, s) {warning(traceCall(s), "stupid berry warning: ", a+10); a}

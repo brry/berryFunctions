@@ -5,6 +5,8 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Mar 2017
 #' @seealso \code{\link{createFun}}
 #' @keywords file
+#' @importFrom graphics par plot
+#' @importFrom grDevices dev.off pdf
 #' @importFrom stats rnorm
 #' @export
 #' @examples

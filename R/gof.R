@@ -19,7 +19,7 @@
 #'             \url{http://en.wikipedia.org/wiki/R-squared},
 #'             \url{http://en.wikipedia.org/wiki/Mean_squared_error}
 #' @keywords ts univar
-#' @importFrom stats cor
+#' @importFrom stats cor sd
 # @export # do not export gofNA
 #' @examples
 #' # R squared and RMSE --------------------------------------------------------
