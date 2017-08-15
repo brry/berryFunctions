@@ -56,8 +56,8 @@
 #' @references Listed here: \url{http://rclickhandbuch.wordpress.com/rpackages}
 #' @keywords aplot hplot regression nonlinear multivariate
 #' @importFrom grDevices extendrange
-#' @importFrom graphics lines par plot
-#' @importFrom stats coef lm model.frame predict
+#' @importFrom graphics lines par plot legend
+#' @importFrom stats coef lm model.frame predict poly
 #' @export
 #' @examples
 #' 

@@ -6,7 +6,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, May 2016
 #' @seealso \code{\link{example}}, \code{\link{system.time}}
 #' @keywords documentation utilities
-#' @importFrom utils capture.output
+#' @importFrom utils capture.output example
 #' @importFrom grDevices dev.off pdf
 #' @importFrom graphics plot text
 #' @export

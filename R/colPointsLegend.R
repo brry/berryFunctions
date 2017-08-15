@@ -9,6 +9,7 @@
 #' @keywords aplot color
 #' @importFrom graphics lines par plot.window polygon rect segments strheight strwidth text
 #' @importFrom utils head tail
+#' @importFrom stats density
 #' @export
 #' @examples
 #' 
