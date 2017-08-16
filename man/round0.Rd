@@ -12,7 +12,7 @@ round0(x, digits = 0, pre = 2, width = digits + pre + ifelse(digits == 0,
 
 \item{digits}{Number of digits (after decimal separator) to keep. DEFAULT: 0}
 
-\item{pre}{Number of characters before the decimal separator. DEFAULT: 2}
+\item{pre}{Minimum number of characters before the decimal separator. DEFAULT: 2}
 
 \item{width}{Total width (number of characters including dot).
 DEFAULT: digits+pre (+1 if needed)}
@@ -32,7 +32,7 @@ Round numbers and add leading + trailing zeros
 round0( pi*10^(-3:5), 2)
 stopifnot(round0(17.3, 2) == "17.30")
 round0(7.3)
-round0(7.3, 2)
+round0(c(7.3,777.1234), 2)
 round0(c(0.2,7.3,12.8), 2, pre=1)
 round0(c(0.2,7.3,12.8), 1, pre=3, flag="") # spaces instead of zeros
 
