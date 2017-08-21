@@ -54,8 +54,9 @@
 #' owa(d, a, c("bb","lwd"), c("lty","dummy") ) # or several vectors
 #' 
 #' 
-#' @param d Default arguments (list or vector)
-#' @param a Arguments specified by user (list or vector)
+#' @param d     Default arguments (list or vector)
+#' @param a     Arguments specified by user (list or vector). 
+#'              Can also be a single TRUE, in which case d will be returned.
 #' @param \dots Names of unchangeable arguments (that will not be overwritten)
 #'              as character strings. Can also be a vector with characters strings.
 #' @param quiet Logical: Should \code{\link{message}} be suppressed if arguments are ignored?
