@@ -13,7 +13,7 @@
 #'             \url{http://www.theusrus.de/blog/the-good-the-bad-22012/}
 #' @keywords aplot hplot color
 #' @importFrom grDevices colorRampPalette rainbow
-#' @importFrom graphics plot points segments
+#' @importFrom graphics plot points segments abline
 #' @importFrom stats approx median na.omit
 #' @export
 #' @examples
@@ -166,6 +166,8 @@
 #' @param zlab     \code{\link{colPointsLegend} title}. DEFAULT: ditto
 #' @param axes,las Draw axes? Label Axis Style. Only used when add=FALSE.
 #'                 See \code{\link{par}}. DEFAULT: axes=TRUE, las=1 (all labels horizontal)
+#' @param bglines  If not NULL, passed to \code{\link{abline}} to draw background 
+#'                 lines before adding colored points. DEFAULT: NULL
 #' @param pch      Point CHaracter. See \code{\link{par}}. DEFAULT: 16
 #' @param x1,x2,y1,y2 Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}.
 #'                 Passed to \code{\link{colPointsLegend}}.
@@ -200,6 +202,7 @@ colPoints <- function(
   zlab=deparse(substitute(z)),
   axes=TRUE,
   las=1,
+  bglines=NULL,
   pch=16,
   x1=0.6,
   y1=0.88,
@@ -230,7 +233,7 @@ if(!missing(data)) # get x, y and z from data.frame
    y <- getColumn(substitute(y), data)
    z <- getColumn(substitute(z), data)
    } else
-# b) Regular case: z ist a vector
+# b) Regular case: z is a vector
 if(is.vector(z))
    {
    if(!(length(x)==length(y) & length(x)==length(z)))
@@ -263,6 +266,7 @@ if(length(col) != cl$nbins) stop("Number of colors is not equal to number of cla
 #
 # ACTUAL PLOTTING --------------------------------------------------------------
 if(!add) plot(x, y, type="n", xlab=xlab, ylab=ylab, las=las, axes=axes, ...)
+if(!is.null(bglines)) do.call(abline, bglines)
 # Plot lines if wanted:
 if(lines)
   {

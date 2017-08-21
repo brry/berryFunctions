@@ -9,9 +9,9 @@ colPoints(x, y, z, data, add = TRUE, col = seqPal(cl$nbins), col2 = c(NA,
   method = "equalinterval", breaks, sdlab = 1, legend = TRUE,
   legargs = NULL, hist = FALSE, histargs = NULL, lines = FALSE,
   nint = 30, xlab = deparse(substitute(x)), ylab = deparse(substitute(y)),
-  zlab = deparse(substitute(z)), axes = TRUE, las = 1, pch = 16,
-  x1 = 0.6, y1 = 0.88, x2 = 0.99, y2 = 0.99, density = NULL,
-  quiet = FALSE, ...)
+  zlab = deparse(substitute(z)), axes = TRUE, las = 1, bglines = NULL,
+  pch = 16, x1 = 0.6, y1 = 0.88, x2 = 0.99, y2 = 0.99,
+  density = NULL, quiet = FALSE, ...)
 }
 \arguments{
 \item{x, y}{Vectors with coordinates of the points to be drawn}
@@ -71,6 +71,9 @@ miss the original points. DEFAULT: 30}
 
 \item{axes, las}{Draw axes? Label Axis Style. Only used when add=FALSE.
 See \code{\link{par}}. DEFAULT: axes=TRUE, las=1 (all labels horizontal)}
+
+\item{bglines}{If not NULL, passed to \code{\link{abline}} to draw background 
+lines before adding colored points. DEFAULT: NULL}
 
 \item{pch}{Point CHaracter. See \code{\link{par}}. DEFAULT: 16}
 
