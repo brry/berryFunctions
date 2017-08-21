@@ -57,7 +57,7 @@ part1 <- paste0(
 ' @section Warning: warningMayBeRemoved
 ' @return ReturnValue
 ' @author Berry Boessenkool, \\email{berry-b@@gmx.de}, ", date,
-"' @seealso \\code{\\link{help}}, \\code{\\link{help}}
+"' @seealso \\code{\\link{help}}, \\code{graphics::\\link[graphics]{plot}}
 ' @keywords aplot
  @importFrom package fun1 fun2
 ' @export
@@ -65,8 +65,8 @@ part1 <- paste0(
 ' ",fun,"(rnorm(20))
 '
 ' @param a     Numerical vector.
-' @param plot  Logical. Should values be plotted? This can be turnd off if
-'              only the computation is needed. DEFAULT: TRUE
+' @param plot  Logical. Should values be plotted? This can be turned off if
+'              only the computation results are needed. DEFAULT: TRUE
 ' @param dummy currently_Unused
 ' @param \\dots Further arguments passed to \\code{\\link{plot}}
 '
