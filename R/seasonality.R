@@ -76,6 +76,10 @@
 #'                 E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0
 #' @param janline  Logical: Should horizontal line be plotted at
 #'                 January 1st if \code{shift!=0}? DEFAULT: TRUE
+#' @param hlines   Draw horizontal background lines in plot 1? Either FALSE (the default), 
+#'                 TRUE to draw gray background lines at each month start, 
+#'                 or a list of arguments passed to \code{\link{abline}} with 
+#'                 \code{\link{owa}}. DEFAULT: FALSE
 #' @param nmax     Number of annual maxima to be marked, plotted and returned.
 #'                 Currently, only 0 and 1 are implemented. DEFAULT: 0
 #' @param maxargs  List of arguments passed to \code{\link{lines}} for annual maxima,
@@ -142,6 +146,7 @@ seasonality <- function(
   vrange=NA,
   shift=0,
   janline=TRUE,
+  hlines=FALSE,
   nmax=0,
   maxargs=NULL,
   plot=1,
@@ -254,8 +259,10 @@ if(1 %in% plot) # doy ~ year, col=Q ----
 {
   ylim1 <- if(allNA(ylim)) c(370,-3) else ylim
   yaxs1 <- if(is.na(yaxs)) "i" else yaxs
+  if(identical(FALSE,hlines)) bglines <- NULL else
+  bglines <- owa(list(h=tdoy, col="grey"), hlines)
   output$plot1 <- colPoints(year, doy, values, Range=vrange, add=add[1], yaxt="n",
-            xlim=xlim1, ylim=ylim1, xaxs=xaxs1, yaxs=yaxs1, quiet=quiet,
+            xlim=xlim1, ylim=ylim1, xaxs=xaxs1, yaxs=yaxs1, quiet=quiet, bglines=bglines,
             ylab=slab, xlab=tlab, zlab=vlab1, legend=legend, legargs=legargs, ...)
   # Axis labelling
   if(!add[1]){
