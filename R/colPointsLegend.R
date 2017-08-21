@@ -34,8 +34,8 @@
 #' @param colors Color vector. DEFAULT: \code{\link{seqPal}}
 #'               from yellow (lowest) to blue (highest value in Range)
 #' @param bb Borders of bins for the legend (key). DEFAULT: seqR(Range, length.out=nbins+1)
-#' @param at Positions of legend labels. DEFAULT: pretty2(Range)
-#' @param labels Labels that are written at the positions of \code{at}. DEFAULT: at
+#' @param nlab,at,labels Number of legend labels, their positions and labels. 
+#'                    DEFAULT: nlab=5, labels=at=pretty2(Range,nlab)
 #' @param adj label adjustment parallel to legend bar (only one number!). DEFAULT: 0.5
 #' @param x1,x2,y1,y2 Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}.
 #'                    DEFAULT: x: 0.6-0.99, y: 0.88-0.99
@@ -78,7 +78,8 @@ Range=range(z, finite=TRUE),
 nbins=100,
 colors=seqPal(nbins),
 bb=seqR(Range, length.out=nbins+1),
-at=pretty2(Range),
+nlab=5,
+at=pretty2(Range, nlab),
 labels=at,
 adj=0.5,
 

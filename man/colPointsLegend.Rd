@@ -6,13 +6,13 @@
 \usage{
 colPointsLegend(z, Range = range(z, finite = TRUE), nbins = 100,
   colors = seqPal(nbins), bb = seqR(Range, length.out = nbins + 1),
-  at = pretty2(Range), labels = at, adj = 0.5, x1 = 0.6, y1 = 0.88,
-  x2 = 0.99, y2 = 0.99, outer = FALSE, xpd = NA, mar, mgp = c(1.8,
-  0.6, 0), bg = par("bg"), sborder = NA, resetfocus = TRUE,
-  plottriangle = FALSE, triangle = 0.14, tricol = c(8, 1),
-  density = NULL, lines = TRUE, atminmax = FALSE, horizontal = TRUE,
-  labelpos = 1, titlepos = 3, title = "Legend", las = 1, x, y, index,
-  ...)
+  nlab = 5, at = pretty2(Range, nlab), labels = at, adj = 0.5,
+  x1 = 0.6, y1 = 0.88, x2 = 0.99, y2 = 0.99, outer = FALSE,
+  xpd = NA, mar, mgp = c(1.8, 0.6, 0), bg = par("bg"), sborder = NA,
+  resetfocus = TRUE, plottriangle = FALSE, triangle = 0.14,
+  tricol = c(8, 1), density = NULL, lines = TRUE, atminmax = FALSE,
+  horizontal = TRUE, labelpos = 1, titlepos = 3, title = "Legend",
+  las = 1, x, y, index, ...)
 }
 \arguments{
 \item{z}{Values of third dimension used in \code{\link{colPoints}},
@@ -28,9 +28,8 @@ from yellow (lowest) to blue (highest value in Range)}
 
 \item{bb}{Borders of bins for the legend (key). DEFAULT: seqR(Range, length.out=nbins+1)}
 
-\item{at}{Positions of legend labels. DEFAULT: pretty2(Range)}
-
-\item{labels}{Labels that are written at the positions of \code{at}. DEFAULT: at}
+\item{nlab, at, labels}{Number of legend labels, their positions and labels. 
+DEFAULT: nlab=5, labels=at=pretty2(Range,nlab)}
 
 \item{adj}{label adjustment parallel to legend bar (only one number!). DEFAULT: 0.5}
 
