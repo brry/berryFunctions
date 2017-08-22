@@ -5,10 +5,10 @@
 \title{linear regression with plotting}
 \usage{
 linReg(x, y = NULL, data = NULL, add = FALSE, digits = 2, pch = 16,
-  col = 2, colband = addAlpha(col), level = 0.95, lwd = 1,
-  xlab = deparse(substitute(x)), ylab = deparse(substitute(y)),
-  main = "linear regression", pos1 = "top", pos2 = NULL, inset = 0,
-  legargs = NULL, ...)
+  col = 2, colband = addAlpha(col), level = 0.95,
+  plotrange = par("usr")[1:2], lwd = 1, xlab = deparse(substitute(x)),
+  ylab = deparse(substitute(y)), main = "linear regression", pos1 = "top",
+  pos2 = NULL, inset = 0, legargs = NULL, ...)
 }
 \arguments{
 \item{x}{Numeric or formula (see examples). Vector with values of explanatory variable}
@@ -31,6 +31,10 @@ If values are not specified, they are set equal to the first. DEFAULT: 2}
 
 \item{level}{Confidence level, see \code{\link{predict.lm}}. DEFAULT: 0.95}
 
+\item{plotrange}{x range for wich regression line and uncertainty band should
+be plotted. Is passed to \code{\link{seqR}} and can hence be a vector.  
+DEFAULT: par("usr")[1:2]}
+
 \item{lwd}{Numeric. Linewidth, see \code{\link{par}}. DEFAULT: 1}
 
 \item{xlab}{Axis label if add=FALSE. DEFAULT: deparse(substitute(x))}
@@ -49,7 +53,7 @@ If values are not specified, they are set equal to the first. DEFAULT: 2}
 xpd specifies whether formula can be written only inside the plot region (when FALSE)
 or inside the figure region including mar (when TRUE) or in the entire device region including oma (when NA). DEFAULT: NULL}
 
-\item{\dots}{Further arguments passed to \code{\link{plot}} and \code{\link{abline}}.}
+\item{\dots}{Further arguments passed to \code{\link{plot}}}
 }
 \value{
 None, used for plotting and drawing.
@@ -67,6 +71,7 @@ linReg(a,b)
 linReg(a,b, ylab="Hallo", pch=1, col=3, main="Regression by Berry")
 linReg(a, b, pos1=15, pos2=0) # position of topleft corner of legend
 linReg(a, b, pos1=NA, col="orange") # to suppress legend
+linReg(a, b, plotrange=5:20) # only for plotting, all data points are used!
 
 # Formula specification:
 linReg(b~a)

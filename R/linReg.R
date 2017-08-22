@@ -19,6 +19,7 @@
 #' linReg(a,b, ylab="Hallo", pch=1, col=3, main="Regression by Berry")
 #' linReg(a, b, pos1=15, pos2=0) # position of topleft corner of legend
 #' linReg(a, b, pos1=NA, col="orange") # to suppress legend
+#' linReg(a, b, plotrange=5:20) # only for plotting, all data points are used!
 #' 
 #' # Formula specification:
 #' linReg(b~a)
@@ -41,6 +42,9 @@
 #' @param col Color of the regression line, see \code{\link{par}}. DEFAULT: 2
 #' @param colband Color of the confidence region band. DEFAULT: addAlpha(col)
 #' @param level Confidence level, see \code{\link{predict.lm}}. DEFAULT: 0.95
+#' @param plotrange x range for wich regression line and uncertainty band should
+#'        be plotted. Is passed to \code{\link{seqR}} and can hence be a vector.  
+#'        DEFAULT: par("usr")[1:2]
 #' @param lwd Numeric. Linewidth, see \code{\link{par}}. DEFAULT: 1
 #' @param xlab Axis label if add=FALSE. DEFAULT: deparse(substitute(x))
 #' @param ylab Axis label if add=FALSE. DEFAULT: deparse(substitute(y))
@@ -51,7 +55,7 @@
 #' @param legargs list of arguments passed to legend, like list(cex=0.8, xpd=TRUE, bg="white"), ...
 #'        xpd specifies whether formula can be written only inside the plot region (when FALSE)
 #'        or inside the figure region including mar (when TRUE) or in the entire device region including oma (when NA). DEFAULT: NULL
-#' @param \dots Further arguments passed to \code{\link{plot}} and \code{\link{abline}}.
+#' @param \dots Further arguments passed to \code{\link{plot}}
 #' 
 linReg <- function(
 x,
@@ -63,6 +67,7 @@ pch=16,
 col=2,
 colband=addAlpha(col),
 level=0.95,
+plotrange=par("usr")[1:2],
 lwd=1,
 xlab=deparse(substitute(x)),
 ylab=deparse(substitute(y)),
@@ -87,10 +92,9 @@ if(inherits(x,"formula"))
 if (!add) plot(x, y, las=1, pch=pch, xlab=xlab, ylab=ylab, main=main, ...)
 # do linear regression and plotting
 mod <- lm( y ~ x )
-abline(mod, col=col, lwd=lwd, ...)
-x2 <- seqR(par("usr")[1:2], len=100)
+x2 <- seqR(plotrange, len=100)
 pred <- predict(mod, newdata=data.frame(x=x2), interval="confidence", level=level )
-ciBand(yu=pred[,3], yl=pred[,2], x=x2, colb=colband, add=TRUE)
+ciBand(yu=pred[,3], yl=pred[,2], ym=pred[,1], x=x2, colm=col, lwd=lwd, colb=colband, add=TRUE)
 # expand digits vector, if necessary
 digits <- rep(digits, length.out=4)
 # Prepare formula writing
