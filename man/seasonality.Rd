@@ -24,7 +24,8 @@ as accepted (and coerced) by \code{\link{as.Date}}}
 \item{data}{Optional: data.frame with the column names as given by dates and values}
 
 \item{drange}{Optional date range (analogous to xlim), can be a vector like
-\code{dates}. DEFAULT: NA (computed from \code{dates} internally)}
+\code{dates}. Can also be numerical years, in which case 
+"-01-01" is appended. DEFAULT: NA (computed from \code{dates} internally)}
 
 \item{vrange}{Optional value range (analogous to ylim), can be a vector like
 \code{values}. DEFAULT: NA (computed from \code{values} internally)}

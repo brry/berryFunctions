@@ -69,7 +69,8 @@
 #' @param values   Values to be mapped in color with \code{\link{colPoints}}
 #' @param data     Optional: data.frame with the column names as given by dates and values
 #' @param drange   Optional date range (analogous to xlim), can be a vector like
-#'                 \code{dates}. DEFAULT: NA (computed from \code{dates} internally)
+#'                 \code{dates}. Can also be numerical years, in which case 
+#'                 "-01-01" is appended. DEFAULT: NA (computed from \code{dates} internally)
 #' @param vrange   Optional value range (analogous to ylim), can be a vector like
 #'                 \code{values}. DEFAULT: NA (computed from \code{values} internally)
 #' @param shift    Number of days to move the year-break to.
@@ -199,10 +200,12 @@ add <- add5
 # convert to date
 dates <- as.Date(dates)
 # date range (analogous to xlim):
+if(is.numeric(drange)) drange <- paste0(drange,"-01-01")
+drange <- as.Date(drange)
 if(!allNA(drange))
   {
-  dmin <- min(as.Date(drange), na.rm=TRUE)
-  dmax <- max(as.Date(drange), na.rm=TRUE)
+  dmin <- min(drange, na.rm=TRUE)
+  dmax <- max(drange, na.rm=TRUE)
   dates <- c(dmin, dates, dmax)
   values <- c(NA, values, NA)
   inrange <- dates>=dmin & dates<=dmax
