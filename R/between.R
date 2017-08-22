@@ -10,6 +10,9 @@
 #' @export
 #' @examples
 #' between(1:10, 4, 8)
+#' between(1:10, 4:8)
+#' between(1:10, 8, 4) # warns about interval
+#'  
 #' data.frame( incl.T=between(1:10, 4, 8), 
 #'             incl.F=between(1:10, 4, 8,  incl=FALSE),
 #'            aincl.F=between(1:10, 4, 8, aincl=FALSE),
@@ -32,8 +35,8 @@ aincl=incl,
 bincl=incl
 )
 {
-a <- min(a, na.rm=TRUE)
 b <- max(b, na.rm=TRUE)
+a <- min(a, na.rm=TRUE)
 if(b<a) warning("b (",b,") is larger than a (",a,"), results may be not as intended.")
 aa <- if(aincl) x >= a else x > a
 bb <- if(bincl) x <= b else x < b

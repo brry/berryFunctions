@@ -27,6 +27,9 @@ Basically a wrapper for \code{ x >= a   &   x <= b } to save repeating long x na
 }
 \examples{
 between(1:10, 4, 8)
+between(1:10, 4:8)
+between(1:10, 8, 4) # warns about interval
+ 
 data.frame( incl.T=between(1:10, 4, 8), 
             incl.F=between(1:10, 4, 8,  incl=FALSE),
            aincl.F=between(1:10, 4, 8, aincl=FALSE),
