@@ -6,15 +6,15 @@
 \usage{
 ciBand(yu, yl, ym = NULL, x = 1:length(yu), na = "interpolate",
   nastars = TRUE, singlepoints = TRUE, args = NULL, add = FALSE,
-  colm = "green3", colb = addAlpha(colm), border = NA, las = 1,
-  ylim = range(yu, yl, finite = TRUE), ...)
+  lwd = 1, colm = "green3", colb = addAlpha(colm), border = NA,
+  las = 1, ylim = range(yu, yl, finite = TRUE), ...)
 }
 \arguments{
 \item{yu}{y values of upper confidence region boundary}
 
 \item{yl}{y values of lower confidence region boundary}
 
-\item{ym}{y values of median/mean line. Only added if this argument is given. DEFAULT: NULL}
+\item{ym}{y values of middle/median/mean line. Only added if this argument is given. DEFAULT: NULL}
 
 \item{x}{x values (one ascending vector). DEFAULT: 1:length(yu)}
 
@@ -29,6 +29,8 @@ Code to identify isolated points is taken from wq::plotTs. DEFAULT: TRUE}
 \item{args}{List of arguments passed to \code{\link{points}} for the previous two arguments. DEFAULT: NULL}
 
 \item{add}{Add to existing plot? If FALSE, plot is called before adding confidence interval. DEFAULT: FALSE}
+
+\item{lwd}{Line width of middle line. DEFAULT: 1}
 
 \item{colm}{Color for median/mean line. DEFAULT: "green3"}
 
