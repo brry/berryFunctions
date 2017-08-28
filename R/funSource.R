@@ -6,7 +6,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan+Dec 2016
 #' @importFrom utils browseURL find
 #' @export
-#' @seealso \url{https://github.com/brry/rstudioberry} to add this as a keyboard shortcut
+#' @seealso \url{https://github.com/brry/rskey} to add this as a keyboard shortcut
 #' @examples
 #' \dontrun{ ## browser windows should not be openend in CRAN checks
 #' library("berryFunctions")
@@ -31,7 +31,7 @@
 #' @param x function name, with or without quotation marks
 #' @param character.only If TRUE, look for SomeFun instead of MyFun if
 #'                       MyFun <- "SomeFun". DEFAULT: \code{\link{is.character}(x)}
-#' @param trydirect If TRUE, try direct url to file \code{x.R}. DEFAULT: TRUE
+#' @param trydirect If TRUE, try direct urls to files \code{x.R} and \code{x.r}. DEFAULT: TRUE
 #' 
 funSource <- function(
 x,
@@ -89,7 +89,7 @@ if(pn %in% c("base", "compiler", "datasets", "grDevices", "graphics", "grid",
 
 # open link in Browser ---------------------------------------------------------
 
-if(trydirect) browseURL(finallink)
+if(trydirect) {browseURL(finallink); browseURL(sub("\\.R$", '\\.r', finallink))}
 # Search github repo query link
 searchlink <- paste0("https://github.com/search?q=",x," function repo:",slink)
 browseURL(searchlink)
