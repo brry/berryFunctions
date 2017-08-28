@@ -31,7 +31,7 @@ plot(rep(1,300), pch=15, cex=cex, col=seqPal(300, yr=TRUE))  ; text(150, 1, "yr=
 plot(rep(1,300), pch=15, cex=cex, col=seqPal(300, gb=TRUE))  ; text(150, 1, "gb=TRUE")
 plot(rep(1,300), pch=15, cex=cex, col=seqPal(300,  b=TRUE))  ; text(150, 1, "b=TRUE")
 plot(rep(1,300), pch=15, cex=cex, col=rainbow2(300))         ; text(150, 1, "berryFunctions::rainbow2(300)", font=2)
-title(main="berryFunctions::seqPal", xpd=NA, line=0.5)
+title(main="berryFunctions::seqPal", xpd=NA, outer=TRUE, adj=0.2, line=0.5)
 
 # Diverging palette ------------------------------------------------------------
 plot(rep(1, 12), pch=15, cex=cex, col=divPal(12))            ; text(  6, 1, "default")
@@ -46,5 +46,5 @@ plot(rep(1,300), pch=15, cex=cex, col=divPal(300,  gp=TRUE)) ; text(150, 1, "gp=
 plot(rep(1,300), pch=15, cex=cex, col=divPal(300,  br=TRUE)) ; text(150, 1, "br=TRUE")
 plot(rep(1,300), pch=15, cex=cex, col=seqPal(300,colors=c("darkblue","green","orange")))
 text(150, 1, 'col=c("darkblue","green","orange"))')
-title(main="berryFunctions::divPal", xpd=NA, line=0.5)
+title(main="berryFunctions::divPal", xpd=NA, outer=TRUE, adj=0.8, line=0.5)
 }
