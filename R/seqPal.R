@@ -61,13 +61,13 @@ if(gb) cols <- c("chartreuse","cornflowerblue","darkblue")
 if(b)  cols <- c("#BADEF4","#3D6088")
 if(!is.null(colors)) cols <- colors
 if(reverse) cols <- rev(cols)
-outcols <- colorRampPalette(cols)(n)
+outcols <- colorRampPalette(cols, ...)(n)
 if(logbase!=1)
   {
   n1 <- n#*10 # log(90, base=logbase)
   cl <- classify(1:n1, method="logspaced", breaks=c(n1,logbase))
   n2 <- cl$nbins
-  outcols <- colorRampPalette(cols)(n2)[cl$index]
+  outcols <- colorRampPalette(cols, ...)(n2)[cl$index]
   # message("n: ", round(n1), ", number of bins from classify: ", n2, ", number of unique colors: ", length(unique(outcols)))
   }
 if(alpha!=1) outcols <- addAlpha(outcols, alpha)

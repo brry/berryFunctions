@@ -50,7 +50,7 @@ if(br) cols <- c("#3F797F","#6498A0","#8BB7B5","#BED8D9","#FCC6A9","#E69A6E","#D
 if( (gp|br) & missing(n) ) n <- 8
 if(!is.null(colors)) cols <- colors
 if(reverse) cols <- rev(cols)
-outcols <- colorRampPalette(cols)(n)
+outcols <- colorRampPalette(cols, ...)(n)
 if(alpha!=1) outcols <- addAlpha(outcols, alpha)
 outcols
 }
