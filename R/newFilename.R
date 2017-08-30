@@ -17,13 +17,17 @@
 #'          "README.md", "dummy2.dummy", "DESCRIPTION", "dummy4.R", "dummy5")
 #' newFilename(fns)
 #' newFilename(fns, ignore=TRUE)
-#' newFilename(fns, ignore=c(FALSE,FALSE,FALSE,FALSE, TRUE,TRUE,TRUE,TRUE) )
+#' newFilename(fns, ignore=rep(c(TRUE,FALSE), each=4) )
+#' newFilename(fns, ignore=rep(c(TRUE,FALSE), each=4), tellignore=FALSE)
 #' newFilename(fns, ntrunc=2)
+#' newFilename(fns, overwrite=TRUE, ign=c(TRUE,TRUE,rep(FALSE,6)))
 #' newFilename("README.md")
 #' newFilename("dummy", mid=" ") # no line break
 #' 
 #' @param filename Char (vector): file name(s).
 #' @param ignore   Logical (vector, recycled): Ignore file? DEFAULT: FALSE
+#' @param overwrite Logical (vector, recycled): overwrite file? DEFAULT: FALSE
+#' @param tellignore Logical: Message about ignored files? DEFAULT: TRUE
 #' @param pre,mid,end Char: strings to append after traceback / message / filenames.
 #'                 DEFAULT: "", "\\n  ", ""
 #' @param quiet    Logical: Suppress messages about creating file(s)? DEFAULT: FALSE
@@ -33,6 +37,8 @@
 newFilename <- function(
 filename,
 ignore=FALSE,
+overwrite=FALSE,
+tellignore=TRUE,
 pre="",
 mid="\n",
 end="",
@@ -52,42 +58,47 @@ if(any(!direxi)) stop(traceCall(1, "", ": "), "The following ",
                       truncMessage(dirs[!direxi], ntrunc=ntrunc, prefix=""),
                       call.=FALSE)
 # Actual code:
-ignore <- rep(ignore, length.out=length(filename))
+ignore <-    rep(ignore,    length.out=length(filename))
+overwrite <- rep(overwrite, length.out=length(filename))
 output <- lapply(seq_along(filename), function(i)
   {
   f <- filename[i]
-  if(ignore[i]) return(c(NA, f))
-  #
-  e2 <- tools::file_ext(f)
-  if(e2!="") e2 <- paste0(".",e2)
-  e1 <- tools::file_path_sans_ext(f)
-  existed <- FALSE
+  if(ignore[i])       return(c("ign", f))
+  if(!file.exists(f)) return(c("new", f))
+  if(overwrite[i])    return(c("ovw", f))
+  # file name part 1 and 2
+  p2 <- tools::file_ext(f)
+  if(p2!="") p2 <- paste0(".",p2)
+  p1 <- tools::file_path_sans_ext(f)
   nr <- 1
   while(file.exists(f))
     {
-    f <- paste0(e1,"_",nr,e2)
+    f <- paste0(p1,"_",nr,p2)
     nr <- nr + 1
-    existed <- TRUE
     }
-  return(c(existed, f))
+  return(c("app", f))
   })
-fnames  <- sapply(output, "[", 2)
-existed <- sapply(output, "[", 1)
-existed <- as.logical(existed)
+fnames <- mnames <- sapply(output, "[", 2)
+status <- sapply(output, "[", 1)
 if(!quiet)
   {
-  # message names:
-  n_e <- sum(existed, na.rm=TRUE) # number of existing files
-  n_n <- sum(!is.na(existed)) # number of new files
-  n_i <- sum(is.na(existed)) # number of ignored files
-  n_o <- sum(file.exists(fnames[is.na(existed)])) # overwritten
-  n_i <- n_i-n_o
+  # message names: number of files
+  n_i <- sum(status=="ign") # ignored
+  n_n <- sum(status=="new") # new 
+  n_o <- sum(status=="ovw") # overwritten
+  n_a <- sum(status=="app") # _n appended
+  if(!tellignore) {n_i <- 0; mnames <- mnames[!ignore]}
+  n_ie<- sum(file.exists(filename[ignore]))
+  nfiles <- function(n) paste0(n, " file", if(n>1)"s")
   message(traceCall(1, "", ": "), pre,
-          if(n_i+n_o>0) paste0("not checking ", n_i+n_o, " file", if(n_i+n_o>1)"s",
-                           " (",n_o," already exist",if(n_o==1)"s",")", if(n_n>0)", "),
-          if(n_n>0) paste0(    "creating ", n_n, " file", if(n_n>1)"s"),
-          if(n_e>0) paste0(" (",n_e," already existed for which '_n' is appended)"),
-          ":", mid, truncMessage(fnames, ntrunc=ntrunc, prefix="", midfix="", sep="\n"), end)
+          if(n_i>0) paste0("not checking ", nfiles(n_i), 
+                           " (",n_ie," exist",if(n_ie==1)"s",")"),
+          if(n_i>0 & n_n+n_a+n_o > 0) ", ",
+          if(n_n>0) paste0("creating ", nfiles(n_n+n_a)),
+          if(n_a>0) paste0(" (",n_a," already existed for which '_n' is appended)"),
+          if(n_i+n_n+n_a > 0 & n_o>0) ", ",
+          if(n_o>0) paste0("overwriting ", nfiles(n_o)),
+          ":", mid, truncMessage(mnames, ntrunc=ntrunc, prefix="", midfix="", sep="\n"), end)
   }
 fnames
 }

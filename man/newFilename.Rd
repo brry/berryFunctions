@@ -4,13 +4,18 @@
 \alias{newFilename}
 \title{Create new filename if file already exists}
 \usage{
-newFilename(filename, ignore = FALSE, pre = "", mid = "\\n", end = "",
-  quiet = FALSE, ntrunc = 3)
+newFilename(filename, ignore = FALSE, overwrite = FALSE,
+  tellignore = TRUE, pre = "", mid = "\\n", end = "", quiet = FALSE,
+  ntrunc = 3)
 }
 \arguments{
 \item{filename}{Char (vector): file name(s).}
 
 \item{ignore}{Logical (vector, recycled): Ignore file? DEFAULT: FALSE}
+
+\item{overwrite}{Logical (vector, recycled): overwrite file? DEFAULT: FALSE}
+
+\item{tellignore}{Logical: Message about ignored files? DEFAULT: TRUE}
 
 \item{pre, mid, end}{Char: strings to append after traceback / message / filenames.
 DEFAULT: "", "\\n  ", ""}
@@ -34,8 +39,10 @@ fns <- c("dummy1", "dummy2.txt", "berryFunctions.Rproj",
          "README.md", "dummy2.dummy", "DESCRIPTION", "dummy4.R", "dummy5")
 newFilename(fns)
 newFilename(fns, ignore=TRUE)
-newFilename(fns, ignore=c(FALSE,FALSE,FALSE,FALSE, TRUE,TRUE,TRUE,TRUE) )
+newFilename(fns, ignore=rep(c(TRUE,FALSE), each=4) )
+newFilename(fns, ignore=rep(c(TRUE,FALSE), each=4), tellignore=FALSE)
 newFilename(fns, ntrunc=2)
+newFilename(fns, overwrite=TRUE, ign=c(TRUE,TRUE,rep(FALSE,6)))
 newFilename("README.md")
 newFilename("dummy", mid=" ") # no line break
 
