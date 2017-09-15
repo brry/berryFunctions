@@ -23,6 +23,7 @@
 #' monthAxis(ym=TRUE, mgp=c(3,1,0))
 #' monthAxis(ym=TRUE, cex.axis=1.4)
 #' monthAxis(ym=TRUE, mcex=0.9, col.axis="red")
+#' monthAxis(ym=TRUE, mgp=c(3,2,0), yformat="")
 #' 
 #' plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
 #' monthAxis(labels=FALSE, col.ticks=2)
@@ -69,11 +70,14 @@
 #' @param npm Number of labels per month, overrides n. DEFAULT: NULL = internally computed.
 #' @param npy Number of labels per year, overrides npm and n. DEFAULT: NA
 #' @param format Format of date, see details in \code{\link{strptime}}. DEFAULT: "\%d.\%m.\\n\%Y"
+#' @param yformat Format of year if \code{ym=TRUE}. 
+#'                Use \code{yformat=" "} (with space) to suppress year labeling. 
+#'                DEFAULT: "\%Y"
 #' @param labels labels. DEFAULT: format.Date(d, format)
 #' @param ym Label months with first letter at the center of the month and year at center below.
 #'           Sets midyear and midmonth to TRUE. Uses \code{labels} and \code{format}
 #'           for the years, but ignores them for the months. DEFAULT: FALSE
-#' @param mcex \code{cex.axis} for month labels if ym=TRUE. DEFAULT: 0.8
+#' @param mcex \code{cex.axis} for month labels if ym=TRUE. DEFAULT: 0.6
 #' @param mmgp \code{mgp} for month labels if ym=TRUE. DEFAULT: 3,0,0
 #' @param midyear Place labels in the middle of the year? if TRUE, format default is "\%Y". DEFAULT: FALSE
 #' @param midmonth Place labels in the middle of the month? if TRUE, format default is "\%m\\n\%Y". DEFAULT: FALSE
@@ -96,6 +100,7 @@ n=5,
 npm=NULL,
 npy=NA,
 format="%d.%m.\n%Y",
+yformat="%Y",
 labels=format.Date(d, format),
 ym=FALSE,
 mcex=0.6,
@@ -183,7 +188,7 @@ for(side_i in side)
                            cex.axis=cex.axis, tcl=tcl, tick=tick), midargs))
     if(missing(format)) format <- "%Y"
     labels <- labels[seq(2,length(d), by=2)]
-    if(ym) labels <- format(dmid, "%Y")
+    if(ym) labels <- format(dmid, yformat)
     axis(side=side_i, at=dmid, labels=labels, las=las, mgp=mgp,
          cex.axis=cex.axis, tick=FALSE, ...)
     }

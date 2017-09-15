@@ -6,10 +6,10 @@
 \usage{
 monthAxis(side = 1, timeAxis = NA, origin = "1970-01-01",
   startyear = NULL, stopyear = NULL, n = 5, npm = NULL, npy = NA,
-  format = "\%d.\%m.\\n\%Y", labels = format.Date(d, format), ym = FALSE,
-  mcex = 0.6, mmgp = c(3, 0, 0), midyear = FALSE, midmonth = FALSE,
-  midargs = NULL, mgp = c(3, 1.5, 0), cex.axis = 1, tick = TRUE,
-  tcl = par("tcl"), las = 1, ...)
+  format = "\%d.\%m.\\n\%Y", yformat = "\%Y", labels = format.Date(d,
+  format), ym = FALSE, mcex = 0.6, mmgp = c(3, 0, 0), midyear = FALSE,
+  midmonth = FALSE, midargs = NULL, mgp = c(3, 1.5, 0), cex.axis = 1,
+  tick = TRUE, tcl = par("tcl"), las = 1, ...)
 }
 \arguments{
 \item{side}{Which \code{\link{axis}} are to be labeled? (can be several). DEFAULT: 1}
@@ -31,13 +31,17 @@ DEFAULT: NA, meaning axis value >1e5}
 
 \item{format}{Format of date, see details in \code{\link{strptime}}. DEFAULT: "\%d.\%m.\\n\%Y"}
 
+\item{yformat}{Format of year if \code{ym=TRUE}. 
+Use \code{yformat=" "} (with space) to suppress year labeling. 
+DEFAULT: "\%Y"}
+
 \item{labels}{labels. DEFAULT: format.Date(d, format)}
 
 \item{ym}{Label months with first letter at the center of the month and year at center below.
 Sets midyear and midmonth to TRUE. Uses \code{labels} and \code{format}
 for the years, but ignores them for the months. DEFAULT: FALSE}
 
-\item{mcex}{\code{cex.axis} for month labels if ym=TRUE. DEFAULT: 0.8}
+\item{mcex}{\code{cex.axis} for month labels if ym=TRUE. DEFAULT: 0.6}
 
 \item{mmgp}{\code{mgp} for month labels if ym=TRUE. DEFAULT: 3,0,0}
 
@@ -80,6 +84,7 @@ monthAxis(ym=TRUE)
 monthAxis(ym=TRUE, mgp=c(3,1,0))
 monthAxis(ym=TRUE, cex.axis=1.4)
 monthAxis(ym=TRUE, mcex=0.9, col.axis="red")
+monthAxis(ym=TRUE, mgp=c(3,2,0), yformat="")
 
 plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
 monthAxis(labels=FALSE, col.ticks=2)
