@@ -16,8 +16,7 @@
 
 #' @param fun  Character string or unquoted name. Function that will be created with identical filename.
 #' @param path Path to package in development (including package name itself).
-#'             Paths ending in /R,man,inst,vignettes will be changed to one level up.
-#'             DEFAULT: "."
+#'             Is passed to \code{\link{packagePath}}. DEFAULT: "."
 #' @param open Logical: open the file? If several instances of Rstudio are open,
 #'             the last one (not necessarily the active one) will be used.
 #'             DEFAULT: TRUE
@@ -33,13 +32,8 @@ fun <- deparse(substitute(fun))
 fun <- gsub("\"", "", fun, fixed=TRUE)
 if(length(fun) >1)     stop("'fun' must be a single function name.")
 if(length(path)>1)     stop("'path' must be a single character string.")
-checkFile(path)
 # Filename
-path <- normalizePath(path, winslash="/", mustWork=FALSE)
-if(endsWith(path, "/R"))         path <- substr(path, 1, nchar(path)-2)
-if(endsWith(path, "/man"))       path <- substr(path, 1, nchar(path)-4)
-if(endsWith(path, "/inst"))      path <- substr(path, 1, nchar(path)-5)
-if(endsWith(path, "/vignettes")) path <- substr(path, 1, nchar(path)-10)
+path <- packagePath(path)
 rfile <- paste0(path,"/R/",fun,".R")
 rfile <- newFilename(rfile) # append _1 if existent
 #

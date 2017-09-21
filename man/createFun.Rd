@@ -10,8 +10,7 @@ createFun(fun, path = ".", open = TRUE)
 \item{fun}{Character string or unquoted name. Function that will be created with identical filename.}
 
 \item{path}{Path to package in development (including package name itself).
-Paths ending in /R,man,inst,vignettes will be changed to one level up.
-DEFAULT: "."}
+Is passed to \code{\link{packagePath}}. DEFAULT: "."}
 
 \item{open}{Logical: open the file? If several instances of Rstudio are open,
 the last one (not necessarily the active one) will be used.
