@@ -4,7 +4,7 @@
 \alias{checkFile}
 \title{check file existance}
 \usage{
-checkFile(file, warnonly = FALSE, trace = TRUE)
+checkFile(file, warnonly = FALSE, trace = TRUE, pwd = TRUE)
 }
 \arguments{
 \item{file}{Filename(s) as character string to be checked for existence.}
@@ -13,6 +13,8 @@ checkFile(file, warnonly = FALSE, trace = TRUE)
 error with \code{\link{stop}}? DEFAULT: FALSE}
 
 \item{trace}{Logical: Add function call stack to the message? DEFAULT: TRUE}
+
+\item{pwd}{Logical: Print working directory in message? DEFAULT: TRUE}
 }
 \value{
 TRUE/FALSE, invisibly

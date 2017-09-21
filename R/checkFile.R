@@ -38,11 +38,13 @@
 #' @param warnonly Logical: Only issue a \code{\link{warning}} instead of an
 #'                 error with \code{\link{stop}}? DEFAULT: FALSE
 #' @param trace Logical: Add function call stack to the message? DEFAULT: TRUE
+#' @param pwd   Logical: Print working directory in message? DEFAULT: TRUE
 #' 
 checkFile <- function(
 file,
 warnonly=FALSE,
-trace=TRUE
+trace=TRUE,
+pwd=TRUE
 )
 {
 # check actual file existence:
@@ -57,8 +59,9 @@ if(any(!exi))
   Text3 <- if(sum(!exi)>2) paste0(toString(file[!exi][1:2]), " (and ",sum(!exi)-2," others)") else
                            toString(file[!exi])
   Text4 <- if(sum(!exi)>1) "\n  do" else "'\n  does"
-  Text5 <- paste0(" not exist at ", getwd() )
-  Text <- paste0(Text1,Text2,Text3,Text4,Text5)
+  Text5 <- " not exist."
+  Text6 <- if(pwd) paste0(" Current getwd: ", getwd() ) else ""
+  Text <- paste0(Text1,Text2,Text3,Text4,Text5,Text6)
   if(warnonly) warning(Text, call.=!trace) else stop(Text, call.=!trace)
   }
 return(invisible(exi))
