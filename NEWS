@@ -30,6 +30,7 @@ ToDo-list
 - ciBand: check if at all x values yl,ym,yu are in ascending order
 - instGit: check versions of dependencies
 - catPal for categorical palettes
+- funSource: add option "local" for settings without internet connection
 
 
 
