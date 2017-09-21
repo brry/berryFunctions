@@ -4,10 +4,14 @@
 \alias{packagePath}
 \title{Base path of package}
 \usage{
-packagePath(path = ".")
+packagePath(path = ".", warnonly = FALSE)
 }
 \arguments{
 \item{path}{Path to (or below) package directory. DEFAULT: "."}
+
+\item{warnonly}{Logical: if no part of the path is a package, give a warning 
+and return the original input instead of stopping with an error. 
+DEFAULT: FALSE}
 }
 \value{
 Path character string

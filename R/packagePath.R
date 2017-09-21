@@ -10,9 +10,13 @@
 #' # packagePath() # may fail on cran checks
 #'
 #' @param path Path to (or below) package directory. DEFAULT: "."
+#' @param warnonly Logical: if no part of the path is a package, give a warning 
+#'                 and return the original input instead of stopping with an error. 
+#'                 DEFAULT: FALSE
 #'
 packagePath <- function(
-path="."
+path=".",
+warnonly=FALSE
 )
 {
 path <- path0 <- normalizePath(path, winslash="/", mustWork=FALSE)
@@ -23,8 +27,13 @@ while(!file.exists(file.path(path, "DESCRIPTION")))
   path <- dirname(path)
   # Error if path0 was not below or at a package:
   if(path==dirname(path)) 
-    stop(traceCall(skip=1, prefix="in ", suffix=":\n"), "Package root directory ",
-         "(containing DESCRIPTION file) could not be found for ", path0, call.=FALSE)
+    {
+    message <- paste0(traceCall(skip=1, prefix="in ", suffix=":\n"), 
+                      "Package root directory (containing DESCRIPTION file) ",
+                      "could not be found for ", path0)
+    if(!warnonly) stop(message, call.=FALSE)
+    else {warning(message, call.=FALSE); return(path0)}
+    }
   }
 path
 }
