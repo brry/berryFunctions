@@ -20,8 +20,8 @@
 #' inherits(d, "try-error")
 #' cat(d)
 #' 
-#' lower <- function(a,...) {warning(traceCall(1,"",": "), "stupid berry warning: ",
-#'                                   a+10, call.=FALSE); a}
+#' lower <- function(a,...) {warning(traceCall(1, prefix="in ", suffix=": "), 
+#'                           "How to use traceCall in functions ", call.=FALSE); a}
 #' upper(3)
 #' 
 #' @param skip Number of levels to skip in \code{\link{traceback}}
