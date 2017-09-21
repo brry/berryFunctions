@@ -7,10 +7,6 @@
 \alias{rmse}
 \alias{nse}
 \alias{kge}
-\alias{rsquare}
-\alias{rmse}
-\alias{nse}
-\alias{kge}
 \title{GOF measures}
 \usage{
 gofNA(a, b, quiet = FALSE, fun = "")
