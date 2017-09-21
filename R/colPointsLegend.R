@@ -162,7 +162,7 @@ if(labelpos==1 | titlepos==1) mar[1] <- nch
 if(labelpos==3 | titlepos==3) mar[3] <- nch
 } # if mar is specified, it is used, of course.
 # subplot setup:
-smallPlot(x1=x1, y1=y1, x2=x2, y2=y2, outer=outer, xpd=xpd, mar=mar, mgp=mgp,
+try(smallPlot(x1=x1, y1=y1, x2=x2, y2=y2, outer=outer, xpd=xpd, mar=mar, mgp=mgp,
           bg=bg, border=sborder, las=las, resetfocus=resetfocus, expr={
 if(horizontal) # ---------------------------------------------------------------
   {
@@ -234,5 +234,5 @@ else # if not horizontal, thus if vertical -------------------------------------
     lines(y=dp$x, x=dp$y/max(dp$y))
     }
   } # end vertical -------------------------------------------------------------
-  }) # end smallPlot
+  })) # end smallPlot
 }
