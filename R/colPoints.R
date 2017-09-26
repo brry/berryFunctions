@@ -164,6 +164,7 @@
 #' @param xlab     x-axis label. DEFAULT: \code{deparse(\link{substitute}(x))}
 #' @param ylab     y-axis label. DEFAULT: ditto
 #' @param zlab     \code{\link{colPointsLegend} title}. DEFAULT: ditto
+#' @param log      Logarithmic axes with log="y", "xy" or "x". DEFAULT: ""
 #' @param axes,las Draw axes? Label Axis Style. Only used when add=FALSE.
 #'                 See \code{\link{par}}. DEFAULT: axes=TRUE, las=1 (all labels horizontal)
 #' @param bglines  If not NULL, passed to \code{\link{abline}} to draw background 
@@ -201,6 +202,7 @@ colPoints <- function(
   ylab=deparse(substitute(y)),
   zlab=deparse(substitute(z)),
   axes=TRUE,
+  log="",
   las=1,
   bglines=NULL,
   pch=16,
@@ -265,7 +267,7 @@ output$z <- z
 if(length(col) != cl$nbins) stop("Number of colors is not equal to number of classes.")
 #
 # ACTUAL PLOTTING --------------------------------------------------------------
-if(!add) plot(x, y, type="n", xlab=xlab, ylab=ylab, las=las, axes=axes, ...)
+if(!add) plot(x, y, type="n", xlab=xlab, ylab=ylab, las=las, axes=axes, log=log, ...)
 if(!is.null(bglines)) do.call(abline, bglines)
 # Plot lines if wanted:
 if(lines)
