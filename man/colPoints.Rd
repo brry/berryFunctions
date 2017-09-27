@@ -4,14 +4,14 @@
 \alias{colPoints}
 \title{Points colored relative to third dimension}
 \usage{
-colPoints(x, y, z, data, add = TRUE, col = seqPal(cl$nbins), col2 = c(NA,
-  "grey", "black"), Range = range(z, finite = TRUE),
-  method = "equalinterval", breaks, sdlab = 1, legend = TRUE,
-  legargs = NULL, hist = FALSE, histargs = NULL, lines = FALSE,
-  nint = 30, xlab = deparse(substitute(x)), ylab = deparse(substitute(y)),
-  zlab = deparse(substitute(z)), axes = TRUE, log = "", las = 1,
-  bglines = NULL, pch = 16, x1 = 0.6, y1 = 0.88, x2 = 0.99,
-  y2 = 0.99, density = NULL, quiet = FALSE, ...)
+colPoints(x, y, z, data, add = TRUE, col = seqPal(100), col2 = c(NA,
+  "grey", "black"), Range = range(z, finite = TRUE), method = "linear",
+  breaks = length(col), sdlab = 1, legend = TRUE, legargs = NULL,
+  lines = FALSE, nint = 30, xlab = deparse(substitute(x)),
+  ylab = deparse(substitute(y)), zlab = deparse(substitute(z)),
+  axes = TRUE, log = "", las = 1, bglines = NULL, pch = 16,
+  x1 = 0.6, y1 = ifelse(horizontal, 0.88, 0.3), x2 = 0.99, y2 = 0.99,
+  density = NULL, horizontal = TRUE, quiet = FALSE, ...)
 }
 \arguments{
 \item{x, y}{Vectors with coordinates of the points to be drawn}
@@ -34,24 +34,18 @@ DEFAULT: c(NA, 1, 8)}
 \item{Range}{Ends of color bar. If NULL, it is again the DEFAULT: range(z, finite=TRUE)}
 
 \item{method}{Classification method (partial matching is performed),
-see \code{\link{classify}} (ways to get color breakpoints).
-DEFAULT: "equalinterval")}
+see \code{\link{classify}}. DEFAULT: "linear"}
 
 \item{breaks}{Specification for method, see \code{\link{classify}}.
 DEFAULT: different defaults for each method}
 
-\item{sdlab}{Type of label and breakpoints if \code{method=standarddeviation},
+\item{sdlab}{Type of label and breakpoints if \code{method="sd"},
 see \code{\link{classify}}. DEFAULT: 1}
 
 \item{legend}{Logical. Should a \code{\link{colPointsLegend}} be drawn? DEFAULT: TRUE}
 
 \item{legargs}{List. Arguments passed to \code{\link{colPointsLegend}}.
 DEFAULT: NULL, with some defaults specified internally}
-
-\item{hist}{Logical. Should a \code{\link{colPointsHist}} be drawn?
-DEFAULT: FALSE (TRUE if histargs are given)}
-
-\item{histargs}{List. Arguments passed to \code{\link{colPointsHist}}. DEFAULT: NULL}
 
 \item{lines}{Logical. Should lines be drawn instead of / underneath the points?
 (color of each \code{\link{segments}} is taken from starting point,
@@ -83,8 +77,10 @@ lines before adding colored points. DEFAULT: NULL}
 Passed to \code{\link{colPointsLegend}}.
 DEFAULT: x: 0.6-0.99, y: 0.88-0.98}
 
-\item{density}{Arguments for density line in \code{\link{colPointsLegend}}
-DEFAULT: NULL}
+\item{density}{Arguments for density line in \code{\link{colPointsLegend}},
+or FALSE to suppress drawing it. DEFAULT: NULL}
+
+\item{horizontal}{Logical passed to \code{\link{colPointsLegend}}. DEFAULT: TRUE}
 
 \item{quiet}{Turn off warnings? DEFAULT: FALSE}
 
@@ -134,36 +130,24 @@ colPoints(i,j,k, cex=1.5, add=FALSE, lines=TRUE, nint=10, lwd=2)
 tfile <- system.file("extdata/rivers.txt", package="berryFunctions")
 rivers <- read.table(tfile, header=TRUE, dec=",")
 colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE)
-colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE, pch=3)
-colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE, pch=3, nint=2)
+colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE, pch=3, lwd=3)
+colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE, pch=3, lwd=3, nint=2)
 
 # different classification methods:
-set.seed(007) ;  rx <- rnorm(30) ; ry <- rnorm(30) ; rz <- rnorm(30)*100
-# sd: normal distribution
-mycols <- colorRampPalette(c("blue","yellow", "red"))
-colPoints(rx,ry,rz, add=FALSE, col=mycols(5), method="s",
-          legargs=list(horiz=FALSE, x1=0.7, x2=0.95))
-colPoints(rx,ry,rz, add=FALSE, col=mycols(6), method="s", sdlab=2,
-          legargs=list(horiz=FALSE, labelpos=5, lines=FALSE, title=""))
-# quantiles: each color is equally often used
-colPoints(rx,ry,rz, add=FALSE, method="q",
-          legargs=list(mar=c(0,1,1,0), bg="transparent") )
-text(rx,ry,round(rz), col=8)
-# logSpaced for rightly skewed data:
-set.seed(41); rz2 <- rbeta(30, 1,7)*100
-colPoints(rx,ry,rz2, add=FALSE, method="l", breaks=c(20,1.1708), col=mycols(20))
-colPoints(rx,ry,rz2, add=FALSE, method="q", breaks=0:20/20, col=mycols(20),
-          legargs=list(at=pretty2(rz2), labels=pretty2(rz2)) )
+# see ?classify
 
-# With histogram:
-colPoints(i,j,k, add=FALSE, hist=TRUE)
-colPoints(i,j,k, cex=3.5, lwd=3, pch=1, histargs=list(bg=5, breaks=5), add=FALSE)
-colPoints(rx,ry,rz, cex=3.5, lwd=3, pch=1, add=FALSE, legend=FALSE,
-   histargs=list(mar=c(0,0,0,0), x1=0.5, x2=1, y1=0.8, y2=0.99, yaxt="n"))
+colPoints(i,j,k, add=FALSE) # use classify separately:
+text(i,j+1,k, col=divPal(100,rev=TRUE)[classify(k)$index], cex=1)
 
-# use classify separately:
-text(rx,ry,round(rz), col=mycols(100)[classify(rz)$index], cex=0.7)
 
+# Add histogram:
+cp <- colPoints(i,j,k, add=FALSE)
+do.call(colPointsHist, cp[c("z","at","labels","bb","nbins")])
+do.call(colPointsHist, owa(cp[c("z","at","labels","bb","nbins")], 
+                           list(bg=5, breaks=5)))
+do.call(colPointsHist, owa(cp[c("z","at","labels","bb","nbins")], 
+                           list(mar=c(0,0,0,0), x1=0.5, x2=1, y1=0.8, 
+                             y2=0.99, yaxt="n")))
 # histogram in lower panel:
 layout(matrix(1:2), heights=c(8,4) )
 colPoints(i,j,k, add=FALSE, y1=0.8, y2=1)
@@ -196,10 +180,8 @@ colPointsHist(z=volcano)
 z <- t(volcano)  ;  x <- 1:ncol(z)  ;  y <- 1:nrow(z)
 colPoints(x,y,z, add=FALSE)  # takes matrix for z
 contour(x,y,t(z), add=TRUE)
-
 # image only takes a regular matrix, but not scatterpoints...
 image(x,y,t(z), col=rainbow2(100))
-
 # add single newly measured points to image (fictional data):
 mx <- c( 22,  40,  80,  45,  60,  63,  30,  70)
 my <- c(  5,  33,  12,  56,  20,  40,  45,  45)
