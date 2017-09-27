@@ -9,6 +9,7 @@ ToDo-list
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
 - implement is.error and getColumn (eg spiralDate) wherever applicable
 - reference to sortDF in addRow, insertRow, etc
+- colPoints: if z is matrix, use image/filled.contour/heatmap instead of points
 - colPointsLegend: improve text placement position for large/small legend fields
 - contemplate moving tryStack and traceCall to own package, maybe "trace"
 - combineFiles: path expansion (see rdwd::fileDWD), remove dir arguments, add ... for encoding etc

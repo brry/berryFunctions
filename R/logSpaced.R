@@ -1,7 +1,9 @@
 #' Logarithmically spaced points
 #' 
 #' Calculates values that are in logarithmic distance from each other
-#' e.g. to produce logarithmic interval borders
+#' e.g. to produce logarithmic interval borders.\cr
+#' For exact logarithmic spacing, use 
+#' \code{10^\link{seq}(from=\link{log10}(1), to=\link{log10}(100), len=100)}
 #' 
 #' @return Vector or matrix, depending on base input
 #' @note base >1 concentrates points at low values, base<1 at high values.
@@ -22,6 +24,10 @@
 #' # bin width across the range on a logarithmic scale:
 #' d <- logSpaced()
 #' plot(d, rep(1,20), log="x")
+#' 
+#' # For exactly spacing logarithmically, use
+#' plot(10^seq(from=log10(1), to=log10(100), len=100), log="y")
+#' browseURL("https://stackoverflow.com/a/29963530")
 #' 
 #' @param base Base for calculations, can be a vector to compare several bases. DEFAULT: 1.1708
 #' @param n Number of values to be calculated. DEFAULT: 30
