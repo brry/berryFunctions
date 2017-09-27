@@ -31,6 +31,10 @@
 #' 
 #' upper(stackloss[1:5,])
 #' 
+#' upper2 <- function(data) upper(data)
+#' upper2("K")
+#' upper2(K)
+#' 
 #' @param x input object name or character string
 #' 
 getName <- function(x)

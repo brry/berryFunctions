@@ -37,6 +37,10 @@ upper(dummy) # still stable
 
 upper(stackloss[1:5,])
 
+upper2 <- function(data) upper(data)
+upper2("K")
+upper2(K)
+
 }
 \seealso{
 \url{http://stackoverflow.com/a/26558733}, \code{\link{substitute}}
