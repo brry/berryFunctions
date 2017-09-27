@@ -70,6 +70,7 @@ a,
 quiet=FALSE)
 {
 # Input controls:
+if(missing(d)|missing(a)) stop("owa needs two lists as input, but they are missing.")
 if( isTRUE(a) ) a <- NULL # catch where users try to give eg legargs=TRUE
 if(is.null(a) | length(a)==0) return( as.list(d) )
 if(is.null(names(a))) stop("owa: Arguments must be named!")
