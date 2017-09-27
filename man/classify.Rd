@@ -4,22 +4,28 @@
 \alias{classify}
 \title{Classification into groups}
 \usage{
-classify(x, method = "equalinterval", breaks, Range = range(x, finite =
-  TRUE), sdlab = 1, quiet = FALSE)
+classify(x, method = "linear", breaks = NULL, Range = range(x, finite =
+  TRUE), sdlab = 1, logbase = 1, quiet = FALSE)
 }
 \arguments{
 \item{x}{Vector with numeric values}
 
-\item{method}{Character string (partial matching is performed). Classification method or
-type of binning to compute the class breakpoints. See section Details. DEFAULT: "equalinterval")}
+\item{method}{Character string (partial matching is performed). 
+Classification method (type of binning) to compute the 
+class breakpoints. See section Details. DEFAULT: "linear"}
 
-\item{breaks}{Specification for method, see Details. DEFAULT: different defaults for each method}
+\item{breaks}{Specification for method, see Details. 
+DEFAULT: NULL (different defaults for each method)}
 
-\item{Range}{Ends of color bar for method=equalinterval. DEFAULT: range(x, finite=TRUE)}
+\item{Range}{Ends of intervals. DEFAULT: range(x, finite=TRUE)}
 
 \item{sdlab}{Type of label and breakpoints if \code{method=standarddeviation}.
 1 means \code{-0.5 sd, 0.5 sd}, 2 means \code{-1 sd, mean, 1 sd},
-3 means actual numbers for type 1, 4 means numbers for type 2.}
+3 means actual numbers for type 1, 4 means numbers for type 2.
+DEFAULT: 1}
+
+\item{logbase}{base for \code{\link{logSpaced}}. Used only if not 1 and method="log".
+DEFAULT: 1}
 
 \item{quiet}{Suppress warnings, eg for values outside Range? DEFAULT: FALSE}
 }
@@ -38,13 +44,13 @@ Binning methods are explained very nicely in the link in the section References.
 \emph{nbins} indicates the number of classes (and thus, colors).\cr \cr
 
 \tabular{llll}{
- \bold{\code{method}}     \tab |  explanation                         \tab |  meaning of \code{breaks}                             \tab |  default   \cr
- ----------               \tab |  -----------                         \tab |  -----------                                          \tab |  -------   \cr
- \bold{equalinterval}     \tab |  \emph{nbins} equally spaced classes \tab |  nbins                                                \tab |  100       \cr
- \bold{quantile}          \tab |  classes have equal number of values \tab |  the quantiles (or number of them)                    \tab |  0:4/4     \cr
- \bold{standarddeviation} \tab |  normal distributions                \tab |  the number of sd in one direction from the mean      \tab |  3         \cr
- \bold{logspaced}         \tab |  \emph{nbins} logarithmically spaced \tab |  c(nbins, base),  see \code{\link{logSpaced}}         \tab |  c(100,1.2)\cr
- \bold{usergiven}         \tab |  custom breakpoints                  \tab |  personal breakpoint values (including ends of Range) \tab |  none      \cr
+\bold{\code{method}} \tab |  explanation                   \tab |  meaning of \code{breaks}                    \tab |  default \cr
+----------     \tab |  -----------                         \tab |  -----------                                 \tab |  ------- \cr
+\bold{linear}  \tab |  \emph{nbins} equally spaced classes \tab |  \emph{nbins}                                \tab |  100     \cr
+\bold{log}     \tab |  \emph{nbins} logarithmically spaced \tab |  \emph{nbins}                                \tab |  100     \cr
+\bold{quantile}\tab |  classes have equal number of values \tab |  the quantiles (or number of them)           \tab |  0:4/4   \cr
+\bold{sd}      \tab |  normal distributions                \tab |  number of sd in one direction from the mean \tab |  3       \cr
+\bold{custom}  \tab |  user-given breakpoints              \tab |  breakpoint values (including ends of Range) \tab |  none    \cr
 }
 The default is set to equalinterval which makes sense for my original intent
 of plotting lake depth (bathymetry measured at irregularly distributed points) on a linear color scale.\cr
@@ -52,12 +58,27 @@ This is the workhorse for \code{\link{colPoints}}.\cr
 }
 \examples{
 
-classify( c(1:10, 20), breaks=12)
+classify( c(1:10, 20), "lin", breaks=12)
 classify( c(1:10, 20), "q", breaks=0:10/10)
 classify( c(1:10, 20), "s", sdlab=2 )
 classify( c(1:10, 20), "s", sdlab=1, breaks=2 )
-classify( c(1:10, 20), "u", breaks=c(5,27) )
-classify( c(1:10, 20), "l")
+classify( c(1:10, 20), "c", breaks=c(5,27) )
+classify( c(1:10, 20), "log")
+
+set.seed(42); rz <- rnorm(30, mean=350, sd=120)
+plot(1)
+classleg <- function(method="linear", breaks=100, sdlab=1, logbase=1, ...) 
+           do.call(colPointsLegend, owa( 
+           classify(rz, method=method, breaks=breaks, sdlab=sdlab, logbase=logbase), 
+           list(z=rz, title="", ...))   )
+classleg(br=3, met="s", col=divPal(5),mar=c(0,3,1,0),hor=FALSE,x1=0.1,x2=0.25)
+classleg(br=3, met="s", col=divPal(6),mar=c(0,3,1,0),hor=FALSE,x1=0.25,x2=0.4, sdlab=2)
+classleg(y1=0.85, y2=1)
+classleg(br=20, met="log", y1=0.70, y2=0.85)
+classleg(br=20, met="log", y1=0.55, y2=0.70, logbase=1.15)
+classleg(br=20, met="log", y1=0.45, y2=0.60, logbase=0.90)
+classleg(br= 5, met="q", y1=0.30, y2=0.45)# quantiles: each color is equally often used
+classleg(met="q", y1=0.15, y2=0.30, breaks=0:15/15, at=pretty2(rz), labels=pretty2(rz) )
 
 }
 \references{
