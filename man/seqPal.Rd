@@ -47,7 +47,7 @@ showPal()
 v <- rescale(volcano^30)
 image(v, col=seqPal(1000), asp=1);  colPointsLegend(v, nbins=1000)
 image(v, col=seqPal(1000, logbase=1.007), asp=1)
-colPointsLegend(v, col=seqPal(1000, logbase=1.09))
+colPointsLegend(v, col=seqPal(1000, logbase=1.007))
 
 plot(    rep(1, 1000), pch=15, cex=3, col=seqPal(1000), ylim=c(0.99, 1.01), ylab="logbase", las=1)
 for(b in seq(0.99, 1.01, len=30))

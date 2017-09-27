@@ -18,7 +18,7 @@
 #' v <- rescale(volcano^30)
 #' image(v, col=seqPal(1000), asp=1);  colPointsLegend(v, nbins=1000)
 #' image(v, col=seqPal(1000, logbase=1.007), asp=1)
-#' colPointsLegend(v, col=seqPal(1000, logbase=1.09))
+#' colPointsLegend(v, col=seqPal(1000, logbase=1.007))
 #' 
 #' plot(    rep(1, 1000), pch=15, cex=3, col=seqPal(1000), ylim=c(0.99, 1.01), ylab="logbase", las=1)
 #' for(b in seq(0.99, 1.01, len=30))
@@ -64,8 +64,8 @@ if(reverse) cols <- rev(cols)
 outcols <- colorRampPalette(cols, ...)(n)
 if(logbase!=1)
   {
-  n1 <- n#*10 # log(90, base=logbase)
-  cl <- classify(1:n1, method="logspaced", breaks=c(n1,logbase))
+  n1 <- n#*10
+  cl <- classify(1:n1, method="log", breaks=n1, logbase=logbase)
   n2 <- cl$nbins
   outcols <- colorRampPalette(cols, ...)(n2)[cl$index]
   # message("n: ", round(n1), ", number of bins from classify: ", n2, ", number of unique colors: ", length(unique(outcols)))
