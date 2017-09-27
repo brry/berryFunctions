@@ -12,7 +12,7 @@ colPointsLegend(z, Range = range(z, finite = TRUE), nbins = 100,
   resetfocus = TRUE, plottriangle = FALSE, triangle = 0.14,
   tricol = c(8, 1), density = NULL, lines = TRUE, atminmax = FALSE,
   horizontal = TRUE, labelpos = 1, titlepos = 3, title = "Legend",
-  las = 1, x, y, index, ...)
+  las = 1, x, y, index, above, below, ...)
 }
 \arguments{
 \item{z}{Values of third dimension used in \code{\link{colPoints}},
@@ -82,7 +82,7 @@ Possible: 1 (below), 2 (left), 3 (above), 4 (right), 5(on top of bar). DEFAULT: 
 
 \item{las}{LabelAxisStyle. DEFAULT: 1}
 
-\item{x, y, index}{Ignored arguments, so that you can pass the result from
+\item{x, y, index, above, below}{Ignored arguments, so that you can pass the result from
 \code{\link{colPoints}} via \code{do.call(colPointsLegend, cp_result)}}
 
 \item{\dots}{Further arguments passed to \code{\link{text}} and \code{\link{strwidth}},
