@@ -37,9 +37,9 @@
 #' # This also avoids the CRAN check NOTE "no visible binding for global variable"
 #' upper3 <- function(char=TRUE)
 #' {
-#' Sepal.Length <- iris
-#' if(char) colPoints("Sepal.Length", Sepal.Width, Petal.Length, data=iris, add=FALSE)
-#' else     colPoints( Sepal.Length,  Sepal.Width, Petal.Length, data=iris, add=FALSE)
+#' Sepal.Length <- stackloss
+#' if(char) head(getColumn("Sepal.Length", iris), 10)
+#' else     head(getColumn( Sepal.Length,  iris), 10)
 #' }
 #' checkerr( upper3(char=FALSE) )
 #' upper3(char=TRUE) # use string "Sepal.Length" and it works fine. 
@@ -108,10 +108,9 @@ if(grepl("[^[:alnum:][:space:]\\._]", paste(nam, collapse=" ") ))
  if(!inherits(nam1, "try-error")) nam <- nam1
  }
 # stop if several columns are to be selected:
-if(length(nam)>1) stop(calltrace, "Only a single column can be selected ",
-                       "with getColumn. The input (",depsub,
-                       ") was evaluated to: ", 
-                       truncMessage(nam, ntrunc=2, prefix=""), call.=FALSE)
+if(length(nam)>1) stop(calltrace, "Only a single column can be selected with ",
+                       "getColumn. The input (",depsub,") was evaluated to str: ", 
+                       capture.output(str(nam)), call.=FALSE)
 
 # deal with numeric input:
 namnum <- suppressWarnings(as.numeric(nam))

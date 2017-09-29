@@ -56,9 +56,9 @@ checkerr( upper2(Water.Temp) ) # Column "Timmy" does not exist
 # This also avoids the CRAN check NOTE "no visible binding for global variable"
 upper3 <- function(char=TRUE)
 {
-Sepal.Length <- iris
-if(char) colPoints("Sepal.Length", Sepal.Width, Petal.Length, data=iris, add=FALSE)
-else     colPoints( Sepal.Length,  Sepal.Width, Petal.Length, data=iris, add=FALSE)
+Sepal.Length <- stackloss
+if(char) head(getColumn("Sepal.Length", iris), 10)
+else     head(getColumn( Sepal.Length,  iris), 10)
 }
 checkerr( upper3(char=FALSE) )
 upper3(char=TRUE) # use string "Sepal.Length" and it works fine. 
