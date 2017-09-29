@@ -14,12 +14,10 @@ its value will be used as name! (see upper2 example)}
 
 \item{df}{dataframe object}
 
-\item{trace}{Logical: Add function call stack to the message? DEFAULT: TRUE
-WARNING: in do.call settings with large objects,
-tracing may take a lot of computing time.}
+\item{trace}{Logical: Add function call stack to the message? DEFAULT: TRUE}
 }
 \value{
-Vector (or array, factor, etc) with values in the specified column
+Vector with values in the specified column
 }
 \description{
 (Try to) extract a column from a data frame with USEFUL warnings/errors.\cr
@@ -27,47 +25,66 @@ Watch out not to define objects with the same name as x if you are using
 getColumn in a function!
 }
 \examples{
+head(stackloss)
 getColumn(Air.Flow, stackloss)
+getColumn("Air.Flow", stackloss)
 getColumn(2, stackloss)
 getColumn("2",  stackloss) # works too...
-getColumn(2,  stackloss[0,])
-# The next examples all return errors:
-try( getColumn(2,  stackloss[0])  )
-try( getColumn(2,  stackloss[,0]) )
-try( getColumn(Acid, stackloss)   ) # design choice: partial matching not supported
-try( getColumn(2:3,  stackloss)   ) # cannot be a vector
-try( getColumn(c("Air.Flow","Acid.Conc"),  stackloss)    )
 
+# useful warnings:
+getColumn(1, stackloss[0,])
+getColumn(1, data.frame(AA=rep(NA,10)) )
+
+# Code returning a character works as well:
+getColumn(c("Air.Flow","Acid.Conc")[1],  stackloss)
+
+# Can be used in functions to get useful messages:
 upper <- function(x, select) getColumn(x, stackloss[select,])
 upper(Water.Temp)
 upper(2)
 upper(2, select=0)
-# upper(Water)  # error with useful message
+
+checkerr <- function(x) invisible(is.error(x, force=TRUE, tell=TRUE))
 
 # Pitfall lexical scoping: R only goes up until it finds things:
-upper2 <- function(xx) {xx <- "Timmy!"; getColumn(xx, stackloss)} # will break!
-is.error(      upper2(Water.Temp) ,   force=TRUE, tell=TRUE) # is an error
+upper2 <- function(xx) {xx <- "Timmy!"; getColumn(xx, stackloss)} # breaks!
+checkerr( upper2(Water.Temp) ) # Column "Timmy" does not exist
+# If possible, use "colname" with quotation marks.
+# This also avoids the CRAN check NOTE "no visible binding for global variable"
+upper3 <- function(...)
+{
+Sepal.Length <- iris
+colPoints(Sepal.Length, Sepal.Width, Petal.Length, data=iris, add=FALSE)
+}
+checkerr( upper3() ) # wrap use string "Sepal.Length" and it works fine. 
 
-upper3 <- function(xx, dd) getColumn(substitute(xx), dd)
-upper3(Air.Flow, stackloss) # may be safer in many scoping situations
 
-# In packages use "colname" with quotation marks in level 2 functions to avoid
-# the CRAN check NOTE "no visible binding for global variable"
+# The next examples all return informative errors:
+checkerr( upper(Water) ) #  partial matching not supported by design
+checkerr( getColumn("dummy", stackloss)) # no NULL for nonexisting columns
+checkerr( getColumn(2,  stackloss[,0]) ) # error for empty dfs
+checkerr( getColumn(Acid, stackloss)   ) # no error-prone partial matching
+checkerr( getColumn(2:3,  stackloss)   ) # cannot be a vector
+checkerr( getColumn(c("Air.Flow","Acid.Conc"),  stackloss) )
 
-df <- data.frame(x=letters[1:3],y=letters[4:6])
-is.vector(df$x)
-is.vector(getColumn("x", df)) # FALSE
-# cannot force output to be a vector, as this will convert:
-as.Date("2016-09-14")  ;  as.vector(as.Date("2016-09-14"))
-# same problem with dfs from tapply results
-# better ideas welcome!! (berry-b@gmx.de)
 
+#getColumn("a", tibble::tibble(a=1:7, b=7:1)) # works but warns with tibbles
+ 
 # Pitfall numerical column names:
 df <- data.frame(1:5, 3:7)
 colnames(df) <- c("a","1") # this is a bad idea anyways
 getColumn("1", df) # will actually return the first column, not column "1"
 
-getColumn(1, data.frame(AA=rep(NA,10)))
+# More on scoping and code yielding a column selection:
+upp1 <- function(coln, datf) {getColumn(substitute(coln), datf)[1:5]}
+upp2 <- function(coln, datf) {getColumn(           coln,  datf)[1:5]}
+upp1(Sepal.Length, iris)
+upp2(Sepal.Length, iris)
+upp1("Sepal.Length", iris)
+upp2("Sepal.Length", iris)
+vekt <- c("Sepal.Length","Dummy")
+upp1(vekt[1], iris)
+upp2(vekt[1], iris)
 
 }
 \seealso{
