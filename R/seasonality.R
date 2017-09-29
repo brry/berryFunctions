@@ -32,7 +32,7 @@
 #' plot(Q, type="l")
 #' seas <- seasonality(date, discharge, data=Q, shift=100, main="NRFA: Thames\nRoyal Windsor Park")
 #' head(seas)
-#' # notice how n for nonmissing values is lower in one single hydrological year,
+#' # notice how n for nonmissing values is lower in the first hydrological year,
 #' # which includes parts of two consecutive calendarical years.
 #' 
 #' # Be careful with your interpretation. This looks normal up to 2007, but then BAM!:
@@ -317,7 +317,7 @@ if(3 %in% plot) # Q~doy, col=year ----
     output$data3 <- data3
     }
   # plot
-  output$plot3 <- colPoints(doy, values, year, data=data3, Range=drange3,
+  output$plot3 <- colPoints("doy", "values", "year", data=data3, Range=drange3,
       zlab=tlab, ylab="", xlab=slab, xaxt="n", legend=legend, add=add[3],
       legargs=owa(list(density=FALSE),legargs), quiet=quiet,
       xlim=xlim3, ylim=ylim3, xaxs=xaxs3, yaxs=yaxs3, lines=TRUE, nint=1,

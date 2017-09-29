@@ -8,8 +8,8 @@
 #' @keywords univar manip arith
 #' @export
 #' @examples
-#' 
-#' sortDF(USArrests[USArrests$Murder>11,], "Assault")
+#' sortDF(USArrests[USArrests$Murder>11,], Assault)
+#' sortDF(USArrests[USArrests$Murder>11,], "Assault") # safer within functions
 #' sortDF(USArrests[USArrests$Murder>11,], 3)
 #' 
 #' @param df Data.frame to be sorted
@@ -25,6 +25,6 @@ decreasing=TRUE,
 ...
 )
 {
-values <- getColumn(col,df)
+values <- getColumn(substitute(col),df)
 df[order(values, decreasing=decreasing, ...),]
 }

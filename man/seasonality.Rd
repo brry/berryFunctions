@@ -146,7 +146,7 @@ Q$discharge[450:581] <- NA
 plot(Q, type="l")
 seas <- seasonality(date, discharge, data=Q, shift=100, main="NRFA: Thames\\nRoyal Windsor Park")
 head(seas)
-# notice how n for nonmissing values is lower in one single hydrological year,
+# notice how n for nonmissing values is lower in the first hydrological year,
 # which includes parts of two consecutive calendarical years.
 
 # Be careful with your interpretation. This looks normal up to 2007, but then BAM!:
