@@ -7,11 +7,12 @@
 colPoints(x, y, z, data, add = TRUE, col = seqPal(100), col2 = c(NA,
   "grey", "black"), Range = range(z, finite = TRUE), method = "linear",
   breaks = length(col), sdlab = 1, legend = TRUE, legargs = NULL,
-  lines = FALSE, nint = 30, xlab = deparse(substitute(x)),
-  ylab = deparse(substitute(y)), zlab = deparse(substitute(z)),
-  axes = TRUE, log = "", las = 1, bglines = NULL, pch = 16,
-  x1 = 0.6, y1 = ifelse(horizontal, 0.88, 0.3), x2 = 0.99, y2 = 0.99,
-  density = NULL, horizontal = TRUE, quiet = FALSE, ...)
+  lines = FALSE, nint = 30, xlab = gsub("\\"", "",
+  deparse(substitute(x))), ylab = gsub("\\"", "", deparse(substitute(y))),
+  zlab = gsub("\\"", "", deparse(substitute(z))), axes = TRUE, log = "",
+  las = 1, bglines = NULL, pch = 16, x1 = 0.6, y1 = ifelse(horizontal,
+  0.88, 0.3), x2 = 0.99, y2 = 0.99, density = NULL, horizontal = TRUE,
+  quiet = FALSE, ...)
 }
 \arguments{
 \item{x, y}{Vectors with coordinates of the points to be drawn}
@@ -57,11 +58,8 @@ coordinate if \code{lines=TRUE}. nint=1 means no interpolation.
 Values below 10 will smooth coordinates and might
 miss the original points. DEFAULT: 30}
 
-\item{xlab}{x-axis label. DEFAULT: \code{deparse(\link{substitute}(x))}}
-
-\item{ylab}{y-axis label. DEFAULT: ditto}
-
-\item{zlab}{\code{\link{colPointsLegend} title}. DEFAULT: ditto}
+\item{xlab, ylab, zlab}{X axis label, y axis label, \code{\link{colPointsLegend} title}. 
+DEFAULT: \code{gsub("\\"", "", deparse(\link{substitute}(x/y/z)))}}
 
 \item{axes, las}{Draw axes? Label Axis Style. Only used when add=FALSE.
 See \code{\link{par}}. DEFAULT: axes=TRUE, las=1 (all labels horizontal)}
@@ -132,6 +130,7 @@ rivers <- read.table(tfile, header=TRUE, dec=",")
 colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE)
 colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE, pch=3, lwd=3)
 colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE, pch=3, lwd=3, nint=2)
+colPoints("x","y","n", data=rivers, add=FALSE)
 
 # different classification methods:
 # see ?classify

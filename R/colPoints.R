@@ -47,6 +47,7 @@
 #' colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE)
 #' colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE, pch=3, lwd=3)
 #' colPoints(x,y,n, data=rivers, add=FALSE, lines=TRUE, pch=3, lwd=3, nint=2)
+#' colPoints("x","y","n", data=rivers, add=FALSE)
 #' 
 #' # different classification methods:
 #' # see ?classify
@@ -143,9 +144,8 @@
 #'                 coordinate if \code{lines=TRUE}. nint=1 means no interpolation.
 #'                 Values below 10 will smooth coordinates and might
 #'                 miss the original points. DEFAULT: 30
-#' @param xlab     x-axis label. DEFAULT: \code{deparse(\link{substitute}(x))}
-#' @param ylab     y-axis label. DEFAULT: ditto
-#' @param zlab     \code{\link{colPointsLegend} title}. DEFAULT: ditto
+#' @param xlab,ylab,zlab X axis label, y axis label, \code{\link{colPointsLegend} title}. 
+#'                 DEFAULT: \code{gsub("\\"", "", deparse(\link{substitute}(x/y/z)))}
 #' @param log      Logarithmic axes with log="y", "xy" or "x". DEFAULT: ""
 #' @param axes,las Draw axes? Label Axis Style. Only used when add=FALSE.
 #'                 See \code{\link{par}}. DEFAULT: axes=TRUE, las=1 (all labels horizontal)
@@ -179,9 +179,9 @@ colPoints <- function(
   legargs=NULL,
   lines=FALSE,
   nint=30,
-  xlab=deparse(substitute(x)),
-  ylab=deparse(substitute(y)),
-  zlab=deparse(substitute(z)),
+  xlab=gsub("\"", "", deparse(substitute(x))),
+  ylab=gsub("\"", "", deparse(substitute(y))),
+  zlab=gsub("\"", "", deparse(substitute(z))),
   axes=TRUE,
   log="",
   las=1,
