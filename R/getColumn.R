@@ -35,12 +35,14 @@
 #' checkerr( upper2(Water.Temp) ) # Column "Timmy" does not exist
 #' # If possible, use "colname" with quotation marks.
 #' # This also avoids the CRAN check NOTE "no visible binding for global variable"
-#' upper3 <- function(...)
+#' upper3 <- function(char=TRUE)
 #' {
 #' Sepal.Length <- iris
-#' colPoints(Sepal.Length, Sepal.Width, Petal.Length, data=iris, add=FALSE)
+#' if(char) colPoints("Sepal.Length", Sepal.Width, Petal.Length, data=iris, add=FALSE)
+#' else     colPoints( Sepal.Length,  Sepal.Width, Petal.Length, data=iris, add=FALSE)
 #' }
-#' checkerr( upper3() ) # wrap use string "Sepal.Length" and it works fine. 
+#' checkerr( upper3(char=FALSE) )
+#' upper3(char=TRUE) # use string "Sepal.Length" and it works fine. 
 #' 
 #' 
 #' # The next examples all return informative errors:
@@ -58,6 +60,8 @@
 #' df <- data.frame(1:5, 3:7)
 #' colnames(df) <- c("a","1") # this is a bad idea anyways
 #' getColumn("1", df) # will actually return the first column, not column "1"
+#' getColumn("1", df, convnum=FALSE)  # now gives second column
+#' # as said, don't name column 2 as "1" - that will confuse people
 #' 
 #' # More on scoping and code yielding a column selection:
 #' upp1 <- function(coln, datf) {getColumn(substitute(coln), datf)[1:5]}
@@ -76,20 +80,23 @@
 #'          its value will be used as name! (see upper2 example)
 #' @param df dataframe object
 #' @param trace Logical: Add function call stack to the message? DEFAULT: TRUE
+#' @param convnum Logical: Convert numerical input (even if character) to 
+#'                Column name for that number?
 #' 
 getColumn <- function(
 x,
 df,
-trace=TRUE
+trace=TRUE,
+convnum=TRUE
 )
 {
 calltrace <- if(trace) traceCall(prefix="in ", suffix=": ") else ""
 # get names of objects as character strings:
 ndf <- getName(df)
 if(length(ndf)>1) ndf <- paste(deparse(substitute(df)), 
-                               "[evaluated with getName to ",length(ndf),"lines]")
+                               "[evaluated with getName to ",length(ndf)," lines]")
 depsub <- deparse(substitute(x))
-nam <- getName(x)
+nam <- if(substr(depsub,1,11)=="substitute(") deparse(x) else getName(x)
 # deal with substitute:
 if(substr(nam[1],1,11)=="substitute(") nam <- substr(nam, 12, nchar(nam)-1)
 nam <- gsub("\"", "", nam) # if input was a character string
@@ -103,11 +110,12 @@ if(grepl("[^[:alnum:][:space:]\\._]", paste(nam, collapse=" ") ))
 # stop if several columns are to be selected:
 if(length(nam)>1) stop(calltrace, "Only a single column can be selected ",
                        "with getColumn. The input (",depsub,
-                       ") was evaluated to: ", truncMessage(nam), call.=FALSE)
+                       ") was evaluated to: ", 
+                       truncMessage(nam, ntrunc=2, prefix=""), call.=FALSE)
 
 # deal with numeric input:
 namnum <- suppressWarnings(as.numeric(nam))
-if(!is.na(namnum))  
+if(!is.na(namnum) && convnum)  
  {
  if(namnum>ncol(df)) stop(calltrace, "column number ", namnum, " is not in '", 
                           ndf, "', which has ", ncol(df), " columns.", call.=FALSE)

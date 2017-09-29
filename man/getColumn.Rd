@@ -4,7 +4,7 @@
 \alias{getColumn}
 \title{get column from data.frame}
 \usage{
-getColumn(x, df, trace = TRUE)
+getColumn(x, df, trace = TRUE, convnum = TRUE)
 }
 \arguments{
 \item{x}{Column name to be subsetted. The safest is to use character strings
@@ -15,6 +15,9 @@ its value will be used as name! (see upper2 example)}
 \item{df}{dataframe object}
 
 \item{trace}{Logical: Add function call stack to the message? DEFAULT: TRUE}
+
+\item{convnum}{Logical: Convert numerical input (even if character) to 
+Column name for that number?}
 }
 \value{
 Vector with values in the specified column
@@ -51,12 +54,14 @@ upper2 <- function(xx) {xx <- "Timmy!"; getColumn(xx, stackloss)} # breaks!
 checkerr( upper2(Water.Temp) ) # Column "Timmy" does not exist
 # If possible, use "colname" with quotation marks.
 # This also avoids the CRAN check NOTE "no visible binding for global variable"
-upper3 <- function(...)
+upper3 <- function(char=TRUE)
 {
 Sepal.Length <- iris
-colPoints(Sepal.Length, Sepal.Width, Petal.Length, data=iris, add=FALSE)
+if(char) colPoints("Sepal.Length", Sepal.Width, Petal.Length, data=iris, add=FALSE)
+else     colPoints( Sepal.Length,  Sepal.Width, Petal.Length, data=iris, add=FALSE)
 }
-checkerr( upper3() ) # wrap use string "Sepal.Length" and it works fine. 
+checkerr( upper3(char=FALSE) )
+upper3(char=TRUE) # use string "Sepal.Length" and it works fine. 
 
 
 # The next examples all return informative errors:
@@ -74,6 +79,8 @@ checkerr( getColumn(c("Air.Flow","Acid.Conc"),  stackloss) )
 df <- data.frame(1:5, 3:7)
 colnames(df) <- c("a","1") # this is a bad idea anyways
 getColumn("1", df) # will actually return the first column, not column "1"
+getColumn("1", df, convnum=FALSE)  # now gives second column
+# as said, don't name column 2 as "1" - that will confuse people
 
 # More on scoping and code yielding a column selection:
 upp1 <- function(coln, datf) {getColumn(substitute(coln), datf)[1:5]}
