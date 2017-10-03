@@ -8,6 +8,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sep 2016
 #' @seealso \code{\link{subset}}, \code{\link{getElement}}, \url{https://mran.revolutionanalytics.com/web/packages/car/vignettes/embedding.pdf}
 #' @export
+#' @importFrom utils capture.output str
 #' @examples
 #' head(stackloss)
 #' getColumn(Air.Flow, stackloss)

@@ -32,6 +32,7 @@ ToDo-list
 - instGit: check versions of dependencies
 - catPal for categorical palettes
 - funSource: add option "local" for settings without internet connection
+- tstop, twarning and tmessage with traceCall
 
 
 
