@@ -5,7 +5,9 @@
 #' @return Vector with Dates as returned by \code{\link{as.Date}}.
 #' @note Spacing of days is not equal, but set to dertain days of the month! This was originally developed for time series movie frames
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, early 2013
-#' @seealso \code{\link{monthAxis}} for automatic determination of npm/npy, \code{\link{as.Date}}, \code{\link{paste}}
+#' @seealso \code{\link{timeAxis}} for nice labelling, 
+#'          \code{\link{timeAxis}} for automatic determination of npm/npy, 
+#'          \code{\link{as.Date}}, \code{\link{paste}}
 #' @keywords chron
 #' @export
 #' @examples

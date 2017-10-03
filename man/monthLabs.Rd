@@ -41,7 +41,9 @@ monthLabs(2014,2014,  npy=4) # 4 months per year
 
 }
 \seealso{
-\code{\link{monthAxis}} for automatic determination of npm/npy, \code{\link{as.Date}}, \code{\link{paste}}
+\code{\link{timeAxis}} for nice labelling, 
+         \code{\link{timeAxis}} for automatic determination of npm/npy, 
+         \code{\link{as.Date}}, \code{\link{paste}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, early 2013

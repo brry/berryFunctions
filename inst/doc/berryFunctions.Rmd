@@ -205,7 +205,7 @@ logAxis(side=2) # invisibly returns values and labels
 points(exdat, pch=16)
 
 plot(as.Date("2013-04-25")+0:500, cumsum(rnorm(501)), type="l", xaxt="n", ann=FALSE)
-dummy <- monthAxis(side=1, ym=TRUE) # tries to find suitable labeling intervall
+dummy <- monthAxis(side=1)
 str(dummy)
 ```
 

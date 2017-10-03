@@ -14,51 +14,50 @@
 #' set.seed(007) # for reproducibility
 #' Date1 <- as.Date("2013-09-25")+sort(sample(0:150, 30))
 #' plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
-#' monthAxis(side=1)
-#' monthAxis(1, npm=2, cex.axis=0.5, col.axis="red") # fix number of labels per month
+#' timeAxis(side=1)
+#' timeAxis(1, npm=2, cex.axis=0.5, col.axis="red") # fix number of labels per month
 #' 
 #' DateYM <- as.Date("2013-04-25")+0:500
 #' plot(DateYM, cumsum(rnorm(501)), type="l", xaxt="n", ann=FALSE)
-#' monthAxis(ym=TRUE)
-#' monthAxis(ym=TRUE, mgp=c(3,1,0))
-#' monthAxis(ym=TRUE, cex.axis=1.4)
-#' monthAxis(ym=TRUE, mcex=0.9, col.axis="red")
-#' monthAxis(ym=TRUE, mgp=c(3,2,0), yformat="")
+#' 
+#' monthAxis() # see more examples there - it largely replaces timeAxis!!!
 #' 
 #' plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
-#' monthAxis(labels=FALSE, col.ticks=2)
-#' monthAxis(1, format=" ")  # equivalent to axis(labels=FALSE)
-#' monthAxis(1)
-#' d <- monthAxis(1, labels=letters[1:24], mgp=c(3,2.5,0))
+#' timeAxis(labels=FALSE, col.ticks=2)
+#' timeAxis(1, format=" ")  # equivalent to axis(labels=FALSE)
+#' timeAxis(1)
+#' d <- timeAxis(1, labels=letters[1:24], mgp=c(3,2.5,0))
 #' d # d covers the full year, thus is longer than n=5
 #' 
 #' Date2 <- as.Date("2011-07-13")+sort(sample(0:1400, 50))
 #' plot(Date2, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
-#' monthAxis(npy=12, format=" ")  # fix number of labels per year
-#' monthAxis(tcl=-0.8, lwd.ticks=2, format="%Y/%m", mgp=c(3,1,0))
-#' monthAxis(format="", mgp=c(3,2,0)) # International Date format YYYY-mm-dd
+#' timeAxis(npy=12, format=" ")  # fix number of labels per year
+#' timeAxis(tcl=-0.8, lwd.ticks=2, format="%Y/%m", mgp=c(3,1,0))
+#' timeAxis(format="", mgp=c(3,2,0)) # International Date format YYYY-mm-dd
 #' 
 #' plot(Date2, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
-#' monthAxis(midyear=TRUE)
+#' timeAxis(midyear=TRUE)
 #' abline(v=monthLabs(npm=1), col=8)
 #' 
 #' Date3 <- as.Date("2011-07-13")+sort(sample(0:1200, 50))
 #' plot(Date3, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
-#' monthAxis(1, n=4, font=2)
-#' monthAxis(1, col.axis=3) # too many labels with default n=5
+#' timeAxis(1, n=4, font=2)
+#' timeAxis(1, col.axis=3) # too many labels with default n=5
+#' 
+#' monthAxis(side=3) # again: use monthAxis, it is usually nicer!
 #' 
 #' # mid-year labels:
 #' plot(Date3, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
-#' monthAxis(midyear=TRUE, midargs=list(tcl=-1.2))
+#' timeAxis(midyear=TRUE, midargs=list(tcl=-1.2))
 #' 
 #' # mid-month labels:
 #' plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
-#' monthAxis(midmonth=TRUE)
+#' timeAxis(midmonth=TRUE)
 #' 
 #' # Time axis instead of date axis:
 #' plot(as.POSIXct(Sys.time()+c(0,10)*24*3600), 1:2, xaxt="n")
-#' monthAxis(n=3)
-#' monthAxis()
+#' timeAxis(n=3)
+#' timeAxis()
 #' 
 #' @param side Which \code{\link{axis}} are to be labeled? (can be several). DEFAULT: 1
 #' @param timeAxis Logical indicating whether the axis is \code{\link{POSIXct}}, not date.
@@ -90,7 +89,7 @@
 #' @param las LabelAxisStyle for orientation of labels. DEFAULT: 1 (upright)
 #' @param \dots Further arguments passed to \code{\link{axis}}, like \code{lwd, col.ticks, hadj, lty}, ...
 #' 
-monthAxis <- function(
+timeAxis <- function(
 side=1,
 timeAxis=NA,
 origin="1970-01-01",

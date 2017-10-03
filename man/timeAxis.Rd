@@ -80,11 +80,8 @@ timeAxis(1, npm=2, cex.axis=0.5, col.axis="red") # fix number of labels per mont
 
 DateYM <- as.Date("2013-04-25")+0:500
 plot(DateYM, cumsum(rnorm(501)), type="l", xaxt="n", ann=FALSE)
-timeAxis(ym=TRUE)
-timeAxis(ym=TRUE, mgp=c(3,1,0))
-timeAxis(ym=TRUE, cex.axis=1.4)
-timeAxis(ym=TRUE, mcex=0.9, col.axis="red")
-timeAxis(ym=TRUE, mgp=c(3,2,0), yformat="")
+
+monthAxis() # see more examples there - it largely replaces timeAxis!!!
 
 plot(Date1, cumsum(rnorm(30)), type="l", xaxt="n", ann=FALSE)
 timeAxis(labels=FALSE, col.ticks=2)
@@ -107,6 +104,8 @@ Date3 <- as.Date("2011-07-13")+sort(sample(0:1200, 50))
 plot(Date3, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
 timeAxis(1, n=4, font=2)
 timeAxis(1, col.axis=3) # too many labels with default n=5
+
+monthAxis(side=3) # again: use monthAxis, it is usually nicer!
 
 # mid-year labels:
 plot(Date3, cumsum(rnorm(50)), type="l", xaxt="n", ann=FALSE)
