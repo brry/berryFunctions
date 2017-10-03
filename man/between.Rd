@@ -4,12 +4,14 @@
 \alias{between}
 \title{Are values between a and b?}
 \usage{
-between(x, a, b = a, incl = TRUE, aincl = incl, bincl = incl)
+between(x, a, b = a, incl = TRUE, aincl = incl, bincl = incl,
+  quiet = FALSE)
 }
 \arguments{
 \item{x}{Numerical vector}
 
-\item{a, b}{Numerical values/vectors specifying the borders of the interval.}
+\item{a, b}{Numerical values/vectors specifying the borders of the interval. 
+\code{\link{min}} and \code{max} are used, so they can be a vector.}
 
 \item{incl}{Logical. Include values on the borders? For x == border, TRUE
 will be returned. Specify per left and right border separately
@@ -17,6 +19,8 @@ with the arguments \code{aincl} and \code{bincl}. DEFAULT: TRUE}
 
 \item{aincl, bincl}{Logical. Include values on left and right border, respectively?
 DEFAULT: \code{incl}}
+
+\item{quiet}{Logical. Suppress warning if a>b? DEFAULT: FALSE}
 }
 \value{
 Logical (boolean) vector with TRUE/FALSE values
@@ -27,7 +31,7 @@ Basically a wrapper for \code{ x >= a   &   x <= b } to save repeating long x na
 }
 \examples{
 between(1:10, 4, 8)
-between(1:10, 4:8)
+between(1:10, 4:8) # range as vector
 between(1:10, 8, 4) # warns about interval
  
 data.frame( incl.T=between(1:10, 4, 8), 
