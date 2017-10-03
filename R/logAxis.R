@@ -53,7 +53,7 @@
 #' @param from Lower exponent OR vector with data, as in \code{\link{logVals}}. DEFAULT based on \code{\link{par}("usr")}
 #' @param to High end exponent. DEFAULT: internally based on par("usr")
 #' @param Range Override from and to as range.
-#' @param base Bases to be used in \code{\link{logVals}}. DEFAULT: c(1,2,5) or 1, depending on from and to.
+#' @param base Bases to be used in \code{\link{logVals}}. DEFAULT: NA -> c(1,2,5) or 1, depending on from and to.
 #' @param big.mark Symbol separating thousands, eg. space, comma, dot, etc. see "format" and "prettyNum". DEFAULT: "'"
 #' @param decimal.mark Character separating comma values, see "format" and "prettyNum". DEFAULT: "."
 #' @param scientific See \code{\link{format}}. DEFAULT: FALSE
@@ -76,7 +76,7 @@ las=1,
 from,
 to,
 Range,
-base,
+base=NA,
 big.mark="'",
 decimal.mark=".",
 scientific=FALSE,
@@ -93,10 +93,8 @@ if(side_i==1 | side_i==3) # vertical lines, labels at x-axis:
   # set from and to:
   from_i <- if(missing(from)) par("usr")[1] else from
   to_i   <- if(missing(to))   par("usr")[2] else to
-  # determine base:
-  base_i <- if(missing(base)) {if(abs(to_i-from_i)>4) 1 else c(1,2,5)} else base
   # get labels and positions:
-  lv <- logVals(from=from_i, to=to_i, Range=Range, base=base_i, big.mark=big.mark,
+  lv <- logVals(from=from_i, to=to_i, Range=Range, base=base, big.mark=big.mark,
             decimal.mark=decimal.mark, scientific=scientific, exponent=exponent,
             expobase1=expobase1, allbase=allbase)
   # draw lines
@@ -109,10 +107,8 @@ else # horizontal lines, labels at y-axis:
   # set from and to:
   from_i <- if(missing(from)) par("usr")[3] else from
   to_i   <- if(missing(to))   par("usr")[4] else to
-  # determine base:
-  base_i <- if(missing(base)) {if(abs(to_i-from_i)>4) 1 else c(1,2,5)} else base
   # get labels and positions:
-  lv <- logVals(from=from_i, to=to_i, Range=Range, base=base_i, big.mark=big.mark,
+  lv <- logVals(from=from_i, to=to_i, Range=Range, base=base, big.mark=big.mark,
             decimal.mark=decimal.mark, scientific=scientific, exponent=exponent,
             expobase1=expobase1, allbase=allbase)
   # draw lines

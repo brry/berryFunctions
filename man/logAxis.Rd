@@ -6,8 +6,9 @@
 \usage{
 logAxis(side = 1, log = NULL, lcol = "grey", lty = 1, lwd = 1,
   labels = NULL, allticks = FALSE, allargs = NULL, expr, las = 1, from,
-  to, Range, base, big.mark = "'", decimal.mark = ".", scientific = FALSE,
-  exponent = 5, expobase1 = FALSE, allbase = 1:9, box = TRUE, ...)
+  to, Range, base = NA, big.mark = "'", decimal.mark = ".",
+  scientific = FALSE, exponent = 5, expobase1 = FALSE, allbase = 1:9,
+  box = TRUE, ...)
 }
 \arguments{
 \item{side}{Which \code{\link{axis}} are to be labeled? Can be a vector within \code{1:4}. DEFAULT: 1}
@@ -34,7 +35,7 @@ logAxis(side = 1, log = NULL, lcol = "grey", lty = 1, lwd = 1,
 
 \item{Range}{Override from and to as range.}
 
-\item{base}{Bases to be used in \code{\link{logVals}}. DEFAULT: c(1,2,5) or 1, depending on from and to.}
+\item{base}{Bases to be used in \code{\link{logVals}}. DEFAULT: NA -> c(1,2,5) or 1, depending on from and to.}
 
 \item{big.mark}{Symbol separating thousands, eg. space, comma, dot, etc. see "format" and "prettyNum". DEFAULT: "'"}
 
