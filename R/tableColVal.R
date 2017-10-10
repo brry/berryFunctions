@@ -22,6 +22,7 @@
 #' (  tableColVal(Bsp)   )
 #' tableColVal(Bsp, nameswidth=0.1) # relative to plot width
 #' tableColVal(Bsp, namesheight=0.5, srt=45)
+#' tableColVal(Bsp, namesheight=0.5, colargs=c(srt=45))
 #' 
 #' tableColVal(Bsp, cellargs=list(cex=2), col="red")
 #' tableColVal(Bsp, Range=c(10,40))
@@ -52,7 +53,9 @@
 #' @param digits      Number of digits rounded to for writing. DEFAULT: 2
 #' @param classargs   List of arguments specifying how to call \code{\link{classify}},
 #'                    e.g. method. DEFAULT: NULL
-#' @param cellargs    List of arguments passed to \code{\link{text}} only for the cells.
+#' @param cellargs,colargs,rowargs,mainargs List of arguments passed to \code{\link{text}} 
+#'                    only for the cells, column labels, row labels or title,
+#'                    respectively. DEFAULTS: NULL
 #' @param \dots Further arguments passed to all \code{\link{text}} like cex, col, srt, ...
 #' 
 tableColVal <- function(
@@ -63,9 +66,13 @@ namesheight=0.1,
 palette=seqPal(100),
 Range=range(mat,finite=TRUE),
 digits=2,
+...,
 classargs=NULL,
 cellargs=NULL,
-...)
+colargs=NULL,
+rowargs=NULL,
+mainargs=NULL
+)
 {
 main <- main # evaluate promise before mat is evaluated
 mat <- as.matrix(mat)
@@ -89,13 +96,14 @@ rect(xleft=rep(x1[-1], each=nr), xright=rep(x2[-1], each=nr), border=NA,
       ytop=rep(y1[-1], nc),     ybottom=rep(y2[-1], nc), col=palette[cl$index])
 abline(v=c(x1,1), h=c(y1,1))
 # add text to each cell:
-def <- list(x=rep(xm[-1], each=nr), y=rep(ym[-1], nc), labels=round(mat, digits))
+def <- list(x=rep(xm[-1], each=nr), y=rep(ym[-1], nc), labels=round0(mat, digits, pre=1))
 def2 <- list(...)
 do.call(text, args=owa(c(def,def2), cellargs))
 # add "titles"
-text(x=xm[-1], y=ym[1] , labels=colnames(mat), ...)
-text(x=xm[1] , y=ym[1] , labels=main,          ...)
-text(x=xm[1] , y=ym[-1], labels=rownames(mat), ...)
+do.call(text, args=owa(c(list(x=xm[-1], y=ym[1] , labels=colnames(mat)),def2), colargs))
+do.call(text, args=owa(c(list(x=xm[1] , y=ym[1] , labels=main),         def2), mainargs))
+do.call(text, args=owa(c(list(x=xm[1] , y=ym[-1], labels=rownames(mat)),def2), rowargs))
 # output
 return(invisible(list(x1=x1,x2=x2,xm=xm,y1=y1,y2=y2,ym=ym)))
 } # end of function
+
