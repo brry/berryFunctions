@@ -12,11 +12,10 @@ ToDo-list
 - colPoints: if z is matrix, use image/filled.contour/heatmap instead of points
 - colPointsLegend: improve text placement position for large/small legend fields
 - contemplate moving tryStack and traceCall to own package, maybe "trace"
-- combineFiles: path expansion (see rdwd::fileDWD), remove dir arguments, add ... for encoding etc
 - plot(c(50,1000), c(2500,35000), log="yx", axes=F) ; logAxis(1:2) # Error 'at' and 'labels' lengths differ, 9 != 12
 - insertRows: r <- r + seq_along(r)-1
 - late 2017: delete dataDWD, readDWD, funTinn, ci
-- colPoints: zlog=TRUE, correct colPoints(i,j,k, cex=1.5, pch="+", add=FALSE, Range=c(150,190), density=T)
+- colPoints: zlog=TRUE
 - linReg: col, colline, colband
 - lsc: better example dataset, optim problems
 - implement identical(FALSE, legargs) wherever owa is used and that makes sense
@@ -25,7 +24,6 @@ ToDo-list
 - tryStack: if silent=TRUE, put warnings and messages into final output (all of them, not just last one)
 - tryStack: example warning with log(-1:6) for non-repeated call stack
 - tryStack: mapply, do.call etc put function name in next element
-- checkFile: eror in ->-> checkFile: n/n file(s) do not exist at getwd: \n truncMessage(files[nonexi])
 - ciBand: check if at all x values yl,ym,yu are in ascending order
 - instGit: check versions of dependencies
 - catPal for categorical palettes

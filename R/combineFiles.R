@@ -20,26 +20,34 @@
 #' unlink(paste0("BujakashaBerry", 1:3, ".txt"))
 #' }
 #' 
-#' @param inFiles vector with names of input files, as can be read with \code{\link{scan}}. Is pasted with inDir, so don't use full paths. DEFAULT: dir()
-#' @param inDir Character string: path to the files. E.g. "D:/MyFolder/Subfolder". Don't have / at the end. DEFAULT: \code{\link{getwd}}().
-#' @param outFile Character string: name of the file to be created. Again, just the file name, not a path. DEFAULT: "combined_Textfiles.txt"
-#' @param outDir Character string: path for output file. DEFAULT: inDir
-#' @param sep Character string: Separation between content of each file and the following. DEFAULT: NULL, with which it uses an empty line, two lines with dashes, and another line break.
-#' @param names Should File names be included after sep? DEFAULT: TRUE
-#' @param selection Index of rows that should be written. Can refer to each file separately, e.g. \code{substr(inFile_i,1,1)=="#"}, DEFAULT: all lines
-#' @param progbar Should a progress bar be drawn? Useful if you combine many large files. DEFAULT: !quiet, i.e. TRUE
-#' @param quiet Suppress message about number of files combined? DEFAULT: FALSE
+#' @param inFiles   vector with names of input files, as can be read with 
+#'                  \code{\link{scan}}. DEFAULT: dir()
+#' @param outFile   Character string: name of the file to be created. Passed to
+#'                  \code{\link{newFilename}}. DEFAULT: "combined_Textfiles.txt"
+#' @param overwrite Logical: overwrite outFile? DEFAULT: FALSE 
+#' @param sep       Character string: Separation between content of 
+#'                  each file and the following. DEFAULT: NULL, with which it uses 
+#'                  an empty line, two lines with dashes, and another line break.
+#' @param names     Should File names be included after sep? DEFAULT: TRUE
+#' @param selection Index of rows that should be written. Can refer to each file 
+#'                  separately, e.g. \code{substr(inFile_i,1,1)=="#"}.
+#'                  DEFAULT: all lines
+#' @param progbar   Should a progress bar be drawn? Useful if you combine many 
+#'                  large files. DEFAULT: !quiet, i.e. TRUE
+#' @param quiet     Suppress message about number of files combined? DEFAULT: FALSE
+#' @param \dots     Arguments passed to \code{\link{scan}}, but not one of: 
+#'                  \code{file, what, blank.lines.skip, sep, quiet}.
 #' 
 combineFiles <- function(
-   inFiles = dir(),
-   inDir = getwd(),
-   outFile = "combined_Textfiles.txt",
-   outDir = inDir,
-   sep = NULL,
-   names=TRUE,
-   selection=NULL,
-   progbar=!quiet,
-   quiet=FALSE)
+   inFiles   = dir(),
+   outFile   = "combined_Textfiles.txt",
+   overwrite = FALSE,
+   sep       = NULL,
+   names     = TRUE,
+   selection = NULL,
+   progbar   = !quiet,
+   quiet     = FALSE,
+   ...)
 {
 # Function start
 inFiles <- inFiles # execute before outFile is added
@@ -47,14 +55,12 @@ inFiles <- inFiles # execute before outFile is added
 if(is.null(sep)) sep <- "\n-------------------------------------------------------
 -------------------------------------------------------\n"
 # File to write to:
-while( substring(outDir, nchar(outDir)) %in% c("/", "\\") ) #"
-    outDir <- substring(outDir, 1, nchar(outDir)-1)
-File <- paste(outDir, outFile, sep="/")
+File <- newFilename(outFile, overwrite=overwrite, quiet=TRUE)
 write("", file=File)
 # Meta information if wanted
 if(names)
  {
- write(paste(length(inFiles), "Files in", inDir), file=File, append=TRUE)
+ write(paste(length(inFiles), "Files in", getwd()), file=File, append=TRUE)
  write("Combined together with berryFunctions::combineFiles", file=File, append=TRUE)
  write(as.character(Sys.time()), file=File, append=TRUE)
  write(sep, file=File, append=TRUE)
@@ -65,8 +71,8 @@ if(progbar) pb <- txtProgressBar(max=length(inFiles), style=3)
 for(i in 1:length(inFiles))
    {
    # Read file:
-   inFile_i <- scan(file=paste(inDir, inFiles[i], sep="/"), what="char",
-                    blank.lines.skip=FALSE, sep="\n", quiet=TRUE)
+   inFile_i <- scan(file=inFiles[i], what="char",
+                    blank.lines.skip=FALSE, sep="\n", quiet=TRUE, ...)
    # Write filename if wanted:
    if(names) write(paste(inFiles[i], "\n"), file=File, append=TRUE)
    # selection of lines to write to output
