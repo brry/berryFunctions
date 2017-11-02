@@ -94,7 +94,7 @@ if(!quiet)
           if(n_i>0) paste0("not checking ", nfiles(n_i), 
                            " (",n_ie," exist",if(n_ie==1)"s",")"),
           if(n_i>0 & n_n+n_a+n_o > 0) ", ",
-          if(n_n>0) paste0("creating ", nfiles(n_n+n_a)),
+          if(n_n+n_a>0) paste0("creating ", nfiles(n_n+n_a)),
           if(n_a>0) paste0(" (",n_a," already existed for which '_n' is appended)"),
           if(n_i+n_n+n_a > 0 & n_o>0) ", ",
           if(n_o>0) paste0("overwriting ", nfiles(n_o)),
