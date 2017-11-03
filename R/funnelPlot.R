@@ -1,6 +1,6 @@
 #' Funnel plots for proportional data
 #' 
-#' Funnel plots for proportional data with confdence interval based on sample size. Introduced by Stephen Few, 2013
+#' Funnel plots for proportional data with confidence interval based on sample size. Introduced by Stephen Few, 2013
 #' 
 #' @return Nothing - the function just plots
 #' @note the default for lty is not taken from par("lty"). This would yield "solid".
@@ -23,7 +23,7 @@
 #' See Stephen Few and Katherine Rowel's PDF for details on the interpretation.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Oct 2013
 #' @references
-#'    http://www.perceptualedge.com/articles/visual_business_intelligence/variation_and_its_discontents.pdf\cr
+#'    \url{https://www.perceptualedge.com/articles/visual_business_intelligence/variation_and_its_discontents.pdf}\cr
 #'    \url{http://sfew.websitetoolbox.com/post/variation-and-its-discontents-6555336?}\cr
 #'    Excellent explanation of bayesian take on proportions: \url{http://varianceexplained.org/r/empirical_bayes_baseball/}
 #' @keywords hplot aplot

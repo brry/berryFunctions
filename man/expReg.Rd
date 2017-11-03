@@ -33,7 +33,7 @@ If values are not specified, they are set equal to the first. DEFAULT: 2}
 \item{inset}{Numeric vector of length \eqn{\le 2}. inset distance(s) from the margins
 as a fraction of the plot region when formula is placed by keyword. DEFAULT: 0}
 
-\item{xpd}{Logical, specifying wheter formula can be written only inside the plot region (when FALSE)
+\item{xpd}{Logical, specifying whether formula can be written only inside the plot region (when FALSE)
 or inside the figure region including mar (when TRUE)
 or in the entire device region including oma (when NA). DEFAULT: par("xpd")}
 
@@ -51,7 +51,7 @@ or in the entire device region including oma (when NA). DEFAULT: par("xpd")}
 
 \item{lwd}{Numeric. Linewidth, see \code{\link{par}}. DEFAULT: 1}
 
-\item{xlab, ylab, main}{Character / Expression. axis label and graph title if add=FAlSE. DEFAULT: internal from names}
+\item{xlab, ylab, main}{Character / Expression. axis label and graph title if add=FALSE. DEFAULT: internal from names}
 
 \item{xlim, ylim}{graphic range. DEFAULT: range(x)}
 

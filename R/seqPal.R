@@ -1,6 +1,6 @@
 #' Sequential color palette
 #' 
-#' Sequential color palette from yelow to red or yellow to blue or custom colors.
+#' Sequential color palette from yellow to red or yellow to blue or custom colors.
 #' 
 #' @return Character string vector with color names
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2016

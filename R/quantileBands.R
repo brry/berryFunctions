@@ -35,7 +35,7 @@
 #' 
 #' @param mat Matrix or data.frame with columns of data
 #' @param x X-axis positions for each column. DEFAULT: 1:ncol(mat)
-#' @param col Vector of colors for each quantile group, recycled reversively if necessary. DEFAULT: rgb(0,0,1, alpha=c(0.5, 0.7))
+#' @param col Vector of colors for each quantile group, recycled reversely if necessary. DEFAULT: rgb(0,0,1, alpha=c(0.5, 0.7))
 #' @param add Add to existing plot? Allows to add to highly customized plot. DEFAULT: FALSE
 #' @param main,xlab,ylab plot labels. DEFAULT: "Quantile Bands", ""
 #' @param probs Probabilities passed to \code{\link{quantile}}. DEFAULT: 0:4/4
@@ -44,7 +44,7 @@
 #' @param smooth If(!is.na), \code{width} passed to \code{\link{movAv}} smoothing quantiles. DEFAULT: NA
 #' @param medargs List of arguments passed to lines drawing \code{\link{median}}. Not drawn if NULL. DEFAULT: NULL
 #' @param meanargs List of arguments passed to lines drawing \code{\link{mean}}. Not drawn if NULL. DEFAULT: NULL
-#' @param txi Text x position index (along columns of mat), recyled if necessary. NA to suppress. INTERNAL DEFAULT: middle of the plot for all.
+#' @param txi Text x position index (along columns of mat), recycled if necessary. NA to suppress. INTERNAL DEFAULT: middle of the plot for all.
 #' @param textargs List of arguments passed to \code{\link{text}}, like col, adj, ... DEFAULT: NULL
 #' @param \dots Further arguments passed to \code{\link{polygon}}, like border, lty, ...
 #' 

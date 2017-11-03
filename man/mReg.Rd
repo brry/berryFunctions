@@ -100,7 +100,7 @@ If you're adjusting the appearance (lwd, lty, col) of single lines,
 set parameters in the following order:\cr
 # 1 linear a*x + b\cr
 # 2 quadratic (parabola) a*x^2 + b*x + c\cr
-# 3 kubic a*x^3 + b*x^2 + c*x + d\cr
+# 3 cubic a*x^3 + b*x^2 + c*x + d\cr
 # 4 Polynom 4th degree a*x^4 + b*x^3 + c*x^2 + d*x + e\cr
 # 5 Polynom 5 a*x^5 + b*x^4 + c*x^3 + d*x^2 + e*x + f \cr
 # 6 logarithmic a*log(x) + b \cr
@@ -115,7 +115,7 @@ exp_4par was originally developed for exponential temperature decline in a cup o
 }
 \section{warning}{
  A well fitting function does NOT imply correct causation!\cr
-        A good fit does NOT mean that you describe the bahaviour of a system adequatly!\cr
+        A good fit does NOT mean that you describe the behaviour of a system adequately!\cr
         Extrapolation can be DANGEROUS!\cr
         Always extrapolate to see if a function fits the expected results there as well.\cr
         Avoid overfitting: Poly45 will often yield good results (in terms of R^2), but can be way overfitted.

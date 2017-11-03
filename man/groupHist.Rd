@@ -2,7 +2,7 @@
 % Please edit documentation in R/groupHist.R
 \name{groupHist}
 \alias{groupHist}
-\title{Histogramm for classes}
+\title{Histogram for classes}
 \usage{
 groupHist(df, x, g, xlab = "", ylab = "", las = 1, main = NULL,
   unit = NA, ...)

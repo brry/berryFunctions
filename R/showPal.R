@@ -1,6 +1,6 @@
 #' show color palettes
 #' 
-#' Plot examples of the seqential and diverging color palettes in this package.
+#' Plot examples of the sequential and diverging color palettes in this package.
 #' Do not use \code{rainbow}: \url{https://eagereyes.org/basics/rainbow-color-map}
 #' 
 #' @return NULL
@@ -12,7 +12,7 @@
 #' @examples
 #' showPal()
 #' 
-#' @param cex Caracter EXpansion size (width of color bar). DEFAULT: 4
+#' @param cex Character EXpansion size (width of color bar). DEFAULT: 4
 #' @param \dots Arguments passed to \code{\link{par}}
 #' 
 showPal <- function(cex=4,...)

@@ -45,8 +45,8 @@
 #' @param log Is the axis logarithmic by plot(log="x")? internal DEFAULT: \code{\link{par}("xlog")} or "ylog". DEFAULT: NULL
 #' @param lcol Color of gridlines drawn in the graph with \code{\link{abline}}, NA to suppress. DEFAULT: "grey"
 #' @param lty,lwd Type of gridlines. DEFAULT: 1
-#' @param labels Labels passed to \code{\link{axis}}. "FALSE" to suppress labelling. DEFAULT: NULL (internally, \code{\link{logVals}$labs}
-#' @param allticks Place all intermediate ticklines at the axis (without labelling). DEFAULT: FALSE
+#' @param labels Labels passed to \code{\link{axis}}. "FALSE" to suppress labeling. DEFAULT: NULL (internally, \code{\link{logVals}$labs}
+#' @param allticks Place all intermediate ticklines at the axis (without labeling). DEFAULT: FALSE
 #' @param allargs List of arguments passed to axis for allticks=TRUE. DEFAULT: NULL
 #' @param expr Expression drawing over the ablines, like (points(x,y). Can be code within {braces}.
 #' @param las LabelAxisStyle for the orientation of the labels. DEFAULT: 1

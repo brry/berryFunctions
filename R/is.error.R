@@ -18,7 +18,7 @@
 #' # is.error(  log(3),   force=TRUE)
 #' stopifnot(is.error(  is.error(log(3), force=TRUE)  ))
 #' 
-#' @param expr Expression to be tested for retunrning an error
+#' @param expr Expression to be tested for returning an error
 #' @param tell Logical: Should the error message be printed via \code{\link{message}}? DEFAULT: FALSE
 #' @param force Logical: Should an error be returned if the expression is not an error? DEFAULT: FALSE
 #' 

@@ -1,4 +1,4 @@
-#' check file existance
+#' check file existence
 #' 
 #' check whether files exist and give a useful error/warning/message
 #' 

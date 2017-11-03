@@ -18,7 +18,7 @@
 #' library2("statmod")
 #' }
 #' 
-#' @param name Name of the package(s). Can be qouted, must not.
+#' @param name Name of the package(s). Can be quoted, must not.
 #' @param libargs List of arguments passed to \code{\link{library}} like \code{lib.loc}, \code{quietly} etc. DEFAULT: NULL
 #' @param \dots Arguments passed to \code{\link{install.packages}} like \code{lib}, \code{repos} etc.
 #' 

@@ -1,6 +1,6 @@
 #' Create log-axis values and labels
 #' 
-#' Create nice values and labels to write at logartihmic axes
+#' Create nice values and labels to write at logarithmic axes
 #' 
 #' @return A list with
 #'        \item{vals}{Values for lines and label positions}

@@ -40,7 +40,7 @@ A list with
        \item{all}{Values for lines}
 }
 \description{
-Create nice values and labels to write at logartihmic axes
+Create nice values and labels to write at logarithmic axes
 }
 \examples{
 

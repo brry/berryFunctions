@@ -13,7 +13,7 @@
 #' sortDF(USArrests[USArrests$Murder>11,], 3)
 #' 
 #' @param df Data.frame to be sorted
-#' @param col Column (index or (un)qouted name) to be sorted by
+#' @param col Column (index or (un)quoted name) to be sorted by
 #' @param decreasing Logical: should highest value be on top?
 #'                   DEFAULT: TRUE (unlike \code{\link{order}}!)
 #' @param \dots Further arguments passed to \code{\link{order}}, like eg \code{na.last or method}

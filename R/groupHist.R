@@ -1,4 +1,4 @@
-#' Histogramm for classes
+#' Histogram for classes
 #' 
 #' Improvement of \code{tapply(x, g, hist)} with x and g taken from a data.frame
 #' 

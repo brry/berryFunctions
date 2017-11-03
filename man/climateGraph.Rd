@@ -54,7 +54,7 @@ like density, angle. DEFAULT: NULL (internal x,y, col, border)}
 
 \item{argcomp}{List of arguments for compressed rainfall polygon. DEFAULT: NULL}
 
-\item{arggrid}{List of arguments for bachground grid lines. DEFAULT: NULL}
+\item{arggrid}{List of arguments for background grid lines. DEFAULT: NULL}
 
 \item{argtext}{List of arguments for text at right hand if textprop>0. DEFAULT: NULL}
 

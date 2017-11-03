@@ -8,7 +8,7 @@
 library2(name, libargs = NULL, ...)
 }
 \arguments{
-\item{name}{Name of the package(s). Can be qouted, must not.}
+\item{name}{Name of the package(s). Can be quoted, must not.}
 
 \item{libargs}{List of arguments passed to \code{\link{library}} like \code{lib.loc}, \code{quietly} etc. DEFAULT: NULL}
 

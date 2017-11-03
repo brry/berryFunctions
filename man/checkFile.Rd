@@ -2,7 +2,7 @@
 % Please edit documentation in R/checkFile.R
 \name{checkFile}
 \alias{checkFile}
-\title{check file existance}
+\title{check file existence}
 \usage{
 checkFile(file, warnonly = FALSE, trace = TRUE, pwd = TRUE)
 }

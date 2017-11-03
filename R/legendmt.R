@@ -1,7 +1,7 @@
 #' legend with multiline title
 #' 
 #' Draw a legend with title spanning several lines (i.e. with line breaks).
-#' Note that this is in development and not all inputs ar correctly vectorized yet.
+#' Note that this is in development and not all inputs are correctly vectorized yet.
 #' 
 #' @return \code{\link{legend}} output
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Apr 2017

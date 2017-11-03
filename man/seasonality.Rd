@@ -16,7 +16,7 @@ seasonality(dates, values, data, drange = NA, vrange = NA, shift = 0,
 }
 \arguments{
 \item{dates}{Dates in ascending order.
-Can be charater strings or \code{\link{strptime}} results,
+Can be character strings or \code{\link{strptime}} results,
 as accepted (and coerced) by \code{\link{as.Date}}}
 
 \item{values}{Values to be mapped in color with \code{\link{colPoints}}}
@@ -69,7 +69,7 @@ DEFAULT: c(0,25,50,75,95,99)/100}
 
 \item{width}{Numeric: window width for plot=4. Used as sd in gaussian weighting.
 Support (number of values around a DOY passed to
-quantile funtion at least once) is ca 4.9*width.
+quantile function at least once) is ca 4.9*width.
 The value at doy itself is used 10 times.
 Larger values of width require more computing time.
 DEFAULT: 3}
@@ -95,7 +95,7 @@ Use "r" for regular 4\% expansion, "i" for in range only.
 DEFAULT: NA (specified internally per plot type)}
 
 \item{main, adj}{Graph title and offset to the left
-(\code{adj} passsed to \code{\link{title}}).
+(\code{adj} passed to \code{\link{title}}).
 DEFAULT: "Seasonality", 0.2}
 
 \item{mar, mgp}{Parameters specifying plot margin size and labels placement.

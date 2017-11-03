@@ -31,7 +31,7 @@ If values are not specified, they are set equal to the first. DEFAULT: 2}
 
 \item{level}{Confidence level, see \code{\link{predict.lm}}. DEFAULT: 0.95}
 
-\item{plotrange}{x range for wich regression line and uncertainty band should
+\item{plotrange}{x range for which regression line and uncertainty band should
 be plotted. Is passed to \code{\link{seqR}} and can hence be a vector.  
 DEFAULT: par("usr")[1:2]}
 

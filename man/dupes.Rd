@@ -32,7 +32,7 @@ A LibreOffice file is included. Note: OpenOffice does not provide color
 scales based on cell values.
 }
 \note{
-This has not been tested al that much - feedback is heavily welcome!
+This has not been tested all that much - feedback is heavily welcome!
 }
 \examples{
 

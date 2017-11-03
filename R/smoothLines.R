@@ -27,7 +27,7 @@
 #' 
 #' #dev.off()
 #' 
-#' @param x numrical. x-coordinates. x can be a matrix, then the y coordinates are taken from the second column
+#' @param x numerical. x-coordinates. x can be a matrix, then the y coordinates are taken from the second column
 #' @param y numerical. y-coordinates
 #' @param lwd single integer. line width
 #' @param col color. DEFAULT: 1 (black)

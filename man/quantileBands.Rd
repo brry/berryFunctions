@@ -14,7 +14,7 @@ quantileBands(mat, x = 1:ncol(mat), col = rgb(0, 0, 1, alpha = c(0.5, 0.7)),
 
 \item{x}{X-axis positions for each column. DEFAULT: 1:ncol(mat)}
 
-\item{col}{Vector of colors for each quantile group, recycled reversively if necessary. DEFAULT: rgb(0,0,1, alpha=c(0.5, 0.7))}
+\item{col}{Vector of colors for each quantile group, recycled reversely if necessary. DEFAULT: rgb(0,0,1, alpha=c(0.5, 0.7))}
 
 \item{add}{Add to existing plot? Allows to add to highly customized plot. DEFAULT: FALSE}
 
@@ -32,7 +32,7 @@ quantileBands(mat, x = 1:ncol(mat), col = rgb(0, 0, 1, alpha = c(0.5, 0.7)),
 
 \item{meanargs}{List of arguments passed to lines drawing \code{\link{mean}}. Not drawn if NULL. DEFAULT: NULL}
 
-\item{txi}{Text x position index (along columns of mat), recyled if necessary. NA to suppress. INTERNAL DEFAULT: middle of the plot for all.}
+\item{txi}{Text x position index (along columns of mat), recycled if necessary. NA to suppress. INTERNAL DEFAULT: middle of the plot for all.}
 
 \item{textargs}{List of arguments passed to \code{\link{text}}, like col, adj, ... DEFAULT: NULL}
 

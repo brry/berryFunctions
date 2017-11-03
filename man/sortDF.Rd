@@ -9,7 +9,7 @@ sortDF(df, col, decreasing = TRUE, ...)
 \arguments{
 \item{df}{Data.frame to be sorted}
 
-\item{col}{Column (index or (un)qouted name) to be sorted by}
+\item{col}{Column (index or (un)quoted name) to be sorted by}
 
 \item{decreasing}{Logical: should highest value be on top?
 DEFAULT: TRUE (unlike \code{\link{order}}!)}

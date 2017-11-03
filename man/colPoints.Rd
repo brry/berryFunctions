@@ -51,7 +51,7 @@ DEFAULT: NULL, with some defaults specified internally}
 \item{lines}{Logical. Should lines be drawn instead of / underneath the points?
 (color of each \code{\link{segments}} is taken from starting point,
 last point is endpoint.) If lines=TRUE and pch is not given,
-pch ist set to NA. DEFAULT: FALSE}
+pch is set to NA. DEFAULT: FALSE}
 
 \item{nint}{Numeric of length 1. Number of interpolation points between each
 coordinate if \code{lines=TRUE}. nint=1 means no interpolation.

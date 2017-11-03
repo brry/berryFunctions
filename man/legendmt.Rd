@@ -22,7 +22,7 @@ If vectorized, please remember to prepend NAs or whatever.}
 }
 \description{
 Draw a legend with title spanning several lines (i.e. with line breaks).
-Note that this is in development and not all inputs ar correctly vectorized yet.
+Note that this is in development and not all inputs are correctly vectorized yet.
 }
 \examples{
 plot(1:10)

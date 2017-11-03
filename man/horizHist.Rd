@@ -18,7 +18,7 @@ horizHist(Data, breaks = "Sturges", freq = TRUE, plot = TRUE,
 \item{freq}{logical. if TRUE, the histogram graphic is a representation of frequencies, the counts component of the result;
 if FALSE, probability densities, component density, are plotted (so that the histogram has a total area of one). DEFAULT: TRUE}
 
-\item{plot}{logical. Should histogramm be plotted? FALSE to get just the hpos function. DEFAULT: TRUE}
+\item{plot}{logical. Should histogram be plotted? FALSE to get just the hpos function. DEFAULT: TRUE}
 
 \item{col}{color. DEFAULT: par("bg")}
 

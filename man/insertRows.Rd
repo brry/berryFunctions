@@ -54,7 +54,7 @@ insertRows(existingDF, c(2,4:6), new=insertDF) # rows are recycled
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Oct 2015, based on code by Ari B. Friedmann
-        (I added the for loop, recycling, input controls and data.framification added by)
+        (I added the for loop, recycling, input controls and data.framification)
 }
 \keyword{array}
 \keyword{manip}

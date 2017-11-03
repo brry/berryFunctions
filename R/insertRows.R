@@ -5,7 +5,7 @@
 #' @return data.frame
 #' @note Has not yet been tested with RWI (really weird input), so might not be absolutely foolproof
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Oct 2015, based on code by Ari B. Friedmann
-#'         (I added the for loop, recycling, input controls and data.framification added by)
+#'         (I added the for loop, recycling, input controls and data.framification)
 #' @seealso \code{\link{addRows}}
 #' @references \url{http://stackoverflow.com/questions/11561856/add-new-row-to-dataframe}
 #' @keywords misc manip array

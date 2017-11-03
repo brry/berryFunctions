@@ -44,7 +44,7 @@ linLogTrans(x, y, log = "x", steps = 100, base = 1, las = 1,
 
 \item{write_t}{Write transformation value in lower right corner? DEFAULT: TRUE}
 
-\item{values_t}{Supply vector with values for transformation (1/t). Overides steps. If you have a better algorithm than I do, please let me know! DEFAULT: NULL for internal calculation based on size of steps.}
+\item{values_t}{Supply vector with values for transformation (1/t). Overrides steps. If you have a better algorithm than I do, please let me know! DEFAULT: NULL for internal calculation based on size of steps.}
 
 \item{pointsarg}{List of further arguments passed to points, like pch, cex, col. DEFAULT: NULL}
 

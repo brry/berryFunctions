@@ -7,7 +7,7 @@
 
 #' climate graph after Walter and Lieth
 #' 
-#' Draw a climate diagramm by the standards of Walter and Lieth.
+#' Draw a climate diagram by the standards of Walter and Lieth.
 #' 
 #' @return None. Plots data and table.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, June 2013
@@ -125,14 +125,14 @@
 #' @param rain monthly rain sum in mm (12 values)
 #' @param main location info as character string. can have \\n.
 #'            DEFAULT: "StatName\\n52d 24' N / 12d 58' E\\n42 m aSL"
-#' @param units units used for labelling. DEFAULT: c("d C", "mm")
+#' @param units units used for labeling. DEFAULT: c("d C", "mm")
 #' @param labs labels for x axis. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
 #' @param textprop proportion of graphic that is used for writing the values
 #'                 in a table to the right. DEFAULT: 0.25
 #' @param ylim limit for y axis in temp units. DEFAULT: range(temp, rain/2)
-#' @param compress should rain>100 mm be compressed with adjusted labelling?
+#' @param compress should rain>100 mm be compressed with adjusted labeling?
 #'                 (not recommended for casual visualization!). DEFAULT: FALSE
-#' @param ticklab positions for vertical labelling. DEFAULT: -8:30*10
+#' @param ticklab positions for vertical labeling. DEFAULT: -8:30*10
 #' @param ticklin positions for horizontal line drawing. DEFAULT: -15:60*5
 #' @param box draw box along outer margins of graph? DEFAULT: TRUE
 #' @param mar plot margins. DEFAULT: c(1.5,2.3,4.5,0.2)
@@ -144,7 +144,7 @@
 #'                like density, angle. DEFAULT: NULL (internal x,y, col, border)
 #' @param argarid List of arguments for arid area. DEFAULT: NULL
 #' @param argcomp List of arguments for compressed rainfall polygon. DEFAULT: NULL
-#' @param arggrid List of arguments for bachground grid lines. DEFAULT: NULL
+#' @param arggrid List of arguments for background grid lines. DEFAULT: NULL
 #' @param argtext List of arguments for text at right hand if textprop>0. DEFAULT: NULL
 #' @param \dots further arguments passed to plot, like col.main
 #' 
@@ -284,7 +284,7 @@ if(textprop > 0)
   argtextdef <- list(x=xpos, y=ypos, labels=c(column1,column2,column3), adj=1, xpd=TRUE)
   do.call(text, owa(argtextdef, argtext, "x","y","labels"))
   }
-# labelling:
+# labeling:
 mtext( paste("\U00D8", round(mean(temp),1), units[1]),        side=3, col=coltemp, line=1,   adj=0.01)
 mtext(bquote(sum()* " "*.(round(rainsum,1))*" "*.(units[2])), side=3, col=colrain, line=0.8, adj=1.08, at=xlim[2])
 axis(side=2, at=ticklab, col.axis=coltemp, las=1)

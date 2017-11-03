@@ -25,7 +25,7 @@ something inbetween the values? DEFAULT: FALSE}
 show head and tail of an object with one command
 }
 \details{
-Tries to find good methods of combining the two results acccording to {code{class(x)}}.
+Tries to find good methods of combining the two results according to {code{class(x)}}.
 }
 \examples{
 

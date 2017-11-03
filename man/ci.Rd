@@ -40,7 +40,7 @@ ci                    # shows the function itself
 }
 \references{
 For newbies: Charles Wheelan: naked statistics - stripping the dread from the data, 2013, Norton, ISBN 978-0-393-07195-5.\cr
-  For statisticians: any of your favorite statistics books should cover confidence intervalls ;-)\cr
+  For statisticians: any of your favorite statistics books should cover confidence intervals ;-)\cr
   \url{http://en.wikipedia.org/wiki/Confidence_interval}\cr
   Wolfe R, Hanley J (Jan 2002). "If we're so different, why do we keep overlapping? When 1 plus 1 doesn't make 2"\cr
   \url{http://www.ecmaj.ca/content/166/1/65.full.pdf}\cr

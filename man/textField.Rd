@@ -59,7 +59,7 @@ None
 \description{
 Write text to plot. A field the size of each label is drawn beneath it, so
 the text can be read easily even if there are many points in the plot.
-Fields can be rectangular, elliptic or rectangular with roundeed edges.
+Fields can be rectangular, elliptic or rectangular with rounded edges.
 }
 \details{
 Specifying pos and offset will currently change the position of the text, but not of the field.\cr

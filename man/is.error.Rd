@@ -7,7 +7,7 @@
 is.error(expr, tell = FALSE, force = FALSE)
 }
 \arguments{
-\item{expr}{Expression to be tested for retunrning an error}
+\item{expr}{Expression to be tested for returning an error}
 
 \item{tell}{Logical: Should the error message be printed via \code{\link{message}}? DEFAULT: FALSE}
 

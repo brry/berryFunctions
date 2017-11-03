@@ -16,7 +16,7 @@ addFade(col, fade = 0.3, target = "white", ...)
 \item{\dots}{Further arguments passed to \code{\link{colorRamp}}}
 }
 \value{
-character matirx with hexadecimal color codes.
+character matrix with hexadecimal color codes.
 }
 \description{
 Make existing colors fade away to white

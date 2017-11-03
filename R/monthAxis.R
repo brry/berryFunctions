@@ -1,5 +1,5 @@
 #' @title Label date axis
-#' @description  Labels date axes at sensible monthy intervals in the 
+#' @description  Labels date axes at sensible monthly intervals in the 
 #'               time domain of years to decades.
 #' @return List with locations of month and year labels and ticks, each a Date vector.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Feb + Dec 2015, Oct 2017
@@ -64,7 +64,7 @@
 #' @param origin   Origin for\code{\link{as.Date}} and \code{\link{as.POSIXct}}. 
 #'                 DEFAULT: "1970-01-01"
 #' @param mlabels  Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
-#' @param yformat  Format of year labes, see details in \code{\link{strptime}}.
+#' @param yformat  Format of year labels, see details in \code{\link{strptime}}.
 #'                 Use \code{yformat=" "} (with space) to suppress year labeling. 
 #'                 DEFAULT: "\%Y"
 #' @param nmonths  Minimum number of months required before a year at the

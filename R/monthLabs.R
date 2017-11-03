@@ -3,9 +3,10 @@
 #' Create dates of certain days of the month for labeling
 #' 
 #' @return Vector with Dates as returned by \code{\link{as.Date}}.
-#' @note Spacing of days is not equal, but set to dertain days of the month! This was originally developed for time series movie frames
+#' @note Spacing of days is not equal, but set to certain days of the month!
+#'       This was originally developed for time series movie frames
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, early 2013
-#' @seealso \code{\link{timeAxis}} for nice labelling, 
+#' @seealso \code{\link{timeAxis}} for nice labeling, 
 #'          \code{\link{timeAxis}} for automatic determination of npm/npy, 
 #'          \code{\link{as.Date}}, \code{\link{paste}}
 #' @keywords chron
@@ -16,7 +17,7 @@
 #' monthLabs(2013,2014,  npy=3) # 3 months per year, equally spaced
 #' monthLabs(2014,2014,  npy=4) # 4 months per year
 #' 
-#' # see monthAxis for automatic plot labelling
+#' # see monthAxis for automatic plot labeling
 #' 
 #' @param startyear Integer. starting year. DEFAULT: 2002
 #' @param stopyear Integer. ending year. DEFAULT: 2018

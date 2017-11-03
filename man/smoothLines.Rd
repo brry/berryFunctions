@@ -7,7 +7,7 @@
 smoothLines(x, y, lwd = 1, col = 1, n = 5, alpha = 0.1, ...)
 }
 \arguments{
-\item{x}{numrical. x-coordinates. x can be a matrix, then the y coordinates are taken from the second column}
+\item{x}{numerical. x-coordinates. x can be a matrix, then the y coordinates are taken from the second column}
 
 \item{y}{numerical. y-coordinates}
 

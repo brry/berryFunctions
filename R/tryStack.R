@@ -101,7 +101,7 @@
 #' # -> Use tryCatch and you can nest those calls. note that d gets longer.
 #' 
 #' 
-#' @param expr     Expresssion to try, potentially wrapped in curly braces if
+#' @param expr     Expression to try, potentially wrapped in curly braces if
 #'                 spanning several commands.
 #' @param silent   Logical: Should printing of error message + stack be suppressed?
 #'                 Does not affect warnings and messages. DEFAULT: FALSE

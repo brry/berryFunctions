@@ -2,7 +2,7 @@
 #' 
 #' Labels date axes at sensible intervals in the time domain of weeks to decades.
 #' 
-#' @return The dates that were labelled
+#' @return The dates that were labeled
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Feb 2015, update labels and midyear Dec 2015
 #' @seealso \code{\link{monthLabs}} for the numbercrunching itself, \code{\link{axis.Date}} with defaults that are less nice.
 #' @keywords chron aplot dplot
@@ -82,7 +82,7 @@
 #' @param midmonth Place labels in the middle of the month? if TRUE, format default is "\%m\\n\%Y". DEFAULT: FALSE
 #' @param midargs List of arguments passed to \code{\link{axis}} for the year-start lines without labels. DEFAULT: NULL
 #' @param mgp MarGinPlacement, see \code{\link{par}}. The second value is for label distance to axis. DEFAULT: c(3,1.5,0)
-#' @param cex.axis CharacterEXpansion (letter size). DEFAULT: 1
+#' @param cex.axis Character EXpansion (letter size). DEFAULT: 1
 #' @param tick Draw tick lines? DEFAULT: TRUE
 #' @param tcl Tick length (negative to go below axis) in text line height units like mgp[2]
 #'            Changed to -2.5 for year borders if ym=TRUE. DEFAULT: par("tcl")

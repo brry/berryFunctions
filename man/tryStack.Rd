@@ -8,7 +8,7 @@ tryStack(expr, silent = FALSE, warn = TRUE, short = TRUE, file = "",
   removetry = TRUE, skip = NULL)
 }
 \arguments{
-\item{expr}{Expresssion to try, potentially wrapped in curly braces if
+\item{expr}{Expression to try, potentially wrapped in curly braces if
 spanning several commands.}
 
 \item{silent}{Logical: Should printing of error message + stack be suppressed?

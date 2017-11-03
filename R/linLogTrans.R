@@ -103,7 +103,7 @@
 #' @param firstplot Plot data on linear axis as additional first image? DEFAULT: TRUE
 #' @param lastplot Plot data on logarithmic axis as additional last image? DEFAULT: TRUE
 #' @param write_t Write transformation value in lower right corner? DEFAULT: TRUE
-#' @param values_t Supply vector with values for transformation (1/t). Overides steps. If you have a better algorithm than I do, please let me know! DEFAULT: NULL for internal calculation based on size of steps.
+#' @param values_t Supply vector with values for transformation (1/t). Overrides steps. If you have a better algorithm than I do, please let me know! DEFAULT: NULL for internal calculation based on size of steps.
 #' @param pointsarg List of further arguments passed to points, like pch, cex, col. DEFAULT: NULL
 #' @param \dots Further arguments passed only to plot, like main, xlim, ylab. Excluded: x, y, las, xaxt, type
 #' 

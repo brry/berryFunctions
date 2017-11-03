@@ -22,7 +22,7 @@ DEFAULT: "1970-01-01"}
 
 \item{mlabels}{Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D}
 
-\item{yformat}{Format of year labes, see details in \code{\link{strptime}}.
+\item{yformat}{Format of year labels, see details in \code{\link{strptime}}.
 Use \code{yformat=" "} (with space) to suppress year labeling. 
 DEFAULT: "\%Y"}
 
@@ -72,7 +72,7 @@ DEFAULT: NULL}
 List with locations of month and year labels and ticks, each a Date vector.
 }
 \description{
-Labels date axes at sensible monthy intervals in the 
+Labels date axes at sensible monthly intervals in the 
               time domain of years to decades.
 }
 \examples{

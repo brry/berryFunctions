@@ -3,7 +3,7 @@
 #' Goodness of Fit measures (GOF) for two vectors.\cr
 #' \bold{gofNA}: not exported, checks input for each of the functions:\cr
 #' \bold{rsquare}: Coefficient of determination (R2)\cr
-#' \bold{rmse}: Root Mean Square Error (for minimising in \code{\link{optim}})\cr
+#' \bold{rmse}: Root Mean Square Error (for minimizing in \code{\link{optim}})\cr
 #' \bold{nse}: Nash-Sutcliffe efficiency, based on RHydro::eval.NSeff\cr
 #' \bold{kge}: Kling-Gupta efficiency (better than NSE),
 #'             based on hydroGOF::KGE, where there are many more options

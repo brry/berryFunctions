@@ -42,7 +42,7 @@
 #' @param col Color of the regression line, see \code{\link{par}}. DEFAULT: 2
 #' @param colband Color of the confidence region band. DEFAULT: addAlpha(col)
 #' @param level Confidence level, see \code{\link{predict.lm}}. DEFAULT: 0.95
-#' @param plotrange x range for wich regression line and uncertainty band should
+#' @param plotrange x range for which regression line and uncertainty band should
 #'        be plotted. Is passed to \code{\link{seqR}} and can hence be a vector.  
 #'        DEFAULT: par("usr")[1:2]
 #' @param lwd Numeric. Linewidth, see \code{\link{par}}. DEFAULT: 1

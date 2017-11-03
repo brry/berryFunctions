@@ -36,7 +36,7 @@ using the result from \code{RColorBrewer::brewer.pal(9, "YlGnBu")}. DEFAULT: FAL
 Character string vector with color names
 }
 \description{
-Sequential color palette from yelow to red or yellow to blue or custom colors.
+Sequential color palette from yellow to red or yellow to blue or custom colors.
 }
 \examples{
 

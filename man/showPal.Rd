@@ -7,12 +7,12 @@
 showPal(cex = 4, ...)
 }
 \arguments{
-\item{cex}{Caracter EXpansion size (width of color bar). DEFAULT: 4}
+\item{cex}{Character EXpansion size (width of color bar). DEFAULT: 4}
 
 \item{\dots}{Arguments passed to \code{\link{par}}}
 }
 \description{
-Plot examples of the seqential and diverging color palettes in this package.
+Plot examples of the sequential and diverging color palettes in this package.
 Do not use \code{rainbow}: \url{https://eagereyes.org/basics/rainbow-color-map}
 }
 \examples{

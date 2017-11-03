@@ -53,7 +53,7 @@
 #' @param firstplot plot on linear scale first? DEFAULT: TRUE
 #' @param lastplot plot on logarithmic scale at the end? DEFAULT: TRUE
 #' @param write_t write transformation value in lower right corner? DEFAULT: TRUE
-#' @param values_t Supply vector with values for transformation (1/t). Overides steps.
+#' @param values_t Supply vector with values for transformation (1/t). Overrides steps.
 #'        If you have a better algorithm than I do, please let me know! DEFAULT: NULL
 #' @param \dots further arguments passed to \code{\link{hist}}, like freq, main, xlim, ylab. Excluded: x, xaxt, possibly add
 #' 

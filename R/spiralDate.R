@@ -49,7 +49,7 @@
 #' #spiralDate(dates, val, data=q05054000LT, lines=TRUE, lwd=3)
 #' 
 #' @param dates Dates in ascending order.
-#'              Can be charater strings or \code{\link{strptime}} results,
+#'              Can be character strings or \code{\link{strptime}} results,
 #'              as accepted (and coerced) by \code{\link{as.Date}}
 #' @param values Values to be mapped in color with \code{\link{colPoints}} along seasonal spiral
 #' @param data Optional: data.frame with the column names as given by dates and values
@@ -57,7 +57,7 @@
 #' @param vrange Optional value range (analogous to ylim), can be a vector like \code{values}. DEFAULT: NA
 #' @param months Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
 #' @param add Add to existing plot? DEFAULT: FALSE
-#' @param shift Number of days to move january 1st clockwise. DEFAULT: 0
+#' @param shift Number of days to move January 1st clockwise. DEFAULT: 0
 #' @param prop Proportion of the data to be actually plotted, used in \code{\link{spiralDateAnim}}. DEFAULT: NA (ignored)
 #' @param zlab Title of \code{\link{colPointsLegend}}
 #' @param format Format of date labels see details in \code{\link{strptime}}. DEFAULT: "\%Y"

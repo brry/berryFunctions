@@ -7,7 +7,7 @@
 #' @param target Target color that should be faded into. DEFAULT: "white"
 #' @param \dots Further arguments passed to \code{\link{colorRamp}}
 
-#' @return character matirx with hexadecimal color codes.
+#' @return character matrix with hexadecimal color codes.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Feb 2016
 #' @seealso \code{\link{addAlpha}}, \code{\link{colorRamp}}, \code{\link{colors}}
 #' @keywords dplot color

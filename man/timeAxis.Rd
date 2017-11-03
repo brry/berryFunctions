@@ -53,7 +53,7 @@ for the years, but ignores them for the months. DEFAULT: FALSE}
 
 \item{mgp}{MarGinPlacement, see \code{\link{par}}. The second value is for label distance to axis. DEFAULT: c(3,1.5,0)}
 
-\item{cex.axis}{CharacterEXpansion (letter size). DEFAULT: 1}
+\item{cex.axis}{Character EXpansion (letter size). DEFAULT: 1}
 
 \item{tick}{Draw tick lines? DEFAULT: TRUE}
 
@@ -65,7 +65,7 @@ Changed to -2.5 for year borders if ym=TRUE. DEFAULT: par("tcl")}
 \item{\dots}{Further arguments passed to \code{\link{axis}}, like \code{lwd, col.ticks, hadj, lty}, ...}
 }
 \value{
-The dates that were labelled
+The dates that were labeled
 }
 \description{
 Labels date axes at sensible intervals in the time domain of weeks to decades.

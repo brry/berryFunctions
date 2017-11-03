@@ -29,7 +29,8 @@ Vector with Dates as returned by \code{\link{as.Date}}.
 Create dates of certain days of the month for labeling
 }
 \note{
-Spacing of days is not equal, but set to dertain days of the month! This was originally developed for time series movie frames
+Spacing of days is not equal, but set to certain days of the month!
+      This was originally developed for time series movie frames
 }
 \examples{
 
@@ -37,11 +38,11 @@ monthLabs(2014,2014, 3) # 3 days per month
 monthLabs(2013,2014,  npy=3) # 3 months per year, equally spaced
 monthLabs(2014,2014,  npy=4) # 4 months per year
 
-# see monthAxis for automatic plot labelling
+# see monthAxis for automatic plot labeling
 
 }
 \seealso{
-\code{\link{timeAxis}} for nice labelling, 
+\code{\link{timeAxis}} for nice labeling, 
          \code{\link{timeAxis}} for automatic determination of npm/npy, 
          \code{\link{as.Date}}, \code{\link{paste}}
 }

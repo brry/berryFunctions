@@ -35,7 +35,7 @@ This is mainly a building block for mReg
 Optim can be slow! It refers to the functions rmse and rsquare, also in this package.
       L-BFGS-B needs finite values. In case it doesn't get any
       with the initial parameters (as in the first example Dataset),
-      it trys again with the parameters optimized via Nelder Mead.
+      it tries again with the parameters optimized via Nelder Mead.
 }
 \examples{
 

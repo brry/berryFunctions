@@ -26,7 +26,7 @@
 #' 
 #' @param x object with numeric values
 #' @param n desired number of values in \code{\link{pretty}}. DEFAULT: 5
-#' @param force Must output lenght equal n exactly?  DEFAULT: FALSE
+#' @param force Must output length equal n exactly?  DEFAULT: FALSE
 #' @param \dots all other arguments in \code{\link{pretty}}.
 #' 
 pretty2 <- function(

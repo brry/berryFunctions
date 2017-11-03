@@ -34,7 +34,7 @@
 #'        If values are not specified, they are set equal to the first. DEFAULT: 2
 #' @param inset Numeric vector of length \eqn{\le 2}. inset distance(s) from the margins
 #'        as a fraction of the plot region when formula is placed by keyword. DEFAULT: 0
-#' @param xpd Logical, specifying wheter formula can be written only inside the plot region (when FALSE)
+#' @param xpd Logical, specifying whether formula can be written only inside the plot region (when FALSE)
 #'        or inside the figure region including mar (when TRUE)
 #'        or in the entire device region including oma (when NA). DEFAULT: par("xpd")
 #' @param pos1 \code{\link{xy.coords}}-acceptable position of the formula. DEFAULT: "top"
@@ -44,7 +44,7 @@
 #' @param col Color of points, see \code{\link{par}}. DEFAULT: rgb(0,0,0, 0.5)
 #' @param modcol color of model line. DEFAULT: 2
 #' @param lwd Numeric. Linewidth, see \code{\link{par}}. DEFAULT: 1
-#' @param xlab,ylab,main Character / Expression. axis label and graph title if add=FAlSE. DEFAULT: internal from names
+#' @param xlab,ylab,main Character / Expression. axis label and graph title if add=FALSE. DEFAULT: internal from names
 #' @param xlim,ylim graphic range. DEFAULT: range(x)
 #' @param \dots Further arguments passed to \code{\link{plot}} and \code{\link{abline}}.
 #' 

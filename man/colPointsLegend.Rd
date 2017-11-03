@@ -39,7 +39,7 @@ DEFAULT: x: 0.6-0.99, y: 0.88-0.99}
 \item{outer}{Logical: Should legend be relative to device instead of current figure?
 use outer=TRUE when par(mfrow, oma) is set. DEFAULT: FALSE}
 
-\item{xpd}{Logical: should text be expanded outisde of plotting region?
+\item{xpd}{Logical: should text be expanded outside of plotting region?
 Must be NA if outer=TRUE. DEFAULT: NA}
 
 \item{mar}{Margins for \code{\link{smallPlot}}.

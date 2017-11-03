@@ -19,9 +19,9 @@ logAxis(side = 1, log = NULL, lcol = "grey", lty = 1, lwd = 1,
 
 \item{lty, lwd}{Type of gridlines. DEFAULT: 1}
 
-\item{labels}{Labels passed to \code{\link{axis}}. "FALSE" to suppress labelling. DEFAULT: NULL (internally, \code{\link{logVals}$labs}}
+\item{labels}{Labels passed to \code{\link{axis}}. "FALSE" to suppress labeling. DEFAULT: NULL (internally, \code{\link{logVals}$labs}}
 
-\item{allticks}{Place all intermediate ticklines at the axis (without labelling). DEFAULT: FALSE}
+\item{allticks}{Place all intermediate ticklines at the axis (without labeling). DEFAULT: FALSE}
 
 \item{allargs}{List of arguments passed to axis for allticks=TRUE. DEFAULT: NULL}
 

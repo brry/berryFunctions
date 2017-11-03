@@ -8,7 +8,7 @@
 #' 
 #' @return Either: a data.frame with line numbers of duplicate rows and the number of duplicates\cr
 #'         Or: a file is written with the number of duplicates and the original \code{file} content.
-#' @note This has not been tested al that much - feedback is heavily welcome!
+#' @note This has not been tested all that much - feedback is heavily welcome!
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Dec 2014
 #' @seealso \code{\link{compareFiles}}
 #' @keywords IO file character

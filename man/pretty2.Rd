@@ -11,7 +11,7 @@ pretty2(x, n = 5, force = FALSE, ...)
 
 \item{n}{desired number of values in \code{\link{pretty}}. DEFAULT: 5}
 
-\item{force}{Must output lenght equal n exactly?  DEFAULT: FALSE}
+\item{force}{Must output length equal n exactly?  DEFAULT: FALSE}
 
 \item{\dots}{all other arguments in \code{\link{pretty}}.}
 }

@@ -10,7 +10,7 @@ spiralDate(dates, values, data, drange = NA, vrange = NA,
 }
 \arguments{
 \item{dates}{Dates in ascending order.
-Can be charater strings or \code{\link{strptime}} results,
+Can be character strings or \code{\link{strptime}} results,
 as accepted (and coerced) by \code{\link{as.Date}}}
 
 \item{values}{Values to be mapped in color with \code{\link{colPoints}} along seasonal spiral}
@@ -25,7 +25,7 @@ as accepted (and coerced) by \code{\link{as.Date}}}
 
 \item{add}{Add to existing plot? DEFAULT: FALSE}
 
-\item{shift}{Number of days to move january 1st clockwise. DEFAULT: 0}
+\item{shift}{Number of days to move January 1st clockwise. DEFAULT: 0}
 
 \item{prop}{Proportion of the data to be actually plotted, used in \code{\link{spiralDateAnim}}. DEFAULT: NA (ignored)}
 

@@ -52,7 +52,7 @@ Overwrites defaults that are defined within the function (if contentually possib
 Nothing - the function just plots
 }
 \description{
-Funnel plots for proportional data with confdence interval based on sample size. Introduced by Stephen Few, 2013
+Funnel plots for proportional data with confidence interval based on sample size. Introduced by Stephen Few, 2013
 }
 \note{
 the default for lty is not taken from par("lty"). This would yield "solid".
@@ -144,7 +144,7 @@ abline(v=10)
 
 }
 \references{
-http://www.perceptualedge.com/articles/visual_business_intelligence/variation_and_its_discontents.pdf\cr
+\url{https://www.perceptualedge.com/articles/visual_business_intelligence/variation_and_its_discontents.pdf}\cr
    \url{http://sfew.websitetoolbox.com/post/variation-and-its-discontents-6555336?}\cr
    Excellent explanation of bayesian take on proportions: \url{http://varianceexplained.org/r/empirical_bayes_baseball/}
 }

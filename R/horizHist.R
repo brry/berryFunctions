@@ -36,7 +36,7 @@
 #' @param breaks character or numerical as explained in \code{\link{hist}}. DEFAULT: "Sturges"
 #' @param freq logical. if TRUE, the histogram graphic is a representation of frequencies, the counts component of the result;
 #'        if FALSE, probability densities, component density, are plotted (so that the histogram has a total area of one). DEFAULT: TRUE
-#' @param plot logical. Should histogramm be plotted? FALSE to get just the hpos function. DEFAULT: TRUE
+#' @param plot logical. Should histogram be plotted? FALSE to get just the hpos function. DEFAULT: TRUE
 #' @param col color. DEFAULT: par("bg")
 #' @param border color of borders of bars. DEFAULT: par("fg")
 #' @param las integer. Label axis style. DEFAULT: 1
