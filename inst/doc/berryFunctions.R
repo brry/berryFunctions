@@ -29,7 +29,7 @@ QOBS <- dbeta(1:40/40, 3, 10) + rnorm(20,0,0.2) + c(seq(0,1,len=20), rep(1,20))
 PREC <- c(1,1,3,4,5,5,4,3,1,1, rep(0,30))
 lsc(PREC, QOBS, area=10, main="lsc, unitHydrograph, superPos") # , plotsim=F
 
-## ----regression, fig.show='hold', echo=-(1:2)-----------------------------------------------------------------------------------------------------------------------
+## ----regression, fig.show='hold', echo=-(1:2)----------------------------
 par(mar=c(3.2,3.2,1.5,0.7), mgp=c(2.1,0.7,0))
 options(digits=5)
 a <- 1:30   ; b <- a/2.345+rnorm(30,0,3)
@@ -41,16 +41,16 @@ x <- c(1.3, 1.6, 2.1, 2.9, 4.4, 5.7, 6.6, 8.3, 8.6, 9.5)
 y <- c(8.6, 7.9, 6.6, 5.6, 4.3, 3.7, 3.2, 2.5, 2.5, 2.2)
 mReg(x,y, main="mReg")[,c(2,3,5:6)]
 
-## ----tableColVal, echo=-1, fig.height=3.5, fig.width=5.5------------------------------------------------------------------------------------------------------------
+## ----tableColVal, echo=-1, fig.height=3.5, fig.width=5.5-----------------
 par(mar=c(0,0,1,0))
 tableColVal(as.matrix(eurodist)[1:15,1:5], nameswidth=0.25)
 
-## ----climgraph, echo=-1, fig.height=3.5, fig.width=5.5--------------------------------------------------------------------------------------------------------------
+## ----climgraph, echo=-1, fig.height=3.5, fig.width=5.5-------------------
 par(mar=c(3.2,3.2,1.5,0.7), mgp=c(2.1,0.7,0))
 climateGraph(temp=c(-9.3,-8.2,-2.8,6.3,13.4,16.8,18.4,17,11.7,5.6,-1,-5.9),
              rain=c(46,46,36,30,31,21,26,57,76,85,59,46))
 
-## ----df-------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----df------------------------------------------------------------------
 # Convert list with vectors of unequal length to one single data.frame: l2df
 eglist <- list(AB=c(6,9,2,6), CD=1:8, EF=c(-3,2) )
 eglist
@@ -70,28 +70,28 @@ TFtest(!a & !b, a&b, !(a&b))
 # Head and tail at the same time: headtail (exception from lowerCamelCasing)  
 headtail(iris, n=3, na=FALSE)
 
-## ----showPal, fig.show='hold'---------------------------------------------------------------------------------------------------------------------------------------
+## ----showPal, fig.show='hold'--------------------------------------------
 showPal(cex=3)
 
 neff <- t(replicate(n=300, sapply(1:200, function(nn) max(rnorm(nn)))   ))
 qB <- quantileBands(neff, x=1:200, smooth=7)
 
-## ----distrplots, fig.show='hold', echo=-1---------------------------------------------------------------------------------------------------------------------------
+## ----distrplots, fig.show='hold', echo=-1--------------------------------
 par(mar=c(3.2,3.2,1.5,0.7), mgp=c(2.1,0.7,0))
 normPlot(mean=81.7, sd=11.45)
 betaPlot(shape1=1.5, shape2=6) 
 
-## ----betacomp, echo=-1, fig.height=4.5, fig.width=5.5---------------------------------------------------------------------------------------------------------------
+## ----betacomp, echo=-1, fig.height=4.5, fig.width=5.5--------------------
 par(mar=c(3.2,3.2,1.5,0.7), mgp=c(2.1,0.7,0))
 betaPlotComp()
 
-## ----lim0, fig.show='hold', echo=-1---------------------------------------------------------------------------------------------------------------------------------
+## ----lim0, fig.show='hold', echo=-1--------------------------------------
 par(mar=c(3.2,3.2,1.5,0.7), mgp=c(2.1,0.7,0))
 val <- c(3.2, 1.8, 4.5, 8.2, 0.1, 2.9) # just some numbers
 plot(val) # axes are extended by 4\% automatically, if xaxs="r"
 plot(val, ylim=lim0(val), las=1) # you don't even have to set yaxs="i" ;-)
 
-## ----horizHist, fig.show='hold', echo=-1----------------------------------------------------------------------------------------------------------------------------
+## ----horizHist, fig.show='hold', echo=-1---------------------------------
 par(mar=c(3.2,3.2,1.5,0.7), mgp=c(2.1,0.7,0))
 ExampleData <- rnorm(200,13,5)
 hpos <- horizHist(ExampleData, col=4)
@@ -100,7 +100,7 @@ abline(h=hpos(11), col=2, lwd=2)
 groupHist(chickwts, "weight", "feed", col=2, unit="gr_6")
 # drop the horsebean, feed those chicks with sunflower seeds (unless you like small chicken)
 
-## ----pointZoom, eval=FALSE------------------------------------------------------------------------------------------------------------------------------------------
+## ----pointZoom, eval=FALSE-----------------------------------------------
 #  a <- rnorm(90); b <- rexp(90)
 #  dev.new(record=TRUE) # turn recording on
 #  plot(a,b, las=1)
@@ -112,7 +112,7 @@ groupHist(chickwts, "weight", "feed", col=2, unit="gr_6")
 #  dev.new(record=TRUE) # scroll through the plots (Pg Up and Pg Dn)...
 #  linLogHist(x, xlab="ddd", breaks=30, yaxt="n", freq=FALSE)
 
-## ----movAvLines, fig.show='hold', echo=-(1:2), warning=FALSE--------------------------------------------------------------------------------------------------------
+## ----movAvLines, fig.show='hold', echo=-(1:2), warning=FALSE-------------
 par(mar=c(3.2,3.2,1.5,0.7), mgp=c(2.1,0.7,0))
 set.seed(42); a <- cumsum(rnorm(100))
 plot(a, type="l", pch=16, las=1)
@@ -123,7 +123,7 @@ X <- c(2, 224,  54,  505, 1,  5, 236,  92,  3, 0) # successful events
 N <- c(2, 400, 100, 1000, 2, 10, 500, 200, 10, 2) # possible succeses
 funnelPlot(X,N, letters[1:10])
 
-## ----axes, fig.show='hold', echo=-(1:2)-----------------------------------------------------------------------------------------------------------------------------
+## ----axes, fig.show='hold', echo=-(1:2)----------------------------------
 par(mar=c(3.2,3.2,1.5,0.7), mgp=c(2.1,0.7,0))
 set.seed(42)
 exdat <- 10^runif(50, -1, 2)
@@ -135,7 +135,7 @@ plot(as.Date("2013-04-25")+0:500, cumsum(rnorm(501)), type="l", xaxt="n", ann=FA
 dummy <- monthAxis(side=1)
 str(dummy)
 
-## ----hydro, echo=-1-------------------------------------------------------------------------------------------------------------------------------------------------
+## ----hydro, echo=-1------------------------------------------------------
 par(mar=c(3.2,3.2,1.5,0.7), mgp=c(2.1,0.7,0))
 # superposition of precipitation to simulate Q from P: superPos
 N <- c(9,5,2,14,1,3) # [mm/hour]
@@ -156,7 +156,7 @@ rmse(QOBS, QSIM)
 # R squared (coefficient of determination): rsquare
 rsquare(QOBS, QSIM)
 
-## ----misc-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----misc----------------------------------------------------------------
 # distance between two points on a plane: distance
 A <- c(3,  9,-1)  ;  B <- c(7, -2, 4)
 plot(A,B); points(3,5, col=2, pch=16); segments(3,5, A,B)
@@ -190,7 +190,7 @@ googleLink2pdf(Link)
 na9()[c(1:4,13,30)]
 
 
-## ----misc_non, eval=FALSE-------------------------------------------------------------------------------------------------------------------------------------------
+## ----misc_non, eval=FALSE------------------------------------------------
 #  # Separate lists with arguments for functions: owa
 #  ?owa # the example section has a good - wait for it - example!
 #  
@@ -225,7 +225,7 @@ na9()[c(1:4,13,30)]
 #  # generate name from "random" sample: nameSample
 #  nameSample("berry")
 
-## ----misc2----------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----misc2---------------------------------------------------------------
 # Kind regards from
 set.seed(1248272); paste(sample(letters,5,rep=T),collapse='')
 
