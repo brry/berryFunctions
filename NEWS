@@ -42,6 +42,31 @@ actual NEWS
 -----------------------------
 
 
+Version 1.16.0 (2017-11-03)
+- tryStack: error messages improved, skip argument added, output invisible
+- pdfpng: safer device closing, errors traced
+- createPres: several small improvements
+- classify: NAs handled
+- divPal,seqPal,showPal: more palettes added
+- createFun: default directory ".", handles subfolder wds, better examples
+- newFilename: handles "./file" paths, overwrite option, hugely improved messages
+- dataStr: sorted alphabetically, works for unloaded packages
+- importFrom entries completed
+- colPoints: bglines argument for grid drawing, new log argument, hist argument removed
+- colPointsLegend: bg=par("bg") instead of "white", nlab argument, smallPlot in try
+- funSource: also opens lowercase .r file
+- classify: true logspaced added, methods renamed, messages improved
+- getColumn: complete rewrite, several input methods now possible
+- owa: runs more checks on inputs
+- monthAxis: replaced with much cleaner code (kept as timeAxis for backwards compatibility)
+- several minor changes, see github commit history
+New functions: round0, openFile, parallelCode, between, packagePath, timeAxis
+
+
+-----------------------------
+-----------------------------
+
+
 Version 1.15.0 (2017-04-10)
 - traceCall: vignette and knitr stuff removed from trace, speed gain through sys.calls
 - after smallPlot calls, mtext, axis etc can be used normally again. Messages are improved.
