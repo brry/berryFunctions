@@ -1,3 +1,10 @@
+
+
+
+# not run by roxygen because of unicode problems!
+
+
+
 #' climate graph after Walter and Lieth
 #' 
 #' Draw a climate diagramm by the standards of Walter and Lieth.
@@ -7,8 +14,8 @@
 #' @seealso \code{diagwl} in package \code{climatol}
 #' @references Heinrich Walter, Helmut Lieth: Klimadiagramm-Weltatlas. Gustav Fischer Verlag, Jena 1967\cr
 #' Examples:\cr
-#' \url{http://www.hoelzel.at/_verlag/geojournal/archiv/klima/2006_01/lieth.gif}\cr
-#' \url{http://www.hoelzel.at/_verlag/geojournal/archiv/klima/istanbul/istanbul200.gif}\cr
+#' \url{https://www.hoelzel.at/__verlag/geojournal/archiv/klima/2006_01/lieth.gif}\cr
+#' \url{https://www.hoelzel.at/__verlag/geojournal/archiv/klima/istanbul/istanbul400.gif}\cr
 #' \url{http://www.ipb.uni-tuebingen.de/kurs/comp/1_excel2007/1_pic/2007diagramm_verbund02.jpg}\cr
 #' \url{http://www.zivatar.hu/felhotar/albums/userpics/wldp.png}
 #' @keywords hplot

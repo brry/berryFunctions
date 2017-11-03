@@ -16,19 +16,19 @@ climateGraph(temp, rain, main = "StatName\\n52\U{00B0}24' N / 12\U{00B0}58' E\\n
 
 \item{rain}{monthly rain sum in mm (12 values)}
 
-\item{main}{location info as character string. can have \\n. 
+\item{main}{location info as character string. can have \\n.
 DEFAULT: "StatName\\n52d 24' N / 12d 58' E\\n42 m aSL"}
 
 \item{units}{units used for labelling. DEFAULT: c("d C", "mm")}
 
 \item{labs}{labels for x axis. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D}
 
-\item{textprop}{proportion of graphic that is used for writing the values 
+\item{textprop}{proportion of graphic that is used for writing the values
 in a table to the right. DEFAULT: 0.25}
 
 \item{ylim}{limit for y axis in temp units. DEFAULT: range(temp, rain/2)}
 
-\item{compress}{should rain>100 mm be compressed with adjusted labelling? 
+\item{compress}{should rain>100 mm be compressed with adjusted labelling?
 (not recommended for casual visualization!). DEFAULT: FALSE}
 
 \item{ticklab}{positions for vertical labelling. DEFAULT: -8:30*10}
@@ -47,7 +47,7 @@ in a table to the right. DEFAULT: 0.25}
 
 \item{lwd}{line width of actual temp and rain lines. DEFAULT: 2}
 
-\item{arghumi}{List of arguments for humid \code{\link{polygon}}, 
+\item{arghumi}{List of arguments for humid \code{\link{polygon}},
 like density, angle. DEFAULT: NULL (internal x,y, col, border)}
 
 \item{argarid}{List of arguments for arid area. DEFAULT: NULL}
@@ -71,15 +71,15 @@ Draw a climate diagramm by the standards of Walter and Lieth.
 temp <- c(-9.3,-8.2,-2.8,6.3,13.4,16.8,18.4,17,11.7,5.6,-1,-5.9)#
 rain <- c(46,46,36,30,31,21,26,57,76,85,59,46)
 
-climateGraph(temp, rain) 
-climateGraph(temp, rain, textprop=0.6) 
+climateGraph(temp, rain)
+climateGraph(temp, rain, textprop=0.6)
 climateGraph(temp, rain, mar=c(2,3,4,3), textprop=0) # no table written to the right
 # vertical lines instead of filled polygon:
-climateGraph(temp, rain, arghumi=list(density=15, angle=90)) 
+climateGraph(temp, rain, arghumi=list(density=15, angle=90))
 # fill color for arid without transparency:
-climateGraph(temp, rain, argarid=list(col="gold")) 
+climateGraph(temp, rain, argarid=list(col="gold"))
 # for the Americans - axes should be different, though!:
-climateGraph(temp, rain, units=c("\\U{00B0}F","in")) 
+climateGraph(temp, rain, units=c("\\U{00B0}F","in"))
 
 rain2 <- c(23, 11, 4, 2, 10, 53, 40, 15, 21, 25, 29, 22)
 # fix ylim if you want to compare diagrams of different stations:
@@ -92,8 +92,8 @@ par(op)
 
 rain <- c(54, 23, 5, 2, 5, 70, 181, 345, 265, 145, 105, 80) # with extrema
 climateGraph(temp, rain) # August can be visually compared to June
-climateGraph(temp, rain, compress=TRUE) 
-# compressing extrema enables a better view of the temperature, 
+climateGraph(temp, rain, compress=TRUE)
+# compressing extrema enables a better view of the temperature,
 # but heigths of rain cannot be visually compared anymore
 climateGraph(temp, rain, compress=TRUE, ylim=c(-10, 90))
 # needs ylim in linearly continued temp units
@@ -103,7 +103,7 @@ climateGraph(temp, rain, compress=TRUE, argcomp=list(density=30, col=6))
 pdf("ClimateGraph.pdf")
 climateGraph(temp, rain, main="Another Station\\nlocated somewhere else")
 dev.off()
-system2("open", "ClimateGraph.pdf")
+openFile(ClimateGraph.pdf")
 unlink("ClimateGraph.pdf")
 
 # further German reading:
@@ -132,7 +132,7 @@ climateGraph(RT, RP, main=meta, compress=TRUE)
 
 
 # Climate Graphs for Germany:
-browseURL("https://github.com/brry/rdwd#rdwd") 
+browseURL("https://github.com/brry/rdwd#rdwd")
 instGit("brry/rdwd")
 link <- rdwd::selectDWD("Potsdam", res="monthly", var="kl", per="h")
 clim <- rdwd::dataDWD(link, dir=tempdir())
@@ -169,10 +169,10 @@ diagwl(datcli,est="Example station",alt=100,per="1961-90",mlab="en")
 Berry Boessenkool, \email{berry-b@gmx.de}, June 2013
 }
 \references{
-Heinrich Walter, Helmut Lieth: Klimadiagramm-Weltatlas. Gustav Fischer Verlag, Jena 1967\cr 
+Heinrich Walter, Helmut Lieth: Klimadiagramm-Weltatlas. Gustav Fischer Verlag, Jena 1967\cr
 Examples:\cr
-\url{http://www.hoelzel.at/_verlag/geojournal/archiv/klima/2006_01/lieth.gif}\cr
-\url{http://www.hoelzel.at/_verlag/geojournal/archiv/klima/istanbul/istanbul200.gif}\cr
+\url{https://www.hoelzel.at/__verlag/geojournal/archiv/klima/2006_01/lieth.gif}\cr
+\url{https://www.hoelzel.at/__verlag/geojournal/archiv/klima/istanbul/istanbul400.gif}\cr
 \url{http://www.ipb.uni-tuebingen.de/kurs/comp/1_excel2007/1_pic/2007diagramm_verbund02.jpg}\cr
 \url{http://www.zivatar.hu/felhotar/albums/userpics/wldp.png}
 }
@@ -180,4 +180,3 @@ Examples:\cr
 \code{diagwl} in package \code{climatol}
 }
 \keyword{hplot}
-

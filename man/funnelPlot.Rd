@@ -59,7 +59,7 @@ the default for lty is not taken from par("lty"). This would yield "solid".
  Overwriting lty for one of the three line categories then produces
  eg c("2", "solid", "solid"), which cannot be processed by legend.\cr
  \bold{Wilson's Method:} algebraic approximation to the binomial distribution, very accurate, even for very small numbers.\cr
- \url{http://www.apho.org.uk/resource/item.aspx?RID=39445} see "contains".\cr
+ \url{http://webarchive.nationalarchives.gov.uk/20170106081156/http://www.apho.org.uk/resource/item.aspx?RID=39445} see "contains".\cr
  \bold{classic = Stephen Few's Method = the way I knew it:} sqrt( mu*(1-mu) / n )\cr
  \url{http://www.jerrydallal.com/LHSP/psd.htm}\cr
  \url{http://commons.wikimedia.org/wiki/File:ComparisonConfidenceIntervals.png}\cr
