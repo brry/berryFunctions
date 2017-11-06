@@ -18,6 +18,7 @@ Collection of functions, mainly connected with graphics and hydrology.\cr
 - and more...
 }
 \note{
+dataDWD and readDWD have moved to the package rdwd: \url{https://github.com/brry/rdwd#rdwd}\cr\cr 
 Get the most recent code updates at \url{https://github.com/brry}\cr
 At some places you'll find \code{## not run} in the examples. These code
 blocks were excluded from checking while building, mainly because they are
@@ -26,10 +27,6 @@ Normally, you should be able to run them in an interactive session. If you
 do find non-executable code, please tell me!\cr
 Feel free to suggest packages in which these functions would fit well.\cr
 I strongly depend on - and therefore welcome - any feedback!\cr\cr
-The following functions have been deprecated:\cr
-changeAttribute, showAttribute, shapeZoom: moved to \url{https://github.com/brry/shapeInteractive}\cr
-extremeStat, extremeStatLmom: moved to distLextreme in \url{https://github.com/brry/extremeStat}\cr
-compFiles has been renamed to \code{\link{compareFiles}}. combineTextfiles has been renamed to \code{\link{combineFiles}}.
 }
 \examples{
 
@@ -37,7 +34,7 @@ compFiles has been renamed to \code{\link{compareFiles}}. combineTextfiles has b
 
 }
 \author{
-Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2016
+Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2017
 }
 \keyword{documentation}
 \keyword{package}
