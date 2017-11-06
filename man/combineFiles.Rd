@@ -36,7 +36,7 @@ large files. DEFAULT: !quiet, i.e. TRUE}
 \code{file, what, blank.lines.skip, sep, quiet}.}
 }
 \value{
-None, but prints number of files combined and output file name.
+Final output file, invisibly.
 }
 \description{
 Combine several textfiles into one, regardless of their content.

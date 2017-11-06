@@ -2,7 +2,7 @@
 #' 
 #' Combine several textfiles into one, regardless of their content.
 #' 
-#' @return None, but prints number of files combined and output file name.
+#' @return Final output file, invisibly.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Nov 2012, Dec 2014, Jul 2015
 #' @seealso \code{\link{compareFiles}}, and the functions used internally here, namely: \code{\link{paste}}, \code{\link{scan}}, \code{\link{write}}.
 #' @keywords IO file character
@@ -87,4 +87,5 @@ for(i in 1:length(inFiles))
    } # End of for-Loop
 if(progbar) close(pb)
 if(!quiet) message(i, " files combined to ", File)
+return(invisible(File))
 } # End of function
