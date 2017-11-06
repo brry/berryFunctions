@@ -99,7 +99,7 @@ if(!is.na(package))
   {
   if(missing(quiet)) quiet <- TRUE
   if(missing(elapsed)) elapsed <- TRUE
-  funs <- ls(paste0("package:",package))
+  funs <- read.table(system.file("help/AnIndex", package=package), as.is=TRUE)[,1]
   cat("processing ", length(funs), " functions.\n")
   sapply(funs, exTimeSingle, catdot=TRUE, echo=echo, elapsed=elapsed, imagefile=imagefile, quiet=quiet, ...)
   } else
