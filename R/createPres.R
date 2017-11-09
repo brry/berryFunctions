@@ -10,7 +10,9 @@
 #' @importFrom stats rnorm
 #' @export
 #' @examples
+#' \dontrun{
 #' createPres("Berry_Conference")
+#' }
 #' 
 #' @param presname Name of .Rnw file to be created. DEFAULT: "pres"
 #' @param dir      Name of directory that will contain .Rnw file and

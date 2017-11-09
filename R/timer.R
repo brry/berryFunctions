@@ -13,9 +13,11 @@
 #' @export
 #' @examples
 #' 
+#' \dontrun{## Skip time consuming checks on CRAN
 #' timer(interval=0.5, n=3)
 #' timer(interval=0.2, n=8, write=TRUE) # a slight deviation occurs for a large n
-#' # timer() # to practice lightning talks at useR! conferences
+#' timer() # to practice lightning talks at useR! conferences
+#' }
 #' 
 #' @param interval \code{\link{alarm}} interval in seconds. DEFAULT: 20
 #' @param n number of alarm signals to be given. DEFAULT: 15

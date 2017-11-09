@@ -38,7 +38,7 @@ Optim can be slow! It refers to the functions rmse and rsquare, also in this pac
       it tries again with the parameters optimized via Nelder Mead.
 }
 \examples{
-
+\dontrun{## Skip time consuming checks on CRAN
 # exponential decline of temperature of a mug of hot chocolate
 tfile <- system.file("extdata/Temp.txt", package="berryFunctions")
 temp <- read.table(tfile, header=TRUE, dec=",")
@@ -53,6 +53,7 @@ exp4p(x,y, plot=TRUE)
 # y=49*e^(-0.031*(x - 0  )) + 25 correct, judged from the model:
 # Temp=T0 - Te *exp(k*t) + Te     with    T0=73.76,  Tend=26.21, k=-0.031
 # optmethod="Nelder-Mead"  # y=52*e^(-0.031*(x + 3.4)) + 26 wrong
+}
 
 }
 \seealso{

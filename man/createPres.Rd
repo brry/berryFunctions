@@ -20,7 +20,9 @@ DEFAULT: "."}
 Create folder with .Rnw presentation template and fig_extern folder.
 }
 \examples{
+\dontrun{
 createPres("Berry_Conference")
+}
 
 }
 \seealso{

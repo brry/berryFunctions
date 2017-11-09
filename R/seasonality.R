@@ -42,13 +42,13 @@
 #' # Shift is important. You don't want to have this event included twice:
 #' seasonality(date, discharge, data=Q[850:950,], plot=3, nmax=1, quiet=TRUE, shift=100)
 #' 
+#' \dontrun{ # excluded from CRAN checks because it is slow
 #' seasonality(date, discharge, data=Q, plot=2) # most floods in winter
 #' seasonality(date, discharge, data=Q, plot=5, vlab="Dude, look at annual max Q!")
 #' seasonality(date, discharge, data=Q, plot=5, shift=100)
 #' s <- seasonality(date, discharge, data=Q, plot=4, shift=100, width=3, returnall=TRUE)
 #' str(s, max.lev=1)
 #' 
-#' \dontrun{ # excluded from CRAN checks because it is slow
 #' seasonality(date, discharge, data=Q, plot=3:4, add=0:1, ylim=lim0(400), shift=117)
 #' seasonality(date, discharge, data=Q, plot=4, add=TRUE, lwd=3, shift=117, width=3)
 #' }

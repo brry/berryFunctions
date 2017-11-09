@@ -50,6 +50,8 @@
 #' rmse(0,0, quiet=TRUE)
 #' rsquare(1:6, tapply(chickwts$weight, chickwts$feed, mean) )
 #' 
+#' \dontrun{ # time consuming Simulation
+#' 
 #' # sample size bias
 #' x <- 1:1000
 #' y <- x+rnorm(1000)
@@ -59,8 +61,6 @@
 #' plot(ssize, sgofs[2,]) # RMSE: no bias, symmetric convergence
 #' plot(ssize, sgofs[1,]) # R2: small underestimation in small samples
 #' 
-#' 
-#' \dontrun{ # time consuming Simulation
 #' if(require(pbapply)) sapply <- pbsapply
 #' r2 <- sapply(1:10000, function(i){
 #'    x <- rnorm(20);  y <- 2*x + rnorm(20);  c(rsquare(x,y), rmse(x,y)) })
