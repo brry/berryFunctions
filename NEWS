@@ -36,6 +36,17 @@ ToDo-list
 actual NEWS
 ---------------------------------------
 
+-----------------------------
+-----------------------------
+
+
+Version 1.16.3 (2017-11-10)
+- newFilename: with normalizePathCP, uses absolute paths for non-existing files 
+  also on Linux (needed for rdwd to work on CRAN)
+- exTime: use documented functions instead of exported functions
+- dataDWD+readDWD are no longer documented as functions 
+- example computation times lowered
+new function: normalizePathCP
 
 
 -----------------------------
