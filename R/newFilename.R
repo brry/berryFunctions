@@ -47,7 +47,7 @@ ntrunc=3
 )
 {
 # change "./someFile" to actual location:
-filename <- normalizePath(filename, winslash="/", mustWork=FALSE)
+filename <- normalizePathCP(filename, winslash="/", mustWork=FALSE)
 # check folder existence:
 dirs <- unique(dirname(filename))
 direxi <- file.exists(dirs)
@@ -90,7 +90,7 @@ if(!quiet)
   if(!tellignore) {n_i <- 0; mnames <- mnames[!ignore]}
   n_ie<- sum(file.exists(filename[ignore]))
   nfiles <- function(n) paste0(n, " file", if(n>1)"s")
-  message(traceCall(1, "", ": "), pre,
+  if(n_i+n_n+n_o+n_a>0) message(traceCall(1, "", ": "), pre,
           if(n_i>0) paste0("not checking ", nfiles(n_i), 
                            " (",n_ie," exist",if(n_ie==1)"s",")"),
           if(n_i>0 & n_n+n_a+n_o > 0) ", ",
