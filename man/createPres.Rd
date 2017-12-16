@@ -4,7 +4,8 @@
 \alias{createPres}
 \title{Create .Rnw presentation template}
 \usage{
-createPres(presname = "pres", dir = "presentation", path = ".")
+createPres(presname = "pres", dir = "presentation", path = ".",
+  open = TRUE)
 }
 \arguments{
 \item{presname}{Name of .Rnw file to be created. DEFAULT: "pres"}
@@ -15,6 +16,8 @@ see \code{\link{newFilename}}. DEFAULT: "presentation"}
 
 \item{path}{Location of \code{dir}. Passed to \code{\link{setwd}}.
 DEFAULT: "."}
+
+\item{open}{Logical: run \code{\link{openFile}}? DEFAULT: TRUE}
 }
 \description{
 Create folder with .Rnw presentation template and fig_extern folder.

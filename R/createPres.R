@@ -20,11 +20,13 @@
 #'                 see \code{\link{newFilename}}. DEFAULT: "presentation"
 #' @param path     Location of \code{dir}. Passed to \code{\link{setwd}}.
 #'                 DEFAULT: "."
+#' @param open     Logical: run \code{\link{openFile}}? DEFAULT: TRUE
 #' 
 createPres <- function(
 presname="pres",
 dir="presentation",
-path="."
+path=".",
+open=TRUE
 )
 {
 #
@@ -233,5 +235,6 @@ Works with pause
 \\appendixend
 
 \\end{document}", file=paste0(dir, "/", presname, ".Rnw"), sep="")
-
+# Open file if wanted:
+if(open) openFile(paste0(dir, "/", presname, ".Rnw"))
 }
