@@ -54,6 +54,9 @@ parameters of small plot, invisible.
 }
 \description{
 multipanel-compatible inset plot with margins, background and border
+Adding points after \code{smallPlot} is called may be 
+incorrect if the original function messes with the graph margins, 
+see the note in \code{\link{colPointsLegend}}.
 }
 \section{Warning}{
  setting mai etc does not work!

@@ -93,12 +93,13 @@ invisible list of par of \code{\link{smallPlot}}, adds legend bar to current plo
 }
 \description{
 Adds legends to plots created or enhanced with \code{\link{colPoints}}
-}
-\note{
-\code{x1,x2,y1,y2,labelpos,titlepos,title} have different defaults when \code{horizontal=FALSE}\cr
 \code{sf} plots set par(mar=c(0,0,1.2,0)) but then reset it to the values before. 
 \code{\link{smallPlot}} will hence also reset to that, so points added after 
 calling colpointsLegend will be wrong, unless the margins are set BEFORE sf plot.
+\code{sf:::plot.sf} alternatively uses c(2.1, 2.1, 1.2, 0)  or  c(1, 1, 1.2, 1).
+}
+\note{
+\code{x1,x2,y1,y2,labelpos,titlepos,title} have different defaults when \code{horizontal=FALSE}\cr
 }
 \examples{
 

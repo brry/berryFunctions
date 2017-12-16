@@ -2,7 +2,10 @@
 #' 
 #' Draw colored points for 3D-data in a 2D-plane. Color is relative to third
 #' dimension, by different classification methods. Can take 3 vectors or, as in
-#' \code{\link{image}}, 2 vectors and a matrix for z.
+#' \code{\link{image}}, 2 vectors and a matrix for z.\cr
+#' Adding points after \code{\link{smallPlot}} is called for the legend may be 
+#' incorrect if the original function messes with the graph margins, 
+#' see the note in \code{\link{colPointsLegend}}.
 #' 
 #' @return Invisible list of values that can be passed to colPointsLegend or colPointsHist.
 #' @note Rstudio scales graphics really badly, so don't expect the right legend width out of the box if you use Rstudio!
