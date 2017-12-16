@@ -69,8 +69,8 @@
 #' @param npm Number of labels per month, overrides n. DEFAULT: NULL = internally computed.
 #' @param npy Number of labels per year, overrides npm and n. DEFAULT: NA
 #' @param format Format of date, see details in \code{\link{strptime}}. DEFAULT: "\%d.\%m.\\n\%Y"
-#' @param yformat Format of year if \code{ym=TRUE}. 
-#'                Use \code{yformat=" "} (with space) to suppress year labeling. 
+#' @param yformat Format of year if \code{ym=TRUE}.
+#'                Use \code{yformat=" "} (with space) to suppress year labeling.
 #'                DEFAULT: "\%Y"
 #' @param labels labels. DEFAULT: format.Date(d, format)
 #' @param ym Label months with first letter at the center of the month and year at center below.

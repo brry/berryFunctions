@@ -30,7 +30,7 @@ DEFAULT: 0.3}
 \item{classargs}{List of arguments specifying how to call \code{\link{classify}},
 e.g. method. DEFAULT: NULL}
 
-\item{cellargs, colargs, rowargs, mainargs}{List of arguments passed to \code{\link{text}} 
+\item{cellargs, colargs, rowargs, mainargs}{List of arguments passed to \code{\link{text}}
 only for the cells, column labels, row labels or title,
 respectively. DEFAULTS: NULL}
 }

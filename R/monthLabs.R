@@ -6,8 +6,8 @@
 #' @note Spacing of days is not equal, but set to certain days of the month!
 #'       This was originally developed for time series movie frames
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, early 2013
-#' @seealso \code{\link{timeAxis}} for nice labeling, 
-#'          \code{\link{timeAxis}} for automatic determination of npm/npy, 
+#' @seealso \code{\link{timeAxis}} for nice labeling,
+#'          \code{\link{timeAxis}} for automatic determination of npm/npy,
 #'          \code{\link{as.Date}}, \code{\link{paste}}
 #' @keywords chron
 #' @export

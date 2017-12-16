@@ -84,14 +84,14 @@ if(!quiet)
   {
   # message names: number of files
   n_i <- sum(status=="ign") # ignored
-  n_n <- sum(status=="new") # new 
+  n_n <- sum(status=="new") # new
   n_o <- sum(status=="ovw") # overwritten
   n_a <- sum(status=="app") # _n appended
   if(!tellignore) {n_i <- 0; mnames <- mnames[!ignore]}
   n_ie<- sum(file.exists(filename[ignore]))
   nfiles <- function(n) paste0(n, " file", if(n>1)"s")
   if(n_i+n_n+n_o+n_a>0) message(traceCall(1, "", ": "), pre,
-          if(n_i>0) paste0("not checking ", nfiles(n_i), 
+          if(n_i>0) paste0("not checking ", nfiles(n_i),
                            " (",n_ie," exist",if(n_ie==1)"s",")"),
           if(n_i>0 & n_n+n_a+n_o > 0) ", ",
           if(n_n+n_a>0) paste0("creating ", nfiles(n_n+n_a)),

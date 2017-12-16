@@ -10,11 +10,11 @@ classify(x, method = "linear", breaks = NULL, Range = range(x, finite =
 \arguments{
 \item{x}{Vector with numeric values}
 
-\item{method}{Character string (partial matching is performed). 
-Classification method (type of binning) to compute the 
+\item{method}{Character string (partial matching is performed).
+Classification method (type of binning) to compute the
 class breakpoints. See section Details. DEFAULT: "linear"}
 
-\item{breaks}{Specification for method, see Details. 
+\item{breaks}{Specification for method, see Details.
 DEFAULT: NULL (different defaults for each method)}
 
 \item{Range}{Ends of intervals. DEFAULT: range(x, finite=TRUE)}
@@ -67,9 +67,9 @@ classify( c(1:10, 20), "log")
 
 set.seed(42); rz <- rnorm(30, mean=350, sd=120)
 plot(1)
-classleg <- function(method="linear", breaks=100, sdlab=1, logbase=1, ...) 
-           do.call(colPointsLegend, owa( 
-           classify(rz, method=method, breaks=breaks, sdlab=sdlab, logbase=logbase), 
+classleg <- function(method="linear", breaks=100, sdlab=1, logbase=1, ...)
+           do.call(colPointsLegend, owa(
+           classify(rz, method=method, breaks=breaks, sdlab=sdlab, logbase=logbase),
            list(z=rz, title="", ...))   )
 classleg(br=3, met="s", col=divPal(5),mar=c(0,3,1,0),hor=FALSE,x1=0.1,x2=0.25)
 classleg(br=3, met="s", col=divPal(6),mar=c(0,3,1,0),hor=FALSE,x1=0.25,x2=0.4, sdlab=2)

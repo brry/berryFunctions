@@ -42,9 +42,9 @@
 #' 
 #' set.seed(42); rz <- rnorm(30, mean=350, sd=120)
 #' plot(1)
-#' classleg <- function(method="linear", breaks=100, sdlab=1, logbase=1, ...) 
-#'            do.call(colPointsLegend, owa( 
-#'            classify(rz, method=method, breaks=breaks, sdlab=sdlab, logbase=logbase), 
+#' classleg <- function(method="linear", breaks=100, sdlab=1, logbase=1, ...)
+#'            do.call(colPointsLegend, owa(
+#'            classify(rz, method=method, breaks=breaks, sdlab=sdlab, logbase=logbase),
 #'            list(z=rz, title="", ...))   )
 #' classleg(br=3, met="s", col=divPal(5),mar=c(0,3,1,0),hor=FALSE,x1=0.1,x2=0.25)
 #' classleg(br=3, met="s", col=divPal(6),mar=c(0,3,1,0),hor=FALSE,x1=0.25,x2=0.4, sdlab=2)
@@ -56,10 +56,10 @@
 #' classleg(met="q", y1=0.15, y2=0.30, breaks=0:15/15, at=pretty2(rz), labels=pretty2(rz) )
 #' 
 #' @param x      Vector with numeric values
-#' @param method Character string (partial matching is performed). 
-#'               Classification method (type of binning) to compute the 
+#' @param method Character string (partial matching is performed).
+#'               Classification method (type of binning) to compute the
 #'               class breakpoints. See section Details. DEFAULT: "linear"
-#' @param breaks Specification for method, see Details. 
+#' @param breaks Specification for method, see Details.
 #'               DEFAULT: NULL (different defaults for each method)
 #' @param Range  Ends of intervals. DEFAULT: range(x, finite=TRUE)
 #' @param sdlab  Type of label and breakpoints if \code{method=standarddeviation}.
@@ -97,7 +97,7 @@ if(diff(Range)==0)
 PossibleMethods <- c("linear", "log", "quantile", "sd", "custom")
 method0 <- method
 method <- PossibleMethods[pmatch(tolower(method),  PossibleMethods)]
-if(is.na(method)) stop("method can not be '",method0,"'. Must be one of ", 
+if(is.na(method)) stop("method can not be '",method0,"'. Must be one of ",
                        toString(PossibleMethods), " (may be abbreviated).")
 # actual work:
 if(method=="linear") # linear --------------------------------------------------
@@ -175,14 +175,14 @@ bb <- breaks
 at <- bb
 la <- signif(breaks, 2)
 ix <- cut(x, breaks=bb, labels=FALSE, include.lowest=TRUE)
-} else 
+} else
 stop("method '",method,"', went wrong internally. Please report via berry-b@gmx.de")
 # Range Warning:
 ###
 below <- above <- 0
 if(anyNA(ix))
   {
-  below <- x < min(bb, na.rm=TRUE) 
+  below <- x < min(bb, na.rm=TRUE)
   above <- x > max(bb, na.rm=TRUE)
   ix[below] <- nb+1
   ix[above] <- nb+2

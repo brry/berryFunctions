@@ -39,7 +39,7 @@
 #' @param from Lower exponent \emph{OR} vector with data
 #' @param to High end
 #' @param Range Or give from and to as range
-#' @param base         Bases to be used, eg. c(1,2,5). Use base=NA to switch 
+#' @param base         Bases to be used, eg. c(1,2,5). Use base=NA to switch
 #'                     between 1 and c(1,2,5) depending on range. DEFAULT 1
 #' @param big.mark Symbol separating thousands, eg. space, comma, dot, etc. see \code{\link{format}} and \code{\link{prettyNum}}
 #' @param decimal.mark Character separating comma values, see \code{\link{format}} and \code{\link{prettyNum}}
@@ -78,7 +78,7 @@ if( !missing(Range)  )
   to <- ceiling(Range[2])
   }
 # base
-if(any(is.na(base))) base <- if(abs(to-from)>4) 1 else c(1,2,5) 
+if(any(is.na(base))) base <- if(abs(to-from)>4) 1 else c(1,2,5)
 # values for lines and labels:
 vals <- base*10^rep(floor(from):ceiling(to), each=length(base))
 # formatted values for labels:

@@ -15,7 +15,7 @@ logVals(from = -7, to = 7, Range, base = 1, big.mark = "'",
 
 \item{Range}{Or give from and to as range}
 
-\item{base}{Bases to be used, eg. c(1,2,5). Use base=NA to switch 
+\item{base}{Bases to be used, eg. c(1,2,5). Use base=NA to switch
 between 1 and c(1,2,5) depending on range. DEFAULT 1}
 
 \item{big.mark}{Symbol separating thousands, eg. space, comma, dot, etc. see \code{\link{format}} and \code{\link{prettyNum}}}

@@ -24,7 +24,7 @@ as accepted (and coerced) by \code{\link{as.Date}}}
 \item{data}{Optional: data.frame with the column names as given by dates and values}
 
 \item{drange}{Optional date range (analogous to xlim), can be a vector like
-\code{dates}. Can also be numerical years, in which case 
+\code{dates}. Can also be numerical years, in which case
 "-01-01" is appended. DEFAULT: NA (computed from \code{dates} internally)}
 
 \item{vrange}{Optional value range (analogous to ylim), can be a vector like
@@ -36,9 +36,9 @@ E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0}
 \item{janline}{Logical: Should horizontal line be plotted at
 January 1st if \code{shift!=0}? DEFAULT: TRUE}
 
-\item{hlines}{Draw horizontal background lines in plot 1? Either FALSE (the default), 
-TRUE to draw gray background lines at each month start, 
-or a list of arguments passed to \code{\link{abline}} with 
+\item{hlines}{Draw horizontal background lines in plot 1? Either FALSE (the default),
+TRUE to draw gray background lines at each month start,
+or a list of arguments passed to \code{\link{abline}} with
 \code{\link{owa}}. DEFAULT: FALSE}
 
 \item{nmax}{Number of annual maxima to be marked, plotted and returned.

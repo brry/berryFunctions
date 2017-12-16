@@ -2,7 +2,7 @@
 #' 
 #' Calculates values that are in logarithmic distance from each other
 #' e.g. to produce logarithmic interval borders.\cr
-#' For exact logarithmic spacing, use 
+#' For exact logarithmic spacing, use
 #' \code{10^\link{seq}(from=\link{log10}(1), to=\link{log10}(100), len=100)}
 #' 
 #' @return Vector or matrix, depending on base input

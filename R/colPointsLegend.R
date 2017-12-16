@@ -1,7 +1,7 @@
 #' @title Legend for colPoints
 #' @description Adds legends to plots created or enhanced with \code{\link{colPoints}}
-#' \code{sf} plots set par(mar=c(0,0,1.2,0)) but then reset it to the values before. 
-#' \code{\link{smallPlot}} will hence also reset to that, so points added after 
+#' \code{sf} plots set par(mar=c(0,0,1.2,0)) but then reset it to the values before.
+#' \code{\link{smallPlot}} will hence also reset to that, so points added after
 #' calling colpointsLegend will be wrong, unless the margins are set BEFORE sf plot.
 #' \code{sf:::plot.sf} alternatively uses c(2.1, 2.1, 1.2, 0)  or  c(1, 1, 1.2, 1).
 #' @note \code{x1,x2,y1,y2,labelpos,titlepos,title} have different defaults when \code{horizontal=FALSE}\cr
@@ -35,7 +35,7 @@
 #' @param colors Color vector. DEFAULT: \code{\link{seqPal}}
 #'               from yellow (lowest) to blue (highest value in Range)
 #' @param bb Borders of bins for the legend (key). DEFAULT: seqR(Range, length.out=nbins+1)
-#' @param nlab,at,labels Number of legend labels, their positions and labels. 
+#' @param nlab,at,labels Number of legend labels, their positions and labels.
 #'                    DEFAULT: nlab=5, labels=at=pretty2(Range,nlab)
 #' @param adj label adjustment parallel to legend bar (only one number!). DEFAULT: 0.5
 #' @param x1,x2,y1,y2 Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}.

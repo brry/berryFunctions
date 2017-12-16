@@ -53,7 +53,7 @@
 #' @param digits      Number of digits rounded to for writing. DEFAULT: 2
 #' @param classargs   List of arguments specifying how to call \code{\link{classify}},
 #'                    e.g. method. DEFAULT: NULL
-#' @param cellargs,colargs,rowargs,mainargs List of arguments passed to \code{\link{text}} 
+#' @param cellargs,colargs,rowargs,mainargs List of arguments passed to \code{\link{text}}
 #'                    only for the cells, column labels, row labels or title,
 #'                    respectively. DEFAULTS: NULL
 #' @param \dots Further arguments passed to all \code{\link{text}} like cex, col, srt, ...

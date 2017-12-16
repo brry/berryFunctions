@@ -18,7 +18,7 @@ Collection of functions, mainly connected with graphics and hydrology.\cr
 - and more...
 }
 \note{
-dataDWD and readDWD have moved to the package rdwd: \url{https://github.com/brry/rdwd#rdwd}\cr\cr 
+dataDWD and readDWD have moved to the package rdwd: \url{https://github.com/brry/rdwd#rdwd}\cr\cr
 Get the most recent code updates at \url{https://github.com/brry}\cr
 At some places you'll find \code{## not run} in the examples. These code
 blocks were excluded from checking while building, mainly because they are

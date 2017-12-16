@@ -69,7 +69,7 @@
 #' @param values   Values to be mapped in color with \code{\link{colPoints}}
 #' @param data     Optional: data.frame with the column names as given by dates and values
 #' @param drange   Optional date range (analogous to xlim), can be a vector like
-#'                 \code{dates}. Can also be numerical years, in which case 
+#'                 \code{dates}. Can also be numerical years, in which case
 #'                 "-01-01" is appended. DEFAULT: NA (computed from \code{dates} internally)
 #' @param vrange   Optional value range (analogous to ylim), can be a vector like
 #'                 \code{values}. DEFAULT: NA (computed from \code{values} internally)
@@ -77,9 +77,9 @@
 #'                 E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0
 #' @param janline  Logical: Should horizontal line be plotted at
 #'                 January 1st if \code{shift!=0}? DEFAULT: TRUE
-#' @param hlines   Draw horizontal background lines in plot 1? Either FALSE (the default), 
-#'                 TRUE to draw gray background lines at each month start, 
-#'                 or a list of arguments passed to \code{\link{abline}} with 
+#' @param hlines   Draw horizontal background lines in plot 1? Either FALSE (the default),
+#'                 TRUE to draw gray background lines at each month start,
+#'                 or a list of arguments passed to \code{\link{abline}} with
 #'                 \code{\link{owa}}. DEFAULT: FALSE
 #' @param nmax     Number of annual maxima to be marked, plotted and returned.
 #'                 Currently, only 0 and 1 are implemented. DEFAULT: 0

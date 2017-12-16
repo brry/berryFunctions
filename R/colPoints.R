@@ -3,8 +3,8 @@
 #' Draw colored points for 3D-data in a 2D-plane. Color is relative to third
 #' dimension, by different classification methods. Can take 3 vectors or, as in
 #' \code{\link{image}}, 2 vectors and a matrix for z.\cr
-#' Adding points after \code{\link{smallPlot}} is called for the legend may be 
-#' incorrect if the original function messes with the graph margins, 
+#' Adding points after \code{\link{smallPlot}} is called for the legend may be
+#' incorrect if the original function messes with the graph margins,
 #' see the note in \code{\link{colPointsLegend}}.
 #' 
 #' @return Invisible list of values that can be passed to colPointsLegend or colPointsHist.
@@ -62,10 +62,10 @@
 #' # Add histogram:
 #' cp <- colPoints(i,j,k, add=FALSE)
 #' do.call(colPointsHist, cp[c("z","at","labels","bb","nbins")])
-#' do.call(colPointsHist, owa(cp[c("z","at","labels","bb","nbins")], 
+#' do.call(colPointsHist, owa(cp[c("z","at","labels","bb","nbins")],
 #'                            list(bg=5, breaks=5)))
-#' do.call(colPointsHist, owa(cp[c("z","at","labels","bb","nbins")], 
-#'                            list(mar=c(0,0,0,0), x1=0.5, x2=1, y1=0.8, 
+#' do.call(colPointsHist, owa(cp[c("z","at","labels","bb","nbins")],
+#'                            list(mar=c(0,0,0,0), x1=0.5, x2=1, y1=0.8,
 #'                              y2=0.99, yaxt="n")))
 #' # histogram in lower panel:
 #' layout(matrix(1:2), heights=c(8,4) )
@@ -147,12 +147,12 @@
 #'                 coordinate if \code{lines=TRUE}. nint=1 means no interpolation.
 #'                 Values below 10 will smooth coordinates and might
 #'                 miss the original points. DEFAULT: 30
-#' @param xlab,ylab,zlab X axis label, y axis label, \code{\link{colPointsLegend} title}. 
+#' @param xlab,ylab,zlab X axis label, y axis label, \code{\link{colPointsLegend} title}.
 #'                 DEFAULT: \code{gsub("\\"", "", deparse(\link{substitute}(x/y/z)))}
 #' @param log      Logarithmic axes with log="y", "xy" or "x". DEFAULT: ""
 #' @param axes,las Draw axes? Label Axis Style. Only used when add=FALSE.
 #'                 See \code{\link{par}}. DEFAULT: axes=TRUE, las=1 (all labels horizontal)
-#' @param bglines  If not NULL, passed to \code{\link{abline}} to draw background 
+#' @param bglines  If not NULL, passed to \code{\link{abline}} to draw background
 #'                 lines before adding colored points. DEFAULT: NULL
 #' @param pch      Point CHaracter. See \code{\link{par}}. DEFAULT: 16
 #' @param x1,x2,y1,y2 Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}.
@@ -282,7 +282,7 @@ points(x, y, col=c(col, col2[2:3])[cl$index], pch=pch, ...)
 # add legend:
 legdefs <- list(z=z, at=cl$at, labels=cl$labels, bb=cl$bb, nbins=cl$nbins,
                 plottriangle=c(cl$below>0,cl$above>0),
-                title=zlab, x1=x1, x2=x2, y1=y1, y2=y2, 
+                title=zlab, x1=x1, x2=x2, y1=y1, y2=y2,
                 density=density, horizontal=horizontal, tricol=col2[2:3], colors=col)
 output <- c(output, legdefs[!names(legdefs) %in% c("nbins","bb","at","labels","index","z")])
 if(legend) do.call(colPointsLegend, args=owa(legdefs, legargs))

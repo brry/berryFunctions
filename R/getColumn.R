@@ -43,7 +43,7 @@
 #' else     head(getColumn( Sepal.Length,  iris), 10)
 #' }
 #' checkerr( upper3(char=FALSE) )
-#' upper3(char=TRUE) # use string "Sepal.Length" and it works fine. 
+#' upper3(char=TRUE) # use string "Sepal.Length" and it works fine.
 #' 
 #' 
 #' # The next examples all return informative errors:
@@ -56,7 +56,7 @@
 #' 
 #' 
 #' #getColumn("a", tibble::tibble(a=1:7, b=7:1)) # works but warns with tibbles
-#'  
+#' 
 #' # Pitfall numerical column names:
 #' df <- data.frame(1:5, 3:7)
 #' colnames(df) <- c("a","1") # this is a bad idea anyways
@@ -81,7 +81,7 @@
 #'          its value will be used as name! (see upper2 example)
 #' @param df dataframe object
 #' @param trace Logical: Add function call stack to the message? DEFAULT: TRUE
-#' @param convnum Logical: Convert numerical input (even if character) to 
+#' @param convnum Logical: Convert numerical input (even if character) to
 #'                Column name for that number?
 #' 
 getColumn <- function(
@@ -94,7 +94,7 @@ convnum=TRUE
 calltrace <- if(trace) traceCall(prefix="in ", suffix=": ") else ""
 # get names of objects as character strings:
 ndf <- getName(df)
-if(length(ndf)>1) ndf <- paste(deparse(substitute(df)), 
+if(length(ndf)>1) ndf <- paste(deparse(substitute(df)),
                                "[evaluated with getName to ",length(ndf)," lines]")
 depsub <- deparse(substitute(x))
 nam <- if(substr(depsub,1,11)=="substitute(") deparse(x) else getName(x)
@@ -105,19 +105,19 @@ nam <- gsub("\"", "", nam) # if input was a character string
 # nam assumed to be code if anything else beside 0-9,a-z,.,_ is contained
 if(grepl("[^[:alnum:][:space:]\\._]", paste(nam, collapse=" ") ))
  {
- nam1 <- try(eval(x, envir=sys.frames()), silent=TRUE) 
+ nam1 <- try(eval(x, envir=sys.frames()), silent=TRUE)
  if(!inherits(nam1, "try-error")) nam <- nam1
  }
 # stop if several columns are to be selected:
 if(length(nam)>1) stop(calltrace, "Only a single column can be selected with ",
-                       "getColumn. The input (",depsub,") was evaluated to str: ", 
+                       "getColumn. The input (",depsub,") was evaluated to str: ",
                        capture.output(str(nam)), call.=FALSE)
 
 # deal with numeric input:
 namnum <- suppressWarnings(as.numeric(nam))
-if(!is.na(namnum) && convnum)  
+if(!is.na(namnum) && convnum)
  {
- if(namnum>ncol(df)) stop(calltrace, "column number ", namnum, " is not in '", 
+ if(namnum>ncol(df)) stop(calltrace, "column number ", namnum, " is not in '",
                           ndf, "', which has ", ncol(df), " columns.", call.=FALSE)
  nam <- colnames(df)[namnum]
  }
@@ -125,7 +125,7 @@ if(!is.na(namnum) && convnum)
 # check if df is a data.frame
 if(!all(class(df)=="data.frame"))
  {
- warning(calltrace, "'",ndf,"' is not a data.frame, but a '", toString(class(df)), 
+ warning(calltrace, "'",ndf,"' is not a data.frame, but a '", toString(class(df)),
          "'. Converting with as.data.frame.", call.=FALSE)
  df <- as.data.frame(df)
  }
@@ -133,13 +133,13 @@ if(!all(class(df)=="data.frame"))
 if(length(colnames(df))==0) stop(calltrace, "'",ndf, "' has no columns.", call.=FALSE)
 if(!nam %in% colnames(df)) stop(calltrace, "Column '", nam, "' is not in '", ndf,
                            "', which has the columns:",
-                           truncMessage(colnames(df), ntrunc=10, prefix=""), 
+                           truncMessage(colnames(df), ntrunc=10, prefix=""),
                            ".", call.=FALSE)
 # actually get the column:
 out <- df[ , nam]
 if(is.null(out) )
   {
-  warning(calltrace, "Column '",nam,"' could not be extracted from '", 
+  warning(calltrace, "Column '",nam,"' could not be extracted from '",
           ndf, "'. Returning NULL.", call.=FALSE)
   return(out)
   }
@@ -149,7 +149,7 @@ if(NROW(out)==0)
   return(out)
   }
 # Further testing:
-if(all(is.na(out)) ) warning(calltrace, "Column '", nam, "' in '", ndf, 
+if(all(is.na(out)) ) warning(calltrace, "Column '", nam, "' in '", ndf,
                              "' only has NAs.", call.=FALSE)
 # return column values
 out
@@ -173,7 +173,7 @@ out
 # Old stuff from code development:
 if(FALSE){
 
-#nam <- if(substr(deparse(substitute(x)),1,10)=="substitute") 
+#nam <- if(substr(deparse(substitute(x)),1,10)=="substitute")
 #          as.character(x) else getName(x)
 
 depsub <- deparse(substitute(x))

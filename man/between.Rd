@@ -10,7 +10,7 @@ between(x, a, b = a, incl = TRUE, aincl = incl, bincl = incl,
 \arguments{
 \item{x}{Numerical vector}
 
-\item{a, b}{Numerical values/vectors specifying the borders of the interval. 
+\item{a, b}{Numerical values/vectors specifying the borders of the interval.
 \code{\link{min}} and \code{max} are used, so they can be a vector.}
 
 \item{incl}{Logical. Include values on the borders? For x == border, TRUE
@@ -26,15 +26,15 @@ DEFAULT: \code{incl}}
 Logical (boolean) vector with TRUE/FALSE values
 }
 \description{
-Are values within a certain interval? 
+Are values within a certain interval?
 Basically a wrapper for \code{ x >= a   &   x <= b } to save repeating long x names twice.
 }
 \examples{
 between(1:10, 4, 8)
 between(1:10, 4:8) # range as vector
 between(1:10, 8, 4) # warns about interval
- 
-data.frame( incl.T=between(1:10, 4, 8), 
+
+data.frame( incl.T=between(1:10, 4, 8),
             incl.F=between(1:10, 4, 8,  incl=FALSE),
            aincl.F=between(1:10, 4, 8, aincl=FALSE),
            bincl.F=between(1:10, 4, 8, bincl=FALSE)  )

@@ -31,8 +31,8 @@ DEFAULT: NA, meaning axis value >1e5}
 
 \item{format}{Format of date, see details in \code{\link{strptime}}. DEFAULT: "\%d.\%m.\\n\%Y"}
 
-\item{yformat}{Format of year if \code{ym=TRUE}. 
-Use \code{yformat=" "} (with space) to suppress year labeling. 
+\item{yformat}{Format of year if \code{ym=TRUE}.
+Use \code{yformat=" "} (with space) to suppress year labeling.
 DEFAULT: "\%Y"}
 
 \item{labels}{labels. DEFAULT: format.Date(d, format)}

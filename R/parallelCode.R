@@ -5,7 +5,7 @@
 #' @export
 #' @examples
 #' parallelCode()
-#'
+#' 
 parallelCode <- function()
 {
 message(

@@ -58,7 +58,7 @@ coordinate if \code{lines=TRUE}. nint=1 means no interpolation.
 Values below 10 will smooth coordinates and might
 miss the original points. DEFAULT: 30}
 
-\item{xlab, ylab, zlab}{X axis label, y axis label, \code{\link{colPointsLegend} title}. 
+\item{xlab, ylab, zlab}{X axis label, y axis label, \code{\link{colPointsLegend} title}.
 DEFAULT: \code{gsub("\\"", "", deparse(\link{substitute}(x/y/z)))}}
 
 \item{axes, las}{Draw axes? Label Axis Style. Only used when add=FALSE.
@@ -66,7 +66,7 @@ See \code{\link{par}}. DEFAULT: axes=TRUE, las=1 (all labels horizontal)}
 
 \item{log}{Logarithmic axes with log="y", "xy" or "x". DEFAULT: ""}
 
-\item{bglines}{If not NULL, passed to \code{\link{abline}} to draw background 
+\item{bglines}{If not NULL, passed to \code{\link{abline}} to draw background
 lines before adding colored points. DEFAULT: NULL}
 
 \item{pch}{Point CHaracter. See \code{\link{par}}. DEFAULT: 16}
@@ -94,8 +94,8 @@ Invisible list of values that can be passed to colPointsLegend or colPointsHist.
 Draw colored points for 3D-data in a 2D-plane. Color is relative to third
 dimension, by different classification methods. Can take 3 vectors or, as in
 \code{\link{image}}, 2 vectors and a matrix for z.\cr
-Adding points after \code{\link{smallPlot}} is called for the legend may be 
-incorrect if the original function messes with the graph margins, 
+Adding points after \code{\link{smallPlot}} is called for the legend may be
+incorrect if the original function messes with the graph margins,
 see the note in \code{\link{colPointsLegend}}.
 }
 \note{
@@ -145,10 +145,10 @@ text(i,j+1,k, col=divPal(100,rev=TRUE)[classify(k)$index], cex=1)
 # Add histogram:
 cp <- colPoints(i,j,k, add=FALSE)
 do.call(colPointsHist, cp[c("z","at","labels","bb","nbins")])
-do.call(colPointsHist, owa(cp[c("z","at","labels","bb","nbins")], 
+do.call(colPointsHist, owa(cp[c("z","at","labels","bb","nbins")],
                            list(bg=5, breaks=5)))
-do.call(colPointsHist, owa(cp[c("z","at","labels","bb","nbins")], 
-                           list(mar=c(0,0,0,0), x1=0.5, x2=1, y1=0.8, 
+do.call(colPointsHist, owa(cp[c("z","at","labels","bb","nbins")],
+                           list(mar=c(0,0,0,0), x1=0.5, x2=1, y1=0.8,
                              y2=0.99, yaxt="n")))
 # histogram in lower panel:
 layout(matrix(1:2), heights=c(8,4) )

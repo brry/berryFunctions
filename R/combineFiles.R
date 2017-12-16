@@ -20,22 +20,22 @@
 #' unlink(paste0("BujakashaBerry", 1:3, ".txt"))
 #' }
 #' 
-#' @param inFiles   vector with names of input files, as can be read with 
+#' @param inFiles   vector with names of input files, as can be read with
 #'                  \code{\link{scan}}. DEFAULT: dir()
 #' @param outFile   Character string: name of the file to be created. Passed to
 #'                  \code{\link{newFilename}}. DEFAULT: "combined_Textfiles.txt"
-#' @param overwrite Logical: overwrite outFile? DEFAULT: FALSE 
-#' @param sep       Character string: Separation between content of 
-#'                  each file and the following. DEFAULT: NULL, with which it uses 
+#' @param overwrite Logical: overwrite outFile? DEFAULT: FALSE
+#' @param sep       Character string: Separation between content of
+#'                  each file and the following. DEFAULT: NULL, with which it uses
 #'                  an empty line, two lines with dashes, and another line break.
 #' @param names     Should File names be included after sep? DEFAULT: TRUE
-#' @param selection Index of rows that should be written. Can refer to each file 
+#' @param selection Index of rows that should be written. Can refer to each file
 #'                  separately, e.g. \code{substr(inFile_i,1,1)=="#"}.
 #'                  DEFAULT: all lines
-#' @param progbar   Should a progress bar be drawn? Useful if you combine many 
+#' @param progbar   Should a progress bar be drawn? Useful if you combine many
 #'                  large files. DEFAULT: !quiet, i.e. TRUE
 #' @param quiet     Suppress message about number of files combined? DEFAULT: FALSE
-#' @param \dots     Arguments passed to \code{\link{scan}}, but not one of: 
+#' @param \dots     Arguments passed to \code{\link{scan}}, but not one of:
 #'                  \code{file, what, blank.lines.skip, sep, quiet}.
 #' 
 combineFiles <- function(

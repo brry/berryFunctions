@@ -33,7 +33,7 @@ d <- tryStack(upper("four"), silent=TRUE)
 inherits(d, "try-error")
 cat(d)
 
-lower <- function(a,...) {warning(traceCall(1, prefix="in ", suffix=": "), 
+lower <- function(a,...) {warning(traceCall(1, prefix="in ", suffix=": "),
                           "How to use traceCall in functions ", call.=FALSE); a}
 upper(3)
 

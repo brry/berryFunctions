@@ -17,13 +17,13 @@ monthAxis(side = 1, time = NA, origin = "1970-01-01",
 \item{time}{Logical indicating whether the axis is \code{\link{POSIXct}},
 not \code{\link{Date}}. DEFAULT: NA, meaning axis value >1e5}
 
-\item{origin}{Origin for\code{\link{as.Date}} and \code{\link{as.POSIXct}}. 
+\item{origin}{Origin for\code{\link{as.Date}} and \code{\link{as.POSIXct}}.
 DEFAULT: "1970-01-01"}
 
 \item{mlabels}{Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D}
 
 \item{yformat}{Format of year labels, see details in \code{\link{strptime}}.
-Use \code{yformat=" "} (with space) to suppress year labeling. 
+Use \code{yformat=" "} (with space) to suppress year labeling.
 DEFAULT: "\%Y"}
 
 \item{nmonths}{Minimum number of months required before a year at the
@@ -39,10 +39,10 @@ not labeled. DEFAULT: 5}
 
 \item{ycex}{\code{cex.axis} (letter size) for year labels. DEFAULT: 1}
 
-\item{mtcl}{Month tick length (negative text line height units). 
+\item{mtcl}{Month tick length (negative text line height units).
 0 to suppress ticks. DEFAULT: par("tcl") = -0.5}
 
-\item{ytcl}{Year tick length (negative text line height units). 
+\item{ytcl}{Year tick length (negative text line height units).
 0 to suppress ticks. DEFAULT: par("tcl")-1.7 = -2.2}
 
 \item{mline}{Line of month labels. DEFAULT: -1}
@@ -56,10 +56,10 @@ DEFAULT: NA = internally computed from \code{\link{par}("usr")}}
 
 \item{ym}{Kept for back reference. DEFAULT: TRUE}
 
-\item{mgp}{MarGin Placement. Suggested not to change this, since 
+\item{mgp}{MarGin Placement. Suggested not to change this, since
 _tcl and _line defaults are chosen for the DEFAULT: c(3,1,0)}
 
-\item{mt, ml, yt, yl}{Lists with further arguments passed to \code{\link{axis}}, 
+\item{mt, ml, yt, yl}{Lists with further arguments passed to \code{\link{axis}},
 like \code{lwd, col.ticks, lwd.ticks, hadj, lty}, separately
 for month ticks, month labels, year ticks, year labels.
 DEFAULT: NULL}
@@ -72,14 +72,14 @@ DEFAULT: NULL}
 List with locations of month and year labels and ticks, each a Date vector.
 }
 \description{
-Labels date axes at sensible monthly intervals in the 
+Labels date axes at sensible monthly intervals in the
               time domain of years to decades.
 }
 \examples{
 
 set.seed(007) # for reproducibility
-timePlot <- function(nydays, start="2013-08-25", ...) 
-   plot(as.Date(start)+sort(c(0,sample(1:nydays, 50))), 
+timePlot <- function(nydays, start="2013-08-25", ...)
+   plot(as.Date(start)+sort(c(0,sample(1:nydays, 50))),
         cumsum(rnorm(51)), type="l", xaxt="n", ann=FALSE, las=1, ...)
 
 timePlot(1100)
@@ -125,8 +125,8 @@ monthAxis() # if less than a full year is covered, the year label is centered
 
 }
 \seealso{
-\code{\link{monthLabs}} for the numbercrunching itself, 
-         \code{\link{timeAxis}} for shorter or longer time frames, 
+\code{\link{monthLabs}} for the numbercrunching itself,
+         \code{\link{timeAxis}} for shorter or longer time frames,
          \code{\link{axis.Date}} with defaults that are less nice.
 }
 \author{

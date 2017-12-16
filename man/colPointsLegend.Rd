@@ -28,7 +28,7 @@ from yellow (lowest) to blue (highest value in Range)}
 
 \item{bb}{Borders of bins for the legend (key). DEFAULT: seqR(Range, length.out=nbins+1)}
 
-\item{nlab, at, labels}{Number of legend labels, their positions and labels. 
+\item{nlab, at, labels}{Number of legend labels, their positions and labels.
 DEFAULT: nlab=5, labels=at=pretty2(Range,nlab)}
 
 \item{adj}{label adjustment parallel to legend bar (only one number!). DEFAULT: 0.5}
@@ -93,8 +93,8 @@ invisible list of par of \code{\link{smallPlot}}, adds legend bar to current plo
 }
 \description{
 Adds legends to plots created or enhanced with \code{\link{colPoints}}
-\code{sf} plots set par(mar=c(0,0,1.2,0)) but then reset it to the values before. 
-\code{\link{smallPlot}} will hence also reset to that, so points added after 
+\code{sf} plots set par(mar=c(0,0,1.2,0)) but then reset it to the values before.
+\code{\link{smallPlot}} will hence also reset to that, so points added after
 calling colpointsLegend will be wrong, unless the margins are set BEFORE sf plot.
 \code{sf:::plot.sf} alternatively uses c(2.1, 2.1, 1.2, 0)  or  c(1, 1, 1.2, 1).
 }

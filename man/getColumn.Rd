@@ -16,7 +16,7 @@ its value will be used as name! (see upper2 example)}
 
 \item{trace}{Logical: Add function call stack to the message? DEFAULT: TRUE}
 
-\item{convnum}{Logical: Convert numerical input (even if character) to 
+\item{convnum}{Logical: Convert numerical input (even if character) to
 Column name for that number?}
 }
 \value{
@@ -61,7 +61,7 @@ if(char) head(getColumn("Sepal.Length", iris), 10)
 else     head(getColumn( Sepal.Length,  iris), 10)
 }
 checkerr( upper3(char=FALSE) )
-upper3(char=TRUE) # use string "Sepal.Length" and it works fine. 
+upper3(char=TRUE) # use string "Sepal.Length" and it works fine.
 
 
 # The next examples all return informative errors:
@@ -74,7 +74,7 @@ checkerr( getColumn(c("Air.Flow","Acid.Conc"),  stackloss) )
 
 
 #getColumn("a", tibble::tibble(a=1:7, b=7:1)) # works but warns with tibbles
- 
+
 # Pitfall numerical column names:
 df <- data.frame(1:5, 3:7)
 colnames(df) <- c("a","1") # this is a bad idea anyways

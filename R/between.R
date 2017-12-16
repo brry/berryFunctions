@@ -1,5 +1,5 @@
 #' @title Are values between a and b?
-#' @description Are values within a certain interval? 
+#' @description Are values within a certain interval?
 #' Basically a wrapper for \code{ x >= a   &   x <= b } to save repeating long x names twice.
 #' @return Logical (boolean) vector with TRUE/FALSE values
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Aug 2017
@@ -12,14 +12,14 @@
 #' between(1:10, 4, 8)
 #' between(1:10, 4:8) # range as vector
 #' between(1:10, 8, 4) # warns about interval
-#'  
-#' data.frame( incl.T=between(1:10, 4, 8), 
+#' 
+#' data.frame( incl.T=between(1:10, 4, 8),
 #'             incl.F=between(1:10, 4, 8,  incl=FALSE),
 #'            aincl.F=between(1:10, 4, 8, aincl=FALSE),
 #'            bincl.F=between(1:10, 4, 8, bincl=FALSE)  )
 #' 
 #' @param x    Numerical vector
-#' @param a,b  Numerical values/vectors specifying the borders of the interval. 
+#' @param a,b  Numerical values/vectors specifying the borders of the interval.
 #'             \code{\link{min}} and \code{max} are used, so they can be a vector.
 #' @param incl Logical. Include values on the borders? For x == border, TRUE
 #'             will be returned. Specify per left and right border separately

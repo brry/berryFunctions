@@ -1,10 +1,10 @@
 #' @title Label date axis
-#' @description  Labels date axes at sensible monthly intervals in the 
+#' @description  Labels date axes at sensible monthly intervals in the
 #'               time domain of years to decades.
 #' @return List with locations of month and year labels and ticks, each a Date vector.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Feb + Dec 2015, Oct 2017
-#' @seealso \code{\link{monthLabs}} for the numbercrunching itself, 
-#'          \code{\link{timeAxis}} for shorter or longer time frames, 
+#' @seealso \code{\link{monthLabs}} for the numbercrunching itself,
+#'          \code{\link{timeAxis}} for shorter or longer time frames,
 #'          \code{\link{axis.Date}} with defaults that are less nice.
 #' @keywords chron aplot dplot
 #' @importFrom graphics axis par
@@ -13,8 +13,8 @@
 #' @examples
 #' 
 #' set.seed(007) # for reproducibility
-#' timePlot <- function(nydays, start="2013-08-25", ...) 
-#'    plot(as.Date(start)+sort(c(0,sample(1:nydays, 50))), 
+#' timePlot <- function(nydays, start="2013-08-25", ...)
+#'    plot(as.Date(start)+sort(c(0,sample(1:nydays, 50))),
 #'         cumsum(rnorm(51)), type="l", xaxt="n", ann=FALSE, las=1, ...)
 #' 
 #' timePlot(1100)
@@ -61,11 +61,11 @@
 #' @param side     Which \code{\link{axis}} is to be labeled? DEFAULT: 1
 #' @param time     Logical indicating whether the axis is \code{\link{POSIXct}},
 #'                 not \code{\link{Date}}. DEFAULT: NA, meaning axis value >1e5
-#' @param origin   Origin for\code{\link{as.Date}} and \code{\link{as.POSIXct}}. 
+#' @param origin   Origin for\code{\link{as.Date}} and \code{\link{as.POSIXct}}.
 #'                 DEFAULT: "1970-01-01"
 #' @param mlabels  Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D
 #' @param yformat  Format of year labels, see details in \code{\link{strptime}}.
-#'                 Use \code{yformat=" "} (with space) to suppress year labeling. 
+#'                 Use \code{yformat=" "} (with space) to suppress year labeling.
 #'                 DEFAULT: "\%Y"
 #' @param nmonths  Minimum number of months required before a year at the
 #'                 axis boundary is labeled. DEFAULT: 3
@@ -75,9 +75,9 @@
 #'                 not labeled. DEFAULT: 5
 #' @param mcex     \code{cex.axis} (letter size) for month labels. DEFAULT: 0.7
 #' @param ycex     \code{cex.axis} (letter size) for year labels. DEFAULT: 1
-#' @param mtcl     Month tick length (negative text line height units). 
+#' @param mtcl     Month tick length (negative text line height units).
 #'                 0 to suppress ticks. DEFAULT: par("tcl") = -0.5
-#' @param ytcl     Year tick length (negative text line height units). 
+#' @param ytcl     Year tick length (negative text line height units).
 #'                 0 to suppress ticks. DEFAULT: par("tcl")-1.7 = -2.2
 #' @param mline    Line of month labels. DEFAULT: -1
 #' @param yline    Line of year labels. DEFAULT: 0.2
@@ -85,9 +85,9 @@
 #' @param lrange   Label range (two \code{\link{Date}} values).
 #'                 DEFAULT: NA = internally computed from \code{\link{par}("usr")}
 #' @param ym       Kept for back reference. DEFAULT: TRUE
-#' @param mgp      MarGin Placement. Suggested not to change this, since 
+#' @param mgp      MarGin Placement. Suggested not to change this, since
 #'                 _tcl and _line defaults are chosen for the DEFAULT: c(3,1,0)
-#' @param mt,ml,yt,yl Lists with further arguments passed to \code{\link{axis}}, 
+#' @param mt,ml,yt,yl Lists with further arguments passed to \code{\link{axis}},
 #'                 like \code{lwd, col.ticks, lwd.ticks, hadj, lty}, separately
 #'                 for month ticks, month labels, year ticks, year labels.
 #'                 DEFAULT: NULL
@@ -130,18 +130,18 @@ if(length(mlabels)!=12)
  mlabels <- rep(mlabels, length.out=12)
  }
 names(mlabels) <- round0(1:12, pre=2)
- 
+
 # get Date range from current graph or from input:
-if(any(is.na(lrange))) 
+if(any(is.na(lrange)))
   {
   lrange <- par("usr")[if(side%%2) 1:2 else 3:4]
   }
-else 
-  { 
+else
+  {
   # lrange class check:
-  if(!inherits(lrange, "Date")) stop("class(lrange) must be 'Date', not '", 
-                                     toString(class(lrange)), "'.") 
-  lrange <- range(lrange, na.rm=TRUE) 
+  if(!inherits(lrange, "Date")) stop("class(lrange) must be 'Date', not '",
+                                     toString(class(lrange)), "'.")
+  lrange <- range(lrange, na.rm=TRUE)
   }
 
 # time default (TRUE if values at axis are very large):
@@ -171,7 +171,7 @@ ytics <- ytics[between(ytics, lrange, quiet=TRUE)]
 jday <- as.numeric(format(lrange,"%j"))
 addlow <- between(jday[1],2,365-nmonths*30.5, quiet=TRUE)
 addupp <- between(jday[2], nmonths*30.5, 365, quiet=TRUE)
-if(addlow & addupp & length(ytics)<1) {ylabs <- mean(lrange)} else 
+if(addlow & addupp & length(ytics)<1) {ylabs <- mean(lrange)} else
   {
   if(addlow) ylabs <- c(mean(c(lrange[1], ytics[1]), na.rm=T), ylabs)
   if(addupp) ylabs <- c(ylabs, mean(c(lrange[2], tail(ytics,1)), na.rm=T))
@@ -179,7 +179,7 @@ if(addlow & addupp & length(ytics)<1) {ylabs <- mean(lrange)} else
 ylabs <- ylabs[between(ylabs, lrange, quiet=TRUE)]
 
 # Convert to POSIXct if needed:
-if(time) 
+if(time)
  {
  mtics <- as.POSIXct(mtics)
  mlabs <- as.POSIXct(mlabs)
@@ -190,9 +190,9 @@ if(time)
 # prepare inputs with defaults:
 mtd <- list(side=side, at=mtics, labels=FALSE, tcl=mtcl, ...)
 ytd <- list(side=side, at=ytics, labels=FALSE, tcl=ytcl, ...)
-mld <- list(side=side, at=mlabs, labels=mlabels[format(mlabs,"%m")], 
+mld <- list(side=side, at=mlabs, labels=mlabels[format(mlabs,"%m")],
             las=las, line=mline, cex.axis=mcex, tick=FALSE, ...)
-yld <- list(side=side, at=ylabs, labels=format(ylabs,yformat), 
+yld <- list(side=side, at=ylabs, labels=format(ylabs,yformat),
             las=las, line=yline, cex.axis=ycex, tick=FALSE, ...)
 
 # actually label axis:

@@ -9,15 +9,15 @@ packagePath(path = ".", warnonly = FALSE)
 \arguments{
 \item{path}{Path to (or below) package directory. DEFAULT: "."}
 
-\item{warnonly}{Logical: if no part of the path is a package, give a warning 
-and return the original input instead of stopping with an error. 
+\item{warnonly}{Logical: if no part of the path is a package, give a warning
+and return the original input instead of stopping with an error.
 DEFAULT: FALSE}
 }
 \value{
 Path character string
 }
 \description{
-Base path of package (with DESCRIPTION file), per default at current getwd. 
+Base path of package (with DESCRIPTION file), per default at current getwd.
              Derived from devtools::package_file
 }
 \examples{

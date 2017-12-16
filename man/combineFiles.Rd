@@ -9,7 +9,7 @@ combineFiles(inFiles = dir(), outFile = "combined_Textfiles.txt",
   progbar = !quiet, quiet = FALSE, ...)
 }
 \arguments{
-\item{inFiles}{vector with names of input files, as can be read with 
+\item{inFiles}{vector with names of input files, as can be read with
 \code{\link{scan}}. DEFAULT: dir()}
 
 \item{outFile}{Character string: name of the file to be created. Passed to
@@ -17,22 +17,22 @@ combineFiles(inFiles = dir(), outFile = "combined_Textfiles.txt",
 
 \item{overwrite}{Logical: overwrite outFile? DEFAULT: FALSE}
 
-\item{sep}{Character string: Separation between content of 
-each file and the following. DEFAULT: NULL, with which it uses 
+\item{sep}{Character string: Separation between content of
+each file and the following. DEFAULT: NULL, with which it uses
 an empty line, two lines with dashes, and another line break.}
 
 \item{names}{Should File names be included after sep? DEFAULT: TRUE}
 
-\item{selection}{Index of rows that should be written. Can refer to each file 
+\item{selection}{Index of rows that should be written. Can refer to each file
 separately, e.g. \code{substr(inFile_i,1,1)=="#"}.
 DEFAULT: all lines}
 
-\item{progbar}{Should a progress bar be drawn? Useful if you combine many 
+\item{progbar}{Should a progress bar be drawn? Useful if you combine many
 large files. DEFAULT: !quiet, i.e. TRUE}
 
 \item{quiet}{Suppress message about number of files combined? DEFAULT: FALSE}
 
-\item{\dots}{Arguments passed to \code{\link{scan}}, but not one of: 
+\item{\dots}{Arguments passed to \code{\link{scan}}, but not one of:
 \code{file, what, blank.lines.skip, sep, quiet}.}
 }
 \value{

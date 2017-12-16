@@ -9,7 +9,7 @@ owa(d, a, ..., quiet = FALSE)
 \arguments{
 \item{d}{Default arguments (list or vector)}
 
-\item{a}{Arguments specified by user (list or vector). 
+\item{a}{Arguments specified by user (list or vector).
 Can also be a single TRUE, in which case d will be returned.}
 
 \item{\dots}{Names of unchangeable arguments (that will not be overwritten)
