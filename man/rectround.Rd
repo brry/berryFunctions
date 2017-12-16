@@ -5,7 +5,7 @@
 \title{Rectangles with rounded corners}
 \usage{
 rectround(xleft, ybottom, xright, ytop, rounding = 0.25, aspcorrect = FALSE,
-  bothsame = FALSE, ...)
+  bothsame = FALSE, corners = 1:4, ...)
 }
 \arguments{
 \item{xleft, ybottom, xright, ytop}{Single numbers with the outer end locations
@@ -21,11 +21,14 @@ both x and y direction? If TRUE,
 the proportion relates to the shortest rectangle side.
 DEFAULT: FALSE}
 
+\item{corners}{Vector with integers indicating the corners to round.
+Starting bottom left, going clockwise. DEFAULT: 1:4}
+
 \item{\dots}{Further arguments passed to \code{\link{polygon}},
 like col, border, ...}
 }
 \value{
-ReturnValue
+Final coordinates, invisible
 }
 \description{
 Draw \link{rect}angles with rounded corners via \code{\link{polygon}}
@@ -37,6 +40,9 @@ rectround(4,2,7,8, rounding=0.25) # default
 rectround(4,2,7,8, rounding=0.5)
 rectround(4,2,7,8, rounding=-0.1, border="red")
 rectround(4,2,7,8, rounding=0.8, border="blue")
+
+plot(1:10)  ;  rect(4,2,7,8, border=8)
+rectround(4,2,7,8, corners=c(2,4))
 
 plot(1:10, asp=1)  ;  rect(4,2,7,8, border=8)
 rectround(4,2,7,8)
