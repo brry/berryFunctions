@@ -5,7 +5,7 @@
 \title{Rectangles with rounded corners}
 \usage{
 rectround(xleft, ybottom, xright, ytop, rounding = 0.25, aspcorrect = FALSE,
-  bothsame = FALSE, corners = 1:4, npoints = 1000, ...)
+  bothsame = FALSE, corners = 1:4, npoints = 1000, plot = TRUE, ...)
 }
 \arguments{
 \item{xleft, ybottom, xright, ytop}{Single numbers with the outer end locations
@@ -25,6 +25,9 @@ DEFAULT: FALSE}
 Starting bottom left, going clockwise. DEFAULT: 1:4}
 
 \item{npoints}{Total number of vertices for the corners. DEFAULT: 1000}
+
+\item{plot}{Logical. Plot the polygon? FALSE to only compute coordinates.
+DEFAULT: TRUE}
 
 \item{\dots}{Further arguments passed to \code{\link{polygon}},
 like col, border, ...}

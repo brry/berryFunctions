@@ -41,6 +41,8 @@
 #' @param corners     Vector with integers indicating the corners to round.
 #'                    Starting bottom left, going clockwise. DEFAULT: 1:4
 #' @param npoints     Total number of vertices for the corners. DEFAULT: 1000
+#' @param plot        Logical. Plot the polygon? FALSE to only compute coordinates.
+#'                    DEFAULT: TRUE
 #' @param \dots       Further arguments passed to \code{\link{polygon}},
 #'                    like col, border, ...
 #' 
@@ -51,6 +53,7 @@ aspcorrect=FALSE,
 bothsame=FALSE,
 corners=1:4,
 npoints=1000,
+plot=TRUE,
 ...)
 {
 # abbreviated inputs and checks:
@@ -92,6 +95,6 @@ yc <- c(if(3 %in% corners) YT-yi+ely(0     ,pi/2  ) else YT, # corner 3 TR
         if(2 %in% corners) YT-yi+ely(pi/2  ,pi    ) else YT, # corner 2 TL
         if(1 %in% corners) YB+yi+ely(pi    ,3*pi/2) else YB, # corner 1 BL
         if(4 %in% corners) YB+yi+ely(3*pi/2,2*pi  ) else YB) # corner 4 BR
-polygon(x=xc, y=yc, ...)
+if(plot) polygon(x=xc, y=yc, ...)
 invisible(data.frame(x=xc,y=yc))
 }
