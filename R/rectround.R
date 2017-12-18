@@ -40,6 +40,7 @@
 #'                    DEFAULT: FALSE
 #' @param corners     Vector with integers indicating the corners to round.
 #'                    Starting bottom left, going clockwise. DEFAULT: 1:4
+#' @param npoints     Total number of vertices for the corners. DEFAULT: 1000
 #' @param \dots       Further arguments passed to \code{\link{polygon}},
 #'                    like col, border, ...
 #' 
@@ -49,6 +50,7 @@ rounding=0.25,
 aspcorrect=FALSE,
 bothsame=FALSE,
 corners=1:4,
+npoints=1000,
 ...)
 {
 # abbreviated inputs and checks:
@@ -76,11 +78,10 @@ if(bothsame) XD <- YD <- min(c(XD,YD))
 xi <- RR*(XD) # x inset of rounded corner
 yi <- RR*(YD)
 if(aspcorrect) xi <- xi/asp
-nv <- 1000 # number of vertices
 
 # elliptic corners function:
-elx <- function(from,to) xi*cos(seq(from,to,length.out=nv/4))
-ely <- function(from,to) yi*sin(seq(from,to,length.out=nv/4))
+elx <- function(from,to) xi*cos(seq(from,to,length.out=npoints/4))
+ely <- function(from,to) yi*sin(seq(from,to,length.out=npoints/4))
 
 # x and y coordinates:
 xc <- c(if(3 %in% corners) XR-xi+elx(0     ,pi/2  ) else XR, # corner 3 TR
