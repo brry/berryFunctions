@@ -7,27 +7,27 @@
 #' @export
 #' @examples
 #' plot(1:10)  ;  rect(4,2,7,8, border=8)
-#' rectround(4,2,7,8, rounding=0.1)
-#' rectround(4,2,7,8, rounding=0.25) # default
-#' rectround(4,2,7,8, rounding=0.5)
-#' rectround(4,2,7,8, rounding=-0.1, border="red")
-#' rectround(4,2,7,8, rounding=0.8, border="blue")
+#' roundedRect(4,2,7,8, rounding=0.1)
+#' roundedRect(4,2,7,8, rounding=0.25) # default
+#' roundedRect(4,2,7,8, rounding=0.5)
+#' roundedRect(4,2,7,8, rounding=-0.1, border="red")
+#' roundedRect(4,2,7,8, rounding=0.8, border="blue")
 #' 
 #' plot(1:10)  ;  rect(4,2,7,8, border=8)
-#' rectround(4,2,7,8, corners=c(2,4))
+#' roundedRect(4,2,7,8, corners=c(2,4))
 #' 
 #' plot(1:10, asp=1)  ;  rect(4,2,7,8, border=8)
-#' rectround(4,2,7,8)
-#' rectround(4,2,7,8, aspcorrect=TRUE, border="red") # results depend on asp...
+#' roundedRect(4,2,7,8)
+#' roundedRect(4,2,7,8, aspcorrect=TRUE, border="red") # results depend on asp...
 #' 
 #' plot(1:10, asp=1.5)  ;  rect(4,2,7,8, border=8)
-#' rectround(4,2,7,8)
-#' rectround(4,2,7,8, aspcorrect=TRUE, border="red") # results depend on asp...
+#' roundedRect(4,2,7,8)
+#' roundedRect(4,2,7,8, aspcorrect=TRUE, border="red") # results depend on asp...
 #' 
 #' plot(1:10, asp=1)  ;  rect(4,2,7,8, border=8)
-#' rectround(4,2,7,8) # difference only visible if rect is clearly not a square:
-#' rectround(4,2,7,8, bothsame=TRUE, border="red")
-#' rectround(4,2,7,8, bothsame=TRUE, aspcorrect=TRUE, border="blue")
+#' roundedRect(4,2,7,8) # difference only visible if rect is clearly not a square:
+#' roundedRect(4,2,7,8, bothsame=TRUE, border="red")
+#' roundedRect(4,2,7,8, bothsame=TRUE, aspcorrect=TRUE, border="blue")
 #' 
 #' @param xleft,ybottom,xright,ytop Single numbers with the outer end locations
 #'                    of the rectangle.
@@ -46,7 +46,7 @@
 #' @param \dots       Further arguments passed to \code{\link{polygon}},
 #'                    like col, border, ...
 #' 
-rectround <- function(
+roundedRect <- function(
 xleft, ybottom, xright, ytop,
 rounding=0.25,
 aspcorrect=FALSE,

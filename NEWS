@@ -41,7 +41,7 @@ actual NEWS
 
 
 Version 1.17. (2018--)
-New function: rectround
+New function: roundedRect
 
 
 -----------------------------
