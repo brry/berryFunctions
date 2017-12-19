@@ -38,8 +38,9 @@
 #'                    both x and y direction? If TRUE,
 #'                    the proportion relates to the shortest rectangle side.
 #'                    DEFAULT: FALSE
-#' @param corners     Vector with integers indicating the corners to round.
-#'                    Starting bottom left, going clockwise. DEFAULT: 1:4
+#' @param corners     Vector with integers indicating which corners to round.
+#'                    Starting bottom left, going clockwise. Zero to suppress
+#'                    rounding. DEFAULT: 1:4
 #' @param npoints     Total number of vertices for the corners. DEFAULT: 1000
 #' @param plot        Logical. Plot the polygon? FALSE to only compute coordinates.
 #'                    DEFAULT: TRUE
@@ -70,7 +71,7 @@ if(length(RR)>1) stop("rounding must be a single value, not ", length(RR))
 if(RR>1) warning("rounding recommended to be smaller than 1. It is ", RR)
 if(RR<0) warning("rounding recommended to be larger than 0. It is ", RR)
 if(!is.numeric(corners)) stop("corners must be ingtegers, not ", class(corners))
-if(!all(corners %in% 1:4)) stop("corners must be (some of) the integers 1:4, not ", 
+if(!all(corners %in% 0:4)) stop("corners must be (some of) the integers 0:4, not ", 
                                 toString(corners))
 asp <- diff(par("usr")[3:4])/diff(par("usr")[1:2]) # current aspect ratio y to x
 

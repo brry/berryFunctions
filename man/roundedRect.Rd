@@ -22,8 +22,9 @@ both x and y direction? If TRUE,
 the proportion relates to the shortest rectangle side.
 DEFAULT: FALSE}
 
-\item{corners}{Vector with integers indicating the corners to round.
-Starting bottom left, going clockwise. DEFAULT: 1:4}
+\item{corners}{Vector with integers indicating which corners to round.
+Starting bottom left, going clockwise. Zero to suppress
+rounding. DEFAULT: 1:4}
 
 \item{npoints}{Total number of vertices for the corners. DEFAULT: 1000}
 
