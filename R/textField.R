@@ -16,7 +16,8 @@
 #' 
 #' @return None
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, April 2013 + March 2014
-#' @seealso \code{\link{text}}; \code{shadowtext} in package \code{TeachingDemos}, see
+#' @seealso \code{\link{text}}, \code{\link{roundedRect}};
+#'          \code{shadowtext} in package \code{TeachingDemos}, see
 #'          \url{http://blog.revolutionanalytics.com/2009/05/make-text-stand-out-with-outlines.html},
 #'           and \url{http://stackoverflow.com/questions/25631216}. \cr
 #'          \code{s.label} in package \code{ade4}, which is not so versatile and

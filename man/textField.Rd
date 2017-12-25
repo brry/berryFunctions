@@ -133,7 +133,8 @@ textField(c(1,2.5,4)*1000, 0.2, paste("expression=\\n", c("FALSE","TRUE","NA")))
 with inspiration taken from \code{ordilabel} in package \code{vegan} and thanks to Jari Oksanen for his comments
 }
 \seealso{
-\code{\link{text}}; \code{shadowtext} in package \code{TeachingDemos}, see
+\code{\link{text}}, \code{\link{roundedRect}};
+         \code{shadowtext} in package \code{TeachingDemos}, see
          \url{http://blog.revolutionanalytics.com/2009/05/make-text-stand-out-with-outlines.html},
           and \url{http://stackoverflow.com/questions/25631216}. \cr
          \code{s.label} in package \code{ade4}, which is not so versatile and
