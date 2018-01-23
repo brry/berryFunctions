@@ -180,6 +180,7 @@ if(length(temp)!=12 | length(rain)!=12) stop("temp and rain each need to have 12
 if(textprop>0.99) stop("textprop (",textprop,") is too large, must be <0.99")
 # prepare plot, write table of values at the right:
 rainsum <- sum(rain) # must be calculated before compression
+raintab <- rain # values for the table should not be compressed!
 if(compress)
   {
   # compress all rain above 100 mm
@@ -280,7 +281,7 @@ if(textprop > 0)
   ypos <- rep(mean(ylim),3)
   column1 <- paste(c(" m \n", "----", labs), collapse="\n")
   column2 <- paste(c(" T ",units[1], "----", sprintf("%4.1f", round(temp,1))), collapse="\n")
-  column3 <- paste(c(" P ",units[2], "----", sprintf("%4.0f", round(rain)  )), collapse="\n")
+  column3 <- paste(c(" P ",units[2], "----", sprintf("%4.0f", round(raintab))), collapse="\n")
   argtextdef <- list(x=xpos, y=ypos, labels=c(column1,column2,column3), adj=1, xpd=TRUE)
   do.call(text, owa(argtextdef, argtext, "x","y","labels"))
   }
