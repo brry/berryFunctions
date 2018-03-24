@@ -9,9 +9,12 @@
 #' @export
 #' @examples
 #' 
-#' normalizePath  ("doesnotexist.file", mustWork=FALSE) # on linux not full path
+#' normalizePath  ("doesnotexist.file", mustWork=FALSE) # on unix not full path
 #' normalizePathCP("doesnotexist.file") # full path on all platforms
-#' 
+#'
+#' normalizePath  ("../doesnotexist.file", mustWork=FALSE)
+#' normalizePathCP("../doesnotexist.file")
+#'  
 #' checknp <- function(a,b=a,d=getwd())
 #'   {
 #'   aa <- normalizePathCP(a)
@@ -37,10 +40,10 @@ winslash="/",
 mustWork=FALSE
 )
 {
-# Windows + Mac work fine by default:
-if(Sys.info()["sysname"] != "Linux")
+# nonexistent files on Windows return full path by default:
+if(Sys.info()["sysname"] == "Windows")
   return(normalizePath(path=path, winslash=winslash, mustWork=mustWork))
-# Linux is more tricky
+# on Linux/Mac/Solaris, this is more tricky
 # fine if path exists
 pathexist <- file.exists(path)
 if(all(pathexist)) return(normalizePath(path=path, mustWork=mustWork))

@@ -24,9 +24,12 @@ path character string(s)
 }
 \examples{
 
-normalizePath  ("doesnotexist.file", mustWork=FALSE) # on linux not full path
+normalizePath  ("doesnotexist.file", mustWork=FALSE) # on unix not full path
 normalizePathCP("doesnotexist.file") # full path on all platforms
 
+normalizePath  ("../doesnotexist.file", mustWork=FALSE)
+normalizePathCP("../doesnotexist.file")
+ 
 checknp <- function(a,b=a,d=getwd())
   {
   aa <- normalizePathCP(a)
