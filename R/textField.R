@@ -22,7 +22,8 @@
 #'           and \url{http://stackoverflow.com/questions/25631216}. \cr
 #'          \code{s.label} in package \code{ade4}, which is not so versatile and
 #'          doesn't work with logarithmic axes
-#' @references with inspiration taken from \code{ordilabel} in package \code{vegan} and thanks to Jari Oksanen for his comments
+#' @references with inspiration taken from \code{ordilabel} in package \code{vegan}
+#'             and thanks to Jari Oksanen for his comments
 #' @keywords aplot
 #' @importFrom graphics par polygon rect strheight text
 #' @export
@@ -42,8 +43,8 @@
 #' textField(90, 5, "short", field="ell", fill=7, border=4, mar=-0.4)
 #' 
 #' # Rounded can also vectorized:
-#' textField(30, c(2,0,-2,-4,-6), paste("rounding =",seq(0,1,len=5)), field="round",
-#'     fill=(2:6), mar=1, rounding=seq(0,1,len=5), border=1)
+#' textField(30, c(2,0,-2,-4,-6), paste("rounding =",seq(0,0.6,len=5)), field="round",
+#'     fill=(2:6), mar=1, rounding=seq(0,0.6,len=5), border=1)
 #' # turn off warning about recycling:
 #' textField(80, c(-5,-6.5), c("Ja", "Nein"), field="round", fill=6:8, quiet=TRUE)
 #' 
@@ -93,8 +94,10 @@
 #' @param margin added field space around words (multiple of em/ex). DEFAULT: 0.3
 #' @param field 'rectangle', 'ellipse', or 'rounded', partial matching is performed. DEFAULT: "rounded"
 #' @param nv number of vertices for field = "ellipse" or "rounded". low: fast drawing.
-#'        high: high resolution in vector graphics as pdf possible. DEFAULT: 1000
-#' @param rounding between 0 and 1: portion of height that is cut off rounded at edges when field = "rounded". DEFAULT: 0.75
+#'        high: high resolution in vector graphics as pdf possible. DEFAULT: 500
+#' @param rounding between 0 and 0.5: portion of height that is cut off rounded 
+#'                 at edges when field = "rounded". DEFAULT: 0.25
+#' @param rrarg List of arguments passed to \code{\link{roundedRect}}. DEFAULT: NULL
 #' @param lty line type. DEFAULT: par("lty")
 #' @param lwd line width. DEFAULT: par("lwd")
 #' @param cex character expansion. DEFAULT: par("cex")
@@ -115,8 +118,9 @@ border=NA,
 expression=NA,
 margin=0.3,
 field="rounded",
-nv=1000,
-rounding=0.75,
+nv=500,
+rounding=0.25,
+rrarg=NULL,
 lty=par("lty"),
 lwd=par("lwd"),
 cex=par("cex"),
@@ -234,26 +238,17 @@ else if(field=="rounded")
 #
 # Plot rectangular fields with rounded corners: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
-#if(par("ylog") | par("xlog")) stop("Rounded not yet possible with log axes")
-if(any(rounding < 0 || rounding > 1  )) stop("Wrong rounding value. Needs to be between 0 and 1.")
-asp <- diff(par("usr")[3:4])/diff(par("usr")[1:2]) # current aspect ratio y to x
 for(i in 1:nx)
   {
   XL <- x[i] - w[i]*adj[1] - mar_x        # Left x position, as with rectangle
   XR <- x[i] - w[i]*adj[1] + w[i] + mar_x # right x
   YB <- y[i] - h[i]*adjy   - mar_y        # bottom y position
   YT <- y[i] - h[i]*adjy   + h[i] + mar_y # top y
-  xi <- rounding[i]*(mar_x+h[i]/asp/2)  # x inset of rounded corner
-  yi <- rounding[i]*(mar_y+h[i]/2)      # y inset
-  elx <- function(from,to) xi*cos(seq(from,to,length.out=nv/4)) # elliptic corners function
-  ely <- function(from,to) yi*sin(seq(from,to,length.out=nv/4))
+  xycc <- do.call(roundedRect, owa(d=list(xleft=XL, ybottom=YB, xright=XR, ytop=YT,
+                  rounding=rounding[i], plot=FALSE, npoints=nv), a=rrarg, "plot"))
   # x and y coordinates:
-  xc <- c(XR-xi+elx(0,pi/2), XR-xi, XL+xi, XL+xi+elx(pi/2,pi), XL,    XL,
-   XL+xi+elx(pi,3*pi/2), XL+xi, XR-xi, XR-xi+elx(3*pi/2,2*pi), XR,    XR)
-  yc <- c(YT-yi+ely(0,pi/2), YT,    YT,    YT-yi+ely(pi/2,pi), YT-yi, YB+yi,
-   YB+yi+ely(pi,3*pi/2), YB,    YB,    YB+yi+ely(3*pi/2,2*pi), YB+yi, YT-yi)
-  polygon(x = if(par("xlog")) 10^xc else xc,
-          y = if(par("ylog")) 10^yc else yc,
+  polygon(x = if(par("xlog")) 10^xycc$x else xycc$x,
+          y = if(par("ylog")) 10^xycc$y else xycc$y,
           col=fill[i], border=border[i], xpd=xpd, lty=lty[i], lwd=lwd[i])
   } # End of for loop
 }
@@ -264,4 +259,3 @@ else stop("Wrong field type specified. Use 'rectangle', 'ellipse', or 'rounded'.
 text(if(par("xlog")) 10^x else x,  if(par("ylog")) 10^y else y,
      labels=labels, cex=cex, xpd=xpd, adj=adj, pos=pos, offset=offset, ...)
 } # End of function
-
