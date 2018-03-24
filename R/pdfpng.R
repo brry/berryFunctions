@@ -48,6 +48,8 @@
 #' @param overwrite    Logical: Overwrite existing \code{file}? Can be a vector
 #'                     for pdf and png separately.
 #'                     DEFAULT: FALSE (_n appended in filename)
+#' @param open         Logical: open file(s) after creation using \code{\link{openFile}}? 
+#'                     DEFAULT: TRUE 
 #' @param quiet        Logical: suppress file creation messages and
 #'                     expr execution error tracing? DEFAULT: FALSE
 #' @param tracewarnmes Logical: trace warnings and messages in expr execution?
@@ -71,6 +73,7 @@ pdfpng <- function(
  pdf=TRUE,
  png=TRUE,
  overwrite=FALSE,
+ open=TRUE,
  quiet=FALSE,
  tracewarnmes=!quiet,
  filargs=NULL,
@@ -120,5 +123,6 @@ if(png)
                    "eval(expr, p)"))
   dev.off()
 }
+if(open) openFile(fig)
 return(invisible(NULL))
 }

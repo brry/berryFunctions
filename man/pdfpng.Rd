@@ -5,9 +5,9 @@
 \title{Create pdf and png graph}
 \usage{
 pdfpng(expr, file, pdf = TRUE, png = TRUE, overwrite = FALSE,
-  quiet = FALSE, tracewarnmes = !quiet, filargs = NULL, width = 7,
-  height = 5, units = "in", res = 500, seed = runif(1, -1e+09, 1e+09),
-  envlevel = 1, pdfargs = NULL, pngargs = NULL, ...)
+  open = TRUE, quiet = FALSE, tracewarnmes = !quiet, filargs = NULL,
+  width = 7, height = 5, units = "in", res = 500, seed = runif(1,
+  -1e+09, 1e+09), envlevel = 1, pdfargs = NULL, pngargs = NULL, ...)
 }
 \arguments{
 \item{expr}{Expression creating the plot, can be included in curly braces.}
@@ -27,6 +27,9 @@ captured by newFilename. You may also have to run dev.off().}
 \item{overwrite}{Logical: Overwrite existing \code{file}? Can be a vector
 for pdf and png separately.
 DEFAULT: FALSE (_n appended in filename)}
+
+\item{open}{Logical: open file(s) after creation using \code{\link{openFile}}? 
+DEFAULT: TRUE}
 
 \item{quiet}{Logical: suppress file creation messages and
 expr execution error tracing? DEFAULT: FALSE}
