@@ -4,29 +4,41 @@
 \alias{roundedRect}
 \title{Rectangles with rounded corners}
 \usage{
-roundedRect(xleft, ybottom, xright, ytop, rounding = 0.25,
-  aspcorrect = FALSE, bothsame = FALSE, corners = 1:4, npoints = 1000,
-  plot = TRUE, ...)
+roundedRect(xleft, ybottom, xright, ytop, rounding = 0.25, bothsame = TRUE,
+  aspcorrect = bothsame, devcorrect = bothsame, corfactor = 1.3,
+  factorpoints = FALSE, corners = 1:4, npoints = 200, plot = TRUE, ...)
 }
 \arguments{
 \item{xleft, ybottom, xright, ytop}{Single numbers with the outer end locations
 of the rectangle.}
 
 \item{rounding}{Proportion of the box to round. Recommended to be between
-0 and 0.5. DEFAULT: 0.25}
-
-\item{aspcorrect}{Correct for graph aspect ratio? DEFAULT: FALSE}
+0 and 1. DEFAULT: 0.25}
 
 \item{bothsame}{Set the visual amount of rounding to the same in
-both x and y direction? If TRUE,
+both x and y direction? If TRUE (the default),
 the proportion relates to the shortest rectangle side.
+This is visually correct only if \code{aspcorrect}
+and \code{devcorrect} are both left at TRUE and 
+\code{corfactor} is set correctly. bothsame DEFAULT: TRUE}
+
+\item{aspcorrect}{Correct for graph aspect ratio? DEFAULT: \code{bothsame}}
+
+\item{devcorrect}{Correct for device aspect ratio? DEFAULT: \code{bothsame}}
+
+\item{corfactor}{Aspect correction factor. I found this by trial and error.
+More elegant solutions are welcome!
+DEFAULT 1.3, works well for 7x5 (width x height) graphs}
+
+\item{factorpoints}{Logical: plot points at inset locations to determine the
+exact value for \code{corfactor} by measuring on screen.
 DEFAULT: FALSE}
 
 \item{corners}{Vector with integers indicating which corners to round.
 Starting bottom left, going clockwise. Zero to suppress
 rounding. DEFAULT: 1:4}
 
-\item{npoints}{Total number of vertices for the corners. DEFAULT: 1000}
+\item{npoints}{Total number of vertices for the corners. DEFAULT: 200}
 
 \item{plot}{Logical. Plot the polygon? FALSE to only compute coordinates.
 DEFAULT: TRUE}
@@ -46,23 +58,36 @@ roundedRect(4,2,7,8, rounding=0.1)
 roundedRect(4,2,7,8, rounding=0.25) # default
 roundedRect(4,2,7,8, rounding=0.5)
 roundedRect(4,2,7,8, rounding=-0.1, border="red")
-roundedRect(4,2,7,8, rounding=0.8, border="blue")
+roundedRect(4,2,7,8, rounding=1.1, border="blue")
+roundedRect(2,2,8,4, rounding=0.5) # in long boxes, 0.5 is max
+roundedRect(2,2,8,4, rounding=0.5, bothsame=FALSE, corfactor=1, border=3)
+
 
 plot(1:10)  ;  rect(4,2,7,8, border=8)
 roundedRect(4,2,7,8, corners=c(2,4))
 
 plot(1:10, asp=1)  ;  rect(4,2,7,8, border=8)
 roundedRect(4,2,7,8)
-roundedRect(4,2,7,8, aspcorrect=TRUE, border="red") # results depend on asp...
+roundedRect(4,2,7,8, aspcorrect=FALSE, border="red") # results depend on asp
 
 plot(1:10, asp=1.5)  ;  rect(4,2,7,8, border=8)
 roundedRect(4,2,7,8)
-roundedRect(4,2,7,8, aspcorrect=TRUE, border="red") # results depend on asp...
+roundedRect(4,2,7,8, aspcorrect=FALSE, border="red") # results depend on asp
 
 plot(1:10, asp=1)  ;  rect(4,2,7,8, border=8)
 roundedRect(4,2,7,8) # difference only visible if rect is clearly not a square:
-roundedRect(4,2,7,8, bothsame=TRUE, border="red")
-roundedRect(4,2,7,8, bothsame=TRUE, aspcorrect=TRUE, border="blue")
+roundedRect(4,2,7,8, bothsame=FALSE, border="red")
+roundedRect(4,2,7,8, bothsame=FALSE, aspcorrect=TRUE, border="blue")
+
+\dontrun{ # aspect correction factor determination
+rrtest <- function(...) roundedRect(10,0.5, 35,15, border=2, factorpoints=TRUE)
+pdfpng({plot(1:40                     ); rrtest();
+        plot(1:40, ylim=c(0,15)       ); rrtest();
+        plot(1:40, ylim=c(0,15), asp=1); rrtest();
+        roundedRect(2,0, 8,15, factorpoints=TRUE);
+        roundedRect(15,10, 25,16, npoints=200)}, 
+       file="dummytest", png=F, overwrite=T)
+}
 
 }
 \seealso{
