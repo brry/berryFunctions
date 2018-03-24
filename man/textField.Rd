@@ -91,8 +91,8 @@ textField(60,-3, "field='Rounded'", field="rounded", fill="orange", cex=1.7)
 textField(90, 5, "short", field="ell", fill=7, border=4, mar=-0.4)
 
 # Rounded can also vectorized:
-textField(30, c(2,0,-2,-4,-6), paste("rounding =",seq(0,1,len=5)), field="round",
-    fill=(2:6), mar=1, rounding=seq(0,1,len=5), border=1)
+textField(30, c(2,0,-2,-4,-6), paste("rounding =",seq(0,0.6,len=5)), field="round",
+    fill=(2:6), mar=1, rounding=seq(0,0.6,len=5), border=1)
 # turn off warning about recycling:
 textField(80, c(-5,-6.5), c("Ja", "Nein"), field="round", fill=6:8, quiet=TRUE)
 
