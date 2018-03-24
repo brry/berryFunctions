@@ -10,11 +10,12 @@
 # @importFrom package fun1 fun2
 #' @export
 #' @examples
-#' # openFile("README.md")
-#' # openFile("Tests.R")
-#' # openFile("dummydummydoesntexist.R")
-#' # openFile(tempdir())
-#' 
+#' \dontrun{ # excluded from CRAN checks, file opening not wanted
+#' openFile("README.md")
+#' openFile("Tests.R")
+#' openFile("dummydummydoesntexist.R")
+#' openFile(tempdir())
+#' }
 #' #' # To open folders with system2:
 #' # "nautilus" on linux ubuntu
 #' # "open" or "dolphin" on mac

@@ -19,11 +19,12 @@ open a file using \code{\link{system2}} with command based on operating system.
 Tries to open the file with the program associated with its file extension.
 }
 \examples{
-# openFile("README.md")
-# openFile("Tests.R")
-# openFile("dummydummydoesntexist.R")
-# openFile(tempdir())
-
+\dontrun{ # excluded from CRAN checks, file opening not wanted
+openFile("README.md")
+openFile("Tests.R")
+openFile("dummydummydoesntexist.R")
+openFile(tempdir())
+}
 #' # To open folders with system2:
 # "nautilus" on linux ubuntu
 # "open" or "dolphin" on mac
