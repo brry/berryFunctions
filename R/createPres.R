@@ -20,12 +20,21 @@
 #'                 see \code{\link{newFilename}}. DEFAULT: "presentation"
 #' @param path     Location of \code{dir}. Passed to \code{\link{setwd}}.
 #'                 DEFAULT: "."
+#' @param bgblack  Logical: set a black background instead of a white one?
+#'                 Requires all R graphics fg and bg colors to be changed!
+#'                 See "How to avoid death By PowerPoint" at 11:49 minutes 
+#'                 \href{https://youtu.be/Iwpi1Lm6dFo?t=11m49s}.
+#'                 Change colors manually in the Rnw files searching for 
+#'                 \code{bg=}, \code{linkcolor=}, \code{urlcolor=}
+#'                 in the preamble and \code{color} right after \code{begin document}.
+#'                 DEFAULT bgblack: FALSE
 #' @param open     Logical: run \code{\link{openFile}}? DEFAULT: TRUE
 #' 
 createPres <- function(
 presname="pres",
 dir="presentation",
 path=".",
+bgblack=FALSE,
 open=TRUE
 )
 {
@@ -54,6 +63,11 @@ Sys.setlocale(category = "LC_TIME", locale="C")
 curmonth <- format(Sys.Date(), "%B %Y")
 Sys.setlocale(category = "LC_TIME", locale="")
 
+             bgcolor <- "white" ; txcolor <- "black"
+if(bgblack) {bgcolor <- "black" ; txcolor <- "white"}
+             
+
+
 cat(
 "% presentation aboutSomething
 % Berry Boessenkool, Potsdam University, Germany
@@ -72,6 +86,9 @@ cat(
 \\renewcommand\\appendixname{Appendix}
 \\usepackage[absolute,overlay,showboxes]{textpos}
 \\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\\setbeamercolor{background canvas}{bg=",bgcolor,"}
+\\setbeamercolor{normal text}{fg=",txcolor,"}
+% \\setbeamercolor{item}{fg=green}
 % \\beamertemplatenavigationsymbolsempty
 \\setbeamertemplate{navigation symbols}[only frame symbol]
 %\\usetheme{Madrid}
@@ -82,11 +99,12 @@ cat(
 \\setbeamertemplate{footline}[frame number]
 \\setbeamertemplate{footline}[text line]{%
   \\parbox{\\linewidth}{\\vspace*{-12pt}
+  \\textcolor{",txcolor,"}{
    % \\scriptsize
   ~~ Berry Boessenkool, ",curmonth,":
-  NiceFooterTitle,
+  NiceFooterTitle ~~~~~
   \\href{https://github.com/brry/course\\#slides}{github.com/brry/course} \\hfill
-  ~~ \\insertframenumber / \\inserttotalframenumber~~~~~~~~~}}
+  ~~ \\insertframenumber / \\inserttotalframenumber~~~~~~~~~}}}
 
 % Reference images:
 \\newcommand{\\bildlink}[1]{\\flushleft{\\tiny \\href{#1}{\\textcolor{gray}{#1}} \\normalsize }}
@@ -109,6 +127,7 @@ cat(
 % ACTUAL SLIDES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \\begin{document}
+\\color{",txcolor,"}
 \\centering
 
 
@@ -162,7 +181,8 @@ ENCOURAGED\\\\[0.5em]%
 % ---------------------------
 
 \\begin{frame}[fragile]{Frametitle}
-<<chunkname, size=\"footnotesize\">>=
+<<chunkname, size=\"footnotesize\"", ifelse(bgblack,", fig.height=3","") , ">>=",
+if(bgblack) "\npar(fg=\"white\")", "
 plot(rnorm(1000))
 @
 \\end{frame}
