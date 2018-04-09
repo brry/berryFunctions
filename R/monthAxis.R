@@ -84,6 +84,8 @@
 #' @param las      LabelAxisStyle for orientation of labels. DEFAULT: 1 (upright)
 #' @param lrange   Label range (two \code{\link{Date}} values).
 #'                 DEFAULT: NA = internally computed from \code{\link{par}("usr")}
+#' @param trunc    Vector with two values: Number of days/seconds to truncate
+#'                 at the left and right end of lrange. DEFAULT: NA
 #' @param ym       Kept for back reference. DEFAULT: TRUE
 #' @param mgp      MarGin Placement. Suggested not to change this, since
 #'                 _tcl and _line defaults are chosen for the DEFAULT: c(3,1,0)
@@ -111,6 +113,7 @@ mline    = -1,
 yline    = 0.2,
 las      = 1,
 lrange   = NA,
+trunc    = NA,
 ym       = TRUE,
 mgp      = c(3,1,0),
 mt=NULL, ml=NULL, yt=NULL, yl=NULL,
@@ -139,10 +142,13 @@ if(any(is.na(lrange)))
 else
   {
   # lrange class check:
-  if(!inherits(lrange, "Date")) stop("class(lrange) must be 'Date', not '",
-                                     toString(class(lrange)), "'.")
+  if(!inherits(lrange, c("Date","POSIXlt"))) stop("class(lrange) must be 
+               'Date' or 'POSIXlt', not '", toString(class(lrange)), "'.")
   lrange <- range(lrange, na.rm=TRUE)
   }
+trunc <- rep(trunc, length.out=2) # recycle trunc
+if(!is.na(trunc[1])) lrange[1] <- lrange[1] + trunc[1]
+if(!is.na(trunc[2])) lrange[2] <- lrange[2] - trunc[2]
 
 # time default (TRUE if values at axis are very large):
 if(is.na(time)) time <- lrange[1]>1e5
