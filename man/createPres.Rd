@@ -20,7 +20,7 @@ DEFAULT: "."}
 \item{bgblack}{Logical: set a black background instead of a white one?
 Requires all R graphics fg and bg colors to be changed!
 See "How to avoid death By PowerPoint" at 11:49 minutes 
-\href{https://youtu.be/Iwpi1Lm6dFo?t=11m49s}.
+\url{https://youtu.be/Iwpi1Lm6dFo?t=11m49s}.
 Change colors manually in the Rnw files searching for 
 \code{bg=}, \code{linkcolor=}, \code{urlcolor=}
 in the preamble and \code{color} right after \code{begin document}.
