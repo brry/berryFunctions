@@ -20,6 +20,7 @@
 #' linReg(a, b, pos1=15, pos2=0) # position of topleft corner of legend
 #' linReg(a, b, pos1=NA, col="orange") # to suppress legend
 #' linReg(a, b, plotrange=5:20) # only for plotting, all data points are used!
+#' linReg(a,b, digits=c(2,3,2,-1) ) # Do not write RMSE into legend
 #' 
 #' # Formula specification:
 #' linReg(b~a)
@@ -37,6 +38,7 @@
 #' @param add Logical. If TRUE, line and text are added to the existing graphic. DEFAULT: FALSE (plots datapoints first and then the line.)
 #' @param digits Numeric vector of length \eqn{\ge 1}. Specifies number of digits a,b,r,e are rounded to
 #'        in the formula "y=a*x+b \\n R^2=r \\n RMSE=e", respectively.
+#'        If a value is negative, the complete respective entry is left away.
 #'        If values are not specified, they are set equal to the first. DEFAULT: 2
 #' @param pch Point Character of datapoints, see \code{\link{par}}. DEFAULT: 16
 #' @param col Color of the regression line, see \code{\link{par}}. DEFAULT: 2
@@ -101,8 +103,11 @@ digits <- rep(digits, length.out=4)
 a <- round( coef(mod)[2] , digits[1])
 b <- round( coef(mod)[1] , digits[2])
 r <- round( summary(mod)$r.squared , digits[3])
-Txt <- paste0("y = ", a, " * x ", ifelse(b>0," + ", " - "), abs(b), "\nR\U00B2 = ",
-          r, "\nRMSE = ", signif(rmse(x,y), digits[4]))
+e <- signif(rmse(x,y), digits[4])
+axb <- ""
+if(digits[1]>=0 & digits[2]>=0) axb <- paste0("y = ", a, " * x ", ifelse(b>0," + ", " - "), abs(b))
+Txt <- paste0(axb, if(digits[3]>=0) paste0("\nR\U00B2 = ", r),
+                   if(digits[4]>=0) paste0("\nRMSE = ", e)     )
 # write formula
 legdef <- list(x=pos1, y=pos2, legend=Txt, bty="n", text.col=col, inset=inset)
 do.call(legend, owa(legdef, legargs, "legend", "inset"))

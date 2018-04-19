@@ -21,6 +21,7 @@ linReg(x, y = NULL, data = NULL, add = FALSE, digits = 2, pch = 16,
 
 \item{digits}{Numeric vector of length \eqn{\ge 1}. Specifies number of digits a,b,r,e are rounded to
 in the formula "y=a*x+b \\n R^2=r \\n RMSE=e", respectively.
+If a value is negative, the complete respective entry is left away.
 If values are not specified, they are set equal to the first. DEFAULT: 2}
 
 \item{pch}{Point Character of datapoints, see \code{\link{par}}. DEFAULT: 16}
@@ -72,6 +73,7 @@ linReg(a,b, ylab="Hallo", pch=1, col=3, main="Regression by Berry")
 linReg(a, b, pos1=15, pos2=0) # position of topleft corner of legend
 linReg(a, b, pos1=NA, col="orange") # to suppress legend
 linReg(a, b, plotrange=5:20) # only for plotting, all data points are used!
+linReg(a,b, digits=c(2,3,2,-1) ) # Do not write RMSE into legend
 
 # Formula specification:
 linReg(b~a)
