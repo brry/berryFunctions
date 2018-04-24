@@ -143,7 +143,7 @@ minfun <- function(param)
    { # discrete values of UH:
    UH_val <- unitHydrograph(n=param["n"], k=param["k"], t=1:length(P))
    qsim <- superPos(P/10^3, UH_val) * area*10^6 /3600 + Qbase
-   berryFunctions::rmse( Q[fit], qsim[fit])
+   berryFunctions::rmse( Q[fit], qsim[fit], quiet=TRUE)
    }
 # do the hard work:
 optimized <- optim(par=param, fn=minfun, ...)$par
@@ -157,7 +157,7 @@ Qsim <- Qsim[1:length(Q)]
 # runoff coefficient Psi:
 # psi*P * A = Q * t
 # psi = Qt / PA  # UNITS:  m^3/s * h * 3600s/h  / (mm=1/1000 m^3/m^2 * km^2)  /  1e6 m^2/km^2
-psi <- mean(Q-Qbase) * length(Q) * 3600  /  ( sum(P)/1000 * area) / 1e6
+psi <- mean(Q-Qbase, na.rm=TRUE) * length(Q) * 3600  /  ( sum(P, na.rm=TRUE)/1000 * area) / 1e6
 if(psi>1) warning("Psi is larger than 1. The area given is not able to yield so much discharge. Consider the units in  ?lsc")
 #
 # graphic:
@@ -169,7 +169,8 @@ if(plot)
   title(main=main)
   axis(2, pretty(P), col=4, las=1, col.axis=4)
   #
-  par(new=TRUE); plot(x, Q, type=type[1], col=2, las=1, ylim=range(Q)*c(1,2), ann=FALSE, axes=FALSE)
+  par(new=TRUE); plot(x, Q, type=type[1], col=2, las=1, 
+                      ylim=range(Q, na.rm=TRUE)*c(1,2), ann=FALSE, axes=FALSE)
   axis(4, pretty(Q), col=2, las=1, col.axis=2)
   #
   mtext("P [mm]", line=-2, col=4, adj=0.02, outer=TRUE)
