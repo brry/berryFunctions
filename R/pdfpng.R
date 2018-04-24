@@ -6,7 +6,7 @@
 #' might want to use e.g. Sumatra, which comes with Rstudio. It can be found e.g. in
 #' C:/Program Files/RStudio/bin/sumatra
 #' 
-#' @return Nothing
+#' @return file paths, invisible
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, March 2017
 #' @seealso \code{\link{pdf}}, \code{\link{png}}
 #' @keywords file
@@ -129,6 +129,6 @@ if(png)
                    "eval(expr, p)"))
   dev.off()
 }
-if(open) openFile(fig)
-return(invisible(NULL))
+if(open) openFile(fig[c(pdf,png)])
+return(invisible(fig))
 }

@@ -58,7 +58,7 @@ Never needs to be changed, as far as I can tell. DEFAULT: 1}
 \item{\dots}{Further arguments passed to both \code{\link{pdf}} and \code{\link{png}}}
 }
 \value{
-Nothing
+file paths, invisible
 }
 \description{
 Create both a \code{\link{pdf}} and a \code{\link{png}} file with a graph,
