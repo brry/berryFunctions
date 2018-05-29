@@ -89,9 +89,9 @@ if(!quiet)
   n_a <- sum(status=="app") # _n appended
   if(!tellignore) {n_i <- 0; mnames <- mnames[!ignore]}
   n_ie<- sum(file.exists(filename[ignore]))
-  nfiles <- function(n) paste0(n, " file", if(n>1)"s")
+  nfiles <- function(n, name=FALSE) paste0(n, " file", if(name) "name", if(n>1)"s")
   if(n_i+n_n+n_o+n_a>0) message(traceCall(1, "", ": "), pre,
-          if(n_i>0) paste0("not checking ", nfiles(n_i),
+          if(n_i>0) paste0("not changing ", nfiles(n_i, name=TRUE),
                            " (",n_ie," exist",if(n_ie==1)"s",")"),
           if(n_i>0 & n_n+n_a+n_o > 0) ", ",
           if(n_n+n_a>0) paste0("creating ", nfiles(n_n+n_a)),
