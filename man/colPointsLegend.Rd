@@ -92,7 +92,7 @@ e.g. cex, srt, font, col. But NOT adj!}
 invisible list of par of \code{\link{smallPlot}}, adds legend bar to current plot
 }
 \description{
-Adds legends to plots created or enhanced with \code{\link{colPoints}}
+Adds legends to plots created or enhanced with \code{\link{colPoints}}. \cr
 \code{sf} plots set par(mar=c(0,0,1.2,0)) but then reset it to the values before.
 \code{\link{smallPlot}} will hence also reset to that, so points added after
 calling colpointsLegend will be wrong, unless the margins are set BEFORE sf plot.
