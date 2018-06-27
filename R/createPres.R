@@ -55,9 +55,13 @@ dev.off()
 cam1 <- system.file("extdata/camera1.jpg", package="berryFunctions")
 cam2 <- system.file("extdata/camera2.png", package="berryFunctions")
 ccby <- system.file("extdata/ccby.png",    package="berryFunctions")
+rlog <- system.file("extdata/Rlogo.png",   package="berryFunctions")
+
 file.copy(cam1, file.path(dir, "fig_extern/camera1.jpg"))
 file.copy(cam2, file.path(dir, "fig_extern/camera2.png"))
 file.copy(ccby, file.path(dir, "fig_extern/ccby.png"))
+file.copy(rlog, file.path(dir, "fig_extern/Rlogo.png"))
+
 
 Sys.setlocale(category = "LC_TIME", locale="C")
 curmonth <- format(Sys.Date(), "%B %Y")
@@ -144,10 +148,15 @@ opts_chunk$set(cache=T, echo=TRUE, fig.height=3.3, fig.width=5, out.width='0.9\\
 % ---------------------------
 
 \\begin{frame}%[plain]
-\\vspace{1em}
-\\Large
-\\textbf{NiceTitle\\\\[1.5em] \\large SubTitle}\\\\[2em]
+\\TPshowboxesfalse % no border around this box
+\\begin{textblock*}{18em}(10pt,30pt) % topleft corner x=10pt, y=30pt. width=18em
+\\centering
+\\vspace{1.5em}
+\\Large \\textbf{NiceTitle\\\\[1.0em] \\large SubTitle about}
+\\includegraphics[width=1.2em]{fig_extern/Rlogo.png}
+\\end{textblock*}
 \\normalsize
+\\vspace{9em}
 Berry Boessenkool, \\href{http://www.geo.uni-potsdam.de/geoecology.html}{uni-potsdam.de}, ",curmonth,"\\\\[1em]
 \\texttt{berry-b@gmx.de}\\\\[1em]
 \\href{https://github.com/brry/rdwd\\#rdwd}{github.com/brry/rdwd}\\\\
@@ -155,7 +164,6 @@ Berry Boessenkool, \\href{http://www.geo.uni-potsdam.de/geoecology.html}{uni-pot
 \\scriptsize
 \\textit{Presentation template generated with} \\rcode{berryFunctions::createPres}\\\\
 \\normalsize
-
 \\TPshowboxesfalse % no border around this box
 \\only<2-3>{ % photography note and licence
 \\begin{textblock*}{8em}(250pt,30pt) % topleft corner x=250pt, y=30pt
