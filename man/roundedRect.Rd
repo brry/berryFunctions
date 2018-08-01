@@ -4,9 +4,10 @@
 \alias{roundedRect}
 \title{Rectangles with rounded corners}
 \usage{
-roundedRect(xleft, ybottom, xright, ytop, rounding = 0.25, bothsame = TRUE,
-  aspcorrect = bothsame, devcorrect = bothsame, corfactor = 1.3,
-  factorpoints = FALSE, corners = 1:4, npoints = 200, plot = TRUE, ...)
+roundedRect(xleft, ybottom, xright, ytop, rounding = 0.25,
+  bothsame = TRUE, aspcorrect = bothsame, devcorrect = bothsame,
+  corfactor = 1.3, factorpoints = FALSE, corners = 1:4,
+  npoints = 200, plot = TRUE, ...)
 }
 \arguments{
 \item{xleft, ybottom, xright, ytop}{Single numbers with the outer end locations

@@ -5,7 +5,8 @@
 \title{legend with multiline title}
 \usage{
 legendmt(x, y = NULL, legend, title, x.intersp = 1, fill = NA,
-  col = par("col"), border = NA, lty = NA, lwd = NA, pch = NA, ...)
+  col = par("col"), border = NA, lty = NA, lwd = NA, pch = NA,
+  ...)
 }
 \arguments{
 \item{x, y, legend}{Arguments as in \code{\link{legend}}}

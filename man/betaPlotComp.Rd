@@ -5,9 +5,9 @@
 \title{Compare beta distributions}
 \usage{
 betaPlotComp(shape1 = c(0.5, 1:4, 10, 20), shape2 = shape1,
-  cumulative = FALSE, cex = 0.8, las = 1, main = "", ylim = lim0(4),
-  mar = rep(0, 4), oma = c(2, 2, 4.5, 2), mgp = c(3, 0.7, 0),
-  keeppar = FALSE, textargs = NULL, ...)
+  cumulative = FALSE, cex = 0.8, las = 1, main = "",
+  ylim = lim0(4), mar = rep(0, 4), oma = c(2, 2, 4.5, 2),
+  mgp = c(3, 0.7, 0), keeppar = FALSE, textargs = NULL, ...)
 }
 \arguments{
 \item{shape1}{Vector of alpha values as in \code{\link{dbeta}}. DEFAULT: c(0.5, 1:4, 10,20)}

@@ -5,11 +5,12 @@
 \title{Histogram for colPoints}
 \usage{
 colPointsHist(z, nbins = 40, colors = seqPal(nbins), bb = seqR(z,
-  length.out = nbins + 1), at = pretty2(z), labels = at, bg = "white",
-  x1 = 0, x2 = 0.4, y1 = 0, y2 = 0.3, outer = FALSE, mar = c(2, 2,
-  1, 0.5), mgp = c(1.8, 0.6, 0), sborder = NA, resetfocus = TRUE,
-  breaks = 20, freq = TRUE, col = par("fg"), border = NA, main = "",
-  ylab = "", xlab = "", las = 1, axes = TRUE, ...)
+  length.out = nbins + 1), at = pretty2(z), labels = at,
+  bg = "white", x1 = 0, x2 = 0.4, y1 = 0, y2 = 0.3,
+  outer = FALSE, mar = c(2, 2, 1, 0.5), mgp = c(1.8, 0.6, 0),
+  sborder = NA, resetfocus = TRUE, breaks = 20, freq = TRUE,
+  col = par("fg"), border = NA, main = "", ylab = "", xlab = "",
+  las = 1, axes = TRUE, ...)
 }
 \arguments{
 \item{z}{Values of third dimension used in \code{\link{colPoints}}}

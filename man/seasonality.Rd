@@ -5,14 +5,15 @@
 \title{Seasonality analysis}
 \usage{
 seasonality(dates, values, data, drange = NA, vrange = NA, shift = 0,
-  janline = TRUE, hlines = FALSE, nmax = 0, maxargs = NULL, plot = 1,
-  add = FALSE, nmin = 100, probs = c(0, 25, 50, 75, 95, 99.9)/100,
-  width = 3, text = TRUE, texti = seq(200, 20, length.out =
-  length(probs)), textargs = NULL, months = substr(month.abb, 1, 1),
+  janline = TRUE, hlines = FALSE, nmax = 0, maxargs = NULL,
+  plot = 1, add = FALSE, nmin = 100, probs = c(0, 25, 50, 75, 95,
+  99.9)/100, width = 3, text = TRUE, texti = seq(200, 20, length.out
+  = length(probs)), textargs = NULL, months = substr(month.abb, 1, 1),
   slab = "Month", tlab = "Year", vlab = NA, xlim = NA, ylim = NA,
-  xaxs = NA, yaxs = NA, main = "Seasonality", adj = 0.2, mar = c(3, 3,
-  4, 1), mgp = c(1.7, 0.7, 0), keeppar = TRUE, legend = TRUE,
-  legargs = NULL, returnall = FALSE, quiet = FALSE, ...)
+  xaxs = NA, yaxs = NA, main = "Seasonality", adj = 0.2,
+  mar = c(3, 3, 4, 1), mgp = c(1.7, 0.7, 0), keeppar = TRUE,
+  legend = TRUE, legargs = NULL, returnall = FALSE, quiet = FALSE,
+  ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order.

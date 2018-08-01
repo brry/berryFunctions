@@ -4,10 +4,10 @@
 \alias{quantileBands}
 \title{Quantile bands}
 \usage{
-quantileBands(mat, x = 1:ncol(mat), col = rgb(0, 0, 1, alpha = c(0.5, 0.7)),
-  add = FALSE, main = "Quantile Bands", ylab = "", xlab = "",
-  probs = 0:4/4, na.rm = FALSE, type = 7, smooth = NA, medargs = NULL,
-  meanargs = NULL, txi, textargs = NULL, ...)
+quantileBands(mat, x = 1:ncol(mat), col = rgb(0, 0, 1, alpha = c(0.5,
+  0.7)), add = FALSE, main = "Quantile Bands", ylab = "",
+  xlab = "", probs = 0:4/4, na.rm = FALSE, type = 7, smooth = NA,
+  medargs = NULL, meanargs = NULL, txi, textargs = NULL, ...)
 }
 \arguments{
 \item{mat}{Matrix or data.frame with columns of data}

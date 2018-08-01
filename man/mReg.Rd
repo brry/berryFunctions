@@ -5,13 +5,13 @@
 \title{Multiple regression}
 \usage{
 mReg(x, y = NULL, data = NULL, Poly45 = FALSE, exp_4 = FALSE,
-  xf = deparse(substitute(x)), yf = deparse(substitute(y)), ncolumns = 9,
-  plot = TRUE, add = FALSE, nbest = 12, R2min, selection = NULL,
-  digits = 2, extend = 0.4, xlim = extendrange(x, f = extend),
-  ylim = extendrange(y, f = extend), xlab = xf, ylab = yf, las = 1,
-  lwd = rep(1, 12), lty = rep(1, 12), col = NULL, pcol = par("col"),
-  pch = 16, legend = TRUE, legargs = NULL, legendform = "nameform",
-  quiet = FALSE, ...)
+  xf = deparse(substitute(x)), yf = deparse(substitute(y)),
+  ncolumns = 9, plot = TRUE, add = FALSE, nbest = 12, R2min,
+  selection = NULL, digits = 2, extend = 0.4, xlim = extendrange(x,
+  f = extend), ylim = extendrange(y, f = extend), xlab = xf,
+  ylab = yf, las = 1, lwd = rep(1, 12), lty = rep(1, 12),
+  col = NULL, pcol = par("col"), pch = 16, legend = TRUE,
+  legargs = NULL, legendform = "nameform", quiet = FALSE, ...)
 }
 \arguments{
 \item{x}{Vector with x coordinates or formula (like y~x), the latter is passed to \code{\link{model.frame}}}

@@ -4,8 +4,8 @@
 \alias{compareFiles}
 \title{Compare textfiles for equality}
 \usage{
-compareFiles(file1, file2, nr = 20, startline = 1, endline = length(f1),
-  quiet = FALSE, ...)
+compareFiles(file1, file2, nr = 20, startline = 1,
+  endline = length(f1), quiet = FALSE, ...)
 }
 \arguments{
 \item{file1, file2}{Filenames to be read by \code{\link{readLines}}.}

@@ -5,7 +5,8 @@
 \title{Histogram of logarithmic values}
 \usage{
 logHist(x, logargs = NULL, main = xmain, xlab = xname, col = "tan",
-  add = FALSE, las = 1, ylim = NULL, freq = TRUE, quiet = FALSE, ...)
+  add = FALSE, las = 1, ylim = NULL, freq = TRUE, quiet = FALSE,
+  ...)
 }
 \arguments{
 \item{x}{Vector of numerical values}

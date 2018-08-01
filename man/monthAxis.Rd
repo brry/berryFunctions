@@ -7,9 +7,10 @@
 monthAxis(side = 1, time = NA, origin = "1970-01-01",
   mlabels = substr(month.abb, 1, 1), yformat = "\%Y", nmonths = 3,
   nym_half = 3.5, nym_none = 5, mcex = 0.7, ycex = 1,
-  mtcl = par("tcl"), ytcl = par("tcl") - 1.7, mline = -1, yline = 0.2,
-  las = 1, lrange = NA, trunc = NA, ym = TRUE, mgp = c(3, 1, 0),
-  mt = NULL, ml = NULL, yt = NULL, yl = NULL, quiet = FALSE, ...)
+  mtcl = par("tcl"), ytcl = par("tcl") - 1.7, mline = -1,
+  yline = 0.2, las = 1, lrange = NA, trunc = NA, ym = TRUE,
+  mgp = c(3, 1, 0), mt = NULL, ml = NULL, yt = NULL, yl = NULL,
+  quiet = FALSE, ...)
 }
 \arguments{
 \item{side}{Which \code{\link{axis}} is to be labeled? DEFAULT: 1}

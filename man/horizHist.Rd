@@ -7,8 +7,8 @@
 horizHist(Data, breaks = "Sturges", freq = TRUE, plot = TRUE,
   col = par("bg"), border = par("fg"), las = 1, xlab = if (freq)
   "Frequency" else "Density", main = paste("Histogram of",
-  deparse(substitute(Data))), ylim = range(HBreaks), labelat = pretty(ylim),
-  labels = labelat, ...)
+  deparse(substitute(Data))), ylim = range(HBreaks),
+  labelat = pretty(ylim), labels = labelat, ...)
 }
 \arguments{
 \item{Data}{any data that \code{\link{hist}} would take.}

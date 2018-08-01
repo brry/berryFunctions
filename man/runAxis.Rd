@@ -4,7 +4,8 @@
 \alias{runAxis}
 \title{Label axis with typical running times}
 \usage{
-runAxis(t = 3 * 60, int1 = 10, int2 = 5, side = 1, linarg = NULL, ...)
+runAxis(t = 3 * 60, int1 = 10, int2 = 5, side = 1, linarg = NULL,
+  ...)
 }
 \arguments{
 \item{t}{Maximum time in minutes}

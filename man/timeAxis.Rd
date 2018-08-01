@@ -7,9 +7,10 @@
 timeAxis(side = 1, timeAxis = NA, origin = "1970-01-01",
   startyear = NULL, stopyear = NULL, n = 5, npm = NULL, npy = NA,
   format = "\%d.\%m.\\n\%Y", yformat = "\%Y", labels = format.Date(d,
-  format), ym = FALSE, mcex = 0.6, mmgp = c(3, 0, 0), midyear = FALSE,
-  midmonth = FALSE, midargs = NULL, mgp = c(3, 1.5, 0), cex.axis = 1,
-  tick = TRUE, tcl = par("tcl"), las = 1, ...)
+  format), ym = FALSE, mcex = 0.6, mmgp = c(3, 0, 0),
+  midyear = FALSE, midmonth = FALSE, midargs = NULL, mgp = c(3,
+  1.5, 0), cex.axis = 1, tick = TRUE, tcl = par("tcl"), las = 1,
+  ...)
 }
 \arguments{
 \item{side}{Which \code{\link{axis}} are to be labeled? (can be several). DEFAULT: 1}

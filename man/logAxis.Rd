@@ -5,10 +5,10 @@
 \title{Label logarithmic axes}
 \usage{
 logAxis(side = 1, log = NULL, lcol = "grey", lty = 1, lwd = 1,
-  labels = NULL, allticks = FALSE, allargs = NULL, expr, las = 1, from,
-  to, Range, base = NA, big.mark = "'", decimal.mark = ".",
-  scientific = FALSE, exponent = 5, expobase1 = FALSE, allbase = 1:9,
-  box = TRUE, ...)
+  labels = NULL, allticks = FALSE, allargs = NULL, expr, las = 1,
+  from, to, Range, base = NA, big.mark = "'", decimal.mark = ".",
+  scientific = FALSE, exponent = 5, expobase1 = FALSE,
+  allbase = 1:9, box = TRUE, ...)
 }
 \arguments{
 \item{side}{Which \code{\link{axis}} are to be labeled? Can be a vector within \code{1:4}. DEFAULT: 1}

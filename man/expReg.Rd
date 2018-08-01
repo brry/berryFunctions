@@ -6,10 +6,11 @@
 \usage{
 expReg(x, y = NULL, data = NULL, logy = TRUE, predictnew = NULL,
   interval = "confidence", plot = TRUE, digits = 2, inset = 0,
-  xpd = par("xpd"), pos1 = "top", pos2 = NULL, add = FALSE, pch = 16,
-  col = rgb(0, 0, 0, 0.5), modcol = 2, lwd = 1,
+  xpd = par("xpd"), pos1 = "top", pos2 = NULL, add = FALSE,
+  pch = 16, col = rgb(0, 0, 0, 0.5), modcol = 2, lwd = 1,
   xlab = deparse(substitute(x)), ylab = deparse(substitute(y)),
-  main = "exponential regression", xlim = range(x), ylim = range(y), ...)
+  main = "exponential regression", xlim = range(x), ylim = range(y),
+  ...)
 }
 \arguments{
 \item{x}{Numeric or formula (see examples). Vector with values of explanatory variable}

@@ -7,8 +7,8 @@
 linLogHist(x, steps = 100, breaks = 20, col = "blue", las = 1,
   xlab = deparse(substitute(x)), xlim = range(x, finite = TRUE),
   box = TRUE, parexpr, endexpr, sleep = 0, axisargs = NULL,
-  axisargs2 = NULL, firstplot = TRUE, lastplot = TRUE, write_t = TRUE,
-  values_t = NULL, ...)
+  axisargs2 = NULL, firstplot = TRUE, lastplot = TRUE,
+  write_t = TRUE, values_t = NULL, ...)
 }
 \arguments{
 \item{x}{x values to be plotted in animation}

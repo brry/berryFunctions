@@ -4,8 +4,8 @@
 \alias{dupes}
 \title{Duplicate lines in file}
 \usage{
-dupes(file, ignore.empty = TRUE, ignore.space = TRUE, tofile = missing(n),
-  n = length(d))
+dupes(file, ignore.empty = TRUE, ignore.space = TRUE,
+  tofile = missing(n), n = length(d))
 }
 \arguments{
 \item{file}{File name (character string)}

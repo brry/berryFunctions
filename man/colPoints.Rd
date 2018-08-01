@@ -8,10 +8,11 @@ colPoints(x, y, z, data, add = TRUE, col = seqPal(100), col2 = c(NA,
   "grey", "black"), Range = range(z, finite = TRUE), method = "linear",
   breaks = length(col), sdlab = 1, legend = TRUE, legargs = NULL,
   lines = FALSE, nint = 30, xlab = gsub("\\"", "",
-  deparse(substitute(x))), ylab = gsub("\\"", "", deparse(substitute(y))),
-  zlab = gsub("\\"", "", deparse(substitute(z))), axes = TRUE, log = "",
-  las = 1, bglines = NULL, pch = 16, x1 = 0.6, y1 = ifelse(horizontal,
-  0.88, 0.3), x2 = 0.99, y2 = 0.99, density = NULL, horizontal = TRUE,
+  deparse(substitute(x))), ylab = gsub("\\"", "",
+  deparse(substitute(y))), zlab = gsub("\\"", "",
+  deparse(substitute(z))), axes = TRUE, log = "", las = 1,
+  bglines = NULL, pch = 16, x1 = 0.6, y1 = ifelse(horizontal, 0.88,
+  0.3), x2 = 0.99, y2 = 0.99, density = NULL, horizontal = TRUE,
   quiet = FALSE, ...)
 }
 \arguments{

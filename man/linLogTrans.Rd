@@ -5,10 +5,10 @@
 \title{Animation for transition from linear to logarithmic axis}
 \usage{
 linLogTrans(x, y, log = "x", steps = 100, base = 1, las = 1,
-  plot = TRUE, xlim = range(x, finite = TRUE), ylim = range(y, finite =
-  TRUE), box = TRUE, parexpr, endexpr, sleep = 0, firstplot = TRUE,
-  lastplot = TRUE, write_t = TRUE, values_t = NULL, pointsarg = NULL,
-  ...)
+  plot = TRUE, xlim = range(x, finite = TRUE), ylim = range(y, finite
+  = TRUE), box = TRUE, parexpr, endexpr, sleep = 0, firstplot = TRUE,
+  lastplot = TRUE, write_t = TRUE, values_t = NULL,
+  pointsarg = NULL, ...)
 }
 \arguments{
 \item{x}{x values to be plotted in animation}
