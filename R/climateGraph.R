@@ -56,6 +56,20 @@
 #' # needs ylim in linearly continued temp units
 #' climateGraph(temp, rain, compress=TRUE, argcomp=list(density=30, col=6))
 #' 
+#' #' # example with (fake) weekly relative soil moisture (RSM) added:
+#' temp <- c(-9.3,-8.2,-2.8,6.3,13.4,16.8,18.4,17,11.7,5.6,-1,-5.9)
+#' rain <- c(46,46,36,30,31,21,26,57,76,85,59,46)
+#' set.seed(3)
+#' soil <- berryFunctions::rescale( cumsum(rnorm(52)), from=1, to=100)
+#' xsoil <- seq(1, 12, length.out=52)
+#' 
+#' climateGraph(temp, rain, ylim=c(-10, 50) ) # ylim for RSM 0:100 on second axis
+#' lines(xsoil, soil/2, lwd=5, col="orange")
+#' 
+#' mtext(paste("Relative\nsoil moisture\n\U00D8", round(mean(soil), 1), "%"), 
+#'       side=3, col="orange", line=1, adj=0.99)
+#' 
+#' 
 #' \dontrun{
 #' pdf("ClimateGraph.pdf")
 #' climateGraph(temp, rain, main="Another Station\nlocated somewhere else")
