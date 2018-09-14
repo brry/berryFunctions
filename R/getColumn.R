@@ -83,12 +83,14 @@
 #' @param trace Logical: Add function call stack to the message? DEFAULT: TRUE
 #' @param convnum Logical: Convert numerical input (even if character) to
 #'                Column name for that number?
+#' @param quiet   Logical: suppress non-df warning? DEFAULT: FALSE
 #' 
 getColumn <- function(
 x,
 df,
 trace=TRUE,
-convnum=TRUE
+convnum=TRUE,
+quiet=FALSE
 )
 {
 calltrace <- if(trace) traceCall(prefix="in ", suffix=": ") else ""
@@ -125,8 +127,8 @@ if(!is.na(namnum) && convnum)
 # check if df is a data.frame
 if(!all(class(df)=="data.frame"))
  {
- warning(calltrace, "'",ndf,"' is not a data.frame, but a '", toString(class(df)),
-         "'. Converting with as.data.frame.", call.=FALSE)
+ if(!quiet) warning(calltrace, "'",ndf,"' is not a data.frame, but a '", 
+            toString(class(df)), "'. Converting with as.data.frame.", call.=FALSE)
  df <- as.data.frame(df)
  }
 # check if column exists:

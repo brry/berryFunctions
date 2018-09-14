@@ -4,7 +4,7 @@
 \alias{sortDF}
 \title{sort dataframes by column}
 \usage{
-sortDF(df, col, decreasing = TRUE, ...)
+sortDF(df, col, decreasing = TRUE, quiet = FALSE, ...)
 }
 \arguments{
 \item{df}{Data.frame to be sorted}
@@ -14,7 +14,10 @@ sortDF(df, col, decreasing = TRUE, ...)
 \item{decreasing}{Logical: should highest value be on top?
 DEFAULT: TRUE (unlike \code{\link{order}}!)}
 
-\item{\dots}{Further arguments passed to \code{\link{order}}, like eg \code{na.last or method}}
+\item{quiet}{Logical: suppress non-df warning? DEFAULT: FALSE}
+
+\item{\dots}{Further arguments passed to \code{\link{order}}, 
+like eg \code{na.last or method}}
 }
 \value{
 data.frame

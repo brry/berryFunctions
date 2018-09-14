@@ -4,7 +4,7 @@
 \alias{getColumn}
 \title{get column from data.frame}
 \usage{
-getColumn(x, df, trace = TRUE, convnum = TRUE)
+getColumn(x, df, trace = TRUE, convnum = TRUE, quiet = FALSE)
 }
 \arguments{
 \item{x}{Column name to be subsetted. The safest is to use character strings
@@ -18,6 +18,8 @@ its value will be used as name! (see upper2 example)}
 
 \item{convnum}{Logical: Convert numerical input (even if character) to
 Column name for that number?}
+
+\item{quiet}{Logical: suppress non-df warning? DEFAULT: FALSE}
 }
 \value{
 Vector with values in the specified column
