@@ -12,7 +12,7 @@ dataStr(package = NULL, ...)
 \item{\dots}{other arguments passed to \code{\link{data}}}
 }
 \value{
-NULL. prints via \code{\link{message}} in a for loop.
+invisible data.frame. Mainly prints via \code{\link{message}} in a for loop.
 }
 \description{
 Print the \code{\link{str}} of each dataset returned by \code{\link{data}}
@@ -22,6 +22,23 @@ Print the \code{\link{str}} of each dataset returned by \code{\link{data}}
 dataStr() # all loaded packages on search path (package=NULL)
 dataStr("datasets") # only datasets in base R
 dataStr("colorspace") # works with an installed but unloaded package
+
+
+# Selection of dataframes based on columns ----
+d <- dataStr()
+d <- d[grepl("data.frame", d$class), ]
+d$nrow <- NA
+d$ncol <- NA
+env <- new.env()
+for(i in 1:nrow(d))
+  {
+  x <- d[i,, drop=FALSE]
+  data(list=x$Call, package=x$Package, envir=env)
+  obj <- get(x$Object, envir=env) # getExportedValue(asNamespace(package), x$Object)
+  d[i, c("nrow","ncol")] <- c(nrow(obj),ncol(obj))
+  }
+d <- sortDF(d, ncol)
+d[,c("Call","ncol","nrow")]
 
 }
 \seealso{
