@@ -135,7 +135,7 @@ if(length(mlabels)!=12)
 names(mlabels) <- round0(1:12, pre=2)
 
 # get Date range from current graph or from input:
-if(any(is.na(lrange)))
+if(anyNA(lrange))
   {
   lrange <- par("usr")[if(side%%2) 1:2 else 3:4]
   }

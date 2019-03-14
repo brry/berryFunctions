@@ -78,7 +78,7 @@ if( !missing(Range)  )
   to <- ceiling(Range[2])
   }
 # base
-if(any(is.na(base))) base <- if(abs(to-from)>4) 1 else c(1,2,5)
+if(anyNA(base)) base <- if(abs(to-from)>4) 1 else c(1,2,5)
 # values for lines and labels:
 vals <- base*10^rep(floor(from):ceiling(to), each=length(base))
 # formatted values for labels:
