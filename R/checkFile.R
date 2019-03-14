@@ -12,6 +12,9 @@
 #' checkFile("FileThatDoesntExist.txt", warnonly=TRUE)
 #' checkFile("FileThatDoesntExist.txt", warnonly=TRUE, trace=FALSE)
 #' 
+#' checkFile("./", warnonly=TRUE)
+#' checkFile(c("./",".//"), warnonly=TRUE)
+#' 
 #' \dontrun{## Excluded from CRAN checks because of file creation
 #' # Vectorized:
 #' file.create("DummyFile2.txt")
@@ -52,6 +55,11 @@ exi <- file.exists(file)
 # warn or stop if file nonexistent:
 if(any(!exi))
   {
+  # existing without trailing slashes?
+  # remove trailing slashes for windows folders:
+  file_ns <- file
+  while(any(grepl("/$", file_ns)))  file_ns <- sub("/$","",file_ns) 
+  exi_ns <- file.exists(file_ns)
   # tracing the calling function(s):
   Text1 <- if(trace) traceCall(prefix="in ", suffix=" :  ") else ""
   # prepare message:
@@ -60,8 +68,10 @@ if(any(!exi))
                            toString(file[!exi])
   Text4 <- if(sum(!exi)>1) "\n  do" else "'\n  does"
   Text5 <- " not exist."
-  Text6 <- if(pwd) paste0(" Current getwd: ", getwd() ) else ""
-  Text <- paste0(Text1,Text2,Text3,Text4,Text5,Text6)
+  Text6 <- if(sum(exi_ns)==1) " (But exists without trailing spaces)." else 
+           if(sum(exi_ns) >1) paste0(" (But ",sum(exi_ns)," exist without trailing spaces).") else ""
+  Text7 <- if(pwd) paste0(" Current getwd: ", getwd() ) else ""
+  Text <- paste0(Text1,Text2,Text3,Text4,Text5,Text6,Text7)
   if(warnonly) warning(Text, call.=!trace) else stop(Text, call.=!trace)
   }
 return(invisible(exi))

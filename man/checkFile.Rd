@@ -27,6 +27,9 @@ is.error( checkFile("FileThatDoesntExist.txt")  )
 checkFile("FileThatDoesntExist.txt", warnonly=TRUE)
 checkFile("FileThatDoesntExist.txt", warnonly=TRUE, trace=FALSE)
 
+checkFile("./", warnonly=TRUE)
+checkFile(c("./",".//"), warnonly=TRUE)
+
 \dontrun{## Excluded from CRAN checks because of file creation
 # Vectorized:
 file.create("DummyFile2.txt")
