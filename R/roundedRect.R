@@ -6,6 +6,7 @@
 #' @keywords aplot
 #' @export
 #' @importFrom grDevices dev.size
+#' @importFrom graphics par points polygon
 #' @examples
 #' plot(1:10)  ;  rect(4,2,7,8, border=8)
 #' roundedRect(4,2,7,8, rounding=0.1)
