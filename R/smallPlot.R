@@ -198,7 +198,7 @@ marpos <- c(x1+mar[2], x2-mar[4], y1+mar[1], y2-mar[3])
 tlh <- marpos[1]>=marpos[2] # margins tlh: too large horizontally
 tlv <- marpos[3]>=marpos[4]
 if(tlh|tlv) stop(traceCall(1,"in ",": "), if(tlh)"horizontal", if(tlh&tlv)" and ",
-   if(tlv)"vertical", " margins are too large.\nTry margins smaller than mar=c(",
+   if(tlv)"vertical", " margins are too large.\nTry a bigger graphic window or use margins smaller than mar=c(",
                  paste(mar_input, collapse=","),"). Cannot set par(plt/fig) to: ",
                  toString(round(marpos[1:4],3)),".", call.=FALSE)
 # actually set margins:
