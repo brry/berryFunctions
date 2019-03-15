@@ -24,60 +24,55 @@
 #' 
 #' # quantile sample size dependency simulation:
 #' qbeta(p=0.999, 2, 9) # dist with Q99.9% = 0.62
-#' betaPlot(2, 9, cumulative=FALSE)
+#' betaPlot(2, 9, cumulative=FALSE, keeppar=TRUE)
 #' abline(v=qbeta(p=0.999, 2, 9), col=6, lwd=3)
 #' qm <- function(size) quantileMean(rbeta(size, 2,9), probs=0.999, names=FALSE)
 #' n30  <- replicate(n=500, expr=qm(30))
 #' n1000 <- replicate(n=500, expr=qm(1000))
-#' lines(density(n30)) # with small sample size, high quantiles are systematically
-#' lines(density(n1000), col=3) # underestimated. for Q0.999, n must be > 1000
+#' lines(density(n30)) 
+#' lines(density(n1000), col=3) 
+#' # with small sample size, high quantiles are systematically
+#' # underestimated. for Q0.999, n must be > 1000
 #' 
 #' 
 #' \dontrun{
 #' # #Excluded from CRAN Checks because of the long computing time
-#' # median of 500 simulations:
-#' qmm <- function(size, truncate=0) median(replicate(n=500,
-#'        expr=quantileMean(rbeta(size, 2,9), probs=0.999, names=FALSE, truncate=truncate)))
-#' 
-#' n <- seq(10, 1000, length=30)
-#' medians <- sapply(n, qmm)  # medians of regular quantile average
-#' plot(n, medians, type="l", las=1)
-#' abline(h=qbeta(p=0.999, 2, 9), col=6) # real value
-#' # with truncation:
-#' medians_trunc <- sapply(n, qmm, truncate=0.8) # only top 20% used for quantile estimation
-#' lines(n, medians_trunc, col=2) # censored quantiles don't help!
-#' # In small samples, rare high values do not occur on average
 #' 
 #' # Parametrical quantiles can avoid sample size dependency!
-#' if(!require(devtools)) install.packages("devtools")
-#' devtools::install_github("brry/extremeStat")
-#' library("extremeStat")
+#' library2("extremeStat")
 #' library2("pbapply")
 #' 
-#' distLquantile(rbeta(1000, 2,9), probs=0.999, plot=TRUE, nbest=10) # 10 distribution functions
-#' distLquantile(rbeta(1000, 2,9), probs=0.999, plot=TRUE, nbest=10) # that seem to work well
-#' select <- c("wei","wak","pe3","ln3","kap","gno","gev","gum","gpa","gam")
+#' dlq <- distLquantile(rbeta(1000, 2,9), probs=0.999, list=TRUE, gpd=FALSE)
+#' plotLquantile(dlq, nbest=10) # 10 distribution functions
+#' select <- c("wei","wak","pe3","gno","gev","gum","gpa","gam")
 #' 
-#' pqmm <- function(size, truncate=0, plot=FALSE) median(replicate(n=50,
-#'        expr=mean(distLquantile(rbeta(size, 2,9), probs=0.999, type=select,
-#'           plot=plot, nbest=10, progbars=FALSE, time=FALSE, truncate=truncate))))
+#' # median of 10 simulations:
+#' nsim <- 10 # set higher for less noisy image (but more computing time)
+#' qmm <- function(size, truncate=0) median(replicate(n=nsim,
+#'        expr=quantileMean(rbeta(size, 2,9), probs=0.999, names=FALSE, 
+#'                          truncate=truncate)                            ))
 #' 
-#' #dev.new(record=TRUE)
-#' #pqmm(30, plot=TRUE)
+#' pqmm <- function(size, truncate=0) median(replicate(n=nsim,
+#'        expr=mean(distLquantile(rbeta(size, 2,9), probs=0.999, selection=select,
+#'                  progbars=FALSE, time=FALSE, truncate=truncate, gpd=FALSE, 
+#'                  weighted=FALSE, empirical=FALSE, ssquiet=TRUE)[1:8, 1])   ))
+#'                  
+#' n <- round(  logSpaced(min=10, max=1000, n=15, base=1.4, plot=FALSE)  )
 #' 
+#' medians_emp <- pbsapply(n, qmm)  # medians of regular quantile average
+#' # with truncation, only top 20% used for quantile estimation (censored quant):
+#' medians_emp_trunc <- sapply(n, qmm, truncate=0.8) 
 #' # medians of parametrical quantile estimation
-#' ###suppressMessages(pmedians <- pbsapply(n, pqmm) )  # takes several minutes
-#' write.table(pmedians, file="../inst/extdata/pmedians.txt", row.names=FALSE, col.names=FALSE)
-#' pmedians <- read.table("../inst/extdata/pmedians.txt")[,1]
+#' medians_param       <- pbsapply(n, pqmm)              # takes ~60 secs
+#' medians_param_trunc <- pbsapply(n, pqmm, truncate=0.8)
 #' 
-#' plot(n, medians, type="l", ylim=c(0.4, 0.7), las=1)
+#' plot(n, medians_emp, type="l", ylim=c(0.45, 0.7), las=1)
 #' abline(h=qbeta(p=0.999, 2, 9), col=6) # real value
-#' lines(n, medians_trunc, col=2) # censored quantiles don't help!
-#' lines(n, pmedians, col=4) # overestimated, but not dependent on n
+#' lines(n, medians_emp_trunc, col=2) #  don't help!
+#' # In small samples, rare high values, on average, simply do not occur 
+#' lines(n, medians_param, col=4) # overestimated, but not dependent on n
 #' # with truncation, only top 20% used for quantile estimation
-#' suppressMessages(pmedians_trunc <- pbsapply(n[-1], pqmm, truncate=0.8))
-#' lines(n[-1], pmedians_trunc, col=6) # much better!
-#' # Good for this beta distribution. I don't know how it scales to other dists.
+#' lines(n, medians_param_trunc, col="orange", lwd=3) # much better!
 #' }
 #' 
 #' @param x Numeric vector whose sample quantiles are wanted
