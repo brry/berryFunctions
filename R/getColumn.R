@@ -72,7 +72,7 @@
 #' upp1("Sepal.Length", iris)
 #' upp2("Sepal.Length", iris)
 #' vekt <- c("Sepal.Length","Dummy")
-#' upp1(vekt[1], iris)
+#' upp1(vekt[1], iris) # won't work if called e.g. by testExamples()
 #' upp2(vekt[1], iris)
 #' 
 #' @param x Column name to be subsetted. The safest is to use character strings

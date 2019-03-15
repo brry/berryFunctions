@@ -64,7 +64,7 @@ if(steps>1000) steps <- 1000. In the unlikely case you need more steps, please l
 \examples{
 
 set.seed(42);  x <- 10^rnorm(100, 3);  y <- runif(100)
-linLogTrans(x,y, steps=15, sleep=0.01) # 0.05 might be smoother...
+linLogTrans(x,y, steps=15, sleep=0.05)
 linLogTrans(x,y, steps=15, log="y", ylim=c(0.1, 0.8), base=c(1,2,5))
 
 \dontrun{
@@ -109,15 +109,6 @@ lines(2:1000, diff(linLogTrans(1,1, steps=1000, plot=F)), col=4)
 
 
 d <- findt(300)
-pdf("degreepoly.pdf")
-for(i in 5:30)
-  {
-  plot(d, log="y", type="l", lwd=3, main=i, xlim=c(0,300), ylim=c(1,2))
-  modell <- lm(t ~  poly(x,i, raw=T), data=d)
-  lines(x2, predict(modell, data.frame(x=1:1300)), col=2)
-  }
-dev.off()   # 17 is good
-
 cf <- coef(lm(t ~  poly(x,17, raw=T), data=d)) # these are currently used in the function
 x <- 1:1000
 y <- rowSums(sapply(1:18, function(i) cf[i]*x^(i-1)), na.rm=TRUE)

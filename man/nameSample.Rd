@@ -29,14 +29,14 @@ nameSample may take a lot of time, due to nchar^26 possibilities. That's why it 
 
 ## Not run in RCMD check as they're very time consuming
 \dontrun{
-nameSample("berry")  # After that, you can send the result to colleagues:
+# nameSample("berry")  # After that, you can send the result to colleagues:
 # Kind regards from
 set.seed(1248272); paste(sample(letters,5,TRUE), collapse='')
 
 # calculation time
-                                       # on my slow laptop:   # on PC
-system.time(nameSample("berr"))        # 25 s # berry: 57 s     10  23
-system.time(nameSample("berr", FALSE)) # 23 s          53 s      9  20
+
+system.time(nameSample("ber"))
+system.time(nameSample("ber", FALSE))
 
 # let <- sapply(1:4, function(n) apply(replicate(n, letters[sample(15)]), 1, paste, collapse=""))
 # calctime <- sapply(let, function(x) system.time(nameSample(x, progress=F))[3])

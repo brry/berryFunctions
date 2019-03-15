@@ -19,7 +19,7 @@ Print the \code{\link{str}} of each dataset returned by \code{\link{data}}
 }
 \examples{
 
-dataStr() # all loaded packages on search path (package=NULL)
+# dataStr() # all loaded packages on search path (package=NULL)
 dataStr("datasets") # only datasets in base R
 dataStr("colorspace") # works with an installed but unloaded package
 
