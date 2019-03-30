@@ -12,6 +12,7 @@ Install release version from CRAN:
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version-last-release/berryFunctions)](https://cran.r-project.org/package=berryFunctions) 
 [![downloads](https://cranlogs.r-pkg.org/badges/berryFunctions)](https://www.r-pkg.org/services)
 [![Rdoc](https://www.rdocumentation.org/badges/version/berryFunctions)](https://www.rdocumentation.org/packages/berryFunctions)
+!["berryFunctions dependencies"](https://tinyverse.netlify.com/badge/berryFunctions)
 
 
 ```R
