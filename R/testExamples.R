@@ -68,15 +68,17 @@ message("Total example run time: ", round(sum(extimes[,2])/60,1), " minutes.")
 over <- paste0(basename(extimes[,3]), "(", round(extimes[,2]), ")")[extimes[,2]>5]
 over <- sub(".Rd", "", over, fixed=TRUE)
 message("Time >5 secs in ",length(over)," Rd files: ", toString(over))
-
 # Tell about errors:
 manfailed <- manfiles[mantests>0]
-message("\nErrors in ", length(manfailed), " out of ", length(manfiles), 
-        " documentation examples in ", path,
-        ".\nErrors, warnings / messages / cats and computing times are logged in \n'", 
-        elogfile, "', '", wlogfile, "' and '", tlogfile, "'.", 
-        if(any(mantests>0)) "'.\nFailures occurred in: ",
-        if(any(mantests>0)) toString(basename(manfailed)))
+failed <- any(mantests>0)
+msg <- if(failed) paste0("\nErrors in ", sum(mantests>0), " out of ", 
+       length(manfiles), " documentation examples in ") else "No errors in "
+msg <- paste0(msg, path, if(failed) ".\nErrors, w" else "\nW",
+        "arnings / messages / cats and computing times are logged in \n'",
+        if(failed) elogfile, if(failed) "', '", wlogfile, "' and '", tlogfile, "'.")
+if(failed) msg <- paste0(msg, "\nFailures occurred in: ", 
+                         toString(basename(manfailed)))
+message(msg)
 }
 
 
@@ -104,7 +106,7 @@ on.exit(options(oop), add=TRUE)
 # get code from example sections:
 ex_path <- file.path(tempdir(), paste0(basename(path), "_test.R"))
 tools::Rd2ex(path, ex_path, commentDontrun=FALSE, ...)
-if(!file.exists(ex_path)) {message("No examples were parsed in ", path); return()}
+if(!file.exists(ex_path)) {message("No examples were parsed in ", path); return(0)}
 rd_ex_parsed <- parse(file=ex_path)
 
 # Environment in which to evaluate the code:
