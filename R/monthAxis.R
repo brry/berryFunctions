@@ -31,6 +31,8 @@
 #' monthAxis(ycex=1.4, ytcl=2, lwd.ticks=2)
 #' monthAxis(yline=1, col.axis=4, col=4)
 #' monthAxis(mcex=1, col.axis="red", yformat=" ") # no years labeled
+#' timePlot(900)
+#' monthAxis(nmonths=1) # year labeled for short period as well
 #' 
 #' timePlot(800)
 #' monthAxis()
