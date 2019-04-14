@@ -74,7 +74,8 @@ for(i in 1:length(inFiles))
    inFile_i <- scan(file=inFiles[i], what="char",
                     blank.lines.skip=FALSE, sep="\n", quiet=TRUE, ...)
    # Write filename if wanted:
-   if(names) write(paste(inFiles[i], "\n"), file=File, append=TRUE)
+   if(names) write(paste0("#~ ", basename(inFiles[i]), " ----\n", inFiles[i], "\n"), 
+                   file=File, append=TRUE)
    # selection of lines to write to output
    selection2 <- eval(substitute(selection), envir=environment())
    if(is.null(selection2)) selection2 <- 1:length(inFile_i)
