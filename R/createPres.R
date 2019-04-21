@@ -20,6 +20,8 @@
 #'                 see \code{\link{newFilename}}. DEFAULT: "presentation"
 #' @param path     Location of \code{dir}. Passed to \code{\link{setwd}}.
 #'                 DEFAULT: "."
+#' @param navbullets Logical: include navigation slide bullet points in header?
+#'                 DEFAULT: FALSE
 #' @param bgblack  Logical: set a black background instead of a white one?
 #'                 Requires all R graphics fg and bg colors to be changed!
 #'                 See "How to avoid death By PowerPoint" at 11:49 minutes 
@@ -34,6 +36,7 @@ createPres <- function(
 presname="pres",
 dir="presentation",
 path=".",
+navbullets=FALSE,
 bgblack=FALSE,
 open=TRUE
 )
@@ -71,6 +74,20 @@ Sys.setlocale(category = "LC_TIME", locale="")
 if(bgblack) {bgcolor <- "black" ; txcolor <- "white"}
              
 
+# header (depending on navbullets):
+nb_y <- "\\useoutertheme[subsection=false]{miniframes}"
+nb_n <- "\\setbeamertemplate{headline}
+{%
+  \\begin{beamercolorbox}[ht=3.5ex,dp=1.125ex,%
+      leftskip=0cm,rightskip=0cm plus1filll]{section in head/foot}
+    \\usebeamerfont{section in head/foot}\\usebeamercolor[fg]{section in head/foot}%
+    \\insertsectionnavigationhorizontal{0.99\\textwidth}{}{}
+  \\end{beamercolorbox}%
+}"
+nb_n <- strsplit(nb_n, "\n")[[1]]
+ 
+header <- if(navbullets) paste(  c(nb_y, paste("%",nb_n)  ), collapse="\n")
+          else           paste(  c(paste("%",nb_y), nb_n  ), collapse="\n")
 
 cat(
 "% presentation aboutSomething
@@ -96,7 +113,9 @@ cat(
 % \\beamertemplatenavigationsymbolsempty
 \\setbeamertemplate{navigation symbols}[only frame symbol]
 %\\usetheme{Madrid}
-\\useoutertheme[subsection=false]{miniframes}
+% Navigation slide bullets in header ON / OFF:\n",
+header,
+"
 \\beamersetleftmargin{0.5cm}
 \\beamersetrightmargin{0.5cm}
 \\let\\Tiny=\\tiny % avoid warning: Font shape `OT1/cmss/m/n' in size <4> not available. size <5> substituted on input line
@@ -226,7 +245,7 @@ R package \\rcode{rdwd} ~~$->$~~ easy usage of weather datasets
 % ---------------------------
 
 \\begin{frame}{includegraphics}
-\\includegraphics[height=0.9\\textheight]{fig_extern/MyFig.pdf}
+\\includegraphics[height=0.85\\textheight]{fig_extern/MyFig.pdf}
 % \\includegraphics[width=0.99\\textwidth]{fig_extern/MyFig.pdf}
 \\end{frame}
 

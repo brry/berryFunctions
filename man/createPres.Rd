@@ -5,7 +5,7 @@
 \title{Create .Rnw presentation template}
 \usage{
 createPres(presname = "pres", dir = "presentation", path = ".",
-  bgblack = FALSE, open = TRUE)
+  navbullets = FALSE, bgblack = FALSE, open = TRUE)
 }
 \arguments{
 \item{presname}{Name of .Rnw file to be created. DEFAULT: "pres"}
@@ -16,6 +16,9 @@ see \code{\link{newFilename}}. DEFAULT: "presentation"}
 
 \item{path}{Location of \code{dir}. Passed to \code{\link{setwd}}.
 DEFAULT: "."}
+
+\item{navbullets}{Logical: include navigation slide bullet points in header?
+DEFAULT: FALSE}
 
 \item{bgblack}{Logical: set a black background instead of a white one?
 Requires all R graphics fg and bg colors to be changed!
