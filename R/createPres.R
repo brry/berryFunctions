@@ -91,8 +91,7 @@ header <- if(navbullets) paste(  c(nb_y, paste("%",nb_n)  ), collapse="\n")
 
 cat(
 "% presentation aboutSomething
-% Berry Boessenkool, Potsdam University, Germany
-% berry-b@gmx.de
+% Template by Berry Boessenkool, berry-b@gmx.de
 
 
 % Make sure to set weaving to knitr before compiling:
@@ -176,7 +175,7 @@ opts_chunk$set(cache=T, echo=TRUE, fig.height=3.3, fig.width=5, out.width='0.9\\
 \\end{textblock*}
 \\normalsize
 \\vspace{9em}
-Berry Boessenkool, \\href{http://www.geo.uni-potsdam.de/geoecology.html}{uni-potsdam.de}, ",curmonth,"\\\\[1em]
+Berry Boessenkool, ",curmonth,"\\\\[1em]
 \\texttt{berry-b@gmx.de}\\\\[1em]
 \\href{https://github.com/brry/rdwd\\#rdwd}{github.com/brry/rdwd}\\\\
 \\href{https://cran.r-project.org/package=extremeStat/vignettes/extremeStat.html}{cran.r-project.org/package=extremeStat}\\\\[1em]
