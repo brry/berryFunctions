@@ -93,7 +93,10 @@ monthAxis(side=3, nym_half=2) # if axis > 2 years, label only partially
 
 timePlot(2e3)
 monthAxis()   # long time series (>nym_none) only have years labeled
-monthAxis(side=3, font=2)
+ma <- monthAxis(side=3, font=2)
+abline(v=ma$mtics, col=8)
+abline(v=ma$ytics)          # vertical lines in graph - now add lines/points
+
 
 timePlot(900)
 monthAxis(side=3, mtcl=0) # no tick lines between months
