@@ -6,17 +6,16 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan+Dec 2016
 #' @importFrom utils browseURL find
 #' @export
-#' @seealso \url{https://github.com/brry/rskey} to add this as a keyboard shortcut
+#' @seealso \url{https://github.com/brry/rskey#rskey} to add this as a keyboard shortcut
 #' @examples
-#' \dontrun{ ## browser windows should not be openend in CRAN checks
+#' \dontrun{ ## browser windows should not be opened in CRAN checks
 #' library("berryFunctions")
 #' funSource(colPoints)
 #' funSource("head")
 #' funSource("require")
 #' 
 #' is.error(funSource(earthDist), TRUE, TRUE)
-#' funSource(OSMscale::earthDist)
-#' funSource("OSMscale::earthDist")
+#' funSource("OSMscale::earthDist") # works even for non-installed CRAN packages
 #' }
 #' 
 #' \dontrun{ # developmental testing

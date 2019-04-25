@@ -19,15 +19,14 @@ links that are also opened with \code{\link{browseURL}}
 open source code of a function in a loaded or specified package on github.com/cran or github.com/wch/r-source
 }
 \examples{
-\dontrun{ ## browser windows should not be openend in CRAN checks
+\dontrun{ ## browser windows should not be opened in CRAN checks
 library("berryFunctions")
 funSource(colPoints)
 funSource("head")
 funSource("require")
 
 is.error(funSource(earthDist), TRUE, TRUE)
-funSource(OSMscale::earthDist)
-funSource("OSMscale::earthDist")
+funSource("OSMscale::earthDist") # works even for non-installed CRAN packages
 }
 
 \dontrun{ # developmental testing
@@ -41,7 +40,7 @@ rm(tail)
 
 }
 \seealso{
-\url{https://github.com/brry/rskey} to add this as a keyboard shortcut
+\url{https://github.com/brry/rskey#rskey} to add this as a keyboard shortcut
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jan+Dec 2016
