@@ -30,7 +30,7 @@ plot(cumsum(rnorm(60)), type="l")
 ## locLine() # only do this manually in interactive() mode
 }
 \seealso{
-\code{\link{locator}}, \code{\link{abline}}
+\code{\link{locArrow}}, \code{\link{locator}}, \code{\link{abline}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Mar 2016

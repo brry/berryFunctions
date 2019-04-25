@@ -91,7 +91,6 @@
 #'                 DEFAULT: NA = internally computed from \code{\link{par}("usr")}
 #' @param trunc    Vector with two values: Number of days/seconds to truncate
 #'                 at the left and right end of lrange. DEFAULT: NA
-#' @param ym       Kept for back reference. DEFAULT: TRUE
 #' @param mgp      MarGin Placement. Suggested not to change this, since
 #'                 _tcl and _line defaults are chosen for the DEFAULT: c(3,1,0)
 #' @param mt,ml,yt,yl Lists with further arguments passed to \code{\link{axis}},
@@ -119,7 +118,6 @@ yline    = 0.2,
 las      = 1,
 lrange   = NA,
 trunc    = NA,
-ym       = TRUE,
 mgp      = c(3,1,0),
 mt=NULL, ml=NULL, yt=NULL, yl=NULL,
 quiet=FALSE,
@@ -130,7 +128,6 @@ quiet=FALSE,
 op <- par(mgp=mgp)
 on.exit(par(op), add=TRUE)
 if(yformat=="") warning("yformat='' gives unexpected labeling. Did you mean yformat=' '?")
-if(!ym) warning("For ym=FALSE behaviour, use timeAxis (no longer monthAxis).")
 if(nmonths>=12) nmonths <- 11
 if(length(mlabels)!=12)
  {

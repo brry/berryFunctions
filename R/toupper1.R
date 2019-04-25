@@ -18,5 +18,6 @@ toupper1 <- function(
 x
 )
 {
+warning("toUpper1 will be removed in late 2019. Write your own one-liner instead ;-)")
 paste0(toupper(substr(x,1,1)), substr(x,2,nchar(x)))
 }

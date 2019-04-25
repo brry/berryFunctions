@@ -44,6 +44,7 @@ instGit <- function(
   cleanup=TRUE,
   ...)
 {
+ warning("instGit will be removed late 2019. Use remotes::install_github() instead.")
 owd <- setwd(tempdir())
 on.exit(setwd(owd), add=TRUE)
 pkn <- strsplit(pk, "/")[[1]][2] # package name part

@@ -53,6 +53,7 @@ quiet=FALSE,
 )
 {
 #
+warning("exTime will be deprecated late 2019. Use testExamples on source code instead.")
 # Reroute graphics:
 if(imagefile)
   {

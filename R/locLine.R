@@ -5,7 +5,7 @@
 #' @details Not tested across platforms yet...
 #' @return \code{\link{locator}} result
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Mar 2016
-#' @seealso \code{\link{locator}}, \code{\link{abline}}
+#' @seealso \code{\link{locArrow}}, \code{\link{locator}}, \code{\link{abline}}
 #' @keywords aplot iplot
 #' @importFrom graphics abline locator
 #' @export

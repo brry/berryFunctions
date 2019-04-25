@@ -99,7 +99,8 @@ par(op)
 
 }
 \seealso{
-\code{\link{filter}}, \code{\link{decompose}}, \code{\link{smooth}},
+\code{\link{movAvLines}}, 
+         \code{\link{filter}}, \code{\link{decompose}}, \code{\link{smooth}},
          \code{\link{loess}}, \code{\link[zoo]{rollapply}} (no overlapping!)
 }
 \author{

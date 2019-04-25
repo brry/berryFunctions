@@ -22,14 +22,12 @@ vignette("berryFunctions")
 ?berryFunctions
 ```
 
-Update to the [current development version](https://github.com/brry/berryFunctions/blob/master/DESCRIPTION#L4-L5) from github:
+Update to the [current development version](https://github.com/brry/berryFunctions/blob/master/DESCRIPTION#L4-L5) 
+on github, incl. vignette:
+:
 ```R
-source("https://raw.githubusercontent.com/brry/berryFunctions/master/R/instGit.R")
-instGit("brry/berryFunctions")
-
-# or use devtools:
-if(!requireNamespace("devtools", quitly=TRUE)) install.packages("devtools")
-devtools::install_github("brry/berryFunctions")
+if(!requireNamespace("remotes", quitly=TRUE)) install.packages("remotes")
+remotes::install_github("brry/berryFunctions", build_opts="--no-manual")
 ```
 
 ### trouble
