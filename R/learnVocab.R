@@ -78,7 +78,7 @@ day %% 16 == 12, # 5: 12 28 44 60
 day %% 32 == 24, # 6: 24 59
 day == 56     )) # 7: 56
 
-for(r in which(voc$LEVEL %in% levels_to_test)) # r: row number
+for(r in sample(which(voc$LEVEL %in% levels_to_test))) # r: row number
 {
 cat("\014") # clear console
 v1 <- paste0(n1,": ", removeSpace(voc[r,2]), " (ENTER -> Solution)")
