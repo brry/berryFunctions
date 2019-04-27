@@ -13,8 +13,6 @@ ToDo-list
 - late 2019: delete exTime, instGit, timeAxis, toUpper1
 - lsc: better example dataset, optim problems
 - implement identical(FALSE, legargs) wherever owa is used and that makes sense
-- climateGraph documentation Roxygen issue (escaping unicode)
-- climateGraph compress=TRUE yields error when no values are >100
 - tryStack: if silent=TRUE, put all warnings and messages into final output (not just last one)
 - tryStack: example warning with log(-1:6) for non-repeated call stack
 - tryStack: mapply, do.call etc put function name in next element

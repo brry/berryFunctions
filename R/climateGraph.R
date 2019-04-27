@@ -1,8 +1,10 @@
 
-
-
 # not run by roxygen because of unicode problems!
-
+# After it's been run for updates, change the first line to
+# % edited for Unicode correction: usage section main+units
+# and in the usage section use:
+#  main = "StatName\\n52\U{00B0}24' N / 12\U{00B0}58' E\\n42 m aSL",
+#  units = c("\U{00B0}C", "mm"), labs = substr(month.abb, 1, 1), 
 
 
 #' climate graph after Walter and Lieth
@@ -54,7 +56,7 @@
 #' # but heigths of rain cannot be visually compared anymore
 #' climateGraph(temp, rain, compress=TRUE, ylim=c(-10, 90))
 #' # needs ylim in linearly continued temp units
-#' climateGraph(temp, rain, compress=TRUE, argcomp=list(density=30, col=6))
+#' climateGraph(temp, rain, compress=TRUE, argcomp=list(density=30, col="green"))
 #' 
 #' # example with (fake) weekly relative soil moisture (RSM) added:
 #' temp <- c(-9.3,-8.2,-2.8,6.3,13.4,16.8,18.4,17,11.7,5.6,-1,-5.9)
@@ -180,7 +182,6 @@ climateGraph <- function(
      colrain="blue",
      coltemp="red",
      lwd=2,
-     #colcomp="purple", # color for compressed polygon ##### or in argcomp?
      arghumi=NULL,
      argarid=NULL,
      argcomp=NULL,
@@ -271,6 +272,7 @@ arghumi_def <- list(x=c(px, hpx), y=c(rpy, hpy), col=rgb(0,0,1, alpha=0.3), bord
 do.call(polygon, args=owa(d=arghumi_def, a=arghumi, "x","y")  )
 
 # polygon drawing - compressed area -----------------------------------------------------
+argcomp_def <- list(col=rgb(1,0,1, alpha=0.3)) # needed later if compress=TRUE but no rain>100
 if(compress & sum(diff(rain>100) !=0) >0 )
 {
 # interception coordinates of rain with 1000-axis (baseline of compressed polygon):

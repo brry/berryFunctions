@@ -98,7 +98,7 @@ climateGraph(temp, rain, compress=TRUE)
 # but heigths of rain cannot be visually compared anymore
 climateGraph(temp, rain, compress=TRUE, ylim=c(-10, 90))
 # needs ylim in linearly continued temp units
-climateGraph(temp, rain, compress=TRUE, argcomp=list(density=30, col=6))
+climateGraph(temp, rain, compress=TRUE, argcomp=list(density=30, col="green"))
 
 # example with (fake) weekly relative soil moisture (RSM) added:
 temp <- c(-9.3,-8.2,-2.8,6.3,13.4,16.8,18.4,17,11.7,5.6,-1,-5.9)
