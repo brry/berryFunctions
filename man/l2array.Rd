@@ -7,7 +7,7 @@
 l2array(x, ...)
 }
 \arguments{
-\item{x}{List with arrays. The dimension of the first is target dimension.}
+\item{x}{List with arrays/data.frames. The dimension of the first is target dimension.}
 
 \item{\dots}{Further arguments passed to \code{abind::\link{abind}}}
 }
@@ -21,16 +21,16 @@ If dimnames do not need to be checked, you can also directly use \cr
 }
 \examples{
 
+LISTm <- lapply(list(1:6,7:12,13:18,19:24), matrix, ncol=3,
+               dimnames=list(x=c("a","b"), y=c("i","j","k"))  )
+l2array(LISTm)
+
 LIST <- lapply(LETTERS[1:5], function(x) array(paste0(x,1:24), dim=c(3,4,2)))
 str(LIST)
 LIST[[2]]
 LISTa1 <- l2array(LIST)
 LISTa1
 str(LISTa1)
-
-LISTm <- lapply(list(1:6,7:12,13:18,19:24), matrix, ncol=3,
-               dimnames=list(x=c("a","b"), y=c("i","j","k"))  )
-l2array(LISTm)
 
 # The old l2array (<1.13.14, 2017-01-06) was very slow on large lists.
 # I then found abind, which is much much much faster and easier on memory!
@@ -40,6 +40,12 @@ LISTa2 <- do.call(abind::abind, list(LIST, rev.along=0, use.dnns=TRUE))
 LISTa2
 stopifnot(all(LISTa1==LISTa2))
 rm(LIST, LISTa1, LISTa2)
+
+
+# list of dataframes:
+LDF <- list(IR1=iris[1:5,1:2], IR2=iris[11:15,1:2], IR3=iris[21:25,1:2])
+l2array(LDF)
+
 
 
 # General intro to arrays -----
