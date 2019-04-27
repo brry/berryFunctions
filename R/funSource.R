@@ -4,7 +4,7 @@
 #' 
 #' @return links that are also opened with \code{\link{browseURL}}
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan+Dec 2016
-#' @importFrom utils browseURL find
+#' @importFrom utils browseURL find getAnywhere
 #' @export
 #' @seealso \url{https://github.com/brry/rskey#rskey} to add this as a keyboard shortcut
 #' @examples
