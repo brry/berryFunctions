@@ -17,36 +17,91 @@
 #' 
 showPal <- function(cex=4,...)
 {
-op <- par(mfcol=c(11,2), mar=c(0,0,0,0), oma=c(0,0,1.8,0), yaxt="n", xaxt="n", ...)
+op <- par(mfcol=c(9,2), mar=c(0,0,0,0), oma=c(0,0,1.8,0), yaxt="n", xaxt="n", ...)
 on.exit(par(op), add=TRUE)
+pal <- function(cols, txt)
+ {
+ n <- length(cols)
+ plot(rep(1, n), pch=15, cex=cex, col=cols)
+ text(par("usr")[1] + 0.05*diff(par("usr")[1:2]), 1, txt, adj=0) # text(n/2+0.5, 1, txt)
+ }
 # Sequential palette -----------------------------------------------------------
-plot(rep(1, 12), pch=15, cex=cex, col=seqPal(12))            ; text(  6, 1, "default")
-plot(rep(1,  7), pch=15, cex=cex, col=seqPal(7))             ; text(  3, 1, "n=7 works, too")
-plot(rep(1,300), pch=15, cex=cex, col=seqPal(300))           ; text(150, 1, "n=300")
-plot(rep(1,300), pch=15, cex=cex, col=seqPal(300, extr=TRUE)); text(150, 1, "extr=TRUE")
-plot(rep(1, 12), pch=15, cex=cex, col=seqPal(alpha=0.4))     ; text(  6, 1, "alpha=0.4 (semi-transparency)")
-plot(rep(1, 12), pch=15, cex=cex, col=seqPal(reverse=TRUE))  ; text(  6, 1, "rev=TRUE")
-plot(rep(1,300), pch=15, cex=cex, col=seqPal(300, yb=TRUE))  ; text(150, 1, "yb=TRUE")
-plot(rep(1,300), pch=15, cex=cex, col=seqPal(300, yr=TRUE))  ; text(150, 1, "yr=TRUE")
-plot(rep(1,300), pch=15, cex=cex, col=seqPal(300, gb=TRUE))  ; text(150, 1, "gb=TRUE")
-plot(rep(1,300), pch=15, cex=cex, col=seqPal(300,  b=TRUE))  ; text(150, 1, "b=TRUE")
-plot(rep(1,300), pch=15, cex=cex, col=rainbow2(300))         ; text(150, 1, "berryFunctions::rainbow2(300)", font=2)
+pal(seqPal()               , "default, n=100")
+pal(seqPal(extr=TRUE)      , "extr=TRUE")
+pal(seqPal(alpha=0.4, n=12), "alpha=0.4 (semi-transparency)")
+pal(seqPal(reverse=TRUE)   , "rev=TRUE")
+pal(seqPal(yb=TRUE)        , "yb=TRUE")
+pal(seqPal(yr=TRUE)        , "yr=TRUE")
+pal(seqPal(gb=TRUE)        , "gb=TRUE")
+pal(seqPal( b=TRUE)        , "b=TRUE")
+pal(seqPal(colors=c("orange","green","darkblue")), 
+    'col=c("orange","green","darkblue"))')
 title(main="berryFunctions::seqPal", xpd=NA, outer=TRUE, adj=0.2, line=0.5)
 
 # Diverging palette ------------------------------------------------------------
-plot(rep(1, 12), pch=15, cex=cex, col=divPal(12))            ; text(  6, 1, "default")
-plot(rep(1,  7), pch=15, cex=cex, col=divPal(7))             ; text(  3, 1, "n=7")
-plot(rep(1,300), pch=15, cex=cex, col=divPal(300))           ; text(150, 1, "n=300")
-plot(rep(1,300), pch=15, cex=cex, col=divPal(300, bias=0.5)) ; text(150, 1, "bias=0.5")
-plot(rep(1, 12), pch=15, cex=cex, col=divPal(alpha=0.4))     ; text(  6, 1, "alpha=0.4 (semi-transparency)")
-plot(rep(1, 12), pch=15, cex=cex, col=divPal(reverse=TRUE))  ; text(  6, 1, "rev=TRUE")
-plot(rep(1,300), pch=15, cex=cex, col=divPal(300, rwb=TRUE)) ; text(150, 1, "rwb=TRUE")
-plot(rep(1,300), pch=15, cex=cex, col=divPal(300, ryb=TRUE)) ; text(150, 1, "ryb=TRUE")
-plot(rep(1,300), pch=15, cex=cex, col=divPal(300,  gp=TRUE)) ; text(150, 1, "gp=TRUE")
-plot(rep(1,300), pch=15, cex=cex, col=divPal(300,  br=TRUE)) ; text(150, 1, "br=TRUE")
-plot(rep(1,300), pch=15, cex=cex, col=seqPal(300,colors=c("darkblue","green","orange")))
-text(150, 1, 'col=c("darkblue","green","orange"))')
+pal(divPal()               , "default")
+pal(divPal(bias=0.5)       , "bias=0.5")
+pal(divPal(alpha=0.4, n=12), "alpha=0.4, n=12")
+pal(divPal(rwb=TRUE)       , "rwb=TRUE")
+pal(divPal(ryb=TRUE)       , "ryb=TRUE")
+pal(divPal( gp=TRUE)       , "gp=TRUE")
+pal(divPal( br=TRUE)       , "br=TRUE")
 title(main="berryFunctions::divPal", xpd=NA, outer=TRUE, adj=0.8, line=0.5)
+
+plot.new()
+pal(catPal(), "")
+title(main="berryFunctions::catPal", xpd=NA, line=0.5)
+}
+
+
+
+# + catPal ----
+
+#' @title Categorical color palette
+#' @description 
+#' Categorical color palette according to IwantHue as displayed on
+#' \url{https://visual.ly/blog/subtleties-of-color-different-types-of-data-require-different-color-schemes/}
+#' @return Character string vector with color names
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Apr 2019
+#' @seealso \code{\link{showPal}}, \code{\link{seqPal}}, \code{\link{divPal}}
+#' @keywords color dplot
+#' @export
+#' @examples
+#' plot(rep(1,12), pch=16, cex=5, col=catPal(12), xaxt="n")
+#' showPal()
+#' plot(cumsum(rnorm(40)), type="l", col=catPal()[1], ylim=c(-10,10))
+#' for(i in 2:6) lines(cumsum(rnorm(40)), col=catPal()[i])
+#' @param n Number of colors, max 12. DEFAULT: 12
+#' @param set Integer for which set to use. Currently, only 1 is implemented.
+#' @param alpha Transparency (0=transparent, 1=fully colored). DEFAULT: 1
+catPal <- function(
+n=12,
+set=1,
+alpha=1
+)
+{
+if(set==1){
+RGB <- read.table(header=TRUE, sep=",", text="
+r,g,b
+132, 213, 164
+192,  89, 203
+208,  83,  61
+ 65,  83,  84
+206, 169,  83
+145, 212,  75
+205,  91, 137
+168, 182, 192
+121, 126, 203
+ 86, 117,  57
+114,  66,  47
+ 93,  55,  98")
+cols <- rgb(RGB$r, RGB$g, RGB$b, maxColorValue=255)}
+else stop("Currently, only set=1 is available.")
+if(n>12) n <- 12
+if(n<1)  n <- 1
+outcols <- cols[1:n]
+if(alpha!=1) outcols <- addAlpha(outcols, alpha)
+outcols
 }
 
 
@@ -71,7 +126,7 @@ title(main="berryFunctions::divPal", xpd=NA, outer=TRUE, adj=0.8, line=0.5)
 #' @examples
 #' plot(rep(1,12), pch=16, cex=5, col=divPal(12), xaxt="n")
 #' showPal()
-#' @param n Number of colors. DEFAULT: 12
+#' @param n Number of colors. DEFAULT: 100
 #' @param reverse Reverse colors? DEFAULT: FALSE
 #' @param alpha Transparency (0=transparent, 1=fully colored). DEFAULT: 1
 #' @param rwb Should colors be in red-white-blue instead of brown-blue? DEFAULT: FALSE
@@ -82,7 +137,7 @@ title(main="berryFunctions::divPal", xpd=NA, outer=TRUE, adj=0.8, line=0.5)
 #' @param \dots Further arguments passed to \code{\link{colorRamp}}
 #' 
 divPal <- function(
-n=12,
+n=100,
 reverse=FALSE,
 alpha=1,
 rwb=FALSE,
@@ -99,7 +154,6 @@ if(rwb) cols <- c("red","white","blue")
 if(ryb) cols <- c("red","khaki1","blue")
 if(gp) cols <- c("#859B12","#A0AF52","#BCBF8B","#DBCFB9","#D5C7CC","#C593B8","#AB78A2","#8A4683")
 if(br) cols <- c("#3F797F","#6498A0","#8BB7B5","#BED8D9","#FCC6A9","#E69A6E","#DC6E3C","#BC4231")
-if( (gp|br) & missing(n) ) n <- 8
 if(!is.null(colors)) cols <- colors
 if(reverse) cols <- rev(cols)
 outcols <- colorRampPalette(cols, ...)(n)
@@ -134,7 +188,7 @@ outcols
 #' for(b in seq(0.99, 1.01, len=30))
 #'     points(rep(b, 1000), pch=15, cex=1, col=seqPal(1000, logbase=b))
 #' 
-#' @param n Number of colors. DEFAULT: 12
+#' @param n Number of colors. DEFAULT: 100
 #' @param reverse Reverse colors? DEFAULT: FALSE
 #' @param alpha Transparency (0=transparent, 1=fully colored). DEFAULT: 1
 #' @param extr Should colors span possible range more extremely?
@@ -149,7 +203,7 @@ outcols
 #' @param \dots Further arguments passed to \code{\link{colorRamp}}
 #' 
 seqPal <- function(
-n=12,
+n=100,
 reverse=FALSE,
 alpha=1,
 extr=FALSE,
@@ -183,5 +237,3 @@ if(logbase!=1)
 if(alpha!=1) outcols <- addAlpha(outcols, alpha)
 outcols
 }
-
-

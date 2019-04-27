@@ -4,12 +4,12 @@
 \alias{seqPal}
 \title{Sequential color palette}
 \usage{
-seqPal(n = 12, reverse = FALSE, alpha = 1, extr = FALSE,
+seqPal(n = 100, reverse = FALSE, alpha = 1, extr = FALSE,
   yb = FALSE, yr = FALSE, gb = FALSE, b = FALSE, colors = NULL,
   logbase = 1, ...)
 }
 \arguments{
-\item{n}{Number of colors. DEFAULT: 12}
+\item{n}{Number of colors. DEFAULT: 100}
 
 \item{reverse}{Reverse colors? DEFAULT: FALSE}
 

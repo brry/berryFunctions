@@ -4,11 +4,11 @@
 \alias{divPal}
 \title{Diverging color palette}
 \usage{
-divPal(n = 12, reverse = FALSE, alpha = 1, rwb = FALSE,
+divPal(n = 100, reverse = FALSE, alpha = 1, rwb = FALSE,
   ryb = FALSE, gp = FALSE, br = FALSE, colors = NULL, ...)
 }
 \arguments{
-\item{n}{Number of colors. DEFAULT: 12}
+\item{n}{Number of colors. DEFAULT: 100}
 
 \item{reverse}{Reverse colors? DEFAULT: FALSE}
 
