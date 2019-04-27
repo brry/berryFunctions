@@ -76,7 +76,7 @@ is.error( l2df(eg5), tell=TRUE )# it is not possible to do this with a data.fram
 eg6 <- list(AA=data.frame(BB=1:8, CC=4:-3), DD=data.frame(EE=23:24, FF=c(-3,2)))
 eg6
 do.call(cbind, eg6) # but this recycles the values of shorter tables!
-names(eg6$DD) <- names(eg6$AA)
+colnames(eg6$DD) <- colnames(eg6$AA)
 do.call(rbind, eg6)
 # check some of the links above for more solutions...
 

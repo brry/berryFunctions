@@ -74,7 +74,7 @@
 #' eg6 <- list(AA=data.frame(BB=1:8, CC=4:-3), DD=data.frame(EE=23:24, FF=c(-3,2)))
 #' eg6
 #' do.call(cbind, eg6) # but this recycles the values of shorter tables!
-#' names(eg6$DD) <- names(eg6$AA)
+#' colnames(eg6$DD) <- colnames(eg6$AA)
 #' do.call(rbind, eg6)
 #' # check some of the links above for more solutions...
 #' 
@@ -88,6 +88,9 @@ l2df <- function(
 list,
 byrow=TRUE)
 {
+cls <- unlist(sapply(list, class))
+if("data.frame" %in% cls) stop(paste("l2df does not work for lists with data.frames.",
+                               "Use r/c-bind instead: do.call(rbind, yourlist)"))
 maxlen <- max(sapply(list,length))
 df <- sapply(list, "[", 1:maxlen) # apply the indexing function to each element
 ###cn <- colnames(df)

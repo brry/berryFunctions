@@ -16,7 +16,6 @@ ToDo-list
 - tryStack: example warning with log(-1:6) for non-repeated call stack
 - tryStack: mapply, do.call etc put function name in next element
 - if tryStack+traceCall moved to own pkg trace, add tstop, twarning and tmessage with traceCall
-- l2df: warn/convert if list contains data.frames instead of vectors
 - getColumn: consider renaming argument x
 
 
