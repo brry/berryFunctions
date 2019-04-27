@@ -86,8 +86,8 @@ zlab <- if(missing(zlab)) deparse(zlab) else zlab
 #
 if(!missing(data)) # get vectors from data.frame
   {
-  dates <- data[ , deparse(substitute(dates))]
-  values<- data[ , deparse(substitute(values))]
+  dates  <- getColumn(substitute(dates ), data)
+  values <- getColumn(substitute(values), data)
   }
 #check input
 if(length(dates)!=length(values)) stop("length of dates and values not equal (",
