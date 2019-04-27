@@ -10,7 +10,6 @@ ToDo-list
 - colPoints: if z is matrix, use image/filled.contour/heatmap instead of points
 - colPointsLegend: improve text placement position for large/small legend fields
 - contemplate moving tryStack and traceCall to own package, maybe "trace"
-- insertRows: r <- r + seq_along(r)-1
 - late 2019: delete exTime, instGit, timeAxis, toUpper1
 - colPoints: zlog=TRUE
 - linReg: col, colline, colband

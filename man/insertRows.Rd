@@ -4,15 +4,24 @@
 \alias{insertRows}
 \title{insert rows to data.frame}
 \usage{
-insertRows(df, r, new = NA)
+insertRows(df, r, new = NA, rcurrent = FALSE)
 }
 \arguments{
 \item{df}{data.frame}
 
-\item{r}{Row number (not name!), at which the \code{new} row is to be inserted. Can be a vector}
+\item{r}{Row number (not name!), at which the \code{new} row is to be inserted.
+Can be a vector.}
 
-\item{new}{Vector with data to be inserted, is recycled. Alternatively, a data.frame, whose rows are put into the r locations.
-If it has more rows than length(r), the excess rows are ignored. DEFAULT: NA}
+\item{new}{Vector with data to be inserted, is recycled.
+Alternatively, a data.frame, whose rows are put into the r locations.
+If it has more rows than length(r), the excess rows are ignored.
+DEFAULT: NA}
+
+\item{rcurrent}{Logical: should \code{r} specify the current rows of \code{df},
+after which \code{new} is to be appended?
+If FALSE (the default for backwards compatibility), the rownumbers 
+of the output (instead of the input) are \code{r}. I.e. \code{new} is 
+inserted \emph{at}, not \emph{after} the rownumber. DEFAULT: FALSE}
 }
 \value{
 data.frame
@@ -28,16 +37,20 @@ Has not yet been tested with RWI (really weird input), so might not be absolutel
 existingDF <- as.data.frame(matrix(1:20, nrow=5, ncol=4))
 existingDF
 insertRows(existingDF, 2) # default new=NA is recycled
+insertRows(existingDF, 2, rcurrent=TRUE) # after current line, not at it
 insertRows(existingDF, 2, 444:446)
 insertRows(existingDF, 3, new=matrix(10:1,ncol=2)) # input warning
 insertRows(existingDF, 1)
 insertRows(existingDF, 5)
-insertRows(existingDF, 6) # weird stuff...
-insertRows(existingDF, 9) # not supposed to do that
+insertRows(existingDF, 6) # use addRows for this:
+addRows(existingDF, n=1)
+insertRows(existingDF, 9) # pads NA rows inbetween
 
 # Works for multiple rows as well:
+insertRows(existingDF, r=c(2,4,5), new=NA, rcurrent=TRUE)
 insertRows(existingDF, r=c(2,4,5), new=NA)
 insertRows(existingDF, r=c(2,4,4), new=NA)
+insertRows(existingDF, r=c(2,4,4), new=NA, rcurrent=TRUE)
 
 # Also works with a data.frame for insertion:
 insertDF <- as.data.frame(matrix(101:112, nrow=3, ncol=4))
