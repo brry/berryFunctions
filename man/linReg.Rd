@@ -5,7 +5,8 @@
 \title{linear regression with plotting}
 \usage{
 linReg(x, y = NULL, data = NULL, add = FALSE, digits = 2,
-  pch = 16, col = 2, colband = addAlpha(col), level = 0.95,
+  pch = 16, col = "black", colline = "red",
+  colband = addAlpha(colline), level = 0.95,
   plotrange = par("usr")[1:2], lwd = 1,
   xlab = deparse(substitute(x)), ylab = deparse(substitute(y)),
   main = "linear regression", pos1 = "top", pos2 = NULL, inset = 0,
@@ -27,7 +28,9 @@ If values are not specified, they are set equal to the first. DEFAULT: 2}
 
 \item{pch}{Point Character of datapoints, see \code{\link{par}}. DEFAULT: 16}
 
-\item{col}{Color of the regression line, see \code{\link{par}}. DEFAULT: 2}
+\item{col}{Color of points. DEFAULT: "black"}
+
+\item{colline}{Color of the regression line, see \code{\link{par}}. DEFAULT: "red"}
 
 \item{colband}{Color of the confidence region band. DEFAULT: addAlpha(col)}
 
@@ -70,20 +73,21 @@ a <- 1:30
 b <- a/2.345+rnorm(30,0,3)
 
 linReg(a,b)
-linReg(a,b, ylab="Hallo", pch=1, col=3, main="Regression by Berry")
+linReg(a,b, ylab="Hallo", pch=1, colline=3, main="Regression by Berry")
 linReg(a, b, pos1=15, pos2=0) # position of topleft corner of legend
-linReg(a, b, pos1=NA, col="orange") # to suppress legend
+linReg(a, b, pos1=NA) # to suppress legend
 linReg(a, b, plotrange=5:20) # only for plotting, all data points are used!
 linReg(a,b, digits=c(2,3,2,-1) ) # Do not write RMSE into legend
 
 # Formula specification:
 linReg(b~a)
-linReg(Volume~Height, data=trees)
+linReg(Fertility~Education, data=swiss, col="blue", colline="green")
+# col is for points, colline + colband for regression line + conf.int.
 
 # For more flexibility with the datapoints, plot first, then use linReg with add=TRUE:
 plot(a,b, xlim=c(-5,45))
 linReg(a, b, pos1="bottomright", add=TRUE, inset=.1) # inset: distance from plot border
-linReg(a, b, digits=c(7,4,3), add=TRUE, col=3, lty=2, lwd=4, level=0.8)
+linReg(a, b, digits=c(7,4,3), add=TRUE, colline=3, lty=2, lwd=4, level=0.8)
 linReg(a, b, pos1="topleft", inset=c(-0.1, 0.3), legargs=list(xpd=TRUE), add=TRUE)
 
 }
