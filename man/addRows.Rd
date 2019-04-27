@@ -26,7 +26,8 @@ addRows(MYDF, 3)
 
 }
 \seealso{
-\code{\link{insertRows}}, \code{\link{data.frame}}, \code{\link{matrix}}, \code{\link{rbind}}
+\code{\link{insertRows}}, \code{\link{sortDF}}, 
+\code{\link{data.frame}}, \code{\link{matrix}}, \code{\link{rbind}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2014

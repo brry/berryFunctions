@@ -4,7 +4,8 @@
 #' 
 #' @return data.frame
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, June 2015
-#' @seealso \code{\link{sort}}, \code{\link{order}}
+#' @seealso \code{\link{sort}}, \code{\link{order}}, 
+#' \code{\link{insertRows}}, \code{\link{addRows}}
 #' @keywords univar manip arith
 #' @export
 #' @examples

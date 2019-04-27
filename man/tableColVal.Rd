@@ -77,7 +77,7 @@ unlink("TableColVal.pdf")
 
 }
 \seealso{
-\code{\link{pdf}}, \code{\link{heatmap}}
+\code{\link{pdf}}, \code{\link{heatmap}}, \code{\link{sortDF}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Nov 2012 + Nov 2016

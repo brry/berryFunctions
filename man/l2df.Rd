@@ -89,7 +89,7 @@ do.call(rbind, eg6)
   \url{http://stackoverflow.com/questions/4227223/r-list-to-data-frame}
 }
 \seealso{
-\code{\link{l2array}}, \code{\link{sapply}}.
+\code{\link{l2array}}, \code{\link{sapply}}, \code{\link{sortDF}}.
          If you have a LARGE list each with the same number of values,
          use the (much!) faster: \code{plyr::quickdf}.
 }

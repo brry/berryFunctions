@@ -4,7 +4,7 @@
 #' 
 #' @return data.frame
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2014
-#' @seealso \code{\link{l2array}}, \code{\link{sapply}}.
+#' @seealso \code{\link{l2array}}, \code{\link{sapply}}, \code{\link{sortDF}}.
 #'          If you have a LARGE list each with the same number of values,
 #'          use the (much!) faster: \code{plyr::quickdf}.
 #' @references

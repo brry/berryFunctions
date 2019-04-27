@@ -8,7 +8,8 @@
 
 #' @return A data.frame
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2014
-#' @seealso \code{\link{insertRows}}, \code{\link{data.frame}}, \code{\link{matrix}}, \code{\link{rbind}}
+#' @seealso \code{\link{insertRows}}, \code{\link{sortDF}}, 
+#' \code{\link{data.frame}}, \code{\link{matrix}}, \code{\link{rbind}}
 #' @keywords misc
 #' @export
 #' @examples

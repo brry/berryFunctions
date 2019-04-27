@@ -50,7 +50,7 @@ insertRows(existingDF, c(2,4:6), new=insertDF) # rows are recycled
 \url{http://stackoverflow.com/questions/11561856/add-new-row-to-dataframe}
 }
 \seealso{
-\code{\link{addRows}}
+\code{\link{addRows}}, \code{\link{sortDF}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Oct 2015, based on code by Ari B. Friedmann

@@ -32,7 +32,8 @@ sortDF(USArrests[USArrests$Murder>11,], 3)
 
 }
 \seealso{
-\code{\link{sort}}, \code{\link{order}}
+\code{\link{sort}}, \code{\link{order}}, 
+\code{\link{insertRows}}, \code{\link{addRows}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, June 2015
