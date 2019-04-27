@@ -21,7 +21,6 @@ ToDo-list
 - if tryStack+traceCall moved to own pkg trace, add tstop, twarning and tmessage with traceCall
 - ciBand: check if at all x values yl,ym,yu are in ascending order
 - catPal for categorical palettes
-- funSource: add option "local" for settings without internet connection
 - l2df: warn/convert if list contains data.frames instead of vectors
 - getColumn: consider renaming argument x
 

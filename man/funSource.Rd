@@ -4,13 +4,16 @@
 \alias{funSource}
 \title{Source code of a function}
 \usage{
-funSource(x, character.only = is.character(x))
+funSource(x, character.only = is.character(x), local = FALSE)
 }
 \arguments{
 \item{x}{function name, with or without quotation marks}
 
 \item{character.only}{If TRUE, look for SomeFun instead of MyFun if
 MyFun <- "SomeFun". DEFAULT: \code{\link{is.character}(x)}}
+
+\item{local}{Open offline version of the code? Lacks comments and
+original formatting of source code. DEFAULT: FALSE}
 }
 \value{
 links that are also opened with \code{\link{browseURL}}
@@ -23,13 +26,13 @@ open source code of a function in a loaded or specified package on github.com/cr
 library("berryFunctions")
 funSource(colPoints)
 funSource("head")
-funSource("require")
+funSource("require", local=TRUE) # usefull when offline
 
-is.error(funSource(earthDist), TRUE, TRUE)
 funSource("OSMscale::earthDist") # works even for non-installed CRAN packages
 }
 
 \dontrun{ # developmental testing
+is.error(funSource("earthDist"), TRUE, TRUE) # Error for unloaded package
 require(plotrix); require(scales)
 funSource(rescale) # from the last loaded package
 

@@ -12,13 +12,13 @@
 #' library("berryFunctions")
 #' funSource(colPoints)
 #' funSource("head")
-#' funSource("require")
+#' funSource("require", local=TRUE) # usefull when offline
 #' 
-#' is.error(funSource(earthDist), TRUE, TRUE)
 #' funSource("OSMscale::earthDist") # works even for non-installed CRAN packages
 #' }
 #' 
 #' \dontrun{ # developmental testing
+#' is.error(funSource("earthDist"), TRUE, TRUE) # Error for unloaded package
 #' require(plotrix); require(scales)
 #' funSource(rescale) # from the last loaded package
 #' 
@@ -30,14 +30,19 @@
 #' @param x function name, with or without quotation marks
 #' @param character.only If TRUE, look for SomeFun instead of MyFun if
 #'                       MyFun <- "SomeFun". DEFAULT: \code{\link{is.character}(x)}
+#' @param local          Open offline version of the code? Lacks comments and
+#'                       original formatting of source code. DEFAULT: FALSE
 #' 
 funSource <- function(
 x,
-character.only=is.character(x)
+character.only=is.character(x),
+local=FALSE
 )
 {
 # change input to character:
-if (!character.only) x <- deparse(substitute(x))
+xname <- deparse(substitute(x))
+xname <- gsub('"', "", xname)
+if(!character.only) x <- xname
 if(length(x)>1) stop("length(x) must be 1, not ", length(x))
 
 # Get package name -------------------------------------------------------------
@@ -67,6 +72,21 @@ if(length(pn)>1)
   pn <- pn[1]
   }
 }
+
+# return offline function content ----------------------------------------------
+# reformatted by R, not original source
+if(local)
+  {
+  File <- paste0(tempdir(), "/", xname, ".R")
+  dd <- getAnywhere(x)
+  sink(File)
+  print(dd$objs[[1L]])
+  sink()
+  # Open the file with the program associated with its file extension
+  message("Now opening (in default viewer): ", File)
+  openFile(File)
+  return(invisible(File))
+  }
 
 # select mirror (base R or CRAN) -----------------------------------------------
 
