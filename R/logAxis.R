@@ -117,9 +117,11 @@ else # horizontal lines, labels at y-axis:
   else abline(h=log10(lv$all), col=lcol, lty=lty, lwd=lwd)
   }
 # axis labels:
-if(is.null(labels)) labels <- lv$labs
+resetlabels <- FALSE # reset to NULL in case logAxis(side=1:2) is called for different ranges
+if(is.null(labels)) {labels <- lv$labs ; resetlabels <- TRUE}
 if(log) axis(side=side_i, at=lv$vals,        labels=labels, las=las, ...)
 else    axis(side=side_i, at=log10(lv$vals), labels=labels, las=las, ...)
+if(resetlabels) labels <- NULL
 if(allticks)
   {
   lv$add <- lv$all[!lv$all %in% lv$vals]
