@@ -8,23 +8,20 @@ ToDo-list
 ---------------------------------------
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
 - colPoints: if z is matrix, use image/filled.contour/heatmap instead of points
+- colPoints: add argument zlog=TRUE
 - colPointsLegend: improve text placement position for large/small legend fields
-- contemplate moving tryStack and traceCall to own package, maybe "trace"
 - late 2019: delete exTime, instGit, timeAxis, toUpper1
-- colPoints: zlog=TRUE
 - lsc: better example dataset, optim problems
 - implement identical(FALSE, legargs) wherever owa is used and that makes sense
-- exp4p: allow initial values for optim, try to improve with nls(y~expfun(p,x=x), start=as.list(param) )
 - climateGraph documentation Roxygen issue (escaping unicode)
 - climateGraph compress=TRUE yields error when no values are >100
-- tryStack: if silent=TRUE, put warnings and messages into final output (all of them, not just last one)
+- tryStack: if silent=TRUE, put all warnings and messages into final output (not just last one)
 - tryStack: example warning with log(-1:6) for non-repeated call stack
 - tryStack: mapply, do.call etc put function name in next element
+- if tryStack+traceCall moved to own pkg trace, add tstop, twarning and tmessage with traceCall
 - ciBand: check if at all x values yl,ym,yu are in ascending order
-- instGit: check versions of dependencies
 - catPal for categorical palettes
 - funSource: add option "local" for settings without internet connection
-- tstop, twarning and tmessage with traceCall
 - l2df: warn/convert if list contains data.frames instead of vectors
 - getColumn: consider renaming argument x
 
