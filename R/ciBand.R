@@ -94,6 +94,11 @@ if( length(yu) != nyl) stop("Vectors yu and yl are not of the same length. (",
 if( length( x) != nyl ) stop("Vectors x and yu/yl are not of the same length. (",
                          length( x), " and ", nyl, " ).")
 if(!add) plot(x, yu, type="n", las=1, ylim=ylim, ...)
+# value check:
+vw <- function(n, e1, e2) paste0(n, e1, "value", if(n>1)"s are" else " is",
+                                 " greater than",e2,"value",if(n>1)"s",".")
+if(any(yl>ym)) warning(vw(sum(yl>ym), " lower " , " middle "))
+if(any(ym>yu)) warning(vw(sum(ym>yu), " middle ", " upper "))
 if(na=="interpolate")
   {
   # Interpolations:

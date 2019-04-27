@@ -12,12 +12,10 @@ ToDo-list
 - colPointsLegend: improve text placement position for large/small legend fields
 - late 2019: delete exTime, instGit, timeAxis, toUpper1, rainbow2
 - lsc: better example dataset, optim problems
-- implement identical(FALSE, legargs) wherever owa is used and that makes sense
 - tryStack: if silent=TRUE, put all warnings and messages into final output (not just last one)
 - tryStack: example warning with log(-1:6) for non-repeated call stack
 - tryStack: mapply, do.call etc put function name in next element
 - if tryStack+traceCall moved to own pkg trace, add tstop, twarning and tmessage with traceCall
-- ciBand: check if at all x values yl,ym,yu are in ascending order
 - l2df: warn/convert if list contains data.frames instead of vectors
 - getColumn: consider renaming argument x
 
