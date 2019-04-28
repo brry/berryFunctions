@@ -42,6 +42,21 @@
 #'          legargs=list(density=FALSE))
 #' ?colPointsLegend # to see which arguments can be set via legargs
 #' 
+#' 
+#' # colPoints with matrix:
+#' colPoints(z=volcano, add=FALSE)
+#' # image and contour by default transpose and reverse the matrix!
+#' # colPoints shows what is really in the data.
+#' 
+#' # add single newly measured points to image (fictional data):
+#' mx <- c( 22,  40,  45,  30,  30,  10)
+#' my <- c(  5,  33,  56,  70,  45,  45)
+#' mz <- c(110, 184, 127, 133, 170, 114)
+#' colPoints(mx,my,mz, cex=5, pch="*", Range=c(94, 195), col=seqPal(), col2=NA, legend=FALSE)
+#' points(mx,my, cex=4)
+#' text(mx,my,mz, adj=-0.5, font=2)
+#' 
+#' 
 #' # with lines (nint to change number of linear interpolation points):
 #' colPoints(i,j,k, cex=1.5, add=FALSE, lines=TRUE, nint=10, lwd=2)
 #' # With NAs separating lines:
@@ -87,27 +102,8 @@
 #' # options as a list in legargs, but you can also use the invisible output
 #' # from colPoints for later calls to colPointsLegend
 #' do.call(colPointsLegend, cp)
-#' do.call(colPointsLegend, owa(cp, list(colors=rainbow2(100), cex=1.2)))
+#' do.call(colPointsLegend, owa(cp, list(colors=divPal(100), cex=1.2)))
 #' 
-#' # colPoints with matrix:
-#' colPoints(z=volcano, add=FALSE)
-#' # image and contour by default transpose the matrix!
-#' # colPoints shows what is really in the data.
-#' colPointsHist(z=volcano)
-#' 
-#' # highlight local character of points on a regular grid normally drawn with image:
-#' z <- t(volcano)  ;  x <- 1:ncol(z)  ;  y <- 1:nrow(z)
-#' colPoints(x,y,z, add=FALSE)  # takes matrix for z
-#' contour(x,y,t(z), add=TRUE)
-#' # image only takes a regular matrix, but not scatterpoints...
-#' image(x,y,t(z), col=rainbow2(100))
-#' # add single newly measured points to image (fictional data):
-#' mx <- c( 22,  40,  80,  45,  60,  63,  30,  70)
-#' my <- c(  5,  33,  12,  56,  20,  40,  45,  45)
-#' mz <- c(135, 155, 120, 105, 140, 130, 190, 110)
-#' colPoints(mx,my,mz, cex=5, pch="*", Range=c(94, 195), col=rainbow2(100), col2=NA, legend=FALSE)
-#' points(mx,my, cex=4)
-#' text(mx,my,mz, adj=-0.5, font=2)
 #' 
 #' # santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r
 #' if(require(gstat)){
@@ -115,7 +111,7 @@
 #'              model=vgm(psill=0.025,model="Exp",range=5), nmax=20)
 #' xyz <- predict(xyz, newdata=data.frame(x=runif(200, 20,40),y=runif(200, 50,70)), nsim=1)
 #' head(xyz)
-#' colPoints(x,y,sim1, data=xyz, col=rainbow2(100), add=FALSE)
+#' colPoints(x,y,sim1, data=xyz, add=FALSE)
 #' }
 #' 
 #' @param x,y      Vectors with coordinates of the points to be drawn
@@ -208,6 +204,7 @@ if(nint<1) stop("nint must be >= 1, not ",nint,".")
 col2 <- rep(col2, length.out=3) # in case only one, two or >3 values are given.
 #
 # vector vs matrix and dimension check: ----------------------------------------
+zmat <- FALSE
 # a) argument data is given
 if(!missing(data)) # get x, y and z from data.frame
    {
@@ -224,12 +221,12 @@ if(is.vector(z))
    } else
 # c) z is a matrix: class(z) = matrix, data.frame, array (2D) - as in image, persp
    {
+   zmat <- TRUE
    if(missing(x)) {x <- 1:ncol(z) ; if(missing(xlab)) xlab <- "x" }
-   if(missing(y)) {y <- nrow(z):1 ; if(missing(ylab)) ylab <- "y" }
+   if(missing(y)) {y <- 1:nrow(z) ; if(missing(ylab)) ylab <- "y" }
    if(!(length(x)==ncol(z) & length(y)==nrow(z)))
      stop("Dimension of z (ncol*nrow=",ncol(z),",",nrow(z),
           ") is not length(x) * length(y) (=",length(x),",",length(y),")!")
-   x <- rep(x, each=nrow(z));  y <- rep(y, ncol(z));  z <- as.vector(z)
    }
 # error checking:
 if(diff(range(z, finite=TRUE))==0) if(!quiet) warning("All z-values are equal.")
@@ -247,6 +244,13 @@ if(length(col) != cl$nbins) stop("Number of colors (",length(col),
                                  ") is not equal to number of classes (",cl$nbins,").")
 #
 # ACTUAL PLOTTING --------------------------------------------------------------
+if(zmat) 
+  {
+  ylim <- rev(range(y, na.rm=TRUE))
+  image(x,y,t(z), col=col, add=add, ylim=ylim, 
+        xlab=xlab, ylab=ylab, las=las, axes=axes, log=log, ...)
+  lines <- FALSE
+  } else
 if(!add) plot(x, y, type="n", xlab=xlab, ylab=ylab, las=las, axes=axes, log=log, ...)
 if(!is.null(bglines)) do.call(abline, bglines)
 # Plot lines if wanted:
@@ -276,8 +280,11 @@ if(lines)
   segments(x0=xl[-length(xl)],  y0=yl[-length(yl)],  x1=xl[-1],  y1=yl[-1],
            col=col[cl2$index], ...)
   }
-points(x[is.na(z)], y[is.na(z)], col=col2[1], pch=pch, ...)
-points(x, y, col=c(col, col2[2:3])[cl$index], pch=pch, ...)
+if(!zmat)
+  {
+  points(x[is.na(z)], y[is.na(z)], col=col2[1], pch=pch, ...)
+  points(x, y, col=c(col, col2[2:3])[cl$index], pch=pch, ...)
+  }
 #
 # add legend:
 legdefs <- list(z=z, at=cl$at, labels=cl$labels, bb=cl$bb, nbins=cl$nbins,
