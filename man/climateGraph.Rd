@@ -172,11 +172,9 @@ mtext("IQR shown als lines", col=8, at=6.5, line=0.7, cex=1.2, font=2)
 
 
 # Comparison to diagram in climatol
-library2("climatol")
-help(package="climatol")
-library(climatol)
-data(datcli)
-diagwl(datcli,est="Example station",alt=100,per="1961-90",mlab="en")
+# library2("climatol") # commented out to avoid dah error in dataStr testing
+# data(datcli)
+# diagwl(datcli,est="Example station",alt=100,per="1961-90",mlab="en")
 
 }
 
