@@ -246,8 +246,10 @@ if(length(col) != cl$nbins) stop("Number of colors (",length(col),
 # ACTUAL PLOTTING --------------------------------------------------------------
 if(zmat) 
   {
-  ylim <- rev(range(y, na.rm=TRUE))
-  image(x,y,t(z), col=col, add=add, ylim=ylim, 
+  dy <- if(length(y)>1 && length(y)==nrow(z)) 0.5*diff(y) else 0
+  ylim <- c(max(y,na.rm=TRUE)+dy[length(dy)], min(y,na.rm=TRUE)-dy[1L])
+  # Potential toDo: use the classify results for coloring in image()
+  image(x,y,t(z), col=col, add=add, ylim=ylim, zlim=Range,
         xlab=xlab, ylab=ylab, las=las, axes=axes, log=log, ...)
   lines <- FALSE
   } else
