@@ -8,7 +8,7 @@ ToDo-list
 ---------------------------------------
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
 - colPoints: add argument zlog=TRUE
-- colPointsLegend: improve text placement position for large/small legend fields
+- linLogHist + linLogTrans: check test warnings and remove reason (rainbow2!)
 - late 2019: delete exTime, instGit, timeAxis, toUpper1, rainbow2
 - lsc: better example dataset, optim problems
 - tryStack: if silent=TRUE, put all warnings and messages into final output (not just last one)
@@ -26,8 +26,39 @@ actual NEWS
 -----------------------------
 -----------------------------
 
+Version 1.18.0 (2019-04-29)
+- monthAxis: lrange option improved, trunc option added
+- createPres: bgblack + navbullets options + Rlogo added
+- linReg: can supress parts of the legend
+- lsc: NAs handled correctly
+- newFilename: message improved
+- sortDF+getColumn: option quiet added
+- dataStr: returns results, df-only example added
+- checkFile: folders checked without leading slashes
+- funSource: opens less URLs, gains local option, has better examples
+- many dontrun examples corrected, sped up
+- combineFiles: adds filename for Rstudio outline
+- monthAxis: examples added
+- sortDF+getColumn: used and referenced where needed
+- logAxis(1:2) bug removed
+- linREg: gains argument col
+- climateGraph(compress=TRUE) bug removed for all rain<100
+- palette functions moved into a single file
+- ciBand: checks order of yl,ym,yu
+- l2df+l2array: handle data.frame inputs better
+- colPoints: uses image for matrix input
+New function: testExamples, learnVocab, catPal
+Removed functions: ci, funTinn
 
-Version 1.17. (2018--)
+
+-----------------------------
+-----------------------------
+
+
+Version 1.17.0 (2018-03-24)
+- createPres+pdfpng: now opens file if wanted
+- climateGraph: table writing corrected when compress=TRUE
+- normalizePathCP: now works on Mac/Solaris as well
 New function: roundedRect
 
 
