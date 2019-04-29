@@ -16,7 +16,7 @@
 #'             \url{http://www.theusrus.de/blog/the-good-the-bad-22012/}
 #' @keywords aplot hplot color
 #' @importFrom grDevices colorRampPalette rainbow
-#' @importFrom graphics plot points segments abline
+#' @importFrom graphics plot points segments abline image
 #' @importFrom stats approx median na.omit
 #' @export
 #' @examples
