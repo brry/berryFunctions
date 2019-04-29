@@ -184,7 +184,6 @@ Heinrich Walter, Helmut Lieth: Klimadiagramm-Weltatlas. Gustav Fischer Verlag, J
 Examples:\cr
 \url{https://www.hoelzel.at/__verlag/geojournal/archiv/klima/2006_01/lieth.gif}\cr
 \url{https://www.hoelzel.at/__verlag/geojournal/archiv/klima/istanbul/istanbul400.gif}\cr
-\url{http://www.ipb.uni-tuebingen.de/kurs/comp/1_excel2007/1_pic/2007diagramm_verbund02.jpg}\cr
 \url{http://www.zivatar.hu/felhotar/albums/userpics/wldp.png}
 }
 \seealso{
