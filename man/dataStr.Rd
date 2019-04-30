@@ -4,10 +4,13 @@
 \alias{dataStr}
 \title{str of datasets}
 \usage{
-dataStr(package = NULL, ...)
+dataStr(package = NULL, df = FALSE, ...)
 }
 \arguments{
 \item{package}{Package name. DEFAULT: NULL}
+
+\item{df}{Logical: give information only about all data.frame objects? 
+DEFAULT: FALSE}
 
 \item{\dots}{other arguments passed to \code{\link{data}}}
 }
@@ -23,21 +26,9 @@ Print the \code{\link{str}} of each dataset returned by \code{\link{data}}
 dataStr("datasets") # only datasets in base R
 dataStr("colorspace") # works with an installed but unloaded package
 
-
-# Selection of dataframes based on columns ----
-d <- dataStr()
-d <- d[grepl("data.frame", d$class), ]
-d$nrow <- NA
-d$ncol <- NA
-env <- new.env()
-for(i in 1:nrow(d))
-  {
-  x <- d[i,, drop=FALSE]
-  data(list=x$Call, package=x$Package, envir=env)
-  obj <- get(x$Object, envir=env) # getExportedValue(asNamespace(package), x$Object)
-  d[i, c("nrow","ncol")] <- c(nrow(obj),ncol(obj))
-  }
-d <- sortDF(d, ncol)
+# data.frames only
+d <- dataStr(df=TRUE)
+head(d)
 d[,c("Call","ncol","nrow")]
 
 }

@@ -26,14 +26,14 @@ actual NEWS
 -----------------------------
 -----------------------------
 
-Version 1.18.0 (2019-04-29)
+Version 1.18.1 (2019-04-30)
 - monthAxis: lrange option improved, trunc option added
 - createPres: bgblack + navbullets options + Rlogo added
 - linReg: can supress parts of the legend
 - lsc: NAs handled correctly
 - newFilename: message improved
 - sortDF+getColumn: option quiet added
-- dataStr: returns results, df-only example added
+- dataStr: returns results, df-only option added
 - checkFile: folders checked without leading slashes
 - funSource: opens less URLs, gains local option, has better examples
 - many dontrun examples corrected, sped up
