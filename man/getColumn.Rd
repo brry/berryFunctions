@@ -92,7 +92,7 @@ upp2(Sepal.Length, iris)
 upp1("Sepal.Length", iris)
 upp2("Sepal.Length", iris)
 vekt <- c("Sepal.Length","Dummy")
-upp1(vekt[1], iris) # won't work if called e.g. by testExamples()
+# upp1(vekt[1], iris) # won't work if called e.g. by testExamples()
 upp2(vekt[1], iris)
 
 }
