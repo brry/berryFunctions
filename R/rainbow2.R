@@ -25,6 +25,6 @@ start=0,
 end=0.7,
 alpha=1)
 {
-warning("rainbow2 will be removed late 2019. use seqPal instead.")
+#warning("rainbow2 will be removed late 2019. use seqPal instead.")
 rev(rainbow(n=n, s=s, v=v, start=start, end=end, alpha=alpha))
 }
