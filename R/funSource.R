@@ -1,23 +1,21 @@
 #' Source code of a function
 #' 
-#' open source code of a function in a loaded or specified package on github.com/cran or github.com/wch/r-source
+#' open source code of a function in a loaded or specified package on 
+#' github.com/cran or github.com/wch/r-source
 #' 
 #' @return links that are also opened with \code{\link{browseURL}}
-#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan+Dec 2016
+#' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan+Dec 2016, May 2017, April 2019
 #' @importFrom utils browseURL find getAnywhere
 #' @export
 #' @seealso \url{https://github.com/brry/rskey#rskey} to add this as a keyboard shortcut
 #' @examples
 #' \dontrun{ ## browser windows should not be opened in CRAN checks
-#' library("berryFunctions")
-#' funSource(colPoints)
 #' funSource("head")
+#' funSource(message()) # handles brackets if fun can be evaluated without input
 #' funSource("require", local=TRUE) # usefull when offline
 #' 
 #' funSource("OSMscale::earthDist") # works even for non-installed CRAN packages
-#' }
 #' 
-#' \dontrun{ # developmental testing
 #' is.error(funSource("earthDist"), TRUE, TRUE) # Error for unloaded package
 #' require(plotrix); require(scales)
 #' funSource(rescale) # from the last loaded package
@@ -27,9 +25,13 @@
 #' rm(tail)
 #' }
 #' 
-#' @param x function name, with or without quotation marks
-#' @param character.only If TRUE, look for SomeFun instead of MyFun if
-#'                       MyFun <- "SomeFun". DEFAULT: \code{\link{is.character}(x)}
+#' @param x              Function name, with or without quotation marks.
+#'                       Trailing brackets are removed: \code{xx()} -> \code{"xx"}.\cr
+#'                       Can be \code{package::function}, which must be quoted for
+#'                       non-loaded packages.
+#' @param character.only If TRUE, look for \code{SomeFun} instead of \code{MyFun}
+#'                       in case \code{MyFun <- "SomeFun"}. 
+#'                       DEFAULT: \code{\link{is.character}(x)}
 #' @param local          Open offline version of the code? Lacks comments and
 #'                       original formatting of source code. DEFAULT: FALSE
 #' 
@@ -44,6 +46,15 @@ xname <- deparse(substitute(x))
 xname <- gsub('"', "", xname)
 if(!character.only) x <- xname
 if(length(x)>1) stop("length(x) must be 1, not ", length(x))
+
+# remove empty brackets at the end:
+x <- sub("\\(\\)$", "", x)
+
+# check input for non-valid characters in function names:
+if(grepl("[^[:alnum:]|^_|^.|^:]", x)) 
+warning("funSource accepts only a function name as input (without brackets etc).\n",
+        "The code will be tried anyway, but expect an error.", 
+        immediate.=TRUE, call.=FALSE)
 
 # Get package name -------------------------------------------------------------
 
