@@ -4,20 +4,13 @@
 \alias{learnVocab}
 \title{spaced learning}
 \usage{
-learnVocab(vocfile = "C:/Dropbox/Sonstiges/Vokabeln.csv", minhours = 3,
-  nnew = 3)
+learnVocab(vocfile = "C:/Dropbox/Sonstiges/Vokabeln.csv", nnew = 3)
 }
 \arguments{
 \item{vocfile}{File with vocabulary (or whatever you want to learn).
-The first two lines must contain the learning day and date, see examples.
-The third line must contain LEVEL;known;new, the last two being
+The first line must contain the learning day, see examples.
+The second line must contain LEVEL;known;new, the last two being
 (short) names, e.g. languages (known will be displayed first).}
-
-\item{minhours}{Minumal number of hours since the last test. If the time 
-difference is less, nothing happens. This enables putting learnVocab
-in \code{\link{Rprofile}} without being asked stuff all the time
-at every restart of R.
-DEFAULT: 3 hours}
 
 \item{nnew}{Number of new entries to be added interactively at the start.
 They can still be skipped by writing nothing and pressing the ENTER key.
@@ -36,7 +29,7 @@ At the beginning, new vocab will be asked, skip with empty ENTER.
 \dontrun{ # Excluded from checks, works only interactively! 
 # initiate empty vocab list:
 vocfile <- tempfile("myvocab",fileext=".csv")
-cat("learning_day 1\\n2019-04-19 17:43:47\\nLEVEL;DE;FR\\n", file=vocfile)
+cat("learning_day 1\\nLEVEL;DE;FR\\n1;Das Haus;la maison\\n", file=vocfile)
 
 learnVocab(vocfile) # asks new vocab, then tests and changes level as needed
 }
