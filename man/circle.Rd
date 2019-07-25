@@ -11,14 +11,15 @@ circle(x, y, r, locnum = 100, ...)
 
 \item{y}{y coordinate}
 
-\item{r}{radius of the circle in units of current plot}
+\item{r}{radius of the circle in units of current plot.
+Can have two values for an ellipse.}
 
 \item{locnum}{number of calculated points on the circle (more means smoother but slower). DEFAULT: 100}
 
 \item{\dots}{further arguments passed to \code{\link{polygon}}, like col, border, lwd}
 }
 \value{
-none. Used for drawing.
+data.frame of coordinates, invisible
 }
 \description{
 Draws a filled circle with a certain radius (in existing plot's units) using \code{\link{polygon}} and \code{\link{sin}}

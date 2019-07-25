@@ -3,7 +3,7 @@
 #' Draws a filled circle with a certain radius (in existing plot's units) using \code{\link{polygon}} and \code{\link{sin}}
 #' 
 #' @note If circles look like ellipsis, use plot(... asp=1)
-#' @return none. Used for drawing.
+#' @return data.frame of coordinates, invisible
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2012
 #' @seealso \code{\link{symbols}}, \code{\link{polygon}}
 #' @keywords aplot
@@ -23,7 +23,8 @@
 #' 
 #' @param x x coordinate of points, numeric value of length 1
 #' @param y y coordinate
-#' @param r radius of the circle in units of current plot
+#' @param r radius of the circle in units of current plot.
+#'          Can have two values for an ellipse.
 #' @param locnum number of calculated points on the circle (more means smoother but slower). DEFAULT: 100
 #' @param \dots further arguments passed to \code{\link{polygon}}, like col, border, lwd
 #' 
@@ -35,18 +36,22 @@ circle <- function(
   ...)
 {
 # input checking - only one circle can be drawn:
-if(length(x) >1 | length(y) >1 | length(r) >1 | length(locnum) >1)
-  {
-  warning("Only the first element of the vectors is used.")
-  x <- x[1]; y <- y[1]; r <- r[1]; locnum <- locnum[1]
-  }
-# input checking - is every value numeric?
-if(!is.numeric(x)) stop("x must be numeric")
-if(!is.numeric(y)) stop("y must be numeric")
-if(!is.numeric(r)) stop("r must be numeric")
+checkinput <- function(i, maxlen=1)
+ {
+ n <- deparse(substitute(i))
+ if(!is.numeric(i)) stop(n, " must be numeric")
+ if(length(i) > maxlen) warning("Only the first element of ",n," is used.", call.=FALSE)
+ i <- rep(i, length.out=maxlen)
+ i[1:maxlen]
+ }
+x      <- checkinput(x)
+y      <- checkinput(y)
+r      <- checkinput(r, 2)
+locnum <- checkinput(locnum)
 # prepare circle line coordinates:
-cx <- x+r*cos( seq(0,2*pi,len=locnum) )
-cy <- y+r*sin( seq(0,2*pi,len=locnum) )
+cx <- x+r[1]*cos( seq(0,2*pi,len=locnum) )
+cy <- y+r[2]*sin( seq(0,2*pi,len=locnum) )
 # actually draw it:
 polygon(cx, cy, ...)
+return(invisible(data.frame(x=cx, y=cy)))
 }
