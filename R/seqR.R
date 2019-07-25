@@ -19,25 +19,28 @@
 #' seqR(range=c(12,6), by=-2, extend=0.1)
 #' # internaly calls extendrange with f=extend
 #' 
-#' @param range vector with 2 values (1st taken as \code{from}, 2nd as \code{to}) or more (the result is then always ascending).
-#' @param from start value of sequence. DEFAULT:1
-#' @param to end value of sequence. DEFAULT:1
-#' @param extend Factor \emph{f} passed to \code{\link{extendrange}}. DEFAULT:0
-#' @param \dots further arguments passed to \code{\link{seq}}.
+#' @param range  vector with 2 values (1st taken as \code{from}, 2nd as \code{to}) 
+#'               or more (the result is then always ascending).
+#' @param from   start value of sequence. DEFAULT: NA (determined from range)
+#' @param to     end value of sequence. DEFAULT: NA (determined from range)
+#' @param extend Factor \emph{f} passed to \code{\link{extendrange}}. DEFAULT: 0
+#' @param warn   Logical: warn about non-numeric classes? DEFAULT: TRUE
+#' @param \dots  further arguments passed to \code{\link{seq}}.
 #' 
 seqR <- function(
 range,
-from=1,
-to=1,
+from=NA,
+to=NA,
 extend=0,
+warn=TRUE,
 ...)
 {
 # only set from and to if range is given as input:
 if(!missing(range))
   {
   # Input checking:
-  #if(!is.vector(range)) warning("'range' must be a vector, not ", class(range))
-  if(!is.numeric(range)) warning("'range' is not numeric, but '", class(range),"'.")
+  if(!is.numeric(range) & warn) warning("'range' is not numeric, but ", 
+                                        toString(class(range)),".")
   # accept long vectors:
   if(length(range)>2) range <- base::range(range, na.rm=TRUE)
   # actual work:

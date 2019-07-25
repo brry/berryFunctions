@@ -4,16 +4,19 @@
 \alias{seqR}
 \title{seq with a range argument}
 \usage{
-seqR(range, from = 1, to = 1, extend = 0, ...)
+seqR(range, from = NA, to = NA, extend = 0, warn = TRUE, ...)
 }
 \arguments{
-\item{range}{vector with 2 values (1st taken as \code{from}, 2nd as \code{to}) or more (the result is then always ascending).}
+\item{range}{vector with 2 values (1st taken as \code{from}, 2nd as \code{to}) 
+or more (the result is then always ascending).}
 
-\item{from}{start value of sequence. DEFAULT:1}
+\item{from}{start value of sequence. DEFAULT: NA (determined from range)}
 
-\item{to}{end value of sequence. DEFAULT:1}
+\item{to}{end value of sequence. DEFAULT: NA (determined from range)}
 
-\item{extend}{Factor \emph{f} passed to \code{\link{extendrange}}. DEFAULT:0}
+\item{extend}{Factor \emph{f} passed to \code{\link{extendrange}}. DEFAULT: 0}
+
+\item{warn}{Logical: warn about non-numeric classes? DEFAULT: TRUE}
 
 \item{\dots}{further arguments passed to \code{\link{seq}}.}
 }
