@@ -4,10 +4,12 @@
 \alias{packagePath}
 \title{Base path of package}
 \usage{
-packagePath(path = ".", warnonly = FALSE)
+packagePath(path = ".", file = NULL, warnonly = FALSE)
 }
 \arguments{
 \item{path}{Path to (or below) package directory. DEFAULT: "."}
+
+\item{file}{Optional file name to be added to path. DEFAULT: NA}
 
 \item{warnonly}{Logical: if no part of the path is a package, give a warning
 and return the original input instead of stopping with an error.

@@ -10,12 +10,14 @@
 #' # packagePath() # may fail on cran checks
 #' 
 #' @param path Path to (or below) package directory. DEFAULT: "."
+#' @param file Optional file name to be added to path. DEFAULT: NA
 #' @param warnonly Logical: if no part of the path is a package, give a warning
 #'                 and return the original input instead of stopping with an error.
 #'                 DEFAULT: FALSE
 #' 
 packagePath <- function(
 path=".",
+file=NULL,
 warnonly=FALSE
 )
 {
@@ -35,5 +37,6 @@ while(!file.exists(file.path(path, "DESCRIPTION")))
     else {warning(message, call.=FALSE); return(path0)}
     }
   }
+if(!is.null(file)) path <- paste0(path, "/", sub("^/","",file))
 path
 }
