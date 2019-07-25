@@ -9,6 +9,7 @@ ToDo-list
 - textField: support srt. Enable positioning with xy.coords as in legend. expr=F if labels contain expression. Adjust adj parameter based on pos and offset: if(!is.null(pos)), I want the field to still be drawn with adj, but have it based on pos
 - colPoints: add argument zlog=TRUE
 - linLogHist + linLogTrans: check test warnings and remove reason (rainbow2!)
+- monthAxis: remove warning to timeAxis for short time ranges + change behaviour?
 - late 2019: delete exTime, instGit, timeAxis, toUpper1, rainbow2
 - lsc: better example dataset, optim problems
 - tryStack: if silent=TRUE, put all warnings and messages into final output (not just last one)
@@ -16,6 +17,7 @@ ToDo-list
 - tryStack: mapply, do.call etc put function name in next element
 - if tryStack+traceCall moved to own pkg trace, add tstop, twarning and tmessage with traceCall
 - getColumn: consider renaming argument x
+- testExamples: temporally suppress pbapply progress bar globally for cleaner warning/message log
 
 
 
