@@ -22,6 +22,13 @@
 #' almost.equal(x,y) # FALSE TRUE                             Exactly what I want
 #' 
 #' 
+#' Absolute vs relative comparison, https://stackoverflow.com/questions/57578257
+#' 
+#'    all.equal(6.2, 6.4, tolerance=0.04) # TRUE - unexpected!
+#' almost.equal(6.2, 6.4, tolerance=0.04) # FALSE, thanks to default scale=1
+#' almost.equal(6.2, 6.4, tolerance=0.04, scale=NULL) # as with all.equal
+#' 
+#' 
 #' # Testing vectorization
 #' almost.equal(1:6, 3)
 #' almost.equal(1:6, NA)
@@ -48,11 +55,14 @@
 #' 
 #' 
 #' @param x,y R objects to be compared with each other, recycled to max length
+#' @param scale DEFAULT scale=1 for absolute comparison for numbers. 
+#'              use scale=NULL for relative comparison (\code{all.equal} default).
 #' @param \dots Further arguments passed to \code{\link{all.equal}}
 #' 
 almost.equal <- function(
 x,
 y,
+scale=1,
 ...
 )
 {
@@ -63,7 +73,7 @@ if(!goodclass) warning("Input class is '", toString(class(x)), "' and '", toStri
 len <- max(length(x), length(y), na.rm=TRUE)
 x <- rep(x, length.out=len)
 y <- rep(y, length.out=len)
-sapply(seq_len(len), function(i) isTRUE(all.equal(x[i],y[i], ...)))
+sapply(seq_len(len), function(i) isTRUE(all.equal(x[i],y[i], scale=scale, ...)))
 }
 
 

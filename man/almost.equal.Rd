@@ -4,10 +4,13 @@
 \alias{almost.equal}
 \title{Vectorized testing for near-equality}
 \usage{
-almost.equal(x, y, ...)
+almost.equal(x, y, scale = 1, ...)
 }
 \arguments{
 \item{x, y}{R objects to be compared with each other, recycled to max length}
+
+\item{scale}{DEFAULT scale=1 for absolute comparison for numbers. 
+use scale=NULL for relative comparison (\code{all.equal} default).}
 
 \item{\dots}{Further arguments passed to \code{\link{all.equal}}}
 }
@@ -31,6 +34,13 @@ almost.equal(x,0.3)       # TRUE TRUE  # nice
 y <- c(7777, 0.3)
    all.equal(x,y) # "Mean relative difference: 25922.33"   Not what I want
 almost.equal(x,y) # FALSE TRUE                             Exactly what I want
+
+
+Absolute vs relative comparison, https://stackoverflow.com/questions/57578257
+
+   all.equal(6.2, 6.4, tolerance=0.04) # TRUE - unexpected!
+almost.equal(6.2, 6.4, tolerance=0.04) # FALSE, thanks to default scale=1
+almost.equal(6.2, 6.4, tolerance=0.04, scale=NULL) # as with all.equal
 
 
 # Testing vectorization
