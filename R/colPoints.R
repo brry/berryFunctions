@@ -216,7 +216,7 @@ if(!missing(data)) # get x, y and z from data.frame
 if(is.vector(z))
    {
    if(!(length(x)==length(y) & length(x)==length(z)))
-      stop("Vectors x,y,z are not all of the same length!")
+      stop("Vectors x,y,z are not all of the same length! (",length(x),",",length(y),",",length(z),")")
    x <- x ;   y <- y ;   z <- z
    } else
 # c) z is a matrix: class(z) = matrix, data.frame, array (2D) - as in image, persp
