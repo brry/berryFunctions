@@ -4,8 +4,14 @@
 \alias{round0}
 \title{Round numbers with leading and trailing zeros}
 \usage{
-round0(x, digits = 0, pre = 2, width = digits + pre + ifelse(digits
-  == 0, 0, 1), flag = 0, ...)
+round0(
+  x,
+  digits = 0,
+  pre = 2,
+  width = digits + pre + ifelse(digits == 0, 0, 1),
+  flag = 0,
+  ...
+)
 }
 \arguments{
 \item{x}{Value(s)}

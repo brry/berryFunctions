@@ -4,8 +4,14 @@
 \alias{na9}
 \title{Prepend spaces before na.strings}
 \usage{
-na9(nspace = 5, base = c(-9999, -999, -9.99, -9.999), sep = c(",",
-  "."), digits = 0:4, more = NULL, ...)
+na9(
+  nspace = 5,
+  base = c(-9999, -999, -9.99, -9.999),
+  sep = c(",", "."),
+  digits = 0:4,
+  more = NULL,
+  ...
+)
 }
 \arguments{
 \item{nspace}{number of spaces prepended. DEFAULT: 5}

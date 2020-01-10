@@ -4,8 +4,15 @@
 \alias{spiralDateAnim}
 \title{Animated spiral graph}
 \usage{
-spiralDateAnim(dates, values, data, steps = 100, sleep = 0,
-  progbar = TRUE, ...)
+spiralDateAnim(
+  dates,
+  values,
+  data,
+  steps = 100,
+  sleep = 0,
+  progbar = TRUE,
+  ...
+)
 }
 \arguments{
 \item{dates, values, data}{Input as in \code{\link{spiralDate}}}

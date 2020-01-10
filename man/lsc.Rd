@@ -4,11 +4,24 @@
 \alias{lsc}
 \title{Linear storage cascade, unit hydrograph}
 \usage{
-lsc(P, Q, area = 50, Qbase = Q[1], n = 2, k = 3, x = 1:length(P),
-  fit = 1:length(Q), plot = TRUE,
-  main = "Precipitation and discharge", plotsim = TRUE,
-  returnsim = FALSE, type = c("o", "l"), legx = "center",
-  legy = NULL, ...)
+lsc(
+  P,
+  Q,
+  area = 50,
+  Qbase = Q[1],
+  n = 2,
+  k = 3,
+  x = 1:length(P),
+  fit = 1:length(Q),
+  plot = TRUE,
+  main = "Precipitation and discharge",
+  plotsim = TRUE,
+  returnsim = FALSE,
+  type = c("o", "l"),
+  legx = "center",
+  legy = NULL,
+  ...
+)
 }
 \arguments{
 \item{P}{Vector with precipitation values \bold{in mm in hourly spacing}}
@@ -54,7 +67,7 @@ linear storage cascade. Plot observed & simulated data
 \examples{
 
 qpfile <- system.file("extdata/Q_P.txt", package="berryFunctions")
-qp <- read.table(qpfile, sep="\\t", dec=",", header=TRUE)
+qp <- read.table(qpfile, sep="\t", dec=",", header=TRUE)
 calib <- qp[1:90,]
 valid <- qp[-(1:90),]
 

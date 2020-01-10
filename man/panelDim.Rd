@@ -4,8 +4,15 @@
 \alias{panelDim}
 \title{Arrange panels in a multipanel plot (par mfrow)}
 \usage{
-panelDim(n, weight = c(1, 1), maxempty = round(n/4),
-  landscape = FALSE, all = FALSE, plot = FALSE, mfcol = FALSE)
+panelDim(
+  n,
+  weight = c(1, 1),
+  maxempty = round(n/4),
+  landscape = FALSE,
+  all = FALSE,
+  plot = FALSE,
+  mfcol = FALSE
+)
 }
 \arguments{
 \item{n}{Number of panels to be arranged}

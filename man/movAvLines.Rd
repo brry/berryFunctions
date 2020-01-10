@@ -4,8 +4,17 @@
 \alias{movAvLines}
 \title{Moving average with different window widths}
 \usage{
-movAvLines(x = 1:length(y), y, widths = c(3, 5, 7, 9, 11, 13), weights,
-  col = "blue", alpha = 0.3, add = TRUE, las = 1, ...)
+movAvLines(
+  x = 1:length(y),
+  y,
+  widths = c(3, 5, 7, 9, 11, 13),
+  weights,
+  col = "blue",
+  alpha = 0.3,
+  add = TRUE,
+  las = 1,
+  ...
+)
 }
 \arguments{
 \item{x}{x values of data. DEFAULT: 1:length(y)}

@@ -4,8 +4,15 @@
 \alias{classify}
 \title{Classification into groups}
 \usage{
-classify(x, method = "linear", breaks = NULL, Range = range(x, finite
-  = TRUE), sdlab = 1, logbase = 1, quiet = FALSE)
+classify(
+  x,
+  method = "linear",
+  breaks = NULL,
+  Range = range(x, finite = TRUE),
+  sdlab = 1,
+  logbase = 1,
+  quiet = FALSE
+)
 }
 \arguments{
 \item{x}{Vector with numeric values}

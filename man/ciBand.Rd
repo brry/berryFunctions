@@ -4,10 +4,24 @@
 \alias{ciBand}
 \title{polygon confidence bands}
 \usage{
-ciBand(yu, yl, ym = NULL, x = 1:length(yu), na = "interpolate",
-  nastars = TRUE, singlepoints = TRUE, args = NULL, add = FALSE,
-  lwd = 1, colm = "green3", colb = addAlpha(colm), border = NA,
-  las = 1, ylim = range(yu, yl, finite = TRUE), ...)
+ciBand(
+  yu,
+  yl,
+  ym = NULL,
+  x = 1:length(yu),
+  na = "interpolate",
+  nastars = TRUE,
+  singlepoints = TRUE,
+  args = NULL,
+  add = FALSE,
+  lwd = 1,
+  colm = "green3",
+  colb = addAlpha(colm),
+  border = NA,
+  las = 1,
+  ylim = range(yu, yl, finite = TRUE),
+  ...
+)
 }
 \arguments{
 \item{yu}{y values of upper confidence region boundary}

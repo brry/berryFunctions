@@ -4,9 +4,19 @@
 \alias{logVals}
 \title{Create log-axis values and labels}
 \usage{
-logVals(from = -7, to = 7, Range, base = 1, big.mark = "'",
-  decimal.mark = ".", scientific = FALSE, exponent = Inf,
-  expobase1 = FALSE, allbase = 1:9, ...)
+logVals(
+  from = -7,
+  to = 7,
+  Range,
+  base = 1,
+  big.mark = "'",
+  decimal.mark = ".",
+  scientific = FALSE,
+  exponent = Inf,
+  expobase1 = FALSE,
+  allbase = 1:9,
+  ...
+)
 }
 \arguments{
 \item{from}{Lower exponent \emph{OR} vector with data}

@@ -4,8 +4,14 @@
 \alias{quantileMean}
 \title{Average of R's quantile methods}
 \usage{
-quantileMean(x, probs = seq(0, 1, 0.25), weights = rep(1, 9),
-  names = TRUE, truncate = 0, ...)
+quantileMean(
+  x,
+  probs = seq(0, 1, 0.25),
+  weights = rep(1, 9),
+  names = TRUE,
+  truncate = 0,
+  ...
+)
 }
 \arguments{
 \item{x}{Numeric vector whose sample quantiles are wanted}

@@ -4,8 +4,15 @@
 \alias{tryStack}
 \title{try an expression, returning the error stack}
 \usage{
-tryStack(expr, silent = FALSE, warn = TRUE, short = TRUE,
-  file = "", removetry = TRUE, skip = NULL)
+tryStack(
+  expr,
+  silent = FALSE,
+  warn = TRUE,
+  short = TRUE,
+  file = "",
+  removetry = TRUE,
+  skip = NULL
+)
 }
 \arguments{
 \item{expr}{Expression to try, potentially wrapped in curly braces if

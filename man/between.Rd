@@ -4,8 +4,7 @@
 \alias{between}
 \title{Are values between a and b?}
 \usage{
-between(x, a, b = a, incl = TRUE, aincl = incl, bincl = incl,
-  quiet = FALSE)
+between(x, a, b = a, incl = TRUE, aincl = incl, bincl = incl, quiet = FALSE)
 }
 \arguments{
 \item{x}{Numerical vector}

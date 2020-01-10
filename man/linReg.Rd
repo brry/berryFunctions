@@ -4,13 +4,28 @@
 \alias{linReg}
 \title{linear regression with plotting}
 \usage{
-linReg(x, y = NULL, data = NULL, add = FALSE, digits = 2,
-  pch = 16, col = "black", colline = "red",
-  colband = addAlpha(colline), level = 0.95,
-  plotrange = par("usr")[1:2], lwd = 1,
-  xlab = deparse(substitute(x)), ylab = deparse(substitute(y)),
-  main = "linear regression", pos1 = "top", pos2 = NULL, inset = 0,
-  legargs = NULL, ...)
+linReg(
+  x,
+  y = NULL,
+  data = NULL,
+  add = FALSE,
+  digits = 2,
+  pch = 16,
+  col = "black",
+  colline = "red",
+  colband = addAlpha(colline),
+  level = 0.95,
+  plotrange = par("usr")[1:2],
+  lwd = 1,
+  xlab = deparse(substitute(x)),
+  ylab = deparse(substitute(y)),
+  main = "linear regression",
+  pos1 = "top",
+  pos2 = NULL,
+  inset = 0,
+  legargs = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{Numeric or formula (see examples). Vector with values of explanatory variable}

@@ -4,9 +4,17 @@
 \alias{combineFiles}
 \title{Combine Textfiles into one}
 \usage{
-combineFiles(inFiles = dir(), outFile = "combined_Textfiles.txt",
-  overwrite = FALSE, sep = NULL, names = TRUE, selection = NULL,
-  progbar = !quiet, quiet = FALSE, ...)
+combineFiles(
+  inFiles = dir(),
+  outFile = "combined_Textfiles.txt",
+  overwrite = FALSE,
+  sep = NULL,
+  names = TRUE,
+  selection = NULL,
+  progbar = !quiet,
+  quiet = FALSE,
+  ...
+)
 }
 \arguments{
 \item{inFiles}{vector with names of input files, as can be read with

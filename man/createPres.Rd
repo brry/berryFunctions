@@ -4,8 +4,14 @@
 \alias{createPres}
 \title{Create .Rnw presentation template}
 \usage{
-createPres(presname = "pres", dir = "presentation", path = ".",
-  navbullets = FALSE, bgblack = FALSE, open = TRUE)
+createPres(
+  presname = "pres",
+  dir = "presentation",
+  path = ".",
+  navbullets = FALSE,
+  bgblack = FALSE,
+  open = TRUE
+)
 }
 \arguments{
 \item{presname}{Name of .Rnw file to be created. DEFAULT: "pres"}

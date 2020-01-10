@@ -4,8 +4,12 @@
 \alias{traceCall}
 \title{call stack of a function}
 \usage{
-traceCall(skip = 0, prefix = "\\nCall stack: ", suffix = "\\n",
-  vigremove = TRUE)
+traceCall(
+  skip = 0,
+  prefix = "\\nCall stack: ",
+  suffix = "\\n",
+  vigremove = TRUE
+)
 }
 \arguments{
 \item{skip}{Number of levels to skip in \code{\link{traceback}}}

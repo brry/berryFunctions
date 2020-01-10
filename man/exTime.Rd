@@ -4,8 +4,15 @@
 \alias{exTime}
 \title{Time to run examples}
 \usage{
-exTime(topic = NA, package = NA, echo = FALSE, elapsed = FALSE,
-  imagefile = TRUE, quiet = FALSE, ...)
+exTime(
+  topic = NA,
+  package = NA,
+  echo = FALSE,
+  elapsed = FALSE,
+  imagefile = TRUE,
+  quiet = FALSE,
+  ...
+)
 }
 \arguments{
 \item{topic}{Character string: the online \code{\link{help}} topic

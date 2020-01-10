@@ -4,9 +4,17 @@
 \alias{newFilename}
 \title{Create new filename if file already exists}
 \usage{
-newFilename(filename, ignore = FALSE, overwrite = FALSE,
-  tellignore = TRUE, pre = "", mid = "\\n", end = "",
-  quiet = FALSE, ntrunc = 3)
+newFilename(
+  filename,
+  ignore = FALSE,
+  overwrite = FALSE,
+  tellignore = TRUE,
+  pre = "",
+  mid = "\\n",
+  end = "",
+  quiet = FALSE,
+  ntrunc = 3
+)
 }
 \arguments{
 \item{filename}{Char (vector): file name(s).}

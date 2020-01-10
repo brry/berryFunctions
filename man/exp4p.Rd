@@ -4,8 +4,7 @@
 \alias{exp4p}
 \title{4-parametric exponential function}
 \usage{
-exp4p(x, y, digits = 2, plot = FALSE, las = 1, col = 1:6,
-  legarg = NULL, ...)
+exp4p(x, y, digits = 2, plot = FALSE, las = 1, col = 1:6, legarg = NULL, ...)
 }
 \arguments{
 \item{x, y}{x and y Data}

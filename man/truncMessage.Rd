@@ -4,8 +4,14 @@
 \alias{truncMessage}
 \title{truncate message parts}
 \usage{
-truncMessage(x, ntrunc = 3, prefix = "s", midfix = " ",
-  altnix = "'", sep = ", ")
+truncMessage(
+  x,
+  ntrunc = 3,
+  prefix = "s",
+  midfix = " ",
+  altnix = "'",
+  sep = ", "
+)
 }
 \arguments{
 \item{x}{Character vector}

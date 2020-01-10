@@ -4,11 +4,26 @@
 \alias{pdfpng}
 \title{Create pdf and png graph}
 \usage{
-pdfpng(expr, file, pdf = TRUE, png = TRUE, overwrite = FALSE,
-  open = TRUE, quiet = FALSE, tracewarnmes = !quiet,
-  filargs = NULL, width = 7, height = 5, units = "in", res = 500,
-  seed = runif(1, -1e+09, 1e+09), envlevel = 1, pdfargs = NULL,
-  pngargs = NULL, ...)
+pdfpng(
+  expr,
+  file,
+  pdf = TRUE,
+  png = TRUE,
+  overwrite = FALSE,
+  open = TRUE,
+  quiet = FALSE,
+  tracewarnmes = !quiet,
+  filargs = NULL,
+  width = 7,
+  height = 5,
+  units = "in",
+  res = 500,
+  seed = runif(1, -1e+09, 1e+09),
+  envlevel = 1,
+  pdfargs = NULL,
+  pngargs = NULL,
+  ...
+)
 }
 \arguments{
 \item{expr}{Expression creating the plot, can be included in curly braces.}

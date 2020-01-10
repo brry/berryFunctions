@@ -4,10 +4,21 @@
 \alias{tableColVal}
 \title{Table with values with value-dependent colored backgrounds in pdf}
 \usage{
-tableColVal(mat, main = deparse(substitute(mat)), nameswidth = 0.3,
-  namesheight = 0.1, palette = seqPal(100), Range = range(mat, finite
-  = TRUE), digits = 2, ..., classargs = NULL, cellargs = NULL,
-  colargs = NULL, rowargs = NULL, mainargs = NULL)
+tableColVal(
+  mat,
+  main = deparse(substitute(mat)),
+  nameswidth = 0.3,
+  namesheight = 0.1,
+  palette = seqPal(100),
+  Range = range(mat, finite = TRUE),
+  digits = 2,
+  ...,
+  classargs = NULL,
+  cellargs = NULL,
+  colargs = NULL,
+  rowargs = NULL,
+  mainargs = NULL
+)
 }
 \arguments{
 \item{mat}{Matrix with values and row/column names}

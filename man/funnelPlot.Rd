@@ -4,11 +4,26 @@
 \alias{funnelPlot}
 \title{Funnel plots for proportional data}
 \usage{
-funnelPlot(x, n, labels = NULL, method = "classic", add = FALSE,
-  xlim = range(n, finite = TRUE), ylim = range(x/n * 100, finite =
-  TRUE), las = 1, xlab = "Sample size n", ylab = "Success rate [\%]",
-  main = "Funnel plot for Proportions", a3 = NULL, a2 = NULL,
-  am = NULL, ap = NULL, at = NULL, al = NULL, ...)
+funnelPlot(
+  x,
+  n,
+  labels = NULL,
+  method = "classic",
+  add = FALSE,
+  xlim = range(n, finite = TRUE),
+  ylim = range(x/n * 100, finite = TRUE),
+  las = 1,
+  xlab = "Sample size n",
+  ylab = "Success rate [\%]",
+  main = "Funnel plot for Proportions",
+  a3 = NULL,
+  a2 = NULL,
+  am = NULL,
+  ap = NULL,
+  at = NULL,
+  al = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{Numeric vector with number of successes (cases).}

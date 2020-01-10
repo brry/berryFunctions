@@ -4,11 +4,28 @@
 \alias{textField}
 \title{Write text to plot with halo underneath}
 \usage{
-textField(x, y, labels = seq_along(x), fill = "white", border = NA,
-  expression = NA, margin = 0.3, field = "rounded", nv = 500,
-  rounding = 0.25, rrarg = NULL, lty = par("lty"),
-  lwd = par("lwd"), cex = par("cex"), xpd = par("xpd"),
-  adj = par("adj"), pos = NULL, offset = 0.5, quiet = TRUE, ...)
+textField(
+  x,
+  y,
+  labels = seq_along(x),
+  fill = "white",
+  border = NA,
+  expression = NA,
+  margin = 0.3,
+  field = "rounded",
+  nv = 500,
+  rounding = 0.25,
+  rrarg = NULL,
+  lty = par("lty"),
+  lwd = par("lwd"),
+  cex = par("cex"),
+  xpd = par("xpd"),
+  adj = par("adj"),
+  pos = NULL,
+  offset = 0.5,
+  quiet = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{X coordinates, if necessary, they are recycled}

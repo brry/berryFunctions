@@ -4,8 +4,7 @@
 \alias{groupHist}
 \title{Histogram for classes}
 \usage{
-groupHist(df, x, g, xlab = "", ylab = "", las = 1, main = NULL,
-  unit = NA, ...)
+groupHist(df, x, g, xlab = "", ylab = "", las = 1, main = NULL, unit = NA, ...)
 }
 \arguments{
 \item{df}{data.frame object name}

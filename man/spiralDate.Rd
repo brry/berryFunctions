@@ -4,10 +4,21 @@
 \alias{spiralDate}
 \title{Spiral graph of time series}
 \usage{
-spiralDate(dates, values, data, drange = NA, vrange = NA,
-  months = substr(month.abb, 1, 1), add = FALSE, shift = 0,
-  prop = NA, zlab = substitute(values), format = "\%Y", nint = 1,
-  ...)
+spiralDate(
+  dates,
+  values,
+  data,
+  drange = NA,
+  vrange = NA,
+  months = substr(month.abb, 1, 1),
+  add = FALSE,
+  shift = 0,
+  prop = NA,
+  zlab = substitute(values),
+  format = "\%Y",
+  nint = 1,
+  ...
+)
 }
 \arguments{
 \item{dates}{Dates in ascending order.

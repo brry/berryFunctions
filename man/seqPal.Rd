@@ -4,9 +4,19 @@
 \alias{seqPal}
 \title{Sequential color palette}
 \usage{
-seqPal(n = 100, reverse = FALSE, alpha = 1, extr = FALSE,
-  yb = FALSE, yr = FALSE, gb = FALSE, b = FALSE, colors = NULL,
-  logbase = 1, ...)
+seqPal(
+  n = 100,
+  reverse = FALSE,
+  alpha = 1,
+  extr = FALSE,
+  yb = FALSE,
+  yr = FALSE,
+  gb = FALSE,
+  b = FALSE,
+  colors = NULL,
+  logbase = 1,
+  ...
+)
 }
 \arguments{
 \item{n}{Number of colors. DEFAULT: 100}

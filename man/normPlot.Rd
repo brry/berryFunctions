@@ -4,12 +4,27 @@
 \alias{normPlot}
 \title{Normal density plot}
 \usage{
-normPlot(mean = 0, sd = 1, width = 3, lines = TRUE, quant = TRUE,
-  fill = addAlpha("blue", c(2:6, 7:2)/10), cumulative = TRUE,
-  las = 1, main = paste("Normal density with\\nmean =", signif(mean,
-  2), "and sd =", signif(sd, 2)), ylim = lim0(dnorm(mean, mean, sd)),
-  ylab = "", xlab = "", type = "n", lty = 1, col = par("fg"),
-  mar = c(2, 3, 3, 3), keeppar = FALSE, ...)
+normPlot(
+  mean = 0,
+  sd = 1,
+  width = 3,
+  lines = TRUE,
+  quant = TRUE,
+  fill = addAlpha("blue", c(2:6, 7:2)/10),
+  cumulative = TRUE,
+  las = 1,
+  main = paste("Normal density with\\nmean =", signif(mean, 2), "and sd =", signif(sd,
+    2)),
+  ylim = lim0(dnorm(mean, mean, sd)),
+  ylab = "",
+  xlab = "",
+  type = "n",
+  lty = 1,
+  col = par("fg"),
+  mar = c(2, 3, 3, 3),
+  keeppar = FALSE,
+  ...
+)
 }
 \arguments{
 \item{mean}{average value as in \code{\link{dnorm}}. DEFAULT: 0}

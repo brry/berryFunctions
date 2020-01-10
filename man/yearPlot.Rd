@@ -4,9 +4,20 @@
 \alias{yearPlot}
 \title{annual plot}
 \usage{
-yearPlot(dates, values, data, ylim = NULL, shift = 0, janline = TRUE,
-  add = FALSE, months = substr(month.abb, 1, 1), xlab = "",
-  ylab = "", zlab = "", ...)
+yearPlot(
+  dates,
+  values,
+  data,
+  ylim = NULL,
+  shift = 0,
+  janline = TRUE,
+  add = FALSE,
+  months = substr(month.abb, 1, 1),
+  xlab = "",
+  ylab = "",
+  zlab = "",
+  ...
+)
 }
 \arguments{
 \item{dates}{Dates, in any format coerced by \code{\link{as.Date}}.}

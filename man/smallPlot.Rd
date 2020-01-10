@@ -4,10 +4,23 @@
 \alias{smallPlot}
 \title{Inset small plot within figure}
 \usage{
-smallPlot(expr, x1 = 0.05, x2 = 0.7, y1 = 0.5, y2 = 1,
-  outer = FALSE, xpd = NA, mar = c(3, 3, 1, 1), mgp = c(1.8, 0.8,
-  0), bg = par("bg"), border = par("fg"), las = 1,
-  resetfocus = TRUE, colwise = FALSE, ...)
+smallPlot(
+  expr,
+  x1 = 0.05,
+  x2 = 0.7,
+  y1 = 0.5,
+  y2 = 1,
+  outer = FALSE,
+  xpd = NA,
+  mar = c(3, 3, 1, 1),
+  mgp = c(1.8, 0.8, 0),
+  bg = par("bg"),
+  border = par("fg"),
+  las = 1,
+  resetfocus = TRUE,
+  colwise = FALSE,
+  ...
+)
 }
 \arguments{
 \item{expr}{expression creating a plot. Can be code within {braces}.}

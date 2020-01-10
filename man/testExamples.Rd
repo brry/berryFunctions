@@ -4,11 +4,18 @@
 \alias{testExamples}
 \title{Test examples in a package}
 \usage{
-testExamples(path = packagePath("."), commentDontrun = FALSE,
-  selection = NULL, logfolder = "ExampleTestLogs",
-  elogfile = "errors.txt", wlogfile = "warnings.txt",
-  tlogfile = "times.txt", plotfile = "plots.pdf",
-  tellcurrentfile = TRUE, ...)
+testExamples(
+  path = packagePath("."),
+  commentDontrun = FALSE,
+  selection = NULL,
+  logfolder = "ExampleTestLogs",
+  elogfile = "errors.txt",
+  wlogfile = "warnings.txt",
+  tlogfile = "times.txt",
+  plotfile = "plots.pdf",
+  tellcurrentfile = TRUE,
+  ...
+)
 }
 \arguments{
 \item{path}{Path to package. For internal function \code{testExample}, 

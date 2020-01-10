@@ -4,8 +4,7 @@
 \alias{nameSample}
 \title{Nonrandom character sequence with sample}
 \usage{
-nameSample(name, progress = FALSE, estimatetime = nc > 4,
-  continue = FALSE)
+nameSample(name, progress = FALSE, estimatetime = nc > 4, continue = FALSE)
 }
 \arguments{
 \item{name}{Character string. long strings (>>5) will compute a VERY long time!}
