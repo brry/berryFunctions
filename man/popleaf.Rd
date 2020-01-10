@@ -4,13 +4,18 @@
 \alias{popleaf}
 \title{create leaflet popup box info}
 \usage{
-popleaf(df, sel = colnames(df))
+popleaf(df, sel = colnames(df), exclude_geometry = TRUE, na.rm = FALSE)
 }
 \arguments{
 \item{df}{Data.frame}
 
 \item{sel}{Columns to be selected (Names or index or TRUE/FALSE vector).
 DEFAULT: colnames(df)}
+
+\item{exclude_geometry}{Remove column with the name "geometry" 
+(as in sf objects) from the display? DEFAULT: TRUE}
+
+\item{na.rm}{Exclude NA entries from the display? DEFAULT: FALSE}
 }
 \value{
 Vector with character strings
