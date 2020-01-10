@@ -135,12 +135,12 @@ textField(3000, c(-3, -3.7), c("0", "good"), border=c("red",3), lty=1:2)
 
 
 # textField even works on logarithmic axes:
-mylabel <- c("This","is (g)","the","ever-\\n great","Sparta")
+mylabel <- c("This","is (g)","the","ever-\n great","Sparta")
 plot(10^runif(5000, -1,2), log="y", col=8)
 textField(1000, c(100,20,4,2,0.5), mylabel, fill=2, mar=0, expression=FALSE)
 textField(2500, c(100,20,4,2,0.5), mylabel, fill=4, mar=0, expression=TRUE)
 textField(4000, c(100,20,4,2,0.5), mylabel, fill=3, mar=0)
-textField(c(1,2.5,4)*1000, 0.2, paste("expression=\\n", c("FALSE","TRUE","NA")))
+textField(c(1,2.5,4)*1000, 0.2, paste("expression=\n", c("FALSE","TRUE","NA")))
 
 # In most devices, vertical adjustment is slightly off when the character string
 # contains no descenders. The default is for centered text:  adj = c(0.5, NA).

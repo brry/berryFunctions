@@ -52,9 +52,9 @@ y <- 2*x + rnorm(20)
 plot(x,y)
 legGOF <- function(a,b)
   {
-  text(a,b, paste(c("      R2","RMSE","  NSE","  KGE"), collapse="\\n"), adj=1.2)
+  text(a,b, paste(c("      R2","RMSE","  NSE","  KGE"), collapse="\n"), adj=1.2)
   text(a,b, paste(round(c(rsquare(x,y), rmse(x,y), nse(x,y), kge(x,y)),5),
-                  collapse="\\n"), adj=0)
+                  collapse="\n"), adj=0)
   }
 legGOF(-1.5, 2) # R2 good, but does not check for bias (distance from 1:1 line)
 

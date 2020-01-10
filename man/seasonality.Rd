@@ -173,7 +173,7 @@ colnames(Q) <- c("date","discharge")
 Q$date <- as.Date(Q$date)
 Q$discharge[450:581] <- NA
 plot(Q, type="l")
-seas <- seasonality(date, discharge, data=Q, shift=100, main="NRFA: Thames\\nRoyal Windsor Park")
+seas <- seasonality(date, discharge, data=Q, shift=100, main="NRFA: Thames\nRoyal Windsor Park")
 head(seas)
 # notice how n for nonmissing values is lower in the first hydrological year,
 # which includes parts of two consecutive calendarical years.

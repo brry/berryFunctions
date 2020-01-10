@@ -62,7 +62,7 @@ trace errors and warnings and ease debugging.
 
 lower <- function(a) {message("fake message, a = ", a); a+10}
 middle <- function(b) {plot(b, main=b) ; warning("fake warning, b = ", b); lower(b) }
-upper <- function(c) {cat("printing c:", c, "\\n") ; middle(c)}
+upper <- function(c) {cat("printing c:", c, "\n") ; middle(c)}
 d <- upper(42)
 d
 rm(d)
@@ -108,13 +108,13 @@ options(op) ; rm(op)
 # Nested calls -----
 
 f <- function(k) tryStack(upper(k), silent=TRUE)
-d <- f(42)                 ; cat("-----\\n", d, "\\n-----\\n") ; rm(d)
-d <- f("42")               ; cat("-----\\n", d, "\\n-----\\n") ; rm(d)
-d <- tryStack(f(4) )       ; cat("-----\\n", d, "\\n-----\\n") ; rm(d)
+d <- f(42)                 ; cat("-----\n", d, "\n-----\n") ; rm(d)
+d <- f("42")               ; cat("-----\n", d, "\n-----\n") ; rm(d)
+d <- tryStack(f(4) )       ; cat("-----\n", d, "\n-----\n") ; rm(d)
 # warnings in nested calls are printed twice, unless warn=0
 d <- tryStack(f(4), warn=0) # could also be set within 'f'
 
-d <- tryStack(f("4"))      ; cat("-----\\n", d, "\\n-----\\n")
+d <- tryStack(f("4"))      ; cat("-----\n", d, "\n-----\n")
 d[1:3] ; rm(d)
 # empty stack at begin - because of tryStack in f, no real error happened in f
 
@@ -123,16 +123,16 @@ d[1:3] ; rm(d)
 
 cat( tryStack(upper("42")) )
 f <- function(k) tryStack(stop("oh oh"))
-d <- f(42) ; cat("-----\\n", d, "\\n-----\\n") ; rm(d) # level 4 not helpful, but OK
+d <- f(42) ; cat("-----\n", d, "\n-----\n") ; rm(d) # level 4 not helpful, but OK
 
 # stuff with base::try
 f <- function(k) try(upper(k), silent=TRUE)
-d <- f(42)     ; cat("-----\\n", d, "\\n-----\\n") ; rm(d)
-d <- f("42")   ; cat("-----\\n", d, "\\n-----\\n") ; rm(d) # regular try output
+d <- f(42)     ; cat("-----\n", d, "\n-----\n") ; rm(d)
+d <- f("42")   ; cat("-----\n", d, "\n-----\n") ; rm(d) # regular try output
 
 f2 <- function(k) tryStack(f(k), warn=0, silent=TRUE)
-d <- f2(42)    ; cat("-----\\n", d, "\\n-----\\n") ; rm(d)
-d <- f2("42")  ; cat("-----\\n", d, "\\n-----\\n") ; rm(d) # try -> no error.
+d <- f2(42)    ; cat("-----\n", d, "\n-----\n") ; rm(d)
+d <- f2("42")  ; cat("-----\n", d, "\n-----\n") ; rm(d) # try -> no error.
 # -> Use tryCatch and you can nest those calls. note that d gets longer.
 
 

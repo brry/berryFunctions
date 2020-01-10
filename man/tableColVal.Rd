@@ -71,7 +71,7 @@ tableColVal(Bsp, cellargs=list(cex=2), col="red")
 tableColVal(Bsp, Range=c(10,40))
 tableColVal(Bsp, Range=c(20,40))
 tableColVal(Bsp, palette=heat.colors(12))
-tableColVal(Bsp, palette=c(2,4,7), main="more\\nstuff")
+tableColVal(Bsp, palette=c(2,4,7), main="more\nstuff")
 
 Bsp2 <- matrix(rexp(30), ncol=6, byrow=TRUE)
 (  tableColVal(Bsp2)  )

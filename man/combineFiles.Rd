@@ -53,7 +53,7 @@ Combine several textfiles into one, regardless of their content.
 
 ## These are skipped by rcmd check (writing to external places is not allowed)
 \dontrun{
-cat("This is Sparta.\\nKicking your face.", file="BujakashaBerry1.txt")
+cat("This is Sparta.\nKicking your face.", file="BujakashaBerry1.txt")
 cat("Chuck Norris will roundhousekick you.", file="BujakashaBerry2.txt")
 combineFiles(inFiles=paste0("BujakashaBerry", 1:2, ".txt"),
              outFile="BujakashaBerry3.txt")

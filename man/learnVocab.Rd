@@ -29,7 +29,7 @@ At the beginning, new vocab will be asked, skip with empty ENTER.
 \dontrun{ # Excluded from checks, works only interactively! 
 # initiate empty vocab list:
 vocfile <- tempfile("myvocab",fileext=".csv")
-cat("learning_day 1\\nLEVEL;DE;FR\\n1;Das Haus;la maison\\n", file=vocfile)
+cat("learning_day 1\nLEVEL;DE;FR\n1;Das Haus;la maison\n", file=vocfile)
 
 learnVocab(vocfile) # asks new vocab, then tests and changes level as needed
 }

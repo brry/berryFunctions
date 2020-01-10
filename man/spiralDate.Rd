@@ -71,14 +71,14 @@ spiralDate(time,vals, data=fakeData, drange=as.Date(c("1980-01-01", "2004-11-15"
 par(mfrow=c(1,3), mar=c(3,3,6,1), mgp=c(2,0.6,0), las=1)
 colPoints(time,vals,vals, data=fakeData, col=divPal(100), add=FALSE, legend=FALSE,
           lines=TRUE, pch=NA, nint=1, lwd=2)
-title(main="classical time series\\nworks badly for long time series\\nshows trends well")
+title(main="classical time series\nworks badly for long time series\nshows trends well")
 
 seasonality(time, vals, fakeData, col=divPal(100), mar=c(3,3,6,1), legend=FALSE, main="", shift=61)
-title(main="yearly time series\\nday of year over time\\nfails for cyclicity over all year")
+title(main="yearly time series\nday of year over time\nfails for cyclicity over all year")
 
 spiralDate(time,vals, data=fakeData, col=divPal(100), legargs=list(y1=0.7,y2=0.8))
-title(main="spiral graph\\nshows cyclic values nicely
-            trends are harder to detect\\nrecent values = more visual weight")
+title(main="spiral graph\nshows cyclic values nicely
+            trends are harder to detect\nrecent values = more visual weight")
 
 par(mfrow=c(1,1))
 

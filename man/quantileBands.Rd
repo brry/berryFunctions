@@ -73,7 +73,7 @@ library(RColorBrewer)
 quantileBands(neff, smooth=35, ylab="max of rnorm(n)",
   xlab="sample size (n)", probs=0:10/10, col=brewer.pal(5,"BuGn"),
   medargs=list(lwd=2), meanargs=list(col=2, lty=1), txi=c(40,50,60),
-  main="Maximum is an unsaturated statistic:\\n it rises with sample size")
+  main="Maximum is an unsaturated statistic:\n it rises with sample size")
 
 neff2 <- t(replicate(n=50, sapply(1:400, function(nn) mean(rnorm(nn)))   ))
 quantileBands(neff2, x=1:400, smooth=35, ylab="mean of rnorm(n)",
