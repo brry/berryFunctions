@@ -36,7 +36,7 @@ y <- c(7777, 0.3)
 almost.equal(x,y) # FALSE TRUE                             Exactly what I want
 
 
-Absolute vs relative comparison, https://stackoverflow.com/questions/57578257
+# Absolute vs relative comparison, https://stackoverflow.com/questions/57578257
 
    all.equal(6.2, 6.4, tolerance=0.04) # TRUE - unexpected!
 almost.equal(6.2, 6.4, tolerance=0.04) # FALSE, thanks to default scale=1
