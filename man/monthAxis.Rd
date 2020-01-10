@@ -4,16 +4,38 @@
 \alias{monthAxis}
 \title{Label date axis}
 \usage{
-monthAxis(side = 1, time = NA, origin = "1970-01-01",
-  mlabels = substr(month.abb, 1, 1), yformat = "\%Y", nmonths = 3,
-  nym_half = 3.5, nym_none = 5, mcex = 0.7, ycex = 1,
-  mtcl = par("tcl"), ytcl = par("tcl") - 1.7, mline = -1,
-  yline = 0.2, las = 1, lrange = NA, trunc = NA, mgp = c(3, 1,
-  0), mt = NULL, ml = NULL, yt = NULL, yl = NULL, quiet = FALSE,
-  ...)
+monthAxis(
+  side = 1,
+  grid = FALSE,
+  time = NA,
+  origin = "1970-01-01",
+  mlabels = substr(month.abb, 1, 1),
+  yformat = "\%Y",
+  nmonths = 3,
+  nym_half = 3.5,
+  nym_none = 5,
+  mcex = 0.7,
+  ycex = 1,
+  mtcl = par("tcl"),
+  ytcl = par("tcl") - 1.7,
+  mline = -1,
+  yline = 0.2,
+  las = 1,
+  lrange = NA,
+  trunc = NA,
+  mgp = c(3, 1, 0),
+  mt = NULL,
+  ml = NULL,
+  yt = NULL,
+  yl = NULL,
+  quiet = FALSE,
+  ...
+)
 }
 \arguments{
 \item{side}{Which \code{\link{axis}} is to be labeled? DEFAULT: 1}
+
+\item{grid}{Add horizontal/vertical lines to graph? DEFAULT: FALSE}
 
 \item{time}{Logical indicating whether the axis is \code{\link{POSIXct}},
 not \code{\link{Date}}. DEFAULT: NA, meaning axis value >1e5}
@@ -91,10 +113,8 @@ monthAxis(side=3, nym_half=2) # if axis > 2 years, label only partially
 
 timePlot(2e3)
 monthAxis()   # long time series (>nym_none) only have years labeled
-ma <- monthAxis(side=3, font=2)
-abline(v=ma$mtics, col=8)
-abline(v=ma$ytics)          # vertical lines in graph - now add lines/points
-
+monthAxis(side=3, font=2, grid=TRUE)
+# vertical lines in graph - now add lines/points
 
 timePlot(900)
 monthAxis(side=3, mtcl=0) # no tick lines between months

@@ -24,10 +24,8 @@
 #' 
 #' timePlot(2e3)
 #' monthAxis()   # long time series (>nym_none) only have years labeled
-#' ma <- monthAxis(side=3, font=2)
-#' abline(v=ma$mtics, col=8)
-#' abline(v=ma$ytics)          # vertical lines in graph - now add lines/points
-#' 
+#' monthAxis(side=3, font=2, grid=TRUE)
+#' # vertical lines in graph - now add lines/points
 #' 
 #' timePlot(900)
 #' monthAxis(side=3, mtcl=0) # no tick lines between months
@@ -64,6 +62,7 @@
 #' monthAxis() # if less than a full year is covered, the year label is centered
 #' 
 #' @param side     Which \code{\link{axis}} is to be labeled? DEFAULT: 1
+#' @param grid     Add horizontal/vertical lines to graph? DEFAULT: FALSE 
 #' @param time     Logical indicating whether the axis is \code{\link{POSIXct}},
 #'                 not \code{\link{Date}}. DEFAULT: NA, meaning axis value >1e5
 #' @param origin   Origin for\code{\link{as.Date}} and \code{\link{as.POSIXct}}.
@@ -102,6 +101,7 @@
 #' 
 monthAxis <- function(
 side     = 1,
+grid     = FALSE,
 time     = NA,
 origin   = "1970-01-01",
 mlabels  = substr(month.abb,1,1),
@@ -208,6 +208,13 @@ do.call(axis, owa(mtd, mt))
 do.call(axis, owa(ytd, yt))
 do.call(axis, owa(mld, ml))
 do.call(axis, owa(yld, yl))
+
+if(grid)
+  {
+  if(side%%2){abline(v=mtics, col="grey90"); abline(v=ytics, col="grey70")} else
+             {abline(h=mtics, col="grey90"); abline(h=ytics, col="grey70")}
+  box()
+  }
 
 # output:
 return(invisible(list(mlabs=mlabs, ylabs=ylabs, mtics=mtics, ytics=ytics)))
