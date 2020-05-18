@@ -12,15 +12,16 @@
 #' @export
 #' @examples
 #' 
-#' groupHist(chickwts, weight, "feed", col=2)
+#' groupHist(chickwts, weight, "feed", col="salmon")
 #' groupHist(chickwts, "weight", "feed", col=2, unit="grams at age 6 weeks")
-#' groupHist(chickwts, weight, feed, col=2, breaks=20, main="Hi there")
+#' groupHist(chickwts, weight, feed, col="khaki", breaks=5, main="Hi there")
 #' groupHist(iris, Petal.Width, Species)
 #' 
 #' @param df data.frame object name
 #' @param x column name of variable of interest
 #' @param g column name of groups (\code{INDEX in \link{tapply}, f in \link{split}})
 #' @param xlab,ylab axis labels. DEFAULT: ""
+#' @param breaks \code{\link{hist} breaks}. DEFAULT: 20
 #' @param las LabelAxisStyle, see \code{\link{par}}. DEFAULT: 1, means numbers on y-axis upright
 #' @param main Main title, internal default based on \code{d, x, unit} and \code{g}. DEFAULT: NULL
 #' @param unit Unit to be written into the default title. DEFAULT: NA
@@ -31,6 +32,7 @@ df,
 x,
 g,
 xlab="", ylab="",
+breaks=20,
 las=1,
 main=NULL,
 unit=NA,
@@ -42,7 +44,7 @@ x <- gsub("\"", "", deparse(substitute(x)), fixed=TRUE)
 g <- gsub("\"", "", deparse(substitute(g)), fixed=TRUE)
 # get break values from full dataset,
 # ignore messages like: argument 'col' is not made use of
-suppressWarnings( h <- hist(df[,x], plot=FALSE, ...)    )
+suppressWarnings( h <- hist(df[,x], plot=FALSE, breaks=breaks, ...)    )
 # prepare dimensions:
 names <- unique(df[,g])
 n <- length(names)

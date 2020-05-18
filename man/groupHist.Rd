@@ -4,7 +4,18 @@
 \alias{groupHist}
 \title{Histogram for classes}
 \usage{
-groupHist(df, x, g, xlab = "", ylab = "", las = 1, main = NULL, unit = NA, ...)
+groupHist(
+  df,
+  x,
+  g,
+  xlab = "",
+  ylab = "",
+  breaks = 20,
+  las = 1,
+  main = NULL,
+  unit = NA,
+  ...
+)
 }
 \arguments{
 \item{df}{data.frame object name}
@@ -14,6 +25,8 @@ groupHist(df, x, g, xlab = "", ylab = "", las = 1, main = NULL, unit = NA, ...)
 \item{g}{column name of groups (\code{INDEX in \link{tapply}, f in \link{split}})}
 
 \item{xlab, ylab}{axis labels. DEFAULT: ""}
+
+\item{breaks}{\code{\link{hist} breaks}. DEFAULT: 20}
 
 \item{las}{LabelAxisStyle, see \code{\link{par}}. DEFAULT: 1, means numbers on y-axis upright}
 
@@ -34,9 +47,9 @@ Uses \code{\link{split}} to categorize into groups.
 }
 \examples{
 
-groupHist(chickwts, weight, "feed", col=2)
+groupHist(chickwts, weight, "feed", col="salmon")
 groupHist(chickwts, "weight", "feed", col=2, unit="grams at age 6 weeks")
-groupHist(chickwts, weight, feed, col=2, breaks=20, main="Hi there")
+groupHist(chickwts, weight, feed, col="khaki", breaks=5, main="Hi there")
 groupHist(iris, Petal.Width, Species)
 
 }
