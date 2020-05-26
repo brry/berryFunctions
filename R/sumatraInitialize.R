@@ -66,11 +66,3 @@ if(openfolder) openFile(path)
 # Output:
 return(invisible(path))
 }
-
-
-dd <- sumatraInitialize()
-openFile(dd)
-
-ddq <- shQuote(dd)
-system2("open", ddq)
-system2("open", shQuote("C:/Program Files/RStudio/bin/translations"))
