@@ -33,8 +33,8 @@ file <- normalizePath(file, winslash="/", mustWork=FALSE)
 checkFile(file)
 file <- shQuote(file) # to handle space in "C:/Program Files/R/..."
 linux <- Sys.info()["sysname"]=="Linux"
-out <- try(if(!linux) system2("open", file) else  # Windows
-                      system2("xdg-open", file),  # Linux
+out <- try(if(!linux) system2("open", file, ...) else  # Windows
+                      system2("xdg-open", file, ...),  # Linux
            silent=TRUE)
 return(invisible(out))
 }
