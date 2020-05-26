@@ -70,6 +70,7 @@ output <- lapply(seq_along(filename), function(i)
   p2 <- tools::file_ext(f)
   if(p2!="") p2 <- paste0(".",p2)
   p1 <- tools::file_path_sans_ext(f)
+  p1 <- sub("_[0-9]*$", "", p1) # if there is already _* as in file_1.ext
   nr <- 1
   while(file.exists(f))
     {
