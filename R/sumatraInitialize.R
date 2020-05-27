@@ -8,7 +8,8 @@
 #' \code{UiLanguage} gets filled in by Sumatra itself upon first opening.
 #' @return path, invisibly
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, May 2020
-#' @seealso \code{\link{openPDF}}, \url{https://www.sumatrapdfreader.org/settings/settings.html}, 
+#' @seealso \code{\link{openPDF}}\cr
+#' \url{https://www.sumatrapdfreader.org/settings/settings.html}\cr
 #' \url{https://github.com/sumatrapdfreader/sumatrapdf/blob/master/docs/sumatrapdfrestrict.ini}
 #' @keywords file
 #' @export
@@ -16,19 +17,19 @@
 #' # sumatraInitialize() # only run in interactive mode
 #'
 #' @param path  Folder (not file) that contains "SumatraPDF.exe". 
-#'              Hints on automatic path detection would be welcome!
-#'              DEFAULT: "C:/Program Files/RStudio/bin/sumatra"
+#'              DEFAULT: extracted from \code{\link{Sys.getenv}("RSTUDIO_PANDOC")}, e.g.
+#'              "C:/Program Files/RStudio/bin/sumatra"
 #' @param openfolder Logical: Open folder after writing the files?
 #'              Uses \code{\link{openFile}()}. DEFAULT: TRUE
 #' 
 sumatraInitialize <- function(
- path="C:/Program Files/RStudio/bin/sumatra",
+ path=sub("pandoc$", "sumatra", Sys.getenv("RSTUDIO_PANDOC")),
  openfolder=TRUE
  )
 {
 # Checks
 checkFile(path)
-# if(.Platform$OS.type != "windows") stop("Platform must be windows") # maybe sumatra is avalable on unix
+if(.Platform$OS.type != "windows") stop("SumatraPDF is only available on Windows") 
 if(!interactive()) stop("sumatraInitialize can only be used in an interactive session.")
 ok <- readline(paste0("Can I write files (no overwriting) at ", path, "? y/n: "))
 if(!tolower(substr(ok,1,1))=="y") stop("You did not give write access.")
@@ -54,7 +55,6 @@ if(file.exists(f2))
   }
 
 # Create new files
-
 fn1 <- system.file("extdata/sumatrapdfrestrict.ini",  package="berryFunctions")
 fn2 <- system.file("extdata/SumatraPDF-settings.txt", package="berryFunctions")
 file.copy(fn1, f1)

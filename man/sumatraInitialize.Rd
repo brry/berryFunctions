@@ -5,14 +5,14 @@
 \title{Set useful Sumatra PDF Viewer default settings}
 \usage{
 sumatraInitialize(
-  path = "C:/Program Files/RStudio/bin/sumatra",
+  path = sub("pandoc$", "sumatra", Sys.getenv("RSTUDIO_PANDOC")),
   openfolder = TRUE
 )
 }
 \arguments{
 \item{path}{Folder (not file) that contains "SumatraPDF.exe". 
-Hints on automatic path detection would be welcome!
-DEFAULT: "C:/Program Files/RStudio/bin/sumatra"}
+DEFAULT: extracted from \code{\link{Sys.getenv}("RSTUDIO_PANDOC")}, e.g.
+"C:/Program Files/RStudio/bin/sumatra"}
 
 \item{openfolder}{Logical: Open folder after writing the files?
 Uses \code{\link{openFile}()}. DEFAULT: TRUE}
@@ -33,7 +33,8 @@ Creates "SumatraPDF-settings.txt" with \code{ShowToc = false} and \code{DefaultD
 
 }
 \seealso{
-\code{\link{openPDF}}, \url{https://www.sumatrapdfreader.org/settings/settings.html}, 
+\code{\link{openPDF}}\cr
+\url{https://www.sumatrapdfreader.org/settings/settings.html}\cr
 \url{https://github.com/sumatrapdfreader/sumatrapdf/blob/master/docs/sumatrapdfrestrict.ini}
 }
 \author{
