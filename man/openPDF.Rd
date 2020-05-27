@@ -37,7 +37,8 @@ I suggest to first change some settings with \code{\link{sumatraInitialize}()}.
 }
 \seealso{
 \code{\link{openFile}} for the default opening programm\cr
-         \code{\link{sumatraInitialize}} for nice Sumatra default settings
+         \code{\link{sumatraInitialize}} for nice Sumatra default settings\cr
+         \code{\link{pdfpng}} to create PDFs and PNGs simultaneously.
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, May 2020
