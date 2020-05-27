@@ -13,6 +13,7 @@
 #' \dontrun{ # excluded from CRAN checks, file opening not wanted
 #' openFile("README.md")
 #' openFile("Tests.R")
+#' openFile(c("README.md","Tests.R"))
 #' is.error(openFile("dummydummydoesntexist.R"), TRUE, TRUE)
 #' openFile(tempdir())
 #' }
