@@ -16,7 +16,8 @@ Result of try(system2, ...), invisibly
 }
 \description{
 open a file using \code{\link{system2}} with command based on operating system.
-Tries to open the file with the program associated with its file extension.
+Tries to open the file with the program associated with its file extension.\cr
+See \code{\link{openPDF}} to open files with sumatraPDF.
 }
 \examples{
 \dontrun{ # excluded from CRAN checks, file opening not wanted
@@ -37,7 +38,7 @@ openFile(tempdir())
 \url{https://apple.stackexchange.com/questions/212583}
 }
 \seealso{
-\code{\link{system2}}, \code{\link{checkFile}}
+\code{\link{openPDF}}, \code{\link{system2}}, \code{\link{checkFile}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Aug 2017

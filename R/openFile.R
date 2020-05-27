@@ -1,9 +1,10 @@
 #' @title open file in default application
 #' @description open a file using \code{\link{system2}} with command based on operating system.
-#' Tries to open the file with the program associated with its file extension.
+#' Tries to open the file with the program associated with its file extension.\cr
+#' See \code{\link{openPDF}} to open files with sumatraPDF.
 #' @return Result of try(system2, ...), invisibly
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Aug 2017
-#' @seealso \code{\link{system2}}, \code{\link{checkFile}}
+#' @seealso \code{\link{openPDF}}, \code{\link{system2}}, \code{\link{checkFile}}
 #' @references \url{https://askubuntu.com/questions/15354},
 #' \url{https://apple.stackexchange.com/questions/212583}
 #' @keywords file
