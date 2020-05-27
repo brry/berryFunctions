@@ -1,11 +1,10 @@
 #' Create pdf and png graph
 #' 
 #' Create both a \code{\link{pdf}} and a \code{\link{png}} file with a graph,
-#' with custom size default values.
-#' To iteratively create pdfs without closing and reopening the pdf viewer, you
-#' might want to use e.g. Sumatra, which comes with Rstudio. It can be found e.g. in
-#' C:/Program Files/RStudio/bin/sumatra
-#' 
+#' with custom size default values.\cr
+#' \code{pdfpng} tries to open the PDF file (through \code{\link{openPDF}}) 
+#' with SumatraPDF viewer, which does not lock files against being edited. \cr
+#' See \code{\link{sumatraInitialize}} for nice Sumatra default settings.
 #' @return file paths, invisible
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, March 2017
 #' @seealso \code{\link{pdf}}, \code{\link{png}}
@@ -54,7 +53,8 @@
 #' @param overwrite    Logical: Overwrite existing \code{file}? Can be a vector
 #'                     for pdf and png separately.
 #'                     DEFAULT: FALSE (_n appended in filename)
-#' @param open         Logical: open file(s) after creation using \code{\link{openFile}}? 
+#' @param open         Logical: open file(s) after creation using 
+#'                     \code{\link{openPDF}} and \code{\link{openFile}}? 
 #'                     DEFAULT: TRUE 
 #' @param quiet        Logical: suppress file creation messages and
 #'                     expr execution error tracing? DEFAULT: FALSE
@@ -129,6 +129,6 @@ if(png)
                    "eval(expr, p)"))
   dev.off()
 }
-if(open) openFile(fig[c(pdf,png)])
+if(open) { if(pdf) openPDF(fig[1]) ; if(png) openFile(fig[2])  }
 return(invisible(fig))
 }

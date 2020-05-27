@@ -44,7 +44,8 @@ captured by newFilename. You may also have to run dev.off().}
 for pdf and png separately.
 DEFAULT: FALSE (_n appended in filename)}
 
-\item{open}{Logical: open file(s) after creation using \code{\link{openFile}}? 
+\item{open}{Logical: open file(s) after creation using 
+\code{\link{openPDF}} and \code{\link{openFile}}? 
 DEFAULT: TRUE}
 
 \item{quiet}{Logical: suppress file creation messages and
@@ -78,10 +79,10 @@ file paths, invisible
 }
 \description{
 Create both a \code{\link{pdf}} and a \code{\link{png}} file with a graph,
-with custom size default values.
-To iteratively create pdfs without closing and reopening the pdf viewer, you
-might want to use e.g. Sumatra, which comes with Rstudio. It can be found e.g. in
-C:/Program Files/RStudio/bin/sumatra
+with custom size default values.\cr
+\code{pdfpng} tries to open the PDF file (through \code{\link{openPDF}}) 
+with SumatraPDF viewer, which does not lock files against being edited. \cr
+See \code{\link{sumatraInitialize}} for nice Sumatra default settings.
 }
 \examples{
 
