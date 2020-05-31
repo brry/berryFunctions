@@ -28,6 +28,8 @@
 #'                       DEFAULT: "plots.pdf"
 #' @param tellcurrentfile Logical: At the beginning of each file, message the
 #'                       name and current time in the console?
+#' @param telldocument   Message reminder to run \code{devtools::\link{document}()}? 
+#'                       DEFAULT: TRUE
 #' @param \dots          Further arguments passed to internal function \code{testExample}
 #'                       and from there to \code{tools::\link{Rd2ex}}
 #'
@@ -41,13 +43,20 @@ wlogfile="warnings.txt",
 tlogfile="times.txt",
 plotfile="plots.pdf",
 tellcurrentfile=TRUE,
+telldocument=TRUE,
 ...
 )
 {
-message("Make sure you have run devtools::document() recently!")
+if(telldocument) message("Make sure you have run devtools::document() recently!")
 if(!file.exists(logfolder)) dir.create(logfolder)
 owd <- setwd(logfolder)
 on.exit(setwd(owd), add=TRUE)
+# Suppress progbars in logfiles:
+if(requireNamespace("pbapply", quietly=TRUE))
+  {
+  pbtype <- pbapply::pboptions(type="none")
+  on.exit(pbapply::pboptions(type=pbtype$type), add=TRUE)
+  }
 #elogfile <- paste0(sub("/$", "", logfolder), "/", elogfile)
 #wlogfile <- paste0(sub("/$", "", logfolder), "/", wlogfile)
 #tlogfile <- paste0(sub("/$", "", logfolder), "/", tlogfile)

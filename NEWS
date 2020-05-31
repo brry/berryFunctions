@@ -17,7 +17,6 @@ ToDo-list
 - tryStack: mapply, do.call etc put function name in next element
 - if tryStack+traceCall moved to own pkg trace, add tstop, twarning and tmessage with traceCall
 - getColumn: consider renaming argument x
-- testExamples: temporally suppress pbapply progress bar globally for cleaner warning/message log
 
 
 

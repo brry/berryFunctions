@@ -14,6 +14,7 @@ testExamples(
   tlogfile = "times.txt",
   plotfile = "plots.pdf",
   tellcurrentfile = TRUE,
+  telldocument = TRUE,
   ...
 )
 }
@@ -44,6 +45,9 @@ DEFAULT: "plots.pdf"}
 
 \item{tellcurrentfile}{Logical: At the beginning of each file, message the
 name and current time in the console?}
+
+\item{telldocument}{Message reminder to run \code{devtools::\link{document}()}? 
+DEFAULT: TRUE}
 
 \item{\dots}{Further arguments passed to internal function \code{testExample}
 and from there to \code{tools::\link{Rd2ex}}}
