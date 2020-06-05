@@ -33,7 +33,7 @@ I suggest to first change some settings with \code{\link{sumatraInitialize}()}.
 # only desired in an interactive session, not on CRAN checks
 # openPDF( system.file("extdata/Anhang.pdf", package="berryFunctions")  )
 # openPDF( system.file(c("extdata/Anhang.pdf", "extdata/RainfallStationsMap.pdf"), 
-                       package="berryFunctions")  )
+#                      package="berryFunctions")  )
 
 }
 \seealso{

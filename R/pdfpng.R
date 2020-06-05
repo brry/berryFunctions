@@ -16,7 +16,6 @@
 #' 
 #' \dontrun{ # excluded from CRAN checks, file opening not wanted
 #' pdfpng(   plot(rnorm(500), type="l")   , file="dummyplot", png=FALSE)
-#' }
 #' 
 #' pdfpng({par(bg=8, las=1); plot(cumsum(rnorm(500)), type="l")},
 #'        file="dummyplot", res=100, open=FALSE)
@@ -39,6 +38,7 @@
 #' 
 #' 
 #' unlink("dummyplot.pdf") ; unlink("dummyplot.png") ; unlink("dummyplot_1.png")
+#' }
 #' 
 #' @param expr         Expression creating the plot, can be included in curly braces.
 #' @param file         Character: Filename without pdf/png extension.

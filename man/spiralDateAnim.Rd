@@ -37,7 +37,6 @@ y <- y + sin(0:5000/366*2*pi)*max(abs(y))/2
 plot(x,y)
 
 spiralDateAnim(x,y, steps=10, sleep=0.01) # 0.05 might be smoother...
-spiralDateAnim(x,y, steps=20)
 
 \dontrun{
 ## Rcmd check --as-cran doesn't like to open external devices such as pdf,

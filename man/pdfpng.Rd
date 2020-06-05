@@ -88,7 +88,6 @@ See \code{\link{sumatraInitialize}} for nice Sumatra default settings.
 
 \dontrun{ # excluded from CRAN checks, file opening not wanted
 pdfpng(   plot(rnorm(500), type="l")   , file="dummyplot", png=FALSE)
-}
 
 pdfpng({par(bg=8, las=1); plot(cumsum(rnorm(500)), type="l")},
        file="dummyplot", res=100, open=FALSE)
@@ -111,6 +110,7 @@ pdfpng({plot(1); plot(dummyobject)}, "dummyplot", overwrite=TRUE,
 
 
 unlink("dummyplot.pdf") ; unlink("dummyplot.png") ; unlink("dummyplot_1.png")
+}
 
 }
 \seealso{
