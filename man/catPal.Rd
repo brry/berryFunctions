@@ -18,7 +18,7 @@ Character string vector with color names
 }
 \description{
 Categorical color palette according to IwantHue as displayed on
-\url{https://visual.ly/blog/subtleties-of-color-different-types-of-data-require-different-color-schemes/}
+\url{https://en.rockcontent.com/blog/subtleties-of-color-different-types-of-data-require-different-color-schemes}
 }
 \examples{
 plot(rep(1,12), pch=16, cex=5, col=catPal(12), xaxt="n")

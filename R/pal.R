@@ -60,12 +60,13 @@ title(main="berryFunctions::catPal", xpd=NA, line=0.5)
 #' @title Categorical color palette
 #' @description 
 #' Categorical color palette according to IwantHue as displayed on
-#' \url{https://visual.ly/blog/subtleties-of-color-different-types-of-data-require-different-color-schemes/}
+#' \url{https://en.rockcontent.com/blog/subtleties-of-color-different-types-of-data-require-different-color-schemes}
 #' @return Character string vector with color names
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Apr 2019
 #' @seealso \code{\link{showPal}}, \code{\link{seqPal}}, \code{\link{divPal}}
 #' @keywords color dplot
 #' @export
+#' @importFrom utils read.table
 #' @examples
 #' plot(rep(1,12), pch=16, cex=5, col=catPal(12), xaxt="n")
 #' showPal()

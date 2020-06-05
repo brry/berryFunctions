@@ -46,7 +46,7 @@ DEFAULT: "plots.pdf"}
 \item{tellcurrentfile}{Logical: At the beginning of each file, message the
 name and current time in the console?}
 
-\item{telldocument}{Message reminder to run \code{devtools::\link{document}()}? 
+\item{telldocument}{Message reminder to run \code{devtools::document()}? 
 DEFAULT: TRUE}
 
 \item{\dots}{Further arguments passed to internal function \code{testExample}

@@ -6,6 +6,7 @@
 #' @keywords package
 #' @importFrom tools Rd2ex
 #' @importFrom grDevices dev.off pdf
+#' @importFrom utils read.table
 #' @export
 #' @examples
 #' # testExamples(selection=1:10)
@@ -28,7 +29,7 @@
 #'                       DEFAULT: "plots.pdf"
 #' @param tellcurrentfile Logical: At the beginning of each file, message the
 #'                       name and current time in the console?
-#' @param telldocument   Message reminder to run \code{devtools::\link{document}()}? 
+#' @param telldocument   Message reminder to run \code{devtools::document()}? 
 #'                       DEFAULT: TRUE
 #' @param \dots          Further arguments passed to internal function \code{testExample}
 #'                       and from there to \code{tools::\link{Rd2ex}}

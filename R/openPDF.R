@@ -13,7 +13,8 @@
 #' @examples
 #' # only desired in an interactive session, not on CRAN checks
 #' # openPDF( system.file("extdata/Anhang.pdf", package="berryFunctions")  )
-#' # openPDF( system.file(c("extdata/Anhang.pdf", "extdata/RainfallStationsMap.pdf"), package="berryFunctions")  )
+#' # openPDF( system.file(c("extdata/Anhang.pdf", "extdata/RainfallStationsMap.pdf"), 
+#'                        package="berryFunctions")  )
 #' 
 #' @param file   Filename to be opened, as character string.
 #'               Files not ending in ".pdf" are ignored with a warning.

@@ -10,8 +10,8 @@
 #' @seealso \code{\link{logVals}}
 #' @references x^(1/t) is based on the first comment on \url{http://stackoverflow.com/questions/15994442/}\cr
 #'   besides the nice graphic properties of logtransformations, check this page for the implications on rates of change: \cr
-#'   \url{http://sfew.websitetoolbox.com/post/show_single_post?pid=1282690259&postcount=4}\cr
-#'   \url{http://sfew.websitetoolbox.com/post/show_single_post?pid=1282691799&postcount=5}
+#'   \code{http://sfew.websitetoolbox.com/post/show_single_post?pid=1282690259&postcount=4}\cr
+#'   \code{http://sfew.websitetoolbox.com/post/show_single_post?pid=1282691799&postcount=5}
 #' @keywords dplot hplot dynamic
 #' @importFrom graphics abline axis box plot title
 #' @export
