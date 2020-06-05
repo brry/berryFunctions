@@ -1,0 +1,3081 @@
+
+R version 3.6.1 (2019-07-05) -- "Action of the Toes"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "extremeStat"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> options(pager = "console")
+> library('extremeStat')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("annMax")
+> ### * annMax
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: annMax
+> ### Title: annual discharge maxima (streamflow)
+> ### Aliases: annMax
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> data(annMax)
+> str(annMax)
+ num [1:35] 61.5 77 37 69.3 75.6 74.9 43.7 50.8 55.6 84.1 ...
+> str(annMax)
+ num [1:35] 61.5 77 37 69.3 75.6 74.9 43.7 50.8 55.6 84.1 ...
+> plot(1976:2010, annMax, type="l", las=1, main="annMax dataset from Austria")
+> # Moving Average with different window widths:
+> berryFunctions::movAvLines(annMax, x=1976:2010, lwd=3, alpha=0.7)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("distLexBoot")
+> ### * distLexBoot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: distLexBoot
+> ### Title: Bootstrapping uncertainty intervals for return periods
+> ### Aliases: distLexBoot
+> ### Keywords: bootstrap distribution dplot hplot montecarlo ts
+> 
+> ### ** Examples
+> 
+> 
+> data(annMax)
+> dlf <- distLextreme(annMax, selection=c("wak","gum","gev","nor"))
+distLfit execution took 0.036 seconds.
+> dlfB <- distLexBoot(dlf, nbest=4, conf.lev=0.5, n=10) # n low for quick example tests
+> plotLexBoot(dlfB)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("distLextreme")
+> ### * distLextreme
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: distLextreme
+> ### Title: Extreme value stats
+> ### Aliases: distLextreme
+> ### Keywords: distribution dplot hplot ts
+> 
+> ### ** Examples
+> 
+> 
+> # Basic examples
+> # BM vs POT
+> # Plotting options
+> # weighted mean based on Goodness of fit (GOF)
+> # Effect of data proportion used to estimate GOF
+> # compare extremeStat with other packages
+> 
+> library(lmomco)
+Warning: package 'lmomco' was built under R version 3.6.3
+> library(berryFunctions)
+Warning: package 'berryFunctions' was built under R version 3.6.3
+> 
+> data(annMax) # annual streamflow maxima in river in Austria
+> 
+> # Basic examples ---------------------------------------------------------------
+> dlf <- distLextreme(annMax)
+distLfit execution took 0.051 seconds.
+> plotLextreme(dlf, log=TRUE)
+> 
+> # Object structure:
+> str(dlf, max.lev=2)
+List of 14
+ $ parameter   :List of 17
+  ..$ exp   :List of 3
+  ..$ gam   :List of 3
+  ..$ gev   :List of 3
+  ..$ glo   :List of 3
+  ..$ gno   :List of 3
+  ..$ gpa   :List of 4
+  ..$ gum   :List of 3
+  ..$ kap   :List of 7
+  ..$ lap   :List of 3
+  ..$ ln3   :List of 4
+  ..$ nor   :List of 3
+  ..$ pe3   :List of 3
+  ..$ ray   :List of 3
+  ..$ revgum:List of 4
+  ..$ rice  :List of 5
+  ..$ wak   :List of 5
+  ..$ wei   :List of 3
+ $ dat_full    : num [1:35] 61.5 77 37 69.3 75.6 74.9 43.7 50.8 55.6 84.1 ...
+ $ dat         : num [1:35] 113.6 110.8 94.8 93.6 89.6 ...
+ $ datname     : chr "annMax"
+ $ distnames   : chr [1:17] "wak" "kap" "wei" "pe3" ...
+ $ distcols    : chr [1:17] "#3300FFFF" "#0010FFFF" "#0053FFFF" "#0096FFFF" ...
+ $ distselector: chr "distLquantile"
+ $ distfailed  : chr ""
+ $ truncate    : num 0
+ $ threshold   : Named num 35.4
+  ..- attr(*, "names")= chr "0%"
+ $ gof         :'data.frame':	17 obs. of  5 variables:
+  ..$ RMSE   : num [1:17] 0.0222 0.0228 0.0231 0.0254 0.0255 ...
+  ..$ weight1: num [1:17] 0.0697 0.0691 0.0689 0.067 0.0669 ...
+  ..$ weight2: num [1:17] 0.0745 0.0737 0.0734 0.0707 0.0705 ...
+  ..$ weight3: num [1:17] 0.117 0.115 0.115 0.111 0.11 ...
+  ..$ weightc: num [1:17] 0 0 0 0 0 0 0 0 0 0 ...
+ $ quant       : num [1:39, 1:6] 62.1 61.6 61.8 61.9 62.4 ...
+  ..- attr(*, "dimnames")=List of 2
+ $ returnlev   :'data.frame':	39 obs. of  5 variables:
+  ..$ RP.2 : num [1:39] 62.1 61.6 61.8 61.9 62.4 ...
+  ..$ RP.5 : num [1:39] 82 82.4 81.7 81.1 81.9 ...
+  ..$ RP.10: num [1:39] 93.4 94.2 93.4 93 93.1 ...
+  ..$ RP.20: num [1:39] 103 104 104 104 103 ...
+  ..$ RP.50: num [1:39] 115 114 115 117 114 ...
+ $ npy         : num 1
+> printL(dlf)
+----------
+Dataset 'annMax' with 35 values. min/median/max:  35.4/61.5/113.6  nNA: 0
+truncate: 0 threshold: 35.4. dat_full with 35 values:  35.4/61.5/113.6  nNA: 0
+dlf with 17 distributions. In descending order of fit quality:
+wak, kap, wei, pe3, ray, ln3, gno, gev, gum, gpa, gam, glo, lap, rice, nor, exp, revgum
+RMSE min/median/max:  0.022/0.027/0.085  nNA: 0
+17 distnames + 17 distcols from distselector distLquantile
+quant: 39 rows, 6 columns, 234 values, of which 32 NA.
+-- distLextreme elements:
+5 Return Periods (min/median/max:  2/10/50  nNA: 0): 2, 5, 10, 20, 50
+Return Levels min/median/max:  49.3/93.2/145.7  nNA: 10
+npy: 1
+> 
+> # discharge levels for default return periods:
+> dlf$returnlev
+                          RP.2      RP.5     RP.10     RP.20     RP.50
+wak                   62.06908  82.00224  93.37393 103.30175 114.81836
+kap                   61.63990  82.43319  94.20990 103.80750 113.98584
+wei                   61.84405  81.72957  93.39678 103.55521 115.46953
+pe3                   61.86107  81.13112  92.97753 103.72004 116.87811
+ray                   62.37416  81.92136  93.07332 102.63851 113.71311
+ln3                   61.89473  80.85126  92.71419 103.69028 117.47486
+gno                   61.89473  80.85126  92.71419 103.69028 117.47486
+gev                   61.85979  80.83924  92.82171 103.89743 117.64984
+gum                   61.24316  80.26879  92.86542 104.94841 120.58860
+gpa                   61.36114  84.02187  95.30208 103.19519 110.11583
+gam                   62.54834  81.39612  92.57994 102.53018 114.52039
+glo                   62.16467  79.38862  91.10085 103.11624 120.24369
+lap                   62.19140  77.33774  88.79551 100.25328 115.39963
+rice                  64.59196  82.14649  91.37297  99.01113 107.62436
+nor                   64.78000  82.13652  91.20908  98.70136 107.13390
+exp                   57.63946  78.96177  95.09148 111.22119 132.54351
+revgum                68.31684  82.45728  88.46912  92.88645  97.36604
+empirical             61.50000  82.32000  93.76000 109.20000 113.48800
+quantileMean          61.42222  82.14694  93.28444 105.64000 112.76000
+weighted1             62.14394  81.21538  92.70405 102.97786 115.41622
+weighted2             62.04278  81.23617  92.80714 103.14857 115.65607
+weighted3             61.85532  81.35425  93.13879 103.68757 116.40382
+weightedc                  NaN       NaN       NaN       NaN       NaN
+GPD_LMO_lmomco        62.18392  84.45045  95.66677 103.59433 110.62509
+GPD_LMO_extRemes      63.22711  85.21118  95.02659 101.29275 106.24317
+GPD_PWM_evir          62.42497  84.65551  94.44999 100.63331 105.45683
+GPD_PWM_fExtremes     63.35462  85.16163  94.76950 100.83502 105.56665
+GPD_MLE_extRemes      49.30374  67.68348  81.58722  95.49096 113.87071
+GPD_MLE_ismev         62.66006  85.55055  96.44390 103.78218 109.94420
+GPD_MLE_evd           62.61322  85.49379  96.39702 103.75028 109.93281
+GPD_MLE_Renext_Renouv 62.61322  85.49379  96.39702 103.75028 109.93281
+GPD_MLE_evir          64.56073  88.34657  98.73178 105.23831 110.27039
+GPD_MLE_fExtremes     65.55978  88.88502  99.06913 105.44967 110.38431
+GPD_GML_extRemes      49.30374  67.68348  81.58722  95.49096 113.87071
+GPD_MLE_Renext_2par   84.50984 118.93838 132.49005 140.27343 145.72999
+GPD_BAY_extRemes            NA        NA        NA        NA        NA
+n_full                35.00000        NA        NA        NA        NA
+n                     35.00000        NA        NA        NA        NA
+threshold             35.40000        NA        NA        NA        NA
+> 
+> # Estimate discharge that could occur every 80 years (at least empirically):
+> Q80 <- distLextreme(dlf=dlf, RPs=80)$returnlev
+> round(sort(Q80[1:17,1]),1)
+ [1]  99.3 111.0 111.6 112.6 118.3 118.9 120.1 120.3 121.1 123.2 123.3 124.4
+[13] 124.4 124.4 128.5 129.8 143.5
+> # 99 to 143 m^3/s can make a relevant difference in engineering!
+> # That's why the rows weighted by GOF are helpful. Weights are given as in
+> plotLweights(dlf) # See also section weighted mean below
+> # For confidence intervals see ?distLexBoot
+> 
+> # Return period of a given discharge value, say 120 m^3/s:
+> round0(sort(1/(1-sapply(dlf$parameter, plmomco, x=120) )  ),1)
+        exp         gum         glo         gev         gno         ln3 
+     "29.2"      "48.3"      "49.4"      "58.8"      "59.4"      "59.4" 
+        pe3         lap         wei         gam         wak         ray 
+     "62.7"      "66.0"      "72.9"      "78.0"      "79.1"      "88.8" 
+        kap        rice         nor         gpa      revgum 
+     "97.7"     "241.3"     "269.7"    "2321.2" "3492153.9" 
+> # exponential:                 every 29 years
+> # gev (general extreme value dist):  59,
+> # Weibull:                     every 73 years only
+> 
+> 
+> # BM vs POT --------------------------------------------------------------------
+> # Return levels by Block Maxima approach vs Peak Over Threshold approach:
+> # BM distribution theoretically converges to GEV, POT to GPD
+> 
+> data(rain, package="ismev")
+> days <- seq(as.Date("1914-01-01"), as.Date("1961-12-30"), by="days")
+> BM <- tapply(rain, format(days,"%Y"), max)  ;  rm(days)
+> dlfBM <- plotLextreme(distLextreme(BM, emp=FALSE), ylim=lim0(100), log=TRUE, nbest=10)
+Note in distLfit: dat was not a vector.
+distLfit execution took 0.04 seconds.
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+> plotLexBoot(distLexBoot(dlfBM, quiet=TRUE), ylim=lim0(100))
+> plotLextreme(dlfBM, log=TRUE, ylim=lim0(100))
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+> 
+> dlfPOT99 <- distLextreme(rain, npy=365.24, trunc=0.99, emp=FALSE)
+Parameter estimation from L-moments:
+Calculating CDFs:
+Calculating RMSE:
+distLfit execution took 0.054 seconds.
+> dlfPOT99 <- plotLextreme(dlfPOT99, ylim=lim0(100), log=TRUE, nbest=10, main="POT 99")
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+> printL(dlfPOT99)
+----------
+Dataset 'rain' with 178 values. min/median/max:  29.2/34/86.6  nNA: 0
+truncate: 0.99 threshold: 29.2. dat_full with 17531 values:  0/0.5/86.6  nNA: 0
+dlf with 17 distributions. In descending order of fit quality:
+gpa, wak, kap, gno, ln3, wei, pe3, gev, exp, glo, lap, gum, ray, gam, rice, nor, revgum
+RMSE min/median/max:  0.019/0.037/0.16  nNA: 0
+17 distnames + 10 distcols from distselector plotLextreme
+quant: 20 rows, 6 columns, 120 values, of which 15 NA.
+-- distLextreme elements:
+17531 Plotting positions min/median/max:  0/0/85.7  nNA: 0
+5 Return Periods (min/median/max:  2/10/50  nNA: 0): 2, 5, 10, 20, 50
+Return Levels min/median/max:  42.7/57.5/102.7  nNA: 0
+npy: 365.24
+> 
+> # using only nonzero values (normally yields better fits, but not here)
+> rainnz <- rain[rain>0]
+> dlfPOT99nz <- distLextreme(rainnz, npy=length(rainnz)/48, trunc=0.99, emp=FALSE)
+Parameter estimation from L-moments:
+Calculating CDFs:
+Calculating RMSE:
+distLfit execution took 0.062 seconds.
+> dlfPOT99nz <- plotLextreme(dlfPOT99nz, ylim=lim0(100), log=TRUE, nbest=10,
++                            main=paste("POT 99 x>0, npy =", round(dlfPOT99nz$npy,2)))
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+Warning in log(x[i] - XI) : NaNs produced
+> 
+> ## Not run: 
+> ##D  ## Excluded from CRAN R CMD check because of computing time
+> ##D 
+> ##D dlfPOT99boot <- distLexBoot(dlfPOT99, prop=0.4)
+> ##D printL(dlfPOT99boot)
+> ##D plotLexBoot(dlfPOT99boot)
+> ##D 
+> ##D 
+> ##D dlfPOT90 <- distLextreme(rain, npy=365.24, trunc=0.90, emp=FALSE)
+> ##D dlfPOT90 <- plotLextreme(dlfPOT90, ylim=lim0(100), log=TRUE, nbest=10, main="POT 90")
+> ##D 
+> ##D dlfPOT50 <- distLextreme(rain, npy=365.24, trunc=0.50, emp=FALSE)
+> ##D dlfPOT50 <- plotLextreme(dlfPOT50, ylim=lim0(100), log=TRUE, nbest=10, main="POT 50")
+> ## End(Not run)
+> 
+> ig99 <- ismev::gpd.fit(rain, dlfPOT99$threshold)
+$threshold
+ 99% 
+29.2 
+
+$nexc
+[1] 178
+
+$conv
+[1] 0
+
+$nllh
+[1] 553.8181
+
+$mle
+[1] 6.3934755 0.2561807
+
+$rate
+[1] 0.01015344
+
+$se
+[1] 0.8115341 0.1042416
+
+> ismev::gpd.diag(ig99); title(main=paste(99, ig99$threshold))
+> ## Not run: 
+> ##D ig90 <- ismev::gpd.fit(rain, dlfPOT90$threshold)
+> ##D ismev::gpd.diag(ig90); title(main=paste(90, ig90$threshold))
+> ##D ig50 <- ismev::gpd.fit(rain, dlfPOT50$threshold)
+> ##D ismev::gpd.diag(ig50); title(main=paste(50, ig50$threshold))
+> ## End(Not run)
+> 
+> 
+> # Plotting options -------------------------------------------------------------
+> plotLextreme(dlf=dlf)
+> # Line colors / select distributions to be plotted:
+> plotLextreme(dlf, nbest=17, distcols=heat.colors(17), lty=1:5) # lty is recycled
+> plotLextreme(dlf, selection=c("gev", "gam", "gum"), distcols=4:6, PPcol=3, lty=3:2)
+> plotLextreme(dlf, selection=c("gpa","glo","wei","exp"), pch=c(NA,NA,6,8),
++                  order=TRUE, cex=c(1,0.6, 1,1), log=TRUE, PPpch=c(16,NA), n_pch=20)
+> # use n_pch to say how many points are drawn per line (important for linear axis)
+> 
+> plotLextreme(dlf, legarg=list(cex=0.5, x="bottom", box.col="red", col=3))
+Note in owa: (called from plotLextreme -> do.call - graphics::legend -> berryFunctions::owa):
+ The argument 'col' is defined as unchangeable and thus ignored.
+> # col in legarg list is (correctly) ignored
+> ## Not run: 
+> ##D ## Excluded from package R CMD check because it's time consuming
+> ##D 
+> ##D plotLextreme(dlf, PPpch=c(1,NA)) # only Weibull plotting positions
+> ##D # add different dataset to existing plot:
+> ##D distLextreme(Nile/15, add=TRUE, PPpch=NA, distcols=1, selection="wak", legend=FALSE)
+> ##D 
+> ##D # Logarithmic axis
+> ##D plotLextreme(distLextreme(Nile), log=TRUE, nbest=8)
+> ##D 
+> ##D 
+> ##D 
+> ##D # weighted mean based on Goodness of fit (GOF) ---------------------------------
+> ##D # Add discharge weighted average estimate continuously:
+> ##D plotLextreme(dlf, nbest=17, legend=FALSE)
+> ##D abline(h=115.6, v=50)
+> ##D RP <- seq(1, 70, len=100)
+> ##D DischargeEstimate <- distLextreme(dlf=dlf, RPs=RP, plot=FALSE)$returnlev
+> ##D lines(RP, DischargeEstimate["weighted2",], lwd=3, col="orange")
+> ##D 
+> ##D # Or, on log scale:
+> ##D plotLextreme(dlf, nbest=17, legend=FALSE, log=TRUE)
+> ##D abline(h=115.9, v=50)
+> ##D RP <- unique(round(logSpaced(min=1, max=70, n=200, plot=FALSE),2))
+> ##D DischargeEstimate <- distLextreme(dlf=dlf, RPs=RP)$returnlev
+> ##D lines(RP, DischargeEstimate["weighted2",], lwd=5)
+> ##D 
+> ##D 
+> ##D # Minima -----------------------------------------------------------------------
+> ##D 
+> ##D browseURL("http://nrfa.ceh.ac.uk/data/station/meanflow/39072")
+> ##D qfile <- system.file("extdata/discharge39072.csv", package="berryFunctions")
+> ##D Q <- read.table(qfile, skip=19, header=TRUE, sep=",", fill=TRUE)[,1:2]
+> ##D rm(qfile)
+> ##D colnames(Q) <- c("date","discharge")
+> ##D Q$date <- as.Date(Q$date)
+> ##D plot(Q, type="l")
+> ##D Qmax <- tapply(Q$discharge, format(Q$date,"%Y"), max)
+> ##D plotLextreme(distLextreme(Qmax, quiet=TRUE))
+> ##D Qmin <- tapply(Q$discharge, format(Q$date,"%Y"), min)
+> ##D dlf <- distLextreme(-Qmin, quiet=TRUE, RPs=c(2,5,10,20,50,100,200,500))
+> ##D plotLextreme(dlf, ylim=c(0,-31), yaxs="i", yaxt="n", ylab="Q annual minimum", nbest=14)
+> ##D axis(2, -(0:3*10), 0:3*10, las=1)
+> ##D -dlf$returnlev[c(1:14,21), ]
+> ##D # Some distribution functions are an obvious bad choice for this, so I use
+> ##D # weighted 3: Values weighted by GOF of dist only for the best half.
+> ##D # For the Thames in Windsor, we will likely always have > 9 m^3/s streamflow
+> ##D 
+> ##D 
+> ##D # compare extremeStat with other packages: ---------------------------------------
+> ##D library(extRemes)
+> ##D plot(fevd(annMax))
+> ##D par(mfrow=c(1,1))
+> ##D return.level(fevd(annMax, type="GEV")) # "GP", "PP", "Gumbel", "Exponential"
+> ##D distLextreme(dlf=dlf, RPs=c(2,20,100))$returnlev["gev",]
+> ##D # differences are small, but noticeable...
+> ##D # if you have time for a more thorough control, please pass me the results!
+> ##D 
+> ##D 
+> ##D # yet another dataset for testing purposes:
+> ##D Dresden_AnnualMax <- c(403, 468, 497, 539, 542, 634, 662, 765, 834, 847, 851, 873,
+> ##D 885, 983, 996, 1020, 1028, 1090, 1096, 1110, 1173, 1180, 1180,
+> ##D 1220, 1270, 1285, 1329, 1360, 1360, 1387, 1401, 1410, 1410, 1456,
+> ##D 1556, 1580, 1610, 1630, 1680, 1734, 1740, 1748, 1780, 1800, 1820,
+> ##D 1896, 1962, 2000, 2010, 2238, 2270, 2860, 4500)
+> ##D plotLextreme(distLextreme(Dresden_AnnualMax))
+> ## End(Not run) # end dontrun
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching 'package:berryFunctions', 'package:lmomco'
+
+> nameEx("distLfit")
+> ### * distLfit
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: distLfit
+> ### Title: Fit distributions via L-moments
+> ### Aliases: distLfit
+> ### Keywords: distribution dplot hplot univar
+> 
+> ### ** Examples
+> 
+> 
+> data(annMax)
+> # basic usage on real data (annual discharge maxima in Austria)
+> dlf <- distLfit(annMax)
+distLfit execution took 0.03 seconds.
+> str(dlf, max.lev=2)
+List of 11
+ $ parameter   :List of 17
+  ..$ exp   :List of 3
+  ..$ gam   :List of 3
+  ..$ gev   :List of 3
+  ..$ glo   :List of 3
+  ..$ gno   :List of 3
+  ..$ gpa   :List of 4
+  ..$ gum   :List of 3
+  ..$ kap   :List of 7
+  ..$ lap   :List of 3
+  ..$ ln3   :List of 4
+  ..$ nor   :List of 3
+  ..$ pe3   :List of 3
+  ..$ ray   :List of 3
+  ..$ revgum:List of 4
+  ..$ rice  :List of 5
+  ..$ wak   :List of 5
+  ..$ wei   :List of 3
+ $ dat_full    : num [1:35] 61.5 77 37 69.3 75.6 74.9 43.7 50.8 55.6 84.1 ...
+ $ dat         : num [1:35] 113.6 110.8 94.8 93.6 89.6 ...
+ $ datname     : chr "annMax"
+ $ distnames   : chr [1:17] "wak" "kap" "wei" "pe3" ...
+ $ distcols    : chr [1:17] "#3300FFFF" "#0010FFFF" "#0053FFFF" "#0096FFFF" ...
+ $ distselector: chr "distLfit"
+ $ distfailed  : chr ""
+ $ truncate    : num 0
+ $ threshold   : Named num 35.4
+  ..- attr(*, "names")= chr "0%"
+ $ gof         :'data.frame':	17 obs. of  5 variables:
+  ..$ RMSE   : num [1:17] 0.0222 0.0228 0.0231 0.0254 0.0255 ...
+  ..$ weight1: num [1:17] 0.0697 0.0691 0.0689 0.067 0.0669 ...
+  ..$ weight2: num [1:17] 0.0745 0.0737 0.0734 0.0707 0.0705 ...
+  ..$ weight3: num [1:17] 0.117 0.115 0.115 0.111 0.11 ...
+  ..$ weightc: num [1:17] 0 0 0 0 0 0 0 0 0 0 ...
+> printL(dlf)
+----------
+Dataset 'annMax' with 35 values. min/median/max:  35.4/61.5/113.6  nNA: 0
+truncate: 0 threshold: 35.4. dat_full with 35 values:  35.4/61.5/113.6  nNA: 0
+dlf with 17 distributions. In descending order of fit quality:
+wak, kap, wei, pe3, ray, ln3, gno, gev, gum, gpa, gam, glo, lap, rice, nor, exp, revgum
+RMSE min/median/max:  0.022/0.027/0.085  nNA: 0
+17 distnames + 17 distcols from distselector distLfit
+> plotLfit(dlf)
+> 
+> # arguments that can be passed to plotting function:
+> plotLfit(dlf, lty=2, col=3, nbest=17, legargs=list(lwd=3), main="booh!")
+> set.seed(42)
+> dlf_b <- distLfit(rbeta(100, 5, 2))
+Warning: in parln3(lmom, ...): L-skew is negative, try reversing the data Y <- -X, to avoid a log(<0) error
+-- tryStack sys.calls: distLfit -> lapply -> FUN -> tryStack -> lmomco::lmom2par -> parln3 -> warning -> parln3(lmom, ...)
+Note in distLfit: 1/17 distributions could not be fitted: ln3
+distLfit execution took 0.088 seconds.
+> plotLfit(dlf_b, nbest=10, legargs=c(x="left"))
+> plotLfit(dlf_b, selection=c("gpa", "glo", "gev", "wak"))
+> plotLfit(dlf_b, selection=c("gpa", "glo", "gev", "wak"), order=TRUE)
+> plotLfit(dlf_b, distcols=c("orange",3:6), lty=1:3) # lty is recycled
+> plotLfit(dlf_b, cdf=TRUE)
+> plotLfit(dlf_b, cdf=TRUE, histargs=list(do.points=FALSE), sel="nor")
+> 
+> 
+> # logarithmic axes:
+> set.seed(1)
+> y <- 10^rnorm(300, mean=2, sd=0.3) # if you use 1e4, distLfit will be much slower
+> hist(y, breaks=20)
+> berryFunctions::logHist(y, col=8)
+> dlf <- distLfit(log10(y))
+Parameter estimation from L-moments:
+Calculating CDFs:
+Calculating RMSE:
+distLfit execution took 0.17 seconds.
+> plotLfit(dlf, breaks=50)
+> plotLfit(dlf, breaks=50, log=TRUE)
+> 
+> 
+> # Goodness of fit: how well do the distributions fit the original data?
+> # measured by RMSE of cumulated distribution function and ?ecdf
+> # RMSE: root of average of ( errors squared )  ,   errors = line distances
+> dlf <- distLfit(annMax, ks=TRUE)
+distLfit execution took 0.064 seconds.
+> plotLfit(dlf, cdf=TRUE, sel=c("wak", "revgum"))
+> x <- sort(annMax)
+> segments(x0=x, y0=lmomco::plmomco(x, dlf$parameter$revgum), y1=ecdf(annMax)(x), col=2)
+> segments(x0=x, y0=lmomco::plmomco(x, dlf$parameter$wak), y1=ecdf(annMax)(x), col=4, lwd=2)
+> # weights by three different weighting schemes, see distLweights:
+> plotLweights(dlf)
+> plotLfit(distLfit(annMax              ), cdf=TRUE, nbest=17)$gof
+distLfit execution took 0.029 seconds.
+             RMSE    weight1    weight2   weight3 weightc
+wak    0.02218165 0.06965009 0.07451435 0.1166444       0
+kap    0.02284202 0.06910720 0.07372754 0.1154128       0
+wei    0.02313721 0.06886452 0.07337583 0.1148622       0
+pe3    0.02535969 0.06703741 0.07072781 0.1107170       0
+ray    0.02554485 0.06688519 0.07050720 0.1103717       0
+ln3    0.02658829 0.06602737 0.06926397 0.1084255       0
+gno    0.02658829 0.06602737 0.06926397 0.1084255       0
+gev    0.02692465 0.06575084 0.06886321 0.1077982       0
+gum    0.02716885 0.06555008 0.06857225 0.1073427       0
+gpa    0.02738413 0.06537310 0.06831576 0.0000000       0
+gam    0.02873879 0.06425943 0.06670172 0.0000000       0
+glo    0.03477494 0.05929707 0.05950982 0.0000000       0
+lap    0.04473377 0.05110984 0.04764417 0.0000000       0
+rice   0.04538985 0.05057048 0.04686247 0.0000000       0
+nor    0.04751986 0.04881938 0.04432463 0.0000000       0
+exp    0.06136773 0.03743495 0.02782530 0.0000000       0
+revgum 0.08472148 0.01823568 0.00000000 0.0000000       0
+> plotLfit(distLfit(annMax, truncate=0.7), cdf=TRUE, nbest=17)$gof
+distLfit execution took 0.019 seconds.
+             RMSE    weight1    weight2   weight3 weightc
+exp    0.04947588 0.06803349 0.07421788 0.1140177       0
+gpa    0.05017184 0.06770108 0.07366226 0.1131641       0
+wak    0.05017184 0.06770108 0.07366226 0.1131641       0
+kap    0.05054238 0.06752410 0.07336644 0.1127097       0
+wei    0.05085444 0.06737505 0.07311730 0.1123270       0
+pe3    0.05146800 0.06708200 0.07262747 0.1115744       0
+gno    0.05403059 0.06585802 0.07058160 0.1084315       0
+ln3    0.05403059 0.06585802 0.07058160 0.1084315       0
+gev    0.05586635 0.06498121 0.06911601 0.1061799       0
+lap    0.05767752 0.06411613 0.06767006 0.0000000       0
+glo    0.05977139 0.06311604 0.06599841 0.0000000       0
+gum    0.06823401 0.05907403 0.05924223 0.0000000       0
+ray    0.07744551 0.05467432 0.05188818 0.0000000       0
+gam    0.09175707 0.04783868 0.04046247 0.0000000       0
+rice   0.10240789 0.04275151 0.03195934 0.0000000       0
+nor    0.10254924 0.04268400 0.03184649 0.0000000       0
+revgum 0.14243937 0.02363123 0.00000000 0.0000000       0
+> pairs(dlf$gof[,-(2:5)]) # measures of goodness of fit are correlated quite well here.
+> dlf$gof
+             RMSE    weight1    weight2   weight3 weightc       ksP        ksD
+wak    0.02218165 0.06965009 0.07451435 0.1166444       0 0.9998529 0.05318209
+kap    0.02284202 0.06910720 0.07372754 0.1154128       0 0.9994410 0.05722892
+wei    0.02313721 0.06886452 0.07337583 0.1148622       0 0.9989883 0.05935487
+pe3    0.02535969 0.06703741 0.07072781 0.1107170       0 0.9965594 0.06459122
+ray    0.02554485 0.06688519 0.07050720 0.1103717       0 0.9993018 0.05799960
+ln3    0.02658829 0.06602737 0.06926397 0.1084255       0 0.9949427 0.06654492
+gno    0.02658829 0.06602737 0.06926397 0.1084255       0 0.9949427 0.06654492
+gev    0.02692465 0.06575084 0.06886321 0.1077982       0 0.9939358 0.06752938
+gum    0.02716885 0.06555008 0.06857225 0.1073427       0 0.9660999 0.07978452
+gpa    0.02738413 0.06537310 0.06831576 0.0000000       0 0.9987648 0.06012387
+gam    0.02873879 0.06425943 0.06670172 0.0000000       0 0.9982951 0.06142968
+glo    0.03477494 0.05929707 0.05950982 0.0000000       0 0.9788153 0.07577403
+lap    0.04473377 0.05110984 0.04764417 0.0000000       0 0.8121559 0.10333018
+rice   0.04538985 0.05057048 0.04686247 0.0000000       0 0.8392465 0.10021394
+nor    0.04751986 0.04881938 0.04432463 0.0000000       0 0.8049663 0.10413066
+exp    0.06136773 0.03743495 0.02782530 0.0000000       0 0.4325587 0.14285714
+revgum 0.08472148 0.01823568 0.00000000 0.0000000       0 0.2180521 0.17313417
+              R2
+wak    0.9958047
+kap    0.9955764
+wei    0.9953732
+pe3    0.9944866
+ray    0.9948971
+ln3    0.9939995
+gno    0.9939995
+gev    0.9938723
+gum    0.9931714
+gpa    0.9932477
+gam    0.9936946
+glo    0.9903101
+lap    0.9784323
+rice   0.9858203
+nor    0.9847022
+exp    0.9649353
+revgum 0.9534211
+> 
+> # Kolmogorov-Smirnov Tests for normal distribution return slightly different values:
+> library(lmomco)
+Warning: package 'lmomco' was built under R version 3.6.3
+> ks.test(annMax, "pnorm", mean(annMax), sd(annMax) )$p.value
+[1] 0.7992765
+> ks.test(annMax, "cdfnor", parnor(lmoms(annMax)))$p.value
+[1] 0.8049663
+> 
+> 
+> # Fit all available distributions (30):
+> ## Not run: 
+> ##D # this takes a while...
+> ##D d_all <- distLfit(annMax, speed=FALSE, progbars=TRUE) # 20 sec
+> ##D printL(d_all)
+> ##D plotLfit(d_all, nbest=30, distcols=grey(1:22/29), xlim=c(20,140))
+> ##D plotLfit(d_all, nbest=30, ylim=c(0,0.04), xlim=c(20,140))
+> ##D plotLweights(d_all)
+> ##D d_all$gof
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching 'package:lmomco'
+
+> nameEx("distLquantile")
+> ### * distLquantile
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: distLquantile
+> ### Title: distribution quantiles
+> ### Aliases: distLquantile
+> ### Keywords: distribution robust univar
+> 
+> ### ** Examples
+> 
+> 
+> data(annMax) # Annual Discharge Maxima (streamflow)
+> 
+> distLquantile(annMax, emp=FALSE)[,] # several distribution functions in lmomco
+distLfit execution took 0.035 seconds.
+               80%      90%      99%       RMSE
+wak       82.00224 93.37393 122.5049 0.02218165
+kap       82.43319 94.20990 120.1919 0.02284202
+wei       81.72957 93.39678 123.6596 0.02313721
+pe3       81.13112 92.97753 126.2917 0.02535969
+ray       81.92136 93.07332 121.2474 0.02554485
+ln3       80.85126 92.71419 127.5938 0.02658829
+gno       80.85126 92.71419 127.5938 0.02658829
+gev       80.83924 92.82171 127.5402 0.02692465
+gum       80.26879 92.86542 132.3087 0.02716885
+gpa       84.02187 95.30208 113.5608 0.02738413
+gam       81.39612 92.57994 122.9881 0.02873879
+glo       79.38862 91.10085 134.4871 0.03477494
+lap       77.33774 88.79551 126.8574 0.04473377
+rice      82.14649 91.37297 113.3748 0.04538985
+nor       82.13652 91.20908 112.7556 0.04751986
+exp       78.96177 95.09148 148.6732 0.06136773
+revgum    82.45728 88.46912 100.1043 0.08472148
+n_full    35.00000       NA       NA         NA
+n         35.00000       NA       NA         NA
+threshold 35.40000       NA       NA         NA
+> distLquantile(annMax, truncate=0.8, probs=0.95)[,] # POT (annMax already block maxima)
+distLfit execution took 0.017 seconds.
+Note in q_gpd: evir::gpd failed. Returning NAs.
+  Reason: Error in optim(theta, negloglik, hessian = TRUE, ..., tmp = excess) : 
+  non-finite finite-difference value [1]
+distLquantile -> q_gpd_int -> supwarn -> withCallingHandlers -> q_gpd -> tryStack -> evir::gpd -> optim -> optim(theta, negloglik, hessian = TRUE, ..., tmp = excess)
+Note in q_gpd: fExtremes::gpdFit failed. Returning NAs.
+  Reason: Error in optim(theta, negloglik, hessian = TRUE, ..., tmp = excess) : 
+  non-finite finite-difference value [1]
+distLquantile -> q_gpd_int -> supwarn -> withCallingHandlers -> q_gpd -> tryStack -> fExtremes::gpdFit -> .gpdmleFit -> optim -> optim(theta, negloglik, hessian = TRUE, ..., tmp = excess)
+                            95%       RMSE
+exp                   101.16307 0.07026821
+lap                   100.55419 0.07738714
+gpa                   103.47619 0.07776625
+wak                   103.47619 0.07776625
+wei                   102.75337 0.07958242
+pe3                   102.47905 0.08057962
+kap                   106.02600 0.08159006
+gno                   102.14421 0.08218201
+ln3                   102.14421 0.08218201
+gev                   101.97305 0.08310577
+glo                   101.41640 0.08701081
+gum                   102.54998 0.08929911
+ray                   103.68398 0.09708304
+gam                   103.89507 0.11277855
+rice                  104.21347 0.12172056
+nor                   104.21610 0.12181165
+revgum                104.99921 0.15952762
+empirical             109.20000         NA
+quantileMean          105.72593         NA
+weighted1             102.87892         NA
+weighted2             102.74077         NA
+weighted3             102.66359         NA
+weightedc                   NaN         NA
+GPD_LMO_lmomco        103.47619 0.01555325
+GPD_LMO_extRemes       99.84166 0.01633799
+GPD_PWM_evir          100.98742 0.01691075
+GPD_PWM_fExtremes     100.70092 0.01763703
+GPD_MLE_extRemes       99.09652 0.01610442
+GPD_MLE_ismev         108.87763 0.04674436
+GPD_MLE_evd           108.44442 0.04535389
+GPD_MLE_Renext_Renouv 108.42262 0.04531900
+GPD_MLE_evir                 NA         NA
+GPD_MLE_fExtremes            NA         NA
+GPD_GML_extRemes       99.09652 0.01610442
+GPD_MLE_Renext_2par   166.91374 0.09578171
+GPD_BAY_extRemes             NA         NA
+n_full                 35.00000         NA
+n                       7.00000         NA
+threshold              82.14694         NA
+> dlf <- distLquantile(annMax, probs=0.95, list=TRUE)
+distLfit execution took 0.032 seconds.
+> plotLquantile(dlf, linargs=list(lwd=3), nbest=5, breaks=10)
+> dlf$quant
+                            95%       RMSE
+wak                   103.30175 0.02218165
+kap                   103.80750 0.02284202
+wei                   103.55521 0.02313721
+pe3                   103.72004 0.02535969
+ray                   102.63851 0.02554485
+ln3                   103.69028 0.02658829
+gno                   103.69028 0.02658829
+gev                   103.89743 0.02692465
+gum                   104.94841 0.02716885
+gpa                   103.19519 0.02738413
+gam                   102.53018 0.02873879
+glo                   103.11624 0.03477494
+lap                   100.25328 0.04473377
+rice                   99.01113 0.04538985
+nor                    98.70136 0.04751986
+exp                   111.22119 0.06136773
+revgum                 92.88645 0.08472148
+empirical             109.20000         NA
+quantileMean          105.64000         NA
+weighted1             102.97786         NA
+weighted2             103.14857         NA
+weighted3             103.68757         NA
+weightedc                   NaN         NA
+GPD_LMO_lmomco        103.59433 0.03537205
+GPD_LMO_extRemes      101.29275 0.03844264
+GPD_PWM_evir          100.63331 0.03973176
+GPD_PWM_fExtremes     100.83502 0.03914311
+GPD_MLE_extRemes       95.49096 0.16739775
+GPD_MLE_ismev         103.78218 0.03633172
+GPD_MLE_evd           103.75028 0.03591204
+GPD_MLE_Renext_Renouv 103.75028 0.03591204
+GPD_MLE_evir          105.23831 0.06600062
+GPD_MLE_fExtremes     105.44967 0.06600062
+GPD_GML_extRemes       95.49096 0.16739775
+GPD_MLE_Renext_2par   140.27343 0.23957149
+GPD_BAY_extRemes             NA         NA
+n_full                 35.00000         NA
+n                      35.00000         NA
+threshold              35.40000         NA
+> # Parametric 95% quantile estimates range from 92 to 111!
+> # But the best fitting distributions all lie aroud 103.
+> 
+> # compare General Pareto Fitting methods
+> # Theoretically, the tails of distributions converge to GPD (General Pareto)
+> # q_gpd compares several R packages for fitting and quantile estimation:
+> dlq <- distLquantile(annMax, weighted=FALSE, quiet=TRUE, probs=0.97, list=TRUE)
+> dlq$quant
+                            97%       RMSE
+wak                   109.92565 0.02218165
+kap                   109.78987 0.02284202
+wei                   110.37259 0.02313721
+pe3                   111.17279 0.02535969
+ray                   108.99295 0.02554485
+ln3                   111.44865 0.02658829
+gno                   111.44865 0.02658829
+gev                   111.66938 0.02692465
+gum                   113.69676 0.02716885
+gpa                   107.45087 0.02738413
+gam                   109.34538 0.02873879
+glo                   112.45175 0.03477494
+lap                   108.69726 0.04473377
+rice                  103.97919 0.04538985
+nor                   103.56709 0.04751986
+exp                   123.10823 0.06136773
+revgum                 95.52933 0.08472148
+empirical             112.49867         NA
+quantileMean          111.46707         NA
+GPD_LMO_lmomco        107.90657 0.03537205
+GPD_LMO_extRemes      104.40816 0.03844264
+GPD_PWM_evir          103.67726 0.03973176
+GPD_PWM_fExtremes     103.82098 0.03914311
+GPD_MLE_extRemes      105.73754 0.16739775
+GPD_MLE_ismev         107.60823 0.03633172
+GPD_MLE_evd           107.58797 0.03591204
+GPD_MLE_Renext_Renouv 107.58797 0.03591204
+GPD_MLE_evir          108.41984 0.06600062
+GPD_MLE_fExtremes     108.56958 0.06600062
+GPD_GML_extRemes      105.73754 0.16739775
+GPD_MLE_Renext_2par   143.79659 0.23957149
+GPD_BAY_extRemes             NA         NA
+n_full                 35.00000         NA
+n                      35.00000         NA
+threshold              35.40000         NA
+> plotLquantile(dlq) # per default best fitting distribution functions
+> plotLquantile(dlq, row=c("wak","GPD*"), nbest=14)
+> #pdf("dummy.pdf", width=9)
+> plotLquantile(dlq, row="GPD*", nbest=13, xlim=c(102,110),
++           linargs=list(lwd=3), heights=seq(0.02, 0.005, len=14))
+> #dev.off()
+> 
+> 
+> ## Not run: 
+> ##D ## Taken out from CRAN package check because it's slow
+> ##D 
+> ##D # Sanity checks: important for very small samples:
+> ##D x1 <- c(2.6, 2.5, 2.9, 3, 5, 2.7, 2.7, 5.7, 2.8, 3.1, 3.6, 2.6, 5.8, 5.6, 5.7, 5.3)
+> ##D q1 <- distLquantile(x1, sanerange=c(0,500), sanevals=c(NA,500))
+> ##D x2 <- c(6.1, 2.4, 4.1, 2.4, 6, 6.3, 2.9, 6.8, 3.5)
+> ##D q2 <- distLquantile(x2, sanerange=c(0,500), sanevals=c(NA,500), quiet=FALSE)
+> ##D x3 <- c(4.4, 3, 1.8, 7.3, 2.1, 2.1, 1.8, 1.8)
+> ##D q3 <- distLquantile(x3, sanerange=c(0,500), sanevals=c(NA,500))
+> ##D 
+> ##D # weighted distribution quantiles are calculated by different weighting schemes:
+> ##D plotLweights(dlf)
+> ##D 
+> ##D # If speed is important and parameters are already available, pass them via dlf:
+> ##D distLquantile(dlf=dlf, probs=0:5/5, selection=c("wak","gev","kap"))
+> ##D distLquantile(dlf=dlf, truncate=0.3, list=TRUE)$truncate
+> ##D 
+> ##D # censored (truncated, trimmed) quantile, Peak Over Treshold (POT) method:
+> ##D qwak <- distLquantile(annMax, sel="wak", prob=0.95, emp=FALSE, list=TRUE)
+> ##D plotLquantile(qwak, ylim=c(0,0.06) ); qwak$quant
+> ##D qwak2 <-distLquantile(annMax, sel="wak", prob=0.95, emp=FALSE, list=TRUE, truncate=0.6)
+> ##D plotLquantile(qwak2, add=TRUE, distcols="blue")
+> ##D 
+> ##D 
+> ##D # Simulation of truncation effect
+> ##D library(lmomco)
+> ##D #set.seed(42)
+> ##D rnum <- rlmomco(n=1e3, para=dlf$parameter$gev)
+> ##D myprobs <- c(0.9, 0.95, 0.99, 0.999)
+> ##D mytrunc <- seq(0, 0.9, length.out=20)
+> ##D trunceffect <- sapply(mytrunc, function(mt) distLquantile(rnum, selection="gev",
+> ##D                              probs=myprobs, truncate=mt, quiet=TRUE,
+> ##D                              pempirical=FALSE)["gev",])
+> ##D # If more values are truncated, the function runs faster
+> ##D 
+> ##D op <- par(mfrow=c(2,1), mar=c(2,4.5,2,0.5), cex.main=1)
+> ##D dlf1 <- distLquantile(rnum, sel="gev", probs=myprobs, emp=FALSE, list=TRUE)
+> ##D dlf2 <- distLquantile(rnum, sel="gev", probs=myprobs, emp=FALSE, list=TRUE, truncate=0.3)
+> ##D plotLquantile(dlf1, ylab="", xlab="")
+> ##D plotLquantile(dlf2, add=TRUE, distcols=4)
+> ##D legend("right", c("fitted GEV", "fitted with truncate=0.3"), lty=1, col=c(2,4), bg="white")
+> ##D par(mar=c(3,4.5,3,0.5))
+> ##D plot(mytrunc, trunceffect[1,], ylim=range(trunceffect), las=1, type="l",
+> ##D      main=c("High quantiles of 1000 random numbers from gev distribution",
+> ##D            "Estimation based on proportion of lower values truncated"),
+> ##D      xlab="", ylab="parametric quantile")
+> ##D title(xlab="Proportion censored", mgp=c(1.8,1,0))
+> ##D for(i in 2:4) lines(mytrunc, trunceffect[i,])
+> ##D library("berryFunctions")
+> ##D textField(rep(0.5,4), trunceffect[,11], paste0("Q",myprobs*100,"%") )
+> ##D par(op)
+> ##D 
+> ##D trunc <- seq(0,0.1,len=200)
+> ##D dd <- pbsapply(trunc, function(t) distLquantile(annMax,
+> ##D           selection="gpa", weight=FALSE, truncate=t, prob=0.99, quiet=T)[c(1,3),])
+> ##D  plot(trunc, dd[1,], type="o", las=1)
+> ##D lines(trunc, dd[2,], type="o", col=2)
+> ##D 
+> ##D 
+> ##D set.seed(3); rnum <- rlmomco(n=1e3, para=dlf$parameter$gpa)
+> ##D qd99 <- evir::quant(rnum, p=0.99, start=15, end=1000, ci=0.5, models=30)
+> ##D axis(3, at=seq(-1000,0, length=6), labels=0:5/5, pos=par("usr")[3])
+> ##D title(xlab="Proportion truncated", line=-3)
+> ##D mytrunc <- seq(0, 0.9, length.out=30)
+> ##D trunceffect <- sapply(mytrunc, function(mt) distLquantile(rnum, selection="gpa",
+> ##D                       probs=0.99, truncate=mt, plot=FALSE, quiet=TRUE,
+> ##D                       empirical=FALSE, gpd=TRUE))
+> ##D lines(-1000*(1-mytrunc), trunceffect[1,], col=4)
+> ##D lines(-1000*(1-mytrunc), trunceffect[2,], col=3) # interesting...
+> ##D for(i in 3:13) lines(-1000*(1-mytrunc), trunceffect[i,], col=3) # interesting...
+> ##D 
+> ##D # If you want the estimates only for one single truncation, use
+> ##D q_gpd(rnum, probs=myprobs, truncate=0.5)
+> ##D 
+> ## End(Not run) # end dontrun
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("distLweights")
+> ### * distLweights
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: distLweights
+> ### Title: Compute distribution weights from GOF
+> ### Aliases: distLweights
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> # weights from RMSE vector:
+> RMSE <- c(gum=0.20, wak=0.17, gam=0.21, gev=0.15)
+> distLweights(RMSE)
+    RMSE   weight1    weight2 weight3 weightc
+gev 0.15 0.2957746 0.54545455     0.6       0
+wak 0.17 0.2676056 0.36363636     0.4       0
+gum 0.20 0.2253521 0.09090909     0.0       0
+gam 0.21 0.2112676 0.00000000     0.0       0
+> distLweights(RMSE, order=FALSE)
+    RMSE   weight1    weight2 weight3 weightc
+gum 0.20 0.2253521 0.09090909     0.0       0
+wak 0.17 0.2676056 0.36363636     0.4       0
+gam 0.21 0.2112676 0.00000000     0.0       0
+gev 0.15 0.2957746 0.54545455     0.6       0
+> 
+> # weights from RMSE in data.frame:
+> df <- data.frame("99.9%"=2:5, RMSE=sample(3:6))
+> rownames(df) <- letters[1:4]
+> df ;  distLweights(df, onlydn=FALSE)
+  X99.9. RMSE
+a      2    3
+b      3    5
+c      4    6
+d      5    4
+  RMSE   weight1   weight2 weight3 weightc
+a    3 0.3333333 0.5000000     0.6       0
+d    4 0.2777778 0.3333333     0.4       0
+b    5 0.2222222 0.1666667     0.0       0
+c    6 0.1666667 0.0000000     0.0       0
+> 
+> # custom weights:
+> set.seed(42); x <- data.frame(A=1:5, RMSE=runif(5)) ; x
+  A      RMSE
+1 1 0.9148060
+2 2 0.9370754
+3 3 0.2861395
+4 4 0.8304476
+5 5 0.6417455
+> distLweights(x) # two warnings
+Warning in distLweights(x) :
+  There are no distributions matching lmomco::dist.list(). Probably you need to set onlydn=FALSE. The distributions in RMSE are: 1, 2, 3, 4, 5
+Note in distLweights: Weights do not sum to 1. Sums are: 0, 0, 0
+       RMSE weight1 weight2 weight3 weightc
+3 0.2861395       0       0       0       0
+5 0.6417455       0       0       0       0
+4 0.8304476       0       0       0       0
+1 0.9148060       0       0       0       0
+2 0.9370754       0       0       0       0
+> distLweights(x, weightc=c("1"=3, "3"=5), onlydn=FALSE)
+Note in distLweights: names present in RMSE, but not in weightc, thus given zero weight: 2, 4, 5
+       RMSE   weight1    weight2   weight3 weightc
+3 0.2861395 0.3739535 0.60542999 0.6182352   0.625
+5 0.6417455 0.2320438 0.27468385 0.2804936   0.000
+4 0.8304476 0.1567395 0.09917361 0.1012712   0.000
+1 0.9148060 0.1230750 0.02071255 0.0000000   0.375
+2 0.9370754 0.1141881 0.00000000 0.0000000   0.000
+> distLweights(x, weightc=c("1"=3, "3"=5), order=FALSE, onlydn=FALSE)
+Note in distLweights: names present in RMSE, but not in weightc, thus given zero weight: 2, 4, 5
+       RMSE   weight1    weight2   weight3 weightc
+1 0.9148060 0.1230750 0.02071255 0.0000000   0.375
+2 0.9370754 0.1141881 0.00000000 0.0000000   0.000
+3 0.2861395 0.3739535 0.60542999 0.6182352   0.625
+4 0.8304476 0.1567395 0.09917361 0.1012712   0.000
+5 0.6417455 0.2320438 0.27468385 0.2804936   0.000
+> 
+> # real life example:
+> data(annMax)
+> cw <- c("gpa"=7, "gev"=3, "wak"=6, "wei"=4, "kap"=3.5, "gum"=3, "ray"=2.1,
++         "ln3"=2, "pe3"=2.5, "gno"=4, "gam"=5)
+> dlf <- distLfit(annMax, weightc=cw, quiet=TRUE, order=FALSE)
+> plotLweights(dlf)
+> 
+> 
+> # GOF judgement by RMSE, not R2 --------
+> # Both RMSE and R2 are computed with ECDF and TCDF
+> # R2 may be very good (see below), but fit needs to be close to 1:1 line,
+> # which is better measured by RMSE
+> 
+> dlf <- distLfit(annMax, ks=TRUE)
+distLfit execution took 0.11 seconds.
+> op <- par(mfrow=c(1,2), mar=c(3,4,0.5,0.5), mgp=c(1.9,0.7,0))
+> plot(dlf$gof$RMSE, 17:1, yaxt="n", ylab="", type="o"); axis(2, 17:1, rownames(dlf$gof), las=1)
+> plot(dlf$gof$R2,   17:1, yaxt="n", ylab="", type="o"); axis(2, 17:1, rownames(dlf$gof), las=1)
+> par(op)
+> sel <- c("wak","lap","nor","revgum")
+> plotLfit(dlf, selection=sel, cdf=TRUE)
+> dlf$gof[sel,-(2:7)]
+             RMSE        R2
+wak    0.02218165 0.9958047
+lap    0.04473377 0.9784323
+nor    0.04751986 0.9847022
+revgum 0.08472148 0.9534211
+> 
+> x <- sort(annMax, decreasing=TRUE)
+> ECDF <- ecdf(x)(x)
+> TCDF <- sapply(sel, function(d) lmomco::plmomco(x,dlf$parameter[[d]]))
+> 
+> plot(TCDF[,"lap"],    ECDF, col="cyan", asp=1, las=1)
+> points(TCDF[,"nor"],    ECDF, col="green")
+> #points(TCDF[,"wak"],    ECDF, col="blue")
+> #points(TCDF[,"revgum"], ECDF, col="red")
+> abline(a=0, b=1, lwd=3, lty=3)
+> legend("bottomright", c("lap good RMSE bad R2", "nor bad RMSE good R2"),
++        col=c("cyan","green"), lwd=2)
+> berryFunctions::linReg(TCDF[,"lap"], ECDF, add=TRUE, digits=3, col="cyan", pos1="topleft")
+> berryFunctions::linReg(TCDF[,"nor"], ECDF, add=TRUE, digits=3, col="green", pos1="left")
+> 
+> 
+> # more distinct example (but with fake data)
+> set.seed(42); x <- runif(30)
+> y1 <-     x+rnorm(30,sd=0.09)
+> y2 <- 1.5*x+rnorm(30,sd=0.01)-0.3
+> plot(x,x, asp=1, las=1, main="High cor (R2) does not necessarily mean good fit!")
+> berryFunctions::linReg(x, y2, add=TRUE, digits=4, pos1="topleft")
+> points(x,y2, col="red", pch=3)
+> points(x,y1, col="blue")
+> berryFunctions::linReg(x, y1, add=TRUE, digits=4, col="blue", pos1="left")
+> abline(a=0, b=1, lwd=3, lty=3)
+> 
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("extremeStat")
+> ### * extremeStat
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: extremeStat
+> ### Title: Extreme value statistics on a linear scale
+> ### Aliases: extremeStat extremeStat-package
+> ### Keywords: documentation package
+> 
+> ### ** Examples
+> 
+> data(annMax) # annual discharge maxima from a stream in Austria
+> plot(annMax, type="l")
+> dle <- distLextreme(annMax)
+distLfit execution took 0.089 seconds.
+> dle$returnlev
+                          RP.2      RP.5     RP.10     RP.20     RP.50
+wak                   62.06908  82.00224  93.37393 103.30175 114.81836
+kap                   61.63990  82.43319  94.20990 103.80750 113.98584
+wei                   61.84405  81.72957  93.39678 103.55521 115.46953
+pe3                   61.86107  81.13112  92.97753 103.72004 116.87811
+ray                   62.37416  81.92136  93.07332 102.63851 113.71311
+ln3                   61.89473  80.85126  92.71419 103.69028 117.47486
+gno                   61.89473  80.85126  92.71419 103.69028 117.47486
+gev                   61.85979  80.83924  92.82171 103.89743 117.64984
+gum                   61.24316  80.26879  92.86542 104.94841 120.58860
+gpa                   61.36114  84.02187  95.30208 103.19519 110.11583
+gam                   62.54834  81.39612  92.57994 102.53018 114.52039
+glo                   62.16467  79.38862  91.10085 103.11624 120.24369
+lap                   62.19140  77.33774  88.79551 100.25328 115.39963
+rice                  64.59196  82.14649  91.37297  99.01113 107.62436
+nor                   64.78000  82.13652  91.20908  98.70136 107.13390
+exp                   57.63946  78.96177  95.09148 111.22119 132.54351
+revgum                68.31684  82.45728  88.46912  92.88645  97.36604
+empirical             61.50000  82.32000  93.76000 109.20000 113.48800
+quantileMean          61.42222  82.14694  93.28444 105.64000 112.76000
+weighted1             62.14394  81.21538  92.70405 102.97786 115.41622
+weighted2             62.04278  81.23617  92.80714 103.14857 115.65607
+weighted3             61.85532  81.35425  93.13879 103.68757 116.40382
+weightedc                  NaN       NaN       NaN       NaN       NaN
+GPD_LMO_lmomco        62.18392  84.45045  95.66677 103.59433 110.62509
+GPD_LMO_extRemes      63.22711  85.21118  95.02659 101.29275 106.24317
+GPD_PWM_evir          62.42497  84.65551  94.44999 100.63331 105.45683
+GPD_PWM_fExtremes     63.35462  85.16163  94.76950 100.83502 105.56665
+GPD_MLE_extRemes      49.30374  67.68348  81.58722  95.49096 113.87071
+GPD_MLE_ismev         62.66006  85.55055  96.44390 103.78218 109.94420
+GPD_MLE_evd           62.61322  85.49379  96.39702 103.75028 109.93281
+GPD_MLE_Renext_Renouv 62.61322  85.49379  96.39702 103.75028 109.93281
+GPD_MLE_evir          64.56073  88.34657  98.73178 105.23831 110.27039
+GPD_MLE_fExtremes     65.55978  88.88502  99.06913 105.44967 110.38431
+GPD_GML_extRemes      49.30374  67.68348  81.58722  95.49096 113.87071
+GPD_MLE_Renext_2par   84.50984 118.93838 132.49005 140.27343 145.72999
+GPD_BAY_extRemes            NA        NA        NA        NA        NA
+n_full                35.00000        NA        NA        NA        NA
+n                     35.00000        NA        NA        NA        NA
+threshold             35.40000        NA        NA        NA        NA
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotLexBoot")
+> ### * plotLexBoot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plotLexBoot
+> ### Title: Bootstrapping uncertainty intervals for return periods
+> ### Aliases: plotLexBoot
+> ### Keywords: bootstrap distribution dplot hplot montecarlo ts
+> 
+> ### ** Examples
+> 
+> # see distLexBoot
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotLextreme")
+> ### * plotLextreme
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plotLextreme
+> ### Title: Plot extreme value statistics
+> ### Aliases: plotLextreme
+> ### Keywords: distribution dplot hplot
+> 
+> ### ** Examples
+> 
+> #see
+> ?distLextreme
+distLextreme            package:extremeStat            R Documentation
+
+_E_x_t_r_e_m_e _v_a_l_u_e _s_t_a_t_s
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Extreme value statistics for flood risk estimation. Input: vector
+     with annual discharge maxima (or all observations for POT
+     approach). Output: discharge estimates for given return periods,
+     parameters of several distributions (fit based on L-moments),
+     quality of fits, plot with linear/logarithmic axis. (plotting
+     positions by Weibull and Gringorton).
+
+_U_s_a_g_e:
+
+     distLextreme(dat = NULL, dlf = NULL, RPs = c(2, 5, 10, 20, 50), npy = 1,
+       truncate = 0, quiet = FALSE, ...)
+     
+_A_r_g_u_m_e_n_t_s:
+
+     dat: Vector with _either_ (for Block Maxima Approach) extreme
+          values like annual discharge maxima _or_ (for Peak Over
+          Threshold approach) all values in time-series. Ignored if dlf
+          is given. DEFAULT: NULL
+
+     dlf: List as returned by 'distLfit'. See also 'distLquantile'.
+          Overrides dat! DEFAULT: NULL
+
+     RPs: Return Periods (in years) for which discharge is estimated.
+          DEFAULT: c(2,5,10,20,50)
+
+     npy: Number of observations per year. Leave 'npy=1' if you use
+          annual block maxima (and leave truncate at 0). If you use a
+          POT approach (see vignette and examples below) e.g. on daily
+          data, use npy=365.24. DEFAULT: 1
+
+truncate: Truncated proportion to determine POT threshold, see
+          'distLquantile'. DEFAULT: 0
+
+   quiet: Suppress notes and progbars? DEFAULT: FALSE
+
+     ...: Further arguments passed to 'distLquantile' like truncate,
+          selection, time, progbars
+
+_D_e_t_a_i_l_s:
+
+     'plotLextreme' adds weibull and gringorton plotting positions to
+     the distribution lines, which are estimated from the L-moments of
+     the data itself.
+     I personally believe that if you have, say, 35 values in 'dat',
+     the highest return period should be around 36 years (Weibull) and
+     not 60 (Gringorton).
+     The plotting positions don't affect the distribution parameter
+     estimation, so this dispute is not really important. But if you
+     care, go ahead and google "weibull vs gringorton plotting
+     positions".
+
+     Plotting positions are not used for fitting distributions, but for
+     plotting only. The ranks of ascendingly sorted extreme values are
+     used to compute the probability of non-exceedance Pn:
+     'Pn_w <- Rank /(n+1) # Weibull'
+     'Pn_g <- (Rank-0.44)/(n+0.12) # Gringorton (taken from
+     lmom:::evplot.default)'
+     Finally: RP = Return period = recurrence interval = 1/P_exceedance
+     = 1/(1-P_nonexc.), thus:
+     'RPweibull = 1/(1-Pn_w)' and analogous for gringorton.
+
+_V_a_l_u_e:
+
+     invisible dlf object, see 'printL'. The added element is
+     'returnlev', a data.frame with the return level (discharge) for
+     all given RPs and for each distribution. Note that this differs
+     from 'distLquantile' (matrix output, not data.frame)
+
+_N_o_t_e:
+
+     This function replaces 'berryFunctions::extremeStatLmom'
+
+_A_u_t_h_o_r(_s):
+
+     Berry Boessenkool, <email: berry-b@gmx.de>, 2012 (first draft) -
+     2014 & 2015 (main updates)
+
+_R_e_f_e_r_e_n_c_e_s:
+
+     <URL: http://RclickHandbuch.wordpress.com> Chapter 15 (German)
+     Christoph Mudersbach: Untersuchungen zur Ermittlung von
+     hydrologischen Bemessungsgroessen mit Verfahren der instationaeren
+     Extremwertstatistik
+
+_S_e_e _A_l_s_o:
+
+     'distLfit'. 'distLexBoot' for confidence interval from
+     Bootstrapping.  'fevd' in the package 'extRemes'.
+
+_E_x_a_m_p_l_e_s:
+
+     # Basic examples
+     # BM vs POT
+     # Plotting options
+     # weighted mean based on Goodness of fit (GOF)
+     # Effect of data proportion used to estimate GOF
+     # compare extremeStat with other packages
+     
+     library(lmomco)
+     library(berryFunctions)
+     
+     data(annMax) # annual streamflow maxima in river in Austria
+     
+     # Basic examples ---------------------------------------------------------------
+     dlf <- distLextreme(annMax)
+     plotLextreme(dlf, log=TRUE)
+     
+     # Object structure:
+     str(dlf, max.lev=2)
+     printL(dlf)
+     
+     # discharge levels for default return periods:
+     dlf$returnlev
+     
+     # Estimate discharge that could occur every 80 years (at least empirically):
+     Q80 <- distLextreme(dlf=dlf, RPs=80)$returnlev
+     round(sort(Q80[1:17,1]),1)
+     # 99 to 143 m^3/s can make a relevant difference in engineering!
+     # That's why the rows weighted by GOF are helpful. Weights are given as in
+     plotLweights(dlf) # See also section weighted mean below
+     # For confidence intervals see ?distLexBoot
+     
+     # Return period of a given discharge value, say 120 m^3/s:
+     round0(sort(1/(1-sapply(dlf$parameter, plmomco, x=120) )  ),1)
+     # exponential:                 every 29 years
+     # gev (general extreme value dist):  59,
+     # Weibull:                     every 73 years only
+     
+     
+     # BM vs POT --------------------------------------------------------------------
+     # Return levels by Block Maxima approach vs Peak Over Threshold approach:
+     # BM distribution theoretically converges to GEV, POT to GPD
+     
+     data(rain, package="ismev")
+     days <- seq(as.Date("1914-01-01"), as.Date("1961-12-30"), by="days")
+     BM <- tapply(rain, format(days,"%Y"), max)  ;  rm(days)
+     dlfBM <- plotLextreme(distLextreme(BM, emp=FALSE), ylim=lim0(100), log=TRUE, nbest=10)
+     plotLexBoot(distLexBoot(dlfBM, quiet=TRUE), ylim=lim0(100))
+     plotLextreme(dlfBM, log=TRUE, ylim=lim0(100))
+     
+     dlfPOT99 <- distLextreme(rain, npy=365.24, trunc=0.99, emp=FALSE)
+     dlfPOT99 <- plotLextreme(dlfPOT99, ylim=lim0(100), log=TRUE, nbest=10, main="POT 99")
+     printL(dlfPOT99)
+     
+     # using only nonzero values (normally yields better fits, but not here)
+     rainnz <- rain[rain>0]
+     dlfPOT99nz <- distLextreme(rainnz, npy=length(rainnz)/48, trunc=0.99, emp=FALSE)
+     dlfPOT99nz <- plotLextreme(dlfPOT99nz, ylim=lim0(100), log=TRUE, nbest=10,
+                                main=paste("POT 99 x>0, npy =", round(dlfPOT99nz$npy,2)))
+     
+     ## Not run:
+      ## Excluded from CRAN R CMD check because of computing time
+     
+     dlfPOT99boot <- distLexBoot(dlfPOT99, prop=0.4)
+     printL(dlfPOT99boot)
+     plotLexBoot(dlfPOT99boot)
+     
+     
+     dlfPOT90 <- distLextreme(rain, npy=365.24, trunc=0.90, emp=FALSE)
+     dlfPOT90 <- plotLextreme(dlfPOT90, ylim=lim0(100), log=TRUE, nbest=10, main="POT 90")
+     
+     dlfPOT50 <- distLextreme(rain, npy=365.24, trunc=0.50, emp=FALSE)
+     dlfPOT50 <- plotLextreme(dlfPOT50, ylim=lim0(100), log=TRUE, nbest=10, main="POT 50")
+     ## End(Not run)
+     
+     
+     ig99 <- ismev::gpd.fit(rain, dlfPOT99$threshold)
+     ismev::gpd.diag(ig99); title(main=paste(99, ig99$threshold))
+     ## Not run:
+     
+     ig90 <- ismev::gpd.fit(rain, dlfPOT90$threshold)
+     ismev::gpd.diag(ig90); title(main=paste(90, ig90$threshold))
+     ig50 <- ismev::gpd.fit(rain, dlfPOT50$threshold)
+     ismev::gpd.diag(ig50); title(main=paste(50, ig50$threshold))
+     ## End(Not run)
+     
+     
+     
+     # Plotting options -------------------------------------------------------------
+     plotLextreme(dlf=dlf)
+     # Line colors / select distributions to be plotted:
+     plotLextreme(dlf, nbest=17, distcols=heat.colors(17), lty=1:5) # lty is recycled
+     plotLextreme(dlf, selection=c("gev", "gam", "gum"), distcols=4:6, PPcol=3, lty=3:2)
+     plotLextreme(dlf, selection=c("gpa","glo","wei","exp"), pch=c(NA,NA,6,8),
+                      order=TRUE, cex=c(1,0.6, 1,1), log=TRUE, PPpch=c(16,NA), n_pch=20)
+     # use n_pch to say how many points are drawn per line (important for linear axis)
+     
+     plotLextreme(dlf, legarg=list(cex=0.5, x="bottom", box.col="red", col=3))
+     # col in legarg list is (correctly) ignored
+     ## Not run:
+     
+     ## Excluded from package R CMD check because it's time consuming
+     
+     plotLextreme(dlf, PPpch=c(1,NA)) # only Weibull plotting positions
+     # add different dataset to existing plot:
+     distLextreme(Nile/15, add=TRUE, PPpch=NA, distcols=1, selection="wak", legend=FALSE)
+     
+     # Logarithmic axis
+     plotLextreme(distLextreme(Nile), log=TRUE, nbest=8)
+     
+     
+     
+     # weighted mean based on Goodness of fit (GOF) ---------------------------------
+     # Add discharge weighted average estimate continuously:
+     plotLextreme(dlf, nbest=17, legend=FALSE)
+     abline(h=115.6, v=50)
+     RP <- seq(1, 70, len=100)
+     DischargeEstimate <- distLextreme(dlf=dlf, RPs=RP, plot=FALSE)$returnlev
+     lines(RP, DischargeEstimate["weighted2",], lwd=3, col="orange")
+     
+     # Or, on log scale:
+     plotLextreme(dlf, nbest=17, legend=FALSE, log=TRUE)
+     abline(h=115.9, v=50)
+     RP <- unique(round(logSpaced(min=1, max=70, n=200, plot=FALSE),2))
+     DischargeEstimate <- distLextreme(dlf=dlf, RPs=RP)$returnlev
+     lines(RP, DischargeEstimate["weighted2",], lwd=5)
+     
+     
+     # Minima -----------------------------------------------------------------------
+     
+     browseURL("http://nrfa.ceh.ac.uk/data/station/meanflow/39072")
+     qfile <- system.file("extdata/discharge39072.csv", package="berryFunctions")
+     Q <- read.table(qfile, skip=19, header=TRUE, sep=",", fill=TRUE)[,1:2]
+     rm(qfile)
+     colnames(Q) <- c("date","discharge")
+     Q$date <- as.Date(Q$date)
+     plot(Q, type="l")
+     Qmax <- tapply(Q$discharge, format(Q$date,"%Y"), max)
+     plotLextreme(distLextreme(Qmax, quiet=TRUE))
+     Qmin <- tapply(Q$discharge, format(Q$date,"%Y"), min)
+     dlf <- distLextreme(-Qmin, quiet=TRUE, RPs=c(2,5,10,20,50,100,200,500))
+     plotLextreme(dlf, ylim=c(0,-31), yaxs="i", yaxt="n", ylab="Q annual minimum", nbest=14)
+     axis(2, -(0:3*10), 0:3*10, las=1)
+     -dlf$returnlev[c(1:14,21), ]
+     # Some distribution functions are an obvious bad choice for this, so I use
+     # weighted 3: Values weighted by GOF of dist only for the best half.
+     # For the Thames in Windsor, we will likely always have > 9 m^3/s streamflow
+     
+     
+     # compare extremeStat with other packages: ---------------------------------------
+     library(extRemes)
+     plot(fevd(annMax))
+     par(mfrow=c(1,1))
+     return.level(fevd(annMax, type="GEV")) # "GP", "PP", "Gumbel", "Exponential"
+     distLextreme(dlf=dlf, RPs=c(2,20,100))$returnlev["gev",]
+     # differences are small, but noticeable...
+     # if you have time for a more thorough control, please pass me the results!
+     
+     
+     # yet another dataset for testing purposes:
+     Dresden_AnnualMax <- c(403, 468, 497, 539, 542, 634, 662, 765, 834, 847, 851, 873,
+     885, 983, 996, 1020, 1028, 1090, 1096, 1110, 1173, 1180, 1180,
+     1220, 1270, 1285, 1329, 1360, 1360, 1387, 1401, 1410, 1410, 1456,
+     1556, 1580, 1610, 1630, 1680, 1734, 1740, 1748, 1780, 1800, 1820,
+     1896, 1962, 2000, 2010, 2238, 2270, 2860, 4500)
+     plotLextreme(distLextreme(Dresden_AnnualMax))
+     ## End(Not run)
+      # end dontrun
+     
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotLfit")
+> ### * plotLfit
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plotLfit
+> ### Title: Plot distributions fitted with L-moments
+> ### Aliases: plotLfit
+> ### Keywords: distribution hplot
+> 
+> ### ** Examples
+> 
+>  # See distLfit
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotLquantile")
+> ### * plotLquantile
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plotLquantile
+> ### Title: Plot quantiles of distributions fitted with L-moments
+> ### Aliases: plotLquantile
+> ### Keywords: distribution hplot
+> 
+> ### ** Examples
+> 
+> # See distLquantile
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotLweights")
+> ### * plotLweights
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plotLweights
+> ### Title: Distribution rank comparison
+> ### Aliases: plotLweights
+> ### Keywords: distribution hplot
+> 
+> ### ** Examples
+> 
+> # see distLweights and distLfit
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("printL")
+> ### * printL
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: printL
+> ### Title: print dlf objects
+> ### Aliases: printL
+> ### Keywords: list methods print
+> 
+> ### ** Examples
+> 
+> 
+> # see
+> ?distLextreme
+distLextreme            package:extremeStat            R Documentation
+
+_E_x_t_r_e_m_e _v_a_l_u_e _s_t_a_t_s
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Extreme value statistics for flood risk estimation. Input: vector
+     with annual discharge maxima (or all observations for POT
+     approach). Output: discharge estimates for given return periods,
+     parameters of several distributions (fit based on L-moments),
+     quality of fits, plot with linear/logarithmic axis. (plotting
+     positions by Weibull and Gringorton).
+
+_U_s_a_g_e:
+
+     distLextreme(dat = NULL, dlf = NULL, RPs = c(2, 5, 10, 20, 50), npy = 1,
+       truncate = 0, quiet = FALSE, ...)
+     
+_A_r_g_u_m_e_n_t_s:
+
+     dat: Vector with _either_ (for Block Maxima Approach) extreme
+          values like annual discharge maxima _or_ (for Peak Over
+          Threshold approach) all values in time-series. Ignored if dlf
+          is given. DEFAULT: NULL
+
+     dlf: List as returned by 'distLfit'. See also 'distLquantile'.
+          Overrides dat! DEFAULT: NULL
+
+     RPs: Return Periods (in years) for which discharge is estimated.
+          DEFAULT: c(2,5,10,20,50)
+
+     npy: Number of observations per year. Leave 'npy=1' if you use
+          annual block maxima (and leave truncate at 0). If you use a
+          POT approach (see vignette and examples below) e.g. on daily
+          data, use npy=365.24. DEFAULT: 1
+
+truncate: Truncated proportion to determine POT threshold, see
+          'distLquantile'. DEFAULT: 0
+
+   quiet: Suppress notes and progbars? DEFAULT: FALSE
+
+     ...: Further arguments passed to 'distLquantile' like truncate,
+          selection, time, progbars
+
+_D_e_t_a_i_l_s:
+
+     'plotLextreme' adds weibull and gringorton plotting positions to
+     the distribution lines, which are estimated from the L-moments of
+     the data itself.
+     I personally believe that if you have, say, 35 values in 'dat',
+     the highest return period should be around 36 years (Weibull) and
+     not 60 (Gringorton).
+     The plotting positions don't affect the distribution parameter
+     estimation, so this dispute is not really important. But if you
+     care, go ahead and google "weibull vs gringorton plotting
+     positions".
+
+     Plotting positions are not used for fitting distributions, but for
+     plotting only. The ranks of ascendingly sorted extreme values are
+     used to compute the probability of non-exceedance Pn:
+     'Pn_w <- Rank /(n+1) # Weibull'
+     'Pn_g <- (Rank-0.44)/(n+0.12) # Gringorton (taken from
+     lmom:::evplot.default)'
+     Finally: RP = Return period = recurrence interval = 1/P_exceedance
+     = 1/(1-P_nonexc.), thus:
+     'RPweibull = 1/(1-Pn_w)' and analogous for gringorton.
+
+_V_a_l_u_e:
+
+     invisible dlf object, see 'printL'. The added element is
+     'returnlev', a data.frame with the return level (discharge) for
+     all given RPs and for each distribution. Note that this differs
+     from 'distLquantile' (matrix output, not data.frame)
+
+_N_o_t_e:
+
+     This function replaces 'berryFunctions::extremeStatLmom'
+
+_A_u_t_h_o_r(_s):
+
+     Berry Boessenkool, <email: berry-b@gmx.de>, 2012 (first draft) -
+     2014 & 2015 (main updates)
+
+_R_e_f_e_r_e_n_c_e_s:
+
+     <URL: http://RclickHandbuch.wordpress.com> Chapter 15 (German)
+     Christoph Mudersbach: Untersuchungen zur Ermittlung von
+     hydrologischen Bemessungsgroessen mit Verfahren der instationaeren
+     Extremwertstatistik
+
+_S_e_e _A_l_s_o:
+
+     'distLfit'. 'distLexBoot' for confidence interval from
+     Bootstrapping.  'fevd' in the package 'extRemes'.
+
+_E_x_a_m_p_l_e_s:
+
+     # Basic examples
+     # BM vs POT
+     # Plotting options
+     # weighted mean based on Goodness of fit (GOF)
+     # Effect of data proportion used to estimate GOF
+     # compare extremeStat with other packages
+     
+     library(lmomco)
+     library(berryFunctions)
+     
+     data(annMax) # annual streamflow maxima in river in Austria
+     
+     # Basic examples ---------------------------------------------------------------
+     dlf <- distLextreme(annMax)
+     plotLextreme(dlf, log=TRUE)
+     
+     # Object structure:
+     str(dlf, max.lev=2)
+     printL(dlf)
+     
+     # discharge levels for default return periods:
+     dlf$returnlev
+     
+     # Estimate discharge that could occur every 80 years (at least empirically):
+     Q80 <- distLextreme(dlf=dlf, RPs=80)$returnlev
+     round(sort(Q80[1:17,1]),1)
+     # 99 to 143 m^3/s can make a relevant difference in engineering!
+     # That's why the rows weighted by GOF are helpful. Weights are given as in
+     plotLweights(dlf) # See also section weighted mean below
+     # For confidence intervals see ?distLexBoot
+     
+     # Return period of a given discharge value, say 120 m^3/s:
+     round0(sort(1/(1-sapply(dlf$parameter, plmomco, x=120) )  ),1)
+     # exponential:                 every 29 years
+     # gev (general extreme value dist):  59,
+     # Weibull:                     every 73 years only
+     
+     
+     # BM vs POT --------------------------------------------------------------------
+     # Return levels by Block Maxima approach vs Peak Over Threshold approach:
+     # BM distribution theoretically converges to GEV, POT to GPD
+     
+     data(rain, package="ismev")
+     days <- seq(as.Date("1914-01-01"), as.Date("1961-12-30"), by="days")
+     BM <- tapply(rain, format(days,"%Y"), max)  ;  rm(days)
+     dlfBM <- plotLextreme(distLextreme(BM, emp=FALSE), ylim=lim0(100), log=TRUE, nbest=10)
+     plotLexBoot(distLexBoot(dlfBM, quiet=TRUE), ylim=lim0(100))
+     plotLextreme(dlfBM, log=TRUE, ylim=lim0(100))
+     
+     dlfPOT99 <- distLextreme(rain, npy=365.24, trunc=0.99, emp=FALSE)
+     dlfPOT99 <- plotLextreme(dlfPOT99, ylim=lim0(100), log=TRUE, nbest=10, main="POT 99")
+     printL(dlfPOT99)
+     
+     # using only nonzero values (normally yields better fits, but not here)
+     rainnz <- rain[rain>0]
+     dlfPOT99nz <- distLextreme(rainnz, npy=length(rainnz)/48, trunc=0.99, emp=FALSE)
+     dlfPOT99nz <- plotLextreme(dlfPOT99nz, ylim=lim0(100), log=TRUE, nbest=10,
+                                main=paste("POT 99 x>0, npy =", round(dlfPOT99nz$npy,2)))
+     
+     ## Not run:
+      ## Excluded from CRAN R CMD check because of computing time
+     
+     dlfPOT99boot <- distLexBoot(dlfPOT99, prop=0.4)
+     printL(dlfPOT99boot)
+     plotLexBoot(dlfPOT99boot)
+     
+     
+     dlfPOT90 <- distLextreme(rain, npy=365.24, trunc=0.90, emp=FALSE)
+     dlfPOT90 <- plotLextreme(dlfPOT90, ylim=lim0(100), log=TRUE, nbest=10, main="POT 90")
+     
+     dlfPOT50 <- distLextreme(rain, npy=365.24, trunc=0.50, emp=FALSE)
+     dlfPOT50 <- plotLextreme(dlfPOT50, ylim=lim0(100), log=TRUE, nbest=10, main="POT 50")
+     ## End(Not run)
+     
+     
+     ig99 <- ismev::gpd.fit(rain, dlfPOT99$threshold)
+     ismev::gpd.diag(ig99); title(main=paste(99, ig99$threshold))
+     ## Not run:
+     
+     ig90 <- ismev::gpd.fit(rain, dlfPOT90$threshold)
+     ismev::gpd.diag(ig90); title(main=paste(90, ig90$threshold))
+     ig50 <- ismev::gpd.fit(rain, dlfPOT50$threshold)
+     ismev::gpd.diag(ig50); title(main=paste(50, ig50$threshold))
+     ## End(Not run)
+     
+     
+     
+     # Plotting options -------------------------------------------------------------
+     plotLextreme(dlf=dlf)
+     # Line colors / select distributions to be plotted:
+     plotLextreme(dlf, nbest=17, distcols=heat.colors(17), lty=1:5) # lty is recycled
+     plotLextreme(dlf, selection=c("gev", "gam", "gum"), distcols=4:6, PPcol=3, lty=3:2)
+     plotLextreme(dlf, selection=c("gpa","glo","wei","exp"), pch=c(NA,NA,6,8),
+                      order=TRUE, cex=c(1,0.6, 1,1), log=TRUE, PPpch=c(16,NA), n_pch=20)
+     # use n_pch to say how many points are drawn per line (important for linear axis)
+     
+     plotLextreme(dlf, legarg=list(cex=0.5, x="bottom", box.col="red", col=3))
+     # col in legarg list is (correctly) ignored
+     ## Not run:
+     
+     ## Excluded from package R CMD check because it's time consuming
+     
+     plotLextreme(dlf, PPpch=c(1,NA)) # only Weibull plotting positions
+     # add different dataset to existing plot:
+     distLextreme(Nile/15, add=TRUE, PPpch=NA, distcols=1, selection="wak", legend=FALSE)
+     
+     # Logarithmic axis
+     plotLextreme(distLextreme(Nile), log=TRUE, nbest=8)
+     
+     
+     
+     # weighted mean based on Goodness of fit (GOF) ---------------------------------
+     # Add discharge weighted average estimate continuously:
+     plotLextreme(dlf, nbest=17, legend=FALSE)
+     abline(h=115.6, v=50)
+     RP <- seq(1, 70, len=100)
+     DischargeEstimate <- distLextreme(dlf=dlf, RPs=RP, plot=FALSE)$returnlev
+     lines(RP, DischargeEstimate["weighted2",], lwd=3, col="orange")
+     
+     # Or, on log scale:
+     plotLextreme(dlf, nbest=17, legend=FALSE, log=TRUE)
+     abline(h=115.9, v=50)
+     RP <- unique(round(logSpaced(min=1, max=70, n=200, plot=FALSE),2))
+     DischargeEstimate <- distLextreme(dlf=dlf, RPs=RP)$returnlev
+     lines(RP, DischargeEstimate["weighted2",], lwd=5)
+     
+     
+     # Minima -----------------------------------------------------------------------
+     
+     browseURL("http://nrfa.ceh.ac.uk/data/station/meanflow/39072")
+     qfile <- system.file("extdata/discharge39072.csv", package="berryFunctions")
+     Q <- read.table(qfile, skip=19, header=TRUE, sep=",", fill=TRUE)[,1:2]
+     rm(qfile)
+     colnames(Q) <- c("date","discharge")
+     Q$date <- as.Date(Q$date)
+     plot(Q, type="l")
+     Qmax <- tapply(Q$discharge, format(Q$date,"%Y"), max)
+     plotLextreme(distLextreme(Qmax, quiet=TRUE))
+     Qmin <- tapply(Q$discharge, format(Q$date,"%Y"), min)
+     dlf <- distLextreme(-Qmin, quiet=TRUE, RPs=c(2,5,10,20,50,100,200,500))
+     plotLextreme(dlf, ylim=c(0,-31), yaxs="i", yaxt="n", ylab="Q annual minimum", nbest=14)
+     axis(2, -(0:3*10), 0:3*10, las=1)
+     -dlf$returnlev[c(1:14,21), ]
+     # Some distribution functions are an obvious bad choice for this, so I use
+     # weighted 3: Values weighted by GOF of dist only for the best half.
+     # For the Thames in Windsor, we will likely always have > 9 m^3/s streamflow
+     
+     
+     # compare extremeStat with other packages: ---------------------------------------
+     library(extRemes)
+     plot(fevd(annMax))
+     par(mfrow=c(1,1))
+     return.level(fevd(annMax, type="GEV")) # "GP", "PP", "Gumbel", "Exponential"
+     distLextreme(dlf=dlf, RPs=c(2,20,100))$returnlev["gev",]
+     # differences are small, but noticeable...
+     # if you have time for a more thorough control, please pass me the results!
+     
+     
+     # yet another dataset for testing purposes:
+     Dresden_AnnualMax <- c(403, 468, 497, 539, 542, 634, 662, 765, 834, 847, 851, 873,
+     885, 983, 996, 1020, 1028, 1090, 1096, 1110, 1173, 1180, 1180,
+     1220, 1270, 1285, 1329, 1360, 1360, 1387, 1401, 1410, 1410, 1456,
+     1556, 1580, 1610, 1630, 1680, 1734, 1740, 1748, 1780, 1800, 1820,
+     1896, 1962, 2000, 2010, 2238, 2270, 2860, 4500)
+     plotLextreme(distLextreme(Dresden_AnnualMax))
+     ## End(Not run)
+      # end dontrun
+     
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("q_gpd")
+> ### * q_gpd
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: q_gpd
+> ### Title: GPD quantile of sample
+> ### Aliases: q_gpd
+> ### Keywords: distribution robust univar
+> 
+> ### ** Examples
+> 
+> data(annMax)
+> q_gpd(annMax)
+        80%         90%         99%        RMSE 
+ 67.6834830  81.5872224 127.7744462   0.1673978 
+> q_gpd(annMax, truncate=0.6)
+        80%         90%         99%        RMSE 
+ 83.0497190  93.5765382 114.1959670   0.0277982 
+> q_gpd(annMax, truncate=0.85)
+Warning: in log(z): NaNs produced
+-- tryStack sys.calls: q_gpd -> tryStack -> extRemes::fevd -> optim ->  -> gr -> colSums -> is.data.frame -> cbind -> log(z)
+Warning: in log(z): NaNs produced
+-- tryStack sys.calls: q_gpd -> tryStack -> extRemes::fevd -> optim ->  -> gr -> colSums -> is.data.frame -> cbind -> log(z)
+Note in q_gpd: quantiles for probs (0.8) below truncate (0.85) replaced with NAs.
+         80%          90%          99%         RMSE 
+          NA  95.53612124 112.27314096   0.02451347 
+> q_gpd(annMax, truncate=0.91)
+Warning: in log(z): NaNs produced
+-- tryStack sys.calls: q_gpd -> tryStack -> extRemes::fevd -> optim ->  -> gr -> colSums -> is.data.frame -> cbind -> log(z)
+Warning: in log(z): NaNs produced
+-- tryStack sys.calls: q_gpd -> tryStack -> extRemes::fevd -> optim ->  -> gr -> colSums -> is.data.frame -> cbind -> log(z)
+Note in q_gpd: quantiles for probs (0.8, 0.9) below truncate (0.91) replaced with NAs.
+         80%          90%          99%         RMSE 
+          NA           NA 112.33545463   0.01773252 
+> 
+> q_gpd(annMax, package="evir")
+         80%          90%          99%         RMSE 
+ 84.65551362  94.44998657 107.58200956   0.03973176 
+> q_gpd(annMax, package="evir", method="ml")
+         80%          90%          99%         RMSE 
+ 88.34656567  98.73178304 112.46746828   0.06600062 
+> q_gpd(annMax, package="evd")
+         80%          90%          99%         RMSE 
+ 85.49379274  96.39702186 112.87896369   0.03591204 
+> q_gpd(annMax, package="extRemes")
+        80%         90%         99%        RMSE 
+ 67.6834830  81.5872224 127.7744462   0.1673978 
+> q_gpd(annMax, package="extRemes", method="GMLE")
+        80%         90%         99%        RMSE 
+ 67.6834833  81.5872224 127.7744462   0.1673978 
+> #q_gpd(annMax, package="extRemes", method="Bayesian") # computes a while
+> q_gpd(annMax, package="extRemes", method="Lmoments")
+         80%          90%          99%         RMSE 
+ 85.21117811  95.02659047 108.45342454   0.03844264 
+> q_gpd(annMax, package="extRemes", method="nonsense") # NAs
+Note in q_gpd: extRemes::fevd failed. Returning NAs.
+  Reason: Error in match.arg(method) : 
+  'arg' should be one of "MLE", "GMLE", "Bayesian", "Lmoments"
+q_gpd -> tryStack -> extRemes::fevd -> match.arg -> stop -> match.arg(method)
+ 80%  90%  99% RMSE 
+  NA   NA   NA   NA 
+> q_gpd(annMax, package="fExtremes")                   # log warnings
+Warning: in log(1 + (xi * (as.vector(exceedances) - u))/beta): NaNs produced
+-- tryStack sys.calls: q_gpd -> tryStack -> fExtremes::gpdFit -> log(1 + (xi * (as.vector(exceedances) - u))/beta)
+         80%          90%          99%         RMSE 
+ 85.16163487  94.76950458 107.65133770   0.03914311 
+> q_gpd(annMax, package="fExtremes", efquiet=TRUE)    # silenced warnings
+Warning: in log(1 + (xi * (as.vector(exceedances) - u))/beta): NaNs produced
+-- tryStack sys.calls: q_gpd -> tryStack -> fExtremes::gpdFit -> log(1 + (xi * (as.vector(exceedances) - u))/beta)
+         80%          90%          99%         RMSE 
+ 85.16163487  94.76950458 107.65133770   0.03914311 
+> q_gpd(annMax, package="fExtremes", method= "mle")
+         80%          90%          99%         RMSE 
+ 88.88501674  99.06913262 112.53883723   0.06600062 
+> q_gpd(annMax, package="ismev")
+         80%          90%          99%         RMSE 
+ 85.55055375  96.44389586 112.87663292   0.03633172 
+> q_gpd(annMax, package="Renext")
+         80%          90%          99%         RMSE 
+ 85.49379274  96.39702186 112.87896369   0.03591204 
+> q_gpd(annMax, package="Renext", method="f")
+Warning: in fmaxlo(x, shapeMin = -1/shapeMin, info.observed = info.observed, : 'shape' is at the bound given in 'shapeMin'. ML inference results not suitable
+-- tryStack sys.calls: q_gpd -> tryStack -> Renext::fGPD -> fmaxlo -> warning -> fmaxlo(x, shapeMin = -1/shapeMin, info.observed = info.observed, 
+Warning: in maxlo2gpd(parMaxlo = res.maxlo$estimate, vcovMaxlo = res.maxlo$cov): in 'parMaxlo', 'shape' is <= 2. 'vcovMaxLo' ignored
+-- tryStack sys.calls: q_gpd -> tryStack -> Renext::fGPD -> maxlo2gpd -> warning -> maxlo2gpd(parMaxlo = res.maxlo$estimate, vcovMaxlo = res.maxlo$cov)
+        80%         90%         99%        RMSE 
+118.9383839 132.4900454 147.8777806   0.2395715 
+> berryFunctions::is.error(q_gpd(annMax, package="nonsense"), force=TRUE)
+[1] TRUE
+> 
+> # compare all at once with
+> d <- distLquantile(annMax); d
+distLfit execution took 0.032 seconds.
+                            80%       90%      99%       RMSE
+wak                    82.00224  93.37393 122.5049 0.02218165
+kap                    82.43319  94.20990 120.1919 0.02284202
+wei                    81.72957  93.39678 123.6596 0.02313721
+pe3                    81.13112  92.97753 126.2917 0.02535969
+ray                    81.92136  93.07332 121.2474 0.02554485
+ln3                    80.85126  92.71419 127.5938 0.02658829
+gno                    80.85126  92.71419 127.5938 0.02658829
+gev                    80.83924  92.82171 127.5402 0.02692465
+gum                    80.26879  92.86542 132.3087 0.02716885
+gpa                    84.02187  95.30208 113.5608 0.02738413
+gam                    81.39612  92.57994 122.9881 0.02873879
+glo                    79.38862  91.10085 134.4871 0.03477494
+lap                    77.33774  88.79551 126.8574 0.04473377
+rice                   82.14649  91.37297 113.3748 0.04538985
+nor                    82.13652  91.20908 112.7556 0.04751986
+exp                    78.96177  95.09148 148.6732 0.06136773
+revgum                 82.45728  88.46912 100.1043 0.08472148
+empirical              82.32000  93.76000 113.6000         NA
+quantileMean           82.14694  93.28444 113.3853         NA
+weighted1              81.21538  92.70405 124.2528         NA
+weighted2              81.23617  92.80714 124.5320         NA
+weighted3              81.35425  93.13879 125.3497         NA
+weightedc                   NaN       NaN      NaN         NA
+GPD_LMO_lmomco         84.45045  95.66677 114.1667 0.03537205
+GPD_LMO_extRemes       85.21118  95.02659 108.4534 0.03844264
+GPD_PWM_evir           84.65551  94.44999 107.5820 0.03973176
+GPD_PWM_fExtremes      85.16163  94.76950 107.6513 0.03914311
+GPD_MLE_extRemes       67.68348  81.58722 127.7744 0.16739775
+GPD_MLE_ismev          85.55055  96.44390 112.8766 0.03633172
+GPD_MLE_evd            85.49379  96.39702 112.8790 0.03591204
+GPD_MLE_Renext_Renouv  85.49379  96.39702 112.8790 0.03591204
+GPD_MLE_evir           88.34657  98.73178 112.4675 0.06600062
+GPD_MLE_fExtremes      88.88502  99.06913 112.5388 0.06600062
+GPD_GML_extRemes       67.68348  81.58722 127.7744 0.16739775
+GPD_MLE_Renext_2par   118.93838 132.49005 147.8778 0.23957149
+GPD_BAY_extRemes             NA        NA       NA         NA
+n_full                 35.00000        NA       NA         NA
+n                      35.00000        NA       NA         NA
+threshold              35.40000        NA       NA         NA
+> # d <- distLquantile(annMax, speed=FALSE); d # for Bayesian also
+> 
+> q_gpd(annMax, truncate=0.85, package="evd")          # Note about quantiles
+Note in q_gpd: quantiles for probs (0.8) below truncate (0.85) replaced with NAs.
+         80%          90%          99%         RMSE 
+          NA  95.17366381 112.09184663   0.02360571 
+> q_gpd(annMax, truncate=0.85, package="evir")
+Note in q_gpd: quantiles for probs (0.8) below truncate (0.85) replaced with NAs.
+         80%          90%          99%         RMSE 
+          NA  92.67569715 118.39041045   0.02089735 
+> q_gpd(annMax, truncate=0.85, package="evir", quiet=TRUE) # No note
+         80%          90%          99%         RMSE 
+          NA  92.67569715 118.39041045   0.02089735 
+> q_gpd(annMax, truncate=0.85, package="evir", undertruncNA=FALSE)
+         80%          90%          99%         RMSE 
+ 73.99492678  92.67569715 118.39041045   0.02089735 
+> 
+> q_gpd(annMax, truncate=0.85, package="evir", list=TRUE)
+Note in q_gpd: quantiles for probs (0.8) below truncate (0.85) replaced with NAs.
+$n
+[1] 35
+
+$data
+[1]  89.6  93.6  94.8 110.8 113.6
+
+$threshold
+[1] 84.1
+
+$p.less.thresh
+[1] 0.8571429
+
+$n.exceed
+[1] 5
+
+$method
+[1] "pwm"
+
+$par.ests
+        xi       beta 
+-0.6424469 26.9032806 
+
+$par.ses
+        xi       beta 
+ 0.7603783 18.6934857 
+
+$varcov
+           [,1]      [,2]
+[1,]  0.5781751  13.46823
+[2,] 13.4682318 349.44641
+
+$information
+[1] "expected"
+
+$converged
+[1] NA
+
+$nllh.final
+[1] NA
+
+$q_gpd_created
+[1] "2020-06-05 16:33:03 CEST"
+
+$q_gpd_creator
+[1] "evir::gpd"
+
+$q_gpd_truncate
+[1] 0.85
+
+$q_gpd_threshold
+     85% 
+84.99144 
+
+$q_gpd_n_full
+[1] 35
+
+$q_gpd_n_geq
+[1] 5
+
+$q_gpd_n_gt
+[1] 5
+
+$q_gpd_probs
+[1] 0.80 0.90 0.99
+
+$q_gpd_probs2
+[1] 0.0000000 0.3333333 0.9333333
+
+$q_gpd_package
+[1] "evir"
+
+$q_gpd_method
+[1] "pwm"
+
+$q_gpd_quant
+         80%          90%          99%         RMSE 
+          NA  92.67569715 118.39041045   0.02089735 
+
+> str(  q_gpd(annMax, truncate=0.85, probs=0.6, package="evir", list=TRUE) )# NAs
+Note in q_gpd: With undertruncNA=TRUE, 'probs' (0.6)
+  must contain values that are larger than 'truncate' (0.85). Returning NAs.
+List of 13
+ $ z              : chr "not fitted"
+ $ q_gpd_created  : POSIXct[1:1], format: "2020-06-05 16:33:03"
+ $ q_gpd_creator  : chr ""
+ $ q_gpd_truncate : num 0.85
+ $ q_gpd_threshold: Named num 85
+  ..- attr(*, "names")= chr "85%"
+ $ q_gpd_n_full   : int 35
+ $ q_gpd_n_geq    : int 5
+ $ q_gpd_n_gt     : int 5
+ $ q_gpd_probs    : num 0.6
+ $ q_gpd_probs2   : num 0
+ $ q_gpd_package  : chr "evir"
+ $ q_gpd_method   : NULL
+ $ q_gpd_quant    : Named logi [1:2] NA NA
+  ..- attr(*, "names")= chr [1:2] "60%" "RMSE"
+> str(  q_gpd(annMax, package="evir",      list=TRUE)   )
+List of 24
+ $ n              : int 35
+ $ data           : num [1:34] 37 38.9 40.1 40.4 43.6 43.7 47.8 48.9 50.8 51.3 ...
+ $ threshold      : num 35.4
+ $ p.less.thresh  : num 0.0286
+ $ n.exceed       : int 34
+ $ method         : chr "pwm"
+ $ par.ests       : Named num [1:2] -0.664 50.314
+  ..- attr(*, "names")= chr [1:2] "xi" "beta"
+ $ par.ses        : Named num [1:2] 0.296 13.424
+  ..- attr(*, "names")= chr [1:2] "xi" "beta"
+ $ varcov         : num [1:2, 1:2] 0.0877 3.7765 3.7765 180.2045
+ $ information    : chr "expected"
+ $ converged      : logi NA
+ $ nllh.final     : logi NA
+ $ q_gpd_created  : POSIXct[1:1], format: "2020-06-05 16:33:03"
+ $ q_gpd_creator  : chr "evir::gpd"
+ $ q_gpd_truncate : num 0
+ $ q_gpd_threshold: Named num 35.4
+  ..- attr(*, "names")= chr "0%"
+ $ q_gpd_n_full   : int 35
+ $ q_gpd_n_geq    : int 35
+ $ q_gpd_n_gt     : int 34
+ $ q_gpd_probs    : num [1:3] 0.8 0.9 0.99
+ $ q_gpd_probs2   : num [1:3] 0.8 0.9 0.99
+ $ q_gpd_package  : chr "evir"
+ $ q_gpd_method   : chr "pwm"
+ $ q_gpd_quant    : Named num [1:4] 84.6555 94.45 107.582 0.0397
+  ..- attr(*, "names")= chr [1:4] "80%" "90%" "99%" "RMSE"
+> str(  q_gpd(annMax, package="evd",       list=TRUE)   )
+List of 36
+ $ estimate       : Named num [1:2] 47.499 -0.568
+  ..- attr(*, "names")= chr [1:2] "scale" "shape"
+ $ std.err        : NULL
+ $ fixed          : NULL
+ $ param          : Named num [1:2] 47.499 -0.568
+  ..- attr(*, "names")= chr [1:2] "scale" "shape"
+ $ deviance       : num 292
+ $ corr           : NULL
+ $ var.cov        : NULL
+ $ convergence    : chr "successful"
+ $ counts         : Named int [1:2] 129 62
+  ..- attr(*, "names")= chr [1:2] "function" "gradient"
+ $ message        : NULL
+ $ threshold      : num 35.4
+ $ cmax           : logi FALSE
+ $ r              : NULL
+ $ ulow           : num -Inf
+ $ rlow           : num 1
+ $ npp            : int 35
+ $ nhigh          : int 34
+ $ nat            : int 34
+ $ pat            : num 0.971
+ $ extind         : NULL
+ $ data           : num [1:35] 35.4 37 38.9 40.1 40.4 43.6 43.7 47.8 48.9 50.8 ...
+ $ exceedances    : num [1:34] 37 38.9 40.1 40.4 43.6 43.7 47.8 48.9 50.8 51.3 ...
+ $ mper           : NULL
+ $ scale          : Named num 47.5
+  ..- attr(*, "names")= chr "scale"
+ $ call           : language evd::fpot(x = x, threshold = threshold, model = "gpd", std.err = FALSE)
+ $ q_gpd_created  : POSIXct[1:1], format: "2020-06-05 16:33:03"
+ $ q_gpd_creator  : chr "evd::fpot"
+ $ q_gpd_truncate : num 0
+ $ q_gpd_threshold: Named num 35.4
+  ..- attr(*, "names")= chr "0%"
+ $ q_gpd_n_full   : int 35
+ $ q_gpd_n_geq    : int 35
+ $ q_gpd_n_gt     : int 34
+ $ q_gpd_probs    : num [1:3] 0.8 0.9 0.99
+ $ q_gpd_probs2   : num [1:3] 0.8 0.9 0.99
+ $ q_gpd_package  : chr "evd"
+ $ q_gpd_quant    : Named num [1:4] 85.4938 96.397 112.879 0.0359
+  ..- attr(*, "names")= chr [1:4] "80%" "90%" "99%" "RMSE"
+> str(  q_gpd(annMax, package="extRemes",  list=TRUE)   )
+List of 35
+ $ call           : language extRemes::fevd(x = x, threshold = threshold, type = "GP", method = method)
+ $ data.name      : chr [1:2] "x" ""
+ $ weights        : num 1
+ $ missing.values : logi [1:35] FALSE FALSE FALSE FALSE FALSE FALSE ...
+ $ in.data        : logi FALSE
+ $ x              : num [1:35] 35.4 37 38.9 40.1 40.4 43.6 43.7 47.8 48.9 50.8 ...
+ $ method         : chr "MLE"
+ $ type           : chr "GP"
+ $ period.basis   : chr "year"
+ $ par.models     :List of 6
+  ..$ threshold :Class 'formula'  language ~1
+  .. .. ..- attr(*, ".Environment")=<environment: 0x000000001fdad278> 
+  ..$ location  :Class 'formula'  language ~1
+  .. .. ..- attr(*, ".Environment")=<environment: 0x000000001fdad278> 
+  ..$ scale     :Class 'formula'  language ~1
+  .. .. ..- attr(*, ".Environment")=<environment: 0x000000001fdad278> 
+  ..$ log.scale : logi FALSE
+  ..$ shape     :Class 'formula'  language ~1
+  .. .. ..- attr(*, ".Environment")=<environment: 0x000000001fdad278> 
+  ..$ term.names:List of 4
+  .. ..$ threshold: chr(0) 
+  .. ..$ location : chr(0) 
+  .. ..$ scale    : chr(0) 
+  .. ..$ shape    : chr(0) 
+ $ const.thresh   : logi TRUE
+ $ const.scale    : logi TRUE
+ $ const.shape    : logi TRUE
+ $ time.units     : chr "days"
+ $ span           : num 0.0931
+ $ npy            : num 365
+ $ n              : int 35
+ $ na.action      : chr "na.fail"
+ $ threshold      : num 35.4
+ $ rate           : num 0.971
+ $ parnames       : chr [1:2] "scale" "shape"
+ $ results        :List of 7
+  ..$ par        : Named num [1:2] 2.01e+01 1.00e-08
+  .. ..- attr(*, "names")= chr [1:2] "scale" "shape"
+  ..$ value      : num 153
+  ..$ counts     : Named int [1:2] 21 1
+  .. ..- attr(*, "names")= chr [1:2] "function" "gradient"
+  ..$ convergence: int 0
+  ..$ message    : NULL
+  ..$ hessian    : num [1:2, 1:2] 0.17 322.78 322.78 80.42
+  .. ..- attr(*, "dimnames")=List of 2
+  .. .. ..$ : chr [1:2] "scale" "shape"
+  .. .. ..$ : chr [1:2] "scale" "shape"
+  ..$ num.pars   :List of 3
+  .. ..$ location: NULL
+  .. ..$ scale   : int 1
+  .. ..$ shape   : int 1
+ $ initial.results:List of 2
+  ..$ Lmoments:List of 2
+  .. ..$ pars      : Named num [1:2] 49.826 -0.647
+  .. .. ..- attr(*, "names")= chr [1:2] "scale" "shape"
+  .. ..$ likelihood: num Inf
+  ..$ MOM     :List of 2
+  .. ..$ pars      : Named num [1:2] 2.01e+01 1.00e-08
+  .. .. ..- attr(*, "names")= chr [1:2] "scale" "shape"
+  .. ..$ likelihood: num 153
+ $ q_gpd_created  : POSIXct[1:1], format: "2020-06-05 16:33:03"
+ $ q_gpd_creator  : chr "extRemes::fevd"
+ $ q_gpd_truncate : num 0
+ $ q_gpd_threshold: Named num 35.4
+  ..- attr(*, "names")= chr "0%"
+ $ q_gpd_n_full   : int 35
+ $ q_gpd_n_geq    : int 35
+ $ q_gpd_n_gt     : int 34
+ $ q_gpd_probs    : num [1:3] 0.8 0.9 0.99
+ $ q_gpd_probs2   : num [1:3] 0.8 0.9 0.99
+ $ q_gpd_package  : chr "extRemes"
+ $ q_gpd_method   : chr "MLE"
+ $ q_gpd_quant    : Named num [1:4] 67.683 81.587 127.774 0.167
+  ..- attr(*, "names")= chr [1:4] "80%" "90%" "99%" "RMSE"
+> str(  q_gpd(annMax, package="fExtremes", list=TRUE)   )
+Warning: in log(1 + (xi * (as.vector(exceedances) - u))/beta): NaNs produced
+-- tryStack sys.calls: str -> q_gpd -> tryStack -> fExtremes::gpdFit -> log(1 + (xi * (as.vector(exceedances) - u))/beta)
+List of 21
+ $ call           : language fExtremes::gpdFit(x = x, u = threshold, type = method)
+ $ method         : chr [1:2] "gpd" "pwm"
+ $ parameter      :List of 2
+  ..$ u   : Named num 35.4
+  .. ..- attr(*, "names")= chr "0%"
+  ..$ type: chr "pwm"
+ $ data           :List of 2
+  ..$ x          : num [1:35] 35.4 37 38.9 40.1 40.4 43.6 43.7 47.8 48.9 50.8 ...
+  ..$ exceedances: Named num [1:34] 37 38.9 40.1 40.4 43.6 43.7 47.8 48.9 50.8 51.3 ...
+  .. ..- attr(*, "names")= chr [1:34] "2" "3" "4" "5" ...
+ $ fit            :List of 10
+  ..$ par.ests     : Named num [1:2] -0.664 50.314
+  .. ..- attr(*, "names")= chr [1:2] "xi" "beta"
+  ..$ par.ses      : Named num [1:2] 0.296 13.424
+  .. ..- attr(*, "names")= chr [1:2] "xi" "beta"
+  ..$ fit          : logi NA
+  ..$ varcov       : logi NA
+  ..$ llh          : logi NA
+  ..$ convergence  : logi NA
+  ..$ prob         : num 0.0286
+  ..$ p.less.thresh: num 0.0286
+  ..$ threshold    : Named num 35.4
+  .. ..- attr(*, "names")= chr "0%"
+  ..$ data         : num [1:35] 35.4 37 38.9 40.1 40.4 43.6 43.7 47.8 48.9 50.8 ...
+ $ residuals      : num [1:34] 0.0321 0.0712 0.0964 0.1028 0.1725 ...
+ $ title          : chr "GPD Parameter Estimation"
+ $ description    : chr "Fri Jun 05 16:33:04 2020 by user: berry"
+ $ q_gpd_created  : POSIXct[1:1], format: "2020-06-05 16:33:04"
+ $ q_gpd_creator  : chr "fExtremes::gpdFit"
+ $ q_gpd_truncate : num 0
+ $ q_gpd_threshold: Named num 35.4
+  ..- attr(*, "names")= chr "0%"
+ $ q_gpd_n_full   : int 35
+ $ q_gpd_n_geq    : int 35
+ $ q_gpd_n_gt     : int 34
+ $ q_gpd_probs    : num [1:3] 0.8 0.9 0.99
+ $ q_gpd_probs2   : num [1:3] 0.8 0.9 0.99
+ $ q_gpd_package  : chr "fExtremes"
+ $ q_gpd_method   : chr "pwm"
+ $ q_gpd_quant    : Named num [1:4] 85.1616 94.7695 107.6513 0.0391
+  ..- attr(*, "names")= chr [1:4] "80%" "90%" "99%" "RMSE"
+ $ q_gpd_Warning  : chr "transformed into list from Formal class 'fGPDFIT' [package 'fExtremes'] with 8 slots"
+> str(  q_gpd(annMax, package="ismev",     list=TRUE)   )
+List of 27
+ $ trans          : logi FALSE
+ $ model          :List of 2
+  ..$ : NULL
+  ..$ : NULL
+ $ link           : chr "c(identity, identity)"
+ $ threshold      : Named num 35.4
+  ..- attr(*, "names")= chr "0%"
+ $ nexc           : int 34
+ $ data           : num [1:34] 37 38.9 40.1 40.4 43.6 43.7 47.8 48.9 50.8 51.3 ...
+ $ conv           : int 0
+ $ nllh           : num 146
+ $ vals           : num [1:34, 1:3] 47.6 47.6 47.6 47.6 47.6 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:34] "0%" "0%" "0%" "0%" ...
+  .. ..$ : chr [1:3] "" "" "u"
+ $ mle            : num [1:2] 47.61 -0.57
+ $ rate           : num 0.971
+ $ cov            : num [1:2, 1:2] 107.2165 -1.6499 -1.6499 0.0275
+ $ se             : num [1:2] 10.355 0.166
+ $ n              : int 35
+ $ npy            : num 365
+ $ xdata          : num [1:35] 35.4 37 38.9 40.1 40.4 43.6 43.7 47.8 48.9 50.8 ...
+ $ q_gpd_created  : POSIXct[1:1], format: "2020-06-05 16:33:04"
+ $ q_gpd_creator  : chr "ismev::gpd.fit"
+ $ q_gpd_truncate : num 0
+ $ q_gpd_threshold: Named num 35.4
+  ..- attr(*, "names")= chr "0%"
+ $ q_gpd_n_full   : int 35
+ $ q_gpd_n_geq    : int 35
+ $ q_gpd_n_gt     : int 34
+ $ q_gpd_probs    : num [1:3] 0.8 0.9 0.99
+ $ q_gpd_probs2   : num [1:3] 0.8 0.9 0.99
+ $ q_gpd_package  : chr "ismev"
+ $ q_gpd_quant    : Named num [1:4] 85.5506 96.4439 112.8766 0.0363
+  ..- attr(*, "names")= chr [1:4] "80%" "90%" "99%" "RMSE"
+> str(  q_gpd(annMax, package="Renext",    list=TRUE)   )
+List of 48
+ $ call           : language Renext::Renouv(x = x, threshold = threshold, effDuration = length(x), distname.y = "gpd",      plot = FALSE)
+ $ x.OT           : num [1:35] 35.4 37 38.9 40.1 40.4 43.6 43.7 47.8 48.9 50.8 ...
+ $ y.OT           : num [1:34] 1.6 3.5 4.7 5 8.2 8.3 12.4 13.5 15.4 15.9 ...
+ $ nb.OT          : int 34
+ $ effDuration    : int 35
+ $ threshold      : Named num 35.4
+  ..- attr(*, "names")= chr "0%"
+ $ distname.y     : chr "gpd"
+ $ p.y            : int 2
+ $ parnames.y     : chr [1:2] "scale" "shape"
+ $ fixed.y        : Named logi [1:2] FALSE FALSE
+  ..- attr(*, "names")= chr [1:2] "scale" "shape"
+ $ trans.y        : NULL
+ $ est.N          : Named num 0.971
+  ..- attr(*, "names")= chr "lambda"
+ $ cov.N          : Named num 0.0278
+  ..- attr(*, "names")= chr "lambda"
+ $ est.y          : Named num [1:2] 47.499 -0.568
+  ..- attr(*, "names")= chr [1:2] "scale" "shape"
+ $ cov.y          : num [1:2, 1:2] 106.4077 -1.6391 -1.6391 0.0273
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:2] "scale" "shape"
+  .. ..$ : chr [1:2] "scale" "shape"
+ $ corr.y         : num [1:2, 1:2] 1 -0.961 -0.961 1
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:2] "scale" "shape"
+  .. ..$ : chr [1:2] "scale" "shape"
+ $ estimate       : Named num [1:3] 0.971 47.499 -0.568
+  ..- attr(*, "names")= chr [1:3] "lambda" "scale" "shape"
+ $ fixed          : Named logi [1:3] FALSE FALSE FALSE
+  ..- attr(*, "names")= chr [1:3] "lambda" "scale" "shape"
+ $ df             : int 3
+ $ nobs           : int 34
+ $ p              : int 3
+ $ opt            : NULL
+ $ logLik         : num -146
+ $ sigma          : Named num [1:3] 0.167 10.315 0.165
+  ..- attr(*, "names")= chr [1:3] "lambda" "scale" "shape"
+ $ cov            : num [1:3, 1:3] 0.0278 0 0 0 106.4077 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:3] "lambda" "scale" "shape"
+  .. ..$ : chr [1:3] "lambda" "scale" "shape"
+ $ corr           : num [1:3, 1:3] 1 0 0 0 1 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:3] "lambda" "scale" "shape"
+  .. ..$ : chr [1:3] "lambda" "scale" "shape"
+ $ history.MAX    :List of 7
+  ..$ flag       : logi FALSE
+  ..$ block      : NULL
+  ..$ blockNames : NULL
+  ..$ effDuration: NULL
+  ..$ r          : NULL
+  ..$ data       : NULL
+  ..$ dataNames  : NULL
+ $ history.OTS    :List of 8
+  ..$ flag       : logi FALSE
+  ..$ block      : NULL
+  ..$ blockNames : NULL
+  ..$ effDuration: NULL
+  ..$ threshold  : NULL
+  ..$ r          : NULL
+  ..$ data       : NULL
+  ..$ dataNames  : NULL
+ $ funs           :List of 9
+  ..$ trans      : logi FALSE
+  ..$ transfun   : NULL
+  ..$ invtransfun: NULL
+  ..$ dfun.y     :function (x, scale = 1, shape = 0, loc = 0, log = FALSE)  
+  ..$ pfun.y     :function (q, scale = 1, shape = 0, loc = 0, lower.tail = TRUE)  
+  ..$ qfun.y     :function (p, scale = 1, shape = 0, loc = 0, lower.tail = TRUE)  
+  ..$ logf.y     :function (parm, x)  
+  ..$ q.y        :function (parm, p)  
+  ..$ F.y        :function (parm, x)  
+ $ transFlag      : logi FALSE
+ $ pct.conf       : num [1:2] 95 70
+ $ ret.lev        :'data.frame':	56 obs. of  6 variables:
+  ..$ period: num [1:56] 1.03 1.04 1.05 1.06 1.07 ...
+  ..$ quant : num [1:56] 35.4 35.9 36.4 36.8 37.3 ...
+  ..$ L.95  : num [1:56] 19.4 20 20.6 21.1 21.7 ...
+  ..$ U.95  : num [1:56] 51.4 51.8 52.1 52.5 52.9 ...
+  ..$ L.70  : num [1:56] 27 27.5 28 28.5 29.1 ...
+  ..$ U.70  : num [1:56] 43.8 44.3 44.7 45.1 45.6 ...
+  ..- attr(*, "infer.method")= chr "Delta method"
+ $ pred           :'data.frame':	13 obs. of  6 variables:
+  ..$ period: num [1:13] 10 20 50 100 200 300 400 500 600 700 ...
+  ..$ quant : num [1:13] 96 103 110 113 115 ...
+  ..$ L.95  : num [1:13] 85 94.1 100.9 103.1 103.9 ...
+  ..$ U.95  : num [1:13] 107 113 119 122 126 ...
+  ..$ L.70  : num [1:13] 90.2 98.5 105.1 107.6 109 ...
+  ..$ U.70  : num [1:13] 102 108 114 118 121 ...
+  ..- attr(*, "infer.method")= chr "Delta method"
+ $ infer.method   : chr "Delta method"
+ $ KS.test        :List of 5
+  ..$ statistic  : Named num 0.0692
+  .. ..- attr(*, "names")= chr "D"
+  ..$ p.value    : num 0.993
+  ..$ alternative: chr "two-sided"
+  ..$ method     : chr "One-sample Kolmogorov-Smirnov test"
+  ..$ data.name  : chr "OTjitter(y.OT, threshold = 0)"
+  ..- attr(*, "class")= chr "htest"
+ $ MAX            :List of 5
+  ..$ distname     : chr "gev"
+  ..$ blockDuration: num 1
+  ..$ estimate     : Named num [1:3] 34.012 48.288 -0.568
+  .. ..- attr(*, "names")= chr [1:3] "loc" "scale" "shape"
+  ..$ sigma        : Named num [1:3] 8.287 11.698 0.165
+  .. ..- attr(*, "names")= chr [1:3] "loc" "scale" "shape"
+  ..$ cov          : num [1:3, 1:3] 68.6742 -42.2379 0.0485 -42.2379 136.8397 ...
+  .. ..- attr(*, "dimnames")=List of 2
+  .. .. ..$ : chr [1:3] "loc" "scale" "shape"
+  .. .. ..$ : chr [1:3] "loc" "scale" "shape"
+ $ q_gpd_created  : POSIXct[1:1], format: "2020-06-05 16:33:04"
+ $ q_gpd_creator  : chr "Renext::Renouv"
+ $ q_gpd_truncate : num 0
+ $ q_gpd_threshold: Named num 35.4
+  ..- attr(*, "names")= chr "0%"
+ $ q_gpd_n_full   : int 35
+ $ q_gpd_n_geq    : int 35
+ $ q_gpd_n_gt     : int 34
+ $ q_gpd_probs    : num [1:3] 0.8 0.9 0.99
+ $ q_gpd_probs2   : num [1:3] 0.8 0.9 0.99
+ $ q_gpd_package  : chr "Renext"
+ $ q_gpd_method   : chr "r"
+ $ q_gpd_quant    : Named num [1:4] 85.4938 96.397 112.879 0.0359
+  ..- attr(*, "names")= chr [1:4] "80%" "90%" "99%" "RMSE"
+> 
+> q_gpd(annMax, package="evir", truncate=0.9, method="ml") # NAs (MLE fails often)
+Warning: in log(x): NaNs produced
+-- tryStack sys.calls: q_gpd -> tryStack -> evir::gpd -> optim ->  -> fn -> logb -> log(x)
+Note in q_gpd: evir::gpd failed. Returning NAs.
+  Reason: Error in optim(theta, negloglik, hessian = TRUE, ..., tmp = excess) : 
+  non-finite finite-difference value [1]
+q_gpd -> tryStack -> evir::gpd -> optim -> optim(theta, negloglik, hessian = TRUE, ..., tmp = excess)
+ 80%  90%  99% RMSE 
+  NA   NA   NA   NA 
+> 
+> trunc <- seq(0,0.9,len=500)
+> library("pbapply")
+> quant <- pbsapply(trunc, function(tr) q_gpd(annMax, pack="evir", method = "pwm",
++                                             truncate=tr, quiet=TRUE))
+> quant <- pbsapply(trunc, function(tr) q_gpd(annMax, pack="lmomco", truncate=tr, quiet=TRUE))
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+Warning: in lmomco::pargpa(lmom, ...): L-moments are invalid
+-- tryStack sys.calls: pbsapply -> pblapply -> lapply -> FUN -> q_gpd -> tryStack -> lmomco::pargpa -> warning -> lmomco::pargpa(lmom, ...)
+> plot(trunc, quant["99%",], type="l", ylim=c(80,130), las=1)
+> lines(trunc, quant["90%",])
+> lines(trunc, quant["80%",])
+> plot(trunc, quant["RMSE",], type="l", las=1)
+> 
+> ## Not run: 
+> ##D ## Not run in checks because simulation takes too long
+> ##D 
+> ##D trunc <- seq(0,0.9,len=200)
+> ##D dlfs <- pblapply(trunc, function(tr) distLfit(annMax, truncate=tr, quiet=TRUE, order=FALSE))
+> ##D rmses <- sapply(dlfs, function(x) x$gof$RMSE)
+> ##D plot(trunc, trunc, type="n", ylim=range(rmses,na.rm=TRUE), las=1, ylab="rmse")
+> ##D cols <- rainbow2(17)[rank(rmses[,1])]
+> ##D for(i in 1:17) lines(trunc, rmses[i,], col=cols[i])
+> ##D 
+> ##D dlfs2 <- lapply(0:8/10, function(tr) distLfit(annMax, truncate=tr, quiet=TRUE))
+> ##D pdf("dummy.pdf")
+> ##D dummy <- sapply(dlfs2, function(x)
+> ##D {plotLfit(x, cdf=TRUE, main=x$truncate, ylim=0:1, xlim=c(20,135), nbest=1)
+> ##D title(sub=round(x$gof$RMSE[1],4))
+> ##D })
+> ##D dev.off()
+> ##D 
+> ##D # truncation effect
+> ##D mytruncs <- seq(0, 0.9, len=150)
+> ##D oo <- options(show.error.messages=FALSE, warn=-1)
+> ##D myquants <- sapply(mytruncs, function(t) q_gpd(annMax, truncate=t, quiet=TRUE))
+> ##D options(oo)
+> ##D plot(1, type="n", ylim=range(myquants, na.rm=TRUE), xlim=c(0,0.9), las=1,
+> ##D      xlab="truncated proportion", ylab="estimated quantiles")
+> ##D abline(h=quantileMean(annMax, probs=c(0.8,0.9,0.99)))
+> ##D for(i in 1:3) lines(mytruncs, myquants[i,], col=i)
+> ##D text(0.3, c(87,97,116), rownames(myquants), col=1:3)
+> ##D 
+> ##D 
+> ##D # Underestimation in small samples
+> ##D # create known population:
+> ##D dat <- extRemes::revd(1e5, scale=50, shape=-0.02, threshold=30, type="GP")
+> ##D op <- par(mfrow=c(1,2), mar=c(2,2,1,1))
+> ##D hist(dat, breaks=50, col="tan")
+> ##D berryFunctions::logHist(dat, breaks=50, col="tan")
+> ##D par(op)
+> ##D 
+> ##D # function to estimate empirical and GPD quantiles from subsamples
+> ##D samsizeeffect <- function(n, nrep=30, probs=0.999, trunc=0.5, Q=c(0.4,0.5,0.6))
+> ##D {
+> ##D res <- replicate(nrep, {
+> ##D subsample <- sample(dat, n)
+> ##D qGPD <- q_gpd(subsample, probs=probs, truncate=trunc)
+> ##D qEMP <- berryFunctions::quantileMean(subsample, probs=probs, truncate=trunc)
+> ##D c(qGPD=qGPD, qEMP=qEMP)})
+> ##D apply(res, MARGIN=1, berryFunctions::quantileMean, probs=Q)
+> ##D }
+> ##D 
+> ##D # Run and plot simulations
+> ##D samplesize <- c(seq(20, 150, 10), seq(200,800, 100))
+> ##D results <- pbapply::pblapply(samplesize, samsizeeffect)
+> ##D res <- function(row, col) sapply(results, function(x) x[row,col])
+> ##D berryFunctions::ciBand(yu=res(3,1),yl=res(1,1),ym=res(2,1),x=samplesize,
+> ##D   main="99.9% Quantile underestimation", xlab="subsample size", ylim=c(200,400), colm=4)
+> ##D berryFunctions::ciBand(yu=res(3,2),yl=res(1,2),ym=res(2,2),x=samplesize, add=TRUE)
+> ##D abline(h=berryFunctions::quantileMean(dat, probs=0.999))
+> ##D text(300, 360, "empirical quantile of full sample")
+> ##D text(300, 340, "GPD parametric estimate", col=4)
+> ##D text(300, 300, "empirical quantile estimate", col="green3")
+> ##D 
+> ## End(Not run) # end of dontrun
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching 'package:pbapply'
+
+> nameEx("q_weighted")
+> ### * q_weighted
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: q_weighted
+> ### Title: Compute weighted averages of quantile estimates
+> ### Aliases: q_weighted
+> ### Keywords: distribution
+> 
+> ### ** Examples
+> 
+> x <- data.frame(A=1:5, RMSE=runif(5))
+> distLweights(x, onlydn=FALSE)
+       RMSE    weight1   weight2   weight3 weightc
+5 0.2016819 0.28125961 0.3181598 0.3747534       0
+1 0.2655087 0.26149334 0.2894176 0.3408986       0
+2 0.3721239 0.22847605 0.2414071 0.2843480       0
+3 0.5728534 0.16631286 0.1510154 0.0000000       0
+4 0.9082078 0.06245815 0.0000000 0.0000000       0
+> 
+> q_weighted(x,  onlydn=FALSE)
+                 A      RMSE
+1         1.000000 0.2655087
+2         2.000000 0.3721239
+3         3.000000 0.5728534
+4         4.000000 0.9082078
+5         5.000000 0.2016819
+weighted1 2.873515        NA
+weighted2 2.816077        NA
+weighted3 2.783362        NA
+weightedc      NaN        NA
+> q_weighted(x,  distLweights(x, weightc=c("1"=3, "3"=5), order=FALSE, onlydn=FALSE)  )
+Note in distLweights: names present in RMSE, but not in weightc, thus given zero weight: 2, 4, 5
+                 A      RMSE
+1         1.000000 0.2655087
+2         2.000000 0.3721239
+3         3.000000 0.5728534
+4         4.000000 0.9082078
+5         5.000000 0.2016819
+weighted1 2.873515        NA
+weighted2 2.816077        NA
+weighted3 2.783362        NA
+weightedc 2.250000        NA
+> 
+> x <- rexp(190)
+> d <- distLquantile(x)
+distLfit execution took 0.079 seconds.
+> d2 <- q_weighted(d)
+> stopifnot(all(d==d2, na.rm=TRUE))
+> 
+> # fast option for adding custom weighted estimates:
+> cw <- runif(17)
+> names(cw) <- c("exp", "gam", "gev", "glo", "gno", "gpa", "gum", "kap", "lap",
++                "ln3", "nor", "pe3", "ray", "revgum", "rice", "wak", "wei")
+> dw <- distLweights(d, weightc=cw)
+> qw1 <- q_weighted(d, weightc=cw); qw1
+                               80%      90%      99%        RMSE
+wak                     1.63043405 2.198910 3.934246 0.009237836
+kap                     1.63259215 2.216550 3.900751 0.009400782
+wei                     1.62135552 2.199076 3.960982 0.009934596
+gpa                     1.65119989 2.237655 3.810022 0.010282882
+pe3                     1.60916027 2.187464 4.017041 0.011708735
+gam                     1.59966540 2.195250 4.108934 0.011823596
+gno                     1.56640630 2.136883 4.223330 0.019726972
+ln3                     1.56640630 2.136883 4.223330 0.019726972
+exp                     1.57684621 2.211110 4.318089 0.024316876
+gev                     1.54263985 2.103468 4.337134 0.024417162
+glo                     1.50224930 2.036247 4.515490 0.032154680
+gum                     1.62824179 2.123575 3.674593 0.036040869
+ray                     1.69322521 2.131751 3.239630 0.046980175
+lap                     1.40347179 1.845729 3.314877 0.051328943
+nor                     1.70168594 2.058444 2.905712 0.073135510
+rice                    1.45895948 1.745074 2.467908 0.105519690
+revgum                  1.71429912 1.950701 2.408226 0.112442036
+empirical               1.60844678 2.224613 4.313884          NA
+quantileMean            1.59824858 2.204776 4.236640          NA
+weighted1               1.59450624 2.141794 3.931373          NA
+weighted2               1.59456129 2.146725 3.955989          NA
+weighted3               1.60738103 2.191962 4.047076          NA
+weightedc               1.56762116 2.084968 3.796391          NA
+GPD_LMO_lmomco          1.65119989 2.237655 3.810022 0.010282882
+GPD_LMO_extRemes        1.66772416 2.240546 3.696258 0.010832508
+GPD_PWM_evir            1.67406034 2.239252 3.639701 0.011991572
+GPD_PWM_fExtremes       1.66824036 2.238554 3.679720 0.010860128
+GPD_MLE_extRemes        1.66017596 2.257285 3.862072 0.011920042
+GPD_MLE_ismev           1.66021409 2.257357 3.862303 0.011921037
+GPD_MLE_evd             1.66015246 2.257284 3.862234 0.011922942
+GPD_MLE_Renext_Renouv   1.66015246 2.257284 3.862234 0.011922942
+GPD_MLE_evir            1.66425175 2.262085 3.859097 0.011696330
+GPD_MLE_fExtremes       1.66024473 2.257362 3.862116 0.011917536
+GPD_GML_extRemes        1.66772416 2.240546 3.696258 0.010832508
+GPD_MLE_Renext_2par     1.69425438 2.294072 3.874888 0.012829623
+GPD_BAY_extRemes                NA       NA       NA          NA
+n_full                190.00000000       NA       NA          NA
+n                     190.00000000       NA       NA          NA
+threshold               0.02025041       NA       NA          NA
+> qw2 <- q_weighted(d, weights=dw); qw2
+                               80%      90%      99%        RMSE
+wak                     1.63043405 2.198910 3.934246 0.009237836
+kap                     1.63259215 2.216550 3.900751 0.009400782
+wei                     1.62135552 2.199076 3.960982 0.009934596
+gpa                     1.65119989 2.237655 3.810022 0.010282882
+pe3                     1.60916027 2.187464 4.017041 0.011708735
+gam                     1.59966540 2.195250 4.108934 0.011823596
+gno                     1.56640630 2.136883 4.223330 0.019726972
+ln3                     1.56640630 2.136883 4.223330 0.019726972
+exp                     1.57684621 2.211110 4.318089 0.024316876
+gev                     1.54263985 2.103468 4.337134 0.024417162
+glo                     1.50224930 2.036247 4.515490 0.032154680
+gum                     1.62824179 2.123575 3.674593 0.036040869
+ray                     1.69322521 2.131751 3.239630 0.046980175
+lap                     1.40347179 1.845729 3.314877 0.051328943
+nor                     1.70168594 2.058444 2.905712 0.073135510
+rice                    1.45895948 1.745074 2.467908 0.105519690
+revgum                  1.71429912 1.950701 2.408226 0.112442036
+empirical               1.60844678 2.224613 4.313884          NA
+quantileMean            1.59824858 2.204776 4.236640          NA
+weighted1               1.59450624 2.141794 3.931373          NA
+weighted2               1.59456129 2.146725 3.955989          NA
+weighted3               1.60738103 2.191962 4.047076          NA
+weightedc               1.56762116 2.084968 3.796391          NA
+GPD_LMO_lmomco          1.65119989 2.237655 3.810022 0.010282882
+GPD_LMO_extRemes        1.66772416 2.240546 3.696258 0.010832508
+GPD_PWM_evir            1.67406034 2.239252 3.639701 0.011991572
+GPD_PWM_fExtremes       1.66824036 2.238554 3.679720 0.010860128
+GPD_MLE_extRemes        1.66017596 2.257285 3.862072 0.011920042
+GPD_MLE_ismev           1.66021409 2.257357 3.862303 0.011921037
+GPD_MLE_evd             1.66015246 2.257284 3.862234 0.011922942
+GPD_MLE_Renext_Renouv   1.66015246 2.257284 3.862234 0.011922942
+GPD_MLE_evir            1.66425175 2.262085 3.859097 0.011696330
+GPD_MLE_fExtremes       1.66024473 2.257362 3.862116 0.011917536
+GPD_GML_extRemes        1.66772416 2.240546 3.696258 0.010832508
+GPD_MLE_Renext_2par     1.69425438 2.294072 3.874888 0.012829623
+GPD_BAY_extRemes                NA       NA       NA          NA
+n_full                190.00000000       NA       NA          NA
+n                     190.00000000       NA       NA          NA
+threshold               0.02025041       NA       NA          NA
+> stopifnot(all(qw1==qw2, na.rm=TRUE))
+> q_weighted(d, weights=dw, onlyc=TRUE)
+[1] 1.567621 2.084968 3.796391
+> q_weighted(d, weights=data.frame(weightc=cw), onlyc=TRUE)
+[1] 1.567621 2.084968 3.796391
+> 
+> ## Not run: 
+> ##D  # time consuming
+> ##D system.time(pbreplicate(5000, q_weighted(d, weightc=cw)))             # 8.5 secs
+> ##D system.time(pbreplicate(5000, q_weighted(d, weights=dw, onlyc=TRUE))) # 0.8 secs
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("quantGPD")
+> ### * quantGPD
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: quantGPD
+> ### Title: Fast GPD quantile estimate
+> ### Aliases: quantGPD
+> ### Keywords: distribution robust univar
+> 
+> ### ** Examples
+> 
+> data(annMax)
+> quantile(annMax, 0.99)
+    99% 
+112.648 
+> quantGPD(annMax, 0.99)
+     99%        n 
+113.5608  35.0000 
+> 
+> ## Not run: 
+> ##D  # Excluded from CRAN checks to reduce checking time
+> ##D data(rain, package="ismev") ;  rain <- rain[rain>0]
+> ##D hist(rain, breaks=50, col=7)
+> ##D tr <- seq(0,0.999, len=50)
+> ##D qu <- pbapply::pbsapply(tr, quantGPD, x=rain, probs=c(0.9,0.99,0.999) ) # 30 s
+> ##D plot(tr, qu[3,], ylim=range(rain), las=1, type="l")
+> ##D lines(tr, qu[2,], col=2); lines(tr, qu[1,], col=4)
+> ##D 
+> ##D tr <- seq(0.88,0.999, len=50)
+> ##D qu <- pbapply::pbsapply(tr, quantGPD, x=rain, probs=c(0.9,0.99,0.999) ) # 5 s
+> ##D plot(tr, qu[3,], ylim=range(rain), las=1, type="l")
+> ##D lines(tr, qu[2,], col=2); lines(tr, qu[1,], col=4);
+> ##D tail(qu["n",])
+> ##D 
+> ##D library(microbenchmark)
+> ##D data(rain, package="ismev"); rain <- rain[rain>0]
+> ##D mb <- microbenchmark(quantGPD(rain[1:200], truncate=0.8, probs=0.99, addn=F),
+> ##D distLquantile(rain[1:200], sel="gpa", emp=F, truncate=0.8, quiet=T, probs=0.99)[1,1]
+> ##D )
+> ##D boxplot(mb)
+> ##D # since computing the lmoments takes most of the computational time,
+> ##D # there's not much to optimize in large samples like n=2000
+> ##D 
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("weightp")
+> ### * weightp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: weightp
+> ### Title: distribution weights
+> ### Aliases: weightp
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> 
+> data(weightp)
+> data.frame(weightp)
+          weightp
+wei    0.12915523
+pe3    0.12645899
+gpa    0.12070367
+wak    0.11883859
+gno    0.09569464
+gum    0.08812947
+exp    0.07123161
+gev    0.06609407
+lap    0.06180443
+ray    0.06040467
+gam    0.04881928
+glo    0.01266536
+rice   0.00000000
+nor    0.00000000
+ln3    0.00000000
+revgum 0.00000000
+kap    0.00000000
+> barplot(weightp, horiz=TRUE, las=1)
+> stopifnot(   all.equal(sum(weightp), 1)   )
+> 
+> data(annMax) ; data(weightp)
+> dlf <- distLfit(annMax, weightc=weightp)
+distLfit execution took 0.029 seconds.
+> dlf$gof
+             RMSE    weight1    weight2   weight3    weightc
+wak    0.02218165 0.06965009 0.07451435 0.1166444 0.11883859
+kap    0.02284202 0.06910720 0.07372754 0.1154128 0.00000000
+wei    0.02313721 0.06886452 0.07337583 0.1148622 0.12915523
+pe3    0.02535969 0.06703741 0.07072781 0.1107170 0.12645899
+ray    0.02554485 0.06688519 0.07050720 0.1103717 0.06040467
+ln3    0.02658829 0.06602737 0.06926397 0.1084255 0.00000000
+gno    0.02658829 0.06602737 0.06926397 0.1084255 0.09569464
+gev    0.02692465 0.06575084 0.06886321 0.1077982 0.06609407
+gum    0.02716885 0.06555008 0.06857225 0.1073427 0.08812947
+gpa    0.02738413 0.06537310 0.06831576 0.0000000 0.12070367
+gam    0.02873879 0.06425943 0.06670172 0.0000000 0.04881928
+glo    0.03477494 0.05929707 0.05950982 0.0000000 0.01266536
+lap    0.04473377 0.05110984 0.04764417 0.0000000 0.06180443
+rice   0.04538985 0.05057048 0.04686247 0.0000000 0.00000000
+nor    0.04751986 0.04881938 0.04432463 0.0000000 0.00000000
+exp    0.06136773 0.03743495 0.02782530 0.0000000 0.07123161
+revgum 0.08472148 0.01823568 0.00000000 0.0000000 0.00000000
+> quant <- distLquantile(annMax, weightc=weightp)
+distLfit execution took 0.029 seconds.
+> quant
+                            80%       90%      99%       RMSE
+wak                    82.00224  93.37393 122.5049 0.02218165
+kap                    82.43319  94.20990 120.1919 0.02284202
+wei                    81.72957  93.39678 123.6596 0.02313721
+pe3                    81.13112  92.97753 126.2917 0.02535969
+ray                    81.92136  93.07332 121.2474 0.02554485
+ln3                    80.85126  92.71419 127.5938 0.02658829
+gno                    80.85126  92.71419 127.5938 0.02658829
+gev                    80.83924  92.82171 127.5402 0.02692465
+gum                    80.26879  92.86542 132.3087 0.02716885
+gpa                    84.02187  95.30208 113.5608 0.02738413
+gam                    81.39612  92.57994 122.9881 0.02873879
+glo                    79.38862  91.10085 134.4871 0.03477494
+lap                    77.33774  88.79551 126.8574 0.04473377
+rice                   82.14649  91.37297 113.3748 0.04538985
+nor                    82.13652  91.20908 112.7556 0.04751986
+exp                    78.96177  95.09148 148.6732 0.06136773
+revgum                 82.45728  88.46912 100.1043 0.08472148
+empirical              82.32000  93.76000 113.6000         NA
+quantileMean           82.14694  93.28444 113.3853         NA
+weighted1              81.21538  92.70405 124.2528         NA
+weighted2              81.23617  92.80714 124.5320         NA
+weighted3              81.35425  93.13879 125.3497         NA
+weightedc              81.18842  93.16871 125.9695         NA
+GPD_LMO_lmomco         84.45045  95.66677 114.1667 0.03537205
+GPD_LMO_extRemes       85.21118  95.02659 108.4534 0.03844264
+GPD_PWM_evir           84.65551  94.44999 107.5820 0.03973176
+GPD_PWM_fExtremes      85.16163  94.76950 107.6513 0.03914311
+GPD_MLE_extRemes       67.68348  81.58722 127.7744 0.16739775
+GPD_MLE_ismev          85.55055  96.44390 112.8766 0.03633172
+GPD_MLE_evd            85.49379  96.39702 112.8790 0.03591204
+GPD_MLE_Renext_Renouv  85.49379  96.39702 112.8790 0.03591204
+GPD_MLE_evir           88.34657  98.73178 112.4675 0.06600062
+GPD_MLE_fExtremes      88.88502  99.06913 112.5388 0.06600062
+GPD_GML_extRemes       67.68348  81.58722 127.7744 0.16739775
+GPD_MLE_Renext_2par   118.93838 132.49005 147.8778 0.23957149
+GPD_BAY_extRemes             NA        NA       NA         NA
+n_full                 35.00000        NA       NA         NA
+n                      35.00000        NA       NA         NA
+threshold              35.40000        NA       NA         NA
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  11.2 0.49 13.02 NA NA 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

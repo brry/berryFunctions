@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Moving average with different window widths</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for movAvLines {berryFunctions}"><tr><td>movAvLines {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Moving average with different window widths</h2>
+
+<h3>Description</h3>
+
+<p>Add moving average lines with different window widths to a plot
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+movAvLines(
+  x = 1:length(y),
+  y,
+  widths = c(3, 5, 7, 9, 11, 13),
+  weights,
+  col = "blue",
+  alpha = 0.3,
+  add = TRUE,
+  las = 1,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>x values of data. DEFAULT: 1:length(y)</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>y values that are smoothed with several window widths</p>
+</td></tr>
+<tr valign="top"><td><code>widths</code></td>
+<td>
+<p>widths of <code><a href="movAv.html">movAv</a></code> windows. DEFAULT: 2:7*2-1</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+<p>weights within each window</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>color passed to <code><a href="addAlpha.html">addAlpha</a></code>. DEFAULT: &quot;blue&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>transparency passed to <code><a href="addAlpha.html">addAlpha</a></code>. DEFAULT: 0.3</p>
+</td></tr>
+<tr valign="top"><td><code>add</code></td>
+<td>
+<p>Logical: Add to existing plot?Set to FALSE to first create
+the scatterplot. DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>las</code></td>
+<td>
+<p>LabelAxisStyle (only relevant if add=FALSE). DEFAULT: 1</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to <code><a href="../../graphics/html/lines.html">lines</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, May 2015
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="movAv.html">movAv</a></code>, <code><a href="addAlpha.html">addAlpha</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+set.seed(42)
+movAvLines(y=cumsum(rnorm(50)), add=FALSE, lwd=3)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

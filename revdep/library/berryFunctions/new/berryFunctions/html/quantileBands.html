@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Quantile bands</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for quantileBands {berryFunctions}"><tr><td>quantileBands {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Quantile bands</h2>
+
+<h3>Description</h3>
+
+<p>Quantile bands with optional smoothing, e.g. for visualizing simulations
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+quantileBands(
+  mat,
+  x = 1:ncol(mat),
+  col = rgb(0, 0, 1, alpha = c(0.5, 0.7)),
+  add = FALSE,
+  main = "Quantile Bands",
+  ylab = "",
+  xlab = "",
+  probs = 0:4/4,
+  na.rm = FALSE,
+  type = 7,
+  smooth = NA,
+  medargs = NULL,
+  meanargs = NULL,
+  txi,
+  textargs = NULL,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mat</code></td>
+<td>
+<p>Matrix or data.frame with columns of data</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>X-axis positions for each column. DEFAULT: 1:ncol(mat)</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>Vector of colors for each quantile group, recycled reversely if necessary. DEFAULT: rgb(0,0,1, alpha=c(0.5, 0.7))</p>
+</td></tr>
+<tr valign="top"><td><code>add</code></td>
+<td>
+<p>Add to existing plot? Allows to add to highly customized plot. DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>main, xlab, ylab</code></td>
+<td>
+<p>plot labels. DEFAULT: &quot;Quantile Bands&quot;, &quot;&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>probs</code></td>
+<td>
+<p>Probabilities passed to <code><a href="../../stats/html/quantile.html">quantile</a></code>. DEFAULT: 0:4/4</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>Remove NAs before computing <code><a href="../../stats/html/quantile.html">quantile</a>s</code>, <code><a href="../../stats/html/median.html">median</a></code> and <code><a href="../../base/html/mean.html">mean</a></code>? DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>Which of the 9 <code><a href="../../stats/html/quantile.html">quantile</a></code> algorithms should be used. DEFAULT: 7</p>
+</td></tr>
+<tr valign="top"><td><code>smooth</code></td>
+<td>
+<p>If(!is.na), <code>width</code> passed to <code><a href="movAv.html">movAv</a></code> smoothing quantiles. DEFAULT: NA</p>
+</td></tr>
+<tr valign="top"><td><code>medargs</code></td>
+<td>
+<p>List of arguments passed to lines drawing <code><a href="../../stats/html/median.html">median</a></code>. Not drawn if NULL. DEFAULT: NULL</p>
+</td></tr>
+<tr valign="top"><td><code>meanargs</code></td>
+<td>
+<p>List of arguments passed to lines drawing <code><a href="../../base/html/mean.html">mean</a></code>. Not drawn if NULL. DEFAULT: NULL</p>
+</td></tr>
+<tr valign="top"><td><code>txi</code></td>
+<td>
+<p>Text x position index (along columns of mat), recycled if necessary. NA to suppress. INTERNAL DEFAULT: middle of the plot for all.</p>
+</td></tr>
+<tr valign="top"><td><code>textargs</code></td>
+<td>
+<p>List of arguments passed to <code><a href="../../graphics/html/text.html">text</a></code>, like col, adj, ... DEFAULT: NULL</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to <code><a href="../../graphics/html/polygon.html">polygon</a></code>, like border, lty, ...</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Quantiles of each column, invisible. Smoothed if <code>smooth</code> is given!
+</p>
+
+
+<h3>Note</h3>
+
+<p>This is the first version and is not tested very well yet.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Sept 2014
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../stats/html/quantile.html">quantile</a></code>, <code><a href="quantileMean.html">quantileMean</a></code>, <code><a href="ciBand.html">ciBand</a></code>,
+<code><a href="../../graphics/html/polygon.html">polygon</a></code>, <a href="https://cran.r-project.org/package=fanplot">https://cran.r-project.org/package=fanplot</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+neff &lt;- t(replicate(n=30, sapply(1:400, function(nn) max(rnorm(nn)))   ))
+qB &lt;- quantileBands(neff, x=1:400)
+qB[,1:9]
+quantileBands(neff, smooth=19, meanargs=list(col=2), txi=NA)
+
+library(RColorBrewer)
+
+quantileBands(neff, smooth=35, ylab="max of rnorm(n)",
+  xlab="sample size (n)", probs=0:10/10, col=brewer.pal(5,"BuGn"),
+  medargs=list(lwd=2), meanargs=list(col=2, lty=1), txi=c(40,50,60),
+  main="Maximum is an unsaturated statistic:\n it rises with sample size")
+
+neff2 &lt;- t(replicate(n=50, sapply(1:400, function(nn) mean(rnorm(nn)))   ))
+quantileBands(neff2, x=1:400, smooth=35, ylab="mean of rnorm(n)",
+  xlab="sample size (n)", probs=0:10/10, col=brewer.pal(5,"BuGn"),
+  txi=c(40,50,60), textargs=list(col="yellow"), medargs=list(lwd=2),
+  meanargs=list(col=2, lty=1), main="Mean converges to true population mean")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

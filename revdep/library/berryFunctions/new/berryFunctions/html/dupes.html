@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Duplicate lines in file</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dupes {berryFunctions}"><tr><td>dupes {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Duplicate lines in file</h2>
+
+<h3>Description</h3>
+
+<p>Number of duplicates per line of (text) file. Per default saved to file
+which can be loaded into excel / libreoffice. With conditional formatting of
+the first column, colors show for each line how often it occurs in the file.
+A LibreOffice file is included. Note: OpenOffice does not provide color
+scales based on cell values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dupes(
+  file,
+  ignore.empty = TRUE,
+  ignore.space = TRUE,
+  tofile = missing(n),
+  n = length(d)
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>File name (character string)</p>
+</td></tr>
+<tr valign="top"><td><code>ignore.empty</code></td>
+<td>
+<p>Should empty lines be ignored? DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>ignore.space</code></td>
+<td>
+<p>Should leading/trailing whitespace be ignored? DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>tofile</code></td>
+<td>
+<p>Logical: should output be directed to a file?
+Otherwise, a dataframe with line numbers and number of duplicates of that line
+will be printed in the console. DEFAULT: missing(n)</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Show only the first n values if <code>tofile=FALSE</code>. DEFAULT: length(d)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Either: a data.frame with line numbers of duplicate rows and the number of duplicates<br />
+Or: a file is written with the number of duplicates and the original <code>file</code> content.
+</p>
+
+
+<h3>Note</h3>
+
+<p>This has not been tested all that much - feedback is heavily welcome!
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Dec 2014
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="compareFiles.html">compareFiles</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+file &lt;- system.file("extdata/doublelines.txt", package="berryFunctions")
+dupes(file, tofile=FALSE)
+dupes(file, tofile=FALSE, ignore.empty=TRUE)
+
+## These are skipped by rcmd check (opening external places is not allowed):
+## Not run: dupes(file)
+
+# a template file (dupes.ods) for libreOffice Calc is available here:
+system.file("extdata", package="berryFunctions")
+
+## Not run: system2("nautilus", system.file("extdata/dupes.ods", package="berryFunctions"))
+
+# To open folders with system2:
+# "nautilus" on linux ubuntu
+# "open" or "dolphin" on mac
+# "explorer" or "start" on windows
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: check file existence</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for checkFile {berryFunctions}"><tr><td>checkFile {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>check file existence</h2>
+
+<h3>Description</h3>
+
+<p>check whether files exist and give a useful error/warning/message
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+checkFile(file, warnonly = FALSE, trace = TRUE, pwd = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>Filename(s) as character string to be checked for existence.</p>
+</td></tr>
+<tr valign="top"><td><code>warnonly</code></td>
+<td>
+<p>Logical: Only issue a <code><a href="../../base/html/warning.html">warning</a></code> instead of an
+error with <code><a href="../../base/html/stop.html">stop</a></code>? DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>trace</code></td>
+<td>
+<p>Logical: Add function call stack to the message? DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>pwd</code></td>
+<td>
+<p>Logical: Print working directory in message? DEFAULT: TRUE</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>TRUE/FALSE, invisibly
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, May 2016
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/files.html">file.exists</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+is.error( checkFile("FileThatDoesntExist.txt")  )
+checkFile("FileThatDoesntExist.txt", warnonly=TRUE)
+checkFile("FileThatDoesntExist.txt", warnonly=TRUE, trace=FALSE)
+
+checkFile("./", warnonly=TRUE)
+checkFile(c("./",".//"), warnonly=TRUE)
+
+## Not run: ## Excluded from CRAN checks because of file creation
+# Vectorized:
+file.create("DummyFile2.txt")
+checkFile(paste0("DummyFile",1:3,".txt"), warnonly=TRUE)
+is.error(checkFile(paste0("DummyFile",1:3,".txt") ), TRUE, TRUE)
+file.remove("DummyFile2.txt")
+
+is.error(compareFiles("dummy.nonexist", "dummy2.nonexist"), TRUE, TRUE)
+is.error(checkFile("dummy.nonexist"), TRUE, TRUE)
+
+## End(Not run)
+
+dingo &lt;- function(k="brute.nonexist", trace=TRUE)
+         checkFile(k, warnonly=TRUE, trace=trace)
+dingo()
+dingo("dummy.nonexist")
+
+upper &lt;- function(h, ...) dingo(c(h, "dumbo.nonexist"), ...)
+upper("dumbo2.nonexist")
+upper(paste0("dumbo",2:8,".nonexist"))
+upper(paste0("dumbo",2:8,".nonexist"), trace=FALSE)
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: insert rows to data.frame</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for insertRows {berryFunctions}"><tr><td>insertRows {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>insert rows to data.frame</h2>
+
+<h3>Description</h3>
+
+<p>Insert (multiple) rows to a data.frame, possibly coming from another data.frame, with value and row recycling
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+insertRows(df, r, new = NA, rcurrent = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>data.frame</p>
+</td></tr>
+<tr valign="top"><td><code>r</code></td>
+<td>
+<p>Row number (not name!), at which the <code>new</code> row is to be inserted.
+Can be a vector.</p>
+</td></tr>
+<tr valign="top"><td><code>new</code></td>
+<td>
+<p>Vector with data to be inserted, is recycled.
+Alternatively, a data.frame, whose rows are put into the r locations.
+If it has more rows than length(r), the excess rows are ignored.
+DEFAULT: NA</p>
+</td></tr>
+<tr valign="top"><td><code>rcurrent</code></td>
+<td>
+<p>Logical: should <code>r</code> specify the current rows of <code>df</code>,
+after which <code>new</code> is to be appended?
+If FALSE (the default for backwards compatibility), the rownumbers 
+of the output (instead of the input) are <code>r</code>. I.e. <code>new</code> is 
+inserted <em>at</em>, not <em>after</em> the rownumber. DEFAULT: FALSE</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>data.frame
+</p>
+
+
+<h3>Note</h3>
+
+<p>Has not yet been tested with RWI (really weird input), so might not be absolutely foolproof
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Oct 2015, based on code by Ari B. Friedmann
+(I added the for loop, recycling, input controls and data.framification)
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="http://stackoverflow.com/questions/11561856/add-new-row-to-dataframe">http://stackoverflow.com/questions/11561856/add-new-row-to-dataframe</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="addRows.html">addRows</a></code>, <code><a href="sortDF.html">sortDF</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+existingDF &lt;- as.data.frame(matrix(1:20, nrow=5, ncol=4))
+existingDF
+insertRows(existingDF, 2) # default new=NA is recycled
+insertRows(existingDF, 2, rcurrent=TRUE) # after current line, not at it
+insertRows(existingDF, 2, 444:446)
+insertRows(existingDF, 3, new=matrix(10:1,ncol=2)) # input warning
+insertRows(existingDF, 1)
+insertRows(existingDF, 5)
+insertRows(existingDF, 6) # use addRows for this:
+addRows(existingDF, n=1)
+insertRows(existingDF, 9) # pads NA rows inbetween
+
+# Works for multiple rows as well:
+insertRows(existingDF, r=c(2,4,5), new=NA, rcurrent=TRUE)
+insertRows(existingDF, r=c(2,4,5), new=NA)
+insertRows(existingDF, r=c(2,4,4), new=NA)
+insertRows(existingDF, r=c(2,4,4), new=NA, rcurrent=TRUE)
+
+# Also works with a data.frame for insertion:
+insertDF &lt;- as.data.frame(matrix(101:112, nrow=3, ncol=4))
+insertRows(existingDF, 3, new=insertDF) # excess rows in new are ignored
+insertRows(existingDF, c(2,4,5), new=insertDF)
+insertRows(existingDF, c(2,4:6), new=insertDF) # rows are recycled
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

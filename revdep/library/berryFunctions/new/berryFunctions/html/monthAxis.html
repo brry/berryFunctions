@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Label date axis</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for monthAxis {berryFunctions}"><tr><td>monthAxis {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Label date axis</h2>
+
+<h3>Description</h3>
+
+<p>Labels date axes at sensible monthly intervals in the
+time domain of years to decades.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+monthAxis(
+  side = 1,
+  grid = FALSE,
+  time = NA,
+  origin = "1970-01-01",
+  mlabels = substr(month.abb, 1, 1),
+  yformat = "%Y",
+  nmonths = 3,
+  nym_half = 3.5,
+  nym_none = 5,
+  mcex = 0.7,
+  ycex = 1,
+  mtcl = par("tcl"),
+  ytcl = par("tcl") - 1.7,
+  mline = -1,
+  yline = 0.2,
+  las = 1,
+  lrange = NA,
+  trunc = NA,
+  mgp = c(3, 1, 0),
+  mt = NULL,
+  ml = NULL,
+  yt = NULL,
+  yl = NULL,
+  quiet = FALSE,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>side</code></td>
+<td>
+<p>Which <code><a href="../../graphics/html/axis.html">axis</a></code> is to be labeled? DEFAULT: 1</p>
+</td></tr>
+<tr valign="top"><td><code>grid</code></td>
+<td>
+<p>Add horizontal/vertical lines to graph? DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>time</code></td>
+<td>
+<p>Logical indicating whether the axis is <code><a href="../../base/html/DateTimeClasses.html">POSIXct</a></code>,
+not <code><a href="../../base/html/Dates.html">Date</a></code>. DEFAULT: NA, meaning axis value &gt;1e5</p>
+</td></tr>
+<tr valign="top"><td><code>origin</code></td>
+<td>
+<p>Origin for<code><a href="../../base/html/as.Date.html">as.Date</a></code> and <code><a href="../../base/html/as.POSIXlt.html">as.POSIXct</a></code>.
+DEFAULT: &quot;1970-01-01&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>mlabels</code></td>
+<td>
+<p>Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D</p>
+</td></tr>
+<tr valign="top"><td><code>yformat</code></td>
+<td>
+<p>Format of year labels, see details in <code><a href="../../base/html/strptime.html">strptime</a></code>.
+Use <code>yformat=" "</code> (with space) to suppress year labeling.
+DEFAULT: &quot;%Y&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>nmonths</code></td>
+<td>
+<p>Minimum number of months required before a year at the
+axis boundary is labeled. DEFAULT: 3</p>
+</td></tr>
+<tr valign="top"><td><code>nym_half</code></td>
+<td>
+<p>Number of years on axis above which only every second month
+is labeled. DEFAULT: 3.5</p>
+</td></tr>
+<tr valign="top"><td><code>nym_none</code></td>
+<td>
+<p>Number of years on axis above which the months are
+not labeled. DEFAULT: 5</p>
+</td></tr>
+<tr valign="top"><td><code>mcex</code></td>
+<td>
+<p><code>cex.axis</code> (letter size) for month labels. DEFAULT: 0.7</p>
+</td></tr>
+<tr valign="top"><td><code>ycex</code></td>
+<td>
+<p><code>cex.axis</code> (letter size) for year labels. DEFAULT: 1</p>
+</td></tr>
+<tr valign="top"><td><code>mtcl</code></td>
+<td>
+<p>Month tick length (negative text line height units).
+0 to suppress ticks. DEFAULT: par(&quot;tcl&quot;) = -0.5</p>
+</td></tr>
+<tr valign="top"><td><code>ytcl</code></td>
+<td>
+<p>Year tick length (negative text line height units).
+0 to suppress ticks. DEFAULT: par(&quot;tcl&quot;)-1.7 = -2.2</p>
+</td></tr>
+<tr valign="top"><td><code>mline</code></td>
+<td>
+<p>Line of month labels. DEFAULT: -1</p>
+</td></tr>
+<tr valign="top"><td><code>yline</code></td>
+<td>
+<p>Line of year labels. DEFAULT: 0.2</p>
+</td></tr>
+<tr valign="top"><td><code>las</code></td>
+<td>
+<p>LabelAxisStyle for orientation of labels. DEFAULT: 1 (upright)</p>
+</td></tr>
+<tr valign="top"><td><code>lrange</code></td>
+<td>
+<p>Label range (two <code><a href="../../base/html/Dates.html">Date</a></code> values).
+DEFAULT: NA = internally computed from <code><a href="../../graphics/html/par.html">par</a>("usr")</code></p>
+</td></tr>
+<tr valign="top"><td><code>trunc</code></td>
+<td>
+<p>Vector with two values: Number of days/seconds to truncate
+at the left and right end of lrange. DEFAULT: NA</p>
+</td></tr>
+<tr valign="top"><td><code>mgp</code></td>
+<td>
+<p>MarGin Placement. Suggested not to change this, since
+_tcl and _line defaults are chosen for the DEFAULT: c(3,1,0)</p>
+</td></tr>
+<tr valign="top"><td><code>mt, ml, yt, yl</code></td>
+<td>
+<p>Lists with further arguments passed to <code><a href="../../graphics/html/axis.html">axis</a></code>,
+like <code>lwd, col.ticks, lwd.ticks, hadj, lty</code>, separately
+for month ticks, month labels, year ticks, year labels.
+DEFAULT: NULL</p>
+</td></tr>
+<tr valign="top"><td><code>quiet</code></td>
+<td>
+<p>Suppress warning about short time axis? DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments passed to <code><a href="../../graphics/html/axis.html">axis</a></code> for all 4 elements.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>List with locations of month and year labels and ticks, each a Date vector.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Feb + Dec 2015, Oct 2017
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="monthLabs.html">monthLabs</a></code> for the numbercrunching itself,
+<code><a href="timeAxis.html">timeAxis</a></code> for shorter or longer time frames,
+<code><a href="../../graphics/html/axis.POSIXct.html">axis.Date</a></code> with defaults that are less nice.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+set.seed(007) # for reproducibility
+timePlot &lt;- function(nydays, start="2013-08-25", ...)
+   plot(as.Date(start)+sort(c(0,sample(1:nydays, 50))),
+        cumsum(rnorm(51)), type="l", xaxt="n", ann=FALSE, las=1, ...)
+
+timePlot(1100)
+monthAxis()
+monthAxis(1, nmonths=6, col.axis="red") # 2013 not labeled anymore
+monthAxis(side=3, nym_half=2) # if axis &gt; 2 years, label only partially
+
+timePlot(2e3)
+monthAxis()   # long time series (&gt;nym_none) only have years labeled
+monthAxis(side=3, font=2, grid=TRUE)
+# vertical lines in graph - now add lines/points
+
+timePlot(900)
+monthAxis(side=3, mtcl=0) # no tick lines between months
+monthAxis(ycex=1.4, ytcl=2, lwd.ticks=2)
+monthAxis(yline=1, col.axis=4, col=4)
+monthAxis(mcex=1, col.axis="red", yformat=" ") # no years labeled
+timePlot(900)
+monthAxis(nmonths=1) # year labeled for short period as well
+
+timePlot(800)
+monthAxis()
+monthAxis(mgp=c(2,1,0)) # the same. element 2 is relevant here
+monthAxis(mgp=c(3,0,0)) # requires change in mline andy yline placement
+
+timePlot(400)
+ma &lt;- monthAxis(lwd=3, yl=list(col.axis=3), mlabels=letters[1:12], mcex=1)
+abline(v=ma$mtics, col=8) # use output from monthAxis for other functions
+
+timePlot(80)
+monthAxis(mlabels=month.abb, mcex=1) # short time series give a warning
+
+timePlot(80, "2013-11-14")
+monthAxis(mlabels=month.abb, mcex=1, nmonths=0, quiet=TRUE)
+
+# Time axis instead of date axis:
+plot(as.POSIXct(Sys.time()+c(0,2)*360*24*3600), 1:2, xaxt="n")
+monthAxis(nmonths=2)
+
+timePlot(800, "2015-01-01")
+monthAxis()
+timePlot(900, "2015-01-01", xaxs="i")
+monthAxis()
+timePlot(300, "2015-01-01", xaxs="i")
+monthAxis() # if less than a full year is covered, the year label is centered
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

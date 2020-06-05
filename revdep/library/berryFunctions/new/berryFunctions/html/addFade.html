@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Color fade out</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for addFade {berryFunctions}"><tr><td>addFade {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Color fade out</h2>
+
+<h3>Description</h3>
+
+<p>Make existing colors fade away to white
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addFade(col, fade = 0.3, target = "white", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>Vector of color names (<code><a href="../../grDevices/html/colors.html">colors</a></code>), hexadecimal or integer that can be interpreted by <code><a href="../../grDevices/html/col2rgb.html">col2rgb</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>fade</code></td>
+<td>
+<p>Level of fading towards target. between 0 (target) and 1 (col). Can also be a vector. DEFAULT: 0.3</p>
+</td></tr>
+<tr valign="top"><td><code>target</code></td>
+<td>
+<p>Target color that should be faded into. DEFAULT: &quot;white&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to <code><a href="../../grDevices/html/colorRamp.html">colorRamp</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>character matrix with hexadecimal color codes.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Feb 2016
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="addAlpha.html">addAlpha</a></code>, <code><a href="../../grDevices/html/colorRamp.html">colorRamp</a></code>, <code><a href="../../grDevices/html/colors.html">colors</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+plot(1:11, pch=16, cex=3, col=addFade(2, 10:0/10))
+plot(1:11, pch=16, cex=3, col=addFade(2, 10:0/10, target="blue"))
+plot(1:11, pch=16, cex=3, col=addFade(2, 10:0/10, target=3:4))
+plot(1:21, pch=16, cex=3, col=addFade(2:3, 10:0/10))
+plot(1:21, pch=16, cex=3, col=addFade(2:3, 10:0/10, target=4:5))
+NewColors &lt;- addFade(c("red","blue","yellow","green", "purple"), 0:200/200)
+plot(runif(1000), col=NewColors, pch=16, cex=2)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Diverging color palette</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for divPal {berryFunctions}"><tr><td>divPal {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Diverging color palette</h2>
+
+<h3>Description</h3>
+
+<p>Diverging color palette: brown to blue, light colors in the middle, darker
+at the extremes, good for displaying values in two directions
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+divPal(
+  n = 100,
+  reverse = FALSE,
+  alpha = 1,
+  rwb = FALSE,
+  ryb = FALSE,
+  gp = FALSE,
+  br = FALSE,
+  colors = NULL,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Number of colors. DEFAULT: 100</p>
+</td></tr>
+<tr valign="top"><td><code>reverse</code></td>
+<td>
+<p>Reverse colors? DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>Transparency (0=transparent, 1=fully colored). DEFAULT: 1</p>
+</td></tr>
+<tr valign="top"><td><code>rwb</code></td>
+<td>
+<p>Should colors be in red-white-blue instead of brown-blue? DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>ryb</code></td>
+<td>
+<p>Use red-yellow-blue instead of the default, with &quot;khaki&quot; in the center. DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>gp</code></td>
+<td>
+<p>Use green-purple instead of the default. DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>br</code></td>
+<td>
+<p>Use blue-red instead of the default. DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>colors</code></td>
+<td>
+<p>If not NULL, a color vector used in <code><a href="../../grDevices/html/colorRamp.html">colorRampPalette</a></code>. DEFAULT: NULL</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to <code><a href="../../grDevices/html/colorRamp.html">colorRamp</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Character string vector with color names
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Jan 2016
+</p>
+
+
+<h3>References</h3>
+
+<p>The default palette is originally in 12 shades in the IPCC Assessment Report 5
+Chapter 12 Fig 12.22, <a href="http://www.ipcc.ch/report/ar5/wg1/">http://www.ipcc.ch/report/ar5/wg1/</a>.<br />
+The green-purple and blue-red palettes are from NYtimes (originally with 8 shades),
+<a href="https://nyti.ms/2mL0o4J">https://nyti.ms/2mL0o4J</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="showPal.html">showPal</a></code>, <code><a href="seqPal.html">seqPal</a></code>, <code><a href="addAlpha.html">addAlpha</a></code>,
+<code><a href="../../grDevices/html/colorRamp.html">colorRampPalette</a></code>, package <code>RColorBrewer</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+plot(rep(1,12), pch=16, cex=5, col=divPal(12), xaxt="n")
+showPal()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

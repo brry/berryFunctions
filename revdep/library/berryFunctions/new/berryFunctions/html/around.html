@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: View values around an index</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for around {berryFunctions}"><tr><td>around {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>View values around an index</h2>
+
+<h3>Description</h3>
+
+<p>View index rows of a data.frame with n surrounding rows
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+around(x, i, n1 = 2, n2 = n1, convert = is.logical(i))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Data.frame</p>
+</td></tr>
+<tr valign="top"><td><code>i</code></td>
+<td>
+<p>Index (logical or integers)</p>
+</td></tr>
+<tr valign="top"><td><code>n1</code></td>
+<td>
+<p>Number of elements shown before each i. DEFAULT: 2</p>
+</td></tr>
+<tr valign="top"><td><code>n2</code></td>
+<td>
+<p>Number of elements shown after each i. DEFAULT: n1</p>
+</td></tr>
+<tr valign="top"><td><code>convert</code></td>
+<td>
+<p>Use <code><a href="../../base/html/which.html">which</a></code> to get the row numbers?
+DEFAULT: TRUE if i is boolean</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Nothing, calls <code><a href="../../utils/html/View.html">View</a></code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Nov 2016
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="sortDF.html">sortDF</a></code>, <code><a href="../../utils/html/View.html">View</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run:  ## View should not be used in examples
+myDF &lt;- data.frame(A=1:30, B=cumsum(rnorm(30)))
+myDF[c(5,7,23,29),1] &lt;- NA
+around(myDF, i=is.na(myDF$A))
+around(myDF, i=c(11,19), n2=0)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

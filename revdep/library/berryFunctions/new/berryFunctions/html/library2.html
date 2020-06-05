@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: install.package and require</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for library2 {berryFunctions}"><tr><td>library2 {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>install.package and require</h2>
+
+<h3>Description</h3>
+
+<p>install and load a package. If a package is not available, it is installed before being loaded
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+library2(name, libargs = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>Name of the package(s). Can be quoted, must not.</p>
+</td></tr>
+<tr valign="top"><td><code>libargs</code></td>
+<td>
+<p>List of arguments passed to <code><a href="../../base/html/library.html">library</a></code> like <code>lib.loc</code>, <code>quietly</code> etc. DEFAULT: NULL</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments passed to <code><a href="../../utils/html/install.packages.html">install.packages</a></code> like <code>lib</code>, <code>repos</code> etc.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code><a href="../../base/html/message.html">message</a>s</code> help instruction.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Passing a vector with packages will work, but give some warnings.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, 2014
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../utils/html/install.packages.html">install.packages</a></code>, <code><a href="../../base/html/library.html">library</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+## Excluded fom CRAN checks. Package installation on server is unnecessary.
+require2(ada)
+library2("statmod")
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

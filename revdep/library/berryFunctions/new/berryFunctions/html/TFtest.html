@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Test logical expressions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for TFtest {berryFunctions}"><tr><td>TFtest {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Test logical expressions</h2>
+
+<h3>Description</h3>
+
+<p>Check if logical expressions return what you expect with a truth table
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+TFtest(..., na = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Expression(s) with logical operators to be evaluated,
+with single letters for variables. Each expression is to be separated with a comma</p>
+</td></tr>
+<tr valign="top"><td><code>na</code></td>
+<td>
+<p>Logical: should NAs be included in the truth table? DEFAULT: TRUE</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This is a nice way to check operator precedence, see <code><a href="../../base/html/Syntax.html">Syntax</a></code>
+</p>
+
+
+<h3>Value</h3>
+
+<p>Truth table as data.frame with TRUE and FALSE (and NA) combinations
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>,  Mrz 2016
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/logical.html">logical</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+TFtest(!a &amp; !b)
+TFtest(!a &amp; !b, a&amp;b, !(a&amp;b))
+TFtest(!a &amp; !b | c)
+TFtest(!a &amp; !b | c, na=FALSE)
+TFtest(!a)
+TFtest(a&amp;b|c, (a&amp;b)|c, a&amp;(b|c), na=FALSE) # AND has precedence over OR
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

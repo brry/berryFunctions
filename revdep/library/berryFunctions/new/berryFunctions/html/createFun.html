@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: create function framework</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for createFun {berryFunctions}"><tr><td>createFun {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>create function framework</h2>
+
+<h3>Description</h3>
+
+<p>create a file with a complete (Roxygen) framework for a new function in a package
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+createFun(fun, path = ".", open = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>fun</code></td>
+<td>
+<p>Character string or unquoted name. Function that will be created with identical filename.</p>
+</td></tr>
+<tr valign="top"><td><code>path</code></td>
+<td>
+<p>Path to package in development (including package name itself).
+Is passed to <code><a href="packagePath.html">packagePath</a></code>. DEFAULT: &quot;.&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>open</code></td>
+<td>
+<p>Logical: open the file? If several instances of Rstudio are open,
+the last one (not necessarily the active one) will be used.
+DEFAULT: TRUE</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Tries to open the file in the standard editor for .R files using <code><a href="../../base/html/system2.html">system2</a></code>
+</p>
+
+
+<h3>Value</h3>
+
+<p>file name as character string
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, March 2016
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/system2.html">system2</a></code>, <code><a href="funSource.html">funSource</a></code>, Roxygen2:
+<a href="https://cran.r-project.org/package=roxygen2/vignettes/rd.html">https://cran.r-project.org/package=roxygen2/vignettes/rd.html</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+#createFun("myNewFunction")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

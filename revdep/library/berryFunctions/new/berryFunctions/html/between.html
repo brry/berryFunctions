@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Are values between a and b?</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for between {berryFunctions}"><tr><td>between {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Are values between a and b?</h2>
+
+<h3>Description</h3>
+
+<p>Are values within a certain interval?
+Basically a wrapper for <code> x &gt;= a   &amp;   x &lt;= b </code> to save repeating long x names twice.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+between(x, a, b = a, incl = TRUE, aincl = incl, bincl = incl, quiet = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Numerical vector</p>
+</td></tr>
+<tr valign="top"><td><code>a, b</code></td>
+<td>
+<p>Numerical values/vectors specifying the borders of the interval.
+<code><a href="../../base/html/Extremes.html">min</a></code> and <code>max</code> are used, so they can be a vector.</p>
+</td></tr>
+<tr valign="top"><td><code>incl</code></td>
+<td>
+<p>Logical. Include values on the borders? For x == border, TRUE
+will be returned. Specify per left and right border separately
+with the arguments <code>aincl</code> and <code>bincl</code>. DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>aincl, bincl</code></td>
+<td>
+<p>Logical. Include values on left and right border, respectively?
+DEFAULT: <code>incl</code></p>
+</td></tr>
+<tr valign="top"><td><code>quiet</code></td>
+<td>
+<p>Logical. Suppress warning if a&gt;b? DEFAULT: FALSE</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Logical (boolean) vector with TRUE/FALSE values
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Aug 2017
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/findInterval.html">findInterval</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+between(1:10, 4, 8)
+between(1:10, 4:8) # range as vector
+between(1:10, 8, 4) # warns about interval
+
+data.frame( incl.T=between(1:10, 4, 8),
+            incl.F=between(1:10, 4, 8,  incl=FALSE),
+           aincl.F=between(1:10, 4, 8, aincl=FALSE),
+           bincl.F=between(1:10, 4, 8, bincl=FALSE)  )
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

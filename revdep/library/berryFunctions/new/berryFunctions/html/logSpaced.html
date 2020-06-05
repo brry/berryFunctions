@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Logarithmically spaced points</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for logSpaced {berryFunctions}"><tr><td>logSpaced {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Logarithmically spaced points</h2>
+
+<h3>Description</h3>
+
+<p>Calculates values that are in logarithmic distance from each other
+e.g. to produce logarithmic interval borders.<br />
+For exact logarithmic spacing, use
+<code>10^<a href="../../base/html/seq.html">seq</a>(from=<a href="../../base/html/Log.html">log10</a>(1), to=<a href="../../base/html/Log.html">log10</a>(100), len=100)</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+logSpaced(
+  base = 1.1708,
+  n = 20,
+  min = 1,
+  max = n,
+  plot = TRUE,
+  pch = 3,
+  las = 1,
+  ylab = "base",
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>base</code></td>
+<td>
+<p>Base for calculations, can be a vector to compare several bases. DEFAULT: 1.1708</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Number of values to be calculated. DEFAULT: 30</p>
+</td></tr>
+<tr valign="top"><td><code>min, max</code></td>
+<td>
+<p>Range where n values are to be distributed, single values each. DEFAULT: 1,n</p>
+</td></tr>
+<tr valign="top"><td><code>plot</code></td>
+<td>
+<p>Should the points be plotted on a line? DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>pch, las</code></td>
+<td>
+<p>PointCharacter and Label Axis Style. DEFAULT: 3,1</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>Y axis label. DEFAULT: &quot;base&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to <code><a href="../../graphics/html/plot.html">plot</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Vector or matrix, depending on base input
+</p>
+
+
+<h3>Note</h3>
+
+<p>base &gt;1 concentrates points at low values, base&lt;1 at high values.
+<code>base</code> does not relate to <code>base</code> in <code><a href="../../base/html/Log.html">log</a></code>!
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Oct 2014
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="classify.html">classify</a></code>, <code><a href="../../base/html/Log.html">log</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+logSpaced()
+logSpaced(base=c(1.1, 1.5, 2), n=6, min=5, max=10)
+d &lt;- logSpaced(seq(0.8, 1.2, 0.025), main="logarithmically spaced points")
+
+# the default base for the default n (20) will give an approximately equal
+# bin width across the range on a logarithmic scale:
+d &lt;- logSpaced()
+plot(d, rep(1,20), log="x")
+
+# For exactly spacing logarithmically, use
+plot(10^seq(from=log10(1), to=log10(100), len=100), log="y")
+browseURL("https://stackoverflow.com/a/29963530")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

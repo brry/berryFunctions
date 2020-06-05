@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Source code of a function</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for funSource {berryFunctions}"><tr><td>funSource {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Source code of a function</h2>
+
+<h3>Description</h3>
+
+<p>open source code of a function in a loaded or specified package on 
+github.com/cran or github.com/wch/r-source
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+funSource(x, character.only = is.character(x), local = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Function name, with or without quotation marks.
+Trailing brackets are removed: <code>xx()</code> -&gt; <code>"xx"</code>.<br />
+Can be <code>package::function</code>, which must be quoted for
+non-loaded packages.</p>
+</td></tr>
+<tr valign="top"><td><code>character.only</code></td>
+<td>
+<p>If TRUE, look for <code>SomeFun</code> instead of <code>MyFun</code>
+in case <code>MyFun &lt;- "SomeFun"</code>. 
+DEFAULT: <code><a href="../../base/html/character.html">is.character</a>(x)</code></p>
+</td></tr>
+<tr valign="top"><td><code>local</code></td>
+<td>
+<p>Open offline version of the code? Lacks comments and
+original formatting of source code. DEFAULT: FALSE</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>links that are also opened with <code><a href="../../utils/html/browseURL.html">browseURL</a></code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Jan+Dec 2016, May 2017, April 2019
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="https://github.com/brry/rskey#rskey">https://github.com/brry/rskey#rskey</a> to add this as a keyboard shortcut
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run:  ## browser windows should not be opened in CRAN checks
+funSource("head")
+funSource(message()) # handles brackets if fun can be evaluated without input
+funSource("require", local=TRUE) # usefull when offline
+
+funSource("OSMscale::earthDist") # works even for non-installed CRAN packages
+
+is.error(funSource("earthDist"), TRUE, TRUE) # Error for unloaded package
+require(plotrix); require(scales)
+funSource(rescale) # from the last loaded package
+
+tail &lt;- function(...) stop("This is a dummy function. Type: rm(tail)")
+funSource("tail")
+rm(tail)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

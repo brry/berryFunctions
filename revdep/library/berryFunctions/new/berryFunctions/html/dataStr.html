@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: str of datasets</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dataStr {berryFunctions}"><tr><td>dataStr {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>str of datasets</h2>
+
+<h3>Description</h3>
+
+<p>Print the <code><a href="../../utils/html/str.html">str</a></code> of each dataset returned by <code><a href="../../utils/html/data.html">data</a></code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dataStr(package = NULL, df = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>package</code></td>
+<td>
+<p>Package name. DEFAULT: NULL</p>
+</td></tr>
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>Logical: give information only about all data.frame objects? 
+DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments passed to <code><a href="../../utils/html/data.html">data</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>invisible data.frame. Mainly prints via <code><a href="../../base/html/message.html">message</a></code> in a for loop.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, November 2015, in search of good datasets for teaching
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../utils/html/str.html">str</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# dataStr() # all loaded packages on search path (package=NULL)
+dataStr("datasets") # only datasets in base R
+dataStr("colorspace") # works with an installed but unloaded package
+
+# data.frames only
+d &lt;- dataStr(df=TRUE)
+head(d)
+d[,c("Call","ncol","nrow")]
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

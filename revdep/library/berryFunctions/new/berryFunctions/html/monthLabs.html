@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Nicely spaced labels along a month</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for monthLabs {berryFunctions}"><tr><td>monthLabs {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Nicely spaced labels along a month</h2>
+
+<h3>Description</h3>
+
+<p>Create dates of certain days of the month for labeling
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+monthLabs(startyear = 2002, stopyear = 2018, npm = 2, npy = NA)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>startyear</code></td>
+<td>
+<p>Integer. starting year. DEFAULT: 2002</p>
+</td></tr>
+<tr valign="top"><td><code>stopyear</code></td>
+<td>
+<p>Integer. ending year. DEFAULT: 2018</p>
+</td></tr>
+<tr valign="top"><td><code>npm</code></td>
+<td>
+<p>Integer, one of 1,2,3,6 or 31. Number of labels per month. DEFAULT: 2<br />
+npm : days of the month<br />
+1 : first day of each month within the given years<br />
+2 : 1st and 15th day<br />
+3 : 1, 10, 20<br />
+6 : 1, 5, 10, 15, 20, 25.
+31 : each day</p>
+</td></tr>
+<tr valign="top"><td><code>npy</code></td>
+<td>
+<p>Integer, one of 1,2,3,4 or 6. Number of labels per year at equally spaced month-beginnings.
+If specified, npm is not considered at all. DEFAULT: NA</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Vector with Dates as returned by <code><a href="../../base/html/as.Date.html">as.Date</a></code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Spacing of days is not equal, but set to certain days of the month!
+This was originally developed for time series movie frames
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, early 2013
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="timeAxis.html">timeAxis</a></code> for nice labeling,
+<code><a href="timeAxis.html">timeAxis</a></code> for automatic determination of npm/npy,
+<code><a href="../../base/html/as.Date.html">as.Date</a></code>, <code><a href="../../base/html/paste.html">paste</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+monthLabs(2014,2014, 3) # 3 days per month
+monthLabs(2013,2014,  npy=3) # 3 months per year, equally spaced
+monthLabs(2014,2014,  npy=4) # 4 months per year
+
+# see monthAxis for automatic plot labeling
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

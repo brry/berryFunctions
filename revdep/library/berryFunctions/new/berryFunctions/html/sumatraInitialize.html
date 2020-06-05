@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Set useful Sumatra PDF Viewer default settings</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for sumatraInitialize {berryFunctions}"><tr><td>sumatraInitialize {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Set useful Sumatra PDF Viewer default settings</h2>
+
+<h3>Description</h3>
+
+<p>Set useful Sumatra PDF Viewer default settings. This will likely only work on windows.
+At the given <code>path</code> with &quot;SumatraPDF.exe&quot;, this creates two settings files.
+Existing files are renamed (&quot;_old_n&quot; appended), not overwritten.<br />
+Creates &quot;sumatrapdfrestrict.ini&quot; with <code>SavePreferences = 1</code> and <code>FullscreenAccess = 1</code>.<br />
+Creates &quot;SumatraPDF-settings.txt&quot; with <code>ShowToc = false</code> and <code>DefaultDisplayMode = single page</code>.
+<code>UiLanguage</code> gets filled in by Sumatra itself upon first opening.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+sumatraInitialize(
+  path = sub("pandoc$", "sumatra", Sys.getenv("RSTUDIO_PANDOC")),
+  openfolder = TRUE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>path</code></td>
+<td>
+<p>Folder (not file) that contains &quot;SumatraPDF.exe&quot;. 
+DEFAULT: extracted from <code><a href="../../base/html/Sys.getenv.html">Sys.getenv</a>("RSTUDIO_PANDOC")</code>, e.g.
+&quot;C:/Program Files/RStudio/bin/sumatra&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>openfolder</code></td>
+<td>
+<p>Logical: Open folder after writing the files?
+Uses <code><a href="openFile.html">openFile</a>()</code>. DEFAULT: TRUE</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>path, invisibly
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, May 2020
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="openPDF.html">openPDF</a></code><br />
+<a href="https://www.sumatrapdfreader.org/settings/settings.html">https://www.sumatrapdfreader.org/settings/settings.html</a><br />
+<a href="https://github.com/sumatrapdfreader/sumatrapdf/blob/master/docs/sumatrapdfrestrict.ini">https://github.com/sumatrapdfreader/sumatrapdf/blob/master/docs/sumatrapdfrestrict.ini</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# sumatraInitialize() # only run in interactive mode
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

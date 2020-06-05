@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: open PDF file with sumatra viewer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for openPDF {berryFunctions}"><tr><td>openPDF {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>open PDF file with sumatra viewer</h2>
+
+<h3>Description</h3>
+
+<p>open PDF file with SumatraPDF viewer, which does not lock files against being edited.
+It is only available on windows, but comes bundled with Rstudio.
+If the executable is not found, <code><a href="openFile.html">openFile</a></code> is called instead.<br />
+I suggest to first change some settings with <code><a href="sumatraInitialize.html">sumatraInitialize</a>()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+openPDF(
+  file,
+  sumexe = sub("pandoc$", "sumatra/SumatraPDF.exe", Sys.getenv("RSTUDIO_PANDOC")),
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>Filename to be opened, as character string.
+Files not ending in &quot;.pdf&quot; are ignored with a warning.</p>
+</td></tr>
+<tr valign="top"><td><code>sumexe</code></td>
+<td>
+<p>The path to SumatraPDF.exe. DEFAULT: extracted from
+<code><a href="../../base/html/Sys.getenv.html">Sys.getenv</a>("RSTUDIO_PANDOC")</code>, e.g. 
+&quot;C:/Program Files/RStudio/bin/sumatra/SumatraPDF.exe&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to <code><a href="../../base/html/system.html">system</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Result of try(system, ...), invisibly
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, May 2020
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="openFile.html">openFile</a></code> for the default opening programm<br />
+<code><a href="sumatraInitialize.html">sumatraInitialize</a></code> for nice Sumatra default settings<br />
+<code><a href="pdfpng.html">pdfpng</a></code> to create PDFs and PNGs simultaneously.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# only desired in an interactive session, not on CRAN checks
+# openPDF( system.file("extdata/Anhang.pdf", package="berryFunctions")  )
+# openPDF( system.file(c("extdata/Anhang.pdf", "extdata/RainfallStationsMap.pdf"), 
+#                      package="berryFunctions")  )
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

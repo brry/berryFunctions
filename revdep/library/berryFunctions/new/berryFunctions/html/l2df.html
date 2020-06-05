@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: List to data.frame</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for l2df {berryFunctions}"><tr><td>l2df {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>List to data.frame</h2>
+
+<h3>Description</h3>
+
+<p>Convert list with vectors of unequal length to dataframe, pad with NAs
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+l2df(list, byrow = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>list</code></td>
+<td>
+<p>List with vectors of irregular length.</p>
+</td></tr>
+<tr valign="top"><td><code>byrow</code></td>
+<td>
+<p>Transposed output? DEFAULT: TRUE</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>data.frame
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Jan 2014
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="http://stackoverflow.com/questions/5531471/combining-unequal-columns-in-r">http://stackoverflow.com/questions/5531471/combining-unequal-columns-in-r</a><br />
+<a href="http://stackoverflow.com/questions/15753091/convert-mixed-length-named-list-to-data-frame">http://stackoverflow.com/questions/15753091/convert-mixed-length-named-list-to-data-frame</a><br />
+<a href="http://stackoverflow.com/questions/5942760/most-efficient-list-to-data-frame-method">http://stackoverflow.com/questions/5942760/most-efficient-list-to-data-frame-method</a><br />
+<a href="http://stackoverflow.com/questions/8799990/converting-given-list-into-dataframe">http://stackoverflow.com/questions/8799990/converting-given-list-into-dataframe</a><br />
+<a href="http://stackoverflow.com/questions/4227223/r-list-to-data-frame">http://stackoverflow.com/questions/4227223/r-list-to-data-frame</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="l2array.html">l2array</a></code>, <code><a href="../../base/html/lapply.html">sapply</a></code>, <code><a href="sortDF.html">sortDF</a></code>.
+If you have a LARGE list each with the same number of values,
+use the (much!) faster: <code>plyr::quickdf</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+eglist &lt;- list(AA=c(6,9,2,6), BB=1:8, CC=c(-3,2) )
+eglist
+l2df(eglist)  # names are even kept
+l2df(eglist, byrow=FALSE)
+class(  l2df(eglist, byrow=FALSE)  ) # data.frame (since 2016-05-24)
+
+eglist &lt;- list(AA=c(6,9,2,6), BB="no", CC=c(-3,2) )
+eglist
+str(l2df(eglist))  # now everything is a character
+
+eg2 &lt;- list(AA=c(6,9,2,6), BB=matrix(1:8, ncol=2), CC=c(-3,2) )
+eg2
+l2df(eg2, FALSE)
+# so a matrix is internally converted to a vector and then used regularly
+
+
+# Naming ----
+
+eg3 &lt;- list(EE=c(AA=3.4),        FF=c(AA=3.5),        GG=c(AA=3.6))
+eg4 &lt;- list(EE=c(AA=3.4,BB=2.4), FF=c(AA=3.5,BB=2.5), GG=c(AA=3.6,BB=2.6))
+l2df(eg3)
+l2df(eg4)
+l2df(eg3, byrow=FALSE)
+l2df(eg4, byrow=FALSE)
+
+eg3 &lt;- list(c(AA=3.4),        c(AA=3.5),        c(AA=3.6))
+eg4 &lt;- list(c(AA=3.4,BB=2.4), c(AA=3.5,BB=2.5), c(AA=3.6,BB=2.6))
+l2df(eg3)
+l2df(eg4)
+l2df(eg3, byrow=FALSE)
+l2df(eg4, byrow=FALSE)
+
+eg3 &lt;- list(EE=c(3.4),     FF=c(3.5),     GG=c(3.6))
+eg4 &lt;- list(EE=c(3.4,2.4), FF=c(3.5,2.5), GG=c(3.6,2.6))
+l2df(eg3)
+l2df(eg4)
+l2df(eg3, byrow=FALSE)
+l2df(eg4, byrow=FALSE)
+
+eg3 &lt;- list(EE=c(3.4),     c(3.5),     c(3.6))
+eg4 &lt;- list(EE=c(3.4,2.4), c(3.5,2.5), c(3.6,2.6))
+l2df(eg3)
+l2df(eg4)
+l2df(eg3, byrow=FALSE)
+l2df(eg4, byrow=FALSE)
+
+
+# Lists with dfs ----
+
+eg5 &lt;- list(AA=c(6,9,2,6), BB=data.frame(CC=1:8, DD=4:-3), EE=c(-3,2) )
+eg5
+is.error( l2df(eg5), tell=TRUE )# it is not possible to do this with a data.frame
+
+# If you have a list with only data.frames, you could use the following:
+eg6 &lt;- list(AA=data.frame(BB=1:8, CC=4:-3), DD=data.frame(EE=23:24, FF=c(-3,2)))
+eg6
+do.call(cbind, eg6) # but this recycles the values of shorter tables!
+colnames(eg6$DD) &lt;- colnames(eg6$AA)
+do.call(rbind, eg6)
+# check some of the links above for more solutions...
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

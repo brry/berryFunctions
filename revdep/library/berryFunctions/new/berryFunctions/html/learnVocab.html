@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: spaced learning</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for learnVocab {berryFunctions}"><tr><td>learnVocab {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>spaced learning</h2>
+
+<h3>Description</h3>
+
+<p>spaced learning e.g. for vocabulary. Uses interactive questions.<br />
+Note: this currently clears the console!<br />
+Based on <a href="https://ncase.me/remember">https://ncase.me/remember</a> by Nicky Case.<br />
+At the beginning, new vocab will be asked, skip with empty ENTER.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+learnVocab(vocfile = "C:/Dropbox/Sonstiges/Vokabeln.csv", nnew = 3)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>vocfile</code></td>
+<td>
+<p>File with vocabulary (or whatever you want to learn).
+The first line must contain the learning day, see examples.
+The second line must contain LEVEL;known;new, the last two being
+(short) names, e.g. languages (known will be displayed first).</p>
+</td></tr>
+<tr valign="top"><td><code>nnew</code></td>
+<td>
+<p>Number of new entries to be added interactively at the start.
+They can still be skipped by writing nothing and pressing the ENTER key.
+DEFAULT: 3</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Updated vocab list, invisibly.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Apr 2019
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run:  # Excluded from checks, works only interactively! 
+# initiate empty vocab list:
+vocfile &lt;- tempfile("myvocab",fileext=".csv")
+cat("learning_day 1\nLEVEL;DE;FR\n1;Das Haus;la maison\n", file=vocfile)
+
+learnVocab(vocfile) # asks new vocab, then tests and changes level as needed
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

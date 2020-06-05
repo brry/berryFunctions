@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: seq with a range argument</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for seqR {berryFunctions}"><tr><td>seqR {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>seq with a range argument</h2>
+
+<h3>Description</h3>
+
+<p>sequence given by range or vector of values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+seqR(range, from = NA, to = NA, extend = 0, warn = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>range</code></td>
+<td>
+<p>vector with 2 values (1st taken as <code>from</code>, 2nd as <code>to</code>) 
+or more (the result is then always ascending).</p>
+</td></tr>
+<tr valign="top"><td><code>from</code></td>
+<td>
+<p>start value of sequence. DEFAULT: NA (determined from range)</p>
+</td></tr>
+<tr valign="top"><td><code>to</code></td>
+<td>
+<p>end value of sequence. DEFAULT: NA (determined from range)</p>
+</td></tr>
+<tr valign="top"><td><code>extend</code></td>
+<td>
+<p>Factor <em>f</em> passed to <code><a href="../../grDevices/html/extendrange.html">extendrange</a></code>. DEFAULT: 0</p>
+</td></tr>
+<tr valign="top"><td><code>warn</code></td>
+<td>
+<p>Logical: warn about non-numeric classes? DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to <code><a href="../../base/html/seq.html">seq</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Numeric vector.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Feb 2014
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/seq.html">seq</a></code>, <code><a href="../../base/html/range.html">range</a></code>, <a href="http://r.789695.n4.nabble.com/seq-range-argument-td4684627.html">http://r.789695.n4.nabble.com/seq-range-argument-td4684627.html</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+seqR(range=c(12,6), by=-2)
+m &lt;- c(41, 12, 38, 29, 50, 39, 22)
+seqR(m, len=6)
+# Takes min and max of range if the vector has more than two elements.
+
+seqR(range=c(12,6), by=-2, extend=0.1)
+# internaly calls extendrange with f=extend
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

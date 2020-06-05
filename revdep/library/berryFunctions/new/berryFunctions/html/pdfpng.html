@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create pdf and png graph</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for pdfpng {berryFunctions}"><tr><td>pdfpng {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create pdf and png graph</h2>
+
+<h3>Description</h3>
+
+<p>Create both a <code><a href="../../grDevices/html/pdf.html">pdf</a></code> and a <code><a href="../../grDevices/html/png.html">png</a></code> file with a graph,
+with custom size default values.<br />
+<code>pdfpng</code> tries to open the PDF file (through <code><a href="openPDF.html">openPDF</a></code>) 
+with SumatraPDF viewer, which does not lock files against being edited. <br />
+See <code><a href="sumatraInitialize.html">sumatraInitialize</a></code> for nice Sumatra default settings.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+pdfpng(
+  expr,
+  file,
+  pdf = TRUE,
+  png = TRUE,
+  overwrite = FALSE,
+  open = TRUE,
+  quiet = FALSE,
+  tracewarnmes = !quiet,
+  filargs = NULL,
+  width = 7,
+  height = 5,
+  units = "in",
+  res = 500,
+  seed = runif(1, -1e+09, 1e+09),
+  envlevel = 1,
+  pdfargs = NULL,
+  pngargs = NULL,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>expr</code></td>
+<td>
+<p>Expression creating the plot, can be included in curly braces.</p>
+</td></tr>
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>Character: Filename without pdf/png extension.
+Unless overwrite=TRUE, files will not be overwritten, but
+&quot;_1&quot; will be appended instead, see <code><a href="newFilename.html">newFilename</a></code>.
+If <code>expr</code> creates several plots, use file=&quot;fname%02d&quot;,
+otherwise the png will only contain the last figure.
+Note: this overwrites files as the % notation is not
+captured by newFilename. You may also have to run dev.off().</p>
+</td></tr>
+<tr valign="top"><td><code>pdf</code></td>
+<td>
+<p>Logical: Create pdf? DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>png</code></td>
+<td>
+<p>Logical: Create png? DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>overwrite</code></td>
+<td>
+<p>Logical: Overwrite existing <code>file</code>? Can be a vector
+for pdf and png separately.
+DEFAULT: FALSE (_n appended in filename)</p>
+</td></tr>
+<tr valign="top"><td><code>open</code></td>
+<td>
+<p>Logical: open file(s) after creation using 
+<code><a href="openPDF.html">openPDF</a></code> and <code><a href="openFile.html">openFile</a></code>? 
+DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>quiet</code></td>
+<td>
+<p>Logical: suppress file creation messages and
+expr execution error tracing? DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>tracewarnmes</code></td>
+<td>
+<p>Logical: trace warnings and messages in expr execution?
+Errors are always traced. Default: !quiet</p>
+</td></tr>
+<tr valign="top"><td><code>filargs</code></td>
+<td>
+<p>List of other arguments passed to <code><a href="newFilename.html">newFilename</a></code>.
+DEFAULT: NULL</p>
+</td></tr>
+<tr valign="top"><td><code>width, height</code></td>
+<td>
+<p>Graph dimensions. DEFAULT: 7x5 inches</p>
+</td></tr>
+<tr valign="top"><td><code>units, res</code></td>
+<td>
+<p>Graph quality arguments passed only to <code><a href="../../grDevices/html/png.html">png</a></code>.
+DEFAULT: inches (&quot;in&quot;), 500 ppi</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>Seed passed to <code><a href="../../base/html/Random.html">set.seed</a></code> before each call.
+DEFAULT: runif(1,-1e9,1e9)</p>
+</td></tr>
+<tr valign="top"><td><code>envlevel</code></td>
+<td>
+<p>Environment level passed to <code><a href="../../base/html/eval.html">eval.parent</a></code>.
+Never needs to be changed, as far as I can tell. DEFAULT: 1</p>
+</td></tr>
+<tr valign="top"><td><code>pdfargs</code></td>
+<td>
+<p>List of arguments only passed to <code><a href="../../grDevices/html/pdf.html">pdf</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>pngargs</code></td>
+<td>
+<p>List of arguments only passed to <code><a href="../../grDevices/html/png.html">png</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to both <code><a href="../../grDevices/html/pdf.html">pdf</a></code> and <code><a href="../../grDevices/html/png.html">png</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>file paths, invisible
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, March 2017
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../grDevices/html/pdf.html">pdf</a></code>, <code><a href="../../grDevices/html/png.html">png</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run:  # excluded from CRAN checks, file opening not wanted
+pdfpng(   plot(rnorm(500), type="l")   , file="dummyplot", png=FALSE)
+
+pdfpng({par(bg=8, las=1); plot(cumsum(rnorm(500)), type="l")},
+       file="dummyplot", res=100, open=FALSE)
+pdfpng({par(bg=8, las=1); plot(cumsum(rnorm(500)), type="l")},
+       file="dummyplot", overwrite=c(TRUE,FALSE), open=FALSE)
+
+# Nesting of functions is possible:
+a &lt;- list( cumsum(rnorm(2000)), cumsum(rnorm(20)) )
+pdfpng(plot(a[[1]]), file="dummyplot", overwrite=TRUE, open=FALSE)
+bfun &lt;- function(b) pdfpng(plot(b,type="l"), file="dummyplot", 
+                           overwrite=TRUE, open=FALSE)
+cfun &lt;- function(c) bfun(c)
+bfun(a[[1]])
+sapply(a, function(d) cfun(d))
+
+
+pdfpng(plot(-10:100, log="y"), "dummyplot",overwr=TRUE,png=FALSE, open=FALSE)
+pdfpng({plot(1); plot(dummyobject)}, "dummyplot", overwrite=TRUE, 
+       png=FALSE, open=FALSE)
+
+
+unlink("dummyplot.pdf") ; unlink("dummyplot.png") ; unlink("dummyplot_1.png")
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

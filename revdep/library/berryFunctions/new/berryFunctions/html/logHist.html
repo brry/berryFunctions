@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Histogram of logarithmic values</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for logHist {berryFunctions}"><tr><td>logHist {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Histogram of logarithmic values</h2>
+
+<h3>Description</h3>
+
+<p>Draw histogram of values on a logarithmic scale with nice axis labels
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+logHist(
+  x,
+  logargs = NULL,
+  main = xmain,
+  xlab = xname,
+  col = "tan",
+  add = FALSE,
+  las = 1,
+  ylim = NULL,
+  freq = TRUE,
+  quiet = FALSE,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Vector of numerical values</p>
+</td></tr>
+<tr valign="top"><td><code>logargs</code></td>
+<td>
+<p>A list of arguments passed to <code><a href="logAxis.html">logAxis</a></code>. DEFAULT: NULL</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>Title of graph, internally from x. DEFAULT: internal name representation</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>X axis label. DEFAULT: internal: name of x</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>Color of histogram bars</p>
+</td></tr>
+<tr valign="top"><td><code>add</code></td>
+<td>
+<p>Logical: add to existing plot?</p>
+</td></tr>
+<tr valign="top"><td><code>las</code></td>
+<td>
+<p>Integer: label axis style. DEFAULT: 1 (numbers upright)</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>2 Numbers: y-axis range. DEFAULT: NULL</p>
+</td></tr>
+<tr valign="top"><td><code>freq</code></td>
+<td>
+<p>Logical: counts instead of density? DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>quiet</code></td>
+<td>
+<p>Logical: suppress warning about non-positive values? DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to <code><a href="../../graphics/html/hist.html">hist</a></code>
+like breaks, xlim=c(-1,3), ..., but not xaxt</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>none
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Feb 2016
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="logAxis.html">logAxis</a></code>, <code><a href="../../graphics/html/hist.html">hist</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+dat &lt;- rbeta(1e4, 2, 18)*100
+hist(dat, col="tan", breaks=50)
+logHist(dat)
+logHist(dat, freq=FALSE)
+logHist(dat, breaks=50)
+logHist(dat,xlim=c(0,2)) # xlim in powers of ten
+logHist(c(-1,0,1,2,2,3,3,4,8,10,50)) # warning for negative values
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

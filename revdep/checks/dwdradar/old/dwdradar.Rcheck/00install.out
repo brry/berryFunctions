@@ -1,0 +1,18 @@
+* installing *source* package 'dwdradar' ...
+** package 'dwdradar' successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+c:/Rtools/mingw_64/bin/gfortran      -O2  -mtune=generic -c  binary_to_num.f90 -o binary_to_num.o
+c:/Rtools/mingw_64/bin/gcc  -I"C:/PROGRA~1/R/R-36~1.1/include" -DNDEBUG          -O2 -Wall  -std=gnu99 -mtune=generic -c init.c -o init.o
+c:/Rtools/mingw_64/bin/gcc -shared -s -static-libgcc -o dwdradar.dll tmp.def binary_to_num.o init.o -lgfortran -lm -lquadmath -LC:/PROGRA~1/R/R-36~1.1/bin/x64 -lR
+installing to C:/Dropbox/Rpack/berryFunctions/revdep/checks/dwdradar/old/dwdradar.Rcheck/00LOCK-dwdradar/00new/dwdradar/libs/x64
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (dwdradar)

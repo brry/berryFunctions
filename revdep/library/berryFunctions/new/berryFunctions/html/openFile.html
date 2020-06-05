@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: open file in default application</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for openFile {berryFunctions}"><tr><td>openFile {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>open file in default application</h2>
+
+<h3>Description</h3>
+
+<p>open a file using <code><a href="../../base/html/system2.html">system2</a></code> with command based on operating system.
+Tries to open the file with the program associated with its file extension.<br />
+See <code><a href="openPDF.html">openPDF</a></code> to open files with sumatraPDF.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+openFile(file, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>Filename to be opened, as character string.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to <code><a href="../../base/html/system2.html">system2</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Result of try(system2, ...), invisibly
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Aug 2017
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://askubuntu.com/questions/15354">https://askubuntu.com/questions/15354</a>,
+<a href="https://apple.stackexchange.com/questions/212583">https://apple.stackexchange.com/questions/212583</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="openPDF.html">openPDF</a></code>, <code><a href="../../base/html/system2.html">system2</a></code>, <code><a href="checkFile.html">checkFile</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run:  # excluded from CRAN checks, file opening not wanted
+openFile("README.md")
+openFile("Tests.R")
+openFile(c("README.md","Tests.R"))
+is.error(openFile("dummydummydoesntexist.R"), TRUE, TRUE)
+openFile(tempdir())
+
+## End(Not run)
+#' # To open folders with system2:
+# "nautilus" on linux ubuntu
+# "open" or "dolphin" on mac
+# "explorer" or "start" on windows
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

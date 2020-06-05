@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Seasonality analysis</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for seasonality {berryFunctions}"><tr><td>seasonality {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Seasonality analysis</h2>
+
+<h3>Description</h3>
+
+<p>Examine time series for seasonality of high (low) values
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+seasonality(
+  dates,
+  values,
+  data,
+  drange = NA,
+  vrange = NA,
+  shift = 0,
+  janline = TRUE,
+  hlines = FALSE,
+  nmax = 0,
+  maxargs = NULL,
+  plot = 1,
+  add = FALSE,
+  nmin = 100,
+  probs = c(0, 25, 50, 75, 95, 99.9)/100,
+  width = 3,
+  text = TRUE,
+  texti = seq(200, 20, length.out = length(probs)),
+  textargs = NULL,
+  months = substr(month.abb, 1, 1),
+  slab = "Month",
+  tlab = "Year",
+  vlab = NA,
+  xlim = NA,
+  ylim = NA,
+  xaxs = NA,
+  yaxs = NA,
+  main = "Seasonality",
+  adj = 0.2,
+  mar = c(3, 3, 4, 1),
+  mgp = c(1.7, 0.7, 0),
+  keeppar = TRUE,
+  legend = TRUE,
+  legargs = NULL,
+  returnall = FALSE,
+  quiet = FALSE,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dates</code></td>
+<td>
+<p>Dates in ascending order.
+Can be character strings or <code><a href="../../base/html/strptime.html">strptime</a></code> results,
+as accepted (and coerced) by <code><a href="../../base/html/as.Date.html">as.Date</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>values</code></td>
+<td>
+<p>Values to be mapped in color with <code><a href="colPoints.html">colPoints</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>Optional: data.frame with the column names as given by dates and values</p>
+</td></tr>
+<tr valign="top"><td><code>drange</code></td>
+<td>
+<p>Optional date range (analogous to xlim), can be a vector like
+<code>dates</code>. Can also be numerical years, in which case
+&quot;-01-01&quot; is appended. DEFAULT: NA (computed from <code>dates</code> internally)</p>
+</td></tr>
+<tr valign="top"><td><code>vrange</code></td>
+<td>
+<p>Optional value range (analogous to ylim), can be a vector like
+<code>values</code>. DEFAULT: NA (computed from <code>values</code> internally)</p>
+</td></tr>
+<tr valign="top"><td><code>shift</code></td>
+<td>
+<p>Number of days to move the year-break to.
+E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0</p>
+</td></tr>
+<tr valign="top"><td><code>janline</code></td>
+<td>
+<p>Logical: Should horizontal line be plotted at
+January 1st if <code>shift!=0</code>? DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>hlines</code></td>
+<td>
+<p>Draw horizontal background lines in plot 1? Either FALSE (the default),
+TRUE to draw gray background lines at each month start,
+or a list of arguments passed to <code><a href="../../graphics/html/abline.html">abline</a></code> with
+<code><a href="owa.html">owa</a></code>. DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>nmax</code></td>
+<td>
+<p>Number of annual maxima to be marked, plotted and returned.
+Currently, only 0 and 1 are implemented. DEFAULT: 0</p>
+</td></tr>
+<tr valign="top"><td><code>maxargs</code></td>
+<td>
+<p>List of arguments passed to <code><a href="../../graphics/html/lines.html">lines</a></code> for annual maxima,
+e.g. <code>maxargs=list(type="l", col="red", lty=3)</code>.
+DEFAULT: NULL (several internal defaults are used, but can be overridden)</p>
+</td></tr>
+<tr valign="top"><td><code>plot</code></td>
+<td>
+<p>Integer specifying the type of plot.
+Can be a vector to produce several plots. <br />
+0: none, only return the data.frame with annual maxima. <br />
+1: color coded doy (day of the year) over year (the default). <br />
+2: Color coded spiral graph with <code><a href="spiralDate.html">spiralDate</a></code>. <br />
+3: Spaghetti line plot with discharge over doy, one line per year. <br />
+4: <code>probs</code> <code><a href="quantileMean.html">quantileMean</a></code> over doy, with optional
+aggregation window (<code>width</code>) around each doy. <br />
+5: Annmax over time for crude trend analysis. <br />
+DEFAULT: 1</p>
+</td></tr>
+<tr valign="top"><td><code>add</code></td>
+<td>
+<p>Logical. Add to existing plot? DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>nmin</code></td>
+<td>
+<p>Minimum number of values that must be present per (hydrological)
+year to be plotted in plot type 5. DEFAULT: 100</p>
+</td></tr>
+<tr valign="top"><td><code>probs</code></td>
+<td>
+<p>Probabilities passed to <code><a href="quantileMean.html">quantileMean</a></code> for plot=4.
+DEFAULT: c(0,25,50,75,95,99)/100</p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p>Numeric: window width for plot=4. Used as sd in gaussian weighting.
+Support (number of values around a DOY passed to
+quantile function at least once) is ca 4.9*width.
+The value at doy itself is used 10 times.
+Larger values of width require more computing time.
+DEFAULT: 3</p>
+</td></tr>
+<tr valign="top"><td><code>text</code></td>
+<td>
+<p>Logical. Call <code><a href="textField.html">textField</a></code> if plot=4? DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>texti</code></td>
+<td>
+<p>Numerical (vector): indices at which to label the lines.
+DEFAULT: seq(200,20,length.out=length(probs))</p>
+</td></tr>
+<tr valign="top"><td><code>textargs</code></td>
+<td>
+<p>List of arguments passed to <code><a href="textField.html">textField</a></code> for plot=4.
+DEFAULT: NULL</p>
+</td></tr>
+<tr valign="top"><td><code>months</code></td>
+<td>
+<p>Labels for the months. DEFAULT: J,F,M,A,M,J,J,A,S,O,N,D</p>
+</td></tr>
+<tr valign="top"><td><code>slab, tlab, vlab</code></td>
+<td>
+<p>Labels for the <b>s</b>eason, <b>t</b>ime (year) and <b>v</b>alues
+used on the axes and title of <code><a href="colPointsLegend.html">colPointsLegend</a></code>.
+DEFAULT: &quot;Month&quot;, &quot;Year&quot;, substitute(values)</p>
+</td></tr>
+<tr valign="top"><td><code>xlim, ylim</code></td>
+<td>
+<p>Limits of x and y axis. DEFAULT: NA (specified internally per plot type)</p>
+</td></tr>
+<tr valign="top"><td><code>xaxs, yaxs</code></td>
+<td>
+<p>x and y Axis style, see <code><a href="../../graphics/html/par.html">par</a></code>.
+Use &quot;r&quot; for regular 4% expansion, &quot;i&quot; for in range only.
+DEFAULT: NA (specified internally per plot type)</p>
+</td></tr>
+<tr valign="top"><td><code>main, adj</code></td>
+<td>
+<p>Graph title and offset to the left
+(<code>adj</code> passed to <code><a href="../../graphics/html/title.html">title</a></code>).
+DEFAULT: &quot;Seasonality&quot;, 0.2</p>
+</td></tr>
+<tr valign="top"><td><code>mar, mgp</code></td>
+<td>
+<p>Parameters specifying plot margin size and labels placement.
+DEFAULT: c(3,3,4,1), c(1.7,0.7,0) (Changed for plot 3:5 if not given)</p>
+</td></tr>
+<tr valign="top"><td><code>keeppar</code></td>
+<td>
+<p>Logical: Keep the margin parameters? If FALSE, they are reset
+to the previous values. DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>legend</code></td>
+<td>
+<p>Logical. Should a legend be drawn? DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>legargs</code></td>
+<td>
+<p>List of arguments passed as <code>legargs</code> to <code><a href="colPoints.html">colPoints</a></code>.
+DEFAULT: NULL (internally, plots 3 and 5 have density=F as default)</p>
+</td></tr>
+<tr valign="top"><td><code>returnall</code></td>
+<td>
+<p>Logical: return all relevant output as a list instead of only
+annmax data.frame? DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>quiet</code></td>
+<td>
+<p>Logical: suppress progress stuff and colPoints messages?
+DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to <code><a href="colPoints.html">colPoints</a></code> like
+pch, main, xaxs, but not Range (use <code>vrange</code>).
+Passed to <code><a href="spiralDate.html">spiralDate</a></code> if <code>plot=2</code>,
+like add, format, lines.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The output is always invisible, don't forget to assign it.
+If returnall=FALSE: Data.frame with <code>year</code>, <code>n</code>umber of nonNA entries,
+<code>max</code> value + <code>doy</code> of annual maxima.
+Please note that the column year does not match the calendrical year
+if <code>shift!=0</code>. <br />
+if returnall=TRUE: a list with <code>annmax</code> (df from above) as well as: <br />
+<code>data</code>: data.frame(doy, values, year) and optionally: <br />
+<code>plot1, plot3, plot4, plot5</code>: outputs from <code><a href="colPoints.html">colPoints</a></code> <br />
+<code>plot2</code>: output list from <code><a href="spiralDate.html">spiralDate</a></code> <br />
+and other elements depending on plot type, <code>like data3, data4, probs4, width4</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Jul-Oct 2016
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="spiralDate.html">spiralDate</a></code>, <code><a href="colPoints.html">colPoints</a></code>,
+<a href="https://waterdata.usgs.gov/nwis">https://waterdata.usgs.gov/nwis</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# browseURL("http://nrfa.ceh.ac.uk/data/station/meanflow/39072")
+qfile &lt;- system.file("extdata/discharge39072.csv", package="berryFunctions")
+Q &lt;- read.table(qfile, skip=19, header=TRUE, sep=",", fill=TRUE)[,1:2]
+rm(qfile)
+colnames(Q) &lt;- c("date","discharge")
+Q$date &lt;- as.Date(Q$date)
+Q$discharge[450:581] &lt;- NA
+plot(Q, type="l")
+seas &lt;- seasonality(date, discharge, data=Q, shift=100, main="NRFA: Thames\nRoyal Windsor Park")
+head(seas)
+# notice how n for nonmissing values is lower in the first hydrological year,
+# which includes parts of two consecutive calendarical years.
+
+# Be careful with your interpretation. This looks normal up to 2007, but then BAM!:
+seasonality(date, discharge, data=Q[Q$date&lt;as.Date("2007-07-15"),], plot=3, shift=100, nmax=1)
+seasonality(date, discharge, data=Q[Q$date&lt;as.Date("2007-08-15"),], plot=3, shift=100, nmax=1)
+
+# Shift is important. You don't want to have this event included twice:
+seasonality(date, discharge, data=Q[850:950,], plot=3, nmax=1, quiet=TRUE, shift=100)
+
+## Not run:  # excluded from CRAN checks because it is slow
+seasonality(date, discharge, data=Q, plot=2) # most floods in winter
+seasonality(date, discharge, data=Q, plot=5, vlab="Dude, look at annual max Q!")
+seasonality(date, discharge, data=Q, plot=5, shift=100)
+s &lt;- seasonality(date, discharge, data=Q, plot=4, shift=100, width=3, returnall=TRUE)
+str(s, max.lev=1)
+
+seasonality(date, discharge, data=Q, plot=3:4, add=0:1, ylim=lim0(400), shift=117)
+seasonality(date, discharge, data=Q, plot=4, add=TRUE, lwd=3, shift=117, width=3)
+
+## End(Not run)
+
+## Not run: 
+dev.new(noRStudioGD=TRUE, record=TRUE)     # large graph on 2nd monitor
+par(mfrow=c(2,2))
+seasonality(date, discharge, data=Q, plot=(1:5)[-4], shift=100)
+seasonality(date, discharge, data=Q, plot=(1:5)[-4], lwd=2)
+seasonality(date, discharge, data=Q, plot=(1:5)[-4], nmax=1, shift=100)
+seasonality(date, discharge, data=Q, plot=(1:5)[-4], col=divPal(100, ryb=TRUE))
+dev.off()
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

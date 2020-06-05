@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: abline at locator point in graph</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for locLine {berryFunctions}"><tr><td>locLine {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>abline at locator point in graph</h2>
+
+<h3>Description</h3>
+
+<p>Draw vertical and/or horizontal lines at positions in a graph located by clicking
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+locLine(h = TRUE, v = TRUE, n = 1, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>Draw horizontal line at clicked location? DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>v</code></td>
+<td>
+<p>Draw vertical line at clicked location? DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Number of points to be clicked. DEFAULT: 1</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to <code><a href="../../graphics/html/abline.html">abline</a></code> like lty, lwd, col, etc</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Not tested across platforms yet...
+</p>
+
+
+<h3>Value</h3>
+
+<p><code><a href="../../graphics/html/locator.html">locator</a></code> result
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Mar 2016
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="locArrow.html">locArrow</a></code>, <code><a href="../../graphics/html/locator.html">locator</a></code>, <code><a href="../../graphics/html/abline.html">abline</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+plot(cumsum(rnorm(60)), type="l")
+## locLine() # only do this manually in interactive() mode
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

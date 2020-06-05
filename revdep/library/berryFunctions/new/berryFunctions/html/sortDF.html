@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: sort dataframes by column</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for sortDF {berryFunctions}"><tr><td>sortDF {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>sort dataframes by column</h2>
+
+<h3>Description</h3>
+
+<p>sort a data.frame by column - basically just a wrapper for order
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+sortDF(df, col, decreasing = TRUE, quiet = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>Data.frame to be sorted</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>Column (index or (un)quoted name) to be sorted by</p>
+</td></tr>
+<tr valign="top"><td><code>decreasing</code></td>
+<td>
+<p>Logical: should highest value be on top?
+DEFAULT: TRUE (unlike <code><a href="../../base/html/order.html">order</a></code>!)</p>
+</td></tr>
+<tr valign="top"><td><code>quiet</code></td>
+<td>
+<p>Logical: suppress non-df warning? DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to <code><a href="../../base/html/order.html">order</a></code>, 
+like eg <code>na.last or method</code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>data.frame
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, June 2015
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/sort.html">sort</a></code>, <code><a href="../../base/html/order.html">order</a></code>, 
+<code><a href="insertRows.html">insertRows</a></code>, <code><a href="addRows.html">addRows</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+sortDF(USArrests[USArrests$Murder&gt;11,], Assault)
+sortDF(USArrests[USArrests$Murder&gt;11,], "Assault") # safer within functions
+sortDF(USArrests[USArrests$Murder&gt;11,], 3)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

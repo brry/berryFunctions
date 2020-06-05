@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Exponential regression with plotting</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for expReg {berryFunctions}"><tr><td>expReg {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Exponential regression with plotting</h2>
+
+<h3>Description</h3>
+
+<p>uses <code><a href="../../stats/html/lm.html">lm</a></code>; plots data if add=FALSE, draws the regression line
+with <code><a href="../../graphics/html/abline.html">abline</a></code> and confidence interval with <code><a href="../../graphics/html/polygon.html">polygon</a></code>
+and writes the formula with <code><a href="../../graphics/html/legend.html">legend</a></code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+expReg(
+  x,
+  y = NULL,
+  data = NULL,
+  logy = TRUE,
+  predictnew = NULL,
+  interval = "confidence",
+  plot = TRUE,
+  digits = 2,
+  inset = 0,
+  xpd = par("xpd"),
+  pos1 = "top",
+  pos2 = NULL,
+  add = FALSE,
+  pch = 16,
+  col = rgb(0, 0, 0, 0.5),
+  modcol = 2,
+  lwd = 1,
+  xlab = deparse(substitute(x)),
+  ylab = deparse(substitute(y)),
+  main = "exponential regression",
+  xlim = range(x),
+  ylim = range(y),
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Numeric or formula (see examples). Vector with values of explanatory variable</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>Numeric. Vector with values of dependent variable. DEFAULT: NULL</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>Dataframe. If x is a formula, the according columns from data are used as x and y. DEFAULT: NULL</p>
+</td></tr>
+<tr valign="top"><td><code>logy</code></td>
+<td>
+<p>Plot with a logarithmic y axis?  Calls <code><a href="logAxis.html">logAxis</a></code>. DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>predictnew</code></td>
+<td>
+<p>Vector with values to predict outcome for. Passed as <code>newdata</code> to <code><a href="../../stats/html/predict.lm.html">predict.lm</a></code>. DEFAULT: NULL</p>
+</td></tr>
+<tr valign="top"><td><code>interval</code></td>
+<td>
+<p>Interval for prediction. DEFAULT: &quot;confidence&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>plot</code></td>
+<td>
+<p>Plot things at all? If FALSE, predictnew will still be returned. DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>Numeric vector of length <i>&ge; 1</i>. Specifies number of digits a,b,r,e are rounded to
+in the formula &quot;y=a*log(x)+b, R^2, RMSE=e&quot;, respectively.
+If values are not specified, they are set equal to the first. DEFAULT: 2</p>
+</td></tr>
+<tr valign="top"><td><code>inset</code></td>
+<td>
+<p>Numeric vector of length <i>&le; 2</i>. inset distance(s) from the margins
+as a fraction of the plot region when formula is placed by keyword. DEFAULT: 0</p>
+</td></tr>
+<tr valign="top"><td><code>xpd</code></td>
+<td>
+<p>Logical, specifying whether formula can be written only inside the plot region (when FALSE)
+or inside the figure region including mar (when TRUE)
+or in the entire device region including oma (when NA). DEFAULT: par(&quot;xpd&quot;)</p>
+</td></tr>
+<tr valign="top"><td><code>pos1</code></td>
+<td>
+<p><code><a href="../../grDevices/html/xy.coords.html">xy.coords</a></code>-acceptable position of the formula. DEFAULT: &quot;top&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>pos2</code></td>
+<td>
+<p>For numerical coordinates, this is the y-position. DEFAULT: NULL, as in <code><a href="../../graphics/html/legend.html">legend</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>add</code></td>
+<td>
+<p>Logical. If TRUE, line and text are added to the existing graphic. DEFAULT: FALSE (plots datapoints first and then the line.)</p>
+</td></tr>
+<tr valign="top"><td><code>pch</code></td>
+<td>
+<p>Point Character, see <code><a href="../../graphics/html/par.html">par</a></code>. DEFAULT: 16</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>Color of points, see <code><a href="../../graphics/html/par.html">par</a></code>. DEFAULT: rgb(0,0,0, 0.5)</p>
+</td></tr>
+<tr valign="top"><td><code>modcol</code></td>
+<td>
+<p>color of model line. DEFAULT: 2</p>
+</td></tr>
+<tr valign="top"><td><code>lwd</code></td>
+<td>
+<p>Numeric. Linewidth, see <code><a href="../../graphics/html/par.html">par</a></code>. DEFAULT: 1</p>
+</td></tr>
+<tr valign="top"><td><code>xlab, ylab, main</code></td>
+<td>
+<p>Character / Expression. axis label and graph title if add=FALSE. DEFAULT: internal from names</p>
+</td></tr>
+<tr valign="top"><td><code>xlim, ylim</code></td>
+<td>
+<p>graphic range. DEFAULT: range(x)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to <code><a href="../../graphics/html/plot.html">plot</a></code> and <code><a href="../../graphics/html/abline.html">abline</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code><a href="../../stats/html/predict.lm.html">predict.lm</a></code> result.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Dec. 2014
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../stats/html/lm.html">lm</a></code>, <code><a href="mReg.html">mReg</a></code>, <code><a href="linReg.html">linReg</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+x &lt;- runif(100, 1, 10)
+y &lt;- 10^(0.3*x+rnorm(100, sd=0.3)+4)
+plot(x,y)
+expReg(x,y)
+expReg(x,y, logy=FALSE)
+expReg(x,y, predictnew=6, plot=FALSE)
+expReg(x,y, predictnew=3:6, interval="none", plot=FALSE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

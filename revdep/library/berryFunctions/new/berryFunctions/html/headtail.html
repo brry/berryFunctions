@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: head and tail</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for headtail {berryFunctions}"><tr><td>headtail {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>head and tail</h2>
+
+<h3>Description</h3>
+
+<p>show head and tail of an object with one command
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+headtail(x, n = 1, nh = n, nt = n, na = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Object</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Number of elements/rows/lines at begin and end of object to be returned. DEFAULT: 1</p>
+</td></tr>
+<tr valign="top"><td><code>nh, nt</code></td>
+<td>
+<p>Number for <code><a href="../../utils/html/head.html">head</a></code> and <code><a href="../../utils/html/head.html">tail</a></code>, respectively. DEFAULT: n</p>
+</td></tr>
+<tr valign="top"><td><code>na</code></td>
+<td>
+<p>Add NA values in between to emphasize visibly that there is
+something inbetween the values? DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to <code><a href="../../utils/html/head.html">head</a></code> and <code><a href="../../utils/html/head.html">tail</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Tries to find good methods of combining the two results according to codeclass(x).
+</p>
+
+
+<h3>Value</h3>
+
+<p><code><a href="../../utils/html/head.html">head</a></code> result
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Mrz 2016
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../utils/html/head.html">head</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+head(letters, n=3)
+headtail(letters)
+headtail(letters, n=3)
+headtail(letters, n=3, na=TRUE)
+
+head(letters, n=-10)
+headtail(letters, n=-10, na=TRUE) # doesn't make sense for headtail
+
+head(freeny.x, n=3)               # matrix
+headtail(freeny.x, n=3, na=TRUE)  # no names for head-part
+headtail(women, n=3, na=TRUE)     # data.frame works fine
+
+head(freeny.y, n=3)
+headtail(freeny.y, n=3, na=TRUE)
+
+head(library, n=3)
+headtail(library, n=3, na=TRUE)
+headtail(library, na=TRUE)
+
+ftable(Titanic)
+head(stats::ftable(Titanic), n=4)
+headtail(stats::ftable(Titanic), n=4, na=TRUE)
+
+head(table(sample(1:9, 30, TRUE)), n=3)
+headtail(table(sample(1:9, 30, TRUE)), n=3, na=TRUE)
+
+head(table(state.division, state.region), n=3)
+headtail(table(state.division, state.region), n=3, na=TRUE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

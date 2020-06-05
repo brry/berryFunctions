@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Beta density plot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for betaPlot {berryFunctions}"><tr><td>betaPlot {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Beta density plot</h2>
+
+<h3>Description</h3>
+
+<p>Quick and nice plot of beta density distribution based on just alpha and beta
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+betaPlot(
+  shape1 = 1.5,
+  shape2 = 5,
+  lines = NA,
+  fill = rgb(0, 0.3, 0.8, 0.4),
+  cumulative = TRUE,
+  mar = c(2, 3, 3, 3),
+  keeppar = FALSE,
+  las = 1,
+  main = paste("Beta density with\nalpha =", signif(shape1, 3), "and beta =",
+    signif(shape2, 3)),
+  ylim = lim0(y),
+  xlim = 0:1,
+  ylab = "",
+  xlab = "",
+  type = "l",
+  lty = 1,
+  col = par("fg"),
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>shape1</code></td>
+<td>
+<p>Alpha value as in <code><a href="../../stats/html/Beta.html">dbeta</a></code>. DEFAULT: 1.5</p>
+</td></tr>
+<tr valign="top"><td><code>shape2</code></td>
+<td>
+<p>Beta value. DEFAULT: 5</p>
+</td></tr>
+<tr valign="top"><td><code>lines</code></td>
+<td>
+<p>Quantiles at which vertical lines should be plotted. DEFAULT: NA</p>
+</td></tr>
+<tr valign="top"><td><code>fill</code></td>
+<td>
+<p>Color passed to <code><a href="../../graphics/html/polygon.html">polygon</a></code>. DEFAULT: rgb(0,0.3,0.8, 0.4)</p>
+</td></tr>
+<tr valign="top"><td><code>cumulative</code></td>
+<td>
+<p>Should cumulative density distribution be added? DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>mar</code></td>
+<td>
+<p>Margins for plot passed to <code><a href="../../graphics/html/par.html">par</a></code>. DEFAULT: c(2,3,3,3)</p>
+</td></tr>
+<tr valign="top"><td><code>keeppar</code></td>
+<td>
+<p>Should margin parameters be kept instead of being restored to previous value? DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>las</code></td>
+<td>
+<p>Label orientation, argument passed to <code><a href="../../graphics/html/plot.html">plot</a></code>. DEFAULT: 1</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>main as in <code><a href="../../graphics/html/plot.html">plot</a></code>. DEFAULT: paste(&quot;Beta density with\nalpha =&quot;, shape1, &quot;and beta =&quot;, shape2)</p>
+</td></tr>
+<tr valign="top"><td><code>ylim, xlim</code></td>
+<td>
+<p>limit for the y and x axis. DEFAULT: lim0(y), 0:1</p>
+</td></tr>
+<tr valign="top"><td><code>ylab, xlab</code></td>
+<td>
+<p>labels for the axes. DEFAULT: &quot;&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>type, lty, col</code></td>
+<td>
+<p>arguments passed to <code><a href="../../graphics/html/plot.html">plot</a></code> and <code><a href="../../graphics/html/lines.html">lines</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to <code><a href="../../graphics/html/plot.html">plot</a></code> like lwd, xaxs, cex.axis, etc.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function very quickly plots a beta distribution by just specifying alpha and beta.
+</p>
+
+
+<h3>Value</h3>
+
+<p>None. Used for plotting.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, July 2014
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="betaPlotComp.html">betaPlotComp</a></code>, <code><a href="normPlot.html">normPlot</a></code>, <code><a href="../../stats/html/Beta.html">dbeta</a></code>,
+<a href="https://cran.r-project.org/package=denstrip">https://cran.r-project.org/package=denstrip</a>,
+<a href="https://cran.r-project.org/view=Distributions">https://cran.r-project.org/view=Distributions</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+betaPlot()
+betaPlot(2,1)
+betaPlot(0.5, 2)
+
+# beta distribution is often used for proportions or probabilities
+# overview of parameters
+# alpha = number of successes + 1.  beta = number of failures + 1
+betaPlotComp()
+# a bigger: HDI (Highest Density Interval) further to the right (1)
+# b bigger: HDI more to the left (0)
+# both bigger: narrower HDI, stronger peak
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

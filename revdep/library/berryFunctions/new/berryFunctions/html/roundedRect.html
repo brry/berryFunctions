@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Rectangles with rounded corners</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for roundedRect {berryFunctions}"><tr><td>roundedRect {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Rectangles with rounded corners</h2>
+
+<h3>Description</h3>
+
+<p>Draw <a href="../../graphics/html/rect.html">rect</a>angles with rounded corners via <code><a href="../../graphics/html/polygon.html">polygon</a></code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+roundedRect(
+  xleft,
+  ybottom,
+  xright,
+  ytop,
+  rounding = 0.25,
+  bothsame = TRUE,
+  aspcorrect = bothsame,
+  devcorrect = bothsame,
+  corfactor = 1.3,
+  factorpoints = FALSE,
+  corners = 1:4,
+  npoints = 200,
+  plot = TRUE,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>xleft, ybottom, xright, ytop</code></td>
+<td>
+<p>Single numbers with the outer end locations
+of the rectangle.</p>
+</td></tr>
+<tr valign="top"><td><code>rounding</code></td>
+<td>
+<p>Proportion of the box to round. Recommended to be between
+0 and 1. DEFAULT: 0.25</p>
+</td></tr>
+<tr valign="top"><td><code>bothsame</code></td>
+<td>
+<p>Set the visual amount of rounding to the same in
+both x and y direction? If TRUE (the default),
+the proportion relates to the shortest rectangle side.
+This is visually correct only if <code>aspcorrect</code>
+and <code>devcorrect</code> are both left at TRUE and 
+<code>corfactor</code> is set correctly. bothsame DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>aspcorrect</code></td>
+<td>
+<p>Correct for graph aspect ratio? DEFAULT: <code>bothsame</code></p>
+</td></tr>
+<tr valign="top"><td><code>devcorrect</code></td>
+<td>
+<p>Correct for device aspect ratio? DEFAULT: <code>bothsame</code></p>
+</td></tr>
+<tr valign="top"><td><code>corfactor</code></td>
+<td>
+<p>Aspect correction factor. I found this by trial and error.
+More elegant solutions are welcome!
+DEFAULT 1.3, works well for 7x5 (width x height) graphs</p>
+</td></tr>
+<tr valign="top"><td><code>factorpoints</code></td>
+<td>
+<p>Logical: plot points at inset locations to determine the
+exact value for <code>corfactor</code> by measuring on screen.
+DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>corners</code></td>
+<td>
+<p>Vector with integers indicating which corners to round.
+Starting bottom left, going clockwise. Zero to suppress
+rounding. DEFAULT: 1:4</p>
+</td></tr>
+<tr valign="top"><td><code>npoints</code></td>
+<td>
+<p>Total number of vertices for the corners. DEFAULT: 200</p>
+</td></tr>
+<tr valign="top"><td><code>plot</code></td>
+<td>
+<p>Logical. Plot the polygon? FALSE to only compute coordinates.
+DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to <code><a href="../../graphics/html/polygon.html">polygon</a></code>,
+like col, border, ...</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Final coordinates, invisible
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Dec 2017
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="textField.html">textField</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+plot(1:10)  ;  rect(4,2,7,8, border=8)
+roundedRect(4,2,7,8, rounding=0.1)
+roundedRect(4,2,7,8, rounding=0.25) # default
+roundedRect(4,2,7,8, rounding=0.5)
+roundedRect(4,2,7,8, rounding=-0.1, border="red")
+roundedRect(4,2,7,8, rounding=1.1, border="blue")
+roundedRect(2,2,8,4, rounding=0.5) # in long boxes, 0.5 is max
+roundedRect(2,2,8,4, rounding=0.5, bothsame=FALSE, corfactor=1, border=3)
+
+
+plot(1:10)  ;  rect(4,2,7,8, border=8)
+roundedRect(4,2,7,8, corners=c(2,4))
+
+plot(1:10, asp=1)  ;  rect(4,2,7,8, border=8)
+roundedRect(4,2,7,8)
+roundedRect(4,2,7,8, aspcorrect=FALSE, border="red") # results depend on asp
+
+plot(1:10, asp=1.5)  ;  rect(4,2,7,8, border=8)
+roundedRect(4,2,7,8)
+roundedRect(4,2,7,8, aspcorrect=FALSE, border="red") # results depend on asp
+
+plot(1:10, asp=1)  ;  rect(4,2,7,8, border=8)
+roundedRect(4,2,7,8) # difference only visible if rect is clearly not a square:
+roundedRect(4,2,7,8, bothsame=FALSE, border="red")
+roundedRect(4,2,7,8, bothsame=FALSE, aspcorrect=TRUE, border="blue")
+
+## Not run:  # aspect correction factor determination
+rrtest &lt;- function(...) roundedRect(10,0.5, 35,15, border=2, factorpoints=TRUE)
+pdfpng({plot(1:40                     ); rrtest();
+        plot(1:40, ylim=c(0,15)       ); rrtest();
+        plot(1:40, ylim=c(0,15), asp=1); rrtest();
+        roundedRect(2,0, 8,15, factorpoints=TRUE);
+        roundedRect(15,10, 25,16, npoints=200)}, 
+       file="dummytest", png=F, overwrite=T)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

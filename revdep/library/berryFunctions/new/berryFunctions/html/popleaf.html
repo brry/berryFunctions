@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: create leaflet popup box info</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for popleaf {berryFunctions}"><tr><td>popleaf {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>create leaflet popup box info</h2>
+
+<h3>Description</h3>
+
+<p>combine data.frame columns into a leaflet popup-box compatible format
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+popleaf(df, sel = colnames(df), exclude_geometry = TRUE, na.rm = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>Data.frame</p>
+</td></tr>
+<tr valign="top"><td><code>sel</code></td>
+<td>
+<p>Columns to be selected (Names or index or TRUE/FALSE vector).
+DEFAULT: colnames(df)</p>
+</td></tr>
+<tr valign="top"><td><code>exclude_geometry</code></td>
+<td>
+<p>Remove column with the name &quot;geometry&quot; 
+(as in sf objects) from the display? DEFAULT: TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>Exclude NA entries from the display? DEFAULT: FALSE</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Vector with character strings
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Apr 2017
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/paste.html">paste</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+dat &lt;- data.frame(a=14:16, b=letters[14:16], c=LETTERS[14:16],
+                 lat=c(52.58,53.45,52.4), lon=c(6.34,7.23,13.05))
+popleaf(dat)
+dat$display &lt;- popleaf(dat, 1:4)
+
+## Not run:  # Excluded from CRAN checks
+library(leaflet)
+leaflet(dat) %&gt;% addTiles() %&gt;% addCircleMarkers(~lon, ~lat, popup=~display)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

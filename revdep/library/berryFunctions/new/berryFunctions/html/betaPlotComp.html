@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compare beta distributions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for betaPlotComp {berryFunctions}"><tr><td>betaPlotComp {berryFunctions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compare beta distributions</h2>
+
+<h3>Description</h3>
+
+<p>Visually understand the effect of the beta distribution parameters
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+betaPlotComp(
+  shape1 = c(0.5, 1:4, 10, 20),
+  shape2 = shape1,
+  cumulative = FALSE,
+  cex = 0.8,
+  las = 1,
+  main = "",
+  ylim = lim0(4),
+  mar = rep(0, 4),
+  oma = c(2, 2, 4.5, 2),
+  mgp = c(3, 0.7, 0),
+  keeppar = FALSE,
+  textargs = NULL,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>shape1</code></td>
+<td>
+<p>Vector of alpha values as in <code><a href="../../stats/html/Beta.html">dbeta</a></code>. DEFAULT: c(0.5, 1:4, 10,20)</p>
+</td></tr>
+<tr valign="top"><td><code>shape2</code></td>
+<td>
+<p>Beta values to be compared. DEFAULT: shape1</p>
+</td></tr>
+<tr valign="top"><td><code>cumulative</code></td>
+<td>
+<p>Should the cumulative density distribution line be added? DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>cex</code></td>
+<td>
+<p>Character EXpansion size. DEFAULT: 0.8</p>
+</td></tr>
+<tr valign="top"><td><code>las</code></td>
+<td>
+<p>Label Axis Style passed to <code><a href="../../graphics/html/axis.html">axis</a></code>. DEFAULT: 1</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>Main as in <code><a href="../../graphics/html/plot.html">plot</a></code>. DEFAULT: &quot;&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>LIMit for the Y axis. DEFAULT: lim0(4)</p>
+</td></tr>
+<tr valign="top"><td><code>mar</code></td>
+<td>
+<p>MARgins for plot passed to <code><a href="../../graphics/html/par.html">par</a></code>. DEFAULT: rep(0,4)</p>
+</td></tr>
+<tr valign="top"><td><code>oma</code></td>
+<td>
+<p>Outer MArgins for plot passed to <code><a href="../../graphics/html/par.html">par</a></code>. DEFAULT: c(2,2,4.5,2)</p>
+</td></tr>
+<tr valign="top"><td><code>mgp</code></td>
+<td>
+<p>MarGin Placement. DEFAULT: c(3,0.7,0)</p>
+</td></tr>
+<tr valign="top"><td><code>keeppar</code></td>
+<td>
+<p>Should margin parameters be kept instead of being restored to previous value? DEFAULT: FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>textargs</code></td>
+<td>
+<p>List of arguments passed to <code><a href="textField.html">textField</a></code>. DEFAULT: NULL</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to <code><a href="betaPlot.html">betaPlot</a></code> like lines, fill, etc.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>None. Used for plotting.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Tries to find suitable subplot for axis labels. This works only for increasing parameter values.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Berry Boessenkool, <a href="mailto:berry-b@gmx.de">berry-b@gmx.de</a>, Dec 2015
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="betaPlot.html">betaPlot</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+betaPlotComp()
+betaPlotComp(oma=c(2,2,2,2), ylim=lim0(5.5), textargs=list(y=NA))
+betaPlotComp(shape1=c(3,10,34), shape2=c(7,9,24))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>berryFunctions</em> version 1.19.0 <a href="00Index.html">Index</a>]</div>
+</body></html>
