@@ -26,6 +26,19 @@ actual NEWS
 -----------------------------
 -----------------------------
 
+Version 1.19.0 (2020-06-05)
+- several additional arguments for functions dataStr, seqR, packagePath, popleaf, monthAxis, groupHist
+- almost.equal now has scale=1 as default
+- better messages in learnVocab, colPoints
+- newFilename now handles file_1.ext
+- testExamples suppress pbapply progbars in logfiles
+New functions: yearPlot, sumatraInitialize, openPDF
+Removed functions: exTime, instGit, toUpper1
+
+
+-----------------------------
+-----------------------------
+
 Version 1.18.1 (2019-04-30)
 - monthAxis: lrange option improved, trunc option added
 - createPres: bgblack + navbullets options + Rlogo added
@@ -47,7 +60,7 @@ Version 1.18.1 (2019-04-30)
 - ciBand: checks order of yl,ym,yu
 - l2df+l2array: handle data.frame inputs better
 - colPoints: uses image for matrix input
-New function: testExamples, learnVocab, catPal
+New functions: testExamples, learnVocab, catPal
 Removed functions: ci, funTinn
 
 
