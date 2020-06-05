@@ -49,11 +49,11 @@ telldocument=TRUE,
 {
 if(telldocument) message("Make sure you have run devtools::document() recently!")
 if(!file.exists(logfolder)) dir.create(logfolder)
-elogfile <- normalizePathCP(elogfile)
-wlogfile <- normalizePathCP(wlogfile)
-tlogfile <- normalizePathCP(tlogfile)
-plotfile <- normalizePathCP(plotfile)
-owd <- setwd(logfolder)
+elogfile <- normalizePathCP(paste0(sub("/$","",logfolder),"/",elogfile))
+wlogfile <- normalizePathCP(paste0(sub("/$","",logfolder),"/",wlogfile))
+tlogfile <- normalizePathCP(paste0(sub("/$","",logfolder),"/",tlogfile))
+plotfile <- normalizePathCP(paste0(sub("/$","",logfolder),"/",plotfile))
+owd <- setwd(logfolder) # examples may write to disc at relative path
 on.exit(setwd(owd), add=TRUE)
 # Suppress progbars in logfiles:
 if(requireNamespace("pbapply", quietly=TRUE))
