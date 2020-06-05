@@ -114,7 +114,6 @@ tcl=par("tcl"),
 las=1,
 ...)
 {
-warning("timeAxis will be removed in late 2019. Use monthAxis instead.")
 if(ym)
   {
   midyear <- TRUE

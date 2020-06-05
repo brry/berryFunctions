@@ -10,7 +10,6 @@ ToDo-list
 - colPoints: add argument zlog=TRUE
 - linLogHist + linLogTrans: check test warnings and remove reason (rainbow2!)
 - monthAxis: remove warning to timeAxis for short time ranges + change behaviour?
-- late 2019: delete exTime, instGit, timeAxis, toUpper1, rainbow2
 - lsc: better example dataset, optim problems
 - tryStack: if silent=TRUE, put all warnings and messages into final output (not just last one)
 - tryStack: example warning with log(-1:6) for non-repeated call stack
