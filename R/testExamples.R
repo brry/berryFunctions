@@ -49,6 +49,10 @@ telldocument=TRUE,
 {
 if(telldocument) message("Make sure you have run devtools::document() recently!")
 if(!file.exists(logfolder)) dir.create(logfolder)
+elogfile <- normalizePathCP(elogfile)
+wlogfile <- normalizePathCP(wlogfile)
+tlogfile <- normalizePathCP(tlogfile)
+plotfile <- normalizePathCP(plotfile)
 owd <- setwd(logfolder)
 on.exit(setwd(owd), add=TRUE)
 # Suppress progbars in logfiles:
@@ -57,10 +61,6 @@ if(requireNamespace("pbapply", quietly=TRUE))
   pbtype <- pbapply::pboptions(type="none")
   on.exit(pbapply::pboptions(type=pbtype$type), add=TRUE)
   }
-#elogfile <- paste0(sub("/$", "", logfolder), "/", elogfile)
-#wlogfile <- paste0(sub("/$", "", logfolder), "/", wlogfile)
-#tlogfile <- paste0(sub("/$", "", logfolder), "/", tlogfile)
-#plotfile <- paste0(sub("/$", "", logfolder), "/", plotfile)
 # Get the man pages in the package:
 manfiles <- dir(paste0(path,"/man"), full.names=TRUE)
 if(!is.null(selection)) manfiles <- manfiles[selection]
