@@ -1,7 +1,7 @@
 #' open the Appendix of Rclick
 #' 
 #' Open the Appendix of my R handbook found online at
-#' \url{RclickHandbuch.wordpress.com}
+#' \url{https://github.com/brry/rclick}
 #' 
 #' @return None, opens pdf in default viewer using \code{\link{system2}}
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jul 2016

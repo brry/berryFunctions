@@ -11,7 +11,7 @@ None, opens pdf in default viewer using \code{\link{system2}}
 }
 \description{
 Open the Appendix of my R handbook found online at
-\url{RclickHandbuch.wordpress.com}
+\url{https://github.com/brry/rclick}
 }
 \examples{
 # anhang() # excluded from cran check because of external browser opening policy
