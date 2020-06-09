@@ -6,6 +6,7 @@
 \usage{
 sumatraInitialize(
   path = sub("pandoc$", "sumatra", Sys.getenv("RSTUDIO_PANDOC")),
+  roampath = paste0(Sys.getenv("APPDATA"), "/SumatraPDF"),
   openfolder = TRUE
 )
 }
@@ -13,6 +14,10 @@ sumatraInitialize(
 \item{path}{Folder (not file) that contains "SumatraPDF.exe". 
 DEFAULT: extracted from \code{\link{Sys.getenv}("RSTUDIO_PANDOC")}, e.g.
 "C:/Program Files/RStudio/bin/sumatra"}
+
+\item{roampath}{if not NULL, both files are also copied to this path, 
+e.g. C:/Users/berry/AppData/Roaming/SumatraPDF.
+DEFAULT: SumatraPDF folder at \code{\link{Sys.getenv}("APPDATA")}}
 
 \item{openfolder}{Logical: Open folder after writing the files?
 Uses \code{\link{openFile}()}. DEFAULT: TRUE}
