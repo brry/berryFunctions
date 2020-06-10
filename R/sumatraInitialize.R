@@ -42,38 +42,32 @@ ok <- readline(paste0("Can I write files (no overwriting) at ", path,
 if(!tolower(substr(ok,1,1))=="y") stop("You did not give write access.")
 
 # Expand filenames
-f1 <- file.path(path, "sumatrapdfrestrict.ini",  fsep="/")
-f2 <- file.path(path, "SumatraPDF-settings.txt", fsep="/")
+f1 <- file.path(path, "sumatrapdfrestrict",  fsep="/") # .ini
+f2 <- file.path(path, "SumatraPDF-settings", fsep="/") # .txt
 
-r1 <- file.path(roampath, "sumatrapdfrestrict.ini",  fsep="/")
-r2 <- file.path(roampath, "SumatraPDF-settings.txt", fsep="/")
+r1 <- file.path(roampath, "sumatrapdfrestrict",  fsep="/") # .ini
+r2 <- file.path(roampath, "SumatraPDF-settings", fsep="/") # .txt
 
 msg <- paste0("Created two SumatraPDF setting files.")
 
 # Rename files if they exist
-if(file.exists(f1))
+replaceFile <- function(base, ext)
   {
-  fo1 <- newFilename(sub("restrict.ini$","restrict_old_1.ini",f1), quiet=TRUE)
-  file.rename(f1, fo1)
-  msg <- paste0(msg, "\nExisting file was renamed to ", fo1)
+  fn <- paste0(base,ext)
+  if(!file.exists(fn)) return(fn)
+  #
+  newname <- newFilename(paste0(base, "_old_1",ext), quiet=TRUE)
+  file.rename(fn, newname)
+  msg <<- paste0(msg, "\nExisting file was renamed to ", newname)
+  return(fn)
   }
-if(file.exists(f2))
+
+f1 <- replaceFile(f1, ".ini")
+f2 <- replaceFile(f2, ".txt")
+if(dor)
   {
-  fo2 <- newFilename(sub("settings.txt$","settings_old_1.txt",f2), quiet=TRUE)
-  file.rename(f2, fo2)
-  msg <- paste0(msg, "\nExisting file was renamed to ", fo2)
-  }
-if(dor&&file.exists(r1))
-  {
-  ro1 <- newFilename(sub("restrict.ini$","restrict_old_1.ini",r1), quiet=TRUE)
-  file.rename(r1, ro1)
-  msg <- paste0(msg, "\nExisting file was renamed to ", ro1)
-  }
-if(dor&&file.exists(r2))
-  {
-  ro2 <- newFilename(sub("settings.txt$","settings_old_1.txt",r2), quiet=TRUE)
-  file.rename(r2, ro2)
-  msg <- paste0(msg, "\nExisting file was renamed to ", ro2)
+  r1 <- replaceFile(r1, ".ini")
+  r2 <- replaceFile(r2, ".txt")
   }
 
 # Create new files
