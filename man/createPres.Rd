@@ -8,6 +8,7 @@ createPres(
   presname = "pres",
   dir = "presentation",
   path = ".",
+  asp = 169,
   navbullets = FALSE,
   bgblack = FALSE,
   open = TRUE
@@ -23,7 +24,13 @@ see \code{\link{newFilename}}. DEFAULT: "presentation"}
 \item{path}{Location of \code{dir}. Passed to \code{\link{setwd}}.
 DEFAULT: "."}
 
+\item{asp}{Number to set as aspectratio. 43 for old 4:3 format. 
+Possible values: 169, 1610, 149, 54, 43, 32. 
+\bold{note}: if you set this, remember to change the default \code{fig.width}.
+DEFAULT: 169 (16:9 format)}
+
 \item{navbullets}{Logical: include navigation slide bullet points in header?
+This only takes effect when there are subsections.
 DEFAULT: FALSE}
 
 \item{bgblack}{Logical: set a black background instead of a white one?

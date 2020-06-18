@@ -20,7 +20,12 @@
 #'                 see \code{\link{newFilename}}. DEFAULT: "presentation"
 #' @param path     Location of \code{dir}. Passed to \code{\link{setwd}}.
 #'                 DEFAULT: "."
+#' @param asp      Number to set as aspectratio. 43 for old 4:3 format. 
+#'                 Possible values: 169, 1610, 149, 54, 43, 32. 
+#'                 \bold{note}: if you set this, remember to change the default \code{fig.width}.
+#'                 DEFAULT: 169 (16:9 format)
 #' @param navbullets Logical: include navigation slide bullet points in header?
+#'                 This only takes effect when there are subsections.
 #'                 DEFAULT: FALSE
 #' @param bgblack  Logical: set a black background instead of a white one?
 #'                 Requires all R graphics fg and bg colors to be changed!
@@ -36,6 +41,7 @@ createPres <- function(
 presname="pres",
 dir="presentation",
 path=".",
+asp=169,
 navbullets=FALSE,
 bgblack=FALSE,
 open=TRUE
@@ -89,6 +95,8 @@ nb_n <- strsplit(nb_n, "\n")[[1]]
 header <- if(navbullets) paste(  c(nb_y, paste("%",nb_n)  ), collapse="\n")
           else           paste(  c(paste("%",nb_y), nb_n  ), collapse="\n")
 
+header <- paste0("%-----\n", header, "\n%-----")
+
 cat(
 "% presentation aboutSomething
 % Template by Berry Boessenkool, berry-b@gmx.de
@@ -98,7 +106,7 @@ cat(
 % Rstudio - Tools - Global Options - Sweave - weave Rnw files using: knitr
 
 
-\\documentclass[compress, xcolor=dvipsnames]{beamer} % handout option for non-animated slides
+\\documentclass[compress, xcolor=dvipsnames, aspectratio=",asp,"]{beamer} % handout option for non-animated slides
 \\setbeamerfont{frametitle}{size=\\normalsize}
 
 \\usepackage{hyperref, graphicx}
@@ -160,7 +168,7 @@ header,
 % ---------------------------
 
 <<setup, include=FALSE>>=
-opts_chunk$set(cache=T, echo=TRUE, fig.height=3.3, fig.width=5, out.width='0.9\\\\textwidth')
+opts_chunk$set(cache=T, echo=TRUE, fig.height=3.2, fig.width=7.5, out.width='0.9\\\\textwidth') # fig.width=5 in aspectratio 43
 @
 
 % ---------------------------
@@ -207,9 +215,11 @@ ENCOURAGED\\\\[0.5em]%
 % ---------------------------
 
 \\begin{frame}[fragile]{Frametitle}
-<<chunkname, size=\"footnotesize\"", ifelse(bgblack,", fig.height=3","") , ">>=",
+\\vspace{-2em} % move rest of slide up a bit
+<<chunkname, size=\"footnotesize\"", ifelse(bgblack,", fig.height=2.9","") , ", echo=-1>>=
+par(mar=c(3.2,3.2,1,0.5), mgp=c(2.0, 0.8, 0), las=1)",
 if(bgblack) "\npar(fg=\"white\")", "
-plot(rnorm(1000))
+plot(rnorm(1000)) ; box(\"figure\", col=\"orange\")
 @
 \\end{frame}
 
@@ -249,6 +259,51 @@ R package \\rcode{rdwd} ~~$->$~~ easy usage of weather datasets
 \\end{frame}
 
 % ---------------------------
+
+% ---------------------------
+% ---------------------------
+\\subsection{SS1}
+\\begin{frame}[fragile]{1A}
+1A - to show navigation bullett points based on (sub)sections. This is SS1
+\\end{frame}
+% ---------------------------
+\\begin{frame}[fragile]{1B}
+1B
+\\end{frame}
+% ---------------------------
+\\begin{frame}[fragile]{1C}
+1C
+\\end{frame}
+% ---------------------------
+% ---------------------------
+\\subsection{SS2}
+% ---------------------------
+% ---------------------------
+\\begin{frame}[fragile]{2A}
+2A. This is SS2
+\\end{frame}
+% ---------------------------
+\\begin{frame}[fragile]{2B}
+2B. The next slide is a \\hyperlink{toc}{TOC that can be linked to} in SS3
+\\end{frame}
+% ---------------------------
+% ---------------------------
+\\subsection{SS3}
+% ---------------------------
+% ---------------------------
+\\begin{frame}{Outline}
+\\TPshowboxesfalse % no border around this box
+\\begin{textblock*}{18em}(10em,8em) % topleft corner x=10em, y=7em width=18em
+\\begin{flushleft}
+\\tableofcontents % \\tableofcontents[hideallsubsections]
+\\end{flushleft}
+\\end{textblock*}
+\\TPshowboxestrue % borders around other boxes
+\\vspace{-9em}
+the toc below is in flushleft and textblock\\\\
+This text is moved up with a hack because textblocks complain about vertical mode otherwise.
+\\label{toc}
+\\end{frame}
 
 \\section{conclusion}
 
