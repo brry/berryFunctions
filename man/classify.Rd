@@ -9,9 +9,11 @@ classify(
   method = "linear",
   breaks = NULL,
   Range = range(x, finite = TRUE),
+  col = NULL,
   sdlab = 1,
   logbase = 1,
-  quiet = FALSE
+  quiet = FALSE,
+  ...
 )
 }
 \arguments{
@@ -26,6 +28,10 @@ DEFAULT: NULL (different defaults for each method)}
 
 \item{Range}{Ends of intervals. DEFAULT: range(x, finite=TRUE)}
 
+\item{col}{Function that will return a color palette, e.g. \code{\link{seqPal}}.
+If given, a vector of colors is returned instead of the regular list.
+DEFAULT: NULL (ignored)}
+
 \item{sdlab}{Type of label and breakpoints if \code{method=standarddeviation}.
 1 means \code{-0.5 sd, 0.5 sd}, 2 means \code{-1 sd, mean, 1 sd},
 3 means actual numbers for type 1, 4 means numbers for type 2.
@@ -35,9 +41,13 @@ DEFAULT: 1}
 DEFAULT: 1}
 
 \item{quiet}{Suppress warnings, eg for values outside Range? DEFAULT: FALSE}
+
+\item{\dots}{Further arguments passed to the function \code{col}.}
 }
 \value{
-list with class numbers (index) and other elements for \code{\link{colPoints}}
+if \code{col=NULL}, a list with class numbers (index) and other 
+        elements for \code{\link{colPoints}}. If \rcode{col} is a palette function,
+        a vector of colors.
 }
 \description{
 classify continuous values into categories with different methods:\cr
@@ -71,6 +81,9 @@ classify( c(1:10, 20), "s", sdlab=2 )
 classify( c(1:10, 20), "s", sdlab=1, breaks=2 )
 classify( c(1:10, 20), "c", breaks=c(5,27) )
 classify( c(1:10, 20), "log")
+
+cols <- classify( c(1:10, 20), col=seqPal) ; cols
+plot(c(1:10, 20), col=cols, pch=16, cex=2)
 
 set.seed(42); rz <- rnorm(30, mean=350, sd=120)
 plot(1)

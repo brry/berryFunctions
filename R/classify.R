@@ -23,7 +23,9 @@
 #' of plotting lake depth (bathymetry measured at irregularly distributed points) on a linear color scale.\cr
 #' This is the workhorse for \code{\link{colPoints}}.\cr
 #' 
-#' @return list with class numbers (index) and other elements for \code{\link{colPoints}}
+#' @return if \code{col=NULL}, a list with class numbers (index) and other 
+#'         elements for \code{\link{colPoints}}. If \rcode{col} is a palette function,
+#'         a vector of colors.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2014
 #' @seealso \code{\link{colPoints}}
 #' @references See this page on the effect of classification (binning) methods: \cr
@@ -39,6 +41,9 @@
 #' classify( c(1:10, 20), "s", sdlab=1, breaks=2 )
 #' classify( c(1:10, 20), "c", breaks=c(5,27) )
 #' classify( c(1:10, 20), "log")
+#' 
+#' cols <- classify( c(1:10, 20), col=seqPal) ; cols
+#' plot(c(1:10, 20), col=cols, pch=16, cex=2)
 #' 
 #' set.seed(42); rz <- rnorm(30, mean=350, sd=120)
 #' plot(1)
@@ -62,6 +67,9 @@
 #' @param breaks Specification for method, see Details.
 #'               DEFAULT: NULL (different defaults for each method)
 #' @param Range  Ends of intervals. DEFAULT: range(x, finite=TRUE)
+#' @param col    Function that will return a color palette, e.g. \code{\link{seqPal}}.
+#'               If given, a vector of colors is returned instead of the regular list.
+#'               DEFAULT: NULL (ignored)
 #' @param sdlab  Type of label and breakpoints if \code{method=standarddeviation}.
 #'               1 means \code{-0.5 sd, 0.5 sd}, 2 means \code{-1 sd, mean, 1 sd},
 #'               3 means actual numbers for type 1, 4 means numbers for type 2.
@@ -69,15 +77,18 @@
 #' @param logbase base for \code{\link{logSpaced}}. Used only if not 1 and method="log".
 #'               DEFAULT: 1
 #' @param quiet  Suppress warnings, eg for values outside Range? DEFAULT: FALSE
-#' 
+#' @param \dots  Further arguments passed to the function \code{col}.
+#'
 classify <- function(
   x,
   method="linear",
   breaks=NULL,
   Range=range(x, finite=TRUE),
+  col=NULL,
   sdlab=1,
   logbase=1,
-  quiet=FALSE)
+  quiet=FALSE,
+  ...)
 {
 # input checks -----------------------------------------------------------------
 x <- as.numeric(x)
@@ -195,5 +206,15 @@ if(min(bb,na.rm=TRUE) > min(x,na.rm=TRUE) | max(bb,na.rm=TRUE) < max(x,na.rm=TRU
                      "These are given the index ", nb+1, " (lower, n=",below,
                      ") and ", nb+2, " (higher, n=",above,").")
 # Results
+if(!is.null(col))
+ {
+ if(!is.function(col)) stop("col must be a function returning a palette, not a", 
+                            toString(class(col)))
+ colors <- col(...)
+ nlarge <- sum(ix>length(colors))
+ if(nlarge>0) warning("There are ", nlarge, " indexes greater than length of colors (",
+                      length(colors),").")
+ return(colors[ix])
+ }
 list(nbins=nb, bb=bb, below=below, above=above, at=at, labels=la, index=ix)
 } # Function end
