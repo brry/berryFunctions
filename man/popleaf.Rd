@@ -4,13 +4,25 @@
 \alias{popleaf}
 \title{create leaflet popup box info}
 \usage{
-popleaf(df, sel = colnames(df), exclude_geometry = TRUE, na.rm = FALSE)
+popleaf(
+  df,
+  sel = colnames(df),
+  truncate = NULL,
+  tstring = "[...]",
+  exclude_geometry = TRUE,
+  na.rm = FALSE
+)
 }
 \arguments{
 \item{df}{Data.frame}
 
 \item{sel}{Columns to be selected (Names or index or TRUE/FALSE vector).
 DEFAULT: colnames(df)}
+
+\item{truncate}{Numeric: number of characters beyond which to truncate columns.
+DEFAULT: NULL (no truncation)}
+
+\item{tstring}{Charstring to add at the end if truncated. DEFAULT: "[...]"}
 
 \item{exclude_geometry}{Remove column with the name "geometry" 
 (as in sf objects) from the display? DEFAULT: TRUE}
@@ -33,6 +45,11 @@ dat$display <- popleaf(dat, 1:4)
 library(leaflet)
 leaflet(dat) \%>\% addTiles() \%>\% addCircleMarkers(~lon, ~lat, popup=~display)
 }
+
+dat[1,1] <- "Very long string I'd rather have truncated"
+popleaf(dat, 1:3)
+popleaf(dat, 1:3, truncate=16)
+popleaf(dat, 1:3, truncate=16, tstring="--")
 
 }
 \seealso{
