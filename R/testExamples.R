@@ -56,6 +56,7 @@ tlogfile <- normalizePathCP(paste0(sub("/$","",logfolder),"/",tlogfile))
 plotfile <- normalizePathCP(paste0(sub("/$","",logfolder),"/",plotfile))
 owd <- setwd(logfolder) # examples may write to disc at relative path
 on.exit(setwd(owd), add=TRUE)
+cat("", file=tlogfile) # clean runtime logfile, otherwise extimes will have too many entries
 # Suppress progbars in logfiles:
 if(requireNamespace("pbapply", quietly=TRUE))
   {
