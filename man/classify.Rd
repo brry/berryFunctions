@@ -46,7 +46,7 @@ DEFAULT: 1}
 }
 \value{
 if \code{col=NULL}, a list with class numbers (index) and other 
-        elements for \code{\link{colPoints}}. If \rcode{col} is a palette function,
+        elements for \code{\link{colPoints}}. If \code{col} is a palette function,
         a vector of colors.
 }
 \description{

@@ -24,7 +24,7 @@
 #' This is the workhorse for \code{\link{colPoints}}.\cr
 #' 
 #' @return if \code{col=NULL}, a list with class numbers (index) and other 
-#'         elements for \code{\link{colPoints}}. If \rcode{col} is a palette function,
+#'         elements for \code{\link{colPoints}}. If \code{col} is a palette function,
 #'         a vector of colors.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2014
 #' @seealso \code{\link{colPoints}}
