@@ -1,11 +1,7 @@
 
-# not run by roxygen because of unicode problems!
-# After it's been run for updates, change the first line to
-# % edited for Unicode correction: usage section main+units
-# and in the usage section use:
-#  main = "StatName\\n52\U{00B0}24' N / 12\U{00B0}58' E\\n42 m aSL",
-#  units = c("\U{00B0}C", "mm"), labs = substr(month.abb, 1, 1), 
-
+# manual usage section!
+# Roxygen writes <U+00B0> instead of \U{00B0}   for main+units 
+# https://github.com/r-lib/roxygen2/issues/592
 
 #' climate graph after Walter and Lieth
 #' 
@@ -24,6 +20,14 @@
 #' @importFrom graphics axis box layout lines mtext par plot text
 #' @importFrom stats coef lm
 #' @export
+#' @usage climateGraph(temp, rain,
+#'   main = "StatName\\n52\U{00B0}24' N / 12\U{00B0}58' E\\n42 m aSL",
+#'   units = c("\U{00B0}C", "mm"), labs = substr(month.abb, 1, 1), 
+#'   textprop = 0.25, ylim = range(temp, rain/2), compress = FALSE,
+#'   ticklab = -8:30 * 10, ticklin = -15:60 * 5, box = TRUE,
+#'   mar = c(1.5, 2.3, 4.5, 0.2), keeppar = TRUE, colrain = "blue",
+#'   coltemp = "red", lwd = 2, arghumi = NULL, argarid = NULL,
+#'   argcomp = NULL, arggrid = NULL, argtext = NULL, ...)
 #' @examples
 #' 
 #' temp <- c(-9.3,-8.2,-2.8,6.3,13.4,16.8,18.4,17,11.7,5.6,-1,-5.9)#
