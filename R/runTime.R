@@ -8,6 +8,7 @@
 #' @examples
 #' runTime(d=3.6, t="15:40")
 #' runTime(d=3.6, t="15:10")
+#' runTime(d=3.6, t="14:50")
 #'
 #' @param d  Numerical value: distance [km]
 #' @param t  Charstring: time ["MM:SS"]
@@ -21,7 +22,7 @@ tsec <- strsplit(t, ":")[[1]]
 tsec <- as.numeric(tsec)
 tsec <- tsec[1]*60 + tsec[2]
 pace <- tsec/d/60
-pace <- paste0(floor(pace), ":", round((pace-floor(pace))*60), " min/km")
+pace <- paste0(floor(pace), ":", round0((pace-floor(pace))*60), " min/km")
 speed <- paste(round(d/tsec*60*60,1), "km/h")
 message(d, " km in ", t, ", ", pace, " = ", speed)
 # Output:
