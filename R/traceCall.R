@@ -63,10 +63,15 @@ vigremove=TRUE
                   "-> vweave_rmarkdown -> rmarkdown::render -> knitr::knit ",
                   "-> tools::buildVignettes -> engine",
                   "weave ->",
-                  "knit -> try ->"
+                  "knit -> try ->",
+                  "rmarkdown::render_site -> generator$render -> in_dir",
+                  "-> render_book_script -> render_book -> render_cur_session -> rmarkdown::render ",
+                  "-> knitr::knit -> call_block -> block_exec -> in_dir -> evaluate ",
+                  "-> evaluate::evaluate -> evaluate_call -> timing_fn -> handle "
                   )
   for(k in elements) calltrace <- sub(k, "", calltrace)
   }
   calltrace <- gsub("->  ->", "->", calltrace)
+  calltrace <- gsub("with -> with.default -> eval -> eval", "with ->", calltrace)
   calltrace
 }
