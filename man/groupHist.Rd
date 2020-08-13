@@ -14,6 +14,7 @@ groupHist(
   las = 1,
   main = NULL,
   unit = NA,
+  col = "purple",
   ...
 )
 }
@@ -33,6 +34,8 @@ groupHist(
 \item{main}{Main title, internal default based on \code{d, x, unit} and \code{g}. DEFAULT: NULL}
 
 \item{unit}{Unit to be written into the default title. DEFAULT: NA}
+
+\item{col}{Color vector to be used, recycled.}
 
 \item{\dots}{further arguments passed to \code{\link{hist}}}
 }

@@ -25,6 +25,7 @@
 #' @param las LabelAxisStyle, see \code{\link{par}}. DEFAULT: 1, means numbers on y-axis upright
 #' @param main Main title, internal default based on \code{d, x, unit} and \code{g}. DEFAULT: NULL
 #' @param unit Unit to be written into the default title. DEFAULT: NA
+#' @param col   Color vector to be used, recycled.
 #' @param \dots further arguments passed to \code{\link{hist}}
 #' 
 groupHist <- function(
@@ -36,6 +37,7 @@ breaks=20,
 las=1,
 main=NULL,
 unit=NA,
+col="purple",
 ...
 )
 {
@@ -58,9 +60,10 @@ unit2 <- if(is.na(unit)) "" else paste0("  [", unit, "] ")
 if(is.null(main))
    main <- paste0("Histograms of ",x, unit2," in ",substitute(df),", grouped by ", g)
 # actual plotting:
+col <- rep(col, length.out=n)
 for(i in 1:n)
   {
-  defaults <- list(x=dd[[i]], main=names(dd)[i], breaks=h$breaks, xlab=xlab, ylab=ylab, las=las)
+  defaults <- list(x=dd[[i]], main=names(dd)[i], breaks=h$breaks, col=col[i], xlab=xlab, ylab=ylab, las=las)
   do.call(hist, owa(defaults, list(...), "breaks"))
 #  hist(x=dd[[i]], main=names(dd)[i], breaks=h$breaks, xlab=xlab, ylab=ylab, las=las, ...)
   box("figure")
