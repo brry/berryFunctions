@@ -20,6 +20,7 @@ display runnning times in useful units
 \examples{
 runTime(d=3.6, t="15:40")
 runTime(d=3.6, t="15:10")
+runTime(d=3.6, t="14:50")
 
 }
 \seealso{
