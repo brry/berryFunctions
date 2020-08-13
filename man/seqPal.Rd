@@ -65,7 +65,7 @@ for(b in seq(0.99, 1.01, len=30))
 
 }
 \seealso{
-\code{\link{showPal}}, \code{\link{divPal}}, \code{\link{addAlpha}},
+\code{\link{showPal}}, \code{\link{divPal}}, \code{\link{catPal}}, \code{\link{addAlpha}},
          \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 }
 \author{

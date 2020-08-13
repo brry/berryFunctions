@@ -53,7 +53,7 @@ The default palette is originally in 12 shades in the IPCC Assessment Report 5
             \url{https://nyti.ms/2mL0o4J}
 }
 \seealso{
-\code{\link{showPal}}, \code{\link{seqPal}}, \code{\link{addAlpha}},
+\code{\link{showPal}}, \code{\link{seqPal}}, \code{\link{catPal}}, \code{\link{addAlpha}},
          \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 }
 \author{

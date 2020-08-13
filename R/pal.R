@@ -6,7 +6,7 @@
 #' Do not use \code{rainbow}: \url{https://eagereyes.org/basics/rainbow-color-map}
 #' @return NULL
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Apr 2016
-#' @seealso \code{\link{seqPal}}, \code{\link{divPal}}, package \code{RColorBrewer}
+#' @seealso \code{\link{seqPal}}, \code{\link{divPal}}, \code{\link{catPal}}, package \code{RColorBrewer}
 #' @keywords dplot color
 #' @importFrom graphics par plot text title
 #' @export
@@ -115,7 +115,7 @@ outcols
 #' at the extremes, good for displaying values in two directions
 #' @return Character string vector with color names
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2016
-#' @seealso \code{\link{showPal}}, \code{\link{seqPal}}, \code{\link{addAlpha}},
+#' @seealso \code{\link{showPal}}, \code{\link{seqPal}}, \code{\link{catPal}}, \code{\link{addAlpha}},
 #'          \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 #' @references The default palette is originally in 12 shades in the IPCC Assessment Report 5
 #'             Chapter 12 Fig 12.22, \url{http://www.ipcc.ch/report/ar5/wg1/}.\cr
@@ -170,7 +170,7 @@ outcols
 #' @description Sequential color palette from yellow to blue or custom colors.
 #' @return Character string vector with color names
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2016
-#' @seealso \code{\link{showPal}}, \code{\link{divPal}}, \code{\link{addAlpha}},
+#' @seealso \code{\link{showPal}}, \code{\link{divPal}}, \code{\link{catPal}}, \code{\link{addAlpha}},
 #'          \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 #' @keywords color dplot
 #' @importFrom grDevices colorRampPalette
