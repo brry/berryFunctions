@@ -21,7 +21,7 @@ compareDist(
 \arguments{
 \item{df}{Data.frame with (named) columns.}
 
-\item{plot}{Integers: which graphics to plot? 
+\item{plot}{Integers: which graphics to plot?\cr
 Plot 1: overlaid density estimates\cr
 Plot 2: multipanel histogram\cr
 Plot 3: boxplot\cr

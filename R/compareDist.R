@@ -13,7 +13,7 @@
 #' compareDist(fakedata)
 #'
 #' @param df         Data.frame with (named) columns.
-#' @param plot       Integers: which graphics to plot? 
+#' @param plot       Integers: which graphics to plot?\cr
 #'                   Plot 1: overlaid density estimates\cr
 #'                   Plot 2: multipanel histogram\cr
 #'                   Plot 3: boxplot\cr
