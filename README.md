@@ -27,7 +27,7 @@ on github, incl. vignette:
 :
 ```R
 if(!requireNamespace("remotes", quitly=TRUE)) install.packages("remotes")
-remotes::install_github("brry/berryFunctions", build_opts="--no-manual")
+remotes::install_github("brry/berryFunctions")
 ```
 
 ### trouble
