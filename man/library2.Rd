@@ -3,14 +3,16 @@
 \name{library2}
 \alias{library2}
 \alias{require2}
-\title{install.package and require}
+\title{install.package and library}
 \usage{
-library2(name, libargs = NULL, ...)
+library2(name, quietly = FALSE, libargs = NULL, ...)
 }
 \arguments{
 \item{name}{Name of the package(s). Can be quoted, must not.}
 
-\item{libargs}{List of arguments passed to \code{\link{library}} like \code{lib.loc}, \code{quietly} etc. DEFAULT: NULL}
+\item{quietly}{passed to \code{\link{library}}. DEFAULT: FALSE}
+
+\item{libargs}{List of arguments passed to \code{\link{library}} like \code{lib.loc}, \code{verbose} etc. DEFAULT: NULL}
 
 \item{\dots}{Arguments passed to \code{\link{install.packages}} like \code{lib}, \code{repos} etc.}
 }
@@ -36,6 +38,6 @@ library2("statmod")
 \code{\link{install.packages}}, \code{\link{library}}
 }
 \author{
-Berry Boessenkool, \email{berry-b@gmx.de}, 2014
+Berry Boessenkool, \email{berry-b@gmx.de}, 2014+2020
 }
 \keyword{package}

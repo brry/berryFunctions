@@ -1,8 +1,8 @@
 Package: berryFunctions
 Type: Package
 Title: Function Collection Related to Plotting and Hydrology
-Version: 1.19.11
-Date: 2020-08-13
+Version: 1.19.12
+Date: 2020-08-24
 Imports: grDevices, graphics, stats, utils, abind
 Suggests: RColorBrewer, pbapply, knitr, rmarkdown, gstat, RCurl, colorspace, vioplot
 Author: Berry Boessenkool
