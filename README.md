@@ -23,7 +23,7 @@ vignette("berryFunctions")
 ```
 
 Update to the [current development version](https://github.com/brry/berryFunctions/blob/master/DESCRIPTION#L4-L5) 
-on github, incl. vignette:
+on github:
 :
 ```R
 if(!requireNamespace("remotes", quitly=TRUE)) install.packages("remotes")
