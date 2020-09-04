@@ -1,10 +1,11 @@
-#' Returns various expressions/values conditional on if tested expression returns an error.
+#' expressions/values conditional on whether tested expression returns an error.
 #' 
 #' Does a given expression return an error? 
-#' If so, return specific values/expressions based on if it does or does not.
+#' Return specific values/expressions for either case.
 #' Useful for loops when you want to easily control values based on errors that arise.
 #' 
-#' @return Returns value or expression stated in error_true or error_false depending on if the tested expression throws an error.
+#' @return Returns value or expression stated in \code{error_true} or \code{error_false},
+#'  depending on whether the tested expression throws an error.
 #' @author Nick Bultman, \email{njbultman74@@gmail.com}, September 2020
 #' @seealso \code{\link{is.error}}
 #' @keywords programming error
@@ -22,11 +23,7 @@
 if.error <- function(
   expr, 
   error_true, 
-  error_false) {
-  if (is.error(expr) == TRUE) {
-    x <- error_true
-  } else {
-    x <- error_false
-  }
-  return(x)
+  error_false
+){
+if(is.error(expr)) error_true else error_false
 }
