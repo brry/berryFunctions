@@ -18,6 +18,7 @@
 #' \dontrun{## Excluded from CRAN checks because of file creation
 #' # Vectorized:
 #' file.create("DummyFile2.txt")
+#' checkFile("DummyFile2.txt/")
 #' checkFile(paste0("DummyFile",1:3,".txt"), warnonly=TRUE)
 #' is.error(checkFile(paste0("DummyFile",1:3,".txt") ), TRUE, TRUE)
 #' file.remove("DummyFile2.txt")
@@ -37,17 +38,20 @@
 #' upper(paste0("dumbo",2:8,".nonexist"), trace=FALSE)
 #' 
 #' 
-#' @param file Filename(s) as character string to be checked for existence.
+#' @param file     Filename(s) as character string to be checked for existence.
 #' @param warnonly Logical: Only issue a \code{\link{warning}} instead of an
 #'                 error with \code{\link{stop}}? DEFAULT: FALSE
-#' @param trace Logical: Add function call stack to the message? DEFAULT: TRUE
-#' @param pwd   Logical: Print working directory in message? DEFAULT: TRUE
+#' @param trace    Logical: Add function call stack to the message? DEFAULT: TRUE
+#' @param pwd      Logical: Print working directory in message? DEFAULT: TRUE
+#' @param nprint   Integer: number of filenames to be printed. 
+#'                 The rest is abbreviated with (and n others). DEFAULT: 2
 #' 
 checkFile <- function(
 file,
 warnonly=FALSE,
 trace=TRUE,
-pwd=TRUE
+pwd=TRUE,
+nprint=2
 )
 {
 # check actual file existence:
@@ -61,17 +65,15 @@ if(any(!exi))
   while(any(grepl("/$", file_ns)))  file_ns <- sub("/$","",file_ns) 
   exi_ns <- file.exists(file_ns)
   # tracing the calling function(s):
-  Text1 <- if(trace) traceCall(prefix="in ", suffix=" :  ") else ""
+  Text1 <- if(trace) traceCall(prefix="in ", suffix=": ") else ""
+  Text2 <- if(pwd) paste0("(With current getwd: ", getwd(), ")\n") else ""
   # prepare message:
-  Text2 <- if(sum(!exi)>1) paste0("The ",sum(!exi)," files  ") else "The file '"
-  Text3 <- if(sum(!exi)>2) paste0(toString(file[!exi][1:2]), " (and ",sum(!exi)-2," others)") else
-                           toString(file[!exi])
-  Text4 <- if(sum(!exi)>1) "\n  do" else "'\n  does"
-  Text5 <- " not exist."
-  Text6 <- if(sum(exi_ns)==1) " (But exists without trailing spaces)." else 
-           if(sum(exi_ns) >1) paste0(" (But ",sum(exi_ns)," exist without trailing spaces).") else ""
-  Text7 <- if(pwd) paste0(" Current getwd: ", getwd() ) else ""
-  Text <- paste0(Text1,Text2,Text3,Text4,Text5,Text6,Text7)
+  Text3 <- if(sum(!exi)>1) paste0("The following ",sum(!exi)," files don't exist: ") else 
+                                  "The following file doesn't exist: "
+  Text4 <- if(sum(!exi)>nprint) paste0(toString(file[!exi][1:nprint]), " (and ",sum(!exi)-nprint," others)") else toString(file[!exi])
+  Text5 <- if(sum(exi_ns)==1) " (But exists without trailing slashes)." else 
+           if(sum(exi_ns) >1) paste0("\n(But ",sum(exi_ns)," exist without trailing slashes).") else ""
+  Text <- paste0(Text1,Text2,Text3,Text4,Text5)
   if(warnonly) warning(Text, call.=!trace) else stop(Text, call.=!trace)
   }
 return(invisible(exi))

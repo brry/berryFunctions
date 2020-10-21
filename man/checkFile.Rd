@@ -4,7 +4,7 @@
 \alias{checkFile}
 \title{check file existence}
 \usage{
-checkFile(file, warnonly = FALSE, trace = TRUE, pwd = TRUE)
+checkFile(file, warnonly = FALSE, trace = TRUE, pwd = TRUE, nprint = 2)
 }
 \arguments{
 \item{file}{Filename(s) as character string to be checked for existence.}
@@ -15,6 +15,9 @@ error with \code{\link{stop}}? DEFAULT: FALSE}
 \item{trace}{Logical: Add function call stack to the message? DEFAULT: TRUE}
 
 \item{pwd}{Logical: Print working directory in message? DEFAULT: TRUE}
+
+\item{nprint}{Integer: number of filenames to be printed. 
+The rest is abbreviated with (and n others). DEFAULT: 2}
 }
 \value{
 TRUE/FALSE, invisibly
@@ -33,6 +36,7 @@ checkFile(c("./",".//"), warnonly=TRUE)
 \dontrun{## Excluded from CRAN checks because of file creation
 # Vectorized:
 file.create("DummyFile2.txt")
+checkFile("DummyFile2.txt/")
 checkFile(paste0("DummyFile",1:3,".txt"), warnonly=TRUE)
 is.error(checkFile(paste0("DummyFile",1:3,".txt") ), TRUE, TRUE)
 file.remove("DummyFile2.txt")
