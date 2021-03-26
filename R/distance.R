@@ -6,7 +6,8 @@
 #' 
 #' @return vector with the distances
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2012
-#' @seealso \code{\link[spatstat]{nndist}} in the package \code{spatstat} for distance to nearest neighbour
+#' @seealso \code{\link[spatstat.geom]{nndist}} in the package \code{spatstat.geom} 
+#'          for distance to nearest neighbour
 #' @keywords spatial
 #' @export
 #' @examples

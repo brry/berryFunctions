@@ -41,7 +41,8 @@ text(c(3.2,6,1), c(6,1,4), round(distance(A,B, 3,5),2) )
 
 }
 \seealso{
-\code{\link[spatstat]{nndist}} in the package \code{spatstat} for distance to nearest neighbour
+\code{\link[spatstat.geom]{nndist}} in the package \code{spatstat.geom} 
+         for distance to nearest neighbour
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, 2012
