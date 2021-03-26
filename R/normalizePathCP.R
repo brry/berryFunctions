@@ -40,6 +40,8 @@ winslash="/",
 mustWork=FALSE
 )
 {
+# Remove trailing slashes:
+path <- sub("[/|\\]+$", "", path)
 # nonexistent files on Windows return full path by default:
 if(Sys.info()["sysname"] == "Windows")
   return(normalizePath(path=path, winslash=winslash, mustWork=mustWork))
