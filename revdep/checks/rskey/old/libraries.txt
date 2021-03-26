@@ -1,6 +1,0 @@
-Library: C:\Dropbox\Rpack\berryFunctions/revdep/library/berryFunctions/old
-berryFunctions (1.18.2)
-
-Library: C:\Dropbox\Rpack\berryFunctions/revdep/library/rskey
-abind      (1.4-5)
-rstudioapi (0.11)
