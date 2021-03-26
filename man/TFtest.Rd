@@ -28,6 +28,7 @@ TFtest(!a & !b | c)
 TFtest(!a & !b | c, na=FALSE)
 TFtest(!a)
 TFtest(a&b|c, (a&b)|c, a&(b|c), na=FALSE) # AND has precedence over OR
+TFtest(a|b, xor(a,b), na=FALSE)
 
 }
 \seealso{

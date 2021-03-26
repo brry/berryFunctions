@@ -16,6 +16,7 @@
 #' TFtest(!a & !b | c, na=FALSE)
 #' TFtest(!a)
 #' TFtest(a&b|c, (a&b)|c, a&(b|c), na=FALSE) # AND has precedence over OR
+#' TFtest(a|b, xor(a,b), na=FALSE)
 #' 
 #' @param \dots Expression(s) with logical operators to be evaluated,
 #'        with single letters for variables. Each expression is to be separated with a comma
@@ -31,9 +32,8 @@ depsub <- as.list(substitute(list(...))[-1])
 depsub <- sapply(depsub, function(x) deparse(x))
 
 # letters in expression
-lets <- gsub("[^[:alpha:]]+", "", depsub)
-lets <- paste(lets, collapse="")
-nn <- length(unique(strsplit(lets,"")[[1]]))
+nlets <- sapply(gregexpr("\\<[a-z,A-Z]{1}\\>", depsub), length)
+nn <- max(nlets)
 
 # combinations of T and F in truth table:
 TFvalues <- c(TRUE, FALSE, if(na) NA)
