@@ -4,15 +4,18 @@
 \alias{dataStr}
 \title{str of datasets}
 \usage{
-dataStr(package = NULL, df = FALSE, ...)
+dataStr(only = NULL, msg = FALSE, package = NULL, ...)
 }
 \arguments{
+\item{only}{Charstring class: give information only about objects of that class.
+Can also be TRUE to sort output by nrow/ncol
+DEFAULT: NULL (ignore)}
+
+\item{msg}{Logical: message str info? DEFAULT: FALSE}
+
 \item{package}{Package name. DEFAULT: NULL}
 
-\item{df}{Logical: give information only about all data.frame objects? 
-DEFAULT: FALSE}
-
-\item{\dots}{other arguments passed to \code{\link{data}}}
+\item{\dots}{Other arguments passed to \code{\link{data}}}
 }
 \value{
 invisible data.frame. Mainly prints via \code{\link{message}} in a for loop.
@@ -22,14 +25,14 @@ Print the \code{\link{str}} of each dataset returned by \code{\link{data}}
 }
 \examples{
 
-# dataStr() # all loaded packages on search path (package=NULL)
-dataStr("datasets") # only datasets in base R
-dataStr("colorspace") # works with an installed but unloaded package
+dataStr() # all loaded packages on search path (package=NULL)
+# dataStr(package="datasets") # only datasets in base R package datasets
+dataStr(TRUE) # sorted by nrow / ncol
 
-# data.frames only
-d <- dataStr(df=TRUE)
+d <- dataStr(only="data.frame") # data.frames only
 head(d)
-d[,c("Call","ncol","nrow")]
+if(interactive()) View(d) # to sort in Rstudio Viewer
+d[,c("Object","ncol","nrow")]
 
 }
 \seealso{

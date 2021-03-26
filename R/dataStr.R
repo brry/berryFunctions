@@ -10,23 +10,26 @@
 #' @export
 #' @examples
 #' 
-#' # dataStr() # all loaded packages on search path (package=NULL)
-#' dataStr("datasets") # only datasets in base R
-#' dataStr("colorspace") # works with an installed but unloaded package
+#' dataStr() # all loaded packages on search path (package=NULL)
+#' # dataStr(package="datasets") # only datasets in base R package datasets
+#' dataStr(TRUE) # sorted by nrow / ncol
 #' 
-#' # data.frames only
-#' d <- dataStr(df=TRUE)
+#' d <- dataStr(only="data.frame") # data.frames only
 #' head(d)
-#' d[,c("Call","ncol","nrow")]
+#' if(interactive()) View(d) # to sort in Rstudio Viewer
+#' d[,c("Object","ncol","nrow")]
 #' 
+#' @param only    Charstring class: give information only about objects of that class.
+#'                Can also be TRUE to sort output by nrow/ncol
+#'                DEFAULT: NULL (ignore)
+#' @param msg     Logical: message str info? DEFAULT: FALSE
 #' @param package Package name. DEFAULT: NULL
-#' @param df      Logical: give information only about all data.frame objects? 
-#'                DEFAULT: FALSE
-#' @param \dots other arguments passed to \code{\link{data}}
+#' @param \dots   Other arguments passed to \code{\link{data}}
 #' 
 dataStr <- function(
+only=NULL,
+msg=FALSE,
 package=NULL,
-df=FALSE,
 ...
 )
 {
@@ -41,32 +44,40 @@ d$Call <- gsub("(","",gsub(")","",d$Call, fixed=TRUE), fixed=TRUE)
 d$Call[is.na(d$Call)] <- d$Object[is.na(d$Call)]
 # sort alphabetically within packages:
 d <- d[order(d$Package, tolower(d$Object)),]
+# remove columns
+d$LibPath <- NULL 
+d$Item <- NULL
+d$Call <- NULL
+# new columns
+d$length <- NA
+d$nrow <- NA
+d$ncol <- NA
 d$class <- NA
-if(df)
-  {
-  d$nrow <- NA
-  d$ncol <- NA
-  }
 for(i in 1:nrow(d))
   {
   x <- d[i,, drop=FALSE]
   data(list=x$Call, package=x$Package, envir=env)
   obj <- get(x$Object, envir=env) # getExportedValue(asNamespace(package), x$Object)
   d[i,"class"] <- toString(class(obj))
-  if(!df)
+  d[i,"length"] <- if(inherits(obj, "data.frame")) NA else length(obj)
+  d[i,"nrow"] <- replace(nrow(obj), is.null(nrow(obj)), NA)
+  d[i,"ncol"] <- replace(ncol(obj), is.null(ncol(obj)), NA)
+  doprint <- TRUE
+  if(!is.null(only) && !isTRUE(only)) doprint <- inherits(obj, only)
+  if(msg & doprint)
     {
     message(x$Package, "  |  ", x$Object, "  |  ", d[i,"class"], "  |  ", x$Title)
     message(str(obj))
-    } else if(grepl("data.frame", d[i,"class"]))
-    d[i, c("nrow","ncol")] <- c(nrow(obj),ncol(obj))
+    }
   }
-if(df) 
+if(!is.null(only)) 
   {
-  d <- d[grepl("data.frame", d$class), ]
+  d <- if(isTRUE(only)) d else d[grepl(only, d$class), ]
   d <- sortDF(d, "nrow")
   d <- sortDF(d, "ncol")
   }
-return(invisible(d))
+return(d)
 }
 
-
+# d <- dataStr(TRUE) ; rm(dataStr)
+# d <- dataStr("data.frame")
