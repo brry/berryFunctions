@@ -61,8 +61,7 @@ if(any(!exi))
   {
   # existing without trailing slashes?
   # remove trailing slashes for windows folders:
-  file_ns <- file
-  while(any(grepl("/$", file_ns)))  file_ns <- sub("/$","",file_ns) 
+  file_ns <- sub("[/|\\]+$", "", file)
   exi_ns <- file.exists(file_ns)
   # tracing the calling function(s):
   Text1 <- if(trace) traceCall(prefix="in ", suffix=": ") else ""
