@@ -289,7 +289,7 @@ mReg(rep(NA,10), 1:10, quiet=TRUE)
 
 }
 \references{
-Listed here: \url{http://rclickhandbuch.wordpress.com/rpackages}
+Listed here: \url{https://rclickhandbuch.wordpress.com/rpackages/}
 }
 \seealso{
 \code{\link{glm}}, \code{\link{lm}}, \code{\link{optim}}

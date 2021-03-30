@@ -179,7 +179,7 @@ op <- par(no.readonly=TRUE)
 # par reset
 if(resetfocus) on.exit(
   {
-  par(op[names(op) != "mfg"]) # mfg not resetted, see http://stackoverflow.com/a/42798556/1587132
+  par(op[names(op) != "mfg"]) # mfg not resetted, see https://stackoverflow.com/a/42798556/1587132
   if(colwise) par(mfcol=op$mfcol)
   if(!all(op$mfg==1)) par(mfg=op$mfg) # needed for multiple figure plots
   #par(mar=op$mar)

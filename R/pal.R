@@ -60,7 +60,7 @@ title(main="berryFunctions::catPal", xpd=NA, line=0.5)
 #' @title Categorical color palette
 #' @description 
 #' Categorical color palette according to IwantHue as displayed on
-#' \url{https://en.rockcontent.com/blog/subtleties-of-color-different-types-of-data-require-different-color-schemes}
+#' \url{https://rockcontent.com/blog/subtleties-of-color-different-types-of-data-require-different-color-schemes/}
 #' @return Character string vector with color names
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Apr 2019
 #' @seealso \code{\link{showPal}}, \code{\link{seqPal}}, \code{\link{divPal}}
@@ -118,9 +118,9 @@ outcols
 #' @seealso \code{\link{showPal}}, \code{\link{seqPal}}, \code{\link{catPal}}, \code{\link{addAlpha}},
 #'          \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 #' @references The default palette is originally in 12 shades in the IPCC Assessment Report 5
-#'             Chapter 12 Fig 12.22, \url{http://www.ipcc.ch/report/ar5/wg1/}.\cr
+#'             Chapter 12 Fig 12.22, \url{https://www.ipcc.ch/report/ar5/wg1/}.\cr
 #'             The green-purple and blue-red palettes are from NYtimes (originally with 8 shades),
-#'             \url{https://nyti.ms/2mL0o4J}
+#'             \url{https://www.nytimes.com/interactive/2017/03/21/climate/how-americans-think-about-climate-change-in-six-maps.html}
 #' @keywords color dplot
 #' @importFrom grDevices colorRampPalette
 #' @export

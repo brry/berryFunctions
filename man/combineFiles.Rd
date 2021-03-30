@@ -63,7 +63,8 @@ unlink(paste0("BujakashaBerry", 1:3, ".txt"))
 
 }
 \seealso{
-\code{\link{compareFiles}}, and the functions used internally here, namely: \code{\link{paste}}, \code{\link{scan}}, \code{\link{write}}.
+\code{\link{compareFiles}}, and the functions used internally here, namely:
+         \code{\link{paste}}, \code{\link{scan}}, \code{\link{write}}.
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Nov 2012, Dec 2014, Jul 2015

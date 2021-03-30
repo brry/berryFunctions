@@ -6,7 +6,8 @@
 #' 
 #' @return array
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Dec 2016
-#' @seealso \code{\link{l2df}}, \code{\link{help}}, \url{http://stackoverflow.com/a/4310747}
+#' @seealso \code{\link{l2df}}, \code{\link{help}},
+#'          \url{https://stackoverflow.com/a/4310747}
 #' @keywords list manip array
 #' @importFrom abind abind
 #' @export

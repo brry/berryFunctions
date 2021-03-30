@@ -156,8 +156,8 @@ with inspiration taken from \code{ordilabel} in package \code{vegan}
 \seealso{
 \code{\link{text}}, \code{\link{roundedRect}};
          \code{shadowtext} in package \code{TeachingDemos}, see
-         \url{http://blog.revolutionanalytics.com/2009/05/make-text-stand-out-with-outlines.html},
-          and \url{http://stackoverflow.com/questions/25631216}. \cr
+         \url{https://blog.revolutionanalytics.com/2009/05/make-text-stand-out-with-outlines.html},
+          and \url{https://stackoverflow.com/questions/25631216}. \cr
          \code{s.label} in package \code{ade4}, which is not so versatile and
          doesn't work with logarithmic axes
 }

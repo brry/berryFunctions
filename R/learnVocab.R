@@ -1,7 +1,7 @@
 #' @title spaced learning
 #' @description spaced learning e.g. for vocabulary. Uses interactive questions.\cr
 #' Note: this currently clears the console!\cr
-#' Based on \url{https://ncase.me/remember} by Nicky Case.\cr
+#' Based on \url{https://ncase.me/remember/} by Nicky Case.\cr
 #' At the beginning, new vocab will be asked, skip with empty ENTER.
 #' @return Updated vocab list, invisibly.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Apr 2019

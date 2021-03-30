@@ -1,11 +1,14 @@
 #' Unit Hydrograph
 #' 
-#' Calculate continuous unit hydrograph with given n and k (in the framework of the linear storage cascade)
+#' Calculate continuous unit hydrograph with given n and k 
+#' (in the framework of the linear storage cascade)
 #' 
 #' @return Vector with the unit hydrograph along t
-#' @note The sum under the UH should always be 1 (if t is long enough). This needs yet to be checked...
+#' @note The sum under the UH should always be 1 (if t is long enough). 
+#' This needs yet to be checked...
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, July 2013
-#' @seealso \code{\link{lsc}} on how to estimate n and k for a given discharge dataset. \code{deconvolution.uh} in the package hydromad, \url{http://hydromad.catchment.org}
+#' @seealso \code{\link{lsc}} on how to estimate n and k for a given discharge dataset. 
+#'          \code{deconvolution.uh} in the package hydromad, \url{https://hydromad.catchment.org/}
 #' @keywords hplot ts
 #' @export
 #' @examples

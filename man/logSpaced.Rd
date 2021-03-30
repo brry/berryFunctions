@@ -57,11 +57,11 @@ plot(d, rep(1,20), log="x")
 
 # For exactly spacing logarithmically, use
 plot(10^seq(from=log10(1), to=log10(100), len=100), log="y")
-browseURL("https://stackoverflow.com/a/29963530")
 
 }
 \seealso{
-\code{\link{classify}}, \code{\link{log}}
+\code{\link{classify}}, \code{\link{log}}, 
+         \url{https://stackoverflow.com/a/29963530}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Oct 2014

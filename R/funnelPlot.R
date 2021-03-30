@@ -7,13 +7,13 @@
 #'  Overwriting lty for one of the three line categories then produces
 #'  eg c("2", "solid", "solid"), which cannot be processed by legend.\cr
 #'  \bold{Wilson's Method:} algebraic approximation to the binomial distribution, very accurate, even for very small numbers.\cr
-#'  \url{http://webarchive.nationalarchives.gov.uk/20170106081156/http://www.apho.org.uk/resource/item.aspx?RID=39445} see "contains".\cr
+#'  \url{https://webarchive.nationalarchives.gov.uk/20170106081156/http://www.apho.org.uk/resource/item.aspx?RID=39445} see "contains".\cr
 #'  \bold{classic = Stephen Few's Method = the way I knew it:} sqrt( mu*(1-mu) / n )\cr
 #'  \url{http://www.jerrydallal.com/LHSP/psd.htm}\cr
-#'  \url{http://commons.wikimedia.org/wiki/File:ComparisonConfidenceIntervals.png}\cr
+#'  \url{https://commons.wikimedia.org/wiki/File:ComparisonConfidenceIntervals.png}\cr
 #'  The apho Wilson method first yielded wrong upper limits in my translation (it needs 0:1 instead of \%). Thus I added the wikipedia formula:\cr
-#'  \url{http://de.wikipedia.org/wiki/Konfidenzintervall_einer_unbekannten_Wahrscheinlichkeit#Wilson-Intervall}\cr
-#'  \url{http://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval}\cr
+#'  \url{https://de.wikipedia.org/wiki/Konfidenzintervall_einer_unbekannten_Wahrscheinlichkeit#Wilson-Intervall}\cr
+#'  \url{https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval}\cr
 #'  Which other methods should I include? (That's not the hard part anymore)
 #' @section The basic idea: Salesman A (new to the job) has had 3 customers and
 #' sold 1 car. So his success rate is 0.33. Salesman B sold 1372 customers 632

@@ -38,7 +38,7 @@ compareFiles(filenames[1], filenames[2], warn=FALSE)
 
 }
 \seealso{
-\url{http://text-compare.com/} which I sadly only discovered after writing this function,
+\url{https://text-compare.com/} which I sadly only discovered after writing this function,
          \code{\link{dupes}} for finding duplicate lines, \code{\link{combineFiles}}
 }
 \author{

@@ -7,7 +7,8 @@
 #'        \item{labs}{Formatted values for labels}
 #'        \item{all}{Values for lines}
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Feb 2014
-#' @seealso \code{\link{log10}}, \code{\link{logAxis}}, \url{http://r.789695.n4.nabble.com/expression-exponent-labeling-td4661174.html}
+#' @seealso \code{\link{log10}}, \code{\link{logAxis}},
+#'          \url{https://r.789695.n4.nabble.com/expression-exponent-labeling-td4661174.html}
 #' @keywords aplot dplot
 #' @export
 #' @examples

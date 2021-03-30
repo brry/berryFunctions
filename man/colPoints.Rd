@@ -224,7 +224,7 @@ colPoints(x,y,sim1, data=xyz, add=FALSE)
 }
 \references{
 \url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html},
-            \url{http://www.theusrus.de/blog/the-good-the-bad-22012/}
+            \url{https://www.theusrus.de/blog/the-good-the-bad-22012/}
 }
 \seealso{
 \code{\link{classify}}, \code{\link{colPointsLegend}}, \code{\link{colPointsHist}}

@@ -13,7 +13,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2011-2014. I'd be interested in hearing what you used the function for.
 #' @seealso \code{\link{classify}}, \code{\link{colPointsLegend}}, \code{\link{colPointsHist}}
 #' @references \url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html},
-#'             \url{http://www.theusrus.de/blog/the-good-the-bad-22012/}
+#'             \url{https://www.theusrus.de/blog/the-good-the-bad-22012/}
 #' @keywords aplot hplot color
 #' @importFrom grDevices colorRampPalette rainbow
 #' @importFrom graphics plot points segments abline image

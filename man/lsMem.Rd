@@ -28,7 +28,7 @@ lsMem()
 
 }
 \references{
-\url{http://stackoverflow.com/questions/1358003/tricks-to-manage-the-available-memory-in-an-r-session}
+\url{https://stackoverflow.com/questions/1358003/tricks-to-manage-the-available-memory-in-an-r-session}
 }
 \seealso{
 \code{\link{object.size}}, \code{\link{ls}}

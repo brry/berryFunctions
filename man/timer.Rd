@@ -32,7 +32,7 @@ timer(interval=0.2, n=8, write=TRUE) # a slight deviation occurs for a large n
 
 }
 \references{
-\url{http://user2015.math.aau.dk/lightning_talks}
+\url{https://user2015.math.aau.dk/lightning_talks}
 }
 \seealso{
 \code{\link{alarm}}, \code{\link{Sys.sleep}}, \code{\link{txtProgressBar}}

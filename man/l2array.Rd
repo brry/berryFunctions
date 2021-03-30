@@ -110,7 +110,8 @@ is.error(   A <- l2array(c(LA, 999)),  tell=TRUE, force=TRUE)
 
 }
 \seealso{
-\code{\link{l2df}}, \code{\link{help}}, \url{http://stackoverflow.com/a/4310747}
+\code{\link{l2df}}, \code{\link{help}},
+         \url{https://stackoverflow.com/a/4310747}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2016

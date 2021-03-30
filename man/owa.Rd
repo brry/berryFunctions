@@ -71,10 +71,10 @@ owa(d, a, c("bb","lwd"), c("lty","dummy") ) # or several vectors
 
 }
 \references{
-\url{http://stackoverflow.com/questions/3057341}\cr
-   \url{http://stackoverflow.com/questions/5890576}\cr
-   \url{http://stackoverflow.com/questions/4124900}\cr
-   \url{http://stackoverflow.com/questions/16774946}\cr
+\url{https://stackoverflow.com/questions/3057341}\cr
+   \url{https://stackoverflow.com/questions/5890576}\cr
+   \url{https://stackoverflow.com/questions/4124900}\cr
+   \url{https://stackoverflow.com/questions/16774946}\cr
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Early 2014, Update Oct 2016

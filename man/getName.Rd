@@ -48,10 +48,10 @@ lower2(pi, TRUE) # "3.14159265358979"
 
 }
 \seealso{
-\url{http://stackoverflow.com/a/26558733}, \code{\link{substitute}}
+\url{https://stackoverflow.com/a/26558733}, \code{\link{substitute}}
 }
 \author{
-\url{http://stackoverflow.com/users/2725969/brodieg}
+\url{https://stackoverflow.com/users/2725969/brodieg}
         Implementation Berry Boessenkool, \email{berry-b@gmx.de}, Sep 2016
 }
 \keyword{IO}

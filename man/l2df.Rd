@@ -82,11 +82,11 @@ do.call(rbind, eg6)
 
 }
 \references{
-\url{http://stackoverflow.com/questions/5531471/combining-unequal-columns-in-r}\cr
-  \url{http://stackoverflow.com/questions/15753091/convert-mixed-length-named-list-to-data-frame}\cr
-  \url{http://stackoverflow.com/questions/5942760/most-efficient-list-to-data-frame-method}\cr
-  \url{http://stackoverflow.com/questions/8799990/converting-given-list-into-dataframe}\cr
-  \url{http://stackoverflow.com/questions/4227223/r-list-to-data-frame}
+\url{https://stackoverflow.com/questions/5531471/combining-unequal-columns-in-r}\cr
+  \url{https://stackoverflow.com/questions/15753091/convert-mixed-length-named-list-to-data-frame}\cr
+  \url{https://stackoverflow.com/questions/5942760/most-efficient-list-to-data-frame-method}\cr
+  \url{https://stackoverflow.com/questions/8799990/converting-given-list-into-dataframe}\cr
+  \url{https://stackoverflow.com/questions/4227223/r-list-to-data-frame}
 }
 \seealso{
 \code{\link{l2array}}, \code{\link{sapply}}, \code{\link{sortDF}}.

@@ -9,7 +9,8 @@
 #' @note base >1 concentrates points at low values, base<1 at high values.
 #'       \code{base} does not relate to \code{base} in \code{\link{log}}!
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Oct 2014
-#' @seealso \code{\link{classify}}, \code{\link{log}}
+#' @seealso \code{\link{classify}}, \code{\link{log}}, 
+#'          \url{https://stackoverflow.com/a/29963530}
 #' @keywords arith
 #' @importFrom graphics plot points
 #' @importFrom stats coef lm
@@ -27,7 +28,6 @@
 #' 
 #' # For exactly spacing logarithmically, use
 #' plot(10^seq(from=log10(1), to=log10(100), len=100), log="y")
-#' browseURL("https://stackoverflow.com/a/29963530")
 #' 
 #' @param base Base for calculations, can be a vector to compare several bases. DEFAULT: 1.1708
 #' @param n Number of values to be calculated. DEFAULT: 30

@@ -7,7 +7,7 @@
 #' @return none
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, June 2015
 #' @seealso \code{\link{alarm}}, \code{\link{Sys.sleep}}, \code{\link{txtProgressBar}}
-#' @references \url{http://user2015.math.aau.dk/lightning_talks}
+#' @references \url{https://user2015.math.aau.dk/lightning_talks}
 #' @keywords utilities chron
 #' @importFrom utils alarm setTxtProgressBar txtProgressBar
 #' @export

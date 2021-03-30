@@ -20,7 +20,7 @@ The function is not vectorized! If you have many links, use a loop around this f
 }
 \examples{
 
-Link <- paste0("http://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1",
+Link <- paste0("https://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1",
         "&cad=rja&sqi=2&ved=0CDIQFjAA&url=http\%3A\%2F\%2Fcran.r-project.org",
         "\%2Fdoc\%2Fmanuals\%2FR-intro.pdf&ei=Nyl4UfHeOIXCswa6pIC4CA",
         "&usg=AFQjCNGejDwPlor4togQZmQEQv72cK9z8A&bvm=bv.45580626,d.Yms")

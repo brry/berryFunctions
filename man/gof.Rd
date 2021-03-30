@@ -109,8 +109,8 @@ kge(x,y) ; kge(y,x)
 }
 \seealso{
 \code{\link{cor}}, \code{\link{lm}}.
-            \url{http://en.wikipedia.org/wiki/R-squared},
-            \url{http://en.wikipedia.org/wiki/Mean_squared_error}
+            \url{https://en.wikipedia.org/wiki/R-squared},
+            \url{https://en.wikipedia.org/wiki/Mean_squared_error}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Sept 2016

@@ -4,7 +4,7 @@
 #' 
 #' @return Vector of line numbers that differ, result from \code{\link{head}(..., nr)}
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Aug 2014
-#' @seealso \url{http://text-compare.com/} which I sadly only discovered after writing this function,
+#' @seealso \url{https://text-compare.com/} which I sadly only discovered after writing this function,
 #'          \code{\link{dupes}} for finding duplicate lines, \code{\link{combineFiles}}
 #' @keywords IO file character
 #' @importFrom utils head

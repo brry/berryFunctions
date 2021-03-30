@@ -30,7 +30,7 @@ hist(rescale(values, 135, 200), breaks=25, col=3)
 
 }
 \references{
-\url{http://stackoverflow.com/a/18303620}
+\url{https://stackoverflow.com/a/18303620}
 }
 \seealso{
 \code{scales::rescale}

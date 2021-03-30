@@ -83,17 +83,17 @@
 #' unlink("ClimateGraph.pdf")
 #' 
 #' # further German reading:
-#' browseURL("http://www.klimadiagramme.de/all.html")
+#' browseURL("https://www.klimadiagramme.de/all.html")
 #' 
 #' 
 #' # Climate Graphs for the USA:
-#' NOOAlink <- "http://www1.ncdc.noaa.gov/pub/data/normals/1981-2010/"
+#' NOOAlink <- "https://www1.ncdc.noaa.gov/pub/data/normals/1981-2010/"
 #' browseURL(NOOAlink)
 #' # Find your Station here:
 #' browseURL(paste0(NOOAlink,"/station-inventories/allstations.txt"))
 #' 
 #' # Data from Roseburg, Oregon:
-#' download.file(destfile="Roseburg.txt", url=paste0("http://www1.ncdc.noaa.gov/",
+#' download.file(destfile="Roseburg.txt", url=paste0("https://www1.ncdc.noaa.gov/",
 #'           "pub/data/normals/1981-2010/products/station/USC00357331.normals.txt"))
 #' RT <- read.table(file="Roseburg.txt", skip=11, nrows=1, as.is=TRUE)[1,-1]
 #' RT <- ( as.numeric(substr(RT,1,3))/10   - 32) * 5/9     # converted to degrees C

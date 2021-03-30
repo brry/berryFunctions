@@ -5,7 +5,7 @@
 #' @return numeric vector, rescaled onto output range
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2016
 #' @seealso \code{scales::rescale}
-#' @references \url{http://stackoverflow.com/a/18303620}
+#' @references \url{https://stackoverflow.com/a/18303620}
 #' @keywords manip
 #' @export
 #' @examples

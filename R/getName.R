@@ -3,9 +3,9 @@
 #' get the name of an input in nested function calls
 #' 
 #' @return Character string with the name
-#' @author \url{http://stackoverflow.com/users/2725969/brodieg}
+#' @author \url{https://stackoverflow.com/users/2725969/brodieg}
 #'         Implementation Berry Boessenkool, \email{berry-b@@gmx.de}, Sep 2016
-#' @seealso \url{http://stackoverflow.com/a/26558733}, \code{\link{substitute}}
+#' @seealso \url{https://stackoverflow.com/a/26558733}, \code{\link{substitute}}
 #' @keywords character IO
 #' @importFrom utils head
 #' @export

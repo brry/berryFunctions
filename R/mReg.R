@@ -53,7 +53,7 @@
 #'         And outside the range of values, they act wildly.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Dec 2012, updated April and Aug 2013, sept 2015
 #' @seealso \code{\link{glm}}, \code{\link{lm}}, \code{\link{optim}}
-#' @references Listed here: \url{http://rclickhandbuch.wordpress.com/rpackages}
+#' @references Listed here: \url{https://rclickhandbuch.wordpress.com/rpackages/}
 #' @keywords aplot hplot regression nonlinear multivariate
 #' @importFrom grDevices extendrange
 #' @importFrom graphics lines par plot legend
