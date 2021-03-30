@@ -1,3 +1,5 @@
 
-Two URLS at www.hoelzel.at sometimes get flagged, but both are working.
-Hence I'd like to keep them, even if the SSL certificate has expired.
+The URL
+https://hydromad.catchment.org/
+is flagged on rhub platform r-devel-windows-ix86+x86_64, but is working.
+
