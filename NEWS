@@ -26,6 +26,26 @@ actual NEWS
 -----------------------------
 -----------------------------
 
+Version 1.20.0 (2021-03-30)
+- sumatraInitialize: now also write to appData/Roaming/SumatraPDF
+- createPres: new argument asp, defaults to 16:9 presentations
+- classify: gains argument 'col' to conveniently map a color palette
+- popleaf: gains new arguments 'truncate' and 'tstring'
+- testExamples: clean computing time logfile
+- traceCall: removes more unwanted output
+- groupHist: gains argument 'col'
+- library2: message removed, 'quietly' argument added 
+- checkFile: Nicer error messages, removal of trailing slashes improved
+- TFtest: letters recognized better
+- normalizePathCP: removal of trailing slashes added
+- dataStr: completely written, new API
+- documentation URLS updated
+New functions: runTime, compareDist, if.error, locatorRS
+
+
+-----------------------------
+-----------------------------
+
 Version 1.19.0 (2020-06-05)
 - several additional arguments for functions dataStr, seqR, packagePath, popleaf, monthAxis, groupHist
 - almost.equal now has scale=1 as default
