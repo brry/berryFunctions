@@ -4,7 +4,7 @@ Miscellaneous R functions. Notable: colPoints, horizHist, logAxis, pointZoom, sm
 
 **See the [Vignette](https://cran.r-project.org/package=berryFunctions/vignettes/berryFunctions.html) for an overview of the package.**
 
-[Recent changes](http://starlogs.net/#brry/berryFunctions) (Thanks, [Jenny](http://happygitwithr.com/comic-relief.html))
+[Recent changes](http://starlogs.net/#brry/berryFunctions) (Thanks, [Jenny](https://happygitwithr.com/comic-relief.html))
 
 
 ### installation
@@ -33,7 +33,7 @@ remotes::install_github("brry/berryFunctions")
 ### trouble
 
 If direct installation from CRAN doesn't work, your R version might be too old. In that case, an update is really recommendable: [r-project.org](https://www.r-project.org/). If you can't update R, try installing from source (github) via `instGit` or devtools as mentioned above. If that's not possible either, here's a manual workaround:
-click on **Clone or Download - Download ZIP** (top right, [link](https://github.com/brry/berryFunctions/archive/master.zip)), unzip the file to some place, then
+click on **Clone or Download - Download ZIP** (top right, [link](https://github.com/brry/berryFunctions/archive/refs/heads/master.zip)), unzip the file to some place, then
 ```R
 setwd("that/path")
 dd <- dir("berryFunctions-master/R", full=T)
