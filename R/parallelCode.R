@@ -2,6 +2,7 @@
 #' @description message a code chunk template for parallelization with progress bar on windows.
 #' On Linux, just use \code{pblapply(X, cl=8, FUN=fun)}
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Aug 2017
+#' @seealso \code{\link{par_sapply}}
 #' @export
 #' @examples
 #' parallelCode()

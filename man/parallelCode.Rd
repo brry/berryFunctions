@@ -14,6 +14,9 @@ On Linux, just use \code{pblapply(X, cl=8, FUN=fun)}
 parallelCode()
 
 }
+\seealso{
+\code{\link{par_sapply}}
+}
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Aug 2017
 }
