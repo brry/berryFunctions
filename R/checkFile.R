@@ -63,6 +63,7 @@ if(any(!exi))
   # remove trailing slashes for windows folders:
   file_ns <- sub("[/|\\]+$", "", file)
   exi_ns <- file.exists(file_ns)
+  exi_ns <- exi_ns & !exi
   # tracing the calling function(s):
   Text1 <- if(trace) traceCall(prefix="in ", suffix=": ") else ""
   Text2 <- if(pwd) paste0("(With current getwd: ", getwd(), ")\n") else ""
