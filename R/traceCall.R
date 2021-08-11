@@ -73,5 +73,6 @@ vigremove=TRUE
   }
   calltrace <- gsub("->  ->", "->", calltrace)
   calltrace <- gsub("with -> with.default -> eval -> eval", "with ->", calltrace)
+  calltrace <- gsub("withVisible -> eval -> eval -> ", "", calltrace)
   calltrace
 }
