@@ -8,6 +8,7 @@ write.tab(
   x,
   file = NULL,
   sep = "\\t",
+  name_rn = NULL,
   row.names = FALSE,
   quote = FALSE,
   fileEncoding = "UTF-8",
@@ -22,8 +23,12 @@ write.tab(
 
 \item{sep}{Column separator. DEFAULT: "\t"}
 
+\item{name_rn}{If not NULL, this will be used as the name for a prepended
+column with the rownames. DEFAULT: NULL}
+
 \item{row.names}{Should rownames be written in a pre-column that will
-mess up alignment with column mnames? DEFAULT: FALSE}
+mess up alignment with column mnames? 
+Use name_rn instead. DEFAULT: FALSE}
 
 \item{quote}{Write quatation marks around charstrings? DEFAULT: FALSE}
 
@@ -45,8 +50,11 @@ if \code{open=TRUE}, tries to open the file in the default txt viewer.
 \dontrun{
 write.tab(iris)
 write.tab(iris, "otherfile.txt")
+write.tab(freeny)
+write.tab(freeny, name_rn="Time")
 unlink("iris.txt")
 unlink("otherfile.txt")
+unlink("freeny.txt")
 }
 }
 \seealso{
