@@ -12,13 +12,16 @@
 #' 
 #' dataStr() # all loaded packages on search path (package=NULL)
 #' # dataStr(package="datasets") # only datasets in base R package datasets
-#' dataStr(TRUE) # sorted by nrow / ncol
-#' 
+#' dataStr(only=TRUE) # sorted by nrow / ncol
 #' d <- dataStr(only="data.frame") # data.frames only
 #' head(d)
 #' if(interactive()) View(d) # to sort in Rstudio Viewer
 #' d[,c("Object","ncol","nrow")]
 #' 
+#' dataStr(heads=TRUE) # heads of all data.frames
+#' 
+#' @param heads   Logical: display heads of all data.frames? 
+#'                If TRUE, \code{only} is ignored. DEFAULT: FALSE
 #' @param only    Charstring class: give information only about objects of that class.
 #'                Can also be TRUE to sort output by nrow/ncol
 #'                DEFAULT: NULL (ignore)
@@ -27,8 +30,9 @@
 #' @param \dots   Other arguments passed to \code{\link{data}}
 #' 
 dataStr <- function(
+heads=FALSE,
 only=NULL,
-msg=FALSE,
+msg=heads,
 package=NULL,
 ...
 )
@@ -44,6 +48,15 @@ d$Call <- gsub("(","",gsub(")","",d$Call, fixed=TRUE), fixed=TRUE)
 d$Call[is.na(d$Call)] <- d$Object[is.na(d$Call)]
 # sort alphabetically within packages:
 d <- d[order(d$Package, tolower(d$Object)),]
+if(heads)
+return(invisible(sapply(d$Object, function(x){
+ y <- get(x)
+ if(!is.data.frame(y)) return(class(y))
+ if(ncol(y)>5) y<- y[,1:5]
+ out <- head(y)
+ if(msg) cat("\n", x,"\n")
+ if(msg) print(out)
+ out})))
 # remove columns
 d$LibPath <- NULL 
 d$Item <- NULL

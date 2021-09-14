@@ -4,9 +4,12 @@
 \alias{dataStr}
 \title{str of datasets}
 \usage{
-dataStr(only = NULL, msg = FALSE, package = NULL, ...)
+dataStr(heads = FALSE, only = NULL, msg = heads, package = NULL, ...)
 }
 \arguments{
+\item{heads}{Logical: display heads of all data.frames? 
+If TRUE, \code{only} is ignored. DEFAULT: FALSE}
+
 \item{only}{Charstring class: give information only about objects of that class.
 Can also be TRUE to sort output by nrow/ncol
 DEFAULT: NULL (ignore)}
@@ -27,12 +30,13 @@ Print the \code{\link{str}} of each dataset returned by \code{\link{data}}
 
 dataStr() # all loaded packages on search path (package=NULL)
 # dataStr(package="datasets") # only datasets in base R package datasets
-dataStr(TRUE) # sorted by nrow / ncol
-
+dataStr(only=TRUE) # sorted by nrow / ncol
 d <- dataStr(only="data.frame") # data.frames only
 head(d)
 if(interactive()) View(d) # to sort in Rstudio Viewer
 d[,c("Object","ncol","nrow")]
+
+dataStr(heads=TRUE) # heads of all data.frames
 
 }
 \seealso{
