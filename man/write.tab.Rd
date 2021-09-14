@@ -21,7 +21,7 @@ write.tab(
 
 \item{file}{Filename. DEFAULT: NULL = [name of x].txt}
 
-\item{sep}{Column separator. DEFAULT: "\t"}
+\item{sep}{Column separator. DEFAULT: "\\t"}
 
 \item{name_rn}{If not NULL, this will be used as the name for a prepended
 column with the rownames. DEFAULT: NULL}

@@ -21,7 +21,7 @@
 #' @param x            Objekt to be written.
 #' @param file         Filename. DEFAULT: NULL = [name of x].txt
 #' @param quote        Write quatation marks around charstrings? DEFAULT: FALSE
-#' @param sep          Column separator. DEFAULT: "\t"
+#' @param sep          Column separator. DEFAULT: "\\t"
 #' @param name_rn      If not NULL, this will be used as the name for a prepended
 #'                     column with the rownames. DEFAULT: NULL
 #' @param row.names    Should rownames be written in a pre-column that will
