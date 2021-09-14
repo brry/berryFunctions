@@ -19,7 +19,9 @@ Do not use \code{rainbow}: \url{https://eagereyes.org/basics/rainbow-color-map}
 showPal()
 }
 \seealso{
-\code{\link{seqPal}}, \code{\link{divPal}}, \code{\link{catPal}}, package \code{RColorBrewer}
+\code{\link{seqPal}}, \code{\link{divPal}}, \code{\link{catPal}}, 
+package \code{RColorBrewer}, 
+\url{https://blog.datawrapper.de/which-color-scale-to-use-in-data-vis/}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Apr 2016

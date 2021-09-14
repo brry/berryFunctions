@@ -6,7 +6,9 @@
 #' Do not use \code{rainbow}: \url{https://eagereyes.org/basics/rainbow-color-map}
 #' @return NULL
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Apr 2016
-#' @seealso \code{\link{seqPal}}, \code{\link{divPal}}, \code{\link{catPal}}, package \code{RColorBrewer}
+#' @seealso \code{\link{seqPal}}, \code{\link{divPal}}, \code{\link{catPal}}, 
+#' package \code{RColorBrewer}, 
+#' \url{https://blog.datawrapper.de/which-color-scale-to-use-in-data-vis/}
 #' @keywords dplot color
 #' @importFrom graphics par plot text title
 #' @export
