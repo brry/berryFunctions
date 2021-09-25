@@ -1,11 +1,11 @@
 Package: berryFunctions
 Type: Package
 Title: Function Collection Related to Plotting and Hydrology
-Version: 1.20.8
-Date: 2021-09-22
+Version: 1.20.9
+Date: 2021-09-25
 Imports: grDevices, graphics, stats, utils, abind
 Suggests: RColorBrewer, pbapply, knitr, rmarkdown, gstat, RCurl, colorspace, 
-          vioplot, spatstat.geom, TeachingDemos, ade4
+          vioplot, spatstat.geom, TeachingDemos, ade4, nortest
 Author: Berry Boessenkool
 Maintainer: Berry Boessenkool <berry-b@gmx.de>
 Description: Draw horizontal histograms, color scattered points by 3rd dimension,
