@@ -4,7 +4,14 @@
 \alias{dataStr}
 \title{str of datasets}
 \usage{
-dataStr(heads = FALSE, only = NULL, msg = heads, package = NULL, ...)
+dataStr(
+  heads = FALSE,
+  only = NULL,
+  msg = heads,
+  package = NULL,
+  view = TRUE,
+  ...
+)
 }
 \arguments{
 \item{heads}{Logical: display heads of all data.frames? 
@@ -18,10 +25,12 @@ DEFAULT: NULL (ignore)}
 
 \item{package}{Package name. DEFAULT: NULL}
 
+\item{view}{Open dataframe with \code{\link{View}} (in Rstudio, if available)? DEFAULT: TRUE}
+
 \item{\dots}{Other arguments passed to \code{\link{data}}}
 }
 \value{
-invisible data.frame. Mainly prints via \code{\link{message}} in a for loop.
+invisible data.frame. If \code{msg=TRUE}, prints via \code{\link{message}} in a for loop.
 }
 \description{
 Print the \code{\link{str}} of each dataset returned by \code{\link{data}}

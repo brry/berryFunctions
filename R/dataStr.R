@@ -2,7 +2,7 @@
 #' 
 #' Print the \code{\link{str}} of each dataset returned by \code{\link{data}}
 #' 
-#' @return invisible data.frame. Mainly prints via \code{\link{message}} in a for loop.
+#' @return invisible data.frame. If \code{msg=TRUE}, prints via \code{\link{message}} in a for loop.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, November 2015, in search of good datasets for teaching
 #' @seealso \code{\link{str}}
 #' @keywords print documentation
@@ -27,6 +27,7 @@
 #'                DEFAULT: NULL (ignore)
 #' @param msg     Logical: message str info? DEFAULT: FALSE
 #' @param package Package name. DEFAULT: NULL
+#' @param view    Open dataframe with \code{\link{View}} (in Rstudio, if available)? DEFAULT: TRUE
 #' @param \dots   Other arguments passed to \code{\link{data}}
 #' 
 dataStr <- function(
@@ -34,12 +35,14 @@ heads=FALSE,
 only=NULL,
 msg=heads,
 package=NULL,
+view=TRUE,
 ...
 )
 {
 env <- new.env()
 d <- data(..., package=package, envir=env)$results
 d <- as.data.frame(d, stringsAsFactors=FALSE)
+d <- d[d$Package!=".",] # From local objects
 # change things like  "beaver1 (beavers)"  to  "beaver1"
 itemsplit <- strsplit(d$Item, split=" ", fixed=TRUE)
 d$Object <- sapply(itemsplit, "[", 1)
@@ -89,8 +92,12 @@ if(!is.null(only))
   d <- sortDF(d, "nrow")
   d <- sortDF(d, "ncol")
   }
-return(d)
+if(view) # https://github.com/r-spatial/sf/issues/618
+if(requireNamespace("rstudioapi", quietly=TRUE) && rstudioapi::isAvailable())
+  .rs.viewHook(x=d, title="dataStr") else View(d, title="dataStr")
+# Output:
+return(invisible(d))
 }
 
-# d <- dataStr(TRUE) ; rm(dataStr)
-# d <- dataStr("data.frame")
+# Suppress CRAN check note 'no visible binding for global variable':
+if(getRversion() >= "2.15.1")  utils::globalVariables(".rs.viewHook")
