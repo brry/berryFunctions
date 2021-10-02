@@ -25,8 +25,10 @@
 #' @param name_rn      If not NULL, this will be used as the name for a prepended
 #'                     column with the rownames. DEFAULT: NULL
 #' @param row.names    Should rownames be written in a pre-column that will
-#'                     mess up alignment with column mnames? 
-#'                     Use name_rn instead. DEFAULT: FALSE
+#'                     mess up alignment with column names? 
+#'                     Use \code{name_rn} instead. DEFAULT: FALSE
+#' @param col.names    Should colnames be written? 
+#'                     DEFAULT: TRUE if x has colnames
 #' @param fileEncoding Encoding of charstrings. DEFAULT: "UTF-8"
 #' @param open         Try to open the output file? DEFAULT: TRUE
 #' @param \dots        Further arguments passed to \code{\link{write.table}}
@@ -37,6 +39,7 @@ file=NULL,
 sep="\t",
 name_rn=NULL,
 row.names=FALSE,
+col.names=!is.null(colnames(x)),
 quote=FALSE,
 fileEncoding="UTF-8",
 open=TRUE,
@@ -45,7 +48,7 @@ open=TRUE,
 {
 if(is.null(file)) file <- paste0(deparse(substitute(x)), ".txt")
 if(!is.null(name_rn)) {x <- cbind(rownames(x), x) ; colnames(x)[1] <- name_rn}
-write.table(x=x, file=file, sep=sep, row.names=row.names, 
+write.table(x=x, file=file, sep=sep, row.names=row.names, col.names=col.names, 
             quote=quote, fileEncoding=fileEncoding, ...)
 if(open) openFile(file)
 return(normalizePath(file))

@@ -10,6 +10,7 @@ write.tab(
   sep = "\\t",
   name_rn = NULL,
   row.names = FALSE,
+  col.names = !is.null(colnames(x)),
   quote = FALSE,
   fileEncoding = "UTF-8",
   open = TRUE,
@@ -27,8 +28,11 @@ write.tab(
 column with the rownames. DEFAULT: NULL}
 
 \item{row.names}{Should rownames be written in a pre-column that will
-mess up alignment with column mnames? 
-Use name_rn instead. DEFAULT: FALSE}
+mess up alignment with column names? 
+Use \code{name_rn} instead. DEFAULT: FALSE}
+
+\item{col.names}{Should colnames be written? 
+DEFAULT: TRUE if x has colnames}
 
 \item{quote}{Write quatation marks around charstrings? DEFAULT: FALSE}
 
