@@ -6,7 +6,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2014
 #' @seealso \code{\link{l2array}}, \code{\link{sapply}}, \code{\link{sortDF}}.
 #'          If you have a LARGE list each with the same number of values,
-#'          use the (much!) faster: \code{plyr::quickdf}.
+#'          use the (much!) faster: \code{\link{simplify2array}} or \code{plyr::quickdf}.
 #' @references
 #'   \url{https://stackoverflow.com/questions/5531471/combining-unequal-columns-in-r}\cr
 #'   \url{https://stackoverflow.com/questions/15753091/convert-mixed-length-named-list-to-data-frame}\cr
