@@ -53,7 +53,7 @@ n=length(d)
 spaces <- if(ignore.empty) sapply(0:9, function(i)
                   paste(rep(" ", i), collapse="")) else FALSE
 R <- readLines(file)
-R2 <- if(ignore.space) removeSpace(R) else R
+R2 <- if(ignore.space) trimws(R) else R
 # indices of duplicated:
 d <- which(duplicated(R2, incomparables=spaces, fromLast=TRUE) |
            duplicated(R2, incomparables=spaces, fromLast=FALSE)  )

@@ -31,6 +31,7 @@ extensively tested yet, please mail me any problems...
 
 s <- c("space at end     ", "  white at begin", "  both ", " special ^  ")
 removeSpace(s)
+trimws(s)
 
 # To add space, use:
 x <- c("ab","abcde")
@@ -40,7 +41,7 @@ format(x, width=9)
 
 }
 \seealso{
-\code{\link{sub}}
+\code{\link{sub}}, \code{\link{trimws}} since R 3.2.0 (April 2015)
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Dec 2014

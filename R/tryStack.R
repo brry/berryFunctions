@@ -186,7 +186,7 @@ if(type=="warning" | type=="message")
 stack <- stack[stack!="doWithOneRestart(return(expr), restart)"]
 
 # remove common try elements from tryStack:
-toremove <- sapply(stack, function(x) any(grepl(removeSpace(x[1]), toremovestring, fixed=TRUE)) )
+toremove <- sapply(stack, function(x) any(grepl(trimws(x[1]), toremovestring, fixed=TRUE)) )
 stack <- stack[!toremove]
 # remove tryCatch elements
 if(removetry)

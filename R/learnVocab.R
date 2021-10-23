@@ -68,13 +68,13 @@ if(nt>0) for(i in 1:nt)
 {
 r <- rows_to_test[i] # r: row number
 cat("\014") # clear console
-v1 <- paste0(i,"/",nt,", L",voc[r,1],", ", n1,": ", removeSpace(voc[r,2]), 
+v1 <- paste0(i,"/",nt,", L",voc[r,1],", ", n1,": ", trimws(voc[r,2]), 
              " (ENTER -> Solution)")
 known <- readline(v1)
 cat("\014")
-known <- readline(paste0(v1, ", ",n2,": ", removeSpace(voc[r,3]), 
+known <- readline(paste0(v1, ", ",n2,": ", trimws(voc[r,3]), 
                          ". Known? y/n (ENTER = yes): "))
-known <- removeSpace(known) %in% c("yes","y","")
+known <- trimws(known) %in% c("yes","y","")
 voc$LEVEL[r] <- if(known) voc$LEVEL[r] + 1   else   1
 }
 
