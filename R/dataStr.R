@@ -14,6 +14,7 @@
 #' # dataStr(package="datasets") # only datasets in base R package datasets
 #' dataStr(only=TRUE) # sorted by nrow / ncol
 #' d <- dataStr(only="data.frame") # data.frames only
+#' sort(sapply(d$Object, function(dd) {sum(is.na(get(dd)))})) # datasets with NAs
 #' head(d)
 #' if(interactive()) View(d) # to sort in Rstudio Viewer
 #' d[,c("Object","ncol","nrow")]
