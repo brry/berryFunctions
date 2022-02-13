@@ -51,7 +51,7 @@ invisible(sapply(c("rnorm(10)", "rnorm(100)",
                    "runif(10)", "runif(100)"), function(vv){
   check <- replicate(1e2, normTest(v=eval(str2lang(vv)), plot=FALSE))
   for(n in rownames(check)) 
-   {hist(check[n,], breaks=seq(0,1,len=20), axes=F, ylab="", xlab="", main="")
+   {hist(check[n,], breaks=seq(0,1,len=20), axes=FALSE, ylab="", xlab="", main="")
    if(n=="ShapiroWilk") title(main=vv, line=1, xpd=NA)
    if(vv=="rnorm(10)") title(ylab=n, line=0, xpd=NA)
    abline(v=0.05, col="blue", lwd=1, xpd=TRUE)
