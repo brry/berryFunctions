@@ -26,6 +26,16 @@ actual NEWS
 -----------------------------
 -----------------------------
 
+Version 1.21.0 (2022-02-13)
+- dataStr: now opened in Rstudio viewer, new arguments heads+view
+- removeSPace: to be removed (replace with trimws)
+- broken URLS fixed / removed
+New functions: par_sapply, write.tab, normTest
+
+
+-----------------------------
+-----------------------------
+
 Version 1.20.0 (2021-03-30)
 - sumatraInitialize: now also write to appData/Roaming/SumatraPDF
 - createPres: new argument asp, defaults to 16:9 presentations
@@ -38,7 +48,7 @@ Version 1.20.0 (2021-03-30)
 - checkFile: Nicer error messages, removal of trailing slashes improved
 - TFtest: letters recognized better
 - normalizePathCP: removal of trailing slashes added
-- dataStr: completely written, new API
+- dataStr: completely rewritten, new API
 - documentation URLS updated
 New functions: runTime, compareDist, if.error, locatorRS
 
