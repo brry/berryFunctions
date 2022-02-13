@@ -183,8 +183,6 @@ mtext("IQR shown als lines", col=8, at=6.5, line=0.7, cex=1.2, font=2)
 \references{
 Heinrich Walter, Helmut Lieth: Klimadiagramm-Weltatlas. Gustav Fischer Verlag, Jena 1967\cr
 Examples:\cr
-\url{https://www.hoelzel.at/__verlag/geojournal/archiv/klima/2006_01/lieth.gif}\cr
-\url{https://www.hoelzel.at/__verlag/geojournal/archiv/klima/istanbul/istanbul400.gif}\cr
 \url{http://www.zivatar.hu/felhotar/albums/userpics/wldp.png}
 }
 \seealso{

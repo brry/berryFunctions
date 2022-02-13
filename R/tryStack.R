@@ -11,7 +11,7 @@
 #' For nested tryStack calls, \code{object[3], object[4]} etc. will contain "-- empty error stack --"
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Nov 2016
 #' @seealso \code{\link{try}}, \code{\link{traceCall}},
-#' \url{https://r.789695.n4.nabble.com/Stack-trace-td4021537.html},
+#' \url{https://web.archive.org/web/20200813031649/https://r.789695.n4.nabble.com/Stack-trace-td4021537.html},
 #' \url{https://stackoverflow.com/questions/15282471/get-stack-trace-on-trycatched-error-in-r},
 #' \url{https://stackoverflow.com/questions/1975110/printing-stack-trace-and-continuing-after-error-occurs-in-r},
 #' \url{https://stackoverflow.com/questions/16879821/save-traceback-on-error-using-trycatch}

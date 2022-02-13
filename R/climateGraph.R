@@ -12,8 +12,6 @@
 #' @seealso \code{diagwl} in package \code{climatol}
 #' @references Heinrich Walter, Helmut Lieth: Klimadiagramm-Weltatlas. Gustav Fischer Verlag, Jena 1967\cr
 #' Examples:\cr
-#' \url{https://www.hoelzel.at/__verlag/geojournal/archiv/klima/2006_01/lieth.gif}\cr
-#' \url{https://www.hoelzel.at/__verlag/geojournal/archiv/klima/istanbul/istanbul400.gif}\cr
 #' \url{http://www.zivatar.hu/felhotar/albums/userpics/wldp.png}
 #' @keywords hplot
 #' @importFrom grDevices rgb
