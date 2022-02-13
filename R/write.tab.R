@@ -51,5 +51,5 @@ if(!is.null(name_rn)) {x <- cbind(rownames(x), x) ; colnames(x)[1] <- name_rn}
 write.table(x=x, file=file, sep=sep, row.names=row.names, col.names=col.names, 
             quote=quote, fileEncoding=fileEncoding, ...)
 if(open) openFile(file)
-return(normalizePath(file))
+return(normalizePath(file, winslash="/"))
 }
