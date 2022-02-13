@@ -10,6 +10,7 @@
 #' @export
 #' @examples
 #' 
+#' \dontrun{ ## View should not be used in examples
 #' dataStr() # all loaded packages on search path (package=NULL)
 #' # dataStr(package="datasets") # only datasets in base R package datasets
 #' dataStr(only=TRUE) # sorted by nrow / ncol
@@ -20,6 +21,7 @@
 #' d[,c("Object","ncol","nrow")]
 #' 
 #' dataStr(heads=TRUE) # heads of all data.frames
+#' }
 #' 
 #' @param heads   Logical: display heads of all data.frames? 
 #'                If TRUE, \code{only} is ignored. DEFAULT: FALSE
@@ -64,7 +66,6 @@ return(invisible(sapply(d$Object, function(x){
 # remove columns
 d$LibPath <- NULL 
 d$Item <- NULL
-d$Call <- NULL
 # new columns
 d$length <- NA
 d$nrow <- NA
@@ -87,6 +88,7 @@ for(i in 1:nrow(d))
     message(str(obj))
     }
   }
+d$Call <- NULL
 if(!is.null(only)) 
   {
   d <- if(isTRUE(only)) d else d[grepl(only, d$class), ]

@@ -37,6 +37,7 @@ Print the \code{\link{str}} of each dataset returned by \code{\link{data}}
 }
 \examples{
 
+\dontrun{ ## View should not be used in examples
 dataStr() # all loaded packages on search path (package=NULL)
 # dataStr(package="datasets") # only datasets in base R package datasets
 dataStr(only=TRUE) # sorted by nrow / ncol
@@ -47,6 +48,7 @@ if(interactive()) View(d) # to sort in Rstudio Viewer
 d[,c("Object","ncol","nrow")]
 
 dataStr(heads=TRUE) # heads of all data.frames
+}
 
 }
 \seealso{
