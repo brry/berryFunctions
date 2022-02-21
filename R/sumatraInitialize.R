@@ -17,6 +17,7 @@
 #' # sumatraInitialize() # only run in interactive mode
 #'
 #' @param path  Folder (not file) that contains "SumatraPDF.exe". 
+#'              You need file writing permissions in the folder.
 #'              DEFAULT: extracted from \code{\link{Sys.getenv}("RSTUDIO_PANDOC")}, e.g.
 #'              "C:/Program Files/RStudio/bin/sumatra"
 #' @param roampath if not NULL, both files are also copied to this path, 
@@ -35,6 +36,7 @@ sumatraInitialize <- function(
 if(.Platform$OS.type != "windows") stop("SumatraPDF is only available on Windows") 
 if(!interactive()) stop("sumatraInitialize can only be used in an interactive session.")
 checkFile(path)
+path <- sub("quarto/bin", "sumatra", path) # Rstudio dev version 2022-02-09
 dor <- !is.null(roampath)
 if(dor) checkFile(roampath)
 ok <- readline(paste0("Can I write files (no overwriting) at ", path, 

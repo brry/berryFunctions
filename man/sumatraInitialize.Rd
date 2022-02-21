@@ -12,6 +12,7 @@ sumatraInitialize(
 }
 \arguments{
 \item{path}{Folder (not file) that contains "SumatraPDF.exe". 
+You need file writing permissions in the folder.
 DEFAULT: extracted from \code{\link{Sys.getenv}("RSTUDIO_PANDOC")}, e.g.
 "C:/Program Files/RStudio/bin/sumatra"}
 
