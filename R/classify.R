@@ -208,7 +208,7 @@ if(min(bb,na.rm=TRUE) > min(x,na.rm=TRUE) | max(bb,na.rm=TRUE) < max(x,na.rm=TRU
 # Results
 if(!is.null(col))
  {
- if(!is.function(col)) stop("col must be a function returning a palette, not a", 
+ if(!is.function(col)) stop("col must be a palette-returning function, not a ", 
                             toString(class(col)))
  colors <- col(...)
  nlarge <- sum(ix>length(colors))
