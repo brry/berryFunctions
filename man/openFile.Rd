@@ -27,10 +27,11 @@ openFile(c("README.md","Tests.R"))
 is.error(openFile("dummydummydoesntexist.R"), TRUE, TRUE)
 openFile(tempdir())
 }
-#' # To open folders with system2:
+#' # To open folders (not files) with system2:
 # "nautilus" on linux ubuntu
 # "open" or "dolphin" on mac
 # "explorer" or "start" on windows
+# But open / xdg-open seems to work as well
 
 }
 \references{

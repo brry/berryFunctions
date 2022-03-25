@@ -18,10 +18,11 @@
 #' is.error(openFile("dummydummydoesntexist.R"), TRUE, TRUE)
 #' openFile(tempdir())
 #' }
-#' #' # To open folders with system2:
+#' #' # To open folders (not files) with system2:
 #' # "nautilus" on linux ubuntu
 #' # "open" or "dolphin" on mac
 #' # "explorer" or "start" on windows
+#' # But open / xdg-open seems to work as well
 #' 
 #' @param file Filename to be opened, as character string.
 #' @param \dots Further arguments passed to \code{\link{system2}}
@@ -38,5 +39,13 @@ unix <- Sys.info()["sysname"] %in% c("Linux", "FreeBSD")
 out <- try(if(!unix) system2("open", file, ...) else   # Windows
                       system2("xdg-open", file, ...),  # Unix
            silent=TRUE)
+# out: 127 if failed, 124 for timeout, 0 for success
+
+# By rhurlin for FreeBSD with handlr:
+# https://github.com/chmln/handlr
+# https://www.freshports.org/sysutils/handlr
+if(!identical(out, 0L)) 
+  out <- try(system2("handlr", paste("open",file), ...), silent=TRUE) 
+
 return(invisible(out))
 }
