@@ -35,17 +35,14 @@ file,
 file <- normalizePath(file, winslash="/", mustWork=FALSE)
 checkFile(file)
 file <- shQuote(file) # to handle space in "C:/Program Files/R/..."
-unix <- Sys.info()["sysname"] %in% c("Linux", "FreeBSD")
-out <- try(if(!unix) system2("open", file, ...) else   # Windows
-                      system2("xdg-open", file, ...),  # Unix
+sysname <- Sys.info()["sysname"]
+out <- try(switch(sysname,
+                  "Linux"   = system2("xdg-open", file, ...),
+                  "FreeBSD" = system2("handlr", paste("open",file), ...),
+                  system2("open", file, ...)  # Windows
+                  ),
            silent=TRUE)
 # out: 127 if failed, 124 for timeout, 0 for success
-
-# By rhurlin for FreeBSD with handlr:
-# https://github.com/chmln/handlr
-# https://www.freshports.org/sysutils/handlr
-if(!identical(out, 0L)) 
-  out <- try(system2("handlr", paste("open",file), ...), silent=TRUE) 
 
 return(invisible(out))
 }
