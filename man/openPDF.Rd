@@ -4,18 +4,16 @@
 \alias{openPDF}
 \title{open PDF file with sumatra viewer}
 \usage{
-openPDF(
-  file,
-  sumexe = sub("pandoc$", "sumatra/SumatraPDF.exe", Sys.getenv("RSTUDIO_PANDOC")),
-  ...
-)
+openPDF(file, rspath = Sys.getenv("RSTUDIO_PANDOC"), sumexe = NULL, ...)
 }
 \arguments{
 \item{file}{Filename to be opened, as character string.
 Files not ending in ".pdf" are ignored with a warning.}
 
-\item{sumexe}{The path to SumatraPDF.exe. DEFAULT: extracted from
-\code{\link{Sys.getenv}("RSTUDIO_PANDOC")}, e.g. 
+\item{rspath}{The path to Rstudio bin files. 
+DEFAULT: \code{\link{Sys.getenv}("RSTUDIO_PANDOC")}}
+
+\item{sumexe}{The path to SumatraPDF.exe. DEFAULT: Null: extracted from \code{rspath}, e.g. 
 "C:/Program Files/RStudio/bin/sumatra/SumatraPDF.exe"}
 
 \item{\dots}{Further arguments passed to \code{\link{system}}}
