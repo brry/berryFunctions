@@ -34,6 +34,7 @@ sumexe=NULL,
 # 
 rspath <- sub("pandoc$", "", rspath)
 rspath <- sub("quarto/bin", "", rspath) # Rstudio dev version 2022-02-09
+rspath <- sub("/$", "", rspath) # trailing slash
 if(is.null(sumexe)) sumexe <- paste0(rspath,"/sumatra/SumatraPDF.exe")
  
 # check file existence:
