@@ -45,8 +45,10 @@ vigremove=TRUE
   if(skip<0) stop("skip must be >=0, not ", skip, ".")
   stack <- lapply(sys.calls(), deparse) # language to character
   # .makeMessage apparently new in R 2022, maybe due to https://github.com/wch/r-source/commit/a114756ee
-  sel <- try(stack[!sapply(stack, startsWith, ".makeMessage")], silent=TRUE)
-  if(!inherits(sel, "try-error")) stack <- sel
+# sel <- try(stack[!sapply(stack, startsWith, ".makeMessage")], silent=TRUE)
+# if(!inherits(sel, "try-error")) stack <- sel
+  if(getRversion() >= "4.1.2") skip <- skip+1 # another level noticed in April 2022 with this version. Could not trace the change in R source yet.
+  if(getRversion() >= "4.2.0") skip <- skip+1 # lapply(list(...), as.character)
   tb <- head(stack, -(skip+1)  )
   # check for empty lists because skip is too large:
   if(length(tb)==0) return(paste0(prefix, "--empty stack--", suffix))
