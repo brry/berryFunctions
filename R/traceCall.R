@@ -44,6 +44,9 @@ vigremove=TRUE
   #dummy <- capture.output(tb <- traceback(realskip) )
   if(skip<0) stop("skip must be >=0, not ", skip, ".")
   stack <- lapply(sys.calls(), deparse) # language to character
+  # .makeMessage apparently new in R 2022, maybe due to https://github.com/wch/r-source/commit/a114756ee
+  sel <- try(stack[!sapply(stack, startsWith, ".makeMessage")], silent=TRUE)
+  if(!inherits(sel, "try-error")) stack <- sel
   tb <- head(stack, -(skip+1)  )
   # check for empty lists because skip is too large:
   if(length(tb)==0) return(paste0(prefix, "--empty stack--", suffix))
