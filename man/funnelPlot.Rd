@@ -160,7 +160,6 @@ abline(v=10)
 }
 \references{
 \url{https://www.perceptualedge.com/articles/visual_business_intelligence/variation_and_its_discontents.pdf}\cr
-   \url{http://sfew.websitetoolbox.com/post/variation-and-its-discontents-6555336?}\cr
    Excellent explanation of bayesian take on proportions: \url{http://varianceexplained.org/r/empirical_bayes_baseball/}
 }
 \author{
