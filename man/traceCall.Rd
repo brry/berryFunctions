@@ -8,17 +8,21 @@ traceCall(
   skip = 0,
   prefix = "\\nCall stack: ",
   suffix = "\\n",
-  vigremove = TRUE
+  vigremove = TRUE,
+  mesremove = TRUE
 )
 }
 \arguments{
-\item{skip}{Number of levels to skip in \code{\link{traceback}}}
+\item{skip}{Number of levels to skip in \code{\link{sys.calls}}}
 
 \item{prefix}{Prefix prepended to the output character string. DEFAULT: "\\nCall stack: "}
 
 \item{suffix}{Suffix appended to the end of the output. DEFAULT: "\\n"}
 
 \item{vigremove}{Logical: remove call created using devtools::build_vignettes()?
+DEFAULT: TRUE}
+
+\item{mesremove}{Logical: remove call part from \code{\link{.makeMessage}}?
 DEFAULT: TRUE}
 }
 \value{
@@ -28,9 +32,12 @@ Character string with the call stack
 trace the call stack e.g. for error checking and format output for do.call levels
 }
 \examples{
-lower <- function(a, s) {warning(traceCall(s, vigremove=FALSE), "stupid berry warning: ", a+10); a}
+lower <- function(a, s) {warning(traceCall(s, mesremove=FALSE), "stupid berry warning: ", a+10); a}
 upper <- function(b, skip=0) lower(b+5, skip)
 upper(3)
+
+# Since 2022-05-04, use tmessage / twarning / tstop instead!
+
 upper(3, skip=1) # traceCall skips last level (R3: warning, R4.1: .makeMessage, R4.2: lapply)
 upper(3, skip=6) # now the stack is empty
 d <- tryStack(upper("four"), silent=TRUE)
