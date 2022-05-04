@@ -28,11 +28,11 @@ Character string with the call stack
 trace the call stack e.g. for error checking and format output for do.call levels
 }
 \examples{
-lower <- function(a, s) {warning(traceCall(s), "stupid berry warning: ", a+10); a}
+lower <- function(a, s) {warning(traceCall(s, vigremove=FALSE), "stupid berry warning: ", a+10); a}
 upper <- function(b, skip=0) lower(b+5, skip)
 upper(3)
-upper(3, skip=1) # traceCall skips last level (warning)
-upper(3, skip=4) # now the stack is empty
+upper(3, skip=1) # traceCall skips last level (R3: warning, R4.1: .makeMessage, R4.2: lapply)
+upper(3, skip=6) # now the stack is empty
 d <- tryStack(upper("four"), silent=TRUE)
 inherits(d, "try-error")
 cat(d)
@@ -43,7 +43,7 @@ upper(3)
 
 }
 \seealso{
-\code{\link{tryStack}}, \code{\link{checkFile}} for example usage
+\code{\link{tmessage}}, \code{\link{tryStack}}, \code{\link{checkFile}} for example usage
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Sep 2016 + March 2017

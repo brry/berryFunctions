@@ -6,16 +6,16 @@
 # @section Warning: Called from \link{do.call} settings with large objects,
 #                   tracing may take a lot of computing time.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sep 2016 + March 2017
-#' @seealso \code{\link{tryStack}}, \code{\link{checkFile}} for example usage
+#' @seealso \code{\link{tmessage}}, \code{\link{tryStack}}, \code{\link{checkFile}} for example usage
 #' @keywords programming error
 #' @importFrom utils capture.output head
 #' @export
 #' @examples
-#' lower <- function(a, s) {warning(traceCall(s), "stupid berry warning: ", a+10); a}
+#' lower <- function(a, s) {warning(traceCall(s, vigremove=FALSE), "stupid berry warning: ", a+10); a}
 #' upper <- function(b, skip=0) lower(b+5, skip)
 #' upper(3)
-#' upper(3, skip=1) # traceCall skips last level (warning)
-#' upper(3, skip=4) # now the stack is empty
+#' upper(3, skip=1) # traceCall skips last level (R3: warning, R4.1: .makeMessage, R4.2: lapply)
+#' upper(3, skip=6) # now the stack is empty
 #' d <- tryStack(upper("four"), silent=TRUE)
 #' inherits(d, "try-error")
 #' cat(d)
@@ -37,18 +37,8 @@ suffix="\n",
 vigremove=TRUE
 )
 {
-# the real skip value will be dependent on R version.
-# since Feb 2016 (Version 3.3.0, May 2016),   .traceback(x)   is called in traceback(x),
-# thus adding one more level to the call stack.
-  #realskip <- if(getRversion() < "3.3.0") 7+skip else 8+skip
-  #dummy <- capture.output(tb <- traceback(realskip) )
   if(skip<0) stop("skip must be >=0, not ", skip, ".")
   stack <- lapply(sys.calls(), deparse) # language to character
-  # .makeMessage apparently new in R 2022, maybe due to https://github.com/wch/r-source/commit/a114756ee
-# sel <- try(stack[!sapply(stack, startsWith, ".makeMessage")], silent=TRUE)
-# if(!inherits(sel, "try-error")) stack <- sel
-  if(getRversion() >= "4.1.2") skip <- skip+1 # another level noticed in April 2022 with this version. Could not trace the change in R source yet.
-  if(getRversion() >= "4.2.0") skip <- skip+1 # lapply(list(...), as.character)
   tb <- head(stack, -(skip+1)  )
   # check for empty lists because skip is too large:
   if(length(tb)==0) return(paste0(prefix, "--empty stack--", suffix))
@@ -56,7 +46,6 @@ vigremove=TRUE
   tb <- lapply(tb, function(x) if(substr(x,1,7)=="do.call")
     sub(",", "(", sub("(", " - ", x, fixed=TRUE), fixed=TRUE) else x)
   calltrace <- sapply(strsplit(unlist(tb), "(", fixed=TRUE), "[", 1)
-  #calltrace <- paste(rev(calltrace), collapse=" -> ")
   calltrace <- paste(calltrace, collapse=" -> ")
   calltrace <- paste0(prefix, calltrace, suffix)
   if(vigremove)
@@ -75,6 +64,9 @@ vigremove=TRUE
                   "-> evaluate::evaluate -> evaluate_call -> timing_fn -> handle "
                   )
   for(k in elements) calltrace <- sub(k, "", calltrace)
+  
+  calltrace <- gsub(" -> .makeMessage -> lapply", "", calltrace) # R > 4.2.0 https://github.com/wch/r-source/commit/a114756ee
+  calltrace <- gsub(" -> .makeMessage",           "", calltrace) # R 4.1.0 - 4.1.3
   }
   calltrace <- gsub("->  ->", "->", calltrace)
   calltrace <- gsub("with -> with.default -> eval -> eval", "with ->", calltrace)
