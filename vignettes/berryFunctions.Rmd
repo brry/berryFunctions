@@ -239,6 +239,24 @@ rmse(QOBS, QSIM)
 rsquare(QOBS, QSIM)
 ```
 
+[TOC](#top)
+
+## Programming
+
+`tmessage`, `twarning`, `tstop`: explicit tracing of messages, warnings and errors:
+```{r trace}
+lower <- function(a, s) {tmessage("some stuff with ", a+10, skip=s); a}
+upper <- function(b, skip=0) lower(b+5, skip)
+upper(3) 
+```
+
+`tryStack`: tracing any message / warning error in other people's code, can also log to a file:
+```{r tryStack}
+lower <- function(a) {message("fake message, a = ", a); a+10}
+middle <- function(b) {plot(b, main=b) ; warning("fake warning, b = ", b); lower(b) }
+upper <- function(c) {cat("printing c:", c, "\n") ; middle(c)}
+tryStack(upper("42") )
+```
 
 [TOC](#top)
 
@@ -313,7 +331,7 @@ nameSample("berry")
 ```
 ```{r misc2}
 # Kind regards from
-set.seed(1248272); paste(sample(letters,5,rep=T),collapse='')
+set.seed(8833277); paste(sample(letters,5,rep=T),collapse='')
 ```
 
 

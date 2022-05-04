@@ -6,16 +6,21 @@
 \alias{tstop}
 \title{messages with call trace}
 \usage{
-tmessage(skip = 0, ...)
+tmessage(..., skip = 0)
 
-twarning(skip = 0, ...)
+twarning(..., skip = 0, call. = FALSE, noBreaks. = TRUE)
 
-tstop(skip = 0, ...)
+tstop(..., skip = 0, call. = FALSE)
 }
 \arguments{
-\item{skip}{Number of tracing levels to exclude. DEfault: 0}
-
 \item{...}{Passed to \link{message}, \link{warning} or \link{stop}}
+
+\item{skip}{Number of tracing levels to exclude. Default: 0}
+
+\item{call.}{include twarning/tstop call? DEFAULT: FALSE (unlike the originals)}
+
+\item{noBreaks.}{reduce line breaks if \code{options(warn=1)}?
+DEFAULT: TRUE (unlike the original)}
 }
 \value{
 NULL, as per \link{message}, \link{warning} or \link{stop}
@@ -24,11 +29,19 @@ NULL, as per \link{message}, \link{warning} or \link{stop}
 \link{message}, \link{warning} or \link{stop} with a call trace prepended
 }
 \examples{
-lower <- function(a, s) {tmessage(s, "some stuff with ", a+10); a}
+lower <- function(a, s) {tmessage("some stuff with ", a+10, skip=s); a}
 upper <- function(b, skip=0) lower(b+5, skip)
 upper(3) # upper -> lower: some stuff with 18
 upper(3, skip=1) # no "lower" in trace
 upper(3, skip=-1) # upper -> lower -> tmessage: some stuff with 18
+tmessage("Some message", " to be displayed")
+lower <- function(a, s) {twarning("some stuff with ", a+10, skip=s); a}
+upper(7)
+oop <- options(warn=1)
+upper(7) # Warning: upper -> lower: some []       no line break :)
+options(oop) ; rm(oop)
+lower <- function(a, s) {tstop("some stuff with ", a+10, skip=s); a}
+try(  upper(7)  ) # Error : try -> upper -> lower: some stuff with 22
 }
 \seealso{
 \link{traceCall} for the generation of the trace
