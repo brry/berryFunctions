@@ -41,6 +41,7 @@
 #'        in the formula "y=a*x+b \\n R^2=r \\n RMSE=e", respectively.
 #'        If a value is negative, the complete respective entry is left away.
 #'        If values are not specified, they are set equal to the first. DEFAULT: 2
+#' @param quiet Silence NA-removal warnings in \code{\link{rmse}}? DEFAULT: FALSE
 #' @param pch Point Character of datapoints, see \code{\link{par}}. DEFAULT: 16
 #' @param col Color of points. DEFAULT: "black"
 #' @param colline Color of the regression line, see \code{\link{par}}. DEFAULT: "red"
@@ -67,6 +68,7 @@ y=NULL,
 data=NULL,
 add=FALSE,
 digits=2,
+quiet=FALSE,
 pch=16,
 col="black",
 colline="red",
@@ -106,7 +108,7 @@ digits <- rep(digits, length.out=4)
 a <- round( coef(mod)[2] , digits[1])
 b <- round( coef(mod)[1] , digits[2])
 r <- round( summary(mod)$r.squared , digits[3])
-e <- signif(rmse(x,y), digits[4])
+e <- signif(rmse(x,y, quiet=quiet), digits[4])
 axb <- ""
 if(digits[1]>=0 & digits[2]>=0) axb <- paste0("y = ", a, " * x ", ifelse(b>0," + ", " - "), abs(b))
 Txt <- paste0(axb, if(digits[3]>=0) paste0("\nR\U00B2 = ", r),

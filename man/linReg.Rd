@@ -10,6 +10,7 @@ linReg(
   data = NULL,
   add = FALSE,
   digits = 2,
+  quiet = FALSE,
   pch = 16,
   col = "black",
   colline = "red",
@@ -40,6 +41,8 @@ linReg(
 in the formula "y=a*x+b \\n R^2=r \\n RMSE=e", respectively.
 If a value is negative, the complete respective entry is left away.
 If values are not specified, they are set equal to the first. DEFAULT: 2}
+
+\item{quiet}{Silence NA-removal warnings in \code{\link{rmse}}? DEFAULT: FALSE}
 
 \item{pch}{Point Character of datapoints, see \code{\link{par}}. DEFAULT: 16}
 
