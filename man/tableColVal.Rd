@@ -11,9 +11,10 @@ tableColVal(
   namesheight = 0.1,
   palette = seqPal(100),
   Range = range(mat, finite = TRUE),
-  digits = 2,
+  digits = 0,
   na.rm = TRUE,
   ...,
+  roundargs = NULL,
   classargs = NULL,
   cellargs = NULL,
   colargs = NULL,
@@ -35,11 +36,14 @@ DEFAULT: 0.3}
 
 \item{Range}{Range mapped to color palette. DEFAULT: range(mat)}
 
-\item{digits}{Number of digits rounded to for writing. DEFAULT: 2}
+\item{digits}{Number of digits rounded to for writing. DEFAULT: 0}
 
 \item{na.rm}{Remove NA from labels? New in May 2022. DEFAULT: TRUE}
 
 \item{\dots}{Further arguments passed to all \code{\link{text}} like cex, col, srt, ...}
+
+\item{roundargs}{List with arguments to \code{\link{round0}}. 
+\code{pre} and \code{big.mark} have internal defaults.}
 
 \item{classargs}{List of arguments specifying how to call \code{\link{classify}},
 e.g. method. DEFAULT: NULL}

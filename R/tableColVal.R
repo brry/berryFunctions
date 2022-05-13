@@ -50,8 +50,10 @@
 #' @param namesheight Relative height of column names at the top. DEFAULT: 0.1
 #' @param palette     Color palette for the heatmap. DEFAULT: \code{\link{seqPal}(100)}
 #' @param Range       Range mapped to color palette. DEFAULT: range(mat)
-#' @param digits      Number of digits rounded to for writing. DEFAULT: 2
+#' @param digits      Number of digits rounded to for writing. DEFAULT: 0
 #' @param na.rm       Remove NA from labels? New in May 2022. DEFAULT: TRUE
+#' @param roundargs   List with arguments to \code{\link{round0}}. 
+#'                    \code{pre} and \code{big.mark} have internal defaults.
 #' @param classargs   List of arguments specifying how to call \code{\link{classify}},
 #'                    e.g. method. DEFAULT: NULL
 #' @param cellargs,colargs,rowargs,mainargs List of arguments passed to \code{\link{text}}
@@ -66,9 +68,10 @@ nameswidth=0.3,
 namesheight=0.1,
 palette=seqPal(100),
 Range=range(mat,finite=TRUE),
-digits=2,
+digits=0,
 na.rm=TRUE,
 ...,
+roundargs=NULL,
 classargs=NULL,
 cellargs=NULL,
 colargs=NULL,
@@ -98,7 +101,7 @@ rect(xleft=rep(x1[-1], each=nr), xright=rep(x2[-1], each=nr), border=NA,
       ytop=rep(y1[-1], nc),     ybottom=rep(y2[-1], nc), col=palette[cl$index])
 abline(v=c(x1,1), h=c(y1,1))
 # add text to each cell:
-lab <- round0(mat, digits, pre=1)
+lab <- do.call(round0, owa(list(x=mat, digits=digits, pre=1, big.mark="'"), roundargs))
 if(na.rm) lab[is.na(mat)] <- NA
 def <- list(x=rep(xm[-1], each=nr), y=rep(ym[-1], nc), labels=lab)
 def2 <- list(...)
