@@ -12,6 +12,7 @@ tableColVal(
   palette = seqPal(100),
   Range = range(mat, finite = TRUE),
   digits = 2,
+  na.rm = TRUE,
   ...,
   classargs = NULL,
   cellargs = NULL,
@@ -35,6 +36,8 @@ DEFAULT: 0.3}
 \item{Range}{Range mapped to color palette. DEFAULT: range(mat)}
 
 \item{digits}{Number of digits rounded to for writing. DEFAULT: 2}
+
+\item{na.rm}{Remove NA from labels? New in May 2022. DEFAULT: TRUE}
 
 \item{\dots}{Further arguments passed to all \code{\link{text}} like cex, col, srt, ...}
 

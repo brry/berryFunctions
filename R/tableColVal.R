@@ -51,6 +51,7 @@
 #' @param palette     Color palette for the heatmap. DEFAULT: \code{\link{seqPal}(100)}
 #' @param Range       Range mapped to color palette. DEFAULT: range(mat)
 #' @param digits      Number of digits rounded to for writing. DEFAULT: 2
+#' @param na.rm       Remove NA from labels? New in May 2022. DEFAULT: TRUE
 #' @param classargs   List of arguments specifying how to call \code{\link{classify}},
 #'                    e.g. method. DEFAULT: NULL
 #' @param cellargs,colargs,rowargs,mainargs List of arguments passed to \code{\link{text}}
@@ -66,6 +67,7 @@ namesheight=0.1,
 palette=seqPal(100),
 Range=range(mat,finite=TRUE),
 digits=2,
+na.rm=TRUE,
 ...,
 classargs=NULL,
 cellargs=NULL,
@@ -96,7 +98,9 @@ rect(xleft=rep(x1[-1], each=nr), xright=rep(x2[-1], each=nr), border=NA,
       ytop=rep(y1[-1], nc),     ybottom=rep(y2[-1], nc), col=palette[cl$index])
 abline(v=c(x1,1), h=c(y1,1))
 # add text to each cell:
-def <- list(x=rep(xm[-1], each=nr), y=rep(ym[-1], nc), labels=round0(mat, digits, pre=1))
+lab <- round0(mat, digits, pre=1)
+if(na.rm) lab[is.na(mat)] <- NA
+def <- list(x=rep(xm[-1], each=nr), y=rep(ym[-1], nc), labels=lab)
 def2 <- list(...)
 do.call(text, args=owa(c(def,def2), cellargs))
 # add "titles"
