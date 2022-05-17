@@ -21,6 +21,8 @@
 #' d[,c("Object","ncol","nrow")]
 #' 
 #' dataStr(heads=TRUE) # heads of all data.frames
+#' 
+#' # dataStr(package="hms") # no datasets in package
 #' }
 #' 
 #' @param heads   Logical: display heads of all data.frames? 
