@@ -47,6 +47,8 @@ d <- data(..., package=package, envir=env)$results
 d <- as.data.frame(d, stringsAsFactors=FALSE)
 d <- d[d$Package!=".",] # From local objects
 # change things like  "beaver1 (beavers)"  to  "beaver1"
+if(nrow(d)==0) stop("No datasets found with 'package' set to ", 
+                    toString(package),".")
 itemsplit <- strsplit(d$Item, split=" ", fixed=TRUE)
 d$Object <- sapply(itemsplit, "[", 1)
 d$Call <- sapply(itemsplit, "[", 2)
