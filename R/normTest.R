@@ -52,20 +52,30 @@ force(main)
 v <- na.omit(v)
 n <- requireNamespace("nortest")
 if(!n) warning("package 'nortest' not available, omitting those tests.")
+mytry <- function(expr)
+{
+ res <- try(expr, silent=TRUE)
+ if(!inherits(res, "try-error")) return(res)
+ res <- sub("(v)","",res,fixed=TRUE)
+ res <- sub("Error in nortest::", "", res)
+ res <- trimws(res)
+ warning("Ignoring ", res, call.=FALSE)
+ return(NA)
+}
 # Output: p values
 out <- c(
- ShapiroWilk       = shapiro.test(v)$p.value,
- KolmogorovSmirnov = ks.test(v, "pnorm", mean(v), sd(v))$p.value)
+ ShapiroWilk       = mytry(shapiro.test(v)$p.value),
+ KolmogorovSmirnov = mytry(ks.test(v, "pnorm", mean(v), sd(v))$p.value))
 if(n) out <- c(out, 
- LillieforsKS     = nortest::lillie.test(v)$p.value,
- AndersonDarling  = nortest::ad.test(v)$p.value,
- CramerVonMises   = nortest::cvm.test(v)$p.value,
- PearsonChiSquare = nortest::pearson.test(v)$p.value,
- ShapiroFrancia   = nortest::sf.test(v)$p.value)
+ LillieforsKS     = mytry(nortest::lillie.test(v)$p.value),
+ AndersonDarling  = mytry(nortest::ad.test(v)$p.value),
+ CramerVonMises   = mytry(nortest::cvm.test(v)$p.value),
+ PearsonChiSquare = mytry(nortest::pearson.test(v)$p.value),
+ ShapiroFrancia   = mytry(nortest::sf.test(v)$p.value))
 if(!plot) return(out)
 # Graph:
 hist(v, breaks=seqR(v, len=breaks), col=col, freq=FALSE, main=main, las=1, ...)
-x <- seqR(v, length.out=200)
+x <- seqR(par("usr")[1:2], length.out=200)
 lines(x, dnorm(x, mean=mean(v), sd=sd(v)), col="red", lwd=3, xpd=TRUE)
 if(legend)
   {
