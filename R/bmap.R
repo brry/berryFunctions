@@ -8,16 +8,17 @@
 #'    requireNamespace("leaflet.extras", quietly=TRUE))
 #' bmap()
 #'
-#' @param a     Numerical vector.
-#' @param plot  Logical. Should values be plotted? This can be turned off if
-#'              only the computation results are needed. DEFAULT: TRUE
-#' @param dummy currently_Unused
-#' @param \dots Further arguments passed to \code{\link{plot}}
+#' @param x,y,zm passed to \code{leaflet::\link[leaflet]{setView}}
+#' @param prov named vector of providers. DEFAULT: NULL (nice selection)
+#' @param collapsebg Collapse background (map) layer selection? DEFAULT: TRUE
+#' @param \dots Ignored for now
 #'
 bmap <- function(
 x=13.12,
 y=52.37,
 zm=14,
+prov=NULL,
+collapsebg=TRUE,
 ...
 )
 {
@@ -37,12 +38,16 @@ rmap <- leaflet::addScaleBar(rmap, position="topleft")
 rmap <- leaflet.extras::addFullscreenControl(rmap)
 rmap <- leaflet::setView(rmap, x, y, zoom=zm)
 # add background map layer options, from mapview::mapviewGetOption("basemaps")
-prov <- c(OSM="OpenStreetMap", Sat="Esri.WorldImagery", Topo="OpenTopoMap") 
+prov <- c(OSM="OpenStreetMap", 
+          Sat="Esri.WorldImagery", 
+          Topo="OpenTopoMap",
+          # CycleTF="Thunderforest.OpenCycleMap",
+          # Night="NASAGIBS.ViirsEarthAtNight2012",
+          Dark="CartoDB.DarkMatter") 
 for(pr in names(prov)) rmap <- leaflet::addProviderTiles(rmap, provider=unname(prov[pr]), 
         group=pr, options=leaflet::providerTileOptions(maxZoom=20))
 rmap <- leaflet::addLayersControl(rmap, baseGroups=names(prov),
-        overlayGroups=c("tracks","residential", "private", "large roads"),
-        options=leaflet::layersControlOptions(collapsed=FALSE))
+        options=leaflet::layersControlOptions(collapsed=collapsebg))
 # Output:
 return(rmap)
 }

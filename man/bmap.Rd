@@ -4,17 +4,16 @@
 \alias{bmap}
 \title{title}
 \usage{
-bmap(x = 13.12, y = 52.37, zm = 14, ...)
+bmap(x = 13.12, y = 52.37, zm = 14, prov = NULL, collapsebg = TRUE, ...)
 }
 \arguments{
-\item{\dots}{Further arguments passed to \code{\link{plot}}}
+\item{x, y, zm}{passed to \code{leaflet::\link[leaflet]{setView}}}
 
-\item{a}{Numerical vector.}
+\item{prov}{named vector of providers. DEFAULT: NULL (nice selection)}
 
-\item{plot}{Logical. Should values be plotted? This can be turned off if
-only the computation results are needed. DEFAULT: TRUE}
+\item{collapsebg}{Collapse background (map) layer selection? DEFAULT: TRUE}
 
-\item{dummy}{currently_Unused}
+\item{\dots}{Ignored for now}
 }
 \value{
 ReturnValue
