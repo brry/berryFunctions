@@ -75,6 +75,7 @@ d$length <- NA
 d$nrow <- NA
 d$ncol <- NA
 d$class <- NA
+d$elements <- NA
 for(i in 1:nrow(d))
   {
   x <- d[i,, drop=FALSE]
@@ -84,6 +85,7 @@ for(i in 1:nrow(d))
   d[i,"length"] <- if(inherits(obj, "data.frame")) NA else length(obj)
   d[i,"nrow"] <- replace(nrow(obj), is.null(nrow(obj)), NA)
   d[i,"ncol"] <- replace(ncol(obj), is.null(ncol(obj)), NA)
+  if(is.data.frame(obj) | is.list(obj)) d[i,"elements"] <- toString(sapply(obj, class))
   doprint <- TRUE
   if(!is.null(only) && !isTRUE(only)) doprint <- inherits(obj, only)
   if(msg & doprint)
