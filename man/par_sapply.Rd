@@ -25,7 +25,9 @@ DEFAULT: NULL (available cores)}
 \item{pb}{Show progress bar with remaining time and at the end runtime? 
 DEFAULT: TRUE}
 
-\item{simplify}{Simplify output to vector/matrix if possible? DEFAULT: TRUE}
+\item{simplify}{Simplify output to vector/matrix if possible?
+Note that simplify="array" is not implemented here.
+DEFAULT: TRUE}
 
 \item{export_objects}{For windows: Objects needed in \code{FUN}. DEFAULT: NULL}
 
@@ -39,6 +41,7 @@ vector/matrix, list if simplify=FALSE
 Call \code{pbapply::\link[pbapply]{pbsapply}} 
              with nc default at number of cores available.
              Also, this works on Windows directly.
+             Note this throws an error on unix systems, unlike \code{parallel::mclapply}
 }
 \examples{
 \dontrun{ # Suppressed on CRAN checks as this is time-consuming
@@ -46,6 +49,16 @@ fun <- function(x) mean(rnorm(1e7))
 pbapply::pbsapply(1:20, fun)
        par_sapply(1:20, fun)
           #sapply(1:20, fun)
+}
+inp_chr_named <- list(first=1, second=2, third="3", fourth=4, fifth="5")
+inp_num_named <- lapply(inp_chr_named, as.numeric)
+inp_chr_none <- unname(inp_chr_named)
+inp_num_none <- unname(inp_num_named)
+if(FALSE){#intentional errors, don't run
+par_sapply(inp_chr_named, log) # fails with name(s)
+par_sapply(inp_num_named, log) # works, has names
+par_sapply(inp_chr_none, log) # fails with index number (s)
+par_sapply(inp_num_none, log) # no names, like in sapply
 }
 
 }
