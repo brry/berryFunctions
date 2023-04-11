@@ -32,7 +32,7 @@ rmap <- leaflet.extras::addSearchOSM(rmap, options=leaflet.extras::searchOptions
         autoCollapse=TRUE, minLength=2, hideMarkerOnCollapse=TRUE, zoom=16))
 rmap <- leaflet.extras::addControlGPS(rmap, options=leaflet.extras::gpsOptions(
         position="topleft", activate=TRUE, autoCenter=TRUE, maxZoom=16, setView=TRUE))
-rmap <- leaflet::addMeasure(rmap, primaryLengthUnit="meters", primaryAreaUnit="hectares",
+rmap <- leaflet::addMeasure(rmap, primaryLengthUnit="meters", primaryAreaUnit="sqmeters",
         activeColor="#3D535D", completedColor="#FF0000", position="topleft")
 rmap <- leaflet::addScaleBar(rmap, position="topleft")
 rmap <- leaflet.extras::addFullscreenControl(rmap)

@@ -1,3 +1,4 @@
+try(installB::loadPackages(), silent=TRUE)
 crancheck <- function() 
  {
  message("Submitting to rhub...")
