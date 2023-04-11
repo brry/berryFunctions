@@ -52,7 +52,7 @@ filename <- normalizePathCP(filename, winslash="/", mustWork=FALSE)
 dirs <- unique(dirname(filename))
 direxi <- file.exists(dirs)
 l1 <- sum(!direxi)>1
-if(any(!direxi)) stop(traceCall(1, "", ": "), "The following ",
+if(any(!direxi)) tstop("The following ",
                       if(l1)paste0(sum(!direxi)," "), "folder", if(l1)"s",
                       " do", if(!l1)"es", " not exist: ",
                       truncMessage(dirs[!direxi], ntrunc=ntrunc, prefix=""),
@@ -91,7 +91,7 @@ if(!quiet)
   if(!tellignore) {n_i <- 0; mnames <- mnames[!ignore]}
   n_ie<- sum(file.exists(filename[ignore]))
   nfiles <- function(n, name=FALSE) paste0(n, " file", if(name) "name", if(n>1)"s")
-  if(n_i+n_n+n_o+n_a>0) message(traceCall(1, "", ": "), pre,
+  if(n_i+n_n+n_o+n_a>0) tmessage(pre,
           if(n_i>0) paste0("not changing ", nfiles(n_i, name=TRUE),
                            " (",n_ie," exist",if(n_ie==1)"s",")"),
           if(n_i>0 & n_n+n_a+n_o > 0) ", ",
