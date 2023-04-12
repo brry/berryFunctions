@@ -9,6 +9,7 @@ traceCall(
   prefix = "\\nCall stack: ",
   suffix = "\\n",
   vigremove = TRUE,
+  shiremove = TRUE,
   mesremove = TRUE
 )
 }
@@ -21,6 +22,8 @@ traceCall(
 
 \item{vigremove}{Logical: remove call created using devtools::build_vignettes()?
 DEFAULT: TRUE}
+
+\item{shiremove}{Logical: remove shiny::runApp ... renderPlot? DEFAULT: TRUE}
 
 \item{mesremove}{Logical: remove call part from \code{\link{.makeMessage}}?
 DEFAULT: TRUE}

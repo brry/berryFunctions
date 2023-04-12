@@ -32,6 +32,7 @@
 #' @param suffix Suffix appended to the end of the output. DEFAULT: "\\n"
 #' @param vigremove Logical: remove call created using devtools::build_vignettes()?
 #'                  DEFAULT: TRUE
+#' @param shiremove Logical: remove shiny::runApp ... renderPlot? DEFAULT: TRUE
 #' @param mesremove Logical: remove call part from \code{\link{.makeMessage}}?
 #'                  DEFAULT: TRUE
 #'
@@ -40,6 +41,7 @@ skip=0,
 prefix="\nCall stack: ",
 suffix="\n",
 vigremove=TRUE,
+shiremove=TRUE,
 mesremove=TRUE
 )
 {
@@ -84,5 +86,10 @@ mesremove=TRUE
   calltrace <- gsub("with -> with.default -> eval -> eval", "with ->", calltrace)
   calltrace <- gsub("eval -> eval -> ", "eval -> ", calltrace)
   calltrace <- gsub("withVisible -> eval_with_user_handlers -> eval -> ", "", calltrace)
+  if(shiremove)
+  {
+  calltrace <- sub("runApp ->.*-> renderPlot", "", calltrace)
+  calltrace <- sub("process_kl ->.*-> get_kl_data", "process_kl -> get_kl_data", calltrace)
+  }
   calltrace
 }
