@@ -14,7 +14,6 @@ ToDo-list
 - tryStack: if silent=TRUE, put all warnings and messages into final output (not just last one)
 - tryStack: example warning with log(-1:6) for non-repeated call stack
 - tryStack: mapply, do.call etc put function name in next element
-- if tryStack+traceCall moved to own pkg trace, add tstop, twarning and tmessage with traceCall
 - getColumn: consider renaming argument x
 
 
@@ -22,6 +21,19 @@ ToDo-list
 ---------------------------------------
 actual NEWS
 ---------------------------------------
+
+-----------------------------
+-----------------------------
+
+Version 1.22.0 (2023-04-12)
+- sumatraInitialize, openPDF: reflect changes in Rstudio
+- openFile: cross-platfrom compatibility, thanks to rhurlin
+- traceCall: several unnecessary trace elements removed
+- dataStr: handles packages with no datasets, column 'elements'
+- par_sapply: now raises errors if encountered
+- improvements to tableColVal, normTest
+New functions: tmessage, twarning, tstop, runRversions, bmap
+
 
 -----------------------------
 -----------------------------
