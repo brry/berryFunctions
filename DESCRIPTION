@@ -5,7 +5,8 @@ Version: 1.21.23
 Date: 2023-04-12
 Imports: grDevices, graphics, stats, utils, abind
 Suggests: RColorBrewer, pbapply, knitr, rmarkdown, gstat, RCurl, colorspace, 
-          vioplot, spatstat.geom, TeachingDemos, ade4, nortest, rstudioapi, leaflet, leaflet.extras
+          vioplot, spatstat.geom, TeachingDemos, ade4, nortest, rstudioapi, 
+          leaflet, leaflet.extras, zoo
 Author: Berry Boessenkool
 Maintainer: Berry Boessenkool <berry-b@gmx.de>
 Description: Draw horizontal histograms, color scattered points by 3rd dimension,
