@@ -149,7 +149,7 @@ lsc(calib$P, calib$Q, area=1.6) # not bad indeed
 
 }
 \references{
-\url{http://ponce.sdsu.edu/onlineuhcascade.php}\cr
+\url{https://ponce.sdsu.edu/onlineuhcascade.php}\cr
    Skript 'Abflusskonzentration' zur Vorlesungsreihe Abwasserentsorgung I von Prof. Krebs an der TU Dresden\cr
   \url{https://tu-dresden.de/bu/umwelt/hydro/isi/sww/ressourcen/dateien/lehre/dateien/abwasserbehandlung/uebung_ws09_10/uebung_awe_1_abflusskonzentration.pdf}\cr
    \url{https://github.com/brry/misc/blob/master/HydroII-Lernzettel.pdf}

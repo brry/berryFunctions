@@ -16,5 +16,6 @@ Description: Draw horizontal histograms, color scattered points by 3rd dimension
 License: GPL (>= 2)
 URL: https://github.com/brry/berryFunctions
 RoxygenNote: 7.2.3
+Encoding: UTF-8
 VignetteBuilder: knitr
 BugReports: https://github.com/brry/berryFunctions

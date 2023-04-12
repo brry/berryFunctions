@@ -1,8 +1,3 @@
-
-# manual usage section!
-# Roxygen writes <U+00B0> instead of \U{00B0}   for main+units 
-# https://github.com/r-lib/roxygen2/issues/592
-
 #' climate graph after Walter and Lieth
 #' 
 #' Draw a climate diagram by the standards of Walter and Lieth.
@@ -10,9 +5,7 @@
 #' @return None. Plots data and table.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, June 2013
 #' @seealso \code{diagwl} in package \code{climatol}
-#' @references Heinrich Walter, Helmut Lieth: Klimadiagramm-Weltatlas. Gustav Fischer Verlag, Jena 1967\cr
-#' Examples:\cr
-#' \url{http://www.zivatar.hu/felhotar/albums/userpics/wldp.png}
+#' @references Heinrich Walter, Helmut Lieth: Klimadiagramm-Weltatlas. Gustav Fischer Verlag, Jena 1967
 #' @keywords hplot
 #' @importFrom grDevices rgb
 #' @importFrom graphics axis box layout lines mtext par plot text
