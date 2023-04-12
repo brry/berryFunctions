@@ -10,21 +10,24 @@ Changes in version 1.22.0 (2023-04-12)
 - dataStr: handles packages with no datasets, column 'elements'
 - par_sapply: now raises errors if encountered
 - improvements to tableColVal, normTest
-New functions: tmessage, twarning, tstop, runRversions, bmap
+- This NEWS file formatted according to current requirements
+- New functions: tmessage, twarning, tstop, runRversions, bmap
 
 
 -----------------------------
 -----------------------------
+
 
 Changes in version 1.21.0 (2022-02-13)
 - dataStr: now opened in Rstudio viewer, new arguments heads+view
 - removeSPace: to be removed (replace with trimws)
 - broken URLS fixed / removed
-New functions: par_sapply, write.tab, normTest
+- New functions: par_sapply, write.tab, normTest
 
 
 -----------------------------
 -----------------------------
+
 
 Changes in version 1.20.0 (2021-03-30)
 - sumatraInitialize: now also write to appData/Roaming/SumatraPDF
@@ -40,7 +43,7 @@ Changes in version 1.20.0 (2021-03-30)
 - normalizePathCP: removal of trailing slashes added
 - dataStr: completely rewritten, new API
 - documentation URLS updated
-New functions: runTime, compareDist, if.error, locatorRS
+- New functions: runTime, compareDist, if.error, locatorRS
 
 
 -----------------------------
@@ -52,12 +55,13 @@ Changes in version 1.19.0 (2020-06-05)
 - better messages in learnVocab, colPoints
 - newFilename now handles file_1.ext
 - testExamples suppress pbapply progbars in logfiles
-New functions: yearPlot, sumatraInitialize, openPDF
-Removed functions: exTime, instGit, toUpper1
+- New functions: yearPlot, sumatraInitialize, openPDF
+- Removed functions: exTime, instGit, toUpper1
 
 
 -----------------------------
 -----------------------------
+
 
 Changes in version 1.18.1 (2019-04-30)
 - monthAxis: lrange option improved, trunc option added
@@ -80,8 +84,8 @@ Changes in version 1.18.1 (2019-04-30)
 - ciBand: checks order of yl,ym,yu
 - l2df+l2array: handle data.frame inputs better
 - colPoints: uses image for matrix input
-New functions: testExamples, learnVocab, catPal
-Removed functions: ci, funTinn
+- New functions: testExamples, learnVocab, catPal
+- Removed functions: ci, funTinn
 
 
 -----------------------------
@@ -92,7 +96,7 @@ Changes in version 1.17.0 (2018-03-24)
 - createPres+pdfpng: now opens file if wanted
 - climateGraph: table writing corrected when compress=TRUE
 - normalizePathCP: now works on Mac/Solaris as well
-New function: roundedRect
+- New function: roundedRect
 
 
 -----------------------------
@@ -100,12 +104,11 @@ New function: roundedRect
 
 
 Changes in version 1.16.3 (2017-11-10)
-- newFilename: with normalizePathCP, uses absolute paths for non-existing files 
-  also on Linux (needed for rdwd to work on CRAN)
+- newFilename: with normalizePathCP, uses absolute paths for non-existing files also on Linux (needed for rdwd to work on CRAN)
 - exTime: use documented functions instead of exported functions
 - dataDWD+readDWD are no longer documented as functions 
 - example computation times lowered
-new function: normalizePathCP
+- new function: normalizePathCP
 
 
 -----------------------------
@@ -130,7 +133,7 @@ Changes in version 1.16.0 (2017-11-03)
 - owa: runs more checks on inputs
 - monthAxis: replaced with much cleaner code (kept as timeAxis for backwards compatibility)
 - several minor changes, see github commit history
-New functions: round0, openFile, parallelCode, between, packagePath, timeAxis
+- New functions: round0, openFile, parallelCode, between, packagePath, timeAxis
 
 
 -----------------------------
@@ -143,10 +146,9 @@ Changes in version 1.15.0 (2017-04-10)
 - colPoints: lines bug fixed, new legend density bandwidth default
 - seasonality: plotting defaults improved, plotting order changed, moving window now gaussian
 - some functions gain quiet arguments and improved messages and argument defaults, see github url below
-New functions: almost.equal, newFilename, createPres, pdfpng, popleaf, legendmt
-Removed functions: dataDWD, readDWD (kept as help file with reference to rdwd until late 2017)
-For all changes, see:
-https://github.com/brry/berryFunctions/compare/master@{2017-01-16}...master@{2017-04-07}#files_bucket
+- New functions: almost.equal, newFilename, createPres, pdfpng, popleaf, legendmt
+- Removed functions: dataDWD, readDWD (kept as help file with reference to rdwd until late 2017)
+- For all changes, see: https://github.com/brry/berryFunctions/compare/master@{2017-01-16}...master@{2017-04-07}#files_bucket
 
 
 -----------------------------
@@ -177,9 +179,8 @@ Changes in version 1.13.0 (2016-12-10)
 - licence expanded
 - tableColVal massively simplified and improved
 - funSource searches target repos on github
-
-New functions: around, convertUmlaut, truncMessage, tryStack, l2array
-Removed: randomPoints, triangleArea, cie, cls, pastec, pointZoom, createDoc
+- New functions: around, convertUmlaut, truncMessage, tryStack, l2array
+- Removed functions: randomPoints, triangleArea, cie, cls, pastec, pointZoom, createDoc
 
 
 -----------------------------
@@ -202,8 +203,8 @@ https://github.com/brry/berryFunctions/compare/master@{2016-08-18}...master@{201
 - Goodness of fit measures unified into one file and with common input check function
 - informative error messages possible with the new functions traceCall and getColumn
 - classify logspaced bug corrected and implemented in seqPal
-New functions: traceCall, getName, getColumn, kge
-removed: randomPoints, triangleArea, equidistPoints (moved to OSMscale)
+- New functions: traceCall, getName, getColumn, kge
+- Removed functions: randomPoints, triangleArea, equidistPoints (moved to OSMscale)
 
 
 -----------------------------
@@ -211,14 +212,14 @@ removed: randomPoints, triangleArea, equidistPoints (moved to OSMscale)
 
 
 Changes in version 1.11.0 (2016-08-18)
-https://github.com/brry/berryFunctions/compare/master@{2016-04-29}...master@{2016-08-18}
+- https://github.com/brry/berryFunctions/compare/master@{2016-04-29}...master@{2016-08-18}
 - A few function arguments added or refined here and there
 - spatially related functions moved to OSMscle (in development at github.com/brry/OSMscale)
 - na9 is now accurate
 - smallPlot now works correctly in multiple-figure plots (par(mfrow))
 - monthAxis gains a nice ym argument for plots with 1-3 years of data
 - showPal color palette display slightly expanded
-New functions: exTime, is.error, checkFile, seasonality, spiralDate, spiralDateAnim, locArrow, runAxis, dataDWD, readDWD, toupper1, anhang
+- New functions: exTime, is.error, checkFile, seasonality, spiralDate, spiralDateAnim, locArrow, runAxis, dataDWD, readDWD, toupper1, anhang
 
 
 -----------------------------
@@ -226,8 +227,7 @@ New functions: exTime, is.error, checkFile, seasonality, spiralDate, spiralDateA
 
 
 Changes in version 1.10.0 (2016-04-29)
-- numerous small code and documentation improvements, see
-https://github.com/brry/berryFunctions/compare/master@{2015-10-10}...master@{2016-04-29}
+- numerous small code and documentation improvements, see https://github.com/brry/berryFunctions/compare/master@{2015-10-10}...master@{2016-04-29}
 - the package is now Roxygenized, the source code structure is much more standardized
 - There now is a vignette
 - normPlot: colors drawn in quantiles
@@ -235,8 +235,7 @@ https://github.com/brry/berryFunctions/compare/master@{2015-10-10}...master@{201
 - linReg: legargs can now be specified, as well as confint.
 - mReg: input checks + NA and 0 now handled well (thanks to Mathias Hollaender)
 - Color palette default unified throughout the package
-
-New functions: insertRows, dataStr, betaCompPlot, rescale, divPal, seqPal, na9, addFade, logHist, locLine, createFun, headtail, TFtest, showPal, instGit
+- New functions: insertRows, dataStr, betaCompPlot, rescale, divPal, seqPal, na9, addFade, logHist, locLine, createFun, headtail, TFtest, showPal, instGit
 
 
 -----------------------------
@@ -244,20 +243,18 @@ New functions: insertRows, dataStr, betaCompPlot, rescale, divPal, seqPal, na9, 
 
 
 Changes in version 1.9.0 (2015-10-10)
-To see all changes in detail, go to:
-https://github.com/brry/berryFunctions/compare/master@{2015-06-02}...master@{2015-10-10}
-The general overview:
-Package imports 'base' packages: graphics (22 functions used), stats (18), utils (6), grDevices (5)
-Documentation updated in several places, notably in package info
-ChangeLog renamed to NEWS, so that it shows up in package help index
+- To see all changes in detail, go to: https://github.com/brry/berryFunctions/compare/master@{2015-06-02}...master@{2015-10-10}
+- The general overview:
+- Package imports 'base' packages: graphics (22 functions used), stats (18), utils (6), grDevices (5)
+- Documentation updated in several places, notably in package info
+- ChangeLog renamed to NEWS, so that it shows up in package help index
 - combineFiles: progbar option added, with default options does no longer include outFile in outFile
 - climateGraph: rainfall sum corrected if compress=TRUE
 - movAv: NA handling greatly improved (some bugs went unnoticed for a long time)
 - linReg and mReg: handle NAs and formula input
 - linLogHist, linLogTrans: added sleep argument to slow down animation
 - pointZoom: expr argument added, colp renamed (col could not be given)
-
-New functions: sortDF, timer, approx2, ciBand
+- New functions: sortDF, timer, approx2, ciBand
 
 
 -----------------------------
@@ -265,22 +262,19 @@ New functions: sortDF, timer, approx2, ciBand
 
 
 Changes in version 1.8.1 (2015-06-02)
-For all changes see the commits on github with these links:
-https://github.com/brry/berryFunctions/compare/master@{2014-12-22}...master
-https://github.com/brry/berryFunctions/compare/master@{2014-12-22}...master@{2015-06-02}
-The most important stuff:
+- For all changes see the commits on github with these links:
+- https://github.com/brry/berryFunctions/compare/master@{2014-12-22}...master
+- https://github.com/brry/berryFunctions/compare/master@{2014-12-22}...master@{2015-06-02}
 - documentation improved and examples expanded in many places
 - where graphical parameters are changed, options are added to reset them (betaPlot, linLogTrans, normPLot, smallPlot, and in some example sections)
 - improvements in package-internal references to other functions (smoothLines eg now calls addAlpha, new functions repeatedly rely on existing functions)
-
 - linLogTrans: lots of new options, better transformation t values
 - logAxis: intermediate tick marks enabled
 - pretty2 can now be forced to return an exact nubmer of values
 - quantileMean: inputs checked, truncate option (analog to extremeStat::distLquantile), example with sample size dependency simulation
 - smallPlot: improved for mfrow situations, coordinates input and swapping improved, auomatic correction of input errors
-
-New functions: panelDim, groupHist, monthAxis, pastec, linLogHist, movAvLines
-removed: deprecatedFunctions
+- New functions: panelDim, groupHist, monthAxis, pastec, linLogHist, movAvLines
+- Removed functions: deprecatedFunctions
 
 
 -----------------------------
@@ -288,7 +282,7 @@ removed: deprecatedFunctions
 
 
 Changes in version 1.7.1 (2014-12-20)
-various small changes and bug fixes. See the commits on github
+- various small changes and bug fixes. See the commits on github
 - rmse and rsquare NA-removal warnings can now be silenced with quiet=TRUE
 - linReg: formula specification is now enabled: linReg(obj1~obj2) or linReg(col_a~col_b, data=df)
 - colPoints can now draw lines (with interpolation and with NA management) and triangles at legend ends for values outside Range
@@ -301,7 +295,7 @@ various small changes and bug fixes. See the commits on github
 - nameSample has been enhanced a lot.
 - tableColVal now uses classify
 - combineFiles now allows selection of lines
-New functions: logSpaced, removeSpace, expReg, dupes
+- New functions: logSpaced, removeSpace, expReg, dupes
 
 
 -----------------------------
@@ -309,11 +303,11 @@ New functions: logSpaced, removeSpace, expReg, dupes
 
 
 Changes in version 1.6 (2014-10-14)
-removed extremeStatLmom from this package (now in separate package extremeStat), updated package title and description
-created a file with deprecated functions
-version table removed from berryFunctions package documentation (redundant and outdated information)
-Development version is now on Github
-"cat" changed to "message" where applicable
+- removed extremeStatLmom from this package (now in separate package extremeStat), updated package title and description
+- created a file with deprecated functions
+- version table removed from berryFunctions package documentation (redundant and outdated information)
+- Development version is now on Github
+- "cat" changed to "message" where applicable
 - mReg and exp4p documentation updated (minor changes)
 - logAxis expanded by log argument to draw the lines on log10(data) but without plot(log="x")
 - logAxis argument order improved (side at first place to mimic axis)
@@ -322,9 +316,8 @@ Development version is now on Github
 - addAlpha now also takes a vector for alpha and yields elementwise alpha-ing
 - compareFiles and combineFiles have been renamed for consistency
 - seqR: added extendrange argument, rewrote part of the function
-
-New functions: rainbow2, quantileMean, quantileBands, (compareFiles and combineFiles)
-removed functions: extremeStatLmom, changeAttribute, showAttribute shapeZoom, (compFiles and combineTextfiles)
+- New functions: rainbow2, quantileMean, quantileBands, (compareFiles and combineFiles)
+- Removed functions: extremeStatLmom, changeAttribute, showAttribute shapeZoom, (compFiles and combineTextfiles)
 
 
 -----------------------------
@@ -332,12 +325,11 @@ removed functions: extremeStatLmom, changeAttribute, showAttribute shapeZoom, (c
 
 
 Changes in version 1.5.2 (2014-09-15)
-Functions to be moved to new packages warn about it (extremeStatLmom, changeAttribute, showAttribute and shapeZoom)
+- Functions to be moved to new packages warn about it (extremeStatLmom, changeAttribute, showAttribute and shapeZoom)
 - combineTextfiles gained 'names' argument to include filenames in the output
 - unitHydrograph: View() in examples only when interactive
 - nse, rmse, rqsuare: NA warning now gives numbers
-
-New function: logAxis
+- New function: logAxis
 
 
 -----------------------------
@@ -345,7 +337,7 @@ New function: logAxis
 
 
 Changes in version 1.5 (2014-09-03)
-To-Do-list centralized and sorted here, no to-Dos left in source code.
+- To-Do-list centralized and sorted here, no to-Dos left in source code.
 - climateGraph: argument lists for each polygon with owa. sum and avg now at figure margins via mtext.
 - createDoc: extreme simplification of creation of usage section. Now creates new .Rd file if one already exists. Backslash handling optimized, but not perfect yet. Now allows latex in arg explanation, but the function start has to be indicated by a single { in an otherwise empty line. "fun" argument does not have to be in quotation marks anymore. Equal sign in defaults now handled correctly.
 - logVals: Default values for 'from' and 'to' changed
@@ -358,9 +350,8 @@ To-Do-list centralized and sorted here, no to-Dos left in source code.
 - colPoints, colPointsLegend: generally rewritten. classification methods, cpHist and smallPlot added.
 - extremeStatLmom: code for legend arguments improved (with owa)
 - packages lmom and spatstat were moved from "suggests" to "imports", as they are within functions and not just in the examples.
-
-New functions: normPlot, betaPlot, exp4p, compFiles, funTinn, pretty2, colPointsHist, classify, smallPlot
-functions removed: compareDoc (Rcmd check does this better, once a package is set up), extremeStat (replaced with extremeStatLmom)
+- New functions: normPlot, betaPlot, exp4p, compFiles, funTinn, pretty2, colPointsHist, classify, smallPlot
+- Removed functions: compareDoc (Rcmd check does this better, once a package is set up), extremeStat (replaced with extremeStatLmom)
 
 
 -----------------------------
@@ -368,12 +359,12 @@ functions removed: compareDoc (Rcmd check does this better, once a package is se
 
 
 Changes in version 1.4 (2014-07-01)
-Added To-Do list with my personal wishes (and some comments from other people) at the top of this ChangeLog. Examples in several functions received line breaks / shortening
+- Added To-Do list with my personal wishes (and some comments from other people) at the top of this ChangeLog.
+- Examples in several functions received line breaks / shortening
 - extremeStatLmom: p.value by ks.test as measure for goodness of fit addded. Output is now data.frame instead of matrix. Value field in Doc is complemented. Examples are updated.
 - lsc: example QP-Data is now a file in the package folder extdata, not a dropbox link anymore (files were accidentally deleted and it was too slow anyways). P and Q labels are now placed in the outer margin.
 - mReg: ditto for temp data
-
-New function: linLogTrans
+- New function: linLogTrans
 
 
 -----------------------------
@@ -381,9 +372,9 @@ New function: linLogTrans
 
 
 Changes in version 1.3 (2014-06-08)
-Description field much more verbose
-Shapefile (6 MB) removed from data
-examples in changeAttribute, showAttribute, shapeZoom changed accordingly
+- Description field much more verbose
+- Shapefile (6 MB) removed from data
+- examples in changeAttribute, showAttribute, shapeZoom changed accordingly
 
 
 -----------------------------
@@ -391,19 +382,17 @@ examples in changeAttribute, showAttribute, shapeZoom changed accordingly
 
 
 Changes in version 1.2 (2014-06-06)
-
-email address in DESCRIPTION Maintainer Field (how could I possibly miss that typo?!) is now corrected.
-This ChangeLog is now reformated to create a standard layout.
-A lot of examples have received line breaks (they were longer than 100 chars).
-
-berryFunctions-package: examples completed and grouped
-createDoc: seealso extended.
-funnelPLot and mReg: owa removed from function body
-lsc: argument returnsim included, output now vector. psi incluced. catchment area included, examples and documentation updated
-logVals: description updated
-owa: programming example included, description changed.
-combineTextfiles: example added.
-require2: example is set to dontrun
+- email address in DESCRIPTION Maintainer Field (how could I possibly miss that typo?!) is now corrected.
+- This ChangeLog is now reformated to create a standard layout.
+- A lot of examples have received line breaks (they were longer than 100 chars).
+- berryFunctions-package: examples completed and grouped
+- createDoc: seealso extended.
+- funnelPLot and mReg: owa removed from function body
+- lsc: argument returnsim included, output now vector. psi incluced. catchment area included, examples and documentation updated
+- logVals: description updated
+- owa: programming example included, description changed.
+- combineTextfiles: example added.
+- require2: example is set to dontrun
 
 
 -----------------------------
@@ -411,50 +400,15 @@ require2: example is set to dontrun
 
 
 Changes in version 1.1 (2014-06-05)
-
-First Version to be published
-all functions have documentation.
-Function names are standardized in lowerCamel.
-Many of the already existing functions have been extended with more arguments and possibilities.
-The following 3 functions have been removed:
-info - use class or mode seperately
-Rand - use box("figure")
-vlast - use head() and tail()
-
-New functions:
-
-addAlpha
-addRows
-changeAttribute
-climateGraph
-cls
-combineTextfiles
-createDoc
-extremeStatLmom
-funnelPlot
-googleLink2pdf (formerly link_google2pdf)
-l2df
-lim0
-logVals
-lsc
-lsMem
-mReg
-nameSample
-nse
-owa
-pointZoom (formerly bzoom)
-require2
-rmse
-rsquare
-seqR
-showAttribute
-smoothLines (formerly blines)
-superPos
-tableColVal
-textField
-triangleArea (formerly dreieckflaeche)
-unitHydrograph
-yearSample
+- First Version to be published
+- all functions have documentation.
+- Function names are standardized in lowerCamel.
+- Many of the already existing functions have been extended with more arguments and possibilities.
+- The following 3 functions have been removed:
+- info - use class or mode seperately
+- Rand - use box("figure")
+- vlast - use head() and tail()
+- New functions: addAlpha, addRows, changeAttribute, climateGraph, cls, combineTextfiles, createDoc, extremeStatLmom, funnelPlot, googleLink2pdf (formerly link_google2pdf), l2df, lim0, logVals, lsc, lsMem, mReg, nameSample, nse, owa, pointZoom (formerly bzoom), require2, rmse, rsquare, seqR, showAttribute, smoothLines (formerly blines), superPos, tableColVal, textField, triangleArea (formerly dreieckflaeche), unitHydrograph, yearSample
 
 
 -----------------------------
@@ -462,28 +416,6 @@ yearSample
 
 
 Changes in version 1.0 (2012-10-04)
-
-unpublished, mainly just to try building a package
-initial functions (Most of them had no or few documentation):
-
-blines
-bzoom
-ci
-cie
-circle
-colpoints
-colpointslegend
-distance
-dreieckflaeche
-extremSTAT
-horiz.hist
-info
-link_google2pdf
-linreg
-monthlabs
-movav
-Rand
-randompoints
-shapezoom
-vlast
+- unpublished, mainly just to try building a package
+- initial functions (Most of them had no or few documentation): blines, bzoom, ci, cie, circle, colpoints, colpointslegend, distance, dreieckflaeche, extremSTAT, horiz.hist, info, link_google2pdf, linreg, monthlabs, movav, Rand, randompoints, shapezoom, vlast
 
