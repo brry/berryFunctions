@@ -3,6 +3,9 @@ berryFunctions
 miscellaneous package by Berry Boessenkool, berry-b@gmx.de
 Any feedback is welcome, per email or on github.com/brry/berryFunctions
 
+Changes in version 1.23.0 (2023-12-12)
+- sumatraInitialize: reflect changes in Rstudio
+
 Changes in version 1.22.0 (2023-04-12)
 - sumatraInitialize, openPDF: reflect changes in Rstudio
 - openFile: cross-platfrom compatibility, thanks to rhurlin

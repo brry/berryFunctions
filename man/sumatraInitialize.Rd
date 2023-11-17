@@ -5,33 +5,31 @@
 \title{Set useful Sumatra PDF Viewer default settings}
 \usage{
 sumatraInitialize(
-  path = sub("pandoc$", "sumatra", Sys.getenv("RSTUDIO_PANDOC")),
+  path = sub("rstudio.exe$", "resources/app/bin/sumatra",
+    Sys.getenv("RSTUDIO_DESKTOP_EXE")),
   roampath = paste0(Sys.getenv("APPDATA"), "/SumatraPDF"),
   openfolder = TRUE
 )
 }
 \arguments{
-\item{path}{Folder (not file) that contains "SumatraPDF.exe". 
+\item{path}{Folder (not file) that contains "SumatraPDF.exe".
 You need file writing permissions in the folder.
-DEFAULT: extracted from \code{\link{Sys.getenv}("RSTUDIO_PANDOC")}, e.g.
-"C:/Program Files/RStudio/bin/sumatra"}
+DEFAULT: equivalent of "C:/Program Files/RStudio/resources/app/bin/sumatra"}
 
-\item{roampath}{if not NULL, both files are also copied to this path, 
-e.g. C:/Users/berry/AppData/Roaming/SumatraPDF.
-DEFAULT: SumatraPDF folder at \code{\link{Sys.getenv}("APPDATA")}}
+\item{roampath}{Folder that will contain "SumatraPDF-settings.txt".
+DEFAULT: equivalent of "C:/Users/berry/AppData/Roaming/SumatraPDF"}
 
-\item{openfolder}{Logical: Open folder after writing the files?
+\item{openfolder}{Logical: Open folders after writing the files?
 Uses \code{\link{openFile}()}. DEFAULT: TRUE}
 }
 \value{
 path, invisibly
 }
 \description{
-Set useful Sumatra PDF Viewer default settings. This will likely only work on windows.
-At the given \code{path} with "SumatraPDF.exe", this creates two settings files.
+Set useful Sumatra PDF Viewer default settings. This will only work on windows.
 Existing files are renamed ("_old_n" appended), not overwritten.\cr
-Creates "sumatrapdfrestrict.ini" with \code{SavePreferences = 1} and \code{FullscreenAccess = 1}.\cr
-Creates "SumatraPDF-settings.txt" with \code{ShowToc = false} and \code{DefaultDisplayMode = single page}.
+At the given \code{path} with "SumatraPDF.exe", it creates "sumatrapdfrestrict.ini" with \code{SavePreferences = 1} and \code{FullscreenAccess = 1}.\cr
+At the given \code{roampath}, it creates "SumatraPDF-settings.txt" with \code{ShowToc = false} and \code{DefaultDisplayMode = single page}.
 \code{UiLanguage} gets filled in by Sumatra itself upon first opening.
 }
 \examples{
@@ -44,6 +42,6 @@ Creates "SumatraPDF-settings.txt" with \code{ShowToc = false} and \code{DefaultD
 \url{https://github.com/sumatrapdfreader/sumatrapdf/blob/master/docs/sumatrapdfrestrict.ini}
 }
 \author{
-Berry Boessenkool, \email{berry-b@gmx.de}, May 2020
+Berry Boessenkool, \email{berry-b@gmx.de}, May 2020, Nov 2023
 }
 \keyword{file}
