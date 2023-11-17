@@ -7,3 +7,4 @@ cran-comments.md
 Tests.R
 funs.odt
 ExampleTestLogs
+^CRAN-SUBMISSION$
