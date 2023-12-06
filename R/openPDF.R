@@ -18,24 +18,20 @@
 #' 
 #' @param file   Filename to be opened, as character string.
 #'               Files not ending in ".pdf" are ignored with a warning.
-#' @param rspath The path to Rstudio bin files. 
-#'               DEFAULT: \code{\link{Sys.getenv}("RSTUDIO_PANDOC")}
-#' @param sumexe The path to SumatraPDF.exe. DEFAULT: Null: extracted from \code{rspath}, e.g. 
-#'               "C:/Program Files/RStudio/bin/sumatra/SumatraPDF.exe"
+#' @param rspath The path to Rstudio files. 
+#'               DEFAULT: \code{sub("rstudio.exe$", "", \link{Sys.getenv}("RSTUDIO_DESKTOP_EXE"))}
+#' @param sumexe The path to SumatraPDF.exe. DEFAULT: Null: added to \code{rspath}, e.g. 
+#'               "C:/Program Files/RStudio/resources/app/bin/sumatra/SumatraPDF.exe"
 #' @param \dots  Further arguments passed to \code{\link{system}}
 #' 
 openPDF <- function(
 file,
-rspath=Sys.getenv("RSTUDIO_PANDOC"),
+rspath=sub("rstudio.exe$", "", Sys.getenv("RSTUDIO_DESKTOP_EXE")),
 sumexe=NULL,
 ...
 )
 {
-# 
-rspath <- sub("pandoc$", "", rspath)
-rspath <- sub("quarto/bin", "", rspath) # Rstudio dev version 2022-02-09
-rspath <- sub("/$", "", rspath) # trailing slash
-if(is.null(sumexe)) sumexe <- paste0(rspath,"/sumatra/SumatraPDF.exe")
+if(is.null(sumexe)) sumexe <- paste0(rspath,"/resources/app/bin/sumatra/SumatraPDF.exe")
  
 # check file existence:
 file   <- normalizePath(file,   winslash="/", mustWork=FALSE)
