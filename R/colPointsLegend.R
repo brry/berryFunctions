@@ -37,6 +37,7 @@
 #' @param bb Borders of bins for the legend (key). DEFAULT: seqR(Range, length.out=nbins+1)
 #' @param nlab,at,labels Number of legend labels, their positions and labels.
 #'                    DEFAULT: nlab=5, labels=at=pretty2(Range,nlab)
+#' @param atgrey Positions for grey lines with no label, if given. DEFAULT: NULL
 #' @param adj label adjustment parallel to legend bar (only one number!). DEFAULT: 0.5
 #' @param x1,x2,y1,y2 Relative coordinates [0:1] of inset plot, see \code{\link{smallPlot}}.
 #'                    DEFAULT: x: 0.6-0.99, y: 0.88-0.99
@@ -82,6 +83,7 @@ bb=seqR(Range, length.out=nbins+1),
 nlab=5,
 at=pretty2(Range, nlab),
 labels=at,
+atgrey=NULL,
 adj=0.5,
 
 x1=0.6,
@@ -178,6 +180,7 @@ if(horizontal) # ---------------------------------------------------------------
   if(plottriangle[1]) polygon(c(bb[1],bb[1],trimin),       c(0,1,0.5), col=tricol[1], border=NA)
   if(plottriangle[2]) polygon(c(rep(tail(bb,1),2),trimax), c(0,1,0.5), col=tricol[2], border=NA)
   # lines
+  if(lines & !is.null(atgrey)) segments(x0=atgrey, y0=0, y1=1, col="grey60")
   if(lines) segments(x0=at, y0=0, y1=1)
   # prepare label adjustment:
   if(labelpos==1) { y <- -0.1 ; vadj <- 1   } else
@@ -214,6 +217,7 @@ else # if not horizontal, thus if vertical -------------------------------------
   if(plottriangle[1]) polygon(c(0,1,0.5), c(bb[1],bb[1],trimin),       col=tricol[1], border=NA)
   if(plottriangle[2]) polygon(c(0,1,0.5), c(rep(tail(bb,1),2),trimax), col=tricol[2], border=NA)
   # lines
+  if(lines & !is.null(atgrey)) segments(y0=atgrey, x0=0, x1=1, col="grey60")
   if(lines) segments(y0=at, x0=0, x1=1)
   # prepare label adjustment:
   if(labelpos==2) { x <- -0.1 ; hadj <- 1   } else

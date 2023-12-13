@@ -57,6 +57,14 @@
 #' text(mx,my,mz, adj=-0.5, font=2)
 #' 
 #' 
+#' # with logarithmic color scale:
+#' shp <- seq(0.2,3, by=0.1)
+#' scl <- seq(0.2,3, by=0.1)
+#' wsim <- sapply(shp, function(h) sapply(scl, function(c) mean(rweibull(1e3, shape=h, scale=c))))
+#' colPoints(shp, scl, (wsim), add=FALSE, asp=1)
+#' colPoints(shp, scl, (wsim), add=FALSE, asp=1, method="log")
+#' 
+#' 
 #' # with lines (nint to change number of linear interpolation points):
 #' colPoints(i,j,k, cex=1.5, add=FALSE, lines=TRUE, nint=10, lwd=2)
 #' # With NAs separating lines:
@@ -145,7 +153,9 @@
 #'                 miss the original points. DEFAULT: 30
 #' @param xlab,ylab,zlab X axis label, y axis label, \code{\link{colPointsLegend} title}.
 #'                 DEFAULT: \code{gsub("\\"", "", deparse(\link{substitute}(x/y/z)))}
-#' @param log      Logarithmic axes with log="y", "xy" or "x". DEFAULT: ""
+#' @param log      Logarithmic axes with log="y", "xy" or "x". 
+#'                 For logarithmic colorscale, see method="log".
+#'                 DEFAULT: ""
 #' @param axes,las Draw axes? Label Axis Style. Only used when add=FALSE.
 #'                 See \code{\link{par}}. DEFAULT: axes=TRUE, las=1 (all labels horizontal)
 #' @param bglines  If not NULL, passed to \code{\link{abline}} to draw background
@@ -234,7 +244,15 @@ if(is.null(Range)) Range <- range(z, finite=TRUE)
 #
 # CLASSIFICATION ---------------------------------------------------------------
 if(is.null(col)) col <- seqPal(100) # in case colPoints(x,y,z, if(F)col=divPal(100))
-cl <- classify(x=z, method=method, breaks=breaks, sdlab=sdlab, Range=Range, quiet=quiet)
+method2 <- method
+z2 <- z
+atgrey <- NULL
+if(zmat && method=="log") {
+ method2 <- "linear"
+ z2 <- log10(z)
+ Range <- log10(Range)
+ }
+cl <- classify(x=z2, method=method2, breaks=breaks, sdlab=sdlab, Range=Range, quiet=quiet)
 output <- cl
 output$x <- x
 output$y <- y
@@ -248,8 +266,15 @@ if(zmat)
   {
   dy <- if(length(y)>1 && length(y)==nrow(z)) 0.5*diff(y) else 0
   ylim <- c(max(y,na.rm=TRUE)+dy[length(dy)], min(y,na.rm=TRUE)-dy[1L])
-  # Potential toDo: use the classify results for coloring in image()
-  image(x,y,t(z), col=col, add=add, ylim=ylim, zlim=Range,
+  if(method=="log") 
+     {
+     lv <- logVals(Range=Range, base=NA, exponent=4)
+     lv$sel <- lv$vals >= 10^Range[1] & lv$vals <= 10^Range[2]
+     cl$at <-     log10(lv$vals[lv$sel])
+     cl$labels <- lv$labs[lv$sel]
+     atgrey <- lv$all[lv$all >= 10^Range[1] & lv$all <= 10^Range[2]]
+     }
+  image(x,y,t(z2), col=col, add=add, ylim=ylim, zlim=Range,
         xlab=xlab, ylab=ylab, las=las, axes=axes, log=log, ...)
   lines <- FALSE
   } else
@@ -289,8 +314,8 @@ if(!zmat)
   }
 #
 # add legend:
-legdefs <- list(z=z, at=cl$at, labels=cl$labels, bb=cl$bb, nbins=cl$nbins,
-                plottriangle=c(cl$below>0,cl$above>0),
+legdefs <- list(z=z2, at=cl$at, labels=cl$labels, bb=cl$bb, nbins=cl$nbins,
+                plottriangle=c(cl$below>0,cl$above>0), atgrey=atgrey,
                 title=zlab, x1=x1, x2=x2, y1=y1, y2=y2,
                 density=density, horizontal=horizontal, tricol=col2[2:3], colors=col)
 output <- c(output, legdefs[!names(legdefs) %in% c("nbins","bb","at","labels","index","z")])

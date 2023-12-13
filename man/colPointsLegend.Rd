@@ -13,6 +13,7 @@ colPointsLegend(
   nlab = 5,
   at = pretty2(Range, nlab),
   labels = at,
+  atgrey = NULL,
   adj = 0.5,
   x1 = 0.6,
   y1 = 0.88,
@@ -60,6 +61,8 @@ from yellow (lowest) to blue (highest value in Range)}
 
 \item{nlab, at, labels}{Number of legend labels, their positions and labels.
 DEFAULT: nlab=5, labels=at=pretty2(Range,nlab)}
+
+\item{atgrey}{Positions for grey lines with no label, if given. DEFAULT: NULL}
 
 \item{adj}{label adjustment parallel to legend bar (only one number!). DEFAULT: 0.5}
 

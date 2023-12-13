@@ -88,7 +88,9 @@ DEFAULT: \code{gsub("\\"", "", deparse(\link{substitute}(x/y/z)))}}
 \item{axes, las}{Draw axes? Label Axis Style. Only used when add=FALSE.
 See \code{\link{par}}. DEFAULT: axes=TRUE, las=1 (all labels horizontal)}
 
-\item{log}{Logarithmic axes with log="y", "xy" or "x". DEFAULT: ""}
+\item{log}{Logarithmic axes with log="y", "xy" or "x". 
+For logarithmic colorscale, see method="log".
+DEFAULT: ""}
 
 \item{bglines}{If not NULL, passed to \code{\link{abline}} to draw background
 lines before adding colored points. DEFAULT: NULL}
@@ -162,6 +164,14 @@ mz <- c(110, 184, 127, 133, 170, 114)
 colPoints(mx,my,mz, cex=5, pch="*", Range=c(94, 195), col=seqPal(), col2=NA, legend=FALSE)
 points(mx,my, cex=4)
 text(mx,my,mz, adj=-0.5, font=2)
+
+
+# with logarithmic color scale:
+shp <- seq(0.2,3, by=0.1)
+scl <- seq(0.2,3, by=0.1)
+wsim <- sapply(shp, function(h) sapply(scl, function(c) mean(rweibull(1e3, shape=h, scale=c))))
+colPoints(shp, scl, (wsim), add=FALSE, asp=1)
+colPoints(shp, scl, (wsim), add=FALSE, asp=1, method="log")
 
 
 # with lines (nint to change number of linear interpolation points):

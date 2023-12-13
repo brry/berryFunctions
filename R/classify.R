@@ -216,5 +216,5 @@ if(!is.null(col))
                       length(colors),").")
  return(colors[ix])
  }
-list(nbins=nb, bb=bb, below=below, above=above, at=at, labels=la, index=ix)
+list(method=method, nbins=nb, bb=bb, below=below, above=above, at=at, labels=la, index=ix)
 } # Function end
