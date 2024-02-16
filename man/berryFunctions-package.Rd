@@ -2,10 +2,13 @@
 % Please edit documentation in R/berryFunctions-package.R
 \docType{package}
 \name{berryFunctions-package}
-\alias{berryFunctions-package}
 \alias{berryFunctions}
+\alias{berryFunctions-package}
 \title{Berry's functions}
 \description{
+Draw horizontal histograms, color scattered points by 3rd dimension, enhance date- and log-axis plots, zoom in X11 graphics, trace errors and warnings, use the unit hydrograph in a linear storage cascade, convert lists to data.frames and arrays, fit multiple functions.
+}
+\note{
 Collection of functions, mainly connected with graphics and hydrology.\cr
 - zoom in X11 graphics\cr
 - plot rainfall-runoff data and optimize parameters for the unit hydrograph in the linear storage cascade\cr
@@ -16,10 +19,7 @@ Collection of functions, mainly connected with graphics and hydrology.\cr
 - fit multiple functions (power, reciprocal, exponential, logarithmic, polynomial, rational) by regression\cr
 - convert lists to data.frames\cr
 - and more...
-}
-\note{
-dataDWD and readDWD have moved to the package rdwd: \url{https://github.com/brry/rdwd#rdwd}\cr\cr
-Get the most recent code updates at \url{https://github.com/brry}\cr
+
 At some places you'll find \code{## not run} in the examples. These code
 blocks were excluded from checking while building, mainly because they are
 interactive and need mouseclicks, or because they open another device/file.
@@ -31,6 +31,14 @@ I strongly depend on - and therefore welcome - any feedback!\cr\cr
 \examples{
 
 # see   vignette("berryFunctions")
+
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/brry/berryFunctions}
+  \item Report bugs at \url{https://github.com/brry/berryFunctions}
+}
 
 }
 \author{

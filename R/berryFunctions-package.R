@@ -1,5 +1,7 @@
 #' Berry's functions
-#' 
+"_PACKAGE"
+#' @name berryFunctions-package
+#' @note 
 #' Collection of functions, mainly connected with graphics and hydrology.\cr
 #' - zoom in X11 graphics\cr
 #' - plot rainfall-runoff data and optimize parameters for the unit hydrograph in the linear storage cascade\cr
@@ -11,11 +13,6 @@
 #' - convert lists to data.frames\cr
 #' - and more...
 #' 
-#' @name berryFunctions-package
-#' @aliases berryFunctions-package berryFunctions
-#' @docType package
-#' @note dataDWD and readDWD have moved to the package rdwd: \url{https://github.com/brry/rdwd#rdwd}\cr\cr
-#' Get the most recent code updates at \url{https://github.com/brry}\cr
 #' At some places you'll find \code{## not run} in the examples. These code
 #' blocks were excluded from checking while building, mainly because they are
 #' interactive and need mouseclicks, or because they open another device/file.
