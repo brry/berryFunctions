@@ -161,7 +161,7 @@ smallPlot(plot(1:10), mar=c(1,3,1,0), x1=0,x2=0.2, y1=0.2,y2=0.8, bg=4, outer=TR
 }
 \seealso{
 \code{\link{colPointsLegend}} for an example of usage.
-         \code{\link[TeachingDemos]{subplot}} and \code{\link[ade4]{add.scatter}}
+         \code{subplot} in the archived \href{https://cran.r-project.org/package=TeachingDemos}{TeachingDemos} package and \code{\link[ade4]{add.scatter}}
          for alternative solutions to this problem that do not set margins.
 }
 \author{

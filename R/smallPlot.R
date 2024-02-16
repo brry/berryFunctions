@@ -9,7 +9,7 @@
 #' @section Warning: setting mai etc does not work!
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2014-2016
 #' @seealso \code{\link{colPointsLegend}} for an example of usage.
-#'          \code{\link[TeachingDemos]{subplot}} and \code{\link[ade4]{add.scatter}}
+#'          \code{subplot} in the archived \href{https://cran.r-project.org/package=TeachingDemos}{TeachingDemos} package and \code{\link[ade4]{add.scatter}}
 #'          for alternative solutions to this problem that do not set margins.
 #' @keywords hplot dplot aplot
 #' @importFrom graphics par plot.new rect strheight strwidth text
