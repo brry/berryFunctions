@@ -4,7 +4,7 @@ Miscellaneous R functions. Notable: colPoints, horizHist, logAxis, pointZoom, sm
 
 **See the [Vignette](https://cran.r-project.org/package=berryFunctions/vignettes/berryFunctions.html) for an overview of the package.**
 
-[Recent changes](http://starlogs.net/#brry/berryFunctions) (Thanks, [Jenny](https://happygitwithr.com/comic-relief.html))
+[Recent changes](https://starlogs.dev/brry/berryFunctions) (Thanks, [Jenny](https://happygitwithr.com/comic-relief.html))
 
 
 ### installation
