@@ -23,7 +23,7 @@ smallPlot(
 )
 }
 \arguments{
-\item{expr}{expression creating a plot. Can be code within {braces}.}
+\item{expr}{expression creating a plot. Can be code within curly braces.}
 
 \item{x1, x2, y1, y2}{Position of small plot, relative to current figure region [0:1].
 DEFAULT: x: 0.05-0.7, y: 0.5-1}

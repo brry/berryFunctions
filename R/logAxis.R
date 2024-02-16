@@ -48,7 +48,7 @@
 #' @param labels Labels passed to \code{\link{axis}}. "FALSE" to suppress labeling. DEFAULT: NULL (internally, \code{\link{logVals}$labs}
 #' @param allticks Place all intermediate ticklines at the axis (without labeling). DEFAULT: FALSE
 #' @param allargs List of arguments passed to axis for allticks=TRUE. DEFAULT: NULL
-#' @param expr Expression drawing over the ablines, like (points(x,y). Can be code within {braces}.
+#' @param expr Expression drawing over the ablines, like (points(x,y). Can be code within curly braces.
 #' @param las LabelAxisStyle for the orientation of the labels. DEFAULT: 1
 #' @param from Lower exponent OR vector with data, as in \code{\link{logVals}}. DEFAULT based on \code{\link{par}("usr")}
 #' @param to High end exponent. DEFAULT: internally based on par("usr")

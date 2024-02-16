@@ -44,7 +44,7 @@ logAxis(
 
 \item{allargs}{List of arguments passed to axis for allticks=TRUE. DEFAULT: NULL}
 
-\item{expr}{Expression drawing over the ablines, like (points(x,y). Can be code within {braces}.}
+\item{expr}{Expression drawing over the ablines, like (points(x,y). Can be code within curly braces.}
 
 \item{las}{LabelAxisStyle for the orientation of the labels. DEFAULT: 1}
 

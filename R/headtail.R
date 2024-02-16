@@ -2,7 +2,7 @@
 #' 
 #' show head and tail of an object with one command
 #' 
-#' @details Tries to find good methods of combining the two results according to {code{class(x)}}.
+#' @details Tries to find good methods of combining the two results according to \code{class(x)}.
 #' 
 #' @return \code{\link{head}} result
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Mrz 2016
