@@ -97,7 +97,7 @@ upp2(vekt[1], iris)
 
 }
 \seealso{
-\code{\link{subset}}, \code{\link{getElement}}, \url{https://cran.r-project.org/web/packages/car/vignettes/embedding.pdf}
+\code{\link{subset}}, \code{\link{getElement}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Sep 2016

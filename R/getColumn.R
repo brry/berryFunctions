@@ -6,7 +6,7 @@
 #' 
 #' @return Vector with values in the specified column
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sep 2016
-#' @seealso \code{\link{subset}}, \code{\link{getElement}}, \url{https://cran.r-project.org/web/packages/car/vignettes/embedding.pdf}
+#' @seealso \code{\link{subset}}, \code{\link{getElement}}
 #' @export
 #' @importFrom utils capture.output str
 #' @examples
