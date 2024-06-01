@@ -20,6 +20,7 @@
 #' set.seed(42);  x <- 10^rnorm(100, 3);  y <- runif(100)
 #' linLogTrans(x,y, steps=15, sleep=0.05)
 #' linLogTrans(x,y, steps=15, log="y", ylim=c(0.1, 0.8), base=c(1,2,5))
+#' linLogTrans(x,y, steps=15, log="xy", sleep=0.05) # sleep not used on my mac
 #' 
 #' \dontrun{
 #' ## Rcmd check --as-cran doesn't like to open external devices such as pdf,
@@ -79,7 +80,7 @@
 #' 
 #' @param x x values to be plotted in animation
 #' @param y Vector with corresponding y values
-#' @param log Which axis is logarithmic, "x" or "y". DEFAULT: "x"
+#' @param log Which axis is logarithmic: "x", "y" or "xy" (for both). DEFAULT: "x"
 #' @param steps Number of steps (images) in transition (About 30\% are taken out). DEFAULT: 100
 #' @param base Base passed to \code{\link{logVals}}. DEFAULT: 1
 #' @param las \code{\link{par}} LabelAxisStyle (numbers upright). DEFAULT: 1

@@ -31,7 +31,7 @@ linLogTrans(
 
 \item{y}{Vector with corresponding y values}
 
-\item{log}{Which axis is logarithmic, "x" or "y". DEFAULT: "x"}
+\item{log}{Which axis is logarithmic: "x", "y" or "xy" (for both). DEFAULT: "x"}
 
 \item{steps}{Number of steps (images) in transition (About 30\% are taken out). DEFAULT: 100}
 
@@ -82,6 +82,7 @@ if(steps>1000) steps <- 1000. In the unlikely case you need more steps, please l
 set.seed(42);  x <- 10^rnorm(100, 3);  y <- runif(100)
 linLogTrans(x,y, steps=15, sleep=0.05)
 linLogTrans(x,y, steps=15, log="y", ylim=c(0.1, 0.8), base=c(1,2,5))
+linLogTrans(x,y, steps=15, log="xy", sleep=0.05) # sleep not used on my mac
 
 \dontrun{
 ## Rcmd check --as-cran doesn't like to open external devices such as pdf,
