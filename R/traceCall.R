@@ -81,6 +81,7 @@ mesremove=TRUE
   {
   calltrace <- gsub(" -> .makeMessage -> lapply", "", calltrace) # R > 4.2.0 https://github.com/wch/r-source/commit/a114756ee
   calltrace <- gsub(" -> .makeMessage",           "", calltrace) # R 4.1.0 - 4.1.3
+  calltrace <- gsub("withVisible -> eval -> ",    "", calltrace) # seen sept 2024
   }
   calltrace <- gsub("->  ->", "->", calltrace)
   calltrace <- gsub("with -> with.default -> eval -> eval", "with ->", calltrace)
