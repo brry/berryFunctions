@@ -274,8 +274,10 @@ if(zmat)
      cl$labels <- lv$labs[lv$sel]
      atgrey <- lv$all[lv$all >= 10^Range[1] & lv$all <= 10^Range[2]]
      }
-  image(x,y,t(z2), col=col, add=add, ylim=ylim, zlim=Range,
+  imargs <- list(x=x,y=y,z=t(z2), col=col, add=add, zlim=Range,
         xlab=xlab, ylab=ylab, las=las, axes=axes, log=log, ...)
+  imargs <- owa(list(ylim=ylim), imargs)
+  do.call(image, args=imargs)
   lines <- FALSE
   } else
 if(!add) plot(x, y, type="n", xlab=xlab, ylab=ylab, las=las, axes=axes, log=log, ...)
