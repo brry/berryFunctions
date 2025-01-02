@@ -5,9 +5,8 @@
 \title{Set useful Sumatra PDF Viewer default settings}
 \usage{
 sumatraInitialize(
-  path = sub("rstudio.exe$", "resources/app/bin/sumatra",
-    Sys.getenv("RSTUDIO_DESKTOP_EXE")),
-  roampath = paste0(Sys.getenv("APPDATA"), "/SumatraPDF"),
+  path = sumatraPaths()[1],
+  roampath = sumatraPaths()[2],
   openfolder = TRUE
 )
 }
