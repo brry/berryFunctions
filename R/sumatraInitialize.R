@@ -33,6 +33,7 @@ sumatraInitialize <- function(
 if(.Platform$OS.type != "windows") stop("SumatraPDF is only available on Windows") 
 if(!interactive()) stop("sumatraInitialize can only be used in an interactive session.")
 checkFile(path)
+if(!dir.exists(roampath)) dir.create(roampath)
 checkFile(roampath)
 message("sumatraInitialize wants to add config files at these two locations:\n",
         path, "\n", roampath,"\nIf files exist, they are kept as a copy.")
@@ -52,6 +53,9 @@ replaceFile <- function(base, ext)
   if(!file.exists(fn)) return(fn)
   #
   newname <- newFilename(paste0(base, "_old_1",ext), quiet=TRUE)
+  if(!requireNamespace("R.utils", quietly=TRUE)) stop("install R.utils")
+  if(R.utils::fileAccess(dirname(newname), mode=2)<0)
+   stop("First set writing access for  ", dirname(fn))
   file.rename(fn, newname)
   msg <<- paste0(msg, "\nExisting file was renamed to ", newname)
   return(fn)
