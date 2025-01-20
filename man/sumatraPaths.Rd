@@ -4,7 +4,10 @@
 \alias{sumatraPaths}
 \title{Get Sumatra PDF Viewer paths}
 \usage{
-sumatraPaths()
+sumatraPaths(open = FALSE)
+}
+\arguments{
+\item{open}{open the folders? DEFAULT: FALSE}
 }
 \value{
 paths
@@ -14,7 +17,6 @@ Get Sumatra paths for \code{\link{sumatraInitialize}}. This will only work on wi
 }
 \examples{
 sumatraPaths()
-
 }
 \seealso{
 \code{\link{sumatraInitialize}}

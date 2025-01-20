@@ -7,8 +7,9 @@
 #' @export
 #' @examples
 #' sumatraPaths()
+#' @param open open the folders? DEFAULT: FALSE
 #'
-sumatraPaths <- function()
+sumatraPaths <- function(open=FALSE)
 {
 if(.Platform$OS.type != "windows") stop("SumatraPDF is only available on Windows") 
 # Exe path:
@@ -19,6 +20,9 @@ epath <- sub("rstudio.exe$", "resources/app/bin/sumatra", epath)
 rpath <- Sys.getenv("APPDATA")
 rpath <- normalizePathCP(rpath)
 rpath <- paste0(rpath, "/SumatraPDF")
+# open:
+if(open) openFile(epath)
+if(open) openFile(rpath)
 # Output:
 return(c(epath, rpath))
 }
