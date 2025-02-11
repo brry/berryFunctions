@@ -6,7 +6,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Feb 2025
 #' @seealso \code{graphics::\link[graphics]{pairs}}
 #' @keywords aplot
-# @importFrom package fun1 fun2
+#' @importFrom graphics pairs
 #' @export
 #' @examples
 #' bpairs(mtcars[,1:5])
