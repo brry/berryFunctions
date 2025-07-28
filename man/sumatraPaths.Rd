@@ -16,7 +16,7 @@ paths
 Get Sumatra paths for \code{\link{sumatraInitialize}}. This will only work on windows.
 }
 \examples{
-sumatraPaths()
+if(.Platform$OS.type == "windows") sumatraPaths()
 }
 \seealso{
 \code{\link{sumatraInitialize}}

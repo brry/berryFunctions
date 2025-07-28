@@ -7,11 +7,11 @@
 count(pattern, x, ...)
 }
 \arguments{
+\item{pattern}{character string (can have regex)}
+
 \item{x}{charstring (vector)}
 
 \item{\dots}{Further arguments passed to \code{\link{gregexpr}}}
-
-\item{a}{character string (can have regex)}
 }
 \value{
 single integer

@@ -18,6 +18,8 @@
 #'
 #' @param df    Data.frame. Can contain NAs. Character columns are excluded.
 #' @param main  Title for the overall graph. DEFAULT: NULL (from input)
+#' @param pch   Point character. DEFAULT: 16
+#' @param col   Color. DEFAULT: \code{\link{addAlpha}("blue")}
 #' @param \dots Further arguments passed to \code{\link{pairs}}
 #'
 bpairs <- function(

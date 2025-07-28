@@ -11,6 +11,10 @@ bpairs(df, main = NULL, pch = 16, col = addAlpha("blue"), ...)
 
 \item{main}{Title for the overall graph. DEFAULT: NULL (from input)}
 
+\item{pch}{Point character. DEFAULT: 16}
+
+\item{col}{Color. DEFAULT: \code{\link{addAlpha}("blue")}}
+
 \item{\dots}{Further arguments passed to \code{\link{pairs}}}
 }
 \value{

@@ -17,7 +17,7 @@
 #' vec <- c(a="xx", b="xabx", c="xabxab", d="abxx", e="abxxabxxabxxab", f="axbx")
 #' sapply(gregexpr("ab", vec), function(x) sum(x>0))
 #'
-#' @param a     character string (can have regex)
+#' @param pattern character string (can have regex)
 #' @param x     charstring (vector)
 #' @param \dots Further arguments passed to \code{\link{gregexpr}}
 #'

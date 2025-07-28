@@ -6,7 +6,7 @@
 #' @seealso \code{\link{sumatraInitialize}}
 #' @export
 #' @examples
-#' sumatraPaths()
+#' if(.Platform$OS.type == "windows") sumatraPaths()
 #' @param open open the folders? DEFAULT: FALSE
 #'
 sumatraPaths <- function(open=FALSE)
