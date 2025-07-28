@@ -9,7 +9,7 @@ l2array(x, ...)
 \arguments{
 \item{x}{List with arrays/data.frames. The dimension of the first is target dimension.}
 
-\item{\dots}{Further arguments passed to \code{abind::\link{abind}}}
+\item{\dots}{Further arguments passed to \code{abind::\link[abind]{abind}}}
 }
 \value{
 array

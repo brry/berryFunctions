@@ -37,11 +37,14 @@ I strongly depend on - and therefore welcome - any feedback!\cr\cr
 Useful links:
 \itemize{
   \item \url{https://github.com/brry/berryFunctions}
-  \item Report bugs at \url{https://github.com/brry/berryFunctions}
+  \item Report bugs at \url{https://github.com/brry/berryFunctions/issues}
 }
 
 }
 \author{
+\strong{Maintainer}: Berry Boessenkool \email{berry-b@gmx.de}
+
+
 Berry Boessenkool, \email{berry-b@gmx.de}, 2011-2017
 }
 \keyword{documentation}

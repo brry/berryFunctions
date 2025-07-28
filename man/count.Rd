@@ -29,6 +29,10 @@ stopifnot(count("abc", vec021) == 3)
 stopifnot(count("abc", vec000) == 0)
 stopifnot(count("abc", vec4  ) == 4)
 
+# vectorized count:
+vec <- c(a="xx", b="xabx", c="xabxab", d="abxx", e="abxxabxxabxxab", f="axbx")
+sapply(gregexpr("ab", vec), function(x) sum(x>0))
+
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jan 2025

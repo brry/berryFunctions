@@ -54,7 +54,7 @@ dataStr(heads=TRUE) # heads of all data.frames
 
 }
 \seealso{
-\code{\link{str}}
+\code{\link{str}}, \url{https://vincentarelbundock.github.io/Rdatasets/}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, November 2015, in search of good datasets for teaching

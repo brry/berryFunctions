@@ -4,7 +4,7 @@
 #' 
 #' @return invisible data.frame. If \code{msg=TRUE}, prints via \code{\link{message}} in a for loop.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, November 2015, in search of good datasets for teaching
-#' @seealso \code{\link{str}}
+#' @seealso \code{\link{str}}, \url{https://vincentarelbundock.github.io/Rdatasets/}
 #' @keywords print documentation
 #' @importFrom utils data str
 #' @export
@@ -105,6 +105,7 @@ if(view) # https://github.com/r-spatial/sf/issues/618
 if(requireNamespace("rstudioapi", quietly=TRUE) && rstudioapi::isAvailable())
   .rs.viewHook(x=d, title="dataStr") else View(d, title="dataStr")
 # Output:
+message("see also   https://vincentarelbundock.github.io/Rdatasets/")
 return(invisible(d))
 }
 

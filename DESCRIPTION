@@ -1,13 +1,14 @@
 Package: berryFunctions
 Type: Package
 Title: Function Collection Related to Plotting and Hydrology
-Version: 1.22.10
-Date: 2025-02-11
+Version: 1.22.11
+Date: 2025-07-28
 Imports: grDevices, graphics, stats, utils, abind
 Suggests: RColorBrewer, pbapply, knitr, rmarkdown, gstat, RCurl, colorspace, 
           vioplot, spatstat.geom, ade4, nortest, rstudioapi, 
           leaflet, leaflet.extras, zoo, R.utils
-Author: Berry Boessenkool
+Authors@R: person(given="Berry", family="Boessenkool",
+                  role=c("aut", "cre"), email="berry-b@gmx.de")
 Maintainer: Berry Boessenkool <berry-b@gmx.de>
 Description: Draw horizontal histograms, color scattered points by 3rd dimension,
     enhance date- and log-axis plots, zoom in X11 graphics, trace errors and warnings, 
@@ -18,4 +19,4 @@ URL: https://github.com/brry/berryFunctions
 RoxygenNote: 7.3.2
 Encoding: UTF-8
 VignetteBuilder: knitr
-BugReports: https://github.com/brry/berryFunctions
+BugReports: https://github.com/brry/berryFunctions/issues

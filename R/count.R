@@ -12,6 +12,10 @@
 #' stopifnot(count("abc", vec021) == 3)
 #' stopifnot(count("abc", vec000) == 0)
 #' stopifnot(count("abc", vec4  ) == 4)
+#' 
+#' # vectorized count:
+#' vec <- c(a="xx", b="xabx", c="xabxab", d="abxx", e="abxxabxxabxxab", f="axbx")
+#' sapply(gregexpr("ab", vec), function(x) sum(x>0))
 #'
 #' @param a     character string (can have regex)
 #' @param x     charstring (vector)

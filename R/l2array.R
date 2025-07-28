@@ -101,7 +101,7 @@
 #' 
 #' 
 #' @param x List with arrays/data.frames. The dimension of the first is target dimension.
-#' @param \dots Further arguments passed to \code{abind::\link{abind}}
+#' @param \dots Further arguments passed to \code{abind::\link[abind]{abind}}
 l2array <- function(
 x,
 ...)
