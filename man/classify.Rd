@@ -103,7 +103,7 @@ classleg(met="q", y1=0.15, y2=0.30, breaks=0:15/15, at=pretty2(rz), labels=prett
 }
 \references{
 See this page on the effect of classification (binning) methods: \cr
-\url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html}
+\url{https://archive.ph/EL9Vq}
 }
 \seealso{
 \code{\link{colPoints}}

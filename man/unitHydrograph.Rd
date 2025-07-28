@@ -68,7 +68,7 @@ legend("topright", bty="n", legend=Explain)
 }
 \seealso{
 \code{\link{lsc}} on how to estimate n and k for a given discharge dataset. 
-         \code{deconvolution.uh} in the package hydromad, \url{https://hydromad.catchment.org/}
+         \code{deconvolution.uh} in the package hydromad, \url{https://hydromad.github.io/}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, July 2013

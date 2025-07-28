@@ -233,7 +233,7 @@ colPoints(x,y,sim1, data=xyz, add=FALSE)
 
 }
 \references{
-\url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html},
+\url{https://archive.ph/EL9Vq},
             \url{https://www.theusrus.de/blog/the-good-the-bad-22012/}
 }
 \seealso{

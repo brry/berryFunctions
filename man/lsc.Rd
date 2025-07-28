@@ -156,7 +156,7 @@ lsc(calib$P, calib$Q, area=1.6) # not bad indeed
 }
 \seealso{
 \code{\link{unitHydrograph}}, \code{\link{superPos}}, \code{\link{nse}}, \code{\link{rmse}}.
-         \code{deconvolution.uh} in the package hydromad, \url{https://hydromad.catchment.org/}
+         \code{deconvolution.uh} in the package hydromad, \url{https://hydromad.github.io/}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, July 2013

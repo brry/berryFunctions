@@ -8,7 +8,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Apr 2016
 #' @seealso \code{\link{seqPal}}, \code{\link{divPal}}, \code{\link{catPal}}, 
 #' package \code{RColorBrewer}, 
-#' \url{https://blog.datawrapper.de/which-color-scale-to-use-in-data-vis/}
+#' \url{https://www.datawrapper.de/blog/which-color-scale-to-use-in-data-vis/}
 #' @keywords dplot color
 #' @importFrom graphics par plot text title
 #' @export
@@ -62,7 +62,7 @@ title(main="berryFunctions::catPal", xpd=NA, line=0.5)
 #' @title Categorical color palette
 #' @description 
 #' Categorical color palette according to IwantHue as displayed on
-#' \url{https://rockcontent.com/blog/subtleties-of-color-different-types-of-data-require-different-color-schemes/}
+#' \url{https://web.archive.org/web/20250122084330/https://rockcontent.com/blog/subtleties-of-color-different-types-of-data-require-different-color-schemes/}
 #' @return Character string vector with color names
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Apr 2019
 #' @seealso \code{\link{showPal}}, \code{\link{seqPal}}, \code{\link{divPal}}

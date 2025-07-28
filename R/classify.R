@@ -29,7 +29,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2014
 #' @seealso \code{\link{colPoints}}
 #' @references See this page on the effect of classification (binning) methods: \cr
-#' \url{http://uxblog.idvsolutions.com/2011/10/telling-truth.html}
+#' \url{https://archive.ph/EL9Vq}
 #' @keywords classif
 #' @importFrom stats quantile sd
 #' @export

@@ -7,7 +7,7 @@
 #'         \emph{or} simulated discharge, depending on the value of \code{returnsim}
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, July 2013
 #' @seealso \code{\link{unitHydrograph}}, \code{\link{superPos}}, \code{\link{nse}}, \code{\link{rmse}}.
-#'          \code{deconvolution.uh} in the package hydromad, \url{https://hydromad.catchment.org/}
+#'          \code{deconvolution.uh} in the package hydromad, \url{https://hydromad.github.io/}
 #' @references \url{https://ponce.sdsu.edu/onlineuhcascade.php}\cr
 #'    Skript 'Abflusskonzentration' zur Vorlesungsreihe Abwasserentsorgung I von Prof. Krebs an der TU Dresden\cr
 #'   \url{https://tu-dresden.de/bu/umwelt/hydro/isi/sww/ressourcen/dateien/lehre/dateien/abwasserbehandlung/uebung_ws09_10/uebung_awe_1_abflusskonzentration.pdf}\cr
