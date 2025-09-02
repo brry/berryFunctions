@@ -39,7 +39,9 @@ sysname <- Sys.info()["sysname"]
 out <- try(switch(sysname,
                   "Linux"   = system2("xdg-open", file, ...),
                   "FreeBSD" = system2("handlr", paste("open",file), ...),
-                  system2("open", file, ...)  # Windows
+                  # system2("open", file, ...)  # closes sumatra when switching Rstudio projects
+                  system2("cmd", args=c("/c","start","/B",'""',file), wait=FALSE)
+                  # system2("powershell", args=c("-Command", paste0("Start-Process '",file,"'")), wait=FALSE)
                   ),
            silent=TRUE)
 # out: 127 if failed, 124 for timeout, 0 for success
