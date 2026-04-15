@@ -16,6 +16,7 @@ character vector with hexadecimal color codes.
 }
 \description{
 Make existing colors semi-transparent (add alpha)
+Actually, use \code{\link{adjustcolor}} instead.
 }
 \examples{
 

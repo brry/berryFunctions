@@ -1,6 +1,7 @@
 #' Color transparency
 #' 
 #' Make existing colors semi-transparent (add alpha)
+#' Actually, use \code{\link{adjustcolor}} instead.
 #' 
 #' @param col Vector of color names (\code{\link{colors}}), hexadecimal or integer that can be interpreted by \code{\link{col2rgb}}
 #' @param alpha Level of semi-transparency. between 0 (transparent) and 1 (intransparent). Can also be a vector. DEFAULT: 0.3
@@ -30,6 +31,7 @@ addAlpha <- function(
   alpha=0.3
   )
 {
+message("Use  adjustcolor()  instead of  berryFunctions::addAlpha()")
 if(any(alpha<0 | alpha>1)) stop("alpha must be between 0 and 1, not ",
                                 toString(alpha[alpha<0|alpha>1]))
 rgb2 <-  function(x) rgb(x[1], x[2], x[3], alpha=alpha)
