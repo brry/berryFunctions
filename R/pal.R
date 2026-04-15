@@ -37,7 +37,7 @@ pal(seqPal(yr=TRUE)        , "yr=TRUE")
 pal(seqPal(gb=TRUE)        , "gb=TRUE")
 pal(seqPal( b=TRUE)        , "b=TRUE")
 pal(seqPal(colors=c("orange","green","darkblue")), 
-    'col=c("orange","green","darkblue"))')
+    'col=c("orange","green","darkblue")')
 title(main="berryFunctions::seqPal", xpd=NA, outer=TRUE, adj=0.2, line=0.5)
 
 # Diverging palette ------------------------------------------------------------
