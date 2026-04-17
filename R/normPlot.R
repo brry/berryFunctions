@@ -25,7 +25,7 @@
 #' @param width distance (in sd) from plot ends to mean. DEFAULT: 3
 #' @param lines Should vertical lines be plotted at mean +- n*sd? DEFAULT: TRUE
 #' @param quant should quantile regions be drawn with \code{fill} colors? DEFAULT: TRUE
-#' @param fill color(s) passed to \code{\link{polygon}}. DEFAULT: addAlpha("blue",c(2:6,7:2)/10)
+#' @param fill color(s) passed to \code{\link{polygon}}. DEFAULT: Vectorize(adjustcolor)("blue",c(2:6,7:2)/10)
 #' @param cumulative Should cumulative density distribution be added? DEFAULT: TRUE
 #' @param las arguments passed to \code{\link{plot}}. DEFAULT: 1
 #' @param main main as in \code{\link{plot}}. DEFAULT: paste("Normal density with\\nmean =", mean, "and sd =", sd)
@@ -42,7 +42,7 @@ sd=1,
 width=3,
 lines=TRUE,
 quant=TRUE,
-fill=addAlpha("blue",c(2:6,7:2)/10),
+fill=Vectorize(adjustcolor)("blue",c(2:6,7:2)/10),
 cumulative=TRUE,
 las=1,
 main=paste("Normal density with\nmean =", signif(mean,2), "and sd =", signif(sd,2)),

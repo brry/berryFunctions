@@ -45,7 +45,7 @@
 #' @param pch Point Character of datapoints, see \code{\link{par}}. DEFAULT: 16
 #' @param col Color of points. DEFAULT: "black"
 #' @param colline Color of the regression line, see \code{\link{par}}. DEFAULT: "red"
-#' @param colband Color of the confidence region band. DEFAULT: addAlpha(col)
+#' @param colband Color of the confidence region band. DEFAULT: adjustcolor(col,0.3)
 #' @param level Confidence level, see \code{\link{predict.lm}}. DEFAULT: 0.95
 #' @param plotrange x range for which regression line and uncertainty band should
 #'        be plotted. Is passed to \code{\link{seqR}} and can hence be a vector.
@@ -72,7 +72,7 @@ quiet=FALSE,
 pch=16,
 col="black",
 colline="red",
-colband=addAlpha(colline),
+colband=adjustcolor(colline,0.3),
 level=0.95,
 plotrange=par("usr")[1:2],
 lwd=1,

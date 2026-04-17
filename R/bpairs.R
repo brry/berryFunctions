@@ -19,14 +19,14 @@
 #' @param df    Data.frame. Can contain NAs. Character columns are excluded.
 #' @param main  Title for the overall graph. DEFAULT: NULL (from input)
 #' @param pch   Point character. DEFAULT: 16
-#' @param col   Color. DEFAULT: \code{\link{addAlpha}("blue")}
+#' @param col   Color. DEFAULT: \code{\link{adjustcolor}("blue",0.3)}
 #' @param \dots Further arguments passed to \code{\link{pairs}}
 #'
 bpairs <- function(
 df,
 main=NULL,
 pch=16,
-col=addAlpha("blue"),
+col=adjustcolor("blue",0.3),
 ...
 )
 {
@@ -43,7 +43,7 @@ panel.hist <- function(x, ...)
   y <- y/max(y)
   rect(breaks[-nB], 0, breaks[-1], y, col="salmon")
   nNA <- sum(is.na(x))
-  if(nNA>0) textField(mean(usr[1:2]), 0.2, paste(nNA, "NA"), fill=addAlpha("white",0.7), cex=1)
+  if(nNA>0) textField(mean(usr[1:2]), 0.2, paste(nNA, "NA"), fill=adjustcolor("white",0.7), cex=1)
   axis(1)
   box()
   }

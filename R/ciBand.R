@@ -55,7 +55,7 @@
 #' @param add Add to existing plot? If FALSE, plot is called before adding confidence interval. DEFAULT: FALSE
 #' @param lwd Line width of middle line. DEFAULT: 1
 #' @param colm Color for median/mean line. DEFAULT: "green3"
-#' @param colb Color of the confidence region band. DEFAULT: addAlpha(colm)
+#' @param colb Color of the confidence region band. DEFAULT: adjustcolor(colm,0.3)
 #' @param border \code{\link{polygon}} border. DEFAULT: NA
 #' @param las LabelAxisStyle (axis labels turned upright, see \code{\link{par}}). DEFAULT: 1
 #' @param ylim limits of plot. DEFAULT: range(yu,yl, finite=TRUE)
@@ -73,7 +73,7 @@ args=NULL,
 add=FALSE,
 lwd=1,
 colm="green3",
-colb=addAlpha(colm),
+colb=adjustcolor(colm,0.3),
 border=NA,
 las=1,
 ylim=range(yu,yl, finite=TRUE),

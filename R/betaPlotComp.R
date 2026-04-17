@@ -56,7 +56,7 @@ for(y in b)
   betaPlot(x,y, main=main, ylim=ylim, mar=mar, cumulative=cumulative, ...)
   #mtext(text=paste("a=",x,", b=",y, sep=""), side=3, line=-1.5, cex=0.7)
   textdef <- list(x=0.5, y=0.9*ylim[2], labels=paste("a=",x,", b=",y, sep=""),
-                  mar=0.1, fill=addAlpha("white", 0.7), cex=1)
+                  mar=0.1, fill=adjustcolor("white", 0.7), cex=1)
   do.call(textField, owa(textdef, textargs))
   if(y==min(b)) mtext(paste("a =",x), side=3, line=0.5, cex=cex)
   if(x==min(a)) mtext(paste("b =",y), side=2, line=0.5, cex=cex)

@@ -16,7 +16,7 @@ ciBand(
   add = FALSE,
   lwd = 1,
   colm = "green3",
-  colb = addAlpha(colm),
+  colb = adjustcolor(colm, 0.3),
   border = NA,
   las = 1,
   ylim = range(yu, yl, finite = TRUE),
@@ -48,7 +48,7 @@ Code to identify isolated points is taken from wq::plotTs. DEFAULT: TRUE}
 
 \item{colm}{Color for median/mean line. DEFAULT: "green3"}
 
-\item{colb}{Color of the confidence region band. DEFAULT: addAlpha(colm)}
+\item{colb}{Color of the confidence region band. DEFAULT: adjustcolor(colm,0.3)}
 
 \item{border}{\code{\link{polygon}} border. DEFAULT: NA}
 

@@ -10,7 +10,7 @@ normPlot(
   width = 3,
   lines = TRUE,
   quant = TRUE,
-  fill = addAlpha("blue", c(2:6, 7:2)/10),
+  fill = Vectorize(adjustcolor)("blue", c(2:6, 7:2)/10),
   cumulative = TRUE,
   las = 1,
   main = paste("Normal density with\\nmean =", signif(mean, 2), "and sd =", signif(sd,
@@ -37,7 +37,7 @@ normPlot(
 
 \item{quant}{should quantile regions be drawn with \code{fill} colors? DEFAULT: TRUE}
 
-\item{fill}{color(s) passed to \code{\link{polygon}}. DEFAULT: addAlpha("blue",c(2:6,7:2)/10)}
+\item{fill}{color(s) passed to \code{\link{polygon}}. DEFAULT: Vectorize(adjustcolor)("blue",c(2:6,7:2)/10)}
 
 \item{cumulative}{Should cumulative density distribution be added? DEFAULT: TRUE}
 

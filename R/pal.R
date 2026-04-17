@@ -103,7 +103,7 @@ else stop("Currently, only set=1 is available.")
 if(n>12) n <- 12
 if(n<1)  n <- 1
 outcols <- cols[1:n]
-if(alpha!=1) outcols <- addAlpha(outcols, alpha)
+if(alpha!=1) outcols <- adjustcolor(outcols, alpha)
 outcols
 }
 
@@ -117,7 +117,7 @@ outcols
 #' at the extremes, good for displaying values in two directions
 #' @return Character string vector with color names
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2016
-#' @seealso \code{\link{showPal}}, \code{\link{seqPal}}, \code{\link{catPal}}, \code{\link{addAlpha}},
+#' @seealso \code{\link{showPal}}, \code{\link{seqPal}}, \code{\link{catPal}}, \code{\link{adjustcolor}},
 #'          \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 #' @references The default palette is originally in 12 shades in the IPCC Assessment Report 5
 #'             Chapter 12 Fig 12.22, \url{https://www.ipcc.ch/report/ar5/wg1/}.\cr
@@ -160,7 +160,7 @@ if(br) cols <- c("#3F797F","#6498A0","#8BB7B5","#BED8D9","#FCC6A9","#E69A6E","#D
 if(!is.null(colors)) cols <- colors
 if(reverse) cols <- rev(cols)
 outcols <- colorRampPalette(cols, ...)(n)
-if(alpha!=1) outcols <- addAlpha(outcols, alpha)
+if(alpha!=1) outcols <- adjustcolor(outcols, alpha)
 outcols
 }
 
@@ -172,7 +172,7 @@ outcols
 #' @description Sequential color palette from yellow to blue or custom colors.
 #' @return Character string vector with color names
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jan 2016
-#' @seealso \code{\link{showPal}}, \code{\link{divPal}}, \code{\link{catPal}}, \code{\link{addAlpha}},
+#' @seealso \code{\link{showPal}}, \code{\link{divPal}}, \code{\link{catPal}}, \code{\link{adjustcolor}},
 #'          \code{\link{colorRampPalette}}, package \code{RColorBrewer}
 #' @keywords color dplot
 #' @importFrom grDevices colorRampPalette
@@ -237,6 +237,6 @@ if(logbase!=1)
   outcols <- colorRampPalette(cols, ...)(n2)[cl$index]
   # message("n: ", round(n1), ", number of bins from classify: ", n2, ", number of unique colors: ", length(unique(outcols)))
   }
-if(alpha!=1) outcols <- addAlpha(outcols, alpha)
+if(alpha!=1) outcols <- adjustcolor(outcols, alpha)
 outcols
 }

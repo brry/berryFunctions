@@ -25,9 +25,9 @@ movAvLines(
 
 \item{weights}{weights within each window}
 
-\item{col}{color passed to \code{\link{addAlpha}}. DEFAULT: "blue"}
+\item{col}{color passed to \code{\link{adjustcolor}}. DEFAULT: "blue"}
 
-\item{alpha}{transparency passed to \code{\link{addAlpha}}. DEFAULT: 0.3}
+\item{alpha}{transparency passed to \code{\link{adjustcolor}}. DEFAULT: 0.3}
 
 \item{add}{Logical: Add to existing plot?Set to FALSE to first create
 the scatterplot. DEFAULT: TRUE}
@@ -46,7 +46,7 @@ movAvLines(y=cumsum(rnorm(50)), add=FALSE, lwd=3)
 
 }
 \seealso{
-\code{\link{movAv}}, \code{\link{addAlpha}}
+\code{\link{movAv}}, \code{\link{adjustcolor}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, May 2015

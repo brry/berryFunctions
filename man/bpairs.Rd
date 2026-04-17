@@ -4,7 +4,7 @@
 \alias{bpairs}
 \title{customized pairs plot}
 \usage{
-bpairs(df, main = NULL, pch = 16, col = addAlpha("blue"), ...)
+bpairs(df, main = NULL, pch = 16, col = adjustcolor("blue", 0.3), ...)
 }
 \arguments{
 \item{df}{Data.frame. Can contain NAs. Character columns are excluded.}
@@ -13,7 +13,7 @@ bpairs(df, main = NULL, pch = 16, col = addAlpha("blue"), ...)
 
 \item{pch}{Point character. DEFAULT: 16}
 
-\item{col}{Color. DEFAULT: \code{\link{addAlpha}("blue")}}
+\item{col}{Color. DEFAULT: \code{\link{adjustcolor}("blue",0.3)}}
 
 \item{\dots}{Further arguments passed to \code{\link{pairs}}}
 }

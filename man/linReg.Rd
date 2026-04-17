@@ -14,7 +14,7 @@ linReg(
   pch = 16,
   col = "black",
   colline = "red",
-  colband = addAlpha(colline),
+  colband = adjustcolor(colline, 0.3),
   level = 0.95,
   plotrange = par("usr")[1:2],
   lwd = 1,
@@ -50,7 +50,7 @@ If values are not specified, they are set equal to the first. DEFAULT: 2}
 
 \item{colline}{Color of the regression line, see \code{\link{par}}. DEFAULT: "red"}
 
-\item{colband}{Color of the confidence region band. DEFAULT: addAlpha(col)}
+\item{colband}{Color of the confidence region band. DEFAULT: adjustcolor(col,0.3)}
 
 \item{level}{Confidence level, see \code{\link{predict.lm}}. DEFAULT: 0.95}
 

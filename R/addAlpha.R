@@ -11,20 +11,20 @@
 #' @seealso \code{\link{addFade}}, \code{\link{rgb}}, \code{\link{colors}}, \code{\link{col2rgb}}
 #' @keywords dplot color
 #' @export
-#' @importFrom grDevices col2rgb rgb
+#' @importFrom grDevices col2rgb rgb adjustcolor
 #' @examples
-#' 
-#' addAlpha("red", c(0.1, 0.3, 0.6, 1))
-#' addAlpha(1:3)
-#' addAlpha(1:3, 1:3/3)
-#' NewColors <- addAlpha(c("red","blue","yellow","green", "purple"), 0:200/200)
-#' plot(runif(1000), col=NewColors, pch=16, cex=2)
+#' adjustcolor(1:3, 0.3)
+#' adjcol <- Vectorize(adjustcolor)
+#' adjcol("red", c(0.1, 0.3, 0.6, 1))
+#' cols1 <- c("red","blue","yellow","green", "purple")
+#' cols2 <- adjcol(rep(cols1, each=200), 1:200/200)
+#' plot(runif(1000), col=cols2, pch=16, cex=2)
 #' 
 #' # use addFade for line segments, because of overlapping dots
 #' set.seed(1); x <- cumsum(rnorm(30))  ; y <- x-2
 #' plot(x, type="n")
-#' segments(x0=1:29,y0=head(x,-1), x1=2:30,y1=x[-1], col=addAlpha(4, 29:0/30), lwd=10)
-#' segments(x0=1:29,y0=head(y,-1), x1=2:30,y1=y[-1], col=addFade (4, 29:0/30), lwd=10)
+#' segments(x0=1:29,y0=head(x,-1), x1=2:30,y1=x[-1], col=adjcol (4, 29:0/30), lwd=10)
+#' segments(x0=1:29,y0=head(y,-1), x1=2:30,y1=y[-1], col=addFade(4, 29:0/30), lwd=10)
 #' 
 addAlpha <- function(
   col,

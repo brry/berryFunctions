@@ -3,7 +3,7 @@
 #' Add moving average lines with different window widths to a plot
 #' 
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, May 2015
-#' @seealso \code{\link{movAv}}, \code{\link{addAlpha}}
+#' @seealso \code{\link{movAv}}, \code{\link{adjustcolor}}
 #' @keywords ts manip smooth
 #' @importFrom graphics lines plot
 #' @export
@@ -16,8 +16,8 @@
 #' @param y y values that are smoothed with several window widths
 #' @param widths widths of \code{\link{movAv}} windows. DEFAULT: 2:7*2-1
 #' @param weights weights within each window
-#' @param col color passed to \code{\link{addAlpha}}. DEFAULT: "blue"
-#' @param alpha transparency passed to \code{\link{addAlpha}}. DEFAULT: 0.3
+#' @param col color passed to \code{\link{adjustcolor}}. DEFAULT: "blue"
+#' @param alpha transparency passed to \code{\link{adjustcolor}}. DEFAULT: 0.3
 #' @param add Logical: Add to existing plot?Set to FALSE to first create
 #'        the scatterplot. DEFAULT: TRUE
 #' @param las LabelAxisStyle (only relevant if add=FALSE). DEFAULT: 1
@@ -37,6 +37,6 @@ las=1,
 {
 if(!add) plot(x,y, las=las)
 for(i in 1:length(widths))
-   lines(x, movAv(y, width=widths[i], weights=weights), col=addAlpha(col, alpha), ...)
+   lines(x, movAv(y, width=widths[i], weights=weights), col=adjustcolor(col, alpha), ...)
 }
 

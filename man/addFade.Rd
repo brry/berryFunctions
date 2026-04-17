@@ -33,7 +33,7 @@ plot(runif(1000), col=NewColors, pch=16, cex=2)
 
 }
 \seealso{
-\code{\link{addAlpha}}, \code{\link{colorRamp}}, \code{\link{colors}}
+\code{\link{adjustcolor}}, \code{\link{colorRamp}}, \code{\link{colors}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Feb 2016
