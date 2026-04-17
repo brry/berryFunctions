@@ -16,7 +16,7 @@ the path of the two modified files (invisibly)
 edit the list of recently opened Rprojects in Rstudio
 }
 \examples{
-editRStudioProjects()
+# editRStudioProjects() # only run interactively
 
 }
 \author{

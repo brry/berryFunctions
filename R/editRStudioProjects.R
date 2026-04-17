@@ -4,8 +4,9 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Sep 2025
 #' @keywords file
 #' @export
+#' @importFrom utils select.list
 #' @examples
-#' editRStudioProjects()
+#' # editRStudioProjects() # only run interactively
 #'
 #' @param path currently ignored
 #'
